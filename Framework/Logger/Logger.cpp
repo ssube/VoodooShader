@@ -180,7 +180,7 @@ namespace VoodooShader
 
                 logMsg << VSTR("<?xml version='1.0'?>\n");
                 logMsg << VSTR("<VoodooLog ");
-                logMsg << String::Data() << VSTR(" ");
+                logMsg << String::Date() << VSTR(" ");
                 logMsg << String::Time().GetData() << VSTR(" ");
                 logMsg << String::Ticks().GetData() << VSTR(" ");
                 logMsg << VSTR(">\n");
@@ -229,39 +229,36 @@ namespace VoodooShader
             }
         }
 
-        void VSXmlLogger::LogModule(const Version * const pVersion)
+        void VSXmlLogger::SetFlags(const LogFlags flags)
+        {
+            m_Flags = flags;
+        }
+
+        LogFlags VSXmlLogger::GetFlags() const
+        {
+            return m_Flags;
+        }
+
+        void VSXmlLogger::SetFilter(const LogLevel level)
+        {
+            m_Filter = level;
+        }
+
+        LogLevel VSXmlLogger::GetFilter() const
+        {
+            return m_Filter;
+        }
+
+        bool VSXmlLogger::LogModule(const Version * const pVersion)
         {
             if (!pVersion || !this->m_LogFile.is_open()) return;
 
-            wstringstream logMsg;
+            Stream stream;
+            stream << VSTR("Loaded") << (*pVersion) << VSTR("\n");
 
-            logMsg <<
-                VSTR("    <Module uuid=\"") << pVersion->LibId << VSTR("\" ") <<
-                VSTR(" major=\"") << pVersion->Major << VSTR("\" ") <<
-                VSTR(" minor=\"") << pVersion->Minor << VSTR("\" ") <<
-                VSTR(" patch=\"") << pVersion->Patch << VSTR("\" ") <<
-                VSTR(" build=\"") << pVersion->Build << VSTR("\" ") <<
-                VSTR(" debug=\"") << pVersion->Debug << VSTR("\" ");
-
-            if (pVersion->Name)  logMsg << VSTR(" name=\"")  << pVersion->Name  << VSTR("\" ");
-            if (pVersion->RevId) logMsg << VSTR(" revid=\"") << pVersion->RevId << VSTR("\" ");
-
-            logMsg << VSTR(" />\n");
-
-#ifdef VOODOO_DEBUG_CONSOLE
-            cout << logMsg.str();
-#endif
-            m_LogFile << logMsg.str();
-
-#ifndef _DEBUG
-            if (m_Flags & LF_Flush)
-#endif
-            {
-                m_LogFile << flush;
-            }
         }
 
-        void VSXmlLogger::Log(const LogLevel level, const String & source, const String & msg)
+        bool VSXmlLogger::Log(const LogLevel level, const String & source, const String & msg)
         {
             if (!this->m_LogFile.is_open()) return;
 
@@ -278,7 +275,7 @@ namespace VoodooShader
 #ifdef _DEBUG
                 if (level & (LL_ModWarn | LL_ModError))
                 {
-                    OutputDebugString(logMsg.To);
+                    OutputDebugString(logMsg.ToString().GetData());
 
 #   ifdef VOODOO_DEBUG_CONSOLE
                     cout << logMsg.str();
@@ -302,67 +299,6 @@ namespace VoodooShader
                 UNREFERENCED_PARAMETER(exc);
 #endif
             }
-        }
-
-        void VSXmlLogger::SetFlags(const LogFlags flags)
-        {
-            m_Flags = flags;
-        }
-
-        LogFlags VSXmlLogger::GetFlags() const
-        {
-            return m_Flags;
-        }
-
-        void VSXmlLogger::SetLogLevel(const LogLevel level)
-        {
-            m_LogLevel = level;
-        }
-
-        LogLevel VSXmlLogger::GetLogLevel() const
-        {
-            return m_LogLevel;
-        }
-
-        String VSXmlLogger::LogTime() const
-        {
-            time_t now = time(nullptr);
-            tm localTime;
-
-            if (localtime_s(&localTime, &now) == 0)
-            {
-                wstringstream stamp;
-
-                stamp << VSTR("time=\"") << put_time(&localTime, VSTR("%H%M%S")) << VSTR("\"");
-                return stamp.str();
-            }
-            else
-            {
-                return String(VSTR("time=\"000000\""));
-            }
-        }
-
-        String VSXmlLogger::LogDate() const
-        {
-            time_t now = time(nullptr);
-            tm localTime;
-
-            if (localtime_s(&localTime, &now) == 0)
-            {
-                wstringstream stamp;
-
-                stamp << VSTR("date=\"") << put_time(&localTime, VSTR("%Y%m%d")) << VSTR("\"");
-                return stamp.str();
-            }
-            else
-            {
-                return String(VSTR("date=\"00000000\""));
-            }
-        }
-
-        String VSXmlLogger::LogTicks() const
-        {
-            return String::Format(VSTR("ticks=\"%d\""), GetTickCount());
         }
     }
 }

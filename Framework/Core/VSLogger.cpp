@@ -138,6 +138,8 @@ namespace VoodooShader
     bool VOODOO_METHODTYPE VSLogger::LogModule(_In_ const Version * const pModule)
     {
         UNREFERENCED_PARAMETER(pModule);
+
+        return true;
     }
 
     bool VOODOO_METHODTYPE VSLogger::LogMessage
@@ -150,5 +152,7 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(level);
         UNREFERENCED_PARAMETER(source);
         UNREFERENCED_PARAMETER(msg);
+
+        return true;
     }
 }

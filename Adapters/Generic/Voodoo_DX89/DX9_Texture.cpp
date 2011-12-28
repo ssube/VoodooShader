@@ -22,6 +22,8 @@
 
 #include "DX9_Converter.hpp"
 
+#include "Format.hpp"
+
 namespace VoodooShader
 {
     namespace VoodooDX9
@@ -92,7 +94,7 @@ namespace VoodooShader
 
         String VOODOO_METHODTYPE DX9Texture::ToString() CONST
         {
-            return String::Format(L"DX9Texture(%s)", m_Name.GetData());
+            return Format(VSTR("DX9Texture(%s)")) << m_Name;
         }
 
         ICore * VOODOO_METHODTYPE DX9Texture::GetCore() CONST

@@ -133,9 +133,9 @@ namespace VoodooShader
         private:
             mutable uint32_t m_Refs;
             ICore * m_Core;
-
-            LogLevel m_LogLevel;
+            
             std::wfstream m_LogFile;
+            LogLevel m_Filter;
             LogFlags m_Flags;
         };
     }

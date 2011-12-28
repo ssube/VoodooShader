@@ -218,7 +218,7 @@ namespace VoodooShader
          *
          * @warning Adapters may change values stored in the variant given, but must not change the type.
          */
-        VOODOO_METHOD(SetProperty)(_In_ const wchar_t * name, _In_ Variant * const pValue) PURE;
+        VOODOO_METHOD(SetProperty)(_In_ const vchar_t * name, _In_ Variant * const pValue) PURE;
         /**
          * Get a property from the adapter.
          *
@@ -227,7 +227,7 @@ namespace VoodooShader
          *
          * @return Success of the property get.
          */
-        VOODOO_METHOD(GetProperty)(_In_ const wchar_t * name, _Out_ Variant * const pValue) CONST PURE;
+        VOODOO_METHOD(GetProperty)(_In_ const vchar_t * name, _Out_ Variant * const pValue) CONST PURE;
         /**
          * A generic error-handling callback provided to the Cg runtime. This will be called by Core::CgErrorHandler() in
          * the event of a error. This allows the adapter to internally handle any cleanup or other state changes that become

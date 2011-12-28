@@ -20,6 +20,8 @@
 
 #include "Converter.hpp"
 
+#include <tchar.h>
+
 namespace VoodooShader
 {
     CGtype Converter::ToCGType(_In_ ParameterType pt)
@@ -162,30 +164,30 @@ namespace VoodooShader
         }
     }
 
-    TextureFormat Converter::ToTextureFormat(_In_ const wchar_t * format)
+    TextureFormat Converter::ToTextureFormat(_In_ const vchar_t * format)
     {
-        if (_wcsnicmp(format, VSTR("TF_"), 3) != 0)
+        if (_tcsnicmp(format, VSTR("TF_"), 3) != 0)
         {
             return TF_Unknown;
         }
 
-        const wchar_t * formatBody = format + 3;
+        const vchar_t * formatBody = format + 3;
 
         if (formatBody[0] == VSTR('D'))
         {
             // Depth format
-            if (_wcsnicmp(formatBody, VSTR("D16"), 3) == 0) return TF_D16;
-            if (_wcsnicmp(formatBody, VSTR("D32"), 3) == 0) return TF_D32;
+            if (_tcsnicmp(formatBody, VSTR("D16"), 3) == 0) return TF_D16;
+            if (_tcsnicmp(formatBody, VSTR("D32"), 3) == 0) return TF_D32;
         }
         else
         {
-            if (_wcsnicmp(formatBody, VSTR("RGB5"),    4) == 0) return TF_RGB5;
-            if (_wcsnicmp(formatBody, VSTR("RGB5A1"),  6) == 0) return TF_RGB5A1;
-            if (_wcsnicmp(formatBody, VSTR("RGB8"),    4) == 0) return TF_RGB8;
-            if (_wcsnicmp(formatBody, VSTR("RGBA8"),   5) == 0) return TF_RGBA8;
-            if (_wcsnicmp(formatBody, VSTR("RGB10A2"), 7) == 0) return TF_RGB10A2;
-            if (_wcsnicmp(formatBody, VSTR("RGBA16F"), 7) == 0) return TF_RGBA16F;
-            if (_wcsnicmp(formatBody, VSTR("RGBA32F"), 7) == 0) return TF_RGBA32F;
+            if (_tcsnicmp(formatBody, VSTR("RGB5"),    4) == 0) return TF_RGB5;
+            if (_tcsnicmp(formatBody, VSTR("RGB5A1"),  6) == 0) return TF_RGB5A1;
+            if (_tcsnicmp(formatBody, VSTR("RGB8"),    4) == 0) return TF_RGB8;
+            if (_tcsnicmp(formatBody, VSTR("RGBA8"),   5) == 0) return TF_RGBA8;
+            if (_tcsnicmp(formatBody, VSTR("RGB10A2"), 7) == 0) return TF_RGB10A2;
+            if (_tcsnicmp(formatBody, VSTR("RGBA16F"), 7) == 0) return TF_RGBA16F;
+            if (_tcsnicmp(formatBody, VSTR("RGBA32F"), 7) == 0) return TF_RGBA32F;
         }
 
         return TF_Unknown;
@@ -232,7 +234,7 @@ namespace VoodooShader
 
 #define CASESTRING(x) case x: return VOODOO_META_TOSTRING(x)
 
-    const wchar_t * Converter::ToString(_In_ TextureFormat tf)
+    const vchar_t * Converter::ToString(_In_ TextureFormat tf)
     {
         switch (tf)
         {
@@ -251,7 +253,7 @@ namespace VoodooShader
         }
     }
 
-    const wchar_t * Converter::ToString(_In_ ParameterType pt)
+    const vchar_t * Converter::ToString(_In_ ParameterType pt)
     {
         switch (pt)
         {
@@ -281,7 +283,7 @@ namespace VoodooShader
         }
     }
 
-    const wchar_t * Converter::ToString(_In_ ParameterCategory cat)
+    const vchar_t * Converter::ToString(_In_ ParameterCategory cat)
     {
         switch (cat)
         {

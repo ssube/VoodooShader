@@ -117,7 +117,7 @@ namespace VoodooShader
 #endif
     }
 
-    bool VOODOO_METHODTYPE VSCore::Initialize(_In_ const wchar_t * const config)
+    bool VOODOO_METHODTYPE VSCore::Initialize(_In_ const vchar_t * const config)
     {
         if (config)
         {
@@ -128,7 +128,7 @@ namespace VoodooShader
 
         // Load variables, built-in first
         {
-            wchar_t buffer[MAX_PATH];
+            vchar_t buffer[MAX_PATH];
 
             // Global path
             GetVoodooPath(buffer);
@@ -275,7 +275,7 @@ namespace VoodooShader
             m_Logger = dynamic_cast<ILogger*>(m_ModuleManager->CreateObject(logClass));
             if (!m_Logger)
             {
-                String error = String::Format(VSTR("Unable to create logger (class ") VPFVSTR VSTR(")."), logClass.GetData());
+                String error = Format(VSTR("Unable to create logger (class %1%).")) << logClass;
                 Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
@@ -313,21 +313,21 @@ namespace VoodooShader
             m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
             if (!m_FileSystem)
             {
-                Format fmt(VSTR("Unable to create file system (class %1%).")) << fsClass;
+                Format fmt(VSTR("Unable to create file system (class %1%).")); fmt << fsClass;
                 Throw(VOODOO_CORE_NAME, fmt, this);
             }
 
             m_HookManager = dynamic_cast<IHookManager*>(m_ModuleManager->CreateObject(hookClass));
             if (!m_HookManager)
             {
-                Format fmt(VSTR("Unable to create hook manager (class %1%).")) << hookClass;
+                Format fmt(VSTR("Unable to create hook manager (class %1%).")); fmt << hookClass;
                 Throw(VOODOO_CORE_NAME, fmt, this);
             }
 
             m_Adapter = dynamic_cast<IAdapter*>(m_ModuleManager->CreateObject(adpClass));
             if (!m_Adapter)
             {
-                Format fmt(VSTR("Unable to create adapter (class %1%).")) << adpClass;
+                Format fmt(VSTR("Unable to create adapter (class %1%).")); fmt << adpClass;
                 Throw(VOODOO_CORE_NAME, fmt, this);
             }
 
@@ -485,7 +485,7 @@ namespace VoodooShader
             m_Logger->LogMessage
             (
                 LL_CoreDebug, VOODOO_CORE_NAME, 
-                Format(VSTR("Set Cg context (%1%).") << m_CgContext
+                Format(VSTR("Set Cg context (%1%).")) << m_CgContext
             );
             return true;
         }
@@ -505,7 +505,7 @@ namespace VoodooShader
         try
         {
             shader = new VSShader(this, fullpath, ppArgs);
-            m_Logger->Log
+            m_Logger->LogMessage
             (
                 LL_CoreDebug, VOODOO_CORE_NAME, 
                 Format(VSTR("Successfully created shader from %1%.")) << fullpath
@@ -513,10 +513,10 @@ namespace VoodooShader
         }
         catch (const std::exception & exc)
         {
-            m_Logger->Log
+            m_Logger->LogMessage
             (
                 LL_CoreError, VOODOO_CORE_NAME,
-                Format(VSTR("Error creating shader from %1%: %2%")) << fullpath << exc
+                Format(VSTR("Error creating shader from %1%: %2%")) << fullpath << exc.what()
             );
         }
 
@@ -560,7 +560,7 @@ namespace VoodooShader
                 m_Logger->LogMessage
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,
-                    Format(VSTR("Error creating parameter %1% with type %2%: %3%")) << name << type << exc
+                    Format(VSTR("Error creating parameter %1% with type %2%: %3%")) << name << type << exc.what()
                 );
             }
 
@@ -659,7 +659,7 @@ namespace VoodooShader
         if (parameter != m_Parameters.end())
         {
             m_Parameters.erase(parameter);
-            m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Removed parameter %1%.")), name);
+            m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Removed parameter %1%.")) << name);
             return true;
         }
         else
@@ -671,7 +671,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSCore::RemoveTexture(_In_ const String & name)
     {
-        TextureMap::iterator texture = m_Textures.find(Name);
+        TextureMap::iterator texture = m_Textures.find(name);
 
         if (texture != m_Textures.end())
         {
@@ -681,7 +681,7 @@ namespace VoodooShader
         }
         else
         {
-            m_Logger->Log(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Unable to find texture %1%.")) << name);
+            m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Unable to find texture %1%.")) << name);
             return false;
         }
     }

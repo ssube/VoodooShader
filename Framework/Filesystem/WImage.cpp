@@ -22,6 +22,8 @@
 
 #include "Filesystem_Version.hpp"
 
+#include "Format.hpp"
+
 // The MS shlobj header contains a few functions that cause errors in analysis under /W4 (and cause the build to fail
 // under /WX). This disables the warning for only that header.
 #pragma warning(push)
@@ -91,11 +93,10 @@ namespace VoodooShader
 
             if (m_Desc.Format == TF_Unknown)
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_ModWarn, VOODOO_FILESYSTEM_NAME,
-                    VSTR("Unable to resolve format for image '") VPFVSTR VSTR("' (%u).",
-                    m_Path.GetData(), image
+                    Format(VSTR("Unable to resolve format for image '%1%' %2%.")) << m_Path << image
                 );
             }
         }
@@ -233,21 +234,20 @@ namespace VoodooShader
                 break;
             case TF_Unknown:
             default:
-                m_Core->GetLogger()->Log
-                    (
+                m_Core->GetLogger()->LogMessage
+                (
                     LL_ModWarn, VOODOO_FILESYSTEM_NAME,
-                    VSTR("Invalid texture format for getting image data (%X)."),
-                    pDesc.Format
-                    );
+                    Format(VSTR("Invalid texture format for getting image data (%1%).")) << pDesc.Format
+                );
                 return 0;
             }
 
             return ilCopyPixels
-                (
+            (
                 pDesc.Origin.X, pDesc.Origin.Y, pDesc.Origin.Z,
                 pDesc.Size.X, pDesc.Size.Y, pDesc.Size.Z,
                 ilFmt, ilType, pBuffer
-                );
+            );
         }
     }
 }

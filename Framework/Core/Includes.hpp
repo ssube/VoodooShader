@@ -33,7 +33,7 @@
 #   endif
 
 #   ifndef _UNICODE
-#       error Voodoo APIs require Unicode characterset enabled.
+#       error Voodoo APIs require Unicode character set enabled.
 #   endif
 #endif
 
@@ -44,8 +44,15 @@
 #ifndef VOODOO_STRING_MACROS
 #   define VOODOO_STRING_MACROS
 // String type macros
-#   define VOODOO_META_STRING_ARG(arg)  L ## #arg
-#   define VOODOO_META_STRING_STR(arg)  L ## arg
+#   ifdef _UNICODE
+#       define VOODOO_META_STRING_ARG(arg)  L ## #arg
+#       define VOODOO_META_STRING_STR(arg)  L ## arg
+#       define VOODOO_META_PRINTF_VSTR      VOODOO_META_PRINTF_USTR
+#   else
+#       define VOODOO_META_STRING_ARG(arg)  #arg
+#       define VOODOO_META_STRING_STR(arg)  arg
+#       define VOODOO_META_PRINTF_VSTR      VOODOO_META_PRINTF_CSTR
+#   endif
 // String printf macros
 #   define VOODOO_META_PRINTF_CSTR      VOODOO_META_STRING_STR("%S")
 #   define VOODOO_META_PRINTF_USTR      VOODOO_META_STRING_STR("%s")
@@ -151,10 +158,19 @@
 
 namespace VoodooShader
 {
+    /* Basic typedefs */
+#ifdef _UNICODE
+    typedef wchar_t vchar_t;
+#else
+    typedef char vchar_t;
+#endif
+
     /* Custom basic types */
     class Exception;
+    class Format;
     class Regex;
     class RegexMatch;
+    class Stream;
     class String;
 
 #ifndef VOODOO_NO_PUGIXML
@@ -686,7 +702,7 @@ namespace VoodooShader
     {
         typedef const Version * (VOODOO_CALLTYPE * ModuleVersionFunc)();
         typedef const uint32_t  (VOODOO_CALLTYPE * ModuleCountFunc)();
-        typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
+        typedef const vchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
         typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(_In_ const uint32_t, _In_ ICore *);
         typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)();
     }

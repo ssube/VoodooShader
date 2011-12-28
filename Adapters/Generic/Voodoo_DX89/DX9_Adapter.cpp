@@ -27,6 +27,8 @@
 #include "CVoodoo3D8.hpp"
 #include "CVoodoo3D9.hpp"
 
+#include "Format.hpp"
+
 namespace VoodooShader
 {
     namespace VoodooDX9
@@ -110,7 +112,7 @@ namespace VoodooShader
 
             if (!pPass)
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to load null pass."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to load null pass."));
                 return false;
             }
 
@@ -125,12 +127,10 @@ namespace VoodooShader
                 hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
                 if (!SUCCEEDED(hr))
                 {
-                    logger->Log
+                    logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        VSTR("Error loading vertex program from '%s': %d."),
-                        pass->GetName().GetData(),
-                        hr
+                        Format(VSTR("Error loading vertex program from '%1%': %2%.")) << pass << hr
                     );
 
                     return false;
@@ -142,18 +142,16 @@ namespace VoodooShader
                 hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
                 if (!SUCCEEDED(hr))
                 {
-                    logger->Log
+                    logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        VSTR("Error loading fragment program from '%s': %d."),
-                        pass->GetName().GetData(),
-                        hr
+                        Format(VSTR("Error loading fragment program from '%1%': %2%.")) << pass << hr
                     );
                     return false;
                 }
             }
 
-            logger->Log(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Successfully loaded programs from '%s'."), pass->GetName().GetData());
+            logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, Format(VSTR("Successfully loaded programs from '%1%'.")) << pass);
             return true;
         }
 
@@ -163,7 +161,7 @@ namespace VoodooShader
 
             if (!pPass)
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to load null pass."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to load null pass."));
                 return false;
             }
 
@@ -178,12 +176,10 @@ namespace VoodooShader
                 hr = cgD3D9UnloadProgram(vertProg);
                 if (!SUCCEEDED(hr))
                 {
-                    logger->Log
+                    logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        VSTR("Error loading vertex program from '%s': %d."),
-                        pass->GetName().GetData(),
-                        hr
+                        Format(VSTR("Error loading vertex program from '%1%': %2%.")) << pass << hr
                     );
 
                     return false;
@@ -195,11 +191,10 @@ namespace VoodooShader
                 hr = cgD3D9UnloadProgram(fragProg);
                 if (!SUCCEEDED(hr))
                 {
-                    logger->Log
+                    logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        VSTR("Error loading fragment program from '%s': %d."),
-                        pass->GetName().GetData(), hr
+                        Format(VSTR("Error loading fragment program from '%1%': %2%.")) << pass << hr
                     );
                     return false;
                 }
@@ -217,13 +212,13 @@ namespace VoodooShader
 
             if (!pPass)
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set null pass."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set null pass."));
                 return false;
             }
 
             if (m_BoundPass && m_BoundPass != pPass)
             {
-                logger->Log(LL_ModWarn, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
+                logger->LogMessage(LL_ModWarn, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
             }
 
             cgSetPassState(pPass->GetCgPass());
@@ -261,13 +256,13 @@ namespace VoodooShader
 
             if (!pPass)
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to reset null pass."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to reset null pass."));
                 return false;
             }
 
             if (m_BoundPass && m_BoundPass != pPass)
             {
-                logger->Log(LL_ModWarn, VOODOO_DX89_NAME, VSTR("Resetting pass different than the previously bound pass."));
+                logger->LogMessage(LL_ModWarn, VOODOO_DX89_NAME, VSTR("Resetting pass different than the previously bound pass."));
             }
 
             cgResetPassState(pPass->GetCgPass());
@@ -292,7 +287,7 @@ namespace VoodooShader
             ILoggerRef logger = m_Core->GetLogger();
 
             if (index > 3) {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Invalid render target index %d."), index);
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Invalid render target index %1%.")) << index);
                 return false;
             }
 
@@ -308,10 +303,10 @@ namespace VoodooShader
 
                     if (SUCCEEDED(result))
                     {
-                        logger->Log(LL_ModDebug, VOODOO_DX89_NAME, VSTR("Bound backbuffer to render target %d: %d"), index, result);
+                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format(VSTR("Bound backbuffer to render target %1%: %2%")) << index << result);
                         return true;
                     } else {
-                        logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Device failed to bind backbuffer to render target %d: %d"), index, result);
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Device failed to bind backbuffer to render target %1%: %2%")) << index << result);
                         return false;
                     }
                 } else {
@@ -319,10 +314,10 @@ namespace VoodooShader
 
                     if (SUCCEEDED(result))
                     {
-                        logger->Log(LL_ModDebug, VOODOO_DX89_NAME, VSTR("Bound null texture to render target %d: %d"), index, result);
+                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format(VSTR("Bound null texture to render target %1%: %2%")) << index << result);
                         return true;
                     } else {
-                        logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Device failed to bind null texture to render target %d: %d"), index, result);
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Device failed to bind null texture to render target %1%: %2%")) << index << result);
                         return false;
                     }
                 }
@@ -334,10 +329,10 @@ namespace VoodooShader
                     result = m_Device->SetRenderTarget(index, nullptr);
                     if (SUCCEEDED(result))
                     {
-                        logger->Log(LL_ModDebug, VOODOO_DX89_NAME, VSTR("Bound null texture data to render target %d: %d"), index, result);
+                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format(VSTR("Bound null texture data to render target %1%: %2%")) << index << result);
                         return true;
                     } else {
-                        logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Device failed to bind null texture data to render target %d: %d"), index, result);
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Device failed to bind null texture data to render target %1%: %2%")) << index << result);
                         return false;
                     }
                 }
@@ -349,7 +344,7 @@ namespace VoodooShader
 
                 if (!SUCCEEDED(result))
                 {
-                    logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to get surface of texture '%s', data %p: %d"), pTarget->GetName().GetData(), pD3D9Tex, result);
+                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Failed to get surface of texture '%1%', data %2%: %3%")) << pTarget << pD3D9Tex << result);
                     pD3D9Surf->Release();
                     pD3D9Tex->Release();
                     return false;
@@ -362,10 +357,10 @@ namespace VoodooShader
 
                 if (!SUCCEEDED(result))
                 {
-                    logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Device failed to bind texture '%s' to render target %d: %d"), pTarget->GetName().GetData(), index, result);
+                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Device failed to bind texture '%1%' to render target %2%: %3%")) << pTarget << index << result);
                     return false;
                 } else {
-                    logger->Log(LL_ModDebug, VOODOO_DX89_NAME, VSTR("Bound texture '%s' to render target %d: %d"), pTarget->GetName().GetData(), index, result);
+                    logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format(VSTR("Bound texture '%1%' to render target %2%: %3%")) << pTarget << index << result);
                     return true;
                 }
             }
@@ -375,7 +370,7 @@ namespace VoodooShader
         {
             if (index > 3)
             {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Invalid render target index %d."), index);
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Invalid render target index %1%.")) << index);
                 return false;
             }
 
@@ -408,7 +403,7 @@ namespace VoodooShader
             {
                 const char * error = cgD3D9TranslateHRESULT(hr);
 
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Error creating texture ") VPFVSTR VSTR(": ") VPFCSTR, name.GetData(), error);
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Error creating texture %1%: %2%")) << name << error);
                 return nullptr;
             }
         }
@@ -433,7 +428,7 @@ namespace VoodooShader
         {
             if (!pData)
             {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("No geometry given to draw."));
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("No geometry given to draw."));
                 return false;
             }
 
@@ -467,7 +462,7 @@ namespace VoodooShader
                 }
                 else
                 {
-                    gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
+                    gpVoodooCore->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
                     return false;
                 }
             } else {
@@ -480,7 +475,7 @@ namespace VoodooShader
                 }
                 else
                 {
-                    gpVoodooCore->GetLogger()->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
+                    gpVoodooCore->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
                     return false;
                 }
             }
@@ -492,7 +487,7 @@ namespace VoodooShader
         {
             if (!pParam)
             {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to apply null parameter."));
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to apply null parameter."));
                 return false;
             }
 
@@ -508,11 +503,10 @@ namespace VoodooShader
                 break;
             case PC_Unknown:
             default:
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_DX89_NAME, 
-                    VSTR("Unable to bind parameter ") VPFVSTR VSTR("of unknown type."), 
-                    param->GetName().GetData()
+                    Format(VSTR("Unable to bind parameter %1% of unknown type.")) << param
                 );
                 return false;
             }
@@ -578,17 +572,16 @@ namespace VoodooShader
                 if (pTexture)
                 {
                     texObj = reinterpret_cast<IDirect3DTexture9 *>(pTexture->GetData());
-                    m_Core->GetLogger()->Log
+                    m_Core->GetLogger()->LogMessage
                     (
                         LL_ModInfo, VOODOO_DX89_NAME, 
-                        VSTR("Binding texture ") VPFVSTR VSTR("to parameter ") VPFVSTR VSTR("."), 
-                        pTexture->GetName().GetData(), pParam->GetName().GetData()
+                        Format(VSTR("Binding texture %1% to parameter %2%.")) << pTexture << pParam
                     );
                 } else {
-                    m_Core->GetLogger()->Log
+                    m_Core->GetLogger()->LogMessage
                     (
                         LL_ModInfo, VOODOO_DX89_NAME, 
-                        VSTR("Binding null texture to parameter ") VPFVSTR VSTR("."), pParam->GetName().GetData());
+                        Format(VSTR("Binding null texture to parameter %1%.")) << pParam);
                 }
 
                 CGparameter texParam = pParam->GetCgParameter();
@@ -598,11 +591,10 @@ namespace VoodooShader
             }
             else
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_DX89_NAME, 
-                    VSTR("Invalid texture binding, parameter ") VPFVSTR VSTR("is not a sampler."), 
-                    pParam->GetName().GetData()
+                    Format(VSTR("Invalid texture binding, parameter %1% is not a sampler.")) << pParam
                 );
                 return false;
             }
@@ -617,7 +609,7 @@ namespace VoodooShader
             if (ecode == cgD3D9DebugTrace)
             {
                 const char * emsg = cgD3D9TranslateCGerror(ecode);
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("D3D9 Debug %d: ") VPFCSTR, ecode, emsg);
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("D3D9 Debug %1%: %2%")) << ecode << emsg);
                 return true;
             }
 
@@ -662,11 +654,11 @@ namespace VoodooShader
 
             if (!SUCCEEDED(errors))
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set Cg D3D9 device."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set Cg D3D9 device."));
             }
             else
             {
-                logger->Log(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Cg D3D9 device set successfully."));
+                logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Cg D3D9 device set successfully."));
             }
 
             cgD3D9RegisterStates(context);
@@ -679,11 +671,11 @@ namespace VoodooShader
 
             if (!SUCCEEDED(errors))
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Errors registering Cg states."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Errors registering Cg states."));
             }
             else
             {
-                logger->Log(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Cg states registered successfully."));
+                logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Cg states registered successfully."));
             }
 
             // Setup profiles
@@ -693,11 +685,10 @@ namespace VoodooShader
             const char * bestVertStr = cgGetProfileString(bestVert);
             const char * bestFragStr = cgGetProfileString(bestFrag);
 
-            logger->Log
+            logger->LogMessage
             (
                 LL_ModInfo, VOODOO_DX89_NAME,
-                VSTR("Detected latest profiles with ") VPFCSTR VSTR("as vertex and ") VPFCSTR VSTR(" as fragment."),
-                bestVertStr, bestFragStr
+                Format(VSTR("Detected latest profiles with %1% as vertex and %2% as fragment.")) << bestVertStr << bestFragStr
             );
 
             // Create vertex declaration
@@ -714,7 +705,7 @@ namespace VoodooShader
 
             if (!SUCCEEDED(errors))
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to create standard vertex declaration."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to create standard vertex declaration."));
             }
 
             vertDeclElems[0].Usage = D3DDECLUSAGE_POSITIONT;
@@ -723,7 +714,7 @@ namespace VoodooShader
 
             if (!SUCCEEDED(errors))
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to create transformed vertex declaration."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to create transformed vertex declaration."));
             }
 
             // Get params
@@ -734,7 +725,11 @@ namespace VoodooShader
             float fx = (viewport.Width  / 2) + 0.5f;
             float fy = (viewport.Height / 2) + 0.5f;
 
-            logger->Log(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Prepping for %d by %d target."), viewport.Width, viewport.Height);
+            logger->LogMessage
+            (
+                LL_ModInfo, VOODOO_DX89_NAME, 
+                Format(VSTR("Prepping for %1% by %2% target.")) << (uint32_t)viewport.Width << (uint32_t)viewport.Height
+            );
 
             // Get buffers
             if (!SUCCEEDED(m_Device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
@@ -758,7 +753,7 @@ namespace VoodooShader
 
             if (FAILED(errors))
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
             }
 
             VertexStruct * pVertices = nullptr;
@@ -766,7 +761,7 @@ namespace VoodooShader
 
             if (FAILED(errors))
             {
-                logger->Log(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
             } else {
                 memcpy(pVertices, fsVertData, sizeof(fsVertData));
                 gpFSQuadVerts->Unlock();

@@ -22,6 +22,8 @@
 
 #include "Filesystem_Version.hpp"
 
+#include "Format.hpp"
+
 #include "Support.inl"
 
 // The MS shlobj header contains a few functions that cause errors in analysis under /W4 (and cause the build to fail
@@ -214,17 +216,18 @@ namespace VoodooShader
 
         IFile * VSWFileSystem::GetFile(const String & name, const GetFileMode mode) const
         {
-            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FILESYSTEM_NAME, 
-                VSTR("Searching for raw file '") VPFVSTR VSTR("'."), name.GetData());
+            m_Core->GetLogger()->LogMessage
+            (
+                LL_ModDebug, VOODOO_FILESYSTEM_NAME, 
+                Format(VSTR("Searching for raw file '%1%'.")) << name.GetData()
+            );
 
             String filename = m_Core->GetParser()->Parse(name);
 
-            m_Core->GetLogger()->Log
+            m_Core->GetLogger()->LogMessage
             (
-                LL_ModDebug,
-                VOODOO_FILESYSTEM_NAME,
-                VSTR("Searching for parsed file '") VPFVSTR VSTR("'."),
-                filename.GetData()
+                LL_ModDebug, VOODOO_FILESYSTEM_NAME,
+                Format(VSTR("Searching for parsed file '%1%'.")) << filename
             );
 
             StringList::const_iterator curDir = m_Directories.begin();
@@ -234,11 +237,10 @@ namespace VoodooShader
                 // Try to find the file in each registered dir
                 String fullname = m_Core->GetParser()->Parse(*curDir, PF_SlashTrail) + filename;
 
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_ModDebug, VOODOO_CORE_NAME,
-                    VSTR("Checking file '") VPFVSTR VSTR("'."),
-                    fullname.GetData()
+                    Format(VSTR("Checking file '%1%'.")) << fullname
                 );
 
                 HANDLE file = CreateFile(fullname.GetData(), 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
@@ -247,11 +249,10 @@ namespace VoodooShader
                 {
                     CloseHandle(file);
 
-                    m_Core->GetLogger()->Log
+                    m_Core->GetLogger()->LogMessage
                     (
                         LL_ModDebug, VOODOO_CORE_NAME,
-                        VSTR("File '") VPFVSTR VSTR("' found in directory '") VPFVSTR VSTR("'."),
-                        name.GetData(), (*curDir).GetData()
+                        Format(VSTR("File '%1%' found in directory '%2%'.")) << name << (*curDir)
                     );
 
                     return new VSWFile(m_Core, fullname);
@@ -260,17 +261,20 @@ namespace VoodooShader
                 ++curDir;
             }
 
-            m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_CORE_NAME, VSTR("Unable to find file '") VPFVSTR VSTR("'."), name.GetData());
+            m_Core->GetLogger()->LogMessage
+            (
+                LL_ModWarn, VOODOO_CORE_NAME, 
+                Format(VSTR("Unable to find file '%1%'.")) << name.GetData()
+            );
 
             if ((mode & FF_CreateOnly) == FF_CreateOnly)
             {
                 String fullname = m_Core->GetParser()->Parse(*m_Directories.begin(), PF_SlashTrail) + filename;
 
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_ModInfo, VOODOO_CORE_NAME,
-                    VSTR("Creating file '") VPFVSTR VSTR("'."),
-                    fullname.GetData()
+                    Format(VSTR("Creating file '%1%'.")) << fullname
                 );
 
                 HANDLE file = CreateFile(fullname.GetData(), 0, 0, nullptr, OPEN_ALWAYS, 0, nullptr);
@@ -279,11 +283,10 @@ namespace VoodooShader
                 {
                     CloseHandle(file);
 
-                    m_Core->GetLogger()->Log
+                    m_Core->GetLogger()->LogMessage
                     (
                         LL_ModDebug, VOODOO_CORE_NAME,
-                        VSTR("File '") VPFVSTR VSTR("' created in directory '") VPFVSTR VSTR("'."),
-                        name.GetData(), (*curDir).GetData()
+                        Format(VSTR("File '%1%' created in directory '%2%'.") << name << (*curDir)
                     );
 
                     return new VSWFile(m_Core, fullname);

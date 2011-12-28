@@ -139,6 +139,6 @@ namespace VoodooShader
 
     String RegexMatch::Format(const String & fmt) const
     {
-        return m_Impl->m_Match.format(fmt.ToStdString(), boost::format_all);
+        return m_Impl->m_Match.format(fmt.ToString(), boost::format_all);
     }
 }

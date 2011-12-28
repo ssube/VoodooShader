@@ -350,7 +350,7 @@ namespace VoodooShader
 
             while (cur < total)
             {
-                wchar_t inchar = iteration[cur++];
+                vchar_t inchar = iteration[cur++];
 
                 if (inchar == L'/' || inchar == L'\\')
                 {

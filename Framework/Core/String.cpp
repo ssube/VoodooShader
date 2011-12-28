@@ -20,11 +20,14 @@
 
 #include "String.hpp"
 
-#include <string>
-#include <sstream>
+#include "Format.hpp"
+
 #include <boost/algorithm/string.hpp>
 #include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid_io.hpp>
+
+#include <string>
+#include <sstream>
 
 namespace VoodooShader
 {
@@ -32,19 +35,19 @@ namespace VoodooShader
     {
     public:
         StringImpl() : m_Str() {};
-        StringImpl(const uint32_t size, const wchar_t ch) : m_Str(size, ch) {};
-        StringImpl(const wchar_t * str)
+        StringImpl(const uint32_t size, const vchar_t ch) : m_Str(size, ch) {};
+        StringImpl(const vchar_t * str)
         {
             if (str) m_Str = (str);
         };
-        StringImpl(const uint32_t size, const wchar_t * str)
+        StringImpl(const uint32_t size, const vchar_t * str)
         {
             if (str) m_Str = std::wstring(str, size);
         };
         StringImpl(const std::wstring & str) : m_Str(str) {};
 
     public:
-        std::wstring m_Str;
+        std::basic_string<vchar_t, std::char_traits<vchar_t>> m_Str;
     };
 
     String::String() :
@@ -678,13 +681,15 @@ namespace VoodooShader
             }
         }
 
-        std::wstringstream stamp;
+        std::basic_stringstream<vchar_t, std::char_traits<vchar_t>> stamp;
         stamp << VSTR("Time(") << std::put_time(&localTime, VSTR("%H%M%S")) << VSTR(")");
         return stamp.str();
     }
 
     String String::Date(time_t * pTime)
     {
+        using namespace std;
+
         tm localTime;
         if (pTime)
         {
@@ -700,15 +705,16 @@ namespace VoodooShader
             }
         }
 
-        std::wstringstream stamp;
+        std::basic_stringstream<vchar_t, std::char_traits<vchar_t>> stamp;
         stamp << VSTR("Date(") << std::put_time(&localTime, VSTR("%Y%m%d")) << VSTR(")");
         return stamp.str();
     }
 
     String String::Ticks()
     {
-        std::wstringstream stamp;
-        stamp << VSTR("Ticks(") << GetTickCount() << VSTR(")");
-        return  stamp.str();
+        Format fmt(VSTR("Ticks(%d)"));
+        fmt << (uint32_t)GetTickCount();
+
+        return fmt.ToString();
     }
 }

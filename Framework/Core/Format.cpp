@@ -29,12 +29,12 @@ namespace VoodooShader
     {
     public:
         FormatImpl() : m_Format() { };
-        FormatImpl(const wchar_t * fmt) : m_Format(fmt) { };
+        FormatImpl(const vchar_t * fmt) : m_Format(fmt) { };
 
-        boost::format m_Format;
+        boost::basic_format<vchar_t> m_Format;
     };
 
-    Format::Format(_In_ const wchar_t * fmt) :
+    Format::Format(_In_ const vchar_t * fmt) :
         m_Impl(new FormatImpl(fmt))
     {}
 
@@ -50,7 +50,7 @@ namespace VoodooShader
 
     String Format::ToString() const
     {
-        std::wstring str(m_Impl->m_Format);
+        std::basic_string<vchar_t, std::char_traits<vchar_t>> str(m_Impl->m_Format.str());
         return String(str);
     }
 
@@ -146,53 +146,49 @@ namespace VoodooShader
 
     Format & Format::operator<<(const Regex & val)
     {
-        Stream stream();
-        stream << val;
-        return this->operator<<(stream);
+        m_Impl->m_Format % val;
+        return (*this);
     }
 
     Format & Format::operator<<(const Stream & val)
     {
-        return this->operator<<(val.ToString());
+        m_Impl->m_Format % val;
+        return (*this);
     }
 
     Format & Format::operator<<(const String & val)
     {
-        return this->operator<<(val.GetData());
+        m_Impl->m_Format % val;
+        return (*this);
     }
 
     Format & Format::operator<<(const TextureDesc & val)
     {
-        Stream str();
-        str << val;
-        this->operator<<(val);
+        m_Impl->m_Format % val;
+        return (*this);
     }
 
     Format & Format::operator<<(const TextureRegion & val)
     {
-        Stream str();
-        str << val;
-        this->operator<<(val);
+        m_Impl->m_Format % val;
+        return (*this);
     }
 
     Format & Format::operator<<(const Uuid & val)
     {
-        Stream str();
-        str << val;
-        this->operator<<(val);
+        m_Impl->m_Format % val;
+        return (*this);
     }
 
     Format & Format::operator<<(const Variant & val)
     {
-        Stream str();
-        str << val;
-        this->operator<<(val);
+        m_Impl->m_Format % val;
+        return (*this);
     }
 
     Format & Format::operator<<(const Version & val)
     {
-        Stream str();
-        str << val;
-        this->operator<<(val);
+        m_Impl->m_Format % val;
+        return (*this);
     }
 }

@@ -21,6 +21,8 @@
 #include "HookManager.hpp"
 #include "Hook_Version.hpp"
 
+#include "Format.hpp"
+
 #pragma warning(push)
 #pragma warning(disable: 4005)
 #include <ntstatus.h>
@@ -83,14 +85,14 @@ namespace VoodooShader
 
             LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
 
-            m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_HOOK_NAME, L"Created hook manager.");
+            m_Core->GetLogger()->LogMessage(LL_ModInfo, VOODOO_HOOK_NAME, VSTR("Created hook manager."));
         }
 
         VSEHHookManager::~VSEHHookManager()
         {
             this->RemoveAll();
 
-            m_Core->GetLogger()->Log(LL_ModInfo, VOODOO_HOOK_NAME, L"Destroying hook manager.");
+            m_Core->GetLogger()->LogMessage(LL_ModInfo, VOODOO_HOOK_NAME, VSTR("Destroying hook manager."));
 
             delete[] m_ThreadIDs;
         }
@@ -143,7 +145,7 @@ namespace VoodooShader
 
         String VSEHHookManager::ToString() const
         {
-            return L"VSEHHookManager";
+            return VSTR("VSEHHookManager");
         }
 
         ICore * VSEHHookManager::GetCore() const
@@ -157,21 +159,19 @@ namespace VoodooShader
 
             if (hook != m_Hooks.end())
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_HOOK_NAME,
-                    L"Attempted to create a hook with a duplicate name (%s).",
-                    name.GetData()
+                    Format(VSTR("Attempted to create a hook with a duplicate name (%1%).")) << name
                 );
 
                 return false;
             }
 
-            m_Core->GetLogger()->Log
+            m_Core->GetLogger()->LogMessage
             (
                 LL_ModDebug, VOODOO_HOOK_NAME,
-                L"Creating hook %s. Redirecting function %p to %p.",
-                name.GetData(), pSrc, pDest
+                Format(VSTR("Creating hook %1%. Redirecting function %2% to %3%.")) << name << pSrc << pDest
             );
 
             TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
@@ -179,11 +179,10 @@ namespace VoodooShader
 
             if (result == STATUS_NOT_SUPPORTED || result == STATUS_NO_MEMORY || result == STATUS_INSUFFICIENT_RESOURCES)
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_HOOK_NAME,
-                    L"Error %u creating hook %s (%p, %p).",
-                    result, name.GetData(), pSrc, pDest
+                    Format(VSTR("Error %1 creating hook %s.")) << result << name
                 );
 
                 return false;
@@ -202,7 +201,7 @@ namespace VoodooShader
         {
             HookMap::iterator hook = m_Hooks.find(name);
 
-            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_HOOK_NAME, L"Removing hook %s.", name.GetData());
+            m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_HOOK_NAME, Format(VSTR("Removing hook %1%.")) << name);
 
             if (hook != m_Hooks.end())
             {
@@ -216,8 +215,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->Log
                     (
                         LL_ModError, VOODOO_HOOK_NAME,
-                        L"Error %u removing hook %s.",
-                        result, name.GetData()
+                        Format(VSTR("Error %1% removing hook %2%.")) << result << name
                     );
 
                     return true;
@@ -234,7 +232,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->Log
                 (
                     LL_ModDebug, VOODOO_HOOK_NAME,
-                    L"Trying to remove hook %s (does not exist).", name.GetData()
+                    Format(VSTR("Trying to remove hook %1% (does not exist).")) << name.GetData()
                 );
                 return false;
             }

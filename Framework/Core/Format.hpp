@@ -44,7 +44,7 @@ namespace VoodooShader
         class FormatImpl;
 
     public:
-        Format(_In_ const wchar_t * fmt);
+        Format(_In_ const vchar_t * fmt);
         Format(_In_ const String & fmt);
         ~Format();
         
@@ -71,6 +71,7 @@ namespace VoodooShader
         Format & operator<<(const wchar_t * val);
 
         Format & operator<<(const Exception & val);
+        Format & operator<<(const Format & val);
         Format & operator<<(const Regex & val);
         Format & operator<<(const Stream & val);
         Format & operator<<(const String & val);

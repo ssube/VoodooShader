@@ -216,7 +216,7 @@ namespace VoodooShader
             Uuid clsid;
             ZeroMemory(&clsid, sizeof(Uuid));
 
-            const wchar_t * classname = module->ClassInfo(curClass, &clsid);
+            const vchar_t * classname = module->ClassInfo(curClass, &clsid);
 
             if (classname)
             {

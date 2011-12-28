@@ -22,6 +22,8 @@
 
 #include "Filesystem_Version.hpp"
 
+#include "Format.hpp"
+
 // The MS shlobj header contains a few functions that cause errors in analysis under /W4 (and cause the build to fail
 // under /WX). This disables the warning for only that header.
 #pragma warning(push)
@@ -65,30 +67,31 @@ namespace VoodooShader
 
             if (access == 0)
             {
-                m_Core->GetLogger()->Log
-                    (
+                m_Core->GetLogger()->LogMessage
+                (
                     LL_ModWarn, VOODOO_FILESYSTEM_NAME,
-                    VSTR("Attempted to open file '") VPFVSTR VSTR("' with unknown mode (%X)."),
-                    m_Path.GetData(), mode
-                    );
+                    Format(VSTR("Attempted to open file '%1%' with unknown mode (%2%).")) << m_Path << mode
+                );
                 return false;
             }
 
             access |= std::ios_base::binary;
 
-            m_Core->GetLogger()->Log
-                (
+            m_Core->GetLogger()->LogMessage
+            (
                 LL_ModDebug, VOODOO_FILESYSTEM_NAME,
-                VSTR("Opening file ") VPFVSTR VSTR("with mode %u (underlying %u)."),
-                m_Path.GetData(), mode, access
-                );
+                Format(VSTR("Opening file %1% with mode %2% (underlying %3%).")) << m_Path << mode << access
+            );
 
             m_File.open(m_Path.GetData(), access);
 
             if (!m_File.is_open())
             {
-                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FILESYSTEM_NAME, 
-                    VSTR("Unable to open file '") VPFVSTR VSTR("'."), m_Path.GetData());
+                m_Core->GetLogger()->LogMessage
+                (
+                    LL_ModWarn, VOODOO_FILESYSTEM_NAME, 
+                    Format(VSTR("Unable to open file '%1%'.")) << m_Path
+                );
                 return false;
             } else {
                 return true;

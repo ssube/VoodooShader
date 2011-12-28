@@ -21,6 +21,7 @@
 
 #include "Includes.hpp"
 #include "Exception.hpp"
+#include "Format.hpp"
 #include "String.hpp"
 #include "Regex.hpp"
 #include "IObject.hpp"
@@ -146,73 +147,87 @@ namespace VoodooShader
      */
 
 #ifndef VOODOO_NO_STREAM_OPS
-    std::ostream & operator<<(std::ostream & out, const Exception & val)
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & out, const Exception & val)
     {
         out << VSTR("Exception(") << val.what() << VSTR(")");
         return out;
     }
 
-    std::ostream & operator<<(std::ostream & out, const Regex & val)
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & out, const Format & val)
     {
-        out << VSTR("Regex(") << val.GetExpr() << VSTR(")");
+        out << val.ToString().GetData();
         return out;
     }
 
-    std::ostream & operator<<(std::ostream & out, const String & val)
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & out, const Regex & val)
+    {
+        out << VSTR("Regex(") << val.GetExpr().GetData() << VSTR(")");
+        return out;
+    }
+
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & out, const String & val)
     {
         out << val.GetData();
         return out;
     }
 
-    template<typename T>
-    std::ostream & operator<<(std::ostream & out, const Vector1<T> & val)
+    template<typename Elem, typename Traits, typename VecElem>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & out, const Vector1<VecElem> & val)
     {
         out << "[" << val.X << "]";
         return out;
     }
 
-    template<typename T>
-    std::ostream & operator<<(std::ostream & out, const Vector2<T> & val)
+    template<typename Elem, typename Traits, typename VecElem>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & out, const Vector2<VecElem> & val)
     {
         out << "[" << val.X << ", " << val.Y << "]";
         return out;
     }
 
-    template<typename T>
-    std::ostream & operator<<(std::ostream & out, const Vector3<T> & val)
+    template<typename Elem, typename Traits, typename VecElem>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & out, const Vector3<VecElem> & val)
     {
         out << "[" << val.X << ", " << val.Y << ", " << val.Z << "]";
         return out;
     }        
 
-    template<typename T>
-    std::ostream & operator<<(std::ostream & out, const Vector4<T> & val)
+    template<typename Elem, typename Traits, typename VecElem>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & out, const Vector4<VecElem> & val)
     {
         out << "[" << val.X << ", " << val.Y << ", " << val.Z << ", " << val.W << "]";
         return out;
     }
 
-    std::ostream & operator<<(std::ostream & os, const TextureDesc & v)
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & os, const TextureDesc & v)
     {
         os << VSTR("TextureDesc(Format: ") << v.Format << VSTR("; Mipmaps: ") << v.Mipmaps << VSTR("; RenderTarget: ") <<
               v.RenderTarget << VSTR("; Size: ") << v.Size << VSTR(")");
         return os;
     }
 
-    std::ostream & operator<<(std::ostream & os, const TextureRegion & v)
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & os, const TextureRegion & v)
     {
         os << VSTR("TextureRegion(Format: ") << v.Format << VSTR("; Mipmaps: ") << v.Mipmaps << VSTR("; RenderTarget: ") <<
               v.RenderTarget << VSTR("; Size: ") << v.Size << VSTR("; Origin: ") << v.Origin << VSTR(")");
         return os;
     }
 
-    std::ostream & operator<<(std::ostream & os, const Uuid & v)
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & os, const Uuid & v)
     {
         os << VSTR("Uuid(") << v << VSTR(")");
         return os;
     }
 
-    std::ostream & operator<<(std::ostream & os, const Variant & v)
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & os, const Variant & v)
     {
         os << VSTR("Variant(") << v.Type << VSTR("; ") << v.Components;
 
@@ -283,7 +298,8 @@ namespace VoodooShader
         return os << VSTR(")");
     }
 
-    std::ostream & operator<<(std::ostream & os, const Version & v)
+    template<typename Elem, typename Traits>
+    std::basic_ostream<Elem, Traits> & operator<<(std::basic_ostream<Elem, Traits> & os, const Version & v)
     {
         os << VSTR("Version(LibId: ") << v.LibId << VSTR("; Major: ") << v.Major << VSTR("; Minor: ") <<
               v.Minor << VSTR("; Patch: ") << v.Patch << VSTR("; Build: ") << v.Build << VSTR("; Debug: ") <<
