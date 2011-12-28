@@ -130,7 +130,7 @@ namespace VoodooShader
                     logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        Format(VSTR("Error loading vertex program from '%1%': %2%.")) << pass << hr
+                        Format("Error loading vertex program from '%1%': %2%.") << pass << hr
                     );
 
                     return false;
@@ -145,13 +145,13 @@ namespace VoodooShader
                     logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        Format(VSTR("Error loading fragment program from '%1%': %2%.")) << pass << hr
+                        Format("Error loading fragment program from '%1%': %2%.") << pass << hr
                     );
                     return false;
                 }
             }
 
-            logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, Format(VSTR("Successfully loaded programs from '%1%'.")) << pass);
+            logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, Format("Successfully loaded programs from '%1%'.") << pass);
             return true;
         }
 
@@ -179,7 +179,7 @@ namespace VoodooShader
                     logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        Format(VSTR("Error loading vertex program from '%1%': %2%.")) << pass << hr
+                        Format("Error loading vertex program from '%1%': %2%.") << pass << hr
                     );
 
                     return false;
@@ -194,7 +194,7 @@ namespace VoodooShader
                     logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        Format(VSTR("Error loading fragment program from '%1%': %2%.")) << pass << hr
+                        Format("Error loading fragment program from '%1%': %2%.") << pass << hr
                     );
                     return false;
                 }
@@ -287,7 +287,7 @@ namespace VoodooShader
             ILoggerRef logger = m_Core->GetLogger();
 
             if (index > 3) {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Invalid render target index %1%.")) << index);
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Invalid render target index %1%.") << index);
                 return false;
             }
 
@@ -303,10 +303,10 @@ namespace VoodooShader
 
                     if (SUCCEEDED(result))
                     {
-                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format(VSTR("Bound backbuffer to render target %1%: %2%")) << index << result);
+                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound backbuffer to render target %1%: %2%") << index << result);
                         return true;
                     } else {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Device failed to bind backbuffer to render target %1%: %2%")) << index << result);
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind backbuffer to render target %1%: %2%") << index << result);
                         return false;
                     }
                 } else {
@@ -314,10 +314,10 @@ namespace VoodooShader
 
                     if (SUCCEEDED(result))
                     {
-                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format(VSTR("Bound null texture to render target %1%: %2%")) << index << result);
+                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture to render target %1%: %2%") << index << result);
                         return true;
                     } else {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Device failed to bind null texture to render target %1%: %2%")) << index << result);
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind null texture to render target %1%: %2%") << index << result);
                         return false;
                     }
                 }
@@ -329,10 +329,10 @@ namespace VoodooShader
                     result = m_Device->SetRenderTarget(index, nullptr);
                     if (SUCCEEDED(result))
                     {
-                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format(VSTR("Bound null texture data to render target %1%: %2%")) << index << result);
+                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture data to render target %1%: %2%") << index << result);
                         return true;
                     } else {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Device failed to bind null texture data to render target %1%: %2%")) << index << result);
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind null texture data to render target %1%: %2%") << index << result);
                         return false;
                     }
                 }
@@ -344,7 +344,7 @@ namespace VoodooShader
 
                 if (!SUCCEEDED(result))
                 {
-                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Failed to get surface of texture '%1%', data %2%: %3%")) << pTarget << pD3D9Tex << result);
+                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Failed to get surface of texture '%1%', data %2%: %3%") << pTarget << pD3D9Tex << result);
                     pD3D9Surf->Release();
                     pD3D9Tex->Release();
                     return false;
@@ -357,10 +357,10 @@ namespace VoodooShader
 
                 if (!SUCCEEDED(result))
                 {
-                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Device failed to bind texture '%1%' to render target %2%: %3%")) << pTarget << index << result);
+                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind texture '%1%' to render target %2%: %3%") << pTarget << index << result);
                     return false;
                 } else {
-                    logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format(VSTR("Bound texture '%1%' to render target %2%: %3%")) << pTarget << index << result);
+                    logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound texture '%1%' to render target %2%: %3%") << pTarget << index << result);
                     return true;
                 }
             }
@@ -370,7 +370,7 @@ namespace VoodooShader
         {
             if (index > 3)
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Invalid render target index %1%.")) << index);
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Invalid render target index %1%.") << index);
                 return false;
             }
 
@@ -403,7 +403,7 @@ namespace VoodooShader
             {
                 const char * error = cgD3D9TranslateHRESULT(hr);
 
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("Error creating texture %1%: %2%")) << name << error);
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error creating texture %1%: %2%") << name << error);
                 return nullptr;
             }
         }
@@ -506,7 +506,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_DX89_NAME, 
-                    Format(VSTR("Unable to bind parameter %1% of unknown type.")) << param
+                    Format("Unable to bind parameter %1% of unknown type.") << param
                 );
                 return false;
             }
@@ -575,13 +575,13 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_ModInfo, VOODOO_DX89_NAME, 
-                        Format(VSTR("Binding texture %1% to parameter %2%.")) << pTexture << pParam
+                        Format("Binding texture %1% to parameter %2%.") << pTexture << pParam
                     );
                 } else {
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_ModInfo, VOODOO_DX89_NAME, 
-                        Format(VSTR("Binding null texture to parameter %1%.")) << pParam);
+                        Format("Binding null texture to parameter %1%.") << pParam);
                 }
 
                 CGparameter texParam = pParam->GetCgParameter();
@@ -594,7 +594,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_DX89_NAME, 
-                    Format(VSTR("Invalid texture binding, parameter %1% is not a sampler.")) << pParam
+                    Format("Invalid texture binding, parameter %1% is not a sampler.") << pParam
                 );
                 return false;
             }
@@ -609,7 +609,7 @@ namespace VoodooShader
             if (ecode == cgD3D9DebugTrace)
             {
                 const char * emsg = cgD3D9TranslateCGerror(ecode);
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format(VSTR("D3D9 Debug %1%: %2%")) << ecode << emsg);
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("D3D9 Debug %1%: %2%") << ecode << emsg);
                 return true;
             }
 
@@ -688,7 +688,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 LL_ModInfo, VOODOO_DX89_NAME,
-                Format(VSTR("Detected latest profiles with %1% as vertex and %2% as fragment.")) << bestVertStr << bestFragStr
+                Format("Detected latest profiles with %1% as vertex and %2% as fragment.") << bestVertStr << bestFragStr
             );
 
             // Create vertex declaration
@@ -728,7 +728,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 LL_ModInfo, VOODOO_DX89_NAME, 
-                Format(VSTR("Prepping for %1% by %2% target.")) << (uint32_t)viewport.Width << (uint32_t)viewport.Height
+                Format("Prepping for %1% by %2% target.") << (uint32_t)viewport.Width << (uint32_t)viewport.Height
             );
 
             // Get buffers

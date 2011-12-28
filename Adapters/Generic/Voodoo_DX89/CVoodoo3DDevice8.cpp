@@ -33,7 +33,7 @@ namespace VoodooShader
         CVoodoo3DDevice8::CVoodoo3DDevice8(IDirect3DDevice9 *realDevice) :
             m_RealDevice(realDevice)
         {
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p", realDevice, this);
+            gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p") << realDevice << this);
         }
 
         CVoodoo3DDevice8::~CVoodoo3DDevice8()
@@ -50,7 +50,7 @@ namespace VoodooShader
         {
             ULONG refCount = m_RealDevice->AddRef();
 
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::AddRef() == %u", refCount);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::AddRef() == %u") << refCount);
 
             return refCount;
         }
@@ -72,7 +72,7 @@ namespace VoodooShader
         // IDirect3DDevice8 methods
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::ApplyStateBlock(DWORD Token)
         {
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::ApplyStateBlock(%u) == UNUSED", Token);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::ApplyStateBlock(%u) == UNUSED") << Token);
 
             return D3DERR_INVALIDCALL;
         }
@@ -81,7 +81,7 @@ namespace VoodooShader
         {
             HRESULT hr = m_RealDevice->BeginScene();
 
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::BeginScene() == %d", hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::BeginScene() == %d") << hr);
 
             return hr;
         }
@@ -90,14 +90,14 @@ namespace VoodooShader
         {
             HRESULT hr = m_RealDevice->BeginStateBlock();
 
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::BeginStateBlock() == %d", hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::BeginStateBlock() == %d") << hr);
 
             return hr;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::CaptureStateBlock(DWORD Token)
         {
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::CaptureStateBlock(%u) == UNUSED", Token);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::CaptureStateBlock(%u) == UNUSED") << Token);
 
             return D3DERR_INVALIDCALL;
         }
@@ -108,8 +108,8 @@ namespace VoodooShader
 
             gpVoodooLogger->Log
                 (
-                LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::Clear(%u, %p, %u, %u, %f, %u) == %d", Count, pRects,
-                Flags, Color, Z, Stencil, hr
+                LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::Clear(%u, %p, %u, %u, %f, %u) == %d") << Count << 
+                pRects << Flags << Colo << Z << Stencil << hr
                 );
 
             return hr;
@@ -119,7 +119,7 @@ namespace VoodooShader
         {
             HRESULT hr = m_RealDevice->TestCooperativeLevel();
 
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::TestCooperativeLevel() == %d", hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::TestCooperativeLevel() == %d") << hr);
 
             return hr;
         }
@@ -128,14 +128,14 @@ namespace VoodooShader
         {
             UINT mem = m_RealDevice->GetAvailableTextureMem();
 
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::GetAvailableTextureMem() == %u", mem);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::GetAvailableTextureMem() == %u") << mem);
 
             return mem;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::ResourceManagerDiscardBytes(DWORD Bytes)
         {
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::ResourceManagerDiscardBytes(%u) == UNUSED", Bytes);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::ResourceManagerDiscardBytes(%u) == UNUSED") << Bytes);
 
             return D3DERR_INVALIDCALL;
         }
@@ -144,7 +144,7 @@ namespace VoodooShader
         {
             (*ppD3D8) = (IDirect3D8 *)m_RealObject;
 
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::GetDirect3D(%p) == D3D_OK", *ppD3D8);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::GetDirect3D(%p) == D3D_OK") << *ppD3D8);
 
             return D3D_OK;
         }
@@ -155,7 +155,7 @@ namespace VoodooShader
 
             HRESULT hr = m_RealDevice->GetDeviceCaps(&rCaps);
 
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::GetDeviceCaps(%p) == %d", pCaps, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::GetDeviceCaps(%p) == %d") << pCaps << hr);
 
             if (SUCCEEDED(hr))
             {
@@ -168,7 +168,7 @@ namespace VoodooShader
         {
             HRESULT hr = m_RealDevice->GetDisplayMode(0, pMode);
 
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3DDevice8::GetDisplayMode(%p) == %d", pMode, hr);
+            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::GetDisplayMode(%p) == %d") << pMode << hr);
 
             return hr;
         }

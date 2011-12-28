@@ -248,7 +248,7 @@ namespace VoodooShader
         (
             _In_ const String & delims, 
             _In_ const uint32_t count, 
-            _In_count_(count) String * pStrings, 
+            _In_opt_count_(count) String * pStrings, 
             _In_ bool stripEmpty = false
         ) const;
         /**

@@ -91,6 +91,10 @@ namespace VoodooShader
              */
             VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append);
             /**
+             * Checks if the log file is open.
+             */
+            VOODOO_METHOD(IsOpen)() CONST;
+            /**
              * Closes the log file, if one is open.
              */
             VOODOO_METHOD(Close)();
@@ -124,11 +128,11 @@ namespace VoodooShader
             /**
              * Log a message, may be formatted with printf syntax. @param level The level for this message.
              *
+             * @param level The log level.
              * @param source The logging module's name.
-             * @param format The message format string.
-             * @param ... The parameters to insert.
+             * @param msg The message format string.
              */
-            VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const wchar_t * source, _In_ _Printf_format_string_ const wchar_t * format, ...);
+            VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const String & source, _In_ const String & msg);
             
         private:
             mutable uint32_t m_Refs;

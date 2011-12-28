@@ -19,11 +19,13 @@
  */
 #pragma once
 
+// CVoodoo3D8
 #include "CVoodoo3DTexture8.hpp"
-
 #include "CVoodoo3DSurface8.hpp"
-
+// Voodoo_DX89
 #include "DX9_Version.hpp"
+// Voodoo Framework
+#include "Format.hpp"
 
 namespace VoodooShader
 {
@@ -32,11 +34,10 @@ namespace VoodooShader
         CVoodoo3DTexture8::CVoodoo3DTexture8(CVoodoo3DDevice8 * pDevice, IDirect3DTexture9 * pTexture) :
             m_Device(pDevice), m_RealTexture(pTexture)
         {
-            gpVoodooLogger->Log
+            gpVoodooLogger->LogMessage
             (
                 LL_ModDebug, VOODOO_DX89_NAME,
-                L"CVoodoo3DTexture8::CVoodoo3DTexture8(%p, %p) == %p",
-                pDevice, pTexture, this
+                Format("CVoodoo3DTexture8::CVoodoo3DTexture8(%1%, %2%) == %3%") << pDevice << pTexture << this
             );
         }
 

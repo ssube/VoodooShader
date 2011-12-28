@@ -94,7 +94,7 @@ namespace VoodooShader
 
         String VOODOO_METHODTYPE DX9Texture::ToString() CONST
         {
-            return Format(VSTR("DX9Texture(%s)")) << m_Name;
+            return Format("DX9Texture(%s)") << m_Name;
         }
 
         ICore * VOODOO_METHODTYPE DX9Texture::GetCore() CONST

@@ -18,17 +18,19 @@
  *   peachykeen@voodooshader.com
  */
 
+// Voodoo Logger
 #include "Logger.hpp"
-
 #include "Logger_Version.hpp"
-
+// Voodoo Framework
+#include "Stream.hpp"
+// WinAPI
 #include <strsafe.h>
-
+// Boost
 #pragma warning(push)
 #pragma warning(disable: 6246)
 #include <boost/uuid/uuid_io.hpp>
 #pragma warning(pop)
-
+// STD
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -41,7 +43,7 @@ namespace VoodooShader
     namespace XmlLogger
     {
         static const Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
-        const wchar_t * name_VSXmlLogger = L"VSXmlLogger";
+        const wchar_t * name_VSXmlLogger = VSTR("VSXmlLogger");
         static const Uuid clsid_VSXmlLogger = CLSID_VSXmlLogger;
 
         const Version * VOODOO_CALLTYPE API_ModuleVersion()
@@ -178,21 +180,14 @@ namespace VoodooShader
 
                 wstringstream logMsg;
 
-                logMsg << VSTR("<?xml version='1.0'?>\n");
-                logMsg << VSTR("<VoodooLog ");
-                logMsg << String::Date() << VSTR(" ");
-                logMsg << String::Time().GetData() << VSTR(" ");
-                logMsg << String::Ticks().GetData() << VSTR(" ");
-                logMsg << VSTR(">\n");
+                logMsg << VSTR("Voodoo Shader Log");
+                logMsg << VSTR("Log Info(") << String::Date() << VSTR("; ") << String::Time() << VSTR("; ") << 
+                    String::Ticks() << VSTR(")");
 
 #ifdef _DEBUG
                 std::wcout << logMsg.str();
 #endif
                 m_LogFile << logMsg.str();
-
-                this->Log(LL_ModInfo, VOODOO_LOGGER_NAME, VSTR("Log file opened by VSXmlLogger::Open."));
-
-                this->LogModule(API_ModuleVersion());
 
                 return true;
             }
@@ -258,8 +253,7 @@ namespace VoodooShader
         {
             if (!pVersion || !this->IsOpen()) return;
 
-            Stream stream;
-            stream << VSTR("Loaded") << (*pVersion) << VSTR("\n");
+            m_LogFile << VSTR("Loaded") << (*pVersion) << endl;
         }
 
         bool VSXmlLogger::Log(const LogLevel level, const String & source, const String & msg)
@@ -272,14 +266,14 @@ namespace VoodooShader
             try
             {
                 // Format the message in memory to prevent partial messages from being dumped
-                Stream logMsg;
+                std::wstringstream logMsg;
                 logMsg << VSTR("Message(Level: ") << level << VSTR("; Ticks: ") << String::Ticks() <<
-                    VSTR("Source: ") << source << VSTR("; Message: ") << msg << VSTR(")");
+                    VSTR("Source: ") << source << VSTR("; Message: ") << msg << VSTR(")") << endl;
 
 #ifdef _DEBUG
                 if (level & (LL_ModWarn | LL_ModError))
                 {
-                    OutputDebugString(logMsg.ToString().GetData());
+                    OutputDebugString(logMsg.str());
 
 #   ifdef VOODOO_DEBUG_CONSOLE
                     cout << logMsg.str();

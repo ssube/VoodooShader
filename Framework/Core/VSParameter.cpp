@@ -28,7 +28,7 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
-#include "Stream.hpp"
+#include "Format.hpp"
 #include "Version.hpp"
 
 namespace VoodooShader
@@ -118,9 +118,7 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSParameter::ToString() CONST
     {
-        Stream stringRep;
-        stringRep << VSTR("VSParameter(") << m_Name << VSTR(")");
-        return stringRep.ToString();
+        return Format("VSParameter(%1%)") << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSParameter::GetCore() CONST

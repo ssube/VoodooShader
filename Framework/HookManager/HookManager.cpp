@@ -215,7 +215,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_ModError, VOODOO_HOOK_NAME,
-                        Format(VSTR("Error %1% removing hook %2%.")) << result << name
+                        Format("Error %1% removing hook %2%.") << (uint32_t)result << name
                     );
 
                     return true;

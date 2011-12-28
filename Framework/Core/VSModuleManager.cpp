@@ -30,8 +30,8 @@
 #include "IParser.hpp"
 
 #include "Exception.hpp"
+#include "Format.hpp"
 #include "Regex.hpp"
-#include "Stream.hpp"
 #include "Version.hpp"
 
 #include "shlwapi.h"
