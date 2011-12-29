@@ -38,20 +38,23 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
+        VOODOO_METHOD(IsLoaded)(_In_ const String & name) CONST;
+        VOODOO_METHOD(IsLoaded)(_In_ const Uuid & libid) CONST;
         VOODOO_METHOD(LoadPath)(_In_ const String & path, _In_ const String & filter);
         VOODOO_METHOD(LoadFile)(_In_ const IFile * pFile);
         VOODOO_METHOD(LoadFile)(_In_ const String & filename);
-        VOODOO_METHOD(ClassExists)(_In_ const Uuid & clsid) const;
-        VOODOO_METHOD(ClassExists)(_In_ const String & name) const;
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid & clsid) const;
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const String & name) const;
+        VOODOO_METHOD(ClassExists)(_In_ const Uuid & clsid) CONST;
+        VOODOO_METHOD(ClassExists)(_In_ const String & name) CONST;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid & clsid) CONST;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const String & name) CONST;
 
     private:
         mutable uint32_t m_Refs;
         ICore * m_Core;
 
         ModuleMap m_Modules;
+        StrongNameMap m_ModuleNames;
         ClassMap m_Classes;
-        ClassNameMap m_ClassNames;
+        StrongNameMap m_ClassNames;
     };
 }

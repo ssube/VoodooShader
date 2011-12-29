@@ -20,12 +20,14 @@
 #pragma once
 
 #include "CVoodoo3D9.hpp"
-
+// CVoodoo3D9
 #include "CVoodoo3DDevice9.hpp"
-
+// Voodoo DX89
 #include "DX9_Adapter.hpp"
 #include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
+// Voodoo Core
+#include "Format.hpp"
 
 namespace VoodooShader
 {
@@ -224,11 +226,11 @@ namespace VoodooShader
 
                 if (SUCCEEDED(hrt))
                 {
-                    logger->Log(LL_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
+                    logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
                 }
                 else
                 {
-                    logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
+                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
                 }
 
                 TextureDesc bufferTextureDesc;
@@ -247,11 +249,11 @@ namespace VoodooShader
                     hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
                     if (SUCCEEDED(hrt))
                     {
-                        logger->Log(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :thisframe surface.");
+                        logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :thisframe surface.");
                     }
                     else
                     {
-                        logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to :thisframe scratch surface.");
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to :thisframe scratch surface.");
                     }
                 }
 
@@ -263,11 +265,11 @@ namespace VoodooShader
                     hrt = texture->GetSurfaceLevel(0, &surface_LastPass);
                     if (SUCCEEDED(hrt))
                     {
-                        logger->Log(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :lastpass surface.");
+                        logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :lastpass surface.");
                     }
                     else
                     {
-                        logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to :lastpass scratch surface.");
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to :lastpass scratch surface.");
                     }
                 }
 
@@ -281,7 +283,7 @@ namespace VoodooShader
                 }
                 catch(std::exception & exc)
                 {
-                    logger->Log(LL_ModError, VOODOO_DX89_NAME, L"Error loading shader: %S", exc.what());
+                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %1%") << exc.what());
                 }
             }
 

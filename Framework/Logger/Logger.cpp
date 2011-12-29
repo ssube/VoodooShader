@@ -249,19 +249,12 @@ namespace VoodooShader
             return m_Filter;
         }
 
-        bool VSXmlLogger::LogModule(const Version * const pVersion)
+        bool VSXmlLogger::LogMessage(const LogLevel level, const String & source, const String & msg)
         {
-            if (!pVersion || !this->IsOpen()) return;
-
-            m_LogFile << VSTR("Loaded") << (*pVersion) << endl;
-        }
-
-        bool VSXmlLogger::Log(const LogLevel level, const String & source, const String & msg)
-        {
-            if (!this->IsOpen()) return;
+            if (!this->IsOpen()) return false;
 
             LogLevel mask = (LogLevel) (level & m_Filter);
-            if (!(mask & LL_Severity) || !(mask & LL_Origin)) return;
+            if (!(mask & LL_Severity) || !(mask & LL_Origin)) return false;
 
             try
             {
@@ -273,7 +266,7 @@ namespace VoodooShader
 #ifdef _DEBUG
                 if (level & (LL_ModWarn | LL_ModError))
                 {
-                    OutputDebugString(logMsg.str());
+                    OutputDebugString(logMsg.str().c_str());
 
 #   ifdef VOODOO_DEBUG_CONSOLE
                     cout << logMsg.str();
@@ -288,6 +281,8 @@ namespace VoodooShader
                 {
                     m_LogFile << flush;
                 }
+
+                return true;
             }
             catch(const std::exception & exc)
             {
@@ -296,6 +291,7 @@ namespace VoodooShader
 #else
                 UNREFERENCED_PARAMETER(exc);
 #endif
+                return false;
             }
         }
     }

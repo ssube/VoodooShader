@@ -56,7 +56,6 @@ namespace VoodooShader
         VOODOO_METHOD_(LogLevel, GetFilter)() const;
         VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flush);
         VOODOO_METHOD_(LogFlags, GetFlags)() const;
-        VOODOO_METHOD(LogModule)(_In_ const Version * const pModule);
         VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const String & source, _In_ const String & msg);
 
     private:

@@ -84,7 +84,7 @@ namespace VoodooShader
 
         String VOODOO_METHODTYPE FrostTexture::ToString() CONST
         {
-            return String::Format(L"FrostTexture(%s)", m_Name.GetData());
+            return Format("FrostTexture(%1%)") << m_Name;
         }
 
         ICore * VOODOO_METHODTYPE FrostTexture::GetCore() CONST

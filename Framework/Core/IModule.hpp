@@ -49,17 +49,28 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Module Interface Methods
+         * @{
          */
-
         /**
-         * Get the current version of this module. @return The version, including name and
-         * debug attribute.
+         * Get the current version of this module.
          */
         VOODOO_METHOD_(const Version *, ModuleVersion)() CONST PURE;
-        /** Get the class count from this module. */
+        /**
+         * Get the number of classes this module publicly provides. 
+         */
         VOODOO_METHOD_(uint32_t, ClassCount)() CONST PURE;
+        /**
+         * Get the name and ClsId of a class, by index.
+         * 
+         * @param number The class index in this module.
+         * @param pUuid The destination Uuid buffer.
+         */
         VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST PURE;
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST PURE;
+        /**
+         * @}
+         */
     };
     /**
      * @}

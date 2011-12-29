@@ -162,7 +162,7 @@ namespace VoodooShader
 
                 m_Target = m_Core->GetTexture(targetName);
 
-                if (!m_Target.get())
+                if (!m_Target)
                 {
                     m_Core->GetLogger()->LogMessage
                     (

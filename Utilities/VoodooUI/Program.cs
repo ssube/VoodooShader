@@ -67,7 +67,7 @@ namespace VoodooUI
                     Thread.CurrentThread.CurrentCulture = culture;
                     Thread.CurrentThread.CurrentUICulture = culture;
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
                     MessageBox.Show(String.Format("Error setting language to {0}, defaulting to en-US.", languageID), "Language Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

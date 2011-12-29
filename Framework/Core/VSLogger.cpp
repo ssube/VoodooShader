@@ -135,13 +135,6 @@ namespace VoodooShader
         return LF_Unknown;
     }
 
-    bool VOODOO_METHODTYPE VSLogger::LogModule(_In_ const Version * const pModule)
-    {
-        UNREFERENCED_PARAMETER(pModule);
-
-        return true;
-    }
-
     bool VOODOO_METHODTYPE VSLogger::LogMessage
     (
         _In_ const LogLevel level,

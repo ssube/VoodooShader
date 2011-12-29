@@ -44,6 +44,8 @@
 
 namespace VoodooShader
 {
+    HMODULE gCoreHandle = nullptr;
+
     void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore)
     {
         if (pCore)
@@ -156,6 +158,9 @@ namespace VoodooShader
             GetCurrentDirectory(MAX_PATH, buffer);
             PathAddBackslash(buffer);
             m_Parser->Add(VSTR("startup"), buffer, VT_System);
+
+            GetModuleFileName(gCoreHandle, buffer, MAX_PATH);
+            m_Parser->Add(VSTR("core"), buffer, VT_System);
         }
 
         // Command line processing
@@ -228,7 +233,9 @@ namespace VoodooShader
                 }
             }
 
-            // Load plugins
+            // Load plugins, starting with the core
+            m_ModuleManager->LoadFile(VSTR("$(core)"));
+
             {
                 pugi::xpath_query xpq_getPluginPaths(L"./Plugins/Path");
                 pugi::xpath_query xpq_getFilter(L"./@filter");
@@ -280,10 +287,12 @@ namespace VoodooShader
             }
 
             pugi::xpath_query logfQuery(L"./Log/File/text()");
+            pugi::xpath_query logaQuery(L"./Log/Append/text()");
             pugi::xpath_query loglQuery(L"./Log/Level/text()");
 
-            String logFile  = m_Parser->Parse(logfQuery.evaluate_string(globalNode).c_str());
-            String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(globalNode).c_str());
+            String logFile  = m_Parser->Parse(logfQuery.evaluate_string(globalNode));
+            String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(globalNode));
+            String logAppendStr = m_Parser->Parse(logaQuery.evaluate_string(globalNode));
 
             LogLevel logLevel = LL_Initial;
             try
@@ -293,7 +302,9 @@ namespace VoodooShader
                 UNREFERENCED_PARAMETER(exc);
             }
 
-            m_Logger->Open(logFile, false);
+            bool logAppend = logAppendStr.Compare(VSTR("true"), false) || logAppendStr == VSTR("1");
+
+            m_Logger->Open(logFile, logAppend);
             m_Logger->SetFilter(logLevel);
 
             // Log extended build information
@@ -301,13 +312,10 @@ namespace VoodooShader
             m_Logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, configMsg);
             m_Logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
-            Version vfver = VOODOO_META_VERSION_STRUCT(CORE);
             Version vsver = VOODOO_META_VERSION_STRUCT(VC);
             Version cgver = VOODOO_META_VERSION_STRUCT(CG);
-
-            m_Logger->LogModule(&vfver);
-            m_Logger->LogModule(&vsver);
-            m_Logger->LogModule(&cgver);
+            m_Logger->LogMessage(LL_CoreSysMsg, VOODOO_CORE_NAME, Format("Loaded module: %1%") << vsver);
+            m_Logger->LogMessage(LL_CoreSysMsg, VOODOO_CORE_NAME, Format("Loaded module: %1%") << cgver);
 
             // Load less vital classes
             m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
@@ -338,7 +346,7 @@ namespace VoodooShader
         }
         catch(const Exception & exc)
         {
-            if (m_Logger.get())
+            if (m_Logger)
             {
                 m_Logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format(VSTR("Exception during Core creation: %1%")) << exc.what());
             }
@@ -347,7 +355,7 @@ namespace VoodooShader
         }
         catch(const std::exception & exc)
         {
-            if (m_Logger.get())
+            if (m_Logger)
             {
                 m_Logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format(VSTR("Error during Core creation: %1%")) << exc.what());
             }

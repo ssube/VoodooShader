@@ -70,37 +70,55 @@ namespace VoodooShader
         return m_Impl->m_Stream.str();
     }
 
-    Stream & Stream::operator<<(uint8_t val)
+    Stream & Stream::operator<<(bool val)
     {
         m_Impl->m_Stream << val;
         return (*this);
     }
 
-    Stream & Stream::operator<<(int8_t val)
+    Stream & Stream::operator<<(char val)
     {
         m_Impl->m_Stream << val;
         return (*this);
     }
 
-    Stream & Stream::operator<<(uint16_t val)
+    Stream & Stream::operator<<(unsigned char val)
     {
         m_Impl->m_Stream << val;
         return (*this);
     }
 
-    Stream & Stream::operator<<(int16_t val)
-    {
-        m_Impl->m_Stream << val;
-        return (*this);
-    }
-    
-    Stream & Stream::operator<<(uint32_t val)
+    Stream & Stream::operator<<(short val)
     {
         m_Impl->m_Stream << val;
         return (*this);
     }
 
-    Stream & Stream::operator<<(int32_t val)
+    Stream & Stream::operator<<(unsigned short val)
+    {
+        m_Impl->m_Stream << val;
+        return (*this);
+    }
+
+    Stream & Stream::operator<<(int val)
+    {
+        m_Impl->m_Stream << val;
+        return (*this);
+    }
+
+    Stream & Stream::operator<<(unsigned int val)
+    {
+        m_Impl->m_Stream << val;
+        return (*this);
+    }
+
+    Stream & Stream::operator<<(long val)
+    {
+        m_Impl->m_Stream << val;
+        return (*this);
+    }
+
+    Stream & Stream::operator<<(unsigned long val)
     {
         m_Impl->m_Stream << val;
         return (*this);
@@ -113,6 +131,12 @@ namespace VoodooShader
     }
 
     Stream & Stream::operator<<(double val)
+    {
+        m_Impl->m_Stream << val;
+        return (*this);
+    }
+
+    Stream & Stream::operator<<(wchar_t val)
     {
         m_Impl->m_Stream << val;
         return (*this);
@@ -161,18 +185,6 @@ namespace VoodooShader
     }
 
     Stream & Stream::operator<<(const Version & val)
-    {
-        m_Impl->m_Stream << val;
-        return (*this);
-    }
-
-    Stream & Stream::operator<<(const char val)
-    {
-        m_Impl->m_Stream << val;
-        return (*this);
-    }
-
-    Stream & Stream::operator<<(const wchar_t val)
     {
         m_Impl->m_Stream << val;
         return (*this);

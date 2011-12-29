@@ -102,6 +102,16 @@ namespace VoodooShader
         return m_Core;
     }
 
+    bool VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const String & name) CONST
+    {
+        return (m_ModuleNames.find(name) != m_ModuleNames.end());
+    }
+
+    bool VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const Uuid & libid) CONST
+    {
+        return (m_Modules.find(libid) != m_Modules.end());
+    }
+
     bool VOODOO_METHODTYPE VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
     {
         String mask = m_Core->GetParser()->Parse(path) + VSTR("\\*");
@@ -168,7 +178,7 @@ namespace VoodooShader
         }
 
         // Check for already loaded
-        if (m_Modules.find(fullname) != m_Modules.end())
+        if (m_ModuleNames.find(fullname) != m_ModuleNames.end())
         {
             return true;
         }
@@ -178,7 +188,7 @@ namespace VoodooShader
 
         if (module == nullptr)
         {
-            if (logger.get())
+            if (logger)
             {
                 logger->LogMessage
                 (
@@ -190,12 +200,21 @@ namespace VoodooShader
             return false;
         }
 
-        m_Modules[fullname] = module;
-
         // Register classes from module
         const Version * moduleversion = module->ModuleVersion();
 
-        if (moduleversion->Debug != VOODOO_META_DEBUG_BOOL && logger.get())
+        if (!moduleversion)
+        {
+            if (logger)
+            {
+                logger->LogMessage(LL_CoreWarn, VOODOO_CORE_NAME, Format("Null version returned by module '%1%'.") << fullname);
+            }
+            return false;
+        }
+
+        m_ModuleNames[fullname] = moduleversion->LibId;
+
+        if (moduleversion->Debug != VOODOO_META_DEBUG_BOOL && logger)
         {
             logger->LogMessage
             (
@@ -204,9 +223,9 @@ namespace VoodooShader
             );
         }
 
-        if (logger.get())
+        if (logger)
         {
-            logger->LogModule(module->ModuleVersion());
+            logger->LogMessage(LL_CoreSysMsg, VOODOO_CORE_NAME, Format("Loaded module: %1%") << *module->ModuleVersion());
         }
 
         int classCount = module->ClassCount();
@@ -249,7 +268,7 @@ namespace VoodooShader
         Uuid clsid;
         if (!name.ToUuid(&clsid))
         {
-            ClassNameMap::const_iterator classiter = m_ClassNames.find(name);
+            StrongNameMap::const_iterator classiter = m_ClassNames.find(name);
             if (classiter != m_ClassNames.end())
             {
                 clsid = classiter->second;
@@ -305,7 +324,7 @@ namespace VoodooShader
         Uuid clsid;
         if (!name.ToUuid(&clsid))
         {
-            ClassNameMap::const_iterator classiter = m_ClassNames.find(name);
+            StrongNameMap::const_iterator classiter = m_ClassNames.find(name);
             if (classiter != m_ClassNames.end())
             {
                 clsid = classiter->second;

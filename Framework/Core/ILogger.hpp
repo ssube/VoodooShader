@@ -120,13 +120,6 @@ namespace VoodooShader
          * @{
          */
         /**
-         * Writes a module stamp to the log. This records the name and version info for a select module (used to log what
-         * modules were present during a logging session).
-         *
-         * @param pModule The module version info to log.
-         */
-        VOODOO_METHOD(LogModule)(_In_ const Version * const pModule) PURE;
-        /**
          * Log a pre-formatted message.
          *
          * @param level The level for this message.

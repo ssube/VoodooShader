@@ -17,7 +17,10 @@
  * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
+
 #include "Frost_Module.hpp"
+// Voodoo Core
+#include "Format.hpp"
 
 using namespace VoodooShader;
 
@@ -31,7 +34,7 @@ void CameraHack(void)
 {
     ILoggerRef logger = gpVoodooCore->GetLogger();
 
-    logger->Log(LL_ModInfo, VOODOO_FROST_NAME, L"Applying camera hack...");
+    logger->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, VSTR("Applying camera hack..."));
 
     float maxDist   = 120.0f;
     float minDist   = -0.2f;
@@ -50,12 +53,12 @@ void CameraHack(void)
 
         VirtualProtect((PVOID) 0x004A9000, 0x1000, oldProtect, &finalProtect);
 
-        logger->Log(LL_ModInfo, VOODOO_FROST_NAME, L"Camera hack successfully applied.");
+        logger->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, VSTR("Camera hack successfully applied."));
     }
     else
     {
         DWORD error = GetLastError();
 
-        logger->Log(LL_ModInfo, VOODOO_FROST_NAME, L"Camera hack failed with code %u.", error);
+        logger->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, Format("Camera hack failed with code %1%.") << error);
     }
 }

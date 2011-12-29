@@ -271,14 +271,15 @@ namespace VoodooShader
     typedef std::map<String, ITextureRef>        TextureMap;
     typedef std::list<ITextureRef>               TextureList;
     typedef std::vector<ITextureRef>             TextureVector;
-    typedef std::map<String, IModuleRef>         ModuleMap;
 
     typedef std::pair<String, uint32_t>          Variable;
     typedef std::map<String, Variable>           VariableMap;
 
+    typedef std::map<Uuid, IModuleRef>           ModuleMap;
+
     typedef std::pair<IModuleRef, uint32_t>      ClassSource;
     typedef std::map<Uuid, ClassSource>          ClassMap;
-    typedef std::map<String, Uuid>               ClassNameMap;
+    typedef std::map<String, Uuid>               StrongNameMap;
 
     typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
 #endif
@@ -432,36 +433,37 @@ namespace VoodooShader
     enum LogLevel : uint32_t
     {
         LL_Unknown      = 0x00,
+        // Basics
         LL_Debug        = 0x01,
         LL_Info         = 0x02,
         LL_Warning      = 0x04,
-        LL_Error        = 0x08,
+        LL_Critical     = 0x08,
         LL_External     = 0x10,
-        LL_Plugin       = 0x20,
-        LL_Module       = 0x40,
-        LL_Core         = 0x80,
-        // Usable values
-        LL_ExtDebug     = 0x11,
-        LL_ExtInfo      = 0x12,
-        LL_ExtWarn      = 0x14,
-        LL_ExtError     = 0x18,
-        LL_PlugDebug    = 0x21,
-        LL_PlugInfo     = 0x22,
-        LL_PlugWarn     = 0x24,
-        LL_PlugError    = 0x28,
-        LL_ModDebug     = 0x41,
-        LL_ModInfo      = 0x42,
-        LL_ModWarn      = 0x44,
-        LL_ModError     = 0x48,
-        LL_CoreDebug    = 0x81,
-        LL_CoreInfo     = 0x82,
-        LL_CoreWarn     = 0x84,
-        LL_CoreError    = 0x88,
-        LL_Initial      = 0xFC,
+        LL_Module       = 0x20,
+        LL_Core         = 0x40,
+        // Compound
+        LL_Exception    = LL_Debug | LL_Critical,
+        LL_Error        = LL_Warning | LL_Critical,
+        LL_Initial      = LL_Info | LL_Warning | LL_Module | LL_Core,
+        // Usable
+        LL_ExtDebug     = LL_External | LL_Debug,
+        LL_ExtInfo      = LL_External | LL_Info,
+        LL_ExtWarn      = LL_External | LL_Warning,
+        LL_ExtError     = LL_External | LL_Error,
+        LL_ModDebug     = LL_Module | LL_Debug,
+        LL_ModInfo      = LL_Module | LL_Info,
+        LL_ModWarn      = LL_Module | LL_Warning,
+        LL_ModError     = LL_Module | LL_Error,
+        LL_CoreDebug    = LL_Core | LL_Debug,
+        LL_CoreInfo     = LL_Core | LL_Info,
+        LL_CoreSysMsg   = LL_Core | LL_Info | LL_Critical,
+        LL_CoreWarn     = LL_Core | LL_Warning,
+        LL_CoreError    = LL_Core | LL_Error,
         // Masks
-        LL_Severity     = 0x0F,
-        LL_Origin       = 0xF0,
-        LL_All          = 0xFF
+        LL_Severity     = LL_Debug | LL_Info | LL_Warning,
+        LL_Origin       = LL_External | LL_Module | LL_Core,
+        LL_Flags        = LL_Critical,
+        LL_All          = LL_Severity | LL_Origin | LL_Flags
     };
 
     enum LogFlags  : uint32_t

@@ -38,7 +38,7 @@ namespace VoodooShader
             ILoggerRef logger = m_Core->GetLogger();
 
             // Hook OpenGL functions
-            logger->Log(LL_ModDebug, VOODOO_FROST_NAME, L"Beginning OpenGL hook procedure.");
+            logger->LogMessage(LL_ModDebug, VOODOO_FROST_NAME, L"Beginning OpenGL hook procedure.");
 
             IHookManagerRef hooker = m_Core->GetHookManager();
             bool success = true;
@@ -72,15 +72,15 @@ namespace VoodooShader
             // Check the results and handle
             if (success)
             {
-                logger->Log(LL_ModInfo, VOODOO_FROST_NAME, L"OpenGL hooked successfully.");
+                logger->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, L"OpenGL hooked successfully.");
             }
             else
             {
-                logger->Log(LL_ModError, VOODOO_FROST_NAME, L"OpenGL hook procedure failed.");
+                logger->LogMessage(LL_ModError, VOODOO_FROST_NAME, L"OpenGL hook procedure failed.");
                 return;
             }
 
-            logger->Log(LL_ModInfo, VOODOO_FROST_NAME, L"Frost adapter initialized.");
+            logger->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, L"Frost adapter initialized.");
         }
 
         FrostAdapter::~FrostAdapter(void)
@@ -137,7 +137,7 @@ namespace VoodooShader
 
         String VOODOO_METHODTYPE FrostAdapter::ToString() const
         {
-            return L"FrostAdapter()";
+            return VSTR("FrostAdapter()");
         }
 
         ICore * VOODOO_METHODTYPE FrostAdapter::GetCore() const
@@ -163,7 +163,7 @@ namespace VoodooShader
         {
             if (!pPass)
             {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to bind null pass.");
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, VSTR("Unable to bind null pass."));
                 return false;
             }
 
@@ -248,7 +248,7 @@ namespace VoodooShader
                 break;
             case TF_Unknown:
             default:
-                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"Unable to resolve texture format.");
+                m_Core->GetLogger()->LogMessage(LL_ModWarn, VOODOO_FROST_NAME, VSTR("Unable to resolve texture format."));
                 return false;
             }
 
@@ -258,7 +258,7 @@ namespace VoodooShader
 
             while (error != GL_NO_ERROR)
             {
-                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"OpenGL returned error %u: %S", error, glGetString(error));
+                m_Core->GetLogger()->LogMessage(LL_ModWarn, VOODOO_FROST_NAME, Format("OpenGL returned error %u: %S") << error << glGetString(error));
                 error = glGetError();
             }
 
@@ -269,17 +269,17 @@ namespace VoodooShader
             error = glGetError();
             while (error != GL_NO_ERROR)
             {
-                m_Core->GetLogger()->Log(LL_ModWarn, VOODOO_FROST_NAME, L"OpenGL returned error %u: %S", error, glGetString(error));
+                m_Core->GetLogger()->LogMessage(LL_ModWarn, VOODOO_FROST_NAME, VSTR("OpenGL returned error %u: %S") << error << glGetString(error));
                 error = glGetError();
             }
 
             if (glIsTexture(texture))
             {
-                m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"OpenGL texture %u created successfully.", texture);
+                m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_FROST_NAME, VSTR("OpenGL texture %u created successfully.") << texture);
             }
             else
             {
-                m_Core->GetLogger()->Log(LL_ModDebug, VOODOO_FROST_NAME, L"OpenGL create failed, returned texture %u.", texture);
+                m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_FROST_NAME, VSTR("OpenGL create failed, returned texture %u.") << texture);
             }
 
             return new FrostTexture(m_Core, name, texture);
@@ -367,7 +367,7 @@ namespace VoodooShader
             }
             else
             {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to apply parameter %s.", pParam->ToString().GetData());
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, Format("Unable to apply parameter %1%.") << pParam);
                 return false;
             }
 
@@ -416,20 +416,18 @@ namespace VoodooShader
         {
             if (!shader)
             {
-                m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to draw null shader.");
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, VSTR("Unable to draw null shader."));
                 return;
             }
 
             ITechniqueRef tech = shader->GetDefaultTechnique();
 
-            if (tech.get() == nullptr)
+            if (!tech)
             {
-                m_Core->GetLogger()->Log
+                m_Core->GetLogger()->LogMessage
                 (
-                    LL_ModError,
-                    VOODOO_FROST_NAME,
-                    L"No default technique given for shader %s.",
-                    shader->ToString().GetData()
+                    LL_ModError, VOODOO_FROST_NAME,
+                    VSTR("No default technique given for shader %1%.") << shader
                 );
                 return;
             }
@@ -454,24 +452,13 @@ namespace VoodooShader
 
                 ITextureRef target = pass->GetTarget(0);
 
-                if (target.get())
+                if (target)
                 {
                     GLuint passtarget = (GLuint) target->GetData();
 
                     glBindTexture(GL_TEXTURE_2D, passtarget);
                     glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
                 }
-            }
-
-            ITextureRef target = tech->GetTarget();
-
-            if (target.get())
-            {
-
-                GLuint techtarget = (GLuint) target->GetData();
-
-                glBindTexture(GL_TEXTURE_2D, techtarget);
-                glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
             }
 
             glMatrixMode(GL_PROJECTION);
@@ -502,7 +489,7 @@ namespace VoodooShader
 
                 if (!cgIsContext(context))
                 {
-                    m_Core->GetLogger()->Log(LL_ModError, VOODOO_FROST_NAME, L"Unable to create Cg context.");
+                    m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, VSTR("Unable to create Cg context."));
                     return;
                 }
 

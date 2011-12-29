@@ -600,7 +600,7 @@ namespace VoodooShader
                 m_Techniques.push_back(tech);
 
                 // The first valid technique is the default one
-                if (!m_DefaultTechnique.get())
+                if (!m_DefaultTechnique)
                 {
                     m_DefaultTechnique = tech;
                 }

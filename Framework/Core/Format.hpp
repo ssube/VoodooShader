@@ -54,17 +54,18 @@ namespace VoodooShader
         }
 
         Format & operator<<(bool val);
-        Format & operator<<(uint8_t val);
-        Format & operator<<(int8_t val);
-        Format & operator<<(uint16_t val);
-        Format & operator<<(int16_t val);
-        Format & operator<<(uint32_t val);
-        Format & operator<<(int32_t val);
+        Format & operator<<(char val);
+        Format & operator<<(unsigned char val);
+        Format & operator<<(short val);
+        Format & operator<<(unsigned short val);
+        Format & operator<<(int val);
+        Format & operator<<(unsigned int val);
+        Format & operator<<(long val);
+        Format & operator<<(unsigned long val);
         Format & operator<<(float val);
         Format & operator<<(double val);
 
-        Format & operator<<(const char val);
-        Format & operator<<(const wchar_t val);
+        Format & operator<<(wchar_t val);
 
         Format & operator<<(const Exception & val);
         Format & operator<<(const Format & val);

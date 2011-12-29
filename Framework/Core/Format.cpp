@@ -65,37 +65,49 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(uint8_t val)
+    Format & Format::operator<<(char val)
     {
         m_Impl->m_Format % val;
         return (*this);
     }
 
-    Format & Format::operator<<(int8_t val)
+    Format & Format::operator<<(unsigned char val)
     {
         m_Impl->m_Format % val;
         return (*this);
     }
 
-    Format & Format::operator<<(uint16_t val)
+    Format & Format::operator<<(short val)
     {
         m_Impl->m_Format % val;
         return (*this);
     }
 
-    Format & Format::operator<<(int16_t val)
+    Format & Format::operator<<(unsigned short val)
     {
         m_Impl->m_Format % val;
         return (*this);
     }
 
-    Format & Format::operator<<(uint32_t val)
+    Format & Format::operator<<(int val)
     {
         m_Impl->m_Format % val;
         return (*this);
     }
 
-    Format & Format::operator<<(int32_t val)
+    Format & Format::operator<<(unsigned int val)
+    {
+        m_Impl->m_Format % val;
+        return (*this);
+    }
+
+    Format & Format::operator<<(long val)
+    {
+        m_Impl->m_Format % val;
+        return (*this);
+    }
+
+    Format & Format::operator<<(unsigned long val)
     {
         m_Impl->m_Format % val;
         return (*this);
@@ -113,13 +125,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const char val)
-    {
-        m_Impl->m_Format % val;
-        return (*this);
-    }
-
-    Format & Format::operator<<(const wchar_t val)
+    Format & Format::operator<<(wchar_t val)
     {
         m_Impl->m_Format % val;
         return (*this);

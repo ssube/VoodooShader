@@ -20,11 +20,13 @@
 #pragma once
 
 #include "CVoodoo3DDevice8.hpp"
-
+// CVoodoo3D8
 #include "CVoodoo3DSurface8.hpp"
 #include "CVoodoo3DTexture8.hpp"
-
+// Voodoo DX89
 #include "DX9_Version.hpp"
+// Voodoo Core
+#include "Format.hpp"
 
 namespace VoodooShader
 {
@@ -109,7 +111,7 @@ namespace VoodooShader
             gpVoodooLogger->Log
                 (
                 LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::Clear(%u, %p, %u, %u, %f, %u) == %d") << Count << 
-                pRects << Flags << Colo << Z << Stencil << hr
+                pRects << Flags << Color << Z << Stencil << hr
                 );
 
             return hr;

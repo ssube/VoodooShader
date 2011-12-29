@@ -58,14 +58,18 @@ namespace VoodooShader
          * @{
          */
         Stream & operator<<(bool val);
-        Stream & operator<<(uint8_t val);
-        Stream & operator<<(int8_t val);
-        Stream & operator<<(uint16_t val);
-        Stream & operator<<(int16_t val);
-        Stream & operator<<(uint32_t val);
-        Stream & operator<<(int32_t val);
+        Stream & operator<<(char val);
+        Stream & operator<<(unsigned char val);
+        Stream & operator<<(short val);
+        Stream & operator<<(unsigned short val);
+        Stream & operator<<(int val);
+        Stream & operator<<(unsigned int val);
+        Stream & operator<<(long val);
+        Stream & operator<<(unsigned long val);
         Stream & operator<<(float val);
         Stream & operator<<(double val);
+
+        Stream & operator<<(wchar_t val);
 
         Stream & operator<<(const Exception & val);
         Stream & operator<<(const Regex & val);
@@ -77,9 +81,6 @@ namespace VoodooShader
         Stream & operator<<(const Uuid & val);
         Stream & operator<<(const Variant & val);
         Stream & operator<<(const Version & val);
-        
-        Stream & operator<<(const char val);
-        Stream & operator<<(const wchar_t val);
 
         // Pointer overloads
         Stream & insertPtr(const void * val);

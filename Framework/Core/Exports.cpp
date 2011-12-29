@@ -21,18 +21,30 @@
 #include "Exports.hpp"
 
 #include "VSAdapter.hpp"
+#include "VSCore.hpp"
 #include "VSFileSystem.hpp"
 #include "VSHookManager.hpp"
 #include "VSLogger.hpp"
-
-#include "ICore.hpp"
 
 #include "Version.hpp"
 
 namespace VoodooShader
 {
-    static const Version coreVersion = VOODOO_META_VERSION_STRUCT(CORE);
+    BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
+    {
+        UNREFERENCED_PARAMETER(lpvReserved);
 
+        if (fdwReason == DLL_PROCESS_ATTACH)
+        {
+            DisableThreadLibraryCalls(hinstDLL);
+
+            gCoreHandle = hinstDLL;
+        }
+
+        return TRUE;
+    }
+
+    static const Version coreVersion = VOODOO_META_VERSION_STRUCT(CORE);
     static const wchar_t * name_VSAdapter = VSTR("VSAdapter");
     static const wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
     static const wchar_t * name_VSHookManager = VSTR("VSHookManager");
@@ -52,7 +64,7 @@ namespace VoodooShader
         return 4;
     }
 
-    const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid)
+    const wchar_t * VOODOO_CALLTYPE API_ClassInfo(const uint32_t number, _Out_ Uuid * pUuid)
     {
         if (!pUuid)
         {
@@ -78,7 +90,7 @@ namespace VoodooShader
         }
     }
 
-    IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t number, _In_ ICore * pCore)
+    IObject * VOODOO_CALLTYPE API_ClassCreate(const uint32_t number, _Pre_notnull_ ICore * pCore)
     {
         switch (number)
         {

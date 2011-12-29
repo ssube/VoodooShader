@@ -50,9 +50,21 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
-         * @name Module Load Methods
+         * @name Module Methods
          * @{
          */
+        /**
+         * Tests if the module with the given name is currently loaded.
+         * 
+         * @param name The module name to check.
+         */
+        VOODOO_METHOD(IsLoaded)(_In_ const String & name) CONST PURE;
+        /**
+         * Tests if the module with the given Uuid is currently loaded.
+         * 
+         * @param libid The module Uuid to check.
+         */
+        VOODOO_METHOD(IsLoaded)(_In_ const Uuid & libid) CONST PURE;
         /**
          * Loads a set of modules from a given path.
          *
@@ -120,11 +132,11 @@ namespace VoodooShader
          */
         VOODOO_METHOD(ClassExists)(_In_ const String & name) CONST PURE;
         /**
-        * Create a new instance of the given class, using specific class Uuid. This requires a precise match and will fail
-        * if no class is available.
-        *
-        * @param clsid The class Uuid to create.
-        * @return New object or nullptr if the class wasn't found or couldn't be created.
+         * Create a new instance of the given class, using specific class Uuid. This requires a precise match and will fail
+         * if no class is available.
+         *
+         * @param clsid The class Uuid to create.
+         * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid & clsid) CONST PURE;
         /**

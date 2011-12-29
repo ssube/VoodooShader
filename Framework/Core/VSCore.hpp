@@ -24,6 +24,11 @@
 namespace VoodooShader
 {
     /**
+     * Core-internal handle to core module.
+     */
+    extern HMODULE gCoreHandle;
+
+    /**
      * Non-member function provided to Cg as an error handling callback.
      *
      * @param pContext The Cg context throwing the error.
