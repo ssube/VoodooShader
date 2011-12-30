@@ -29,9 +29,15 @@
 #pragma comment(lib, "cgD3D9.lib")
 
 #ifndef VOODOO_IMPORT_DX9
-#define VOODOO_API_DX9 __declspec(dllexport)
+#   define VOODOO_API_DX9 __declspec(dllexport)
 #else
-#define VOODOO_API_DX9 __declspec(dllimport)
+#   define VOODOO_API_DX9 __declspec(dllimport)
+#endif
+
+#ifdef VOODOO_DX89_DEBUG3D8
+#   define APILOG(arg) gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, arg)
+#else
+#   define APILOG(arg)
 #endif
 
 namespace VoodooShader

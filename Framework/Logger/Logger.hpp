@@ -119,13 +119,6 @@ namespace VoodooShader
             VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags);
             VOODOO_METHOD_(LogFlags, GetFlags)() CONST;
             /**
-             * Writes a module stamp to the log. This records the name and version info for a select module (used to log
-             * what modules were present during a logging session).
-             *
-             * @param pModule The module version info to log.
-             */
-            VOODOO_METHOD(LogModule)(_In_ const Version * const pModule);
-            /**
              * Log a message, may be formatted with printf syntax. @param level The level for this message.
              *
              * @param level The log level.

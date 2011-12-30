@@ -19,12 +19,15 @@
  */
 
 #include "CVoodoo3D8.hpp"
-
+// CVoodoo3D8
 #include "CVoodoo3DDevice8.hpp"
-
+// Voodoo DX89
 #include "DX9_Adapter.hpp"
 #include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
+// Voodoo Core
+#include "Format.hpp"
+#include "Support.inl"
 
 namespace VoodooShader
 {
@@ -80,13 +83,12 @@ namespace VoodooShader
             HRESULT hr = m_RealObject->CheckDepthStencilMatch
                 (Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log
-                (
-                LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d", Adapter, DeviceType,
-                AdapterFormat, RenderTargetFormat, DepthStencilFormat, hr
-                );
-#endif
+            gpVoodooLogger->LogMessage
+            (
+                LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::CheckDepthStencilMatch(%d, %d, %d, %d, %d) == %d") << Adapter << DeviceType <<
+                AdapterFormat << RenderTargetFormat << DepthStencilFormat << hr
+            );
+
             return hr;
         }
 
@@ -102,13 +104,12 @@ namespace VoodooShader
         {
             HRESULT hr = m_RealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log
-                (
-                LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d", Adapter, DeviceType,
-                AdapterFormat, Usage, RType, CheckFormat, hr
-                );
-#endif
+            gpVoodooLogger->LogMessage
+            (
+                LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::CheckDeviceFormat(%d, %d, %d, %d, %d, %d) == %d") << Adapter << DeviceType <<
+                AdapterFormat << Usage << RType << CheckFormat << hr
+            );
+
             return hr;
         }
 
@@ -124,13 +125,12 @@ namespace VoodooShader
             HRESULT hr = m_RealObject->CheckDeviceMultiSampleType
                 (Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log
-                (
-                LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d", Adapter, DeviceType,
-                SurfaceFormat, Windowed, MultiSampleType, hr
-                );
-#endif
+            gpVoodooLogger->LogMessage
+            (
+                LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::CheckDeviceMultiSampleType(%d, %d, %d, %d, %d) == %d") << Adapter << DeviceType <<
+                SurfaceFormat << Windowed << MultiSampleType << hr
+            );
+
             return hr;
         }
 
@@ -145,13 +145,12 @@ namespace VoodooShader
         {
             HRESULT hr = m_RealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log
+            gpVoodooLogger->LogMessage
                 (
-                LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d", Adapter, CheckType, DisplayFormat,
-                BackBufferFormat, Windowed, hr
+                LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::CheckDeviceType(%d, %d, %d, %d, %d) == %d") << Adapter << CheckType << DisplayFormat <<
+                BackBufferFormat << Windowed << hr
                 );
-#endif
+
             return hr;
         }
 
@@ -191,11 +190,11 @@ namespace VoodooShader
             const wchar_t * textureType = VoodooShader::Converter::ToString
                 (VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat));
 
-            gpVoodooLogger->Log
+            gpVoodooLogger->LogMessage
             (
-                LL_ModInfo, VOODOO_DX89_NAME, L"Backbuffer parameters for new device: %d by %d (%d buffers), %s.",
-                mpPresentationParameters.BackBufferWidth, mpPresentationParameters.BackBufferHeight,
-                mpPresentationParameters.BackBufferCount, textureType
+                LL_ModInfo, VOODOO_DX89_NAME, Format("Backbuffer parameters for new device: %d by %d (%d buffers), %s.") <<
+                mpPresentationParameters.BackBufferWidth << mpPresentationParameters.BackBufferHeight <<
+                mpPresentationParameters.BackBufferCount << textureType
             );
 #endif
 
@@ -203,15 +202,15 @@ namespace VoodooShader
             HRESULT hr = m_RealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &pRealDevice);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log
+            gpVoodooLogger->LogMessage
                 (
-                LL_ModInfo, VOODOO_DX89_NAME, L"CVoodoo3D8::CreateDevice(%d, %d, %p, %d, %p, %p) == %d", Adapter, DeviceType,
-                hFocusWindow, BehaviorFlags, &mpPresentationParameters, pRealDevice, hr
+                LL_ModInfo, VOODOO_DX89_NAME, Format("CVoodoo3D8::CreateDevice(%d, %d, %p, %d, %p, %p) == %d") << Adapter << DeviceType <<
+                hFocusWindow << BehaviorFlags << &mpPresentationParameters << pRealDevice << hr
                 );
 #endif
             if (!SUCCEEDED(hr))
             {
-                gpVoodooLogger->Log(LL_ModError, VOODOO_DX89_NAME, L"CVoodoo3D8::CreateDevice failed with error %d on adapter %d.", hr, Adapter);
+                gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("CVoodoo3D8::CreateDevice failed with error %d on adapter %d.") << hr << Adapter);
                 return hr;
             }
             else
@@ -230,11 +229,11 @@ namespace VoodooShader
 
                 if (SUCCEEDED(hrt))
                 {
-                    gpVoodooLogger->Log(LL_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
+                    gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
                 }
                 else
                 {
-                    gpVoodooLogger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
+                    gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
                 }
 
                 TextureDesc backbufferDesc;
@@ -254,11 +253,11 @@ namespace VoodooShader
                     hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
                     if (SUCCEEDED(hrt))
                     {
-                        gpVoodooLogger->Log(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :thisframe surface.");
+                        gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :thisframe surface.");
                     }
                     else
                     {
-                        gpVoodooLogger->Log(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :thisframe surface.");
+                        gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :thisframe surface.");
                     }
                 }
 
@@ -269,7 +268,7 @@ namespace VoodooShader
                 }
                 catch(std::exception & exc)
                 {
-                    gpVoodooLogger->Log(LL_ModError, VOODOO_DX89_NAME, L"Error loading shader: %S", exc.what());
+                    gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %S") << exc.what());
                 }
 
                 return hr;
@@ -280,9 +279,8 @@ namespace VoodooShader
         {
             HRESULT hr = m_RealObject->EnumAdapterModes(Adapter, D3DFMT_X8R8G8B8, Mode, pMode);
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::EnumAdapterModes(%d, %d, %p) == %d", Adapter, Mode, pMode, hr);
-#endif
+            gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::EnumAdapterModes(%d, %d, %p) == %d") << Adapter << Mode << pMode << hr);
+
             return hr;
         }
 
@@ -290,9 +288,8 @@ namespace VoodooShader
         {
             UINT count = m_RealObject->GetAdapterCount();
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::GetAdapterCount() == %d", count);
-#endif
+            gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::GetAdapterCount() == %d") << count);
+
             return count;
         }
 
@@ -300,10 +297,10 @@ namespace VoodooShader
         {
             HRESULT hr = m_RealObject->GetAdapterDisplayMode(Adapter, pMode);
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::GetAdapterDisplayMode(%d, %p) == %d", Adapter, pMode, hr);
-#endif
-            pMode->Format = D3DFMT_X8R8G8B8;
+            gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::GetAdapterDisplayMode(%d, %p) == %d") << Adapter << pMode << hr);
+
+            //! @todo Check if this force-format is necessary.
+            //pMode->Format = D3DFMT_X8R8G8B8;
 
             return hr;
         }
@@ -314,16 +311,13 @@ namespace VoodooShader
 
             HRESULT hr = m_RealObject->GetAdapterIdentifier(Adapter, 0, &realIdentifier);
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::GetAdapterIdentifier(%d, %d, %p) == %d", Adapter, Flags, pIdentifier, hr);
-#else
-            UNREFERENCED_PARAMETER(Flags);
-#endif
+            gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::GetAdapterIdentifier(%d, %d, %p) == %d") << Adapter << Flags << pIdentifier << hr);
 
             if (SUCCEEDED(hr))
             {
                 // Strings, so use copymemory instead of assignment
-                ::CopyMemory(pIdentifier, &realIdentifier, 1024);
+                ::CopyMemory(pIdentifier->Driver, realIdentifier.Driver, MAX_DEVICE_IDENTIFIER_STRING);
+                ::CopyMemory(pIdentifier->Description, realIdentifier.Description, MAX_DEVICE_IDENTIFIER_STRING);
                 pIdentifier->DeviceId = realIdentifier.DeviceId;
                 pIdentifier->DeviceIdentifier = realIdentifier.DeviceIdentifier;
                 pIdentifier->DriverVersion = realIdentifier.DriverVersion;
@@ -338,10 +332,8 @@ namespace VoodooShader
         UINT STDMETHODCALLTYPE CVoodoo3D8::GetAdapterModeCount(UINT Adapter)
         {
             UINT r = m_RealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
-
-#ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::GetAdapterModeCount(%d) == %d", Adapter, r);
-#endif
+            
+            gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::GetAdapterModeCount(%d) == %d") << Adapter << r);
 
             return r;
         }
@@ -350,9 +342,8 @@ namespace VoodooShader
         {
             HMONITOR hm = m_RealObject->GetAdapterMonitor(Adapter);
 
-#ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::GetAdapterMonitor(%d) == %p", Adapter, hm);
-#endif
+            gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::GetAdapterMonitor(%d) == %p") << Adapter << hm);
+
             return hm;
         }
 
@@ -363,12 +354,7 @@ namespace VoodooShader
 
             if (!d3d8caps_fetched)
             {
-                TCHAR d3d8Path[MAX_PATH];
-
-                GetSystemDirectory(d3d8Path, MAX_PATH);
-                wcscat_s(d3d8Path, MAX_PATH, TEXT("\\d3d8.dll"));
-
-                HMODULE d3d8module = LoadLibrary(d3d8Path);
+                HMODULE d3d8module = LoadSystemLibrary(VSTR("d3d8.dll"));
                 if (d3d8module)
                 {
                     typedef IDirect3D8 * (WINAPI * d3d8createtype)(UINT);
@@ -403,9 +389,9 @@ namespace VoodooShader
             HRESULT hr = m_RealObject->RegisterSoftwareDevice(pInitializeFunction);
 
 #ifdef _DEBUG
-            gpVoodooLogger->Log(LL_ModDebug, VOODOO_DX89_NAME, L"CVoodoo3D8::RegisterSoftwareDevice(%p) == %d", pInitializeFunction, hr);
+            gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::RegisterSoftwareDevice(%p) == %d") << pInitializeFunction << hr);
 #else
-            gpVoodooLogger->Log(LL_ModWarn, VOODOO_DX89_NAME, L"The application has registered a software device with D3D8, illegal behavior.");
+            gpVoodooLogger->LogMessage(LL_ModWarn, VOODOO_DX89_NAME, VSTR("The application has registered a software device with D3D8, illegal behavior."));
 #endif
 
             return hr;
