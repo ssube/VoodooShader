@@ -19,6 +19,8 @@
  */
 
 #include "Frost_Texture.hpp"
+// Voodoo Core
+#include "Format.hpp"
 
 namespace VoodooShader
 {

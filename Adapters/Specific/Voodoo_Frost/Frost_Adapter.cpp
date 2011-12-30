@@ -19,10 +19,11 @@
  */
 
 #include "Frost_Adapter.hpp"
-
+// Voodoo Frost
 #include "Frost_Texture.hpp"
-
 #include "VoodooGL.hpp"
+// Voodoo Core
+#include "Format.hpp"
 
 #define VOODOO_OGL_HOOK_PARAMS(x) #x, &x, &v##x
 
@@ -269,17 +270,17 @@ namespace VoodooShader
             error = glGetError();
             while (error != GL_NO_ERROR)
             {
-                m_Core->GetLogger()->LogMessage(LL_ModWarn, VOODOO_FROST_NAME, VSTR("OpenGL returned error %u: %S") << error << glGetString(error));
+                m_Core->GetLogger()->LogMessage(LL_ModWarn, VOODOO_FROST_NAME, Format("OpenGL returned error %u: %S") << error << glGetString(error));
                 error = glGetError();
             }
 
             if (glIsTexture(texture))
             {
-                m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_FROST_NAME, VSTR("OpenGL texture %u created successfully.") << texture);
+                m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_FROST_NAME, Format("OpenGL texture %u created successfully.") << texture);
             }
             else
             {
-                m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_FROST_NAME, VSTR("OpenGL create failed, returned texture %u.") << texture);
+                m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_FROST_NAME, Format("OpenGL create failed, returned texture %u.") << texture);
             }
 
             return new FrostTexture(m_Core, name, texture);
@@ -427,7 +428,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_FROST_NAME,
-                    VSTR("No default technique given for shader %1%.") << shader
+                    Format("No default technique given for shader %1%.") << shader
                 );
                 return;
             }

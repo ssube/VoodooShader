@@ -33,7 +33,6 @@ using namespace VoodooShader;
 namespace
 {
     ICore * gpCore;
-    InitParams gParams;
 }
 
 FIXTURE(DefaultCore);
@@ -43,15 +42,10 @@ SETUP(DefaultCore)
     wchar_t cwd[MAX_PATH + 1];
     GetCurrentDirectory(MAX_PATH, cwd);
     cwd[MAX_PATH] = 0;
-
-    gParams.Config = L"D:\\Code\\VoodooShader\\Tests\\Resources\\default.xmlconfig";
-    gParams.GlobalRoot = gParams.LocalRoot = gParams.RunRoot = cwd;
-    gParams.Loader = L"TestLoader.exe";
-    gParams.Target = L"TestCore.exe";
-
-    gpCore = CreateCore();
+    
+    gpCore = CreateCore(0);
     gpCore->AddRef();
-    gpCore->Initialize(&gParams);
+    gpCore->Initialize(VSTR("D:\\Code\\VoodooShader\\Tests\\Resources\\default.xmlconfig"));
     WIN_ASSERT_NOT_NULL(gpCore, L"DefaultCore::Setup: gpCore is nullptr.");
 }
 

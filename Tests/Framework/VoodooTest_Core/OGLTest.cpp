@@ -42,7 +42,6 @@ using namespace VoodooShader;
 namespace
 {
     ICore *gpCore;
-    InitParams gParams;
     int gGlutWindow;
     CGcontext gCgContext;
 }
@@ -61,15 +60,10 @@ SETUP(OGLCore)
     glutInitWindowSize(320, 320);
     gGlutWindow = glutCreateWindow("VoodooTest_Core::OGLTest");
 
-    gParams.Config = L"D:\\Code\\VoodooShader\\Tests\\Resources\\OpenGL.xmlconfig";
-    gParams.GlobalRoot = gParams.LocalRoot = gParams.RunRoot = cwd;
-    gParams.Loader = L"TestLoader.exe";
-    gParams.Target = L"TestCore.exe";
-
-    gpCore = CreateCore();
+    gpCore = CreateCore(0);
     WIN_ASSERT_NOT_NULL(gpCore, L"OGLCore::Setup: gpCore is nullptr.");
     gpCore->AddRef();
-    gpCore->Initialize(&gParams);
+    gpCore->Initialize(L"D:\\Code\\VoodooShader\\Tests\\Resources\\OpenGL.xmlconfig");
 
     gCgContext = cgCreateContext();
     WIN_ASSERT_TRUE(cgIsContext(gCgContext), L"OGLCore::Setup: gCgContext is not valid.");
