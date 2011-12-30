@@ -1,4 +1,9 @@
 <map id="G" name="G">
-<area shape="rect" id="node11" href="$_string_8hpp.html" title="String.hpp" alt="" coords="631,80,712,107"/>
-<area shape="rect" id="node13" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="732,155,826,181"/>
+<area shape="rect" id="node3" href="$_string_8hpp.html" title="String.hpp" alt="" coords="269,229,349,256"/>
+<area shape="rect" id="node28" href="$_format_8hpp.html" title="Format.hpp" alt="" coords="347,80,435,107"/>
+<area shape="rect" id="node44" href="$_stream_8hpp.html" title="Stream.hpp" alt="" coords="459,80,548,107"/>
+<area shape="rect" id="node5" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="465,304,559,331"/>
+<area shape="rect" id="node31" href="$_exception_8hpp.html" title="Exception.hpp" alt="" coords="459,155,564,181"/>
+<area shape="rect" id="node35" href="$_regex_8hpp.html" title="Regex.hpp" alt="" coords="589,155,672,181"/>
+<area shape="rect" id="node40" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="347,155,435,181"/>
 </map>

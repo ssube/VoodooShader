@@ -1,11 +1,14 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_v_s_parser_8hpp.html" title="VSParser.hpp" alt="" coords="339,80,441,107"/>
-<area shape="rect" id="node35" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="459,155,536,181"/>
-<area shape="rect" id="node38" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="233,155,321,181"/>
-<area shape="rect" id="node41" href="$_version_8hpp.html" title="Version.hpp" alt="" coords="517,80,608,107"/>
-<area shape="rect" id="node5" href="$_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="347,155,435,181"/>
-<area shape="rect" id="node7" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="336,229,424,256"/>
-<area shape="rect" id="node9" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="333,379,427,405"/>
-<area shape="rect" id="node29" href="$_string_8hpp.html" title="String.hpp" alt="" coords="251,304,332,331"/>
-<area shape="rect" id="node43" href="$_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="561,155,687,181"/>
+<area shape="rect" id="node3" href="$_v_s_parser_8hpp.html" title="VSParser.hpp" alt="" coords="610,80,712,107"/>
+<area shape="rect" id="node35" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="391,155,468,181"/>
+<area shape="rect" id="node38" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="493,155,581,181"/>
+<area shape="rect" id="node41" href="$_format_8hpp.html" title="Format.hpp" alt="" coords="719,155,807,181"/>
+<area shape="rect" id="node54" href="$_version_8hpp.html" title="Version.hpp" alt="" coords="884,80,975,107"/>
+<area shape="rect" id="node5" href="$_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="607,155,695,181"/>
+<area shape="rect" id="node7" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="412,229,500,256"/>
+<area shape="rect" id="node9" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="518,379,612,405"/>
+<area shape="rect" id="node29" href="$_string_8hpp.html" title="String.hpp" alt="" coords="695,304,776,331"/>
+<area shape="rect" id="node44" href="$_exception_8hpp.html" title="Exception.hpp" alt="" coords="683,229,788,256"/>
+<area shape="rect" id="node48" href="$_regex_8hpp.html" title="Regex.hpp" alt="" coords="575,229,659,256"/>
+<area shape="rect" id="node56" href="$_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="885,155,1011,181"/>
 </map>

@@ -1,6 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$_i_pass_8hpp.html" title="IPass.hpp" alt="" coords="545,80,625,107"/>
-<area shape="rect" id="node5" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="541,155,629,181"/>
-<area shape="rect" id="node7" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="489,304,583,331"/>
-<area shape="rect" id="node27" href="$_string_8hpp.html" title="String.hpp" alt="" coords="589,229,669,256"/>
+<area shape="rect" id="node5" href="$_i_resource_8hpp.html" title="IResource.hpp" alt="" coords="533,155,637,181"/>
+<area shape="rect" id="node7" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="541,229,629,256"/>
+<area shape="rect" id="node9" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="489,379,583,405"/>
+<area shape="rect" id="node29" href="$_string_8hpp.html" title="String.hpp" alt="" coords="589,304,669,331"/>
 </map>

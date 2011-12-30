@@ -1,4 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="13,80,171,107"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="14,5,169,32"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="13,155,171,181"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_resource.html" title="Describes a Cg or graphics API&#45;backed resource, managed or indexed by the core and adapter..." alt="" coords="5,80,179,107"/>
+<area shape="rect" id="node6" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="14,5,169,32"/>
 </map>

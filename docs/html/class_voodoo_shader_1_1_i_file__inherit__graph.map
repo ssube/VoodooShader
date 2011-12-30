@@ -1,6 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access." alt="" coords="59,155,212,181"/>
-<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file.html" title="VoodooShader::VoodooWFS::VSWFile" alt="" coords="237,155,485,181"/>
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="170,5,325,32"/>
-<area shape="rect" id="node7" href="$class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_image.html" title="Provides image loading, using the DevIL library." alt="" coords="5,229,267,256"/>
+<area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access." alt="" coords="6,155,159,181"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="5,5,160,32"/>
 </map>

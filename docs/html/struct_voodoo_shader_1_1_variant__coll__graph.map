@@ -1,7 +1,15 @@
 <map id="G" name="G">
-<area shape="rect" id="node10" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="734,208,890,235"/>
-<area shape="rect" id="node24" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="737,488,887,515"/>
-<area shape="rect" id="node26" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="422,507,637,533"/>
-<area shape="rect" id="node28" title="STL class." alt="" coords="243,507,333,533"/>
-<area shape="rect" id="node30" title="STL class." alt="" coords="5,507,192,533"/>
+<area shape="rect" id="node2" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; uint32_t \&gt;" alt="" coords="1257,220,1487,247"/>
+<area shape="rect" id="node44" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="1297,44,1447,71"/>
+<area shape="rect" id="node6" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; ValType \&gt;" alt="" coords="902,649,1133,676"/>
+<area shape="rect" id="node10" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; int8_t \&gt;" alt="" coords="1264,355,1480,381"/>
+<area shape="rect" id="node17" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; uint8_t \&gt;" alt="" coords="1261,669,1483,696"/>
+<area shape="rect" id="node24" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; int32_t \&gt;" alt="" coords="1261,720,1483,747"/>
+<area shape="rect" id="node31" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; float \&gt;" alt="" coords="1268,821,1476,848"/>
+<area shape="rect" id="node37" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; double \&gt;" alt="" coords="1261,489,1483,516"/>
+<area shape="rect" id="node55" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; int16_t \&gt;" alt="" coords="1261,619,1483,645"/>
+<area shape="rect" id="node62" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; uint16_t \&gt;" alt="" coords="1257,771,1487,797"/>
+<area shape="rect" id="node29" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="1294,973,1450,1000"/>
+<area shape="rect" id="node46" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="910,7,1125,33"/>
+<area shape="rect" id="node50" title="STL class." alt="" coords="6,7,175,33"/>
 </map>

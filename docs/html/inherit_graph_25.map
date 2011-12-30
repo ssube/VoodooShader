@@ -1,4 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format." alt="" coords="6,5,194,32"/>
-<area shape="rect" id="node3" href="$struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture." alt="" coords="243,5,442,32"/>
+<area shape="rect" id="node1" href="$class_v_s_w_file.html" title="VSWFile" alt="" coords="5,5,80,32"/>
 </map>

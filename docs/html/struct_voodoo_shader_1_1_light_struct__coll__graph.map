@@ -1,6 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node4" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; float \&gt;" alt="" coords="420,288,628,315"/>
-<area shape="rect" id="node13" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; float \&gt;" alt="" coords="16,288,224,315"/>
-<area shape="rect" id="node7" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; ValType \&gt;" alt="" coords="350,139,580,165"/>
-<area shape="rect" id="node16" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; ValType \&gt;" alt="" coords="5,139,235,165"/>
+<area shape="rect" id="node4" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; float \&gt;" alt="" coords="341,288,549,315"/>
+<area shape="rect" id="node11" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; float \&gt;" alt="" coords="23,288,231,315"/>
+<area shape="rect" id="node7" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; ValType \&gt;" alt="" coords="330,139,560,165"/>
+<area shape="rect" id="node14" href="$struct_voodoo_shader_1_1_vector3.html" title="VoodooShader::Vector3\&lt; ValType \&gt;" alt="" coords="5,139,235,165"/>
 </map>

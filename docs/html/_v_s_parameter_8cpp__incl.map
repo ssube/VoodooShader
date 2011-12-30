@@ -1,16 +1,19 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$_v_s_parameter_8hpp.html" title="VSParameter.hpp" alt="" coords="612,80,737,107"/>
-<area shape="rect" id="node35" href="$_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="706,155,800,181"/>
-<area shape="rect" id="node38" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="253,155,331,181"/>
-<area shape="rect" id="node41" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="355,155,444,181"/>
-<area shape="rect" id="node44" href="$_i_shader_8hpp.html" title="IShader.hpp" alt="" coords="380,80,471,107"/>
-<area shape="rect" id="node47" href="$_i_texture_8hpp.html" title="ITexture.hpp" alt="" coords="495,80,588,107"/>
-<area shape="rect" id="node50" href="$_converter_8hpp.html" title="Converter.hpp" alt="" coords="668,304,769,331"/>
-<area shape="rect" id="node53" href="$_exception_8hpp.html" title="Exception.hpp" alt="" coords="330,229,435,256"/>
-<area shape="rect" id="node57" href="$_version_8hpp.html" title="Version.hpp" alt="" coords="885,80,976,107"/>
-<area shape="rect" id="node5" href="$_i_parameter_8hpp.html" title="IParameter.hpp" alt="" coords="571,155,681,181"/>
-<area shape="rect" id="node7" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="464,229,552,256"/>
-<area shape="rect" id="node9" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="465,379,559,405"/>
-<area shape="rect" id="node29" href="$_string_8hpp.html" title="String.hpp" alt="" coords="342,304,423,331"/>
-<area shape="rect" id="node59" href="$_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="877,155,1003,181"/>
+<area shape="rect" id="node3" href="$_v_s_parameter_8hpp.html" title="VSParameter.hpp" alt="" coords="640,80,765,107"/>
+<area shape="rect" id="node37" href="$_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="303,155,397,181"/>
+<area shape="rect" id="node40" href="$_i_core_8hpp.html" title="ICore.hpp" alt="" coords="403,229,480,256"/>
+<area shape="rect" id="node43" href="$_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="474,155,563,181"/>
+<area shape="rect" id="node46" href="$_i_shader_8hpp.html" title="IShader.hpp" alt="" coords="789,80,880,107"/>
+<area shape="rect" id="node49" href="$_i_texture_8hpp.html" title="ITexture.hpp" alt="" coords="523,80,616,107"/>
+<area shape="rect" id="node52" href="$_converter_8hpp.html" title="Converter.hpp" alt="" coords="703,379,804,405"/>
+<area shape="rect" id="node55" href="$_exception_8hpp.html" title="Exception.hpp" alt="" coords="134,304,239,331"/>
+<area shape="rect" id="node59" href="$_format_8hpp.html" title="Format.hpp" alt="" coords="235,229,323,256"/>
+<area shape="rect" id="node69" href="$_version_8hpp.html" title="Version.hpp" alt="" coords="964,80,1055,107"/>
+<area shape="rect" id="node5" href="$_i_parameter_8hpp.html" title="IParameter.hpp" alt="" coords="646,155,756,181"/>
+<area shape="rect" id="node7" href="$_i_resource_8hpp.html" title="IResource.hpp" alt="" coords="603,229,708,256"/>
+<area shape="rect" id="node9" href="$_i_object_8hpp.html" title="IObject.hpp" alt="" coords="475,304,563,331"/>
+<area shape="rect" id="node11" href="$_includes_8hpp.html" title="Includes.hpp" alt="" coords="390,453,484,480"/>
+<area shape="rect" id="node31" href="$_string_8hpp.html" title="String.hpp" alt="" coords="245,379,325,405"/>
+<area shape="rect" id="node63" href="$_regex_8hpp.html" title="Regex.hpp" alt="" coords="315,304,399,331"/>
+<area shape="rect" id="node71" href="$_version___build_8hpp.html" title="Version_Build.hpp" alt="" coords="955,155,1081,181"/>
 </map>
