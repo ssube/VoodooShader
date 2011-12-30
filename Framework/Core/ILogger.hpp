@@ -95,7 +95,7 @@ namespace VoodooShader
          *
          * @param level The minimum log level.
          */
-        VOODOO_METHOD_(void, SetFilter)(_In_ const LogLevel level) PURE;
+        VOODOO_METHOD_(void, SetFilter)(_In_ const uint32_t level) PURE;
         /**
          * Get the current log level.
          *
@@ -122,12 +122,17 @@ namespace VoodooShader
         /**
          * Log a pre-formatted message.
          *
-         * @param level The level for this message.
+         * @param level The log level for this message (combination of LogLevel values).
          * @param source The source of the log message, usually the calling module's name.
-         * @param format The message format string. Make sure to insert Unicode strings with %s and ASCII with %S.
-         * @param ... The parameters to insert.
+         * @param msg The log message.
+         *
+         * @note When formatting log messages that do not need reused, it may be cleaner to do it inline:
+         * @code
+         * pLogger->LogMessage(LL_Module | LL_Info, MODULE_NAME, Format("Hello %1%.") << "World");
+         * @endcode
+         * This uses the Format class and implicit casts to String after the last argument is inserted.
          */
-        VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const String & source, _In_ const String & msg) PURE;
+        VOODOO_METHOD(LogMessage)(_In_ const uint32_t level, _In_ const String & source, _In_ const String & msg) PURE;
         /**
          * @}
          */

@@ -294,12 +294,13 @@ namespace VoodooShader
             String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(globalNode));
             String logAppendStr = m_Parser->Parse(logaQuery.evaluate_string(globalNode));
 
-            LogLevel logLevel = LL_Initial;
+            LogLevel logLevel = LL_Default;
             try
             {
                 logLevel = (LogLevel)stoi(logLevelStr.ToString());
             } catch (const std::exception & exc) {
                 UNREFERENCED_PARAMETER(exc);
+                logLevel = LL_Default;
             }
 
             bool logAppend = logAppendStr.Compare(VSTR("true"), false) || logAppendStr == VSTR("1");
@@ -309,13 +310,13 @@ namespace VoodooShader
 
             // Log extended build information
             String configMsg = m_Parser->Parse(VSTR("Config loaded from '$(config)'."));
-            m_Logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, configMsg);
-            m_Logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
+            m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, configMsg);
+            m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             Version vsver = VOODOO_META_VERSION_STRUCT(VC);
             Version cgver = VOODOO_META_VERSION_STRUCT(CG);
-            m_Logger->LogMessage(LL_CoreSysMsg, VOODOO_CORE_NAME, Format("Loaded module: %1%") << vsver);
-            m_Logger->LogMessage(LL_CoreSysMsg, VOODOO_CORE_NAME, Format("Loaded module: %1%") << cgver);
+            m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << vsver);
+            m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << cgver);
 
             // Load less vital classes
             m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
@@ -546,7 +547,7 @@ namespace VoodooShader
 
         if (paramEntry != m_Parameters.end())
         {
-            m_Logger->LogMessage(LL_CoreWarn, VOODOO_CORE_NAME, VSTR("Trying to create a parameter with a duplicate name."));
+            m_Logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, VSTR("Trying to create a parameter with a duplicate name."));
             return nullptr;
         }
         else
@@ -591,7 +592,7 @@ namespace VoodooShader
 
         if (textureEntry != m_Textures.end())
         {
-            m_Logger->LogMessage(LL_CoreWarn, VOODOO_CORE_NAME, Format(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
+            m_Logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
             return nullptr;
         }
         else
@@ -633,7 +634,7 @@ namespace VoodooShader
         }
         else
         {
-            m_Logger->LogMessage(LL_CoreWarn, VOODOO_CORE_NAME, Format(VSTR("Unable to find parameter %1%.")) << name);
+            m_Logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format(VSTR("Unable to find parameter %1%.")) << name);
             return nullptr;
         }
     }

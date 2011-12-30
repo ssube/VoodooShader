@@ -257,11 +257,15 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
             SetWindowText(gWindow, title);
         }
 
-        VoodooFrost::FrostAdapter * adapter = reinterpret_cast<VoodooShader::VoodooFrost::FrostAdapter*>(gpVoodooCore->GetAdapter());
-        adapter->SetDC(hdc);
-        adapter->SetGLRC(hglrc);
+        Uuid clsid = VoodooFrost::CLSID_FrostAdapter;
+        VoodooFrost::FrostAdapter * adapter = nullptr;
+        if (gpVoodooCore->GetAdapter()->QueryInterface(clsid, (const void**)&adapter) && adapter)
+        {
+            adapter->SetDC(hdc);
+            adapter->SetGLRC(hglrc);
+        }
 
-        gpVoodooCore->GetLogger()->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, L"OpenGL information:");
+        gpVoodooCore->GetLogger()->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, L"OpenGL Driver Information:");
         gpVoodooCore->GetLogger()->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, Format("Vendor: %S") << glGetString(GL_VENDOR));
         gpVoodooCore->GetLogger()->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, Format("Renderer: %S") << glGetString(GL_RENDERER));
         gpVoodooCore->GetLogger()->LogMessage(LL_ModInfo, VOODOO_FROST_NAME, Format("Version: %S") << glGetString(GL_VERSION));

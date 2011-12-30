@@ -115,7 +115,7 @@ namespace VoodooShader
         return true;
     }
 
-    void VOODOO_METHODTYPE VSLogger::SetFilter(_In_ const LogLevel level)
+    void VOODOO_METHODTYPE VSLogger::SetFilter(_In_ const uint32_t level)
     {
         UNREFERENCED_PARAMETER(level);
     }
@@ -137,7 +137,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSLogger::LogMessage
     (
-        _In_ const LogLevel level,
+        _In_ const uint32_t level,
         _In_ const String & source,
         _In_ const String & msg
     )
@@ -145,6 +145,13 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(level);
         UNREFERENCED_PARAMETER(source);
         UNREFERENCED_PARAMETER(msg);
+
+#ifdef _DEBUG
+        if ((level & (LL_Critical | LL_Warning | LL_Error)) > 0)
+        {
+            OutputDebugString(msg.GetData());
+        }
+#endif
 
         return true;
     }

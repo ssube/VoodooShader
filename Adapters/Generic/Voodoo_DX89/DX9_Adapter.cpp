@@ -218,7 +218,7 @@ namespace VoodooShader
 
             if (m_BoundPass && m_BoundPass != pPass)
             {
-                logger->LogMessage(LL_ModWarn, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
+                logger->LogMessage(LL_ModWarning, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
             }
 
             cgSetPassState(pPass->GetCgPass());
@@ -262,7 +262,7 @@ namespace VoodooShader
 
             if (m_BoundPass && m_BoundPass != pPass)
             {
-                logger->LogMessage(LL_ModWarn, VOODOO_DX89_NAME, VSTR("Resetting pass different than the previously bound pass."));
+                logger->LogMessage(LL_ModWarning, VOODOO_DX89_NAME, VSTR("Resetting pass different than the previously bound pass."));
             }
 
             cgResetPassState(pPass->GetCgPass());

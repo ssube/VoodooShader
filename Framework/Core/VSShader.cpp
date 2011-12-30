@@ -271,7 +271,7 @@ namespace VoodooShader
                 {
                     m_Core->GetLogger()->LogMessage
                     (
-                        LL_CoreWarn, VOODOO_CORE_NAME,
+                        LL_CoreWarning, VOODOO_CORE_NAME,
                         Format(VSTR("Unable to find global param '%1%' for parameter '%2%'.")) << globalName << param
                     );
                 }
@@ -280,7 +280,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarn, VOODOO_CORE_NAME,
+                    LL_CoreWarning, VOODOO_CORE_NAME,
                     Format(VSTR("Unable to read global annotation for parameter '%1%'.")) << param
                 );
             }
@@ -307,7 +307,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                LL_CoreWarn, VOODOO_CORE_NAME,
+                LL_CoreWarning, VOODOO_CORE_NAME,
                 Format(VSTR("Could not retrieve texture annotation for parameter '%1%'.")) << param
             );
 
@@ -320,7 +320,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                LL_CoreWarn, VOODOO_CORE_NAME,
+                LL_CoreWarning, VOODOO_CORE_NAME,
                 Format(VSTR("Could not retrieve texture name for parameter '%1%'.")) << param
             );
 
@@ -338,7 +338,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                LL_CoreWarn, VOODOO_CORE_NAME,
+                LL_CoreWarning, VOODOO_CORE_NAME,
                 Format(VSTR("Could not find texture '%1%' for parameter '%1%', attempting to load."))  << textureName << param
             );
 
@@ -556,21 +556,21 @@ namespace VoodooShader
                 {
                     m_Core->GetLogger()->LogMessage
                     (
-                        LL_CoreWarn, VOODOO_CORE_NAME, 
+                        LL_CoreWarning, VOODOO_CORE_NAME, 
                         Format(VSTR("Adapter was unable to load texture from file '%1%'.")) << texFile
                     );
                 }
             } else {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarn, VOODOO_CORE_NAME, 
+                    LL_CoreWarning, VOODOO_CORE_NAME, 
                     Format(VSTR("File '%1%' is not a valid image.")) << texFile
                 );
             }
         } else {
             m_Core->GetLogger()->LogMessage
             (
-                LL_CoreWarn, VOODOO_CORE_NAME, 
+                LL_CoreWarning, VOODOO_CORE_NAME, 
                 Format(VSTR("Unable to find texture file '%1%'.")) << texName
             );
         }
@@ -609,7 +609,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarn, VOODOO_CORE_NAME,
+                    LL_CoreWarning, VOODOO_CORE_NAME,
                     Format(VSTR("Technique '%1%' failed to validate.")) << cgGetTechniqueName(cTech)
                 );
             }

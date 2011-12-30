@@ -85,7 +85,7 @@ namespace VoodooShader
         }
 
         VSXmlLogger::VSXmlLogger(_In_ ICore * pCore) :
-            m_Core(pCore), m_Filter(LL_Initial)
+            m_Core(pCore), m_Filter(LL_Default)
         {
         }
 
@@ -239,9 +239,9 @@ namespace VoodooShader
             return m_Flags;
         }
 
-        void VSXmlLogger::SetFilter(const LogLevel level)
+        void VSXmlLogger::SetFilter(const uint32_t level)
         {
-            m_Filter = level;
+            m_Filter = (LogLevel)level;
         }
 
         LogLevel VSXmlLogger::GetFilter() const
@@ -249,7 +249,7 @@ namespace VoodooShader
             return m_Filter;
         }
 
-        bool VSXmlLogger::LogMessage(const LogLevel level, const String & source, const String & msg)
+        bool VSXmlLogger::LogMessage(const uint32_t level, const String & source, const String & msg)
         {
             if (!this->IsOpen()) return false;
 
@@ -264,7 +264,7 @@ namespace VoodooShader
                     VSTR("Source: ") << source << VSTR("; Message: ") << msg << VSTR(")") << endl;
 
 #ifdef _DEBUG
-                if (level & (LL_ModWarn | LL_ModError))
+                if (level & (LL_ModWarning | LL_ModError))
                 {
                     OutputDebugString(logMsg.str().c_str());
 

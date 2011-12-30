@@ -63,18 +63,11 @@ namespace VoodooShader
 
         virtual ~Exception();
 
-        void Init();
-
         virtual const char * what() const;
 
     private:
         ICore * m_Core;
-        String m_Module;
-        String m_Message;
-        wchar_t * m_File;
-        wchar_t * m_Function;
-        int m_Line;
-        char * m_FmtMsg;
+        String m_What;
     };
 
     /**

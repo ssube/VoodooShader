@@ -124,7 +124,7 @@ namespace VoodooShader
                 {
                     Format msg(VSTR("Unable to add duplicate variable '%1%' (system variable already exists)."));
                     msg << finalname;
-                    logger->LogMessage(LL_CoreWarn, VOODOO_CORE_NAME, msg);
+                    logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, msg);
                 }
             } else {
                 m_Variables[finalname] = Variable(value, type);

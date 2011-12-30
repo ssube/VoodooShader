@@ -95,7 +95,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_ModWarn, VOODOO_FILESYSTEM_NAME,
+                    LL_ModWarning, VOODOO_FILESYSTEM_NAME,
                     Format(VSTR("Unable to resolve format for image '%1%' %2%.")) << m_Path << image
                 );
             }
@@ -236,7 +236,7 @@ namespace VoodooShader
             default:
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_ModWarn, VOODOO_FILESYSTEM_NAME,
+                    LL_ModWarning, VOODOO_FILESYSTEM_NAME,
                     Format(VSTR("Invalid texture format for getting image data (%1%).")) << pDesc.Format
                 );
                 return 0;

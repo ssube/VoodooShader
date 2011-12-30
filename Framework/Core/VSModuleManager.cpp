@@ -127,7 +127,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarn, VOODOO_CORE_NAME,
+                    LL_CoreWarning, VOODOO_CORE_NAME,
                     Format("No plugins found in directory '%1%'.") << path
                 );
 
@@ -135,7 +135,7 @@ namespace VoodooShader
             } else {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarn, VOODOO_CORE_NAME, 
+                    LL_CoreWarning, VOODOO_CORE_NAME, 
                     Format("Error searching directory '%1%'.") << path
                 );
 
@@ -207,7 +207,7 @@ namespace VoodooShader
         {
             if (logger)
             {
-                logger->LogMessage(LL_CoreWarn, VOODOO_CORE_NAME, Format("Null version returned by module '%1%'.") << fullname);
+                logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Null version returned by module '%1%'.") << fullname);
             }
             return false;
         }
@@ -218,14 +218,14 @@ namespace VoodooShader
         {
             logger->LogMessage
             (
-                LL_CoreWarn, VOODOO_CORE_NAME,
+                LL_CoreWarning, VOODOO_CORE_NAME,
                 Format("Debug build mismatch with module '%1%'.") << moduleversion->Name
             );
         }
 
         if (logger)
         {
-            logger->LogMessage(LL_CoreSysMsg, VOODOO_CORE_NAME, Format("Loaded module: %1%") << *module->ModuleVersion());
+            logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << *module->ModuleVersion());
         }
 
         int classCount = module->ClassCount();

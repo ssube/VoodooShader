@@ -263,7 +263,7 @@ namespace VoodooShader
 
             m_Core->GetLogger()->LogMessage
             (
-                LL_ModWarn, VOODOO_CORE_NAME, 
+                LL_ModWarning, VOODOO_CORE_NAME, 
                 Format(VSTR("Unable to find file '%1%'.")) << name.GetData()
             );
 

@@ -39,27 +39,21 @@ namespace VoodooShader
         _In_ wchar_t * message,
         _In_opt_ ICore * pCore
     ) :
-        m_Core(pCore),
-        m_Module(module),
-        m_Message(message),
-        m_File(file),
-        m_Function(function),
-        m_Line(line),
-        m_FmtMsg(nullptr)
+        m_Core(pCore)
     {
+        Format msg(ExceptionLogMsg);
+        msg << file << function << line << message;
+        m_What = msg;
+
         if (pCore)
         {
             ILoggerRef logger = pCore->GetLogger();
 
             if (logger)
             {
-                Format msg(ExceptionLogMsg);
-                msg << file << function << line << message;
-                logger->LogMessage(LL_CoreError, module, msg.ToString());
+                logger->LogMessage(LL_CoreException, module, msg);
             }
         }
-
-        this->Init();
     }
 
     Exception::Exception
@@ -71,75 +65,29 @@ namespace VoodooShader
         _In_ String message,
         _In_opt_ ICore * pCore
     ) :
-            m_Core(pCore),
-            m_Module(module),
-            m_Message(message),
-            m_File(file),
-            m_Function(function),
-            m_Line(line),
-            m_FmtMsg(nullptr)
+            m_Core(pCore)
     {
+        Format msg(ExceptionLogMsg);
+        msg << file << function << line << message;
+        m_What = msg;
+
         if (pCore)
         {
             ILoggerRef logger = pCore->GetLogger();
 
             if (logger)
             {
-                Format msg(ExceptionLogMsg);
-                msg << file << function << line << message;
-                logger->LogMessage(LL_CoreError, module, msg.ToString());
+                logger->LogMessage(LL_CoreException, module, msg);
             }
         }
-
-        this->Init();
     }
 
     Exception::~Exception()
     {
-        if (m_FmtMsg)
-        {
-            delete[] m_FmtMsg;
-            m_FmtMsg = nullptr;
-        }
-    }
-
-    void Exception::Init()
-    {
-        if (m_FmtMsg == nullptr)
-        {
-            const wchar_t * module = m_Module.GetData();
-            const wchar_t * msg = m_Message.GetData();
-
-            int bufsize = _scprintf
-            (
-                ExceptionFmtMsg,
-                module,
-                m_File,
-                m_Function,
-                m_Line,
-                msg
-            ) + 1;
-
-            assert(bufsize < 1024); // Large exception message
-
-            m_FmtMsg = new char[bufsize];
-
-            sprintf_s
-            (
-                m_FmtMsg,
-                bufsize,
-                ExceptionFmtMsg,
-                module,
-                m_File,
-                m_Function,
-                m_Line,
-                msg
-            );
-        }
     }
 
     const char * Exception::what() const
     {
-        return m_FmtMsg;
+        return (const char*)m_What.GetData();
     }
 }

@@ -249,7 +249,7 @@ namespace VoodooShader
                 break;
             case TF_Unknown:
             default:
-                m_Core->GetLogger()->LogMessage(LL_ModWarn, VOODOO_FROST_NAME, VSTR("Unable to resolve texture format."));
+                m_Core->GetLogger()->LogMessage(LL_ModWarning, VOODOO_FROST_NAME, VSTR("Unable to resolve texture format."));
                 return false;
             }
 
@@ -259,7 +259,7 @@ namespace VoodooShader
 
             while (error != GL_NO_ERROR)
             {
-                m_Core->GetLogger()->LogMessage(LL_ModWarn, VOODOO_FROST_NAME, Format("OpenGL returned error %u: %S") << error << glGetString(error));
+                m_Core->GetLogger()->LogMessage(LL_ModWarning, VOODOO_FROST_NAME, Format("OpenGL returned error %u: %S") << error << glGetString(error));
                 error = glGetError();
             }
 
@@ -270,7 +270,7 @@ namespace VoodooShader
             error = glGetError();
             while (error != GL_NO_ERROR)
             {
-                m_Core->GetLogger()->LogMessage(LL_ModWarn, VOODOO_FROST_NAME, Format("OpenGL returned error %u: %S") << error << glGetString(error));
+                m_Core->GetLogger()->LogMessage(LL_ModWarning, VOODOO_FROST_NAME, Format("OpenGL returned error %u: %S") << error << glGetString(error));
                 error = glGetError();
             }
 

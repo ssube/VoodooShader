@@ -433,36 +433,40 @@ namespace VoodooShader
     enum LogLevel : uint32_t
     {
         LL_Unknown      = 0x00,
-        // Basics
-        LL_Debug        = 0x01,
-        LL_Info         = 0x02,
-        LL_Warning      = 0x04,
-        LL_Critical     = 0x08,
-        LL_External     = 0x10,
-        LL_Module       = 0x20,
-        LL_Core         = 0x40,
+        // Severity
+        LL_Debug        = 0x0001,
+        LL_Info         = 0x0002,
+        LL_Warning      = 0x0004,
+        LL_Error        = 0x0008,
+        // Source
+        LL_External     = 0x0100,
+        LL_Module       = 0x0200,
+        LL_Core         = 0x0400,
+        LL_System       = 0x0800,
+        // Flags
+        LL_Critical     = 0x010000,
         // Compound
         LL_Exception    = LL_Debug | LL_Critical,
-        LL_Error        = LL_Warning | LL_Critical,
-        LL_Initial      = LL_Info | LL_Warning | LL_Module | LL_Core,
-        // Usable
-        LL_ExtDebug     = LL_External | LL_Debug,
-        LL_ExtInfo      = LL_External | LL_Info,
-        LL_ExtWarn      = LL_External | LL_Warning,
-        LL_ExtError     = LL_External | LL_Error,
-        LL_ModDebug     = LL_Module | LL_Debug,
-        LL_ModInfo      = LL_Module | LL_Info,
-        LL_ModWarn      = LL_Module | LL_Warning,
-        LL_ModError     = LL_Module | LL_Error,
+        LL_Notice       = LL_Info  | LL_Critical,
+        // User
         LL_CoreDebug    = LL_Core | LL_Debug,
+        LL_CoreException= LL_Core | LL_Exception,
         LL_CoreInfo     = LL_Core | LL_Info,
-        LL_CoreSysMsg   = LL_Core | LL_Info | LL_Critical,
-        LL_CoreWarn     = LL_Core | LL_Warning,
+        LL_CoreNotice   = LL_Core | LL_Notice,
+        LL_CoreWarning  = LL_Core | LL_Warning,
         LL_CoreError    = LL_Core | LL_Error,
+        LL_ModDebug     = LL_Module | LL_Debug,
+        LL_ModException = LL_Module | LL_Exception,
+        LL_ModInfo      = LL_Module | LL_Info,
+        LL_ModNotice    = LL_Module | LL_Notice,
+        LL_ModWarning   = LL_Module | LL_Warning,
+        LL_ModError     = LL_Module | LL_Error,
         // Masks
-        LL_Severity     = LL_Debug | LL_Info | LL_Warning,
-        LL_Origin       = LL_External | LL_Module | LL_Core,
+        LL_Severity     = LL_Debug | LL_Info | LL_Warning | LL_Error,
         LL_Flags        = LL_Critical,
+        LL_Origin       = LL_External | LL_Module | LL_Core | LL_System,
+        // Other
+        LL_Default      = LL_Info | LL_Warning | LL_Module | LL_Core | LL_System,
         LL_All          = LL_Severity | LL_Origin | LL_Flags
     };
 

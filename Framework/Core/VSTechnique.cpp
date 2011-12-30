@@ -166,7 +166,7 @@ namespace VoodooShader
                 {
                     m_Core->GetLogger()->LogMessage
                     (
-                        LL_CoreWarn, VOODOO_CORE_NAME,
+                        LL_CoreWarning, VOODOO_CORE_NAME,
                         Format(VSTR("Technique %1% cannot find target %2%.")) << this << targetName
                     );
 
@@ -177,7 +177,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarn, VOODOO_CORE_NAME,
+                    LL_CoreWarning, VOODOO_CORE_NAME,
                     Format(VSTR("Technique %1% has target annotation of invalid type.")) << this
                 );
 

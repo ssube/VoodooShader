@@ -52,11 +52,11 @@ namespace VoodooShader
         VOODOO_METHOD(IsOpen)() CONST;
         VOODOO_METHOD(Close)();
         VOODOO_METHOD(Flush)();
-        VOODOO_METHOD_(void, SetFilter)(_In_ const LogLevel level);
+        VOODOO_METHOD_(void, SetFilter)(_In_ const uint32_t level);
         VOODOO_METHOD_(LogLevel, GetFilter)() const;
         VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flush);
         VOODOO_METHOD_(LogFlags, GetFlags)() const;
-        VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const String & source, _In_ const String & msg);
+        VOODOO_METHOD(LogMessage)(_In_ const uint32_t level, _In_ const String & source, _In_ const String & msg);
 
     private:
         mutable uint32_t m_Refs;

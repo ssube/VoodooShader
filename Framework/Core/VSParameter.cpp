@@ -150,7 +150,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                LL_CoreWarn, VOODOO_CORE_NAME, 
+                LL_CoreWarning, VOODOO_CORE_NAME, 
                 Format("Cannot attach parameter '%1%' to non-virtual parameter '%2%'.") << pParam << this
             );
             return false;

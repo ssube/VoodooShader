@@ -208,7 +208,7 @@ namespace VoodooShader
                     {
                         m_Core->GetLogger()->LogMessage
                         (
-                            LL_CoreWarn, VOODOO_CORE_NAME,
+                            LL_CoreWarning, VOODOO_CORE_NAME,
                             Format(VSTR("%1% cannot find target '%2%'.")) << this << targetName 
                         );
 
@@ -220,7 +220,7 @@ namespace VoodooShader
                 } else {
                     m_Core->GetLogger()->LogMessage
                     (
-                        LL_CoreWarn, VOODOO_CORE_NAME,
+                        LL_CoreWarning, VOODOO_CORE_NAME,
                         Format(VSTR("%1% has target annotation of invalid type.")) << this
                     );
 
@@ -250,7 +250,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                LL_CoreWarn, VOODOO_CORE_NAME,
+                LL_CoreWarning, VOODOO_CORE_NAME,
                 Format(VSTR("No adapter found, %1% must be explicitly loaded later.")) << this
             );
         }

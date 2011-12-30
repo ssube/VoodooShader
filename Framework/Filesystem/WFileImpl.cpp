@@ -69,7 +69,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_ModWarn, VOODOO_FILESYSTEM_NAME,
+                    LL_ModWarning, VOODOO_FILESYSTEM_NAME,
                     Format(VSTR("Attempted to open file '%1%' with unknown mode (%2%).")) << m_Path << mode
                 );
                 return false;
@@ -89,7 +89,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_ModWarn, VOODOO_FILESYSTEM_NAME, 
+                    LL_ModWarning, VOODOO_FILESYSTEM_NAME, 
                     Format(VSTR("Unable to open file '%1%'.")) << m_Path
                 );
                 return false;

@@ -114,7 +114,7 @@ namespace VoodooShader
              *
              * @param level The minimum log level.
              */
-            VOODOO_METHOD_(void, SetFilter)(_In_ const LogLevel level);
+            VOODOO_METHOD_(void, SetFilter)(_In_ const uint32_t level);
             VOODOO_METHOD_(LogLevel, GetFilter)() CONST;
             VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags);
             VOODOO_METHOD_(LogFlags, GetFlags)() CONST;
@@ -125,7 +125,7 @@ namespace VoodooShader
              * @param source The logging module's name.
              * @param msg The message format string.
              */
-            VOODOO_METHOD(LogMessage)(_In_ const LogLevel level, _In_ const String & source, _In_ const String & msg);
+            VOODOO_METHOD(LogMessage)(_In_ const uint32_t level, _In_ const String & source, _In_ const String & msg);
             
         private:
             mutable uint32_t m_Refs;
