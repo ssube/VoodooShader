@@ -47,8 +47,12 @@ namespace VoodooShader
         static const wchar_t  VarDelimStart  = VSTR('(');
         static const wchar_t  VarDelimEnd    = VSTR(')');
         static const wchar_t  VarMarkerState = VSTR(':');
-        static const wchar_t  VarMarkerRaw   = VSTR('!');
-        static const wchar_t  VarMarkerSupp  = VSTR('?');
+        static const wchar_t  VarMarkerReq   = VSTR('!');
+        static const wchar_t  VarMarkerDelay = VSTR('~');
+        static const wchar_t  VarMarkerMode  = VSTR('@');
+        static const wchar_t  VarMarkerModeD = VSTR(' ');
+        static const wchar_t  VarMarkerModeM = VSTR('+');
+        static const wchar_t  VarMarkerModeR = VSTR('-');
 
     private:
         String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) const;

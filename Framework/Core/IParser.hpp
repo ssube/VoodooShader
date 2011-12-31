@@ -89,21 +89,23 @@ namespace VoodooShader
      * regular variables, and finally environment variables supplied by the system.
      *
      * @subsection voodoo_vars_syntax_names Variable Names
-     * Variable names may contain any characters but ':' and may start with any character but '?' or '!'. These
-     * characters have special meaning and will be stripped or will modify the name before it is used. Variable names
-     * may contain variables, which will be resolved using standard rules (this allows for variable variable names and
-     * dynamic string creation). When a variable is added to the parser, the name is immediately parsed using
-     * @p PF_Lowercase and the result is used as the actual name. This contrasts with values, which are parsed when
-     * used.
+     * Variable names may contain any characters not listed to have a special meaning; these characters will be stripped 
+     * before the name is used. Variable names may contain variables, with the full syntax, but these are parsed when the
+     * variable is added to the parser (rather than when used, as values are).
      *
-     * @subsubsection voodoo_vars_syntax_names_spec Special Characters
-     * @li The ':' character indicates state variables, described below.
-     * @li The '?' character indicates optional variables, which are not replaced with an error note if they are not
+     * @subsubsection voodoo_vars_syntax_names_spec Variable Flags & Modes
+     * @li The '!' character indicates required variables, which are replaced with an error note if they are not
      *     found.
-     * @li The '!' character indicates express variables, which do not have their value parsed (and so may contain
+     * @li The '~' character indicates delayed variables, which do not have their value parsed (and so may contain
      *     other  variables without replacements). This can be useful when building variable variables to avoid
      *     recursion constraints.
-     * @li The remaining listed characters are reserved.
+     * @li The '@' character indicates recursive flags. The '@' must be followed by a number, which may be prefixed with
+     *     '-' or '+' and followed by a space. If no symbol is given, the flags replace those given to the parse call; if
+     *     '+' the flags are added (logical OR) and if '-' the flags are removed (logical XOR).
+     * @li The ':' character indicates state variables, described below.
+     *     
+     * These flags can be combined, but must appear in the order given. With the exception of the state delimiter (':'),
+     * flags must begin at the start of the variable and no other content may come before the end of the flags.
      *
      * @subsection voodoo_vars_syntax_value Variable Values
      * Variable values may contain any characters and embedded variables. Values are parsed when used, using the

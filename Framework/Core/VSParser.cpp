@@ -228,6 +228,65 @@ namespace VoodooShader
                 continue;
             }
 
+            // Handle flags
+            bool require = false;
+            bool parse = true;
+
+            if (varname[0] == VSParser::VarMarkerReq)
+            {
+                require = true;
+                varname = varname.Substr(1);
+            }
+            
+            if (varname[0] == VSParser::VarMarkerDelay)
+            {
+                parse = false;
+                varname = varname.Substr(1);
+            }
+
+            // Handle modes
+            ParseFlags localFlags = flags;
+            if (varname[0] == VSParser::VarMarkerMode)
+            {
+                int8_t merge = 0;
+                varname = varname.Substr(1);
+
+                if (varname[0] == VSParser::VarMarkerModeM)
+                {
+                    merge = 1;
+                } else if (varname[0] == VSParser::VarMarkerModeR) {
+                    merge = -1;
+                }
+
+                uint32_t modesEnd = varname.Find(VSParser::VarMarkerModeD);
+                if (modesEnd != String::Npos)
+                {
+                    try
+                    {
+                        String modesString = varname.Substr(0, modesEnd - 1);
+                        int newFlags = stoi(modesString.ToString());
+
+                        if (merge == 0)
+                        {
+                            localFlags = (ParseFlags)newFlags;
+                        } else if (merge == -1) {
+                            localFlags = (ParseFlags)(flags ^ newFlags);
+                        } else if (merge == 1) {
+                            localFlags = (ParseFlags)(flags | newFlags);
+                        }
+
+                        if (logger)
+                        {
+                            logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, 
+                                Format("Variable local flags of %1% found, merged %2% with original %3%, flags set to %4%.") << newFlags << merge << flags << localFlags);
+                        }
+                    } catch (std::exception & exc)
+                    {
+                        UNREFERENCED_PARAMETER(exc);
+                    }
+                }
+            }
+
             // Handle state variables
             uint32_t statepos = varname.Find(VSParser::VarMarkerState);
 
@@ -236,7 +295,7 @@ namespace VoodooShader
                 // State set, handle
                 String newvalue = varname.Substr(statepos + 1);
 
-                newvalue = this->ParseStringRaw(newvalue, flags, ++depth, state);
+                newvalue = this->ParseStringRaw(newvalue, localFlags, ++depth, state);
 
                 varname = varname.Substr(0, statepos);
                 varname = this->ParseStringRaw(varname, PF_None, ++depth, state);
@@ -249,21 +308,6 @@ namespace VoodooShader
                 iteration = output.str();
 
                 continue;
-            }
-
-            // Handle variable flags
-            bool supress = false;
-            bool parse = true;
-
-            if (varname[0] == VSParser::VarMarkerSupp)
-            {
-                supress = true;
-                varname = varname.Substr(1);
-            }
-            else if (varname[0] == VSParser::VarMarkerRaw)
-            {
-                parse = false;
-                varname = varname.Substr(1);
             }
 
             // Properly format the variable name
@@ -302,9 +346,9 @@ namespace VoodooShader
             output << iteration.Substr(0, startpos - 1).GetData();
             if (parse && varvalue.GetLength() > 0)
             {
-                output << this->ParseStringRaw(varvalue, flags, ++depth, state).GetData();
+                output << this->ParseStringRaw(varvalue, localFlags, ++depth, state).GetData();
             }
-            else if (!foundvar && !supress)
+            else if (!foundvar && require)
             {
                 output << VSTR("badvar:") << varname.GetData();
             }
