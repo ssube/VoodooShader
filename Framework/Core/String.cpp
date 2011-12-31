@@ -324,42 +324,36 @@ namespace VoodooShader
     uint32_t String::Split(const String & delims, const uint32_t count, String * pStrings, bool stripEmpty) const
     {
         VALIDATE_IMPL;
-        String buffer;
-        uint32_t index = 0;
 
-        for (std::wstring::size_type i = 0; i < m_Impl->m_Str.length(); ++i)
+        std::vector<std::wstring> tokens;
+        boost::split(tokens, m_Impl->m_Str, boost::is_any_of(delims.GetData()), stripEmpty ? boost::algorithm::token_compress_on : boost::algorithm::token_compress_off);
+
+        if (pStrings)
         {
-            if (delims.Find(m_Impl->m_Str[i]) != String::Npos)
+            uint32_t index = 0;
+            uint32_t cap = min(count, tokens.size());
+            while (index < cap)
             {
-                if (!stripEmpty || buffer.GetLength() > 0)
-                {
-                    if (pStrings)
-                    {
-                        if (index < count)
-                        {
-                            pStrings[index] = buffer;
-                        } else {
-                            pStrings[count-1].Append(m_Impl->m_Str[i]).Append(buffer);
-                        }
-                    }
-                }
-                buffer.Clear().Reserve(m_Impl->m_Str.length() - i);
+                pStrings[index] = tokens[index];
                 ++index;
-            } else {
-                buffer.Append(m_Impl->m_Str[i]);
             }
-        }
 
-        if (!stripEmpty || buffer.GetLength() > 0)
-        {
-            if (pStrings)
+            if (index == tokens.size())
             {
-                pStrings[index] = buffer;
+                return index;
+            } else if (index == count) {
+                cap = tokens.size();
+                while (index < cap)
+                {
+                    pStrings[count - 1] += tokens[index];
+                    ++index;
+                }
             }
-            ++index;
-        }
 
-        return index;
+            return index;
+        } else {
+            return tokens.size();
+        }
     }
 
     String String::ToLower() const
@@ -756,18 +750,18 @@ namespace VoodooShader
         {
             if (localtime_s(&localTime, pTime) != 0)
             {
-                return String(VSTR("Time(------)"));
+                return String(VSTR("Unknown Time"));
             }
         } else {
             time_t now = time(nullptr);
             if (localtime_s(&localTime, &now) != 0)
             {
-                return String(VSTR("Time(------)"));
+                return String(VSTR("Unknown Time"));
             }
         }
 
         std::basic_stringstream<wchar_t, std::char_traits<wchar_t>> stamp;
-        stamp << VSTR("Time(") << std::put_time(&localTime, VSTR("%H%M%S")) << VSTR(")");
+        stamp << std::put_time(&localTime, VSTR("%H%M%S"));
         return stamp.str();
     }
 
@@ -780,24 +774,24 @@ namespace VoodooShader
         {
             if (localtime_s(&localTime, pTime) != 0)
             {
-                return String(VSTR("Date(--------)"));
+                return String(VSTR("Unknown Date"));
             }
         } else {
             time_t now = time(nullptr);
             if (localtime_s(&localTime, &now) != 0)
             {
-                return String(VSTR("Date(--------)"));
+                return String(VSTR("Unknown Date"));
             }
         }
 
         std::basic_stringstream<wchar_t, std::char_traits<wchar_t>> stamp;
-        stamp << VSTR("Date(") << std::put_time(&localTime, VSTR("%Y%m%d")) << VSTR(")");
+        stamp << std::put_time(&localTime, VSTR("%Y%m%d"));
         return stamp.str();
     }
 
     String String::Ticks()
     {
-        Format fmt(VSTR("Ticks(%d)"));
+        Format fmt(VSTR("%d"));
         fmt << (uint32_t)GetTickCount();
 
         return fmt.ToString();

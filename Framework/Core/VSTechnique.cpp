@@ -39,7 +39,7 @@ namespace VoodooShader
     {
         const char * techName = cgGetTechniqueName(m_CgTechnique);
 
-        m_Name = m_Shader->GetName() + VSTR("::");
+        m_Name = m_Shader->GetName() + VSTR(":");
         if (techName)
         {
             m_Name += techName;

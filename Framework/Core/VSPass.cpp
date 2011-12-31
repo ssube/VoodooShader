@@ -44,7 +44,7 @@ namespace VoodooShader
 
         const char * passName = cgGetPassName(m_CgPass);
 
-        m_Name = m_Technique->GetName() + VSTR("::");
+        m_Name = m_Technique->GetName() + VSTR(":");
         if (passName)
         {
             m_Name += passName;

@@ -189,21 +189,32 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::insertPtr(const void * val)
+    Format & Format::operator<<(const void * val)
     {
         m_Impl->m_Format % val;
         return (*this);
     }
 
-    Format & Format::insertPtr(const char * val)
+    Format & Format::operator<<(const char * val)
     {
         m_Impl->m_Format % val;
         return (*this);
     }
 
-    Format & Format::insertPtr(const wchar_t * val)
+    Format & Format::operator<<(const wchar_t * val)
     {
         m_Impl->m_Format % val;
+        return (*this);
+    }
+
+    Format & Format::operator<<(const IObject * val)
+    {
+        if (val)
+        {
+            m_Impl->m_Format % val->ToString();
+        } else {
+            m_Impl->m_Format % VSTR("IObject(null)");
+        }
         return (*this);
     }
 }

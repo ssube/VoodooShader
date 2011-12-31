@@ -190,21 +190,32 @@ namespace VoodooShader
         return (*this);
     }
 
-    Stream & Stream::insertPtr(const void * val)
+    Stream & Stream::operator<<(const void * val)
     {
         m_Impl->m_Stream << val;
         return (*this);
     }
 
-    Stream & Stream::insertPtr(const char * val)
+    Stream & Stream::operator<<(const char * val)
     {
         m_Impl->m_Stream << val;
         return (*this);
     }
 
-    Stream & Stream::insertPtr(const wchar_t * val)
+    Stream & Stream::operator<<(const wchar_t * val)
     {
         m_Impl->m_Stream << val;
+        return (*this);
+    }
+
+    Stream & Stream::operator<<(const IObject * val)
+    {
+        if (val)
+        {
+            m_Impl->m_Stream << val->ToString();
+        } else {
+            m_Impl->m_Stream << VSTR("IObject(null)");
+        }
         return (*this);
     }
 

@@ -79,35 +79,10 @@ namespace VoodooShader
         Format & operator<<(const Version & val);
 
         // Pointer overloads
-        Format & insertPtr(const void * val);
-        Format & insertPtr(const char * val);
-        Format & insertPtr(const wchar_t * val);
-
-        template<typename T>
-        Format & operator<<(const T * val)
-        {
-            return this->insertPtr((const void *)val);
-        }
-
-        Format & operator<<(const char * val)
-        {
-            return this->insertPtr(val);
-        }
-
-        Format & operator<<(const wchar_t * val)
-        {
-            return this->insertPtr(val);
-        }
-
-        Format & operator<<(const IObject * val)
-        {
-            if (val)
-            {
-                return this->operator<<(val->ToString());
-            } else {
-                return this->operator<<(VSTR("IObject(null)"));
-            }
-        }
+        Format & operator<<(const void * val);
+        Format & operator<<(const char * val);
+        Format & operator<<(const wchar_t * val);
+        Format & operator<<(const IObject * val);
 
         template<typename T>
         Format & operator<<(const Vector1<T> & val)
