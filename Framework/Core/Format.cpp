@@ -21,7 +21,8 @@
 
 #include "Format.hpp"
 #include "Stream.hpp"
-
+#include "Version.hpp"
+// Boost
 #include <boost/format.hpp>
 #pragma warning(push)
 #pragma warning(disable: 6246)
@@ -41,7 +42,16 @@ namespace VoodooShader
 
     Format::Format(_In_ const wchar_t * fmt) :
         m_Impl(new FormatImpl(fmt))
-    {}
+    {
+        try
+        {
+            m_Impl = new FormatImpl(fmt);
+        } catch (boost::exception & exc)
+        {
+            UNREFERENCED_PARAMETER(exc);
+            Throw(VOODOO_CORE_NAME, VSTR("Format string error"), nullptr);
+        }
+    }
 
     Format::Format(_In_ const String & fmt) :
         m_Impl(new FormatImpl(fmt.GetData()))

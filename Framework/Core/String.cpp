@@ -19,23 +19,26 @@
  */
 
 #include "String.hpp"
-
+// Voodoo Core
 #include "Format.hpp"
 #include "Stream.hpp"
-
+#include "Version.hpp"
+// Boost
 #include <boost/algorithm/string.hpp>
 #include <boost/uuid/string_generator.hpp>
 #pragma warning(push)
 #pragma warning(disable: 6246)
 #include <boost/uuid/uuid_io.hpp>
 #pragma warning(pop)
-
+// STL
 #include <string>
 #include <sstream>
 #include <iomanip>
 
 namespace VoodooShader
 {
+#define VALIDATE_IMPL if(!m_Impl) Throw(VOODOO_CORE_NAME, VSTR("String has no impl."), nullptr)
+
     class String::StringImpl
     {
     public:
@@ -56,7 +59,7 @@ namespace VoodooShader
     };
 
     String::String() :
-        m_Impl()
+        m_Impl(new StringImpl())
     {
     }
 
@@ -109,8 +112,14 @@ namespace VoodooShader
     }
 
     String::String(const String & other) :
-        m_Impl(new StringImpl(other.m_Impl->m_Str))
+        m_Impl(nullptr)
     {
+        if (other.m_Impl)
+        {
+            m_Impl = new StringImpl(other.m_Impl->m_Str);
+        } else {
+            m_Impl = new StringImpl();
+        }
     }
 
     String::String(const Uuid & uuid) :
@@ -180,118 +189,141 @@ namespace VoodooShader
 
     int32_t String::ToCharStr(int32_t size, char * const pBuffer) const
     {
+        VALIDATE_IMPL;
         return WideCharToMultiByte(CP_UTF8, NULL, m_Impl->m_Str.c_str(), -1, pBuffer, size, NULL, NULL);
     }
 
     String & String::Append(const wchar_t ch)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.append(1, ch);
         return (*this);
     }
 
     String & String::Append(const uint32_t size, const wchar_t ch)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.append(size, ch);
         return (*this);
     }
 
     String & String::Append(const wchar_t * str)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.append(str);
         return (*this);
     }
 
     String & String::Append(const uint32_t size, const wchar_t * str)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.append(str, size);
         return (*this);
     }
 
     String & String::Append(const String & str)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.append(str.m_Impl->m_Str);
         return (*this);
     }
 
     String & String::Assign(const wchar_t ch)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.assign(1, ch);
         return (*this);
     }
 
     String & String::Assign(const uint32_t size, const wchar_t ch)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.assign(size, ch);
         return (*this);
     }
 
     String & String::Assign(const wchar_t * str)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.assign(str);
         return (*this);
     }
 
     String & String::Assign(const uint32_t size, const wchar_t * str)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.assign(str, size);
         return (*this);
     }
 
     String & String::Assign(const String & str)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.assign(str.m_Impl->m_Str);
         return (*this);
     }
 
     String & String::Clear()
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.clear();
         return (*this);
     }
 
     String & String::Prepend(const wchar_t ch)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str = std::wstring(1, ch) + m_Impl->m_Str;
         return (*this);
     }
 
     String & String::Prepend(const uint32_t size, const wchar_t ch)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str = std::wstring(size, ch) + m_Impl->m_Str;
         return (*this);
     }
 
     String & String::Prepend(const wchar_t * str)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str = std::wstring(str) + m_Impl->m_Str;
         return (*this);
     }
 
     String & String::Prepend(const uint32_t size, const wchar_t * str)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str = std::wstring(str, size) + m_Impl->m_Str;
         return (*this);
     }
 
     String & String::Prepend(const String & str)
     {
-        m_Impl->m_Str = str.m_Impl->m_Str + m_Impl->m_Str;
+        VALIDATE_IMPL;
+        if (str.m_Impl)
+        {
+            m_Impl->m_Str = str.m_Impl->m_Str + m_Impl->m_Str;
+        }
         return (*this);
     }
 
     String & String::Truncate(uint32_t size)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str = m_Impl->m_Str.substr(size);
         return (*this);
     }
 
     void String::Reserve(uint32_t size)
     {
+        VALIDATE_IMPL;
         m_Impl->m_Str.reserve(size);
     }
 
     uint32_t String::Split(const String & delims, const uint32_t count, String * pStrings, bool stripEmpty) const
     {
+        VALIDATE_IMPL;
         String buffer;
         uint32_t index = 0;
 
@@ -318,21 +350,33 @@ namespace VoodooShader
             }
         }
 
+        if (!stripEmpty || buffer.GetLength() > 0)
+        {
+            if (pStrings)
+            {
+                pStrings[index] = buffer;
+            }
+            ++index;
+        }
+
         return index;
     }
 
     String String::ToLower() const
     {
+        VALIDATE_IMPL;
         return String(boost::to_lower_copy(m_Impl->m_Str));
     }
 
     String String::ToUpper() const
     {
+        VALIDATE_IMPL;
         return String(boost::to_upper_copy(m_Impl->m_Str));
     }
 
     String String::Left(uint32_t count) const
     {
+        VALIDATE_IMPL;
         if (count == String::Npos)
         {
             return String(m_Impl->m_Str.substr(0, std::string::npos));
@@ -343,11 +387,13 @@ namespace VoodooShader
 
     String String::Right(uint32_t count) const
     {
+        VALIDATE_IMPL;
         return String(m_Impl->m_Str.substr(max(this->GetLength() - count, 0), count));
     }
 
     String String::Substr(uint32_t start, uint32_t count) const
     {
+        VALIDATE_IMPL;
         if (count == String::Npos)
         {
             return String(m_Impl->m_Str.substr(start, std::string::npos));
@@ -358,6 +404,7 @@ namespace VoodooShader
 
     bool String::Compare(const wchar_t ch, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::equals(m_Impl->m_Str, std::wstring(1, ch));
@@ -368,6 +415,7 @@ namespace VoodooShader
 
     bool String::Compare(const wchar_t * str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::equals(m_Impl->m_Str, str);
@@ -378,6 +426,7 @@ namespace VoodooShader
 
     bool String::Compare(const String & str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::equals(m_Impl->m_Str, str.m_Impl->m_Str);
@@ -388,6 +437,7 @@ namespace VoodooShader
 
     bool String::StartsWith(const wchar_t ch, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::starts_with(m_Impl->m_Str, std::wstring(1, ch));
@@ -398,6 +448,7 @@ namespace VoodooShader
 
     bool String::StartsWith(const wchar_t * str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::starts_with(m_Impl->m_Str, str);
@@ -408,6 +459,7 @@ namespace VoodooShader
 
     bool String::StartsWith(const String & str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::starts_with(m_Impl->m_Str, str.m_Impl->m_Str);
@@ -418,6 +470,7 @@ namespace VoodooShader
 
     bool String::EndsWith(const wchar_t ch, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::ends_with(m_Impl->m_Str, std::wstring(1, ch));
@@ -428,6 +481,7 @@ namespace VoodooShader
 
     bool String::EndsWith(const wchar_t * str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::ends_with(m_Impl->m_Str, str);
@@ -438,6 +492,7 @@ namespace VoodooShader
 
     bool String::EndsWith(const String & str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::ends_with(m_Impl->m_Str, str.m_Impl->m_Str);
@@ -448,6 +503,7 @@ namespace VoodooShader
 
     bool String::Contains(const wchar_t ch, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::contains(m_Impl->m_Str, std::wstring(1, ch));
@@ -458,6 +514,7 @@ namespace VoodooShader
 
     bool String::Contains(const wchar_t * str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::contains(m_Impl->m_Str, str);
@@ -468,6 +525,7 @@ namespace VoodooShader
 
     bool String::Contains(const String & str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return boost::contains(m_Impl->m_Str, str.m_Impl->m_Str);
@@ -478,6 +536,7 @@ namespace VoodooShader
 
     uint32_t String::Find(const wchar_t ch, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return m_Impl->m_Str.find(ch);
@@ -490,6 +549,7 @@ namespace VoodooShader
 
     uint32_t String::Find(const wchar_t * str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return m_Impl->m_Str.find(str);
@@ -503,6 +563,7 @@ namespace VoodooShader
 
     uint32_t String::Find(const String & str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return m_Impl->m_Str.find(str.m_Impl->m_Str);
@@ -515,6 +576,7 @@ namespace VoodooShader
 
     uint32_t String::ReverseFind(const wchar_t ch, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return m_Impl->m_Str.find(ch);
@@ -527,6 +589,7 @@ namespace VoodooShader
 
     uint32_t String::ReverseFind(const wchar_t * str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return m_Impl->m_Str.find(str);
@@ -540,6 +603,7 @@ namespace VoodooShader
 
     uint32_t String::ReverseFind(const String & str, bool useCase) const
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             return m_Impl->m_Str.find(str.m_Impl->m_Str);
@@ -552,6 +616,7 @@ namespace VoodooShader
 
     String & String::Replace(const wchar_t fch, const wchar_t rch, bool useCase)
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             boost::replace_all(m_Impl->m_Str, std::wstring(1, fch), std::wstring(1, rch));
@@ -563,6 +628,7 @@ namespace VoodooShader
 
     String & String::Replace(const wchar_t * fstr, const wchar_t * rstr, bool useCase)
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             boost::replace_all(m_Impl->m_Str, fstr, rstr);
@@ -574,6 +640,7 @@ namespace VoodooShader
 
     String & String::Replace(const String & fstr, const String & rstr, bool useCase)
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             boost::replace_all(m_Impl->m_Str, fstr.m_Impl->m_Str, rstr.m_Impl->m_Str);
@@ -585,6 +652,7 @@ namespace VoodooShader
 
     String & String::Remove(const wchar_t fch, bool useCase)
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             boost::erase_all(m_Impl->m_Str, std::wstring(1, fch));
@@ -596,6 +664,7 @@ namespace VoodooShader
 
     String & String::Remove(const wchar_t * fstr, bool useCase)
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             boost::erase_all(m_Impl->m_Str, fstr);
@@ -607,6 +676,7 @@ namespace VoodooShader
 
     String & String::Remove(const String & fstr, bool useCase)
     {
+        VALIDATE_IMPL;
         if (useCase)
         {
             boost::erase_all(m_Impl->m_Str, fstr.m_Impl->m_Str);
@@ -618,54 +688,64 @@ namespace VoodooShader
 
     uint32_t String::GetLength() const
     {
+        VALIDATE_IMPL;
         return m_Impl->m_Str.size();
     }
 
     bool String::IsEmpty() const
     {
+        VALIDATE_IMPL;
         return (this->GetLength() == 0);
     }
 
     wchar_t String::GetAt(uint32_t pos) const
     {
+        VALIDATE_IMPL;
         //! @todo Error checking on pos.
         return m_Impl->m_Str.at(pos);
     }
 
     wchar_t & String::operator[](uint32_t pos)
     {
+        VALIDATE_IMPL;
         //! @todo Error checking on pos.
         return m_Impl->m_Str[pos];
     }
 
     void String::SetAt(uint32_t pos, wchar_t data)
     {
+        VALIDATE_IMPL;
         //! @todo Error checking on pos.
         m_Impl->m_Str[pos] = data;
     }
 
     const wchar_t * String::GetData() const
     {
+        VALIDATE_IMPL;
         return m_Impl->m_Str.c_str();
     }
 
     bool String::operator<(const wchar_t * str) const
     {
+        VALIDATE_IMPL;
         return (m_Impl->m_Str < str);
     }
 
     bool String::operator<(const String & str) const
     {
+        VALIDATE_IMPL;
         return (m_Impl->m_Str < str.m_Impl->m_Str);
     }
 
     bool String::operator>(const wchar_t * str) const
     {
+        VALIDATE_IMPL;
         return (m_Impl->m_Str > str);
     }
 
     bool String::operator>(const String & str) const
     {
+        VALIDATE_IMPL;
         return (m_Impl->m_Str > str.m_Impl->m_Str);
     }
 

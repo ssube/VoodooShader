@@ -104,7 +104,7 @@ bool WINAPI LoadVoodoo()
         return false;
     }
 
-    gVoodooCore = createFunc();
+    gVoodooCore = createFunc(0);
     
     if (!gVoodooCore)
     {

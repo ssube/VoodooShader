@@ -180,9 +180,9 @@ namespace VoodooShader
 
                 wstringstream logMsg;
 
-                logMsg << VSTR("Voodoo Shader Log");
-                logMsg << VSTR("Log Info(") << String::Date() << VSTR("; ") << String::Time() << VSTR("; ") << 
-                    String::Ticks() << VSTR(")");
+                logMsg << VSTR("Voodoo Shader Log") << endl;
+                logMsg << VSTR("Log opened on ") << String::Date() << VSTR(" at ") << String::Time() << VSTR(" (") << 
+                    String::Ticks() << VSTR(")") << endl;
 
 #ifdef _DEBUG
                 std::wcout << logMsg.str();
@@ -260,8 +260,7 @@ namespace VoodooShader
             {
                 // Format the message in memory to prevent partial messages from being dumped
                 std::wstringstream logMsg;
-                logMsg << VSTR("Message(Level: ") << level << VSTR("; Ticks: ") << String::Ticks() <<
-                    VSTR("Source: ") << source << VSTR("; Message: ") << msg << VSTR(")") << endl;
+                logMsg << source << VSTR("(") << level << VSTR(", ") << GetTickCount() << VSTR(": ") << msg << endl;
 
 #ifdef _DEBUG
                 if (level & (LL_ModWarning | LL_ModError))

@@ -331,7 +331,10 @@ namespace VoodooShader
     {
         os << VSTR("Version(LibId: ") << v.LibId << VSTR("; Major: ") << v.Major << VSTR("; Minor: ") <<
               v.Minor << VSTR("; Patch: ") << v.Patch << VSTR("; Build: ") << v.Build << VSTR("; Debug: ") <<
-              v.Debug << VSTR("; Name: ") << v.Name << VSTR("; RevId: ") << v.RevId << VSTR(")");
+              v.Debug;
+        if (v.Name) os << VSTR("; Name: ") << v.Name;
+        if (v.RevId) os << VSTR("; RevId: ") << v.RevId;
+        os << VSTR(")");
         return os;
     }
 #endif

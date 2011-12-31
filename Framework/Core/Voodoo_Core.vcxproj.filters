@@ -153,23 +153,11 @@
     <ClInclude Include="VSTechnique.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
-    <ClInclude Include="VoodooFramework.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Version.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Version_Build.hpp">
       <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Docs_Code.dox">
-      <Filter>Docs</Filter>
-    </ClInclude>
-    <ClInclude Include="Docs_Graphics.dox">
-      <Filter>Docs</Filter>
-    </ClInclude>
-    <ClInclude Include="Docs_License.dox">
-      <Filter>Docs</Filter>
     </ClInclude>
     <ClInclude Include="IFile.hpp">
       <Filter>Headers\Interfaces</Filter>
@@ -235,6 +223,18 @@
       <Filter>Docs</Filter>
     </None>
     <None Include="Support.inl">
+      <Filter>Headers</Filter>
+    </None>
+    <None Include="Docs_Code.dox">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="Docs_Graphics.dox">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="Docs_License.dox">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="VoodooFramework.hpp">
       <Filter>Headers</Filter>
     </None>
   </ItemGroup>

@@ -434,20 +434,20 @@ namespace VoodooShader
     {
         LL_Unknown      = 0x00,
         // Severity
-        LL_Debug        = 0x0001,
-        LL_Info         = 0x0002,
-        LL_Warning      = 0x0004,
-        LL_Error        = 0x0008,
+        LL_Debug        = 0x0001,   /* !< Verbose debugging message. May cause significant performance hit. */
+        LL_Info         = 0x0002,   /* !< General information. */
+        LL_Warning      = 0x0004,   /* !< Potential problem, not fatal within program or function scope. */
+        LL_Error        = 0x0008,   /* !< Problem, fatal at function scope but not program. */
         // Source
-        LL_External     = 0x0100,
-        LL_Module       = 0x0200,
-        LL_Core         = 0x0400,
-        LL_System       = 0x0800,
+        LL_External     = 0x0100,   /* !< Completely external source (network, pipe, IPC, etc). */
+        LL_Module       = 0x0200,   /* !< Voodoo plugin module. Module must conform to Voodoo plugin API. */
+        LL_Core         = 0x0400,   /* !< Voodoo core module. Must not be used elsewhere. */
+        LL_System       = 0x0800,   /* !< System message (OS message, system API error, STL exception, etc). */
         // Flags
-        LL_Critical     = 0x010000,
+        LL_Critical     = 0x010000, /* !< Special flag: message must be logged, regardless of settings. Typically for notices. */
         // Compound
-        LL_Exception    = LL_Debug | LL_Critical,
-        LL_Notice       = LL_Info  | LL_Critical,
+        LL_Exception    = LL_Debug | LL_Critical, /* !< Caught exception from Voodoo or other code. */
+        LL_Notice       = LL_Info  | LL_Critical, /* !< Important info (module loaded, copyright banner, etc). */
         // User
         LL_CoreDebug    = LL_Core | LL_Debug,
         LL_CoreException= LL_Core | LL_Exception,
@@ -473,7 +473,7 @@ namespace VoodooShader
     enum LogFlags  : uint32_t
     {
         LF_Unknown      = 0x00,
-        LF_Flush        = 0x01
+        LF_Flush        = 0x01      /* !< Log will be flushed to disk after every message. */
     };
 
     /**
@@ -483,19 +483,20 @@ namespace VoodooShader
     {
         PF_None         = 0x00,
 
-        PF_SlashSingle  = 0x0001,
-        PF_SlashDouble  = 0x0002,
-        PF_SlashOnly    = 0x0004,
-        PF_SlashBack    = 0x0008,
-        PF_SlashTrail   = 0x0010,
+        PF_SlashSingle  = 0x0001,   /* !< Compress any consecutive slashes into one. */
+        PF_SlashDouble  = 0x0002,   /* !< Double any slashes found. */
+        PF_SlashEscape  = 0x0004,   /* !< Prefix any slashes with a backslash. */
+        PF_SlashOnly    = 0x0010,   /* !< Replace all slashes with forward slashes. */
+        PF_SlashBack    = 0x0020,   /* !< Replace all slashes with back slashes. */
+        PF_SlashTrail   = 0x0100,   /* !< Append a slash to the end of the string. */
 
-        PF_PathRoot     = 0x001000,
-        PF_PathOnly     = 0x002000,
-        PF_PathFile     = 0x004000,
-        PF_PathExt      = 0x008000,
-        PF_PathCanon    = 0x010000,
+        PF_PathRoot     = 0x001000, /* !< Isolate the root of a path (eg "C:\file.txt" becomes "C:"). */
+        PF_PathOnly     = 0x002000, /* !< Strip a trailing filename, if one is present (eg "C:\dir\file.txt" becomes "C:\dir"). */
+        PF_PathFile     = 0x004000, /* !< Strip a path, leaving only filename or last element (eg "C:\dir\file.txt" becomes "file.txt", and "C:\dir\other" becomes "other"). */
+        PF_PathExt      = 0x008000, /* !< Isolate the file extension, if one is present (eg "C:\dir\file.txt" becomes "txt"). */
+        PF_PathCanon    = 0x010000, /* !< Canonicalize the path (parse any relative tokens, eg "C:\dir\..\file.txt" becomes "C:\file.txt"). */
 
-        PF_SlashFlags   = 0x0000001F,
+        PF_SlashFlags   = 0x0000013F,
         PF_PathFlags    = 0x000FF000,
     };
 
@@ -692,9 +693,9 @@ namespace VoodooShader
     {
         typedef const Version * (VOODOO_CALLTYPE * ModuleVersionFunc)();
         typedef const uint32_t  (VOODOO_CALLTYPE * ModuleCountFunc)();
-        typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(_In_ const uint32_t, _Out_ Uuid *);
-        typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(_In_ const uint32_t, _In_ ICore *);
-        typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)();
+        typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(const uint32_t, Uuid *);
+        typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(const uint32_t, ICore *);
+        typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)(uint32_t);
     }
 
 #ifdef VOODOO_STATIC_LINK

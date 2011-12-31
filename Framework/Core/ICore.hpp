@@ -61,14 +61,14 @@ namespace VoodooShader
          */
         _Check_return_ VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config) PURE;
         /**
-         * Cleans up all modules and objects, as much as possible. Invalidates all objects created by this core. This method
+         * Cleans up all modules and objects. Invalidates all objects created by this core. This method
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this
          * core may be reinitialized.
          *
          * @return Success of the destroy operation.
          *
-         * @warning If this method fails, this core is in an undefined state and must be destroyed. All resources created
-         *      from it are considered invalid.
+         * @warning If this method fails, this core is in an undefined state and must be destroyed; calling any method but
+         *      AddRef or Release is undefined. All resources created by this core are immediately considered invalid.
          */
         _Check_return_ VOODOO_METHOD(Reset)() PURE;
         /**
@@ -198,8 +198,7 @@ namespace VoodooShader
          * @param type The type to verify.
          * @return A reference to the parameter if found, nullptr reference otherwise.
          *
-         * @note If a parameter with a matching name is found, the type will be checked. If Type is PT_Unknown, any type
-         *      parameter will be returned (only the name will be tested).
+         * @note If type is PT_Unknown, no type checking is performed, only the name is used.
          */
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST PURE;
         /**
