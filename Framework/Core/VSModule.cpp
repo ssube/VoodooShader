@@ -28,6 +28,7 @@
 #include "IParser.hpp"
 
 #include "Exception.hpp"
+#include "Format.hpp"
 #include "Regex.hpp"
 #include "Version.hpp"
 
@@ -35,6 +36,7 @@ namespace VoodooShader
 {
     VSModule * VSModule::Load(_In_ ICore * const pCore, _In_ const String & path)
     {
+        VOODOO_DEBUG_FUNCLOG(pCore->GetLogger());
         // Load the module
         HMODULE hmodule = LoadLibraryEx(path.GetData(), nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
 
@@ -68,10 +70,13 @@ namespace VoodooShader
 
     VOODOO_METHODTYPE VSModule::VSModule(_In_ ICore * pCore, HMODULE hmodule) :
         m_Refs(0), m_Core(pCore), m_Handle(hmodule)
-    { }
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    }
 
     VOODOO_METHODTYPE VSModule::~VSModule()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (m_Handle != INVALID_HANDLE_VALUE)
         {
             FreeLibrary(m_Handle);
@@ -81,11 +86,13 @@ namespace VoodooShader
 
     uint32_t VOODOO_METHODTYPE VSModule::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSModule::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
         {
@@ -96,6 +103,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSModule::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -125,31 +133,37 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSModule::ToString() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return VSTR("VSModule()");
     }
 
     ICore * VOODOO_METHODTYPE VSModule::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
     const Version * VOODOO_METHODTYPE VSModule::ModuleVersion() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_ModuleVersion();
     }
 
     uint32_t VOODOO_METHODTYPE VSModule::ClassCount() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_ClassCount();
     }
 
     const wchar_t * VOODOO_METHODTYPE VSModule::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_ClassInfo(number, pUuid);
     }
 
     IObject * VOODOO_METHODTYPE VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * const pCore) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_ClassCreate(number, pCore);
     }
 }

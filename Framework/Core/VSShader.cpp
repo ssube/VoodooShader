@@ -38,10 +38,16 @@
 
 namespace VoodooShader
 {
-    //! @todo PREfast fails if the input core here has an _In_ annotation. This needs fixed.
     VSShader::VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
         m_Refs(0), m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
+        if (!m_Core)
+        {
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter with no core."), nullptr);
+        }
+
         CGcontext context = m_Core->GetCgContext();
 
         if (!context || !cgIsContext(context))
@@ -71,6 +77,7 @@ namespace VoodooShader
 
     VSShader::~VSShader()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_DefaultTechnique = nullptr;
         m_Techniques.clear();
         m_Parameters.clear();
@@ -83,11 +90,13 @@ namespace VoodooShader
 
     uint32_t VOODOO_METHODTYPE VSShader::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSShader::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -99,6 +108,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSShader::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -128,26 +138,31 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSShader::ToString() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return Format(VSTR("VSShader(%1%)")) << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSShader::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
     String VOODOO_METHODTYPE VSShader::GetName() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
     }
 
     uint32_t VOODOO_METHODTYPE VSShader::GetTechniqueCount() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Techniques.size();
     }
 
     ITechnique * VOODOO_METHODTYPE VSShader::GetTechnique(const uint32_t index) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Techniques.size())
         {
             return m_Techniques[index].get();
@@ -160,11 +175,13 @@ namespace VoodooShader
 
     ITechnique * VOODOO_METHODTYPE VSShader::GetDefaultTechnique() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_DefaultTechnique.get();
     }
 
     bool VOODOO_METHODTYPE VSShader::SetDefaultTechnique(ITechnique * pTechnique)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (pTechnique != nullptr)
         {
             if (pTechnique->GetShader() == this)
@@ -188,11 +205,13 @@ namespace VoodooShader
 
     uint32_t VOODOO_METHODTYPE VSShader::GetParameterCount() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Parameters.size();
     }
 
     IParameter * VOODOO_METHODTYPE VSShader::GetParameter(_In_ const uint32_t index) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Parameters.size())
         {
             return m_Parameters[index].get();
@@ -205,11 +224,13 @@ namespace VoodooShader
 
     CGeffect VOODOO_METHODTYPE VSShader::GetCgEffect() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_CgEffect;
     }
 
     void VSShader::Link()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         // Make sure it's a valid effect
         if (!cgIsEffect(m_CgEffect))
         {
@@ -246,6 +267,7 @@ namespace VoodooShader
 
     void VSShader::LinkParameter(IParameter * pParam)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         IParameterRef param = pParam;
 
         // Cache basic data for future use
@@ -297,6 +319,7 @@ namespace VoodooShader
 
     void VSShader::LinkSampler(IParameter * pParam)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         IParameterRef param = pParam;
 
         CGparameter cgparam = param->GetCgParameter();
@@ -348,6 +371,7 @@ namespace VoodooShader
 
     void VSShader::CreateParameterTexture(_In_ IParameter * pParam)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         IParameterRef param = pParam;
 
         CGparameter parameter = param->GetCgParameter();
@@ -580,6 +604,7 @@ namespace VoodooShader
 
     void VSShader::SetupTechniques()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         CGtechnique cTech = cgGetFirstTechnique(m_CgEffect);
 
         while (cgIsTechnique(cTech))

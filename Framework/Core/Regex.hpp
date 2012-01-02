@@ -26,14 +26,7 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup voodoo_utility Voodoo Utility
-     * @{
-     */
-
-    /**
-     * @addtogroup voodoo_utility_regex Voodoo Regex
      * @ingroup voodoo_utility
-     *
      * Voodoo internal regex class, providing constant and compiler-safe regex handling between modules. This internally
      * uses <a href="http://www.boost.org/doc/libs/1_48_0/libs/regex/doc/html/index.html">Boost.Regex</a> in extended-syntax
      * mode for both expressions and match formatting.
@@ -46,16 +39,13 @@ namespace VoodooShader
 
     public:
         /**
-         * @addtogroup voodoo_utility_regex_ctor Regex constructors
-         * @ingroup voodoo_utility_regex
+         * @name Regex Constructors
          * @{
          */
-
         /**
          * Creates an empty regular expression.
          */
         Regex();
-
         /**
          * Creates a regular expression from the given string, using extended syntax.
          *
@@ -65,37 +55,28 @@ namespace VoodooShader
         /**
          * @}
          */
-
         ~Regex();
-
         /**
-         * @addtogroup voodoo_utility_regex_expr Regex expression
-         * @ingroup voodoo_utility_regex
+         * @name Regex Expression
          * @{
          */
-
         /**
          * Sets the internal expression and recompiles.
          *
          * @param expr The string to use.
          */
         void SetExpr(const String & expr);
-
         /**
          * Retrieve the current expression.
          *
          * @return The expression string.
          */
         String GetExpr() CONST;
-
         /**
          * @}
-         *
-         * @addtogroup voodoo_utility_regex_expr Regex expression
-         * @ingroup voodoo_utility_regex
+         * @name Regex Operations
          * @{
          */
-
         /**
          * Attempt to match the given string against the stored expression.
          *
@@ -103,15 +84,6 @@ namespace VoodooShader
          * @return A RegexMatch for all match groups.
          */
         RegexMatch Match(const String & string) CONST;
-
-        /**
-         * @}
-         *
-         * @addtogroup voodoo_utility_regex_expr Regex expression
-         * @ingroup voodoo_utility_regex
-         * @{
-         */
-
         /**
          * Test if the given string is matched by the expression.
          *
@@ -119,15 +91,6 @@ namespace VoodooShader
          * @return True if the expression matches the string in full.
          */
         bool Find(const String & find) CONST;
-
-        /**
-         * @}
-         *
-         * @addtogroup voodoo_utility_regex_expr Regex expression
-         * @ingroup voodoo_utility_regex
-         * @{
-         */
-
         /**
          * Perform a find and replace on all segments which this regex matches. Matches are replaced using the same rules as
          * RegexMatch::Replace().
@@ -137,7 +100,6 @@ namespace VoodooShader
          * @return A copy of find with all matches replaced.
          */
         String Replace(const String & find, const String & replace) CONST;
-
         /**
          * @}
          */
@@ -147,7 +109,6 @@ namespace VoodooShader
     };
 
     /**
-     * @addtogroup voodoo_utility_regex Voodoo Regex
      * @ingroup voodoo_utility
      *
      * Voodoo internal regex match class, encapsulating matches found by @ref Regex. This class provides methods to read
@@ -198,8 +159,4 @@ namespace VoodooShader
 
         RegexMatchImpl * m_Impl;
     };
-
-    /**
-     * @}
-     */
 }

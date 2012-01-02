@@ -24,6 +24,7 @@
 namespace VoodooShader
 {
     /**
+     * @ingroup voodoo_utility
      * Conversion helper class for Voodoo and Cg types. This class provides methods to convert various enums to
      * other types or retrieve readable names (for logging).
      */

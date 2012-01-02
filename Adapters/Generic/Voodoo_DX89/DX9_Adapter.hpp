@@ -29,7 +29,7 @@ namespace VoodooShader
         {
         public:
             DX9Adapter(ICore * pCore);
-            virtual ~DX9Adapter();
+            ~DX9Adapter();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;

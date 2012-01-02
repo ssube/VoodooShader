@@ -33,6 +33,7 @@ namespace VoodooShader
 {
     /**
      * @class Stream
+     * @ingroup voodoo_utility
      *
      * Provides formatted string creation.
      */
@@ -147,6 +148,7 @@ namespace VoodooShader
 
     /**
      * @addtogroup voodoo_stream_manipulators Stream Manipulators
+     * @ingroup voodoo_utility
      * @{
      */
     Stream & Hex(Stream & val);
@@ -156,6 +158,11 @@ namespace VoodooShader
      */
 
 #ifndef VOODOO_NO_STREAM
+    /**
+     * @defgroup voodoo_stdstream Standard Stream Operators
+     * @ingroup voodoo_utility
+     * @{
+     */
     template<typename Elem>
     std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Exception & val)
     {
@@ -325,5 +332,8 @@ namespace VoodooShader
         }
         return os;
     }
+    /**
+     * @}
+     */
 #endif
 }

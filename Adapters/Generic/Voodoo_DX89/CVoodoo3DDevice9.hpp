@@ -30,7 +30,7 @@ namespace VoodooShader
         {
         public:
             CVoodoo3DDevice9(IDirect3D9 * pVoodooObject, IDirect3DDevice9 * pRealDevice);
-            virtual ~CVoodoo3DDevice9();
+            ~CVoodoo3DDevice9();
 
             /* IUnknown methods */
             STDMETHOD(QueryInterface)(THIS_ REFIID riid, void **ppvObj);

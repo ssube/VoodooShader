@@ -33,7 +33,7 @@ namespace VoodooShader
         {
         public:
             FrostTexture(_In_ ICore * pCore, _In_ String name, _In_ GLuint pTexture);
-            virtual ~FrostTexture();
+            ~FrostTexture();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;

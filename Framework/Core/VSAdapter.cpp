@@ -20,22 +20,33 @@
 
 #include "VSAdapter.hpp"
 
+#include "ICore.hpp"
+#include "ILogger.hpp"
+
+#include "Format.hpp"
+
 namespace VoodooShader
 {
     VSAdapter::VSAdapter(ICore * pCore) :
         m_Refs(0), m_Core(pCore)
-    { }
+    { 
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    }
 
     VSAdapter::~VSAdapter()
-    { }
+    { 
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    }
 
     uint32_t VOODOO_METHODTYPE VSAdapter::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSAdapter::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -47,6 +58,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -76,16 +88,19 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSAdapter::ToString() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return VSTR("VSAdapter()");
     }
 
     ICore * VOODOO_METHODTYPE VSAdapter::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
     bool VOODOO_METHODTYPE VSAdapter::LoadPass(IPass * pPass)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pPass);
 
         return true;
@@ -93,6 +108,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::UnloadPass(IPass * pPass)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pPass);
 
         return true;
@@ -100,6 +116,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::SetPass(IPass * pPass)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pPass);
 
         return true;
@@ -107,11 +124,13 @@ namespace VoodooShader
 
     IPass * VOODOO_METHODTYPE VSAdapter::GetPass() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return nullptr;
     }
 
     bool VOODOO_METHODTYPE VSAdapter::ResetPass(IPass * pPass)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pPass);
 
         return true;
@@ -119,6 +138,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::SetTarget(const uint32_t index, ITexture * pTarget)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(index);
         UNREFERENCED_PARAMETER(pTarget);
 
@@ -127,6 +147,7 @@ namespace VoodooShader
 
     ITexture * VOODOO_METHODTYPE VSAdapter::GetTarget(const uint32_t index) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(index);
 
         return nullptr;
@@ -134,6 +155,7 @@ namespace VoodooShader
 
     ITexture * VOODOO_METHODTYPE VSAdapter::CreateTexture(const String & name, const TextureDesc pDesc)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(pDesc);
 
@@ -142,6 +164,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::LoadTexture(IImage * const pFile, const TextureRegion pRegion, ITexture * const pTexture)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pFile);
         UNREFERENCED_PARAMETER(pRegion);
         UNREFERENCED_PARAMETER(pTexture);
@@ -151,6 +174,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::DrawGeometry(const uint32_t offset, const uint32_t count, void * const pData, const VertexFlags flags)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(offset);
         UNREFERENCED_PARAMETER(count);
         UNREFERENCED_PARAMETER(pData);
@@ -161,6 +185,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::ApplyParameter(IParameter * const pParam)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pParam);
 
         return true;
@@ -168,6 +193,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::SetProperty(const wchar_t * name, Variant * const value)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);
 
@@ -176,6 +202,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::GetProperty(const wchar_t * name, Variant * const value) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(value);
 
@@ -184,6 +211,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::ConnectTexture(IParameter * const pParam, ITexture * const pTexture)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pParam);
         UNREFERENCED_PARAMETER(pTexture);
 
@@ -192,6 +220,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSAdapter::HandleError(CGcontext const pContext, const uint32_t error)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pContext);
         UNREFERENCED_PARAMETER(error);
 

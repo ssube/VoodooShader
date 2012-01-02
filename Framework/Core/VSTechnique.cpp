@@ -37,6 +37,7 @@ namespace VoodooShader
     VOODOO_METHODTYPE VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
         m_Refs(0), m_Shader(pShader), m_Core(pShader->GetCore()), m_CgTechnique(pCgTech), m_Target(nullptr)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         const char * techName = cgGetTechniqueName(m_CgTechnique);
 
         m_Name = m_Shader->GetName() + VSTR(":");
@@ -54,17 +55,20 @@ namespace VoodooShader
 
     VOODOO_METHODTYPE VSTechnique::~VSTechnique()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_Target = nullptr;
         m_Passes.clear();
     }
 
     uint32_t VOODOO_METHODTYPE VSTechnique::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSTechnique::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -76,6 +80,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSTechnique::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -105,21 +110,25 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSTechnique::ToString() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return Format(VSTR("VSTechnique(%1%)")) << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSTechnique::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
     String VOODOO_METHODTYPE VSTechnique::GetName() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
     }
 
     IPass * VOODOO_METHODTYPE VSTechnique::GetPass(const uint32_t index) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Passes.size())
         {
             return m_Passes[index].get();
@@ -130,26 +139,31 @@ namespace VoodooShader
 
     ITexture * VOODOO_METHODTYPE VSTechnique::GetTarget() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Target.get();
     }
 
     uint32_t VOODOO_METHODTYPE VSTechnique::GetPassCount() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Passes.size();
     }
 
     IShader * VOODOO_METHODTYPE VSTechnique::GetShader() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Shader;
     }
 
     CGtechnique VOODOO_METHODTYPE VSTechnique::GetCgTechnique() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_CgTechnique;
     }
 
     void VSTechnique::Link()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         // Process the technique's target annotation
         CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(m_CgTechnique, "target");
 

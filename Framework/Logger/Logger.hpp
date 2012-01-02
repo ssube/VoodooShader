@@ -73,7 +73,7 @@ namespace VoodooShader
             /**
              * Default destructor, flushes and closes the log file (if open).
              */
-            virtual ~VSXmlLogger();
+            ~VSXmlLogger();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;

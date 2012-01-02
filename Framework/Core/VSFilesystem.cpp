@@ -20,22 +20,33 @@
 
 #include "VSFilesystem.hpp"
 
+#include "ICore.hpp"
+#include "ILogger.hpp"
+
+#include "Format.hpp"
+
 namespace VoodooShader
 {
     VSFileSystem::VSFileSystem(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
-    { }
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    }
 
     VSFileSystem::~VSFileSystem()
-    { }
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    }
 
     uint32_t VOODOO_METHODTYPE VSFileSystem::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSFileSystem::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -47,6 +58,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSFileSystem::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -76,16 +88,19 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSFileSystem::ToString() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return VSTR("VSFileSystem()");
     }
 
     ICore * VOODOO_METHODTYPE VSFileSystem::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
     bool VOODOO_METHODTYPE VSFileSystem::AddPath(_In_ const String & dir)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(dir);
 
         return true;
@@ -93,6 +108,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSFileSystem::RemovePath(_In_ const String & dir)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(dir);
 
         return true;
@@ -100,6 +116,7 @@ namespace VoodooShader
 
     IFile * VOODOO_METHODTYPE VSFileSystem::GetFile(_In_ const String & name, const GetFileMode mode) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(mode);
 

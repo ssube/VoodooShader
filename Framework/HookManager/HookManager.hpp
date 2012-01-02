@@ -48,17 +48,20 @@ namespace VoodooShader
          *
          * Handles function-level hooks, redirecting function calls into new locations.
          *
-         * @par ClassId
-         *      e6f312b5-05af-11e1-9e05-005056c00008
+         * @clsid e6f312b5-05af-11e1-9e05-005056c00008
          */
         VOODOO_CLASS(VSEHHookManager, IHookManager, {0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
         {
         public:
-            /* Creates a new VSEHHookManager bound to the current process. */
+            /**
+             * Creates a new VSEHHookManager bound to the current process. 
+             */
             VSEHHookManager(_In_ ICore * pCore);
 
-            /* Removes all hooks and cleans up the VSEHHookManager. */
-            virtual ~VSEHHookManager();
+            /**
+             * Removes all hooks and cleans up the hook manager. 
+             */
+            ~VSEHHookManager();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -80,7 +83,6 @@ namespace VoodooShader
              *      a bother with member functions, but can be worked around relatively easily.
              */
             VOODOO_METHOD(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
-
             /**
              * Removes a single hook.
              *
@@ -91,9 +93,8 @@ namespace VoodooShader
              *      trampoline function. This will likely crash the process.
              */
             VOODOO_METHOD(Remove)(_In_ const String & name);
-
             /**
-             * Removes all hooks created with this VSEHHookManager.
+             * Removes all hooks created with this hook manager.
              */
             VOODOO_METHOD(RemoveAll)();
 

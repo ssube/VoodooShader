@@ -26,7 +26,6 @@ namespace VoodooShader
     /**
      * @addtogroup voodoo_core_null Null Implementations
      * @ingroup voodoo_core
-     *
      * @{
      */
 

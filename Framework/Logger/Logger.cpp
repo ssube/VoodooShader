@@ -253,8 +253,7 @@ namespace VoodooShader
         {
             if (!this->IsOpen()) return false;
 
-            LogLevel mask = (LogLevel) (level & m_Filter);
-            if (!(mask & LL_Severity) || !(mask & LL_Origin)) return false;
+            if ((level & (LL_System | LL_Critical | m_Filter)) == 0) return false;
 
             try
             {

@@ -30,11 +30,7 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup voodoo_utility Voodoo Utility
-     * @{
-     */
-
-    /**
+     * @ingroup voodoo_utility
      * Printf-style formatting class with type safety and some extended features, including handling of standard Voodoo
      * types.
      */

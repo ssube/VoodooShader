@@ -26,11 +26,7 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup voodoo_utility Voodoo Utility
-     * @{
-     */
-
-    /**
+     * @ingroup voodoo_utility
      * Generic exception class for Voodoo applications. Combines a generic standard exception with extended error location
      * data.
      *
@@ -64,6 +60,7 @@ namespace VoodooShader
         virtual ~Exception();
 
         virtual const char * what() const;
+        virtual const String strwhat() const;
 
     private:
         ICore * m_Core;
@@ -71,13 +68,10 @@ namespace VoodooShader
     };
 
     /**
+     * @ingroup voodoo_utility
      * Macro to throw Voodoo @ref VoodooShader::Exception "exceptions" with extended debug info, particularly function,
      * filename and line. These exceptions are also logged if possible (requires a valid core be given). The Exception
      * class derives from std::exception, so these are simple to handle.
      */
 #   define Throw(module, msg, core) throw Exception(VSTR(__FILE__), VSTR(__FUNCTION__), __LINE__, module, msg, core)
-
-    /**
-     * @}
-     */
 }

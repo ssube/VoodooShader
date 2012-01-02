@@ -26,7 +26,6 @@ namespace VoodooShader
     /**
      * @addtogroup voodoo_core_null Null Implementations
      * @ingroup voodoo_core
-     *
      * @{
      */
 
@@ -62,4 +61,7 @@ namespace VoodooShader
         mutable uint32_t m_Refs;
         ICore * m_Core;
     };
+    /**
+     * @}
+     */
 }

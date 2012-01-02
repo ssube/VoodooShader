@@ -79,7 +79,7 @@ namespace VoodooShader
         public:
             VSWFileSystem(_In_ ICore *core);
 
-            virtual ~VSWFileSystem();
+            ~VSWFileSystem();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -117,7 +117,7 @@ namespace VoodooShader
              */
             VSWFile(_In_ ICore * pCore, _In_ const String & path);
 
-            virtual ~VSWFile();
+            ~VSWFile();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -159,7 +159,7 @@ namespace VoodooShader
         public:
             static VSWImage * Load(ICore * pCore, const String & name);
             VSWImage(ICore *core, const String & path, unsigned int image);
-            virtual ~VSWImage();
+            ~VSWImage();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;

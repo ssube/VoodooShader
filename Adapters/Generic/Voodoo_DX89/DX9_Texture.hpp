@@ -33,7 +33,7 @@ namespace VoodooShader
         {
         public:
             DX9Texture(_In_ ICore * pCore, _In_ String name, _In_ IDirect3DBaseTexture9 * pTexture);
-            virtual ~DX9Texture();
+            ~DX9Texture();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;

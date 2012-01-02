@@ -20,22 +20,33 @@
 
 #include "VSHookManager.hpp"
 
+#include "ICore.hpp"
+#include "ILogger.hpp"
+
+#include "Format.hpp"
+
 namespace VoodooShader
 {
     VSHookManager::VSHookManager(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
-    { }
+    { 
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    }
 
     VSHookManager::~VSHookManager()
-    { }
+    { 
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    }
 
     uint32_t VOODOO_METHODTYPE VSHookManager::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSHookManager::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -47,6 +58,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSHookManager::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -76,16 +88,19 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSHookManager::ToString() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return VSTR("VSHookManager()");
     }
 
     ICore * VOODOO_METHODTYPE VSHookManager::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
     bool VOODOO_METHODTYPE VSHookManager::Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(pSrc);
         UNREFERENCED_PARAMETER(pDest);
@@ -95,6 +110,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSHookManager::Remove(_In_ const String & name)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(name);
 
         return true;
@@ -102,6 +118,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSHookManager::RemoveAll()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return true;
     }
 }

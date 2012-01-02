@@ -32,19 +32,13 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup voodoo_utility Voodoo Utility
-     * @{
-     */
-
-    /**
-     * @addtogroup voodoo_utility_string Voodoo Strings
      * @ingroup voodoo_utility
      *
      * Voodoo internal string class, providing constant and compiler-safe string passing between various modules.
      *
      * @warning If built with Unicode, wchar_t must be a wide character meeting the size and behavior of Visual Studio's
-     *      wchar_t. Otherwise, it must be a character meeting the size and behavior of the standard 8-bit ASCII char. The
-     *      wchar_t type is used to allow future porting to proper C++11 UTF character types.
+     *      wchar_t. Otherwise, it must be a character meeting the size and behavior of the standard 8-bit ASCII char. When
+     *      it becomes possible, proper C++11 UTF character types will be used.
      */
     class VOODOO_API String
     {
@@ -55,80 +49,68 @@ namespace VoodooShader
          * @name String Constructors
          * @{
          */
-
         /**
          * Creates an empty string.
          */
         String();
-
         /**
          * Creates a string from the given character (one character, converted).
          * @param ch Character to use.
          */
         String(_In_ const char ch);
-
         /**
          * Creates a string from a C-style string (converted).
          * @param str String to use.
          */
         String(_In_z_ const char * str);
-
         /**
          * Creates a string from the given character (converted and repeated).
          * @param size The number of characters.
          * @param ch The character to use.
          */
         String(_In_ const uint32_t size, _In_ const char ch);
-
         /**
          * Creates a string from a portion of the given string (taken from the beginning and converted).
          * @param size The number of characters to use.
          * @param str The string to use.
          */
         String(_In_ const uint32_t size, _In_z_count_(size) const char * str);
-
         /**
          * Creates a string from the given character (one character).
          * @param ch Character to use.
          */
         String(_In_ const wchar_t ch);
-
         /**
          * Creates a string from a C-style wide string.
          * @param str String to use.
          */
         String(_In_z_ const wchar_t * str);
-
         /**
          * Creates a string from the given character (repeated).
          * @param size The number of characters.
          * @param ch The character to use.
          */
         String(_In_ const uint32_t size, _In_ const wchar_t ch);
-
         /**
          * Create a string from a C-style wide string.
          * @param size The number of characters to use.
          * @param str The string to use.
          */
         String(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
-
         /**
          * Creates a string from another String (copy constructor).
          * @param str The string to copy.
          * @note This does not provide a partial copy constructor, use <code>String(String.Left())</code>.
          */
         String(_In_ const String & str);
-
         /**
-         * Creates a string from a Uuid, converting to a string with the unbraced 4/2/2/2/6 format, like so:
+         * Creates a string from a Uuid in unbraced 4/2/2/2/6 form.
          *
          * @code 01234567-89ab-cdef-0123-456789abcdef @endcode
          *
-         * This is considered the standard form for Voodoo Uuids, and is used in the registry and most other locations.
+         * This is considered the standard form for Voodoo Uuids.
          */
         String(_In_ const Uuid & uuid);
-
 #ifdef _VECTOR_
         /**
          * Create a string from a vector, treating it as a character array (performs conversion).
@@ -139,7 +121,6 @@ namespace VoodooShader
         {
             this->CInit(0, &vec[0]);
         }
-
         /**
          * Create a string from a vector, treating it as a wide character array.
          * @param vec The vector to use.
@@ -150,7 +131,6 @@ namespace VoodooShader
             this->WInit(0, &vec[0]);
         }
 #endif
-
 #ifdef _STRING_
         /**
          * Create a string from a std::string (performs conversion).
@@ -161,7 +141,6 @@ namespace VoodooShader
         {
             this->CInit(0, str.c_str());
         }
-
         /**
          * Create a string from a std::wstring.
          * @param str The string to use.
@@ -176,35 +155,29 @@ namespace VoodooShader
          * @}
          * @name Static Creation Methods
          * @{
-         */
-            
+         */            
         /**
-         * Formats a timestamp as <code>Time(HHMMSS)</code>. Leading zeros are guaranteed to be present.
+         * Formats a timestamp as <code>HHMMSS</code>. Leading zeros are guaranteed to be present.
          *
-         * @note If the system time cannot be retrieved, an equal-length error stamp of <code>Time(000000)</code> will be
-         *      returned.
+         * @note If the time cannot be retrieved or formatted, <code>Unknown Time</code> will be returned.
          */
         static String Time(time_t * pTime = nullptr);
         /**
-         * Formats a date as <code>Date(YYYYMMDD)</code>. Leading zeros are guaranteed to be present.
+         * Formats a date as <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present.
          *
-         * @note If the system time cannot be retrieved, an equal-length error stamp of <code>Date(00000000)</code> will be
-         *      returned.
+         * @note If the time cannot be retrieved or formatted, <code>Unknown Date</code> will be returned.
          */
         static String Date(time_t * pTime = nullptr);
         /**
-         * Formats the system's current tick count as <code>Ticks(n)</code>, with a varying length. This records ms since 
-         * system start.
+         * Formats the system's current tick count, with a varying length. This records ms since system start (not useful
+         * for global timing, but holds enough precision to order events).
          */
         static String Ticks();
         /**
          * @}
          */
-
         ~String();
-
         /**
-         * @}
          * @name String Modification
          * @{
          */
@@ -227,7 +200,7 @@ namespace VoodooShader
         String & Truncate(_In_ uint32_t size);
         /**
          * @}
-         * @name 
+         * @name Conversion and Split
          * @{
          */
         String ToLower() const;
@@ -266,7 +239,6 @@ namespace VoodooShader
          * @return Success of conversion.
          */
         bool ToUuid(_Out_ Uuid * pUuid) const;
-
         /**
          * Attempts to convert this String to a character array. If size is 0 and pBuffer is null, this estimates the size
          * of the buffer required and returns that; otherwise it converts the string and returns the number of bytes written
@@ -277,7 +249,6 @@ namespace VoodooShader
          * @return Necessary buffer size or bytes converted.
          */
         int32_t ToCharStr(_In_ int32_t size, _Inout_opt_count_(size) char * const pBuffer) const;
-
 #ifdef _STRING_
         /**
          * Creates a std::wstring from this string.
@@ -325,7 +296,6 @@ namespace VoodooShader
         uint32_t ReverseFind(_In_ const wchar_t ch, _In_ bool useCase = true) const;
         uint32_t ReverseFind(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
         uint32_t ReverseFind(_In_ const String & str, _In_ bool useCase = true) const;
-
         String & Replace(_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
         String & Replace(_In_z_ const wchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
         String & Replace(_In_ const String & fstr, _In_ const String & rstr, _In_ bool caseSensitive = true);
@@ -334,8 +304,7 @@ namespace VoodooShader
         String & Remove(_In_ const String & fstr, _In_ bool useCase = true);
         /**
          * @}
-         * @name Data Methods
-         * Underlying data access methods.
+         * @name Data Access Methods
          * @{
          */
         /**
@@ -384,51 +353,43 @@ namespace VoodooShader
             this->Assign(ch);
             return (*this);
         };
-
         inline String & operator=(_In_z_ const wchar_t * str)
         {
             this->Assign(str);
             return (*this);
         };
-
         inline String & operator=(_In_ const String & str)
         {
             this->Assign(str);
             return (*this);
         };
-
         inline String & operator+=(_In_ const wchar_t ch)
         {
             this->Append(ch);
             return (*this);
         };
-
         inline String & operator+=(_In_z_ const wchar_t * str)
         {
             this->Append(str);
             return (*this);
         };
-
         inline String & operator+=(_In_ const String & str)
         {
             this->Append(str);
             return (*this);
         };
-
         inline const String operator+(_In_ const wchar_t ch) const
         {
             String c = (*this);
             c += ch;
             return c;
         };
-
         inline const String operator+(_In_z_ const wchar_t * str) const
         {
             String c = (*this);
             c += str;
             return c;
         };
-
         inline const String operator+(_In_ const String & str) const
         {
             String c = (*this);
@@ -444,60 +405,56 @@ namespace VoodooShader
         {
             return this->Compare(str);
         };
-
         inline bool operator==(_In_ const String & str) const
         {
             return this->Compare(str);
         };
-
         inline bool operator!=(_In_z_ const wchar_t * str) const
         {
             return !(this->operator==(str));
         };
-
         inline bool operator!=(_In_ const String & str) const
         {
             return !(this->operator==(str));
         };
-
         bool operator<(_In_z_ const wchar_t * str) const;
         bool operator<(_In_ const String & str) const;
         bool operator>(_In_z_ const wchar_t * str) const;
         bool operator>(_In_ const String & str) const;
-
         inline bool operator<=(_In_z_ const wchar_t * str) const
         {
             return !(this->operator>(str));
         };
-
         inline bool operator<=(_In_ const String & str) const
         {
             return !(this->operator>(str));
         };
-
         inline bool operator>=(_In_z_ const wchar_t * str) const
         {
             return !(this->operator<(str));
         };
-
         inline bool operator>=(_In_ const String & str) const
         {
             return !(this->operator<(str));
         };
         /**
          * @}
-         * @
          */
-
+        /**
+         * Character positions indicating beyond the end of the string or not found.
+         */
         static const uint32_t Npos = (uint32_t)-1;
 
     private:
+        /**
+         * Initializes the string from an ASCII string, doing conversion as needed.
+         */
         void CInit(_In_ const uint32_t size, _In_z_count_(size) const char * str);
+        /**
+         * Initializes the string from a wide string, copying as needed.
+         */
         void WInit(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
 
         StringImpl * m_Impl;
     };
-    /**
-     * @}
-     */
 }

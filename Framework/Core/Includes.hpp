@@ -41,6 +41,12 @@
 #   define nullptr NULL
 #endif
 
+#ifdef VOODOO_SDK_VERSION
+#   error Voodoo SDK version already defined.
+#else
+#   define VOODOO_SDK_VERSION 0
+#endif
+
 #ifndef VOODOO_STRING_MACROS
 #   define VOODOO_STRING_MACROS
 // String type macros
@@ -70,6 +76,7 @@
 #   include <boost/uuid/uuid.hpp>
 #endif
 
+// Windows includes and macros
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
@@ -93,13 +100,38 @@
 #   define DECLSPEC_NOVTABLE __declspec(novtable)
 #endif
 
-// Extended memory debug routines.
-// This will enable a lot of in-depth logging for a lot of memory data and will have a major speed hit.
-#ifdef VOODOO_DEBUG_MEMORY
+// Extended debug macros:
+// These will enable a significant amount of additional code and will cause major performance loss. However, full
+// memory management and program flow will be logged.
+#ifdef VOODOO_DEBUG
+#   define VOODOO_DEBUG_BREAK DebugBreak()
+#   define SAFE_INCREMENT(x) InterlockedIncrement(&x)
+#   define SAFE_DECREMENT(x) InterlockedCompareExchange(&x, x-1, x), x
+#else
+#   define VOODOO_DEBUG_BREAK
+#   define SAFE_INCREMENT(x) ++x
+#   define SAFE_DECREMENT(x) --x
+#endif
+
+// Extended logging
+//#if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_EXTLOG)
+#   define VOODOO_DEBUG_FUNCLOG(logger) \
+    { \
+        if (logger)\
+        {\
+            logger->LogMessage(LL_Debug | LL_Critical | LL_System, VSTR("Extended Debug Log"), \
+                Format("Entered function %1% in %2% (line %3%).") << __FUNCTION__ << __FILE__ << __LINE__); \
+        }\
+    }
+//#else
+//#   define VOODOO_DEBUG_FUNCLOG(logger)
+//#endif
+
+// Memory debug
+#if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_MEMORY)
 #   define _CRTDBG_MAP_ALLOC
 #   include <stdlib.h>
 #   include <crtdbg.h>
-
 #   define vnew new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #   define vdelete delete
 #else
@@ -107,6 +139,7 @@
 #   define vdelete delete
 #endif
 
+// Function macros
 #ifndef VOODOO_IMPORT
 #   define VOODOO_API __declspec(dllexport)
 #else
@@ -149,42 +182,19 @@
 
 namespace VoodooShader
 {
-    /* Custom basic types */
-    class Exception;
-    class Format;
-    class Regex;
-    class RegexMatch;
-    class Stream;
-    class String;
-
-#ifndef VOODOO_NO_PUGIXML
-    typedef pugi::xml_document * XmlDocument;
-#else
-    typedef void * XmlDocument;
-#endif
-
-#ifndef VOODOO_NO_BOOST
-    typedef boost::uuids::uuid Uuid;
-#else
-    typedef struct
-    {
-        uint8_t data[16];
-    } Uuid;
-#endif
-
-    /* Basic structs */
+    /**
+     * @defgroup voodoo_structs Basic Structs 
+     * @{
+     */
     struct TextureDesc;
     struct TextureRegion;
     struct Variant;
     struct Version;
-
-    /* Geometry-related structs */
     struct VertexStruct;
     struct LightStruct;
-
-    /* Interfaces */
     /**
-     * @defgroup voodoo_framework_interfaces Voodoo Framework interfaces
+     * @}
+     * @defgroup voodoo_interfaces Interfaces
      * @{
      */
     class IAdapter;
@@ -205,18 +215,30 @@ namespace VoodooShader
     class ITexture;
     /**
      * @}
+     * @defgroup voodoo_utility Utility Classes
+     * @{
      */
-
-    /* Refcount handlers */
-#ifdef VOODOO_THREAD_SAFE
-#   define SAFE_INCREMENT(x) InterlockedIncrement(&x)
-#   define SAFE_DECREMENT(x) InterlockedDecrement(&x)
+    class Exception;
+    class Format;
+    class Regex;
+    class RegexMatch;
+    class Stream;
+    class String;
+#ifndef VOODOO_NO_BOOST
+    typedef boost::uuids::uuid Uuid;
 #else
-#   define SAFE_INCREMENT(x) ++x
-#   define SAFE_DECREMENT(x) --x
+    typedef struct
+    {
+        uint8_t data[16];
+    } Uuid;
 #endif
-
+#ifndef VOODOO_NO_PUGIXML
+    typedef pugi::xml_document * XmlDocument;
+#else
+    typedef void * XmlDocument;
+#endif
     /**
+     * @}
      * @defgroup voodoo_uuids Voodoo Uuids
      * @{
      */
@@ -226,11 +248,10 @@ namespace VoodooShader
 #define DEFINE_LIBID(name)    DEFINE_UUID(LIBID_##name)
     /**
      * @}
+     * @defgroup voodoo_references Reference Typedefs
+     * @{
      */
-
-    /* Reference typedefs */
 #ifndef VOODOO_NO_BOOST
-    // Boost intrusive_ptr functions
     void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
     void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
 
@@ -250,9 +271,13 @@ namespace VoodooShader
     typedef boost::intrusive_ptr<IShader>        IShaderRef;
     typedef boost::intrusive_ptr<ITechnique>     ITechniqueRef;
     typedef boost::intrusive_ptr<ITexture>       ITextureRef;
-
-    /* Collections */
+    /**
+     * @}
+     * @defgroup voodoo_collections Collections
+     * @{
+     */
 #ifndef VOODOO_NO_COLLECTIONS
+    // Standard collections
     typedef std::map<String, String>             StringMap;
     typedef std::list<String>                    StringList;
     typedef std::vector<String>                  StringVector;
@@ -271,22 +296,29 @@ namespace VoodooShader
     typedef std::map<String, ITextureRef>        TextureMap;
     typedef std::list<ITextureRef>               TextureList;
     typedef std::vector<ITextureRef>             TextureVector;
-
+    // Variable handling
     typedef std::pair<String, uint32_t>          Variable;
     typedef std::map<String, Variable>           VariableMap;
-
+    // Module and class
     typedef std::map<Uuid, IModuleRef>           ModuleMap;
-
     typedef std::pair<IModuleRef, uint32_t>      ClassSource;
     typedef std::map<Uuid, ClassSource>          ClassMap;
     typedef std::map<String, Uuid>               StrongNameMap;
-
+    // Misc
     typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
 #endif
 #endif
+    /**
+     * @}
+     */
 
+    // Disable typed-enum warning
 #pragma warning(push)
 #pragma warning(disable: 4480)
+    /**
+     * @defgroup voodoo_enums Enums
+     * @{
+     */
     /**
      * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture
      * data. These may not be implemented by the underlying graphics API exactly as they are indicated here, but the
@@ -296,7 +328,6 @@ namespace VoodooShader
     enum TextureFormat : uint32_t
     {
         TF_Unknown  = 0x0,      /* !< Unknown texture format. */
-
         // Backbuffer formats
         TF_RGB5     = 0x101,    /* !< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
         TF_RGB5A1   = 0x102,    /* !< 5 bit RGB, 1 bit alpha */
@@ -595,6 +626,8 @@ namespace VoodooShader
     typedef Vector4<double>     Double4;
 
     /**
+     * @addtogroup voodoo_structs
+     * @{
      * Describes the precise version of a particular library, including name, main version, revision and debug status.
      */
     struct Version
@@ -685,6 +718,9 @@ namespace VoodooShader
         float    Theta;
         float    Phi;
     };
+    /**
+     * @}
+     */
 
     /**
      * Function pointer types for module interfaces.

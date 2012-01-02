@@ -36,6 +36,7 @@ namespace VoodooShader
     VSParameter::VSParameter(_Pre_notnull_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type) :
          m_Refs(0), m_Core(pCore), m_Shader(nullptr), m_Virtual(true), m_Type(type)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_Core->GetLogger()->LogMessage
         (
             LL_CoreDebug, VOODOO_CORE_NAME,
@@ -57,6 +58,7 @@ namespace VoodooShader
     VSParameter::VSParameter(_In_ IShader * const pShader, _In_ CGparameter const pParam) :
         m_Refs(0), m_Core(pShader->GetCore()), m_Shader(pShader), m_Virtual(false), m_Param(pParam)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_Type = Converter::ToParameterType(cgGetParameterType(m_Param));
         m_Name = m_Shader->GetName() + VSTR(":") + cgGetParameterName(m_Param);
 
@@ -65,6 +67,7 @@ namespace VoodooShader
 
     VOODOO_METHODTYPE VSParameter::~VSParameter()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (m_Virtual && cgIsParameter(m_Param))
         {
             cgDestroyParameter(m_Param);
@@ -73,11 +76,13 @@ namespace VoodooShader
 
     uint32_t VOODOO_METHODTYPE VSParameter::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSParameter::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -89,6 +94,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSParameter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -118,31 +124,37 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSParameter::ToString() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return Format("VSParameter(%1%)") << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSParameter::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
     String VOODOO_METHODTYPE VSParameter::GetName() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
     }
 
     ParameterType VOODOO_METHODTYPE VSParameter::GetType() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Type;
     }
 
     bool VOODOO_METHODTYPE VSParameter::IsVirtual() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Virtual;
     }
 
     bool VOODOO_METHODTYPE VSParameter::AttachParameter(IParameter * const pParam)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!pParam)
         {
             return false;
@@ -163,6 +175,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSParameter::DetachParameter()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         cgDisconnectParameter(m_Param);
 
         return true;
@@ -170,16 +183,19 @@ namespace VoodooShader
 
     uint32_t VOODOO_METHODTYPE VSParameter::GetComponents() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return Converter::ToComponents(m_Type);
     }
 
     ITexture * VOODOO_METHODTYPE VSParameter::GetTexture() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_ValueTexture.get();
     }
 
     void VOODOO_METHODTYPE VSParameter::SetTexture(ITexture * pTexture)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_ValueTexture = pTexture;
 
         if (pTexture)
@@ -190,11 +206,13 @@ namespace VoodooShader
 
     _Ret_count_c_(16) float * const VOODOO_METHODTYPE VSParameter::GetScalar()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Valuefloat;
     }
 
     void VOODOO_METHODTYPE VSParameter::SetScalar(const uint32_t count, float * pValues)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (pValues && count > 0)
         {
             memcpy(m_Valuefloat, pValues, min(16, count) * sizeof(float));
@@ -203,11 +221,13 @@ namespace VoodooShader
 
     IShader * const VOODOO_METHODTYPE VSParameter::GetShader() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Shader;
     }
 
     CGparameter VOODOO_METHODTYPE VSParameter::GetCgParameter() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Param;
     }
 }

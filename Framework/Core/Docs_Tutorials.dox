@@ -1,0 +1,65 @@
+/*
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2011 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at
+ *   peachykeen@voodooshader.com
+ */
+
+#pragma once
+
+namespace VoodooShader
+{
+     /**
+      * @addtogroup voodoo_tutorials Tutorials
+      * @{
+      *
+      * @page voodoo_tut_basics Basics
+      *
+      * To launch Voodoo Shader, a core must be created. This is done by calling the function <tt>CreateCore</tt>, 
+      * exported undecorated from the core module. 
+      *
+      * It is possible to link to the Voodoo Core, by defining <tt>VOODOO_STATIC_LINK</tt> before including 
+      * VoodooFramework.hpp, or load the module at runtime. As the location of the core is unknown, loading at runtime is 
+      * highly recommended. Once loaded, calling CreateCore will return an <tt>ICore *</tt>.
+      *
+      * If a valid core is returned, it must be initialized to load the config and plugins. The desired config file must
+      * be passed to <tt>pCore->Initialize()</tt> with the desired startup parameters, and the core will load the
+      * config, modules, and other necessary data. The core must not be used until initialized, except for adding and
+      * releasing references.
+      *
+      * @code
+      * // Look up the path
+      * TCHAR path[MAX_PATH];
+      * GetVoodooBinPath(path);
+      * PathCombine(path, path, VSTR("Voodoo_Core.dll"));
+      *
+      * // Load the core
+      * HMODULE core = LoadLibraryEx(path, NULL, LOAD_WITH_ALTERED_SEARCH_PATHS);
+      * assert(core);
+      * 
+      * CoreCreateFunc create = (CoreCreateFunc)GetProcAddress(core, "CreateCore");
+      * assert(create);
+      *
+      * ICore * pCore = create(VOODOO_SDK_VERSION);
+      * assert(pCore);
+      * 
+      * if (pCore->Initialize(VSTR("config.xml")))
+      * {
+      *     // Core is ready for use
+      * }
+      * @endcode
+      */
+}

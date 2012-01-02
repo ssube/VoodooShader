@@ -90,4 +90,9 @@ namespace VoodooShader
     {
         return (const char*)m_What.GetData();
     }
+
+    const String Exception::strwhat() const
+    {
+        return m_What;
+    }
 }

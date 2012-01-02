@@ -29,7 +29,7 @@ namespace VoodooShader
         {
         public:
             FrostAdapter(_In_ ICore * pCore);
-            virtual ~FrostAdapter();
+            ~FrostAdapter();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;

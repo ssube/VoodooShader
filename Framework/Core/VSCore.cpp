@@ -65,7 +65,7 @@ namespace VoodooShader
         {
             try
             {
-                pCore = new VSCore();
+                pCore = new VSCore(version);
             } catch(const std::exception & exc) {
                 UNREFERENCED_PARAMETER(exc);
                 pCore = nullptr;
@@ -75,10 +75,9 @@ namespace VoodooShader
         return pCore;
     }
 
-    VSCore::VSCore() :
-        m_Refs(0), m_ConfigFile(nullptr), m_CgContext(nullptr)
+    VSCore::VSCore(uint32_t version) :
+        m_Refs(0), m_Version(version), m_ConfigFile(nullptr), m_CgContext(nullptr)
     {
-
 #ifdef VOODOO_DEBUG_MEMORY
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRT0DBG_LEAK_CHECK_DF);
         _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
@@ -94,6 +93,7 @@ namespace VoodooShader
 
     VSCore::~VSCore()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         this->SetCgContext(nullptr);
 
         m_LastPass = nullptr;
@@ -369,17 +369,20 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSCore::Reset()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         //! @todo Actually reset stuff.
         return true;
     }
 
     uint32_t VOODOO_METHODTYPE VSCore::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSCore::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
         {
@@ -390,6 +393,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSCore::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -419,51 +423,61 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSCore::ToString() CONST
     {
-        return VSTR("VSCore()");
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+        return Format("VSCore(%1%)") << m_Version;
     }
 
     ICore * VOODOO_METHODTYPE VSCore::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return nullptr;
     }
 
     IParser * VOODOO_METHODTYPE VSCore::GetParser() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return m_Parser.get();
     }
 
     IHookManager * VOODOO_METHODTYPE VSCore::GetHookManager() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return m_HookManager.get();
     }
 
     IFileSystem * VOODOO_METHODTYPE VSCore::GetFileSystem() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return m_FileSystem.get();
     }
 
     IAdapter * VOODOO_METHODTYPE VSCore::GetAdapter() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return m_Adapter.get();
     }
 
     ILogger * VOODOO_METHODTYPE VSCore::GetLogger() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return m_Logger.get();
     }
 
     XmlDocument VOODOO_METHODTYPE VSCore::GetConfig() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return m_ConfigFile;
     }
 
     CGcontext VOODOO_METHODTYPE VSCore::GetCgContext() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         return m_CgContext;
     }
 
     bool VOODOO_METHODTYPE VSCore::SetCgContext(CGcontext pContext)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         if (pContext == nullptr)
         {
             m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("Setting Cg context to nullptr."));
@@ -502,6 +516,7 @@ namespace VoodooShader
 
     IShader * VOODOO_METHODTYPE VSCore::CreateShader(_In_ const IFile * pFile, _In_opt_ const char **ppArgs)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         if (!pFile || !m_CgContext)
         {
             return nullptr;
@@ -509,7 +524,7 @@ namespace VoodooShader
 
         String fullpath = pFile->GetPath();
 
-        IShader * shader = nullptr;
+        IShaderRef shader = nullptr;
 
         try
         {
@@ -529,15 +544,17 @@ namespace VoodooShader
             );
         }
 
-#if defined(VOODOO_DEBUG_TRACK) || defined(VOODOO_DEBUG_MEMORY)
-        m_Dbg_Shaders.push_back(shader);
-#endif
+        if (shader)
+        {
+            m_Shaders.push_back(shader);
+        }
 
-        return shader;
+        return shader.get();
     }
 
     IParameter * VOODOO_METHODTYPE VSCore::CreateParameter(const String & name, const ParameterType type)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         if (!m_CgContext)
         {
             return nullptr;
@@ -573,16 +590,13 @@ namespace VoodooShader
                 );
             }
 
-#if defined(VOODOO_DEBUG_TRACK) || defined(VOODOO_DEBUG_MEMORY)
-            m_Dbg_Parameters.push_back(parameter);
-#endif
-
             return parameter;
         }
     }
 
     ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         if (!m_CgContext)
         {
             return nullptr;
@@ -603,16 +617,13 @@ namespace VoodooShader
 
             m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Created texture %1%.")) << name);
 
-#if defined(VOODOO_DEBUG_TRACK) || defined(VOODOO_DEBUG_MEMORY)
-            m_Dbg_Textures.push_back(texture);
-#endif
-
             return texture;
         }
     }
 
     IParameter * VOODOO_METHODTYPE VSCore::GetParameter(const String & name, const ParameterType type) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         ParameterMap::const_iterator parameter = m_Parameters.find(name);
 
         if (parameter != m_Parameters.end())
@@ -641,6 +652,7 @@ namespace VoodooShader
 
     ITexture * VOODOO_METHODTYPE VSCore::GetTexture(const String & name) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         TextureMap::const_iterator textureEntry = m_Textures.find(name);
 
         if (textureEntry != m_Textures.end())
@@ -663,6 +675,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSCore::RemoveParameter(_In_ const String & name)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         ParameterMap::iterator parameter = m_Parameters.find(name);
 
         if (parameter != m_Parameters.end())
@@ -680,6 +693,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSCore::RemoveTexture(_In_ const String & name)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         TextureMap::iterator texture = m_Textures.find(name);
 
         if (texture != m_Textures.end())
@@ -697,6 +711,7 @@ namespace VoodooShader
 
     ITexture * VOODOO_METHODTYPE VSCore::GetStageTexture(_In_ const TextureStage stage) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         switch (stage)
         {
         case TS_Shader:
@@ -710,6 +725,7 @@ namespace VoodooShader
 
     void VOODOO_METHODTYPE VSCore::SetStageTexture(_In_ const TextureStage Stage, _In_opt_ ITexture * const pTexture)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         switch (Stage)
         {
         case TS_Shader:
@@ -723,6 +739,7 @@ namespace VoodooShader
 
     void VSCore::CgErrorHandler(CGcontext context, CGerror error) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
         if (!m_Adapter || !m_Adapter->HandleError(context, error))
         {
             const char * errorString = error ? cgGetErrorString(error) : nullptr;

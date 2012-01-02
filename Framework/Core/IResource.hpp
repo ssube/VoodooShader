@@ -24,7 +24,7 @@
 namespace VoodooShader
 {
     /**
-     * @addtogroup voodoo_framework_interfaces
+     * @addtogroup voodoo_interfaces
      * @{
      */
 
@@ -59,4 +59,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(String, GetName)() CONST PURE;
     };
+    /**
+     * @}
+     */
 }

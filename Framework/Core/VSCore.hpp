@@ -48,7 +48,7 @@ namespace VoodooShader
         friend void Voodoo_CgErrorHandler_Func(CGcontext, CGerror, void *);
 
     public:
-        VSCore();
+        VSCore(uint32_t version);
         ~VSCore();
 
         // IObject
@@ -84,6 +84,7 @@ namespace VoodooShader
 
     private:
         mutable uint32_t m_Refs;
+        uint32_t m_Version;
 
         /** Config file. */
         XmlDocument m_ConfigFile;
@@ -109,6 +110,9 @@ namespace VoodooShader
         /** The current variable parser. */
         IParserRef m_Parser;
 
+        /** Collection of all usable shaders. */
+        ShaderList m_Shaders;
+
         /** Collection of all usable textures. */
         TextureMap m_Textures;
 
@@ -120,11 +124,5 @@ namespace VoodooShader
 
         /** Default technique target for shader linker. */
         ITextureRef m_LastShader;
-
-#if defined(VOODOO_MEMORY_TRACK) || defined(VOODOO_MEMORY_DEBUG)
-        ShaderList m_Dbg_Shaders;
-        TextureList m_Dbg_Textures;
-        ParameterList m_Dbg_Parameters;
-#endif
     };
 }

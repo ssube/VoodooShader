@@ -35,6 +35,7 @@ namespace VoodooShader
     VOODOO_METHODTYPE VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) :
         m_Refs(0), m_Technique(pTechnique), m_CgPass(pCgPass)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!m_Technique)
         {
             Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), m_Core);
@@ -59,6 +60,7 @@ namespace VoodooShader
 
     VOODOO_METHODTYPE VSPass::~VSPass()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (m_Core)
         {
             IAdapter * pAdapter = m_Core->GetAdapter();
@@ -71,11 +73,13 @@ namespace VoodooShader
 
     uint32_t VOODOO_METHODTYPE VSPass::AddRef() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSPass::Release() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -87,6 +91,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSPass::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             if (clsid.is_nil())
@@ -116,21 +121,25 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSPass::ToString() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return Format(VSTR("VSPass(%1%)")) << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSPass::GetCore() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
     String VOODOO_METHODTYPE VSPass::GetName() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
     }
 
     ITexture * VOODOO_METHODTYPE VSPass::GetTarget(uint32_t index) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < 4)
         {
             return m_Target[index].get();
@@ -141,6 +150,7 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSPass::SetTarget(uint32_t index, ITexture * pTarget)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < 4)
         {
             m_Target[index] = pTarget;
@@ -152,6 +162,7 @@ namespace VoodooShader
 
     CGprogram VOODOO_METHODTYPE VSPass::GetProgram(ProgramStage stage) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         switch (stage)
         {
         case PS_Vertex:
@@ -172,16 +183,19 @@ namespace VoodooShader
 
     ITechnique * VOODOO_METHODTYPE VSPass::GetTechnique() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Technique;
     }
 
     CGpass VOODOO_METHODTYPE VSPass::GetCgPass() CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_CgPass;
     }
 
     void VSPass::Link()
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_VertexProgram = cgGetPassProgram(m_CgPass, CG_VERTEX_DOMAIN);
         m_FragmentProgram = cgGetPassProgram(m_CgPass, CG_FRAGMENT_DOMAIN);
         m_GeometryProgram = cgGetPassProgram(m_CgPass, CG_GEOMETRY_DOMAIN);

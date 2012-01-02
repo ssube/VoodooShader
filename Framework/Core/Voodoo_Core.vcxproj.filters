@@ -237,5 +237,8 @@
     <None Include="VoodooFramework.hpp">
       <Filter>Headers</Filter>
     </None>
+    <None Include="Docs_Tutorials.dox">
+      <Filter>Docs</Filter>
+    </None>
   </ItemGroup>
 </Project>
