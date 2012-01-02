@@ -1,0 +1,82 @@
+<?xml version='1.0'?>
+<VoodooLog  date="20111126"  time="185215"  ticks="155486258" >
+    <Message severity="66"  time="185215"  ticks="155486258"  source="Voodoo/XmlLogger">Log file opened by VSXmlLogger::Open.</Message>
+    <Module uuid="cccf87a6-3c06-e111-b22e-005056c00008"  major="0"  minor="4"  patch="0"  build="44"  debug="1"  name="Voodoo/XmlLogger"  revid="framework-4.2-96-g6ddeb85"  />
+    <Message severity="130"  time="185215"  ticks="155486258"  source="Voodoo/Core">Config loaded from 'voodoo_config.xml'.</Message>
+    <Message severity="130"  time="185215"  ticks="155486258"  source="Voodoo/Core">Voodoo Shader Framework, Copyright (c) 2010-2011 by Sean Sube.&lt;br /&gt;
+The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;
+This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;
+Please see the included license file for more details.</Message>
+    <Module uuid="cbcf87a6-3c06-e111-b22e-005056c00008"  major="0"  minor="4"  patch="2"  build="44"  debug="1"  name="Voodoo/Core"  revid="framework-4.2-96-g6ddeb85"  />
+    <Module uuid="00000000-0000-0000-0000-000000000000"  major="1600"  minor="0"  patch="160040219"  build="1"  debug="1"  name="MSVC"  revid=""  />
+    <Module uuid="00000000-0000-0000-0000-000000000000"  major="3"  minor="0"  patch="0"  build="7"  debug="1"  name="Cg"  revid=""  />
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Adding variable "allgames" with value "C:\Users\Public\Documents\My Games\".</Message>
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Parsing string "allgames" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Adding variable "mygames" with value "C:\Users\Sean\Documents\My Games\".</Message>
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Parsing string "mygames" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Adding variable "systemroot" with value "C:\Windows\system32".</Message>
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Parsing string "systemroot" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Parsing string "$(globalroot)\resources\common\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Parsing string "globalroot" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486258"  source="Voodoo/Core">Parsing string "D:\Code\VoodooShader\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "$(globalroot)\resources\$(adapter)" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "globalroot" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "D:\Code\VoodooShader\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "adapter" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "$(localroot)\resources\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "localroot" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "D:\Code\VoodooShader\Debug" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "$(runroot)\resources\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "runroot" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "D:\Code\VoodooShader\Tests\Scenarios\VoodooTest_DX9" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "$(allgames)\VoodooShader\resources\common\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "allgames" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "C:\Users\Public\Documents\My Games\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "$(mygames)\VoodooShader\resources\common\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "mygames" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "C:\Users\Sean\Documents\My Games\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "$(allgames)\VoodooShader\resources\$(adapter)\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "allgames" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "C:\Users\Public\Documents\My Games\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "adapter" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "$(mygames)\VoodooShader\resources\$(adapter)\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "mygames" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "C:\Users\Sean\Documents\My Games\" (0).</Message>
+    <Message severity="129"  time="185215"  ticks="155486274"  source="Voodoo/Core">Parsing string "adapter" (0).</Message>
+    <Message severity="66"  time="185215"  ticks="155486274"  source="Voodoo/EHHook">Created hook manager.</Message>
+    <Message severity="130"  time="185215"  ticks="155486274"  source="Voodoo/Core">Core initialization complete.</Message>
+    <Message severity="129"  time="185215"  ticks="155486336"  source="Voodoo/Core">Set Cg context (00000001).</Message>
+    <Message severity="66"  time="185215"  ticks="155486336"  source="Voodoo/_DX9">Cg D3D9 device set successfully.</Message>
+    <Message severity="66"  time="185215"  ticks="155486352"  source="Voodoo/_DX9">Cg states registered successfully.</Message>
+    <Message severity="66"  time="185215"  ticks="155486352"  source="Voodoo/_DX9">Detected the following profiles:
+Vertex: vs_3_0
+Fragment: ps_3_0</Message>
+    <Message severity="66"  time="185215"  ticks="155486352"  source="Voodoo/_DX9">Prepping for 484 by 462 target.</Message>
+    <Message severity="66"  time="185242"  ticks="155512919"  source="Voodoo/_DX9">Cached backbuffer surface.</Message>
+    <Message severity="129"  time="185242"  ticks="155512919"  source="Voodoo/Core">Added texture :thisframe, returning shared pointer to 00A0FA08.</Message>
+    <Message severity="66"  time="185242"  ticks="155512919"  source="Voodoo/_DX9">Cached :thisframe surface.</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/WFileSystem">Searching for raw file 'test.cgfx'.</Message>
+    <Message severity="129"  time="185242"  ticks="155512919"  source="Voodoo/Core">Parsing string "test.cgfx" (0).</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/WFileSystem">Searching for parsed file 'test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/Core">Checking file 'C:\Users\Sean\Documents\My Games\\VoodooShader\resources\--badvar:adapter--\\test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/Core">Checking file 'C:\Users\Public\Documents\My Games\\VoodooShader\resources\--badvar:adapter--\\test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/Core">Checking file 'C:\Users\Sean\Documents\My Games\\VoodooShader\resources\common\\test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/Core">Checking file 'C:\Users\Public\Documents\My Games\\VoodooShader\resources\common\\test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/Core">Checking file 'D:\Code\VoodooShader\Tests\Scenarios\VoodooTest_DX9\resources\\test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/Core">Checking file 'D:\Code\VoodooShader\Debug\resources\\test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512919"  source="Voodoo/Core">Checking file 'D:\Code\VoodooShader\\resources\--badvar:adapter--\test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512935"  source="Voodoo/Core">Checking file 'D:\Code\VoodooShader\\resources\common\\test.cgfx'.</Message>
+    <Message severity="65"  time="185242"  ticks="155512935"  source="Voodoo/Core">File 'test.cgfx' found in directory 'D:\Code\VoodooShader\\resources\common\'.</Message>
+    <Message severity="129"  time="185242"  ticks="155512935"  source="Voodoo/Core">Got texture :thisframe, returning shared pointer to 00A0FA08.</Message>
+    <Message severity="66"  time="185242"  ticks="155512935"  source="Voodoo/_DX9">Binding texture :thisframe to parameter D:\Code\VoodooShader\\resources\common\\test.cgfx::mainTex.</Message>
+    <Message severity="129"  time="185242"  ticks="155512950"  source="Voodoo/Core">Validated technique main.</Message>
+    <Message severity="129"  time="185242"  ticks="155512950"  source="Voodoo/Core">Technique VSTechnique(D:\Code\VoodooShader\\resources\common\\test.cgfx::main) has no target annotation.</Message>
+    <Message severity="129"  time="185242"  ticks="155512950"  source="Voodoo/Core">Pass VSPass(D:\Code\VoodooShader\\resources\common\\test.cgfx::main::p0) has no target annotation.</Message>
+    <Message severity="66"  time="185242"  ticks="155512950"  source="Voodoo/_DX9">Successfully loaded programs from 'D:\Code\VoodooShader\\resources\common\\test.cgfx::main::p0'.</Message>
+    <Message severity="130"  time="185242"  ticks="155512950"  source="Voodoo/Core">Successfully loaded pass VSPass(D:\Code\VoodooShader\\resources\common\\test.cgfx::main::p0).</Message>
+    <Message severity="129"  time="185242"  ticks="155512981"  source="Voodoo/Core">Validated technique alternate.</Message>
+    <Message severity="129"  time="185242"  ticks="155512981"  source="Voodoo/Core">Technique VSTechnique(D:\Code\VoodooShader\\resources\common\\test.cgfx::alternate) has no target annotation.</Message>
+    <Message severity="129"  time="185242"  ticks="155512981"  source="Voodoo/Core">Pass VSPass(D:\Code\VoodooShader\\resources\common\\test.cgfx::alternate::p0) has no target annotation.</Message>
+    <Message severity="66"  time="185242"  ticks="155512981"  source="Voodoo/_DX9">Successfully loaded programs from 'D:\Code\VoodooShader\\resources\common\\test.cgfx::alternate::p0'.</Message>
+    <Message severity="130"  time="185242"  ticks="155512981"  source="Voodoo/Core">Successfully loaded pass VSPass(D:\Code\VoodooShader\\resources\common\\test.cgfx::alternate::p0).</Message>
+    <Message severity="129"  time="185242"  ticks="155512981"  source="Voodoo/Core">Successfully created shader from 'D:\Code\VoodooShader\\resources\common\\test.cgfx'.</Message>

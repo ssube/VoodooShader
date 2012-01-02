@@ -37,7 +37,7 @@ namespace VoodooUI
             }
             catch (Exception exc)
             {
-                webBrowser1.DocumentText = "Voodoo Shader Framework<br>\nCopyright (c) 2010-2011 by Sean Sube, All Rights Reserved.<br>\n<br>\nError loading info:<br>\n\t" + exc.Message;
+                webBrowser1.DocumentText = "Voodoo Shader Framework<br>\nCopyright (c) 2010-2012 by Sean Sube, All Rights Reserved.<br>\n<br>\nError loading info:<br>\n\t" + exc.Message;
             }
 
             m_NoNav = true;

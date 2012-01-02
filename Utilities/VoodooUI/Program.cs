@@ -1,7 +1,7 @@
 ﻿/*
  * This file is part of the Voodoo Shader Framework.
  *
- * Copyright (c) 2010-2011 by Sean Sube
+ * Copyright (c) 2010-2012 by Sean Sube
  *
  * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
@@ -130,7 +130,7 @@ namespace VoodooUI
             {
                 Console.WriteLine("Voodoo Shader Framework GUI");
                 Console.WriteLine("version 0.5.2");
-                Console.WriteLine("Copyright (c) 2010-2011 by Sean Sube, All Rights Reserved. See COPYING for license details.\n");
+                Console.WriteLine("Copyright (c) 2010-2012 by Sean Sube, All Rights Reserved. See COPYING for license details.\n");
 
                 if (logo)
                 {

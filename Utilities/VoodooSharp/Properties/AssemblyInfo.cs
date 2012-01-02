@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sean Sube, et al.")]
 [assembly: AssemblyProduct("Voodoo Shader")]
-[assembly: AssemblyCopyright("Copyright ©  2010-2011 by Sean Sube")]
+[assembly: AssemblyCopyright("Copyright ©  2010-2012 by Sean Sube")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

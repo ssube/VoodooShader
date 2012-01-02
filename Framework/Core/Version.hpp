@@ -1,7 +1,7 @@
 /*
  * This file is part of the Voodoo Shader Framework.
  *
- * Copyright (c) 2010-2011 by Sean Sube
+ * Copyright (c) 2010-2012 by Sean Sube
  *
  * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
@@ -82,8 +82,8 @@
       VOODOO_##token##_NAME, VOODOO_##token##_VERSION_ID }
 
 // Copyright info
-#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VSTR("Copyright © 2010-2011 by Sean Sube")
-#define VOODOO_GLOBAL_COPYRIGHT_FULL    VSTR("Voodoo Shader Framework, Copyright &copy; 2010-2011 by Sean Sube.&lt;br /&gt;\n") \
+#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VSTR("Copyright © 2010-2012 by Sean Sube")
+#define VOODOO_GLOBAL_COPYRIGHT_FULL    VSTR("Voodoo Shader Framework, Copyright &copy; 2010-2012 by Sean Sube.&lt;br /&gt;\n") \
     VSTR("The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\n") \
     VSTR("This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\n") \
     VSTR("Please see the included license file for more details.")

@@ -85,7 +85,7 @@ If you have any interest in helping test or contributing code to Voodoo, please 
 
 ### 7. Legal
 
-Voodoo Shader Framework &copy; 2010-2011 by Sean Sube, All Rights Reserved.
+Voodoo Shader Framework &copy; 2010-2012 by Sean Sube, All Rights Reserved.
 
 The Voodoo Shader Framework, all associated binary or object files and source code is released under the terms and
 conditions of the GNU Lesser General Public License, version 3. See the included LICENSE file for more details.

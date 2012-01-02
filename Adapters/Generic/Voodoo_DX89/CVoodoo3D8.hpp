@@ -1,7 +1,7 @@
 /*
  * This file is part of the Voodoo Shader Framework.
  *
- * Copyright (c) 2010-2011 by Sean Sube
+ * Copyright (c) 2010-2012 by Sean Sube
  *
  * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
  * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
@@ -39,8 +39,10 @@ namespace VoodooShader
             public IDirect3D8
         {
         public:
+            UINT m_SdkVersion;
+            IDirect3D9 * m_RealObject;
+
             CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObj);
-            ~CVoodoo3D8();
 
             /*** IUnknown methods ***/
             STDMETHOD(QueryInterface)(REFIID riid, void** ppvObj);
@@ -74,10 +76,6 @@ namespace VoodooShader
             STDMETHOD(GetDeviceCaps)(UINT Adapter,D3DDEVTYPE DeviceType,D3DCAPS8* pCaps);
             STDMETHOD_(HMONITOR, GetAdapterMonitor)(UINT Adapter);
             STDMETHOD(CreateDevice)(UINT Adapter,D3DDEVTYPE DeviceType,HWND hFocusWindow,DWORD BehaviorFlags,D3DPRESENT_PARAMETERS8* pPresentationParameters,IDirect3DDevice8** ppReturnedDeviceInterface);
-
-        private:
-            UINT m_SdkVersion;
-            IDirect3D9 * m_RealObject;
         };
     }
 }
