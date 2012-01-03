@@ -45,18 +45,26 @@ HRESULT WINAPI VSDirectSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOI
     LPVOID s8obj = nullptr;
     DWORD result = gFunc_DirectSoundCreate8(lpcGuidDevice, &s8obj, pUnkOuter);
 
-    if (SUCCEEDED(result) && LoadVoodoo())
+    if (FAILED(result))
     {
-        VoodooShader::Variant DSObj;
-        DSObj.Type = VoodooShader::UT_PVoid;
-        DSObj.VPVoid = s8obj;
-
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirectSound8", &DSObj);
-
-        if (DSObj.VPVoid != s8obj)
+        *ppDS8 = s8obj;
+        return result;
+    }
+    
+    if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
+    {
+        if (LoadVoodoo())
         {
-            s8obj = DSObj.VPVoid;
+            VoodooShader::Variant DSObj;
+            DSObj.Type = VoodooShader::UT_PVoid;
+            DSObj.VPVoid = s8obj;
+
+            if (gVoodooCore->GetAdapter()->SetProperty(L"IDirectSound8", &DSObj))
+            {
+                s8obj = DSObj.VPVoid;
+            }
         }
+        gSingleExport = false;
     }
 
     *ppDS8 = s8obj;

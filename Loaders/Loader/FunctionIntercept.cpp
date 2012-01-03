@@ -28,6 +28,8 @@
 #include <strsafe.h>
 #include <map>
 
+volatile LONG gSingleExport;
+
 std::map<FARPROC, TRACED_HOOK_HANDLE> gHooks;
 
 ULONG threadList[] = {0};

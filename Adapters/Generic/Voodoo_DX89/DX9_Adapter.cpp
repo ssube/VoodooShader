@@ -19,15 +19,16 @@
  */
 
 #include "DX9_Adapter.hpp"
-
+// Voodoo DX9 Adapter
 #include "DX9_Converter.hpp"
 #include "DX9_Texture.hpp"
 #include "DX9_Version.hpp"
-
+// CVoodoo3D
 #include "CVoodoo3D8.hpp"
 #include "CVoodoo3D9.hpp"
-
+// Voodoo Core
 #include "Format.hpp"
+#include "Support.inl"
 
 namespace VoodooShader
 {
@@ -50,12 +51,12 @@ namespace VoodooShader
             }
         }
 
-        uint32_t DX9Adapter::AddRef() const
+        uint32_t VOODOO_METHODTYPE DX9Adapter::AddRef() const
         {
             return SAFE_INCREMENT(m_Refs);
         }
 
-        uint32_t DX9Adapter::Release() const
+        uint32_t VOODOO_METHODTYPE DX9Adapter::Release() const
         {
             uint32_t value = SAFE_DECREMENT(m_Refs);
 
@@ -67,7 +68,7 @@ namespace VoodooShader
             return value;
         }
 
-        bool DX9Adapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        bool VOODOO_METHODTYPE DX9Adapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
         {
             if (!ppOut)
             {
@@ -96,17 +97,17 @@ namespace VoodooShader
             }
         }
 
-        String DX9Adapter::ToString() const
+        String VOODOO_METHODTYPE DX9Adapter::ToString() const
         {
             return VSTR("DX9Adapter()");
         }
 
-        ICore * DX9Adapter::GetCore() const
+        ICore * VOODOO_METHODTYPE DX9Adapter::GetCore() const
         {
             return m_Core;
         }
 
-        bool DX9Adapter::LoadPass(_In_ IPass * const pPass)
+        bool VOODOO_METHODTYPE DX9Adapter::LoadPass(_In_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -155,7 +156,7 @@ namespace VoodooShader
             return true;
         }
 
-        bool DX9Adapter::UnloadPass(_In_ IPass * const pPass)
+        bool VOODOO_METHODTYPE DX9Adapter::UnloadPass(_In_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -203,7 +204,7 @@ namespace VoodooShader
             return true;
         }
 
-        bool DX9Adapter::SetPass(_In_ IPass * const pPass)
+        bool VOODOO_METHODTYPE DX9Adapter::SetPass(_In_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -245,12 +246,12 @@ namespace VoodooShader
             return true;
         }
 
-        IPass * DX9Adapter::GetPass() CONST
+        IPass * VOODOO_METHODTYPE DX9Adapter::GetPass() CONST
         {
             return m_BoundPass.get();
         }
 
-        bool DX9Adapter::ResetPass(_In_ IPass * pPass)
+        bool VOODOO_METHODTYPE DX9Adapter::ResetPass(_In_ IPass * pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -366,7 +367,7 @@ namespace VoodooShader
             }
         }
 
-        ITexture * DX9Adapter::GetTarget(_In_ const uint32_t index) CONST
+        ITexture * VOODOO_METHODTYPE DX9Adapter::GetTarget(_In_ const uint32_t index) CONST
         {
             if (index > 3)
             {
@@ -377,7 +378,7 @@ namespace VoodooShader
             return m_RenderTarget[index].get();
         }
 
-        ITexture * DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
+        ITexture * VOODOO_METHODTYPE DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
         {
             IDirect3DTexture9 * tex = nullptr;
             D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pDesc.Format);
@@ -408,7 +409,7 @@ namespace VoodooShader
             }
         }
 
-        bool DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
+        bool VOODOO_METHODTYPE DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
         {
             UNREFERENCED_PARAMETER(pFile);
             UNREFERENCED_PARAMETER(pRegion);
@@ -418,7 +419,7 @@ namespace VoodooShader
             return false;
         }
 
-        bool DX9Adapter::DrawGeometry
+        bool VOODOO_METHODTYPE DX9Adapter::DrawGeometry
         (
             _In_ const uint32_t offset,
             _In_ const uint32_t count,
@@ -483,7 +484,7 @@ namespace VoodooShader
             return true;
         }
 
-        bool DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
+        bool VOODOO_METHODTYPE DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
         {
             if (!pParam)
             {
@@ -514,38 +515,55 @@ namespace VoodooShader
             return true;
         }
 
-        bool DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant * const value)
+        bool VOODOO_METHODTYPE DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant * const value)
         {
+            static volatile LONG setDevice = 0;
+
             String strname(name);
 
             if (strname == VSTR("SdkVersion") && value->Type == UT_UInt32)
             {
                 m_SdkVersion = value->VUInt32.X;
-                return true;
             } else if (strname == VSTR("IDirect3D8") && value->Type == UT_PVoid) {
-                using VoodooShader::VoodooDX8::CVoodoo3D8;
+                if (InterlockedCompareExchange(&setDevice, 1, 0) == 0)
+                {
+                    IDirect3D8 * origObj = reinterpret_cast<IDirect3D8 *>(value->VPVoid);
+                    if (origObj)
+                    {
+                        origObj->Release();
+                    }
+                
+                    HMODULE d3d9 = nullptr;
+                    typedef IDirect3D9 * (WINAPI * Type_Direct3DCreate9)(UINT);
+                    Type_Direct3DCreate9 d3d9func = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), "Direct3DCreate9", &d3d9);
+                    assert(d3d9func);
 
-                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->VPVoid);
+                    IDirect3D9 * realObj = d3d9func(D3D_SDK_VERSION);
+                    assert(realObj);
 
-                CVoodoo3D8 * fakeObj = new CVoodoo3D8(m_SdkVersion, origObj);
+                    VoodooDX8::CVoodoo3D8 * fakeObj = new VoodooDX8::CVoodoo3D8(m_SdkVersion, realObj);
 
-                value->VPVoid = fakeObj;
+                    value->VPVoid = fakeObj;
 
-                return true;
+                    return true;
+                }
             } else if (strname == VSTR("IDirect3D9") && value->Type == UT_PVoid) {
-                IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->VPVoid);
+                if (InterlockedCompareExchange(&setDevice, 1, 0) == 0)
+                {
+                    IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->VPVoid);
 
-                CVoodoo3D9 * fakeObj = new CVoodoo3D9(m_SdkVersion, origObj);
+                    CVoodoo3D9 * fakeObj = new CVoodoo3D9(m_SdkVersion, origObj);
 
-                value->VPVoid = fakeObj;
+                    value->VPVoid = fakeObj;
 
-                return true;
+                    return true;
+                }
             }
 
             return false;
         }
 
-        bool DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant * const value) CONST
+        bool VOODOO_METHODTYPE DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant * const value) CONST
         {
             String strname(name);
 
@@ -559,7 +577,7 @@ namespace VoodooShader
             return false;
         }
 
-        bool DX9Adapter::ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture)
+        bool VOODOO_METHODTYPE DX9Adapter::ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture)
         {
             if (!pParam)
             {
@@ -600,7 +618,7 @@ namespace VoodooShader
             }
         }
 
-        bool DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error)
+        bool VOODOO_METHODTYPE DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error)
         {
             UNREFERENCED_PARAMETER(pContext);
 
@@ -616,7 +634,7 @@ namespace VoodooShader
             return false;
         }
 
-        bool DX9Adapter::SetDXDevice(IDirect3DDevice9 * pDevice)
+        bool VOODOO_METHODTYPE DX9Adapter::SetDXDevice(IDirect3DDevice9 * pDevice)
         {
             if (pDevice == m_Device)
             {

@@ -34,11 +34,12 @@ namespace VoodooShader
     namespace VoodooDX8
     {
         /**
-        * The default, public constructor for CVoodoo3D objects.
-        */
+         * The default, public constructor for CVoodoo3D objects.
+         */
         CVoodoo3D8::CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObject) :
             m_SdkVersion(sdkVersion), m_RealObject(pRealObject)
-        { }
+        {
+        }
 
         // IUnknown methods
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::QueryInterface(REFIID riid, void **ppvObj)
@@ -67,13 +68,13 @@ namespace VoodooShader
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::CheckDepthStencilMatch
-            (
+        (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
             D3DFORMAT AdapterFormat,
             D3DFORMAT RenderTargetFormat,
             D3DFORMAT DepthStencilFormat
-            )
+        )
         {
             HRESULT hr = m_RealObject->CheckDepthStencilMatch
                 (Adapter, DeviceType, AdapterFormat, RenderTargetFormat, DepthStencilFormat);
@@ -88,14 +89,14 @@ namespace VoodooShader
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::CheckDeviceFormat
-            (
+        (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
             D3DFORMAT AdapterFormat,
             DWORD Usage,
             D3DRESOURCETYPE RType,
             D3DFORMAT CheckFormat
-            )
+        )
         {
             HRESULT hr = m_RealObject->CheckDeviceFormat(Adapter, DeviceType, AdapterFormat, Usage, RType, CheckFormat);
 
@@ -109,13 +110,13 @@ namespace VoodooShader
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::CheckDeviceMultiSampleType
-            (
+        (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
             D3DFORMAT SurfaceFormat,
             BOOL Windowed,
             D3DMULTISAMPLE_TYPE MultiSampleType
-            )
+        )
         {
             HRESULT hr = m_RealObject->CheckDeviceMultiSampleType
                 (Adapter, DeviceType, SurfaceFormat, Windowed, MultiSampleType, NULL);
@@ -130,13 +131,13 @@ namespace VoodooShader
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::CheckDeviceType
-            (
+        (
             UINT Adapter,
             D3DDEVTYPE CheckType,
             D3DFORMAT DisplayFormat,
             D3DFORMAT BackBufferFormat,
             BOOL Windowed
-            )
+        )
         {
             HRESULT hr = m_RealObject->CheckDeviceType(Adapter, CheckType, DisplayFormat, BackBufferFormat, Windowed);
 
@@ -150,23 +151,18 @@ namespace VoodooShader
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::CreateDevice
-            (
+        (
             UINT Adapter,
             D3DDEVTYPE DeviceType,
             HWND hFocusWindow,
             DWORD BehaviorFlags,
             D3DPRESENT_PARAMETERS8 * pPresentationParameters,
             IDirect3DDevice8 **ppReturnedDeviceInterface
-            )
+        )
         {
             D3DPRESENT_PARAMETERS mpPresentationParameters;
 
-            mpPresentationParameters.Flags = pPresentationParameters->Flags;
-
-            if (mpPresentationParameters.Flags & D3DPRESENTFLAG_LOCKABLE_BACKBUFFER)
-            {
-                mpPresentationParameters.Flags ^= D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
-            }
+            mpPresentationParameters.Flags = pPresentationParameters->Flags ^ D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
             mpPresentationParameters.Windowed = pPresentationParameters->Windowed;
             mpPresentationParameters.BackBufferCount = pPresentationParameters->BackBufferCount;
             mpPresentationParameters.BackBufferFormat = pPresentationParameters->BackBufferFormat;
@@ -183,7 +179,9 @@ namespace VoodooShader
 
 #ifdef _DEBUG
             const wchar_t * textureType = VoodooShader::Converter::ToString
-                (VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat));
+            (
+                VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
+            );
 
             gpVoodooLogger->LogMessage
             (
@@ -198,11 +196,12 @@ namespace VoodooShader
 
 #ifdef _DEBUG
             gpVoodooLogger->LogMessage
-                (
-                LL_ModInfo, VOODOO_DX89_NAME, Format("CVoodoo3D8::CreateDevice(%d, %d, %p, %d, %p, %p) == %d") << Adapter << DeviceType <<
-                hFocusWindow << BehaviorFlags << &mpPresentationParameters << pRealDevice << hr
-                );
+            (
+                LL_ModInfo, VOODOO_DX89_NAME, Format("CVoodoo3D8::CreateDevice(%d, %d, %p, %d, %p, %p) == %d") << Adapter << 
+                DeviceType << hFocusWindow << BehaviorFlags << &mpPresentationParameters << pRealDevice << hr
+            );
 #endif
+
             if (!SUCCEEDED(hr))
             {
                 gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("CVoodoo3D8::CreateDevice failed with error %d on adapter %d.") << hr << Adapter);
@@ -283,11 +282,6 @@ namespace VoodooShader
         {
             UINT count = m_RealObject->GetAdapterCount();
 
-             // All the other calls to m_RealObject->X work perfectly, except this one:
-            UINT amc = m_RealObject->GetAdapterModeCount(D3DADAPTER_DEFAULT, D3DFMT_X8R8G8B8);
-            assert(amc);
-            // No matter where it's at, what the params are, it always breaks ESP.
-
             gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::GetAdapterCount() == %d") << count);
 
             return count;
@@ -296,12 +290,10 @@ namespace VoodooShader
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::GetAdapterDisplayMode(UINT Adapter, D3DDISPLAYMODE * pMode)
         {
             HRESULT hr = m_RealObject->GetAdapterDisplayMode(Adapter, pMode);
+            pMode->Format = D3DFMT_X8R8G8B8;
 
             gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::GetAdapterDisplayMode(%d, %p) == %d") << Adapter << pMode << hr);
-
-            //! @todo Check if this force-format is necessary.
-            //pMode->Format = D3DFMT_X8R8G8B8;
-
+            
             return hr;
         }
 
@@ -326,14 +318,13 @@ namespace VoodooShader
                 pIdentifier->VendorId = realIdentifier.VendorId;
                 pIdentifier->WHQLLevel = realIdentifier.WHQLLevel;
             }
+
             return hr;
         }
 
         UINT STDMETHODCALLTYPE CVoodoo3D8::GetAdapterModeCount(UINT Adapter)
         {
-            UINT r = 2;
-            
-            m_RealObject->GetAdapterModeCount(D3DADAPTER_DEFAULT, D3DFMT_X8R8G8B8);
+            UINT r = m_RealObject->GetAdapterModeCount(Adapter, D3DFMT_X8R8G8B8);
             
             gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3D8::GetAdapterModeCount(%d) == %d") << Adapter << r);
 
@@ -377,11 +368,11 @@ namespace VoodooShader
                 }
             }
 
-            *pCaps = d3d8caps;
             if (!d3d8caps_fetched)
             {
                 return D3DERR_NOTAVAILABLE;
             } else {
+                ::CopyMemory(pCaps, &d3d8caps, sizeof(D3DCAPS8));
                 return D3D_OK;
             }
         }

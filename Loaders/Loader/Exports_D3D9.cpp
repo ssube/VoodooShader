@@ -61,18 +61,26 @@ LPVOID WINAPI VSDirect3DCreate9(UINT sdkVersion)
 
     LPVOID pD3D9 = gFunc_Direct3DCreate9(sdkVersion);
 
-    if (LoadVoodoo())
+    if (!pD3D9)
     {
-        VoodooShader::Variant D3DObj;
-        D3DObj.Type = VoodooShader::UT_PVoid;
-        D3DObj.VPVoid = pD3D9;
-
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9", &D3DObj);
-
-        if (D3DObj.VPVoid != pD3D9)
+        return pD3D9;
+    }
+        
+    if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
+    {
+        if (LoadVoodoo())
         {
-            pD3D9 = D3DObj.VPVoid;
+            VoodooShader::Variant D3DObj;
+            D3DObj.Type = VoodooShader::UT_PVoid;
+            D3DObj.VPVoid = pD3D9;
+            
+            if (gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9", &D3DObj))
+            {
+                pD3D9 = D3DObj.VPVoid;
+            }
         }
+
+        gSingleExport = false;
     }
 
     return pD3D9;
@@ -89,18 +97,25 @@ HRESULT WINAPI VSDirect3DCreate9Ex(UINT sdkVersion, LPVOID * dx)
 
     DWORD hr = gFunc_Direct3DCreate9Ex(sdkVersion, dx);
 
-    if (LoadVoodoo())
+    if (FAILED(hr))
     {
-        VoodooShader::Variant D3DObj;
-        D3DObj.Type = VoodooShader::UT_PVoid;
-        D3DObj.VPVoid = *dx;
-
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9Ex", &D3DObj);
-
-        if (D3DObj.VPVoid != *dx)
+        return hr;
+    }
+    
+    if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
+    {
+        if (LoadVoodoo())
         {
-            *dx = D3DObj.VPVoid;
+            VoodooShader::Variant D3DObj;
+            D3DObj.Type = VoodooShader::UT_PVoid;
+            D3DObj.VPVoid = *dx;
+
+            if (gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9Ex", &D3DObj))
+            {
+                *dx = D3DObj.VPVoid;
+            }
         }
+        gSingleExport = false;
     }
 
     return hr;

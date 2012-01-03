@@ -28,6 +28,9 @@
 #   define VOODOO_DEBUGBREAK
 #endif
 
+// Single-export flag
+extern volatile LONG gSingleExport;
+
 // Direct3D8 Exports
 void * WINAPI VSDirect3DCreate8(UINT sdkVersion);
 

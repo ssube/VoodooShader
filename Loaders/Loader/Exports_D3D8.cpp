@@ -44,19 +44,26 @@ LPVOID WINAPI VSDirect3DCreate8(UINT sdkVersion)
     }
 
     LPVOID pD3D8 = gFunc_Direct3DCreate8(sdkVersion);
-
-    if (LoadVoodoo())
+    
+    if (!pD3D8)
     {
-        VoodooShader::Variant D3DObj;
-        D3DObj.Type = VoodooShader::UT_PVoid;
-        D3DObj.VPVoid = pD3D8;
+        return pD3D8;
+    }
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D8", &D3DObj);
-
-        if (D3DObj.VPVoid != pD3D8)
+    if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
+    {
+        if (LoadVoodoo())
         {
-            pD3D8 = D3DObj.VPVoid;
+            VoodooShader::Variant D3DObj;
+            D3DObj.Type = VoodooShader::UT_PVoid;
+            D3DObj.VPVoid = pD3D8;
+
+            if (gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D8", &D3DObj))
+            {
+                pD3D8 = D3DObj.VPVoid;
+            }
         }
+        gSingleExport = false;
     }
 
     return pD3D8;

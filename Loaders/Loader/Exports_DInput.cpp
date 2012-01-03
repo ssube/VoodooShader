@@ -51,18 +51,26 @@ HRESULT WINAPI VSDirectInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID rii
     LPVOID i8obj = nullptr;
     DWORD result = gFunc_DirectInput8Create(hinst, dwVersion, riidltf, &i8obj, punkOuter);
 
-    if (SUCCEEDED(result) && LoadVoodoo())
+    if (FAILED(result))
     {
-        VoodooShader::Variant DIObj;
-        DIObj.Type = VoodooShader::UT_PVoid;
-        DIObj.VPVoid = i8obj;
-
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInput8", &DIObj);
-
-        if (DIObj.VPVoid != i8obj)
+        *ppvOut = i8obj;
+        return result;
+    }
+    
+    if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
+    {
+        if (LoadVoodoo())
         {
-            i8obj = DIObj.VPVoid;
+            VoodooShader::Variant DIObj;
+            DIObj.Type = VoodooShader::UT_PVoid;
+            DIObj.VPVoid = i8obj;
+
+            if (gVoodooCore->GetAdapter()->SetProperty(L"IDirectInput8", &DIObj))
+            {
+                i8obj = DIObj.VPVoid;
+            }
         }
+        gSingleExport = false;
     }
 
     *ppvOut = i8obj;

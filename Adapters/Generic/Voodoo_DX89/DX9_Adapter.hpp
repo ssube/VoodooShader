@@ -53,7 +53,7 @@ namespace VoodooShader
             VOODOO_METHOD(ConnectTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
             VOODOO_METHOD(HandleError)(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
 
-            bool SetDXDevice(IDirect3DDevice9 * pDevice);
+            VOODOO_METHOD(SetDXDevice)(IDirect3DDevice9 * pDevice);
 
         private:
             mutable uint32_t m_Refs;
