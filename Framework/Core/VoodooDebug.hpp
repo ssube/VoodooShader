@@ -19,22 +19,28 @@
  */
 #pragma once
 
-// Extended debug macros:
-// These will enable a significant amount of additional code and will cause major performance loss. However, full
-// memory management and program flow will be logged.
+/**
+ * @defgroup voodoo_macros_debug Debug Macros
+ * These will enable a significant amount of additional code and will cause major performance loss. However, full
+ * memory management and program flow will be logged.
+ * @{
+ */
 #ifdef VOODOO_DEBUG
-#   define VOODOO_DEBUG_BREAK DebugBreak()
-#   define VOODOO_CHECK_IMPL if (!m_Impl) { Throw(VSTR("Extended Debug"), VSTR("String has no impl."), nullptr); }
-#   define SAFE_INCREMENT(x) InterlockedIncrement(&x)
-#   define SAFE_DECREMENT(x) InterlockedCompareExchange(&x, x-1, x), x
+#   define VOODOO_DEBUG_BREAK   DebugBreak()
+#   define VOODOO_CHECK_IMPL    if (!m_Impl) { Throw(VSTR("Extended Debug"), VSTR("String has no impl."), nullptr); }
+#   define SAFE_INCREMENT(x)    InterlockedIncrement(&x)
+#   define SAFE_DECREMENT(x)    InterlockedDecrement(&x)
 #else
 #   define VOODOO_DEBUG_BREAK
 #   define VOODOO_CHECK_IMPL
-#   define SAFE_INCREMENT(x) ++x
-#   define SAFE_DECREMENT(x) --x
+#   define SAFE_INCREMENT(x)    ++x
+#   define SAFE_DECREMENT(x)    --x
 #endif
 
-// Extended logging
+/**
+ * @defgroup voodoo_macros_debug_log Extended Logging
+ * @{
+ */
 #if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_EXTLOG)
 #   define VOODOO_DEBUG_FUNCLOG(logger) \
     { \
@@ -47,15 +53,29 @@
 #else
 #   define VOODOO_DEBUG_FUNCLOG(logger)
 #endif
-
-// Memory debug
+/**
+ * @}
+ * @defgroup voodoo_macros_debug_mem Memory Management
+ * @{
+ */
 #if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_MEMORY)
 #   define _CRTDBG_MAP_ALLOC
 #   include <stdlib.h>
 #   include <crtdbg.h>
+#   include <set>
+#   define DebugCache(type) std::set<type *> DebugCache_##type
+#   define AddThisToDebugCache(type) DebugCache_##type.insert(this)
+#   define RemoveThisFromDebugCache(type) DebugCache_##type.erase(this)
 #   define vnew new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #   define vdelete delete
 #else
+#   define DebugCache(type)
+#   define AddThisToDebugCache(type)
+#   define RemoveThisFromDebugCache(type)
 #   define vnew new
 #   define vdelete delete
 #endif
+/**
+ * @}
+ * @}
+ */

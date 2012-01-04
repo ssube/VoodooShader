@@ -22,14 +22,17 @@
 
 namespace VoodooShader
 {
+    DebugCache(VSHookManager);
+
     VSHookManager::VSHookManager(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { 
+        AddThisToDebugCache(VSHookManager);
     }
 
     VSHookManager::~VSHookManager()
     { 
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        RemoveThisFromDebugCache(VSHookManager);
     }
 
     uint32_t VOODOO_METHODTYPE VSHookManager::AddRef() CONST

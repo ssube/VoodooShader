@@ -24,6 +24,8 @@
 
 namespace VoodooShader
 {
+    DebugCache(VSTechnique);
+
     VOODOO_METHODTYPE VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
         m_Refs(0), m_Shader(pShader), m_CgTechnique(pCgTech), m_Target(nullptr)
     {
@@ -53,10 +55,14 @@ namespace VoodooShader
         ++this->m_Refs;
         this->Link();
         --this->m_Refs;
+
+        AddThisToDebugCache(VSTechnique);
     }
 
     VOODOO_METHODTYPE VSTechnique::~VSTechnique()
     {
+        RemoveThisFromDebugCache(VSTechnique);
+
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_Target = nullptr;
         m_Passes.clear();

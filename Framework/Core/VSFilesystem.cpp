@@ -22,14 +22,17 @@
 
 namespace VoodooShader
 {
+    DebugCache(VSFileSystem);
+
     VSFileSystem::VSFileSystem(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     {
+        AddThisToDebugCache(VSFileSystem);
     }
 
     VSFileSystem::~VSFileSystem()
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        RemoveThisFromDebugCache(VSFileSystem);
     }
 
     uint32_t VOODOO_METHODTYPE VSFileSystem::AddRef() CONST

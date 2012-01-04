@@ -26,14 +26,18 @@
 
 namespace VoodooShader
 {
+    DebugCache(VSModuleManager);
+
     VSModuleManager::VSModuleManager(_In_ ICore *core) :
         m_Refs(0), m_Core(core)
     {
+        AddThisToDebugCache(VSModuleManager);
     }
 
     VSModuleManager::~VSModuleManager()
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        RemoveThisFromDebugCache(VSModuleManager);
+
         m_Classes.clear();
         m_Modules.clear();
     }

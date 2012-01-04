@@ -31,6 +31,7 @@
 
 namespace VoodooShader
 {
+    DebugCache(VSCore);
     HMODULE gCoreHandle = nullptr;
 
     void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore)
@@ -66,7 +67,7 @@ namespace VoodooShader
 
     VSCore::VSCore(uint32_t version) :
         m_Refs(0), m_Version(version), m_ConfigFile(nullptr), m_CgContext(nullptr)
-    {
+        {
 #ifdef VOODOO_DEBUG_MEMORY
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRT0DBG_LEAK_CHECK_DF);
         _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
@@ -78,11 +79,14 @@ namespace VoodooShader
         // Set up the internal objects
         m_ModuleManager = new VSModuleManager(this);
         m_Parser = new VSParser(this);
+
+        AddThisToDebugCache(VSCore);
     };
 
     VSCore::~VSCore()
     {
-        VOODOO_DEBUG_FUNCLOG(m_Logger);
+        RemoveThisFromDebugCache(VSCore);
+
         this->SetCgContext(nullptr);
 
         m_LastPass = nullptr;

@@ -22,14 +22,17 @@
 
 namespace VoodooShader
 {
+    DebugCache(VSLogger);
+
     VSLogger::VSLogger(ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { 
+        AddThisToDebugCache(VSLogger);
     }
 
     VSLogger::~VSLogger()
     { 
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        RemoveThisFromDebugCache(VSLogger);
     }
 
     uint32_t VOODOO_METHODTYPE VSLogger::AddRef() CONST

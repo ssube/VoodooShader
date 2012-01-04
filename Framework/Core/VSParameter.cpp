@@ -22,6 +22,8 @@
 
 namespace VoodooShader
 {
+    DebugCache(VSParameter);
+
     VSParameter::VSParameter(_Pre_notnull_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type) :
          m_Refs(0), m_Core(pCore), m_Shader(nullptr), m_Virtual(true), m_Type(type)
     {
@@ -40,22 +42,26 @@ namespace VoodooShader
 
         m_Param = cgCreateParameter(context, Converter::ToCGType(m_Type));
 
-        memset(m_Valuefloat, 0, sizeof(float) * 16);
+        ZeroMemory(m_Valuefloat, sizeof(float) * 16);
+
+        AddThisToDebugCache(VSParameter);
     }
 
     VSParameter::VSParameter(_In_ IShader * const pShader, _In_ CGparameter const pParam) :
         m_Refs(0), m_Core(pShader->GetCore()), m_Shader(pShader), m_Virtual(false), m_Param(pParam)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_Type = Converter::ToParameterType(cgGetParameterType(m_Param));
         m_Name = m_Shader->GetName() + VSTR(":") + cgGetParameterName(m_Param);
 
         memset(m_Valuefloat, 0, sizeof(float) * 16);
+
+        AddThisToDebugCache(VSParameter);
     }
 
     VOODOO_METHODTYPE VSParameter::~VSParameter()
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        RemoveThisFromDebugCache(VSParameter);
+
         if (m_Virtual && cgIsParameter(m_Param))
         {
             cgDestroyParameter(m_Param);

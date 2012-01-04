@@ -22,14 +22,17 @@
 
 namespace VoodooShader
 {
+    DebugCache(VSAdapter);
+
     VSAdapter::VSAdapter(ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { 
+        AddThisToDebugCache(VSAdapter);
     }
 
     VSAdapter::~VSAdapter()
-    { 
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {
+        RemoveThisFromDebugCache(VSAdapter);
     }
 
     uint32_t VOODOO_METHODTYPE VSAdapter::AddRef() CONST
