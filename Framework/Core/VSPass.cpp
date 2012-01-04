@@ -20,16 +20,6 @@
 
 #include "VSPass.hpp"
 
-#include "IAdapter.hpp"
-#include "ICore.hpp"
-#include "ILogger.hpp"
-#include "ITechnique.hpp"
-#include "ITexture.hpp"
-
-#include "Exception.hpp"
-#include "Format.hpp"
-#include "Version.hpp"
-
 namespace VoodooShader
 {
     VOODOO_METHODTYPE VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) :
@@ -39,7 +29,7 @@ namespace VoodooShader
         {
             Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), nullptr);
         }
-        else if(!cgIsPass(pCgPass))
+        else if (!cgIsPass(pCgPass))
         {
             Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no Cg pass."), nullptr);
         }

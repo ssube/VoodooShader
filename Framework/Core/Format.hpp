@@ -19,13 +19,8 @@
  */
 #pragma once
 
-#include "Includes.hpp"
-
-#include "Exception.hpp"
-#include "Regex.hpp"
+#include "VoodooFramework.hpp"
 #include "String.hpp"
-
-#include "IObject.hpp"
 
 namespace VoodooShader
 {
@@ -104,6 +99,188 @@ namespace VoodooShader
     private:
         FormatImpl * m_Impl;
     };
+    /**
+     * @defgroup voodoo_stdstream Standard Stream Operators
+     * @ingroup voodoo_utility
+     * @{
+     */
+#if !defined(VOODOO_NO_STDLIB)
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Exception & val)
+    {
+        out << VSTR("Exception(") << val.what() << VSTR(")");
+        return out;
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Format & val)
+    {
+        out << val.ToString().GetData();
+        return out;
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Regex & val)
+    {
+        out << VSTR("Regex(") << val.GetExpr().GetData() << VSTR(")");
+        return out;
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const String & val)
+    {
+        out << val.GetData();
+        return out;
+    }
+
+    template<typename Elem, typename VecElem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Vector1<VecElem> & val)
+    {
+        out << "[" << val.X << "]";
+        return out;
+    }
+
+    template<typename Elem, typename VecElem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Vector2<VecElem> & val)
+    {
+        out << "[" << val.X << ", " << val.Y << "]";
+        return out;
+    }
+
+    template<typename Elem, typename VecElem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Vector3<VecElem> & val)
+    {
+        out << "[" << val.X << ", " << val.Y << ", " << val.Z << "]";
+        return out;
+    }        
+
+    template<typename Elem, typename VecElem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Vector4<VecElem> & val)
+    {
+        out << "[" << val.X << ", " << val.Y << ", " << val.Z << ", " << val.W << "]";
+        return out;
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & os, const TextureDesc & v)
+    {
+        os << VSTR("TextureDesc(Format: ") << v.Format << VSTR("; Mipmaps: ") << v.Mipmaps << VSTR("; RenderTarget: ") <<
+              v.RenderTarget << VSTR("; Size: ") << v.Size << VSTR(")");
+        return os;
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & os, const TextureRegion & v)
+    {
+        os << VSTR("TextureRegion(Format: ") << v.Format << VSTR("; Mipmaps: ") << v.Mipmaps << VSTR("; RenderTarget: ") <<
+              v.RenderTarget << VSTR("; Size: ") << v.Size << VSTR("; Origin: ") << v.Origin << VSTR(")");
+        return os;
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & os, const Variant & v)
+    {
+        os << VSTR("Variant(") << v.Type << VSTR("; ") << v.Components;
+
+        if (v.Type == UT_None)
+        {
+            return os << VSTR(")");
+        }
+
+        switch (v.Type)
+        {
+        case UT_None:
+            break;
+        case UT_Bool:
+            os << v.VBool;
+            break;
+        case UT_Int8:
+            os << v.VInt8;
+            break;
+        case UT_UInt8:
+            os << v.VUInt8;
+            break;
+        case UT_Int16:
+            os << v.VInt16;
+            break;
+        case UT_UInt16:
+            os << v.VUInt16;
+            break;
+        case UT_Int32:
+            os << v.VInt32;
+            break;
+        case UT_UInt32:
+            os << v.VUInt32;
+            break;
+        case UT_Float:
+            os << v.VFloat;
+            break;
+        case UT_Double:
+            os << v.VDouble;
+            break;
+        case UT_Uuid:
+            if (v.VUuid)
+            {
+                Uuid t = (*v.VUuid);
+                os << t;
+            }
+            else
+            {
+                os << VSTR("(null)");
+            }
+            break;
+        case UT_String:
+            if (v.VString)
+            {
+                os << v.VString->GetData();
+            }
+            else
+            {
+                os << VSTR("(null)");
+            }
+            break;
+        case UT_IObject:
+            os << VSTR("; ") << v.VIObject;
+            break;
+        case UT_PVoid:
+            os << VSTR("; ") << v.VPVoid;
+            break;
+        case UT_Unknown:
+        default:
+            os << VSTR("; (unknown)");
+            break;
+        }
+
+        return os << VSTR(")");
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & os, const Version & v)
+    {
+        os << VSTR("Version(LibId: ") << v.LibId << VSTR("; Major: ") << v.Major << VSTR("; Minor: ") << v.Minor << 
+              VSTR("; Patch: ") << v.Patch << VSTR("; Build: ") << v.Build << VSTR("; Debug: ") << v.Debug;
+
+        if (v.Name)  { os << VSTR("; Name: ")  << v.Name;  };
+        if (v.RevId) { os << VSTR("; RevId: ") << v.RevId; };
+
+        os << VSTR(")");
+        return os;
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & os, const IObject * v)
+    {
+        if (v)
+        {
+            os << v->ToString();
+        }
+        else
+        {
+            os << VSTR("IObject(null)");
+        }
+        return os;
+    }
+#endif
     /**
      * @}
      */

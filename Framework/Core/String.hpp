@@ -19,14 +19,10 @@
  */
 #pragma once
 
-#include "Includes.hpp"
+#include "VoodooFramework.hpp"
 
-#ifndef VOODOO_NO_STDSTRING
-#include <string>
-#endif
-
-#ifndef VOODOO_NO_COLLECTIONS
-#include <vector>
+#if !defined(VOODOO_NO_STDLIB)
+#   include <string>
 #endif
 
 namespace VoodooShader

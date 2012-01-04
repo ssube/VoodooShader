@@ -19,9 +19,7 @@
  */
 #pragma once
 
-#include "Format.hpp"
-#include "Stream.hpp"
-#include "Version.hpp"
+#include "VoodooFramework.hpp"
 // Boost
 #include <boost/format.hpp>
 #pragma warning(push)
@@ -65,150 +63,200 @@ namespace VoodooShader
 
     String Format::ToString() const
     {
+        VOODOO_CHECK_IMPL;
+
         std::basic_string<wchar_t, std::char_traits<wchar_t>> str(m_Impl->m_Format.str());
         return String(str);
     }
 
     Format & Format::operator<<(bool val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(char val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(unsigned char val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(short val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(unsigned short val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(int val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(unsigned int val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(long val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(unsigned long val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(float val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(double val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(wchar_t val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const Exception & val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const Regex & val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const String & val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const TextureDesc & val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const TextureRegion & val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const Uuid & val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const Variant & val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const Version & val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const void * val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const char * val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const wchar_t * val)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Format % val;
         return (*this);
     }
 
     Format & Format::operator<<(const IObject * val)
     {
+        VOODOO_CHECK_IMPL;
+
         if (val)
         {
             m_Impl->m_Format % val->ToString();

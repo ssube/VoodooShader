@@ -19,7 +19,7 @@
  */
 #pragma once
 
-#include "Version.hpp"
+#include "VoodooVersion.hpp"
 
 /**
  * @addtogroup voodoo_module_wfilesystem

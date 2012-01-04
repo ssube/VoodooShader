@@ -18,7 +18,7 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "Converter.hpp"
+#include "VoodooFramework.hpp"
 
 #include <tchar.h>
 
@@ -232,7 +232,7 @@ namespace VoodooShader
         }
     }
 
-#define CASESTRING(x) case x: return VOODOO_META_TOSTRING(x)
+#define CASESTRING(x) case x: return VOODOO_TOSTRING(x)
 
     const wchar_t * Converter::ToString(_In_ TextureFormat tf)
     {

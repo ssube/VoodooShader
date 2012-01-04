@@ -18,12 +18,7 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "Exception.hpp"
-
-#include "ICore.hpp"
-#include "ILogger.hpp"
-
-#include "Format.hpp"
+#include "VoodooFramework.hpp"
 
 namespace VoodooShader
 {

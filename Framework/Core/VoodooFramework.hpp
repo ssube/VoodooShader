@@ -19,16 +19,108 @@
  */
 #pragma once
 
-#define VOODOO_IMPORT
+/**
+ * @file
+ * This file is the public-facing include for the Voodoo Shader core. All libraries using the Voodoo Shader Framework should
+ * include this file, and optionally <tt>Support.inl</tt>; this file includes all other headers necessary to use Voodoo
+ * Shader.
+ */
 
-#include "Includes.hpp"
+#if !defined(__cplusplus)
+#   error Voodoo Shader requires a C++ compiler, preferably Microsoft Visual C++ 10 or better.
+#elif !defined(_WIN32) 
+#   error Voodoo Shader must be built for the Win32 platform.
+#elif !defined(_UNICODE) || (!defined(wchar_t) && !defined(_NATIVE_WCHAR_T_DEFINED))
+#   error Voodoo Shader APIs require Unicode character set enabled.
+#elif defined(VOODOO_SDK_VERSION)
+#   error Voodoo SDK version already defined. This should only be defined by the primary framework header.
+#endif
+
+/**
+ * Current core version for Voodoo Shader. Only incremented on significant changes to the behavior of the core.
+ */
+#define VOODOO_SDK_VERSION 0
+
+#if !defined(VOODOO_STRING_MACROS)
+#   define VOODOO_STRING_MACROS
+#   ifdef _UNICODE
+#       define VOODOO_STRING_ARG(arg)  L ## #arg
+#       define VOODOO_STRING_STR(arg)  L ## arg
+#   else
+#       define VOODOO_STRING_ARG(arg)  #arg
+#       define VOODOO_STRING_STR(arg)  arg
+#   endif
+#   define VOODOO_TOSTRING(arg)    VOODOO_STRING_ARG(arg)
+#   define VOODOO_STRING(arg)      VOODOO_STRING_STR(arg)
+#   define VSTR(arg)               VOODOO_STRING_STR(arg)
+#endif
+
+// Windows includes and macros
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+#if !defined(PURE)
+#   define PURE = 0
+#endif
+#if !defined(CONST)
+#   define CONST const
+#endif
+#if !defined(DECLSPEC_NOTHROW)
+#   define DECLSPEC_NOTHROW __declspec(nothrow)
+#endif
+#if !defined(DECLSPEC_SELECTANY)
+#   define DECLSPEC_SELECTANY __declspec(selectany)
+#endif
+#if !defined(DECLSPEC_NOVTABLE)
+#   define DECLSPEC_NOVTABLE __declspec(novtable)
+#endif
+
+/**
+ * @defgroup voodoo_macros_decl Declaration Macros
+ * @{
+ */
+#define VOODOO_STRIP(...) __VA_ARGS__
+
+#define DEFINE_UUID(name)     EXTERN_C CONST Uuid DECLSPEC_SELECTANY name
+#define DEFINE_IID(name)      DEFINE_UUID(IID_##name)
+#define DEFINE_CLSID(name)    DEFINE_UUID(CLSID_##name)
+#define DEFINE_LIBID(name)    DEFINE_UUID(LIBID_##name)
+
+#define VOODOO_CALLTYPE     __stdcall
+#define VOODOO_METHODTYPE   VOODOO_CALLTYPE
+
+#if !defined(VOODOO_EXPORT)
+#   define VOODOO_API __declspec(dllimport)
+#else
+#   define VOODOO_API __declspec(dllexport)
+#endif
+
+#define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALLTYPE
+
+#define VOODOO_METHOD_(type, name)  virtual DECLSPEC_NOTHROW type VOODOO_METHODTYPE name
+#define VOODOO_METHOD(name)         VOODOO_METHOD_(bool, name)
+
+#define VOODOO_INTERFACE_(iname, uuid)       DEFINE_IID(iname) = VOODOO_STRIP##uuid; \
+    class DECLSPEC_NOVTABLE iname
+#define VOODOO_INTERFACE(iname, ibase, uuid) DEFINE_IID(iname) = VOODOO_STRIP##uuid; \
+    class DECLSPEC_NOVTABLE iname : public ibase
+#define VOODOO_CLASS(iname, ibase, uuid)     DEFINE_CLSID(iname) = VOODOO_STRIP##uuid; \
+    class iname : public ibase
+/**
+ * @}
+ */
+
+#include "VoodooDebug.hpp"
+#include "VoodooTypes.hpp"
+#include "VoodooVersion.hpp"
 
 #include "Converter.hpp"
 #include "Exception.hpp"
+#include "Format.hpp"
 #include "Regex.hpp"
 #include "String.hpp"
-#include "Version.hpp"
 
+#include "IObject.hpp"
 #include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "IFile.hpp"
@@ -38,9 +130,10 @@
 #include "ILogger.hpp"
 #include "IModule.hpp"
 #include "IModuleManager.hpp"
-#include "IObject.hpp"
-#include "IParameter.hpp"
 #include "IParser.hpp"
+
+#include "IResource.hpp"
+#include "IParameter.hpp"
 #include "IPass.hpp"
 #include "IShader.hpp"
 #include "ITechnique.hpp"

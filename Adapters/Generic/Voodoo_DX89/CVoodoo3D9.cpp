@@ -282,7 +282,7 @@ namespace VoodooShader
                         testShader = gpVoodooCore->CreateShader(shaderFile, nullptr);
                     }
                 }
-                catch(std::exception & exc)
+                catch (std::exception & exc)
                 {
                     logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %1%") << exc.what());
                 }

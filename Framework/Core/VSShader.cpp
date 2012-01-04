@@ -23,19 +23,6 @@
 #include "VSParameter.hpp"
 #include "VSTechnique.hpp"
 
-#include "IAdapter.hpp"
-#include "ICore.hpp"
-#include "IFile.hpp"
-#include "IFilesystem.hpp"
-#include "ILogger.hpp"
-#include "IParser.hpp"
-#include "ITexture.hpp"
-
-#include "Converter.hpp"
-#include "Exception.hpp"
-#include "Format.hpp"
-#include "Version.hpp"
-
 namespace VoodooShader
 {
     VSShader::VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
@@ -259,7 +246,9 @@ namespace VoodooShader
                 this->LinkParameter(pParam.get());
 
                 m_Parameters.push_back(pParam);
-            } catch (const std::exception & exc) {
+            }
+            catch (const std::exception & exc)
+            {
                 const char * name = cgGetParameterName(cParam);
 
                 m_Core->GetLogger()->LogMessage

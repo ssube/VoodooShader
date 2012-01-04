@@ -22,16 +22,6 @@
 
 #include "VSPass.hpp"
 
-#include "IAdapter.hpp"
-#include "ICore.hpp"
-#include "ILogger.hpp"
-#include "IShader.hpp"
-#include "ITexture.hpp"
-
-#include "Exception.hpp"
-#include "Format.hpp"
-#include "Version.hpp"
-
 namespace VoodooShader
 {
     VOODOO_METHODTYPE VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
@@ -247,7 +237,9 @@ namespace VoodooShader
                 IPassRef pass = new VSPass(this, cPass);
 
                 m_Passes.push_back(pass);
-            } catch (const std::exception & exc) {
+            }
+            catch (const std::exception & exc)
+            {
                 const char * name = cgGetPassName(cPass);
 
                 m_Core->GetLogger()->LogMessage

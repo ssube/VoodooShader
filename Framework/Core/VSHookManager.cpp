@@ -20,11 +20,6 @@
 
 #include "VSHookManager.hpp"
 
-#include "ICore.hpp"
-#include "ILogger.hpp"
-
-#include "Format.hpp"
-
 namespace VoodooShader
 {
     VSHookManager::VSHookManager(_In_ ICore * pCore) :

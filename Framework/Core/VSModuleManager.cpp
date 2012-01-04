@@ -22,18 +22,6 @@
 
 #include "VSModule.hpp"
 
-#include "ICore.hpp"
-#include "IFile.hpp"
-#include "IFilesystem.hpp"
-#include "ILogger.hpp"
-#include "IObject.hpp"
-#include "IParser.hpp"
-
-#include "Exception.hpp"
-#include "Format.hpp"
-#include "Regex.hpp"
-#include "Version.hpp"
-
 #include "shlwapi.h"
 
 namespace VoodooShader
@@ -239,7 +227,7 @@ namespace VoodooShader
 
         m_ModuleNames[fullname] = moduleversion->LibId;
 
-        if (moduleversion->Debug != VOODOO_META_DEBUG_BOOL && logger)
+        if (moduleversion->Debug != VOODOO_DEBUG_BOOL && logger)
         {
             logger->LogMessage
             (

@@ -49,7 +49,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;FRAMEWORK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;VOODOO_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
@@ -64,7 +64,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;FRAMEWORK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;VOODOO_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -82,7 +82,6 @@
     <ClCompile Include="Exports.cpp" />
     <ClCompile Include="Regex.cpp" />
     <ClCompile Include="Format.cpp" />
-    <ClCompile Include="Stream.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="VSAdapter.cpp" />
     <ClCompile Include="VSCore.cpp" />
@@ -98,7 +97,7 @@
     <ClCompile Include="VSTechnique.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Includes.hpp" />
+    <ClInclude Include="VoodooTypes.hpp" />
     <ClInclude Include="IAdapter.hpp" />
     <ClInclude Include="ICore.hpp" />
     <ClInclude Include="IFile.hpp" />
@@ -116,6 +115,7 @@
     <ClInclude Include="IShader.hpp" />
     <ClInclude Include="ITechnique.hpp" />
     <ClInclude Include="ITexture.hpp" />
+    <ClInclude Include="VoodooDebug.hpp" />
     <ClInclude Include="VSAdapter.hpp" />
     <ClInclude Include="VSCore.hpp" />
     <ClInclude Include="VSFilesystem.hpp" />
@@ -133,10 +133,9 @@
     <ClInclude Include="Exports.hpp" />
     <ClInclude Include="Format.hpp" />
     <ClInclude Include="Regex.hpp" />
-    <ClInclude Include="Stream.hpp" />
     <ClInclude Include="String.hpp" />
-    <ClInclude Include="Version.hpp" />
-    <ClInclude Include="Version_Build.hpp" />
+    <ClInclude Include="VoodooVersion.hpp" />
+    <ClInclude Include="BuildVersion.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

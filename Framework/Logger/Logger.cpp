@@ -21,8 +21,6 @@
 // Voodoo Logger
 #include "Logger.hpp"
 #include "Logger_Version.hpp"
-// Voodoo Framework
-#include "Stream.hpp"
 // WinAPI
 #include <strsafe.h>
 // Boost
@@ -42,7 +40,7 @@ namespace VoodooShader
 {
     namespace XmlLogger
     {
-        static const Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOGGER);
+        static const Version moduleVersion = VOODOO_VERSION_STRUCT(LOGGER);
         const wchar_t * name_VSXmlLogger = VSTR("VSXmlLogger");
         static const Uuid clsid_VSXmlLogger = CLSID_VSXmlLogger;
 
@@ -300,7 +298,7 @@ namespace VoodooShader
 
                 return true;
             }
-            catch(const std::exception & exc)
+            catch (const std::exception & exc)
             {
 #ifdef _DEBUG
                 OutputDebugStringA(exc.what());

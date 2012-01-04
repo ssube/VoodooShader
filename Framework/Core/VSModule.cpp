@@ -20,18 +20,6 @@
 
 #include "VSModule.hpp"
 
-#include "ICore.hpp"
-#include "IFile.hpp"
-#include "IFilesystem.hpp"
-#include "ILogger.hpp"
-#include "IObject.hpp"
-#include "IParser.hpp"
-
-#include "Exception.hpp"
-#include "Format.hpp"
-#include "Regex.hpp"
-#include "Version.hpp"
-
 namespace VoodooShader
 {
     VSModule * VSModule::Load(_In_ ICore * const pCore, _In_ const String & path)

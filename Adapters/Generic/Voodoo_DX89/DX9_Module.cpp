@@ -40,7 +40,7 @@ volatile LONG gObjectLock = 0;
 
 const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion()
 {
-    static const VoodooShader::Version dx9version = VOODOO_META_VERSION_STRUCT(DX89);
+    static const VoodooShader::Version dx9version = VOODOO_VERSION_STRUCT(DX89);
     return &dx9version;
 }
 

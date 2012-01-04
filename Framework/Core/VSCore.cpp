@@ -25,19 +25,6 @@
 #include "VSParser.hpp"
 #include "VSShader.hpp"
 
-#include "IAdapter.hpp"
-#include "ICore.hpp"
-#include "IFile.hpp"
-#include "IFilesystem.hpp"
-#include "IHookManager.hpp"
-#include "ILogger.hpp"
-#include "ITexture.hpp"
-
-#include "Converter.hpp"
-#include "Exception.hpp"
-#include "Format.hpp"
-#include "Version.hpp"
-
 #include "Support.inl"
 
 #include "shellapi.h"
@@ -66,7 +53,9 @@ namespace VoodooShader
             try
             {
                 pCore = new VSCore(version);
-            } catch(const std::exception & exc) {
+            }
+            catch (const std::exception & exc)
+            {
                 UNREFERENCED_PARAMETER(exc);
                 pCore = nullptr;
             }
@@ -300,7 +289,9 @@ namespace VoodooShader
             try
             {
                 logLevel = (LogLevel)stoi(logLevelStr.ToString());
-            } catch (const std::exception & exc) {
+            }
+            catch (const std::exception & exc)
+            {
                 UNREFERENCED_PARAMETER(exc);
                 logLevel = LL_Default;
             }
@@ -315,8 +306,8 @@ namespace VoodooShader
             m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, configMsg);
             m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
-            Version vsver = VOODOO_META_VERSION_STRUCT(VC);
-            Version cgver = VOODOO_META_VERSION_STRUCT(CG);
+            Version vsver = VOODOO_VERSION_STRUCT(VC);
+            Version cgver = VOODOO_VERSION_STRUCT(CG);
             m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << vsver);
             m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << cgver);
 
@@ -347,7 +338,7 @@ namespace VoodooShader
 
             // Return
         }
-        catch(const Exception & exc)
+        catch (const Exception & exc)
         {
             if (m_Logger)
             {
@@ -356,7 +347,7 @@ namespace VoodooShader
 
             return false;
         }
-        catch(const std::exception & exc)
+        catch (const std::exception & exc)
         {
             if (m_Logger)
             {
@@ -594,7 +585,9 @@ namespace VoodooShader
                     LL_CoreDebug, VOODOO_CORE_NAME,
                     Format(VSTR("Created parameter %1% with type %2%.")) << parameter << type
                 );
-            } catch (const std::exception & exc) {
+            }
+            catch (const std::exception & exc)
+            {
                 m_Logger->LogMessage
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,

@@ -19,73 +19,70 @@
  */
 #pragma once
 
-#ifndef VOODOO_STRING_MACROS
+#if !defined(VOODOO_STRING_MACROS)
 #   define VOODOO_STRING_MACROS
-// String type macros
 #   ifdef _UNICODE
-#       define VOODOO_META_STRING_ARG(arg)  L ## #arg
-#       define VOODOO_META_STRING_STR(arg)  L ## arg
+#       define VOODOO_STRING_ARG(arg)  L ## #arg
+#       define VOODOO_STRING_STR(arg)  L ## arg
 #   else
-#       define VOODOO_META_STRING_ARG(arg)  #arg
-#       define VOODOO_META_STRING_STR(arg)  arg
+#       define VOODOO_STRING_ARG(arg)  #arg
+#       define VOODOO_STRING_STR(arg)  arg
 #   endif
-// String meta macros
-#   define VOODOO_META_TOSTRING(arg)    VOODOO_META_STRING_ARG(arg)
-#   define VOODOO_META_STRING(arg)      VOODOO_META_STRING_STR(arg)
-#   define VSTR(arg)                    VOODOO_META_STRING_STR(arg)
+#   define VOODOO_TOSTRING(arg)    VOODOO_STRING_ARG(arg)
+#   define VOODOO_STRING(arg)      VOODOO_STRING_STR(arg)
+#   define VSTR(arg)               VOODOO_STRING_STR(arg)
 #endif
 
 /**
- * Versioning functions
+ * @defgroup voodoo_macros_version Versioning Macros
+ * @{
  */
 #ifdef _DEBUG
-#   define VOODOO_META_DEBUG_BOOL   true
-#   define VOODOO_META_DEBUG_STRING VSTR(" (DEBUG)")
+#   define VOODOO_DEBUG_BOOL   true
+#   define VOODOO_DEBUG_STRING VSTR(" (DEBUG)")
 #else
-#   define VOODOO_META_DEBUG_BOOL   false
-#   define VOODOO_META_DEBUG_STRING
+#   define VOODOO_DEBUG_BOOL   false
+#   define VOODOO_DEBUG_STRING
 #endif
 
-#define VOODOO_META_STRING_NAME_BASIC(token)    VOODOO_##token##_NAME VOODOO_META_DEBUG_STRING
-#define VOODOO_META_STRING_NAME_FULL(token)     VOODOO_##token##_PRETTYNAME VOODOO_META_DEBUG_STRING
-#define VOODOO_META_STRING_NAME_INTERNAL        VOODOO_META_TOSTRING(BUILD_PROJECTNAME)
-#define VOODOO_META_STRING_NAME_TARGET          VOODOO_META_TOSTRING(BUILD_FILENAME)
+#define VOODOO_STRING_NAME_INTERNAL        VOODOO_TOSTRING(BUILD_PROJECTNAME)
+#define VOODOO_STRING_NAME_TARGET          VOODOO_TOSTRING(BUILD_FILENAME)
 
-#define VOODOO_META_STRING_AUTHOR(token)        VOODOO_##token##_AUTHOR
+#define VOODOO_STRING_NAME_BASIC(token)    VOODOO_##token##_NAME VOODOO_DEBUG_STRING
+#define VOODOO_STRING_NAME_FULL(token)     VOODOO_##token##_PRETTYNAME VOODOO_DEBUG_STRING
+#define VOODOO_STRING_AUTHOR(token)        VOODOO_##token##_AUTHOR
+/**
+ * Creates a basic version string separated with periods.
+ */
+#define VOODOO_STRING_VERSION_BASIC(token) \
+    VOODOO_TOSTRING(VOODOO_##token##_VERSION_MAJOR) VSTR(".")\
+    VOODOO_TOSTRING(VOODOO_##token##_VERSION_MINOR) VSTR(".")\
+    VOODOO_TOSTRING(VOODOO_##token##_VERSION_PATCH) VSTR(".")\
+    VOODOO_TOSTRING(VOODOO_##token##_VERSION_BUILD) VOODOO_DEBUG_STRING
+/**
+ * Creates an extended version string with the module's full name and strong version ID.
+ */
+#define VOODOO_STRING_VERSION_FULL(token) VOODOO_##token##_VERSION_ID VOODOO_DEBUG_STRING
 
 /**
  * Creates a comma-separated chain of version tokens (not string).
  */
-#define VOODOO_META_VERSION_CHAIN(token) \
+#define VOODOO_VERSION_CHAIN(token) \
     VOODOO_##token##_VERSION_MAJOR, VOODOO_##token##_VERSION_MINOR, VOODOO_##token##_VERSION_PATCH, \
     VOODOO_##token##_VERSION_BUILD
 
 /**
- * Creates a basic version string separated with periods.
- */
-#define VOODOO_META_STRING_VERSION_BASIC(token) \
-    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_MAJOR) VSTR(".")\
-    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_MINOR) VSTR(".")\
-    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_PATCH) VSTR(".")\
-    VOODOO_META_TOSTRING(VOODOO_##token##_VERSION_BUILD) VOODOO_META_DEBUG_STRING
-
-/**
- * Creates an extended version string with the module's full name and strong version ID.
- */
-#define VOODOO_META_STRING_VERSION_FULL(token) VOODOO_##token##_VERSION_ID VOODOO_META_DEBUG_STRING
-
-/**
  * Creates a Version structure with data for the given module.
  */
-#define VOODOO_META_VERSION_STRUCT(token) \
-    { VOODOO_##token##_LIBID, VOODOO_META_VERSION_CHAIN(token), VOODOO_META_DEBUG_BOOL, \
+#define VOODOO_VERSION_STRUCT(token) \
+    { VOODOO_##token##_LIBID, VOODOO_VERSION_CHAIN(token), VOODOO_DEBUG_BOOL, \
       VOODOO_##token##_NAME, VOODOO_##token##_VERSION_ID }
 
 // Copyright info
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VSTR("Copyright © 2010-2012 by Sean Sube")
-#define VOODOO_GLOBAL_COPYRIGHT_FULL    VSTR("Voodoo Shader Framework, Copyright &copy; 2010-2012 by Sean Sube.&lt;br /&gt;\n") \
-    VSTR("The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&lt;br /&gt;\n") \
-    VSTR("This is free software and you are welcome to redistribute it under certain conditions.&lt;br /&gt;\n") \
+#define VOODOO_GLOBAL_COPYRIGHT_FULL    VSTR("Voodoo Shader Framework, Copyright &copy; 2010-2012 by Sean Sube.\n") \
+    VSTR("The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.\n") \
+    VSTR("This is free software and you are welcome to redistribute it under certain conditions.\n") \
     VSTR("Please see the included license file for more details.")
 
 // Global defs
@@ -96,7 +93,7 @@
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     5
 #define VOODOO_GLOBAL_VERSION_PATCH     3
-#include "Version_Build.hpp"
+#include "BuildVersion.hpp"
 
 // Core defs
 #define VOODOO_CORE_LIBID               {0xCB, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}

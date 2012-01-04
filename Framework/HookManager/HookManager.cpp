@@ -34,7 +34,7 @@ namespace VoodooShader
 {
     namespace EasyHook
     {
-        static const Version moduleVersion = VOODOO_META_VERSION_STRUCT(HOOK);
+        static const Version moduleVersion = VOODOO_VERSION_STRUCT(HOOK);
         static const wchar_t * name_VSEHHookManager = L"VSEHHookManager";
         static const Uuid clsid_VSEHHookManager = CLSID_VSEHHookManager;
 

@@ -261,7 +261,7 @@ namespace VoodooShader
                     IFileRef shaderfile = gpVoodooCore->GetFileSystem()->GetFile(L"test.cgfx");
                     testShader = gpVoodooCore->CreateShader(shaderfile.get(), nullptr);
                 }
-                catch(std::exception & exc)
+                catch (std::exception & exc)
                 {
                     gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %S") << exc.what());
                 }

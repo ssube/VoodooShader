@@ -26,7 +26,7 @@
 #include "VSHookManager.hpp"
 #include "VSLogger.hpp"
 
-#include "Version.hpp"
+#include "VoodooVersion.hpp"
 
 namespace VoodooShader
 {
@@ -44,7 +44,7 @@ namespace VoodooShader
         return TRUE;
     }
 
-    static const Version coreVersion = VOODOO_META_VERSION_STRUCT(CORE);
+    static const Version coreVersion = VOODOO_VERSION_STRUCT(CORE);
     static const wchar_t * name_VSAdapter = VSTR("VSAdapter");
     static const wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
     static const wchar_t * name_VSHookManager = VSTR("VSHookManager");

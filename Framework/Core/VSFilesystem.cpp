@@ -20,11 +20,6 @@
 
 #include "VSFilesystem.hpp"
 
-#include "ICore.hpp"
-#include "ILogger.hpp"
-
-#include "Format.hpp"
-
 namespace VoodooShader
 {
     VSFileSystem::VSFileSystem(_In_ ICore * pCore) :

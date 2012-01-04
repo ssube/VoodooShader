@@ -20,11 +20,6 @@
 
 #include "VSAdapter.hpp"
 
-#include "ICore.hpp"
-#include "ILogger.hpp"
-
-#include "Format.hpp"
-
 namespace VoodooShader
 {
     VSAdapter::VSAdapter(ICore * pCore) :

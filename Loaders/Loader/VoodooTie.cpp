@@ -30,7 +30,7 @@ VoodooShader::ICore * gVoodooCore = nullptr;
 VoodooShader::IAdapter * gVoodooAdapter = nullptr;
 HINSTANCE gLoaderHandle = nullptr;
 
-const VoodooShader::Version moduleVersion = VOODOO_META_VERSION_STRUCT(LOADER);
+const VoodooShader::Version moduleVersion = VOODOO_VERSION_STRUCT(LOADER);
 
 const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion()
 {

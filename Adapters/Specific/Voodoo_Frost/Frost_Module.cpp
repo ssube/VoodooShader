@@ -38,7 +38,7 @@ namespace VoodooShader
     {
         const Version * API_ModuleVersion(void)
         {
-            static const Version moduleVersion = VOODOO_META_VERSION_STRUCT(FROST);
+            static const Version moduleVersion = VOODOO_VERSION_STRUCT(FROST);
 
             return &moduleVersion;
         }

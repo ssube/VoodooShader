@@ -19,307 +19,37 @@
  */
 #pragma once
 
-#ifndef VOODOO_NO_COMPILER_CHECKS
-#   ifndef __cplusplus
-#      error Voodoo requires a C++ compiler, preferably Microsoft Visual C++ 10 or better.
-#   endif
-
-#   ifndef _WIN32
-#      error Voodoo must be built for the Win32 platform.
-#   endif
-
-#   ifdef _WIN64
-#       error Voodoo is not yet compatible with 64-bit systems.
-#   endif
-
-#   ifndef _UNICODE
-#       error Voodoo APIs require Unicode character set enabled.
-#   endif
-#endif
-
-#ifndef _NATIVE_NULLPTR_SUPPORTED
-#   define nullptr NULL
-#endif
-
-#ifdef VOODOO_SDK_VERSION
-#   error Voodoo SDK version already defined. This should only be defined by the primary framework header.
-#else
-#   define VOODOO_SDK_VERSION 0
-#endif
-
-#ifndef VOODOO_STRING_MACROS
-#   define VOODOO_STRING_MACROS
-// String type macros
-#   ifdef _UNICODE
-#       define VOODOO_META_STRING_ARG(arg)  L ## #arg
-#       define VOODOO_META_STRING_STR(arg)  L ## arg
-#   else
-#       define VOODOO_META_STRING_ARG(arg)  #arg
-#       define VOODOO_META_STRING_STR(arg)  arg
-#   endif
-// String meta macros
-#   define VOODOO_META_TOSTRING(arg)    VOODOO_META_STRING_ARG(arg)
-#   define VOODOO_META_STRING(arg)      VOODOO_META_STRING_STR(arg)
-#   define VSTR(arg)                    VOODOO_META_STRING_STR(arg)
-#endif
-
 #include <cstdint>
 
-#ifndef VOODOO_NO_COLLECTIONS
-#   include <list>
-#   include <map>
-#   include <vector>
-#endif
-
-#ifndef VOODOO_NO_BOOST
+#if !defined(VOODOO_NO_BOOST)
 #   include <boost/intrusive_ptr.hpp>
 #   include <boost/uuid/uuid.hpp>
+#   if !defined(VOODOO_NO_STDLIB)
+#       include <list>
+#       include <map>
+#       include <vector>
+#   endif
 #endif
 
-// Windows includes and macros
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-
-#ifndef PURE
-#   define PURE = 0
-#endif
-
-#ifndef CONST
-#   define CONST const
-#endif
-
-#ifndef DECLSPEC_NOTHROW
-#   define DECLSPEC_NOTHROW __declspec(nothrow)
-#endif
-
-#ifndef DECLSPEC_SELECTANY
-#   define DECLSPEC_SELECTANY __declspec(selectany)
-#endif
-
-#ifndef DECLSPEC_NOVTABLE
-#   define DECLSPEC_NOVTABLE __declspec(novtable)
-#endif
-
-// Extended debug macros:
-// These will enable a significant amount of additional code and will cause major performance loss. However, full
-// memory management and program flow will be logged.
-#ifdef VOODOO_DEBUG
-#   define VOODOO_DEBUG_BREAK DebugBreak()
-#   define SAFE_INCREMENT(x) InterlockedIncrement(&x)
-#   define SAFE_DECREMENT(x) InterlockedCompareExchange(&x, x-1, x), x
-#else
-#   define VOODOO_DEBUG_BREAK
-#   define SAFE_INCREMENT(x) ++x
-#   define SAFE_DECREMENT(x) --x
-#endif
-
-// Extended logging
-#if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_EXTLOG)
-#   define VOODOO_DEBUG_FUNCLOG(logger) \
-    { \
-        if (logger)\
-        {\
-            logger->LogMessage(LL_Debug | LL_Critical | LL_System, VSTR("Extended Debug Log"), \
-                Format("Entered function %1% in %2% (line %3%).") << __FUNCTION__ << __FILE__ << __LINE__); \
-        }\
-    }
-#else
-#   define VOODOO_DEBUG_FUNCLOG(logger)
-#endif
-
-// Memory debug
-#if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_MEMORY)
-#   define _CRTDBG_MAP_ALLOC
-#   include <stdlib.h>
-#   include <crtdbg.h>
-#   define vnew new(_NORMAL_BLOCK, __FILE__, __LINE__)
-#   define vdelete delete
-#else
-#   define vnew new
-#   define vdelete delete
-#endif
-
-// Function macros
-#ifndef VOODOO_IMPORT
-#   define VOODOO_API __declspec(dllexport)
-#else
-#   define VOODOO_API __declspec(dllimport)
-#endif
-
-#define VOODOO_CALLTYPE     __stdcall
-#define VOODOO_METHODTYPE   VOODOO_CALLTYPE
-
-#define VOODOO_METHOD_(type, name)  virtual DECLSPEC_NOTHROW type VOODOO_METHODTYPE name
-#define VOODOO_METHOD(name)         VOODOO_METHOD_(bool, name)
-
-#define VOODOO_INTERFACE_(iname, ...)       DEFINE_IID(iname) = __VA_ARGS__; class DECLSPEC_NOVTABLE iname
-#define VOODOO_INTERFACE(iname, ibase, ...) VOODOO_INTERFACE_(iname, __VA_ARGS__) : public ibase
-#define VOODOO_CLASS(iname, ibase, ...)     DEFINE_CLSID(iname) = __VA_ARGS__; class iname : public ibase
-
-#define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALLTYPE
-
-#ifndef VOODOO_NO_CG
+#if !defined(VOODOO_NO_CG)
 #   include "Cg/cg.h"
-#else
-    typedef int    CGbool;
-    typedef void * CGcontext;
-    typedef void * CGprogram;
-    typedef void * CGparameter;
-    typedef void * CGobj;
-    typedef void * CGbuffer;
-    typedef void * CGeffect;
-    typedef void * CGtechnique;
-    typedef void * CGpass;
-    typedef void * CGstate;
-    typedef void * CGstateassignment;
-    typedef void * CGannotation;
-    typedef void * CGhandle;
 #endif
 
-#ifndef VOODOO_NO_PUGIXML
+#if !defined(VOODOO_NO_PUGIXML)
 #   include "pugixml.hpp"
 #endif
 
 namespace VoodooShader
-{
-    /**
-     * @defgroup voodoo_structs Basic Structs 
-     * @{
-     */
-    struct TextureDesc;
-    struct TextureRegion;
-    struct Variant;
-    struct Version;
-    struct VertexStruct;
-    struct LightStruct;
-    /**
-     * @}
-     * @defgroup voodoo_interfaces Interfaces
-     * @{
-     */
-    class IAdapter;
-    class ICore;
-    class IFile;
-    class IFileSystem;
-    class IHookManager;
-    class IImage;
-    class ILogger;
-    class IModule;
-    class IModuleManager;
-    class IObject;
-    class IParameter;
-    class IParser;
-    class IPass;
-    class IShader;
-    class ITechnique;
-    class ITexture;
-    /**
-     * @}
-     * @defgroup voodoo_utility Utility Classes
-     * @{
-     */
-    class Exception;
-    class Format;
-    class Regex;
-    class RegexMatch;
-    class Stream;
-    class String;
-#ifndef VOODOO_NO_BOOST
-    typedef boost::uuids::uuid Uuid;
-#else
-    typedef struct
-    {
-        uint8_t data[16];
-    } Uuid;
-#endif
-#ifndef VOODOO_NO_PUGIXML
-    typedef pugi::xml_document * XmlDocument;
-#else
-    typedef void * XmlDocument;
-#endif
-    /**
-     * @}
-     * @defgroup voodoo_uuids Voodoo Uuids
-     * @{
-     */
-#define DEFINE_UUID(name)     EXTERN_C CONST Uuid DECLSPEC_SELECTANY name
-#define DEFINE_IID(name)      DEFINE_UUID(IID_##name)
-#define DEFINE_CLSID(name)    DEFINE_UUID(CLSID_##name)
-#define DEFINE_LIBID(name)    DEFINE_UUID(LIBID_##name)
-    /**
-     * @}
-     * @defgroup voodoo_references Reference Typedefs
-     * @{
-     */
-#ifndef VOODOO_NO_BOOST
-    void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
-    void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
-
-    typedef boost::intrusive_ptr<IAdapter>       IAdapterRef;
-    typedef boost::intrusive_ptr<ICore>          ICoreRef;
-    typedef boost::intrusive_ptr<IFile>          IFileRef;
-    typedef boost::intrusive_ptr<IFileSystem>    IFileSystemRef;
-    typedef boost::intrusive_ptr<IHookManager>   IHookManagerRef;
-    typedef boost::intrusive_ptr<IImage>         IImageRef;
-    typedef boost::intrusive_ptr<ILogger>        ILoggerRef;
-    typedef boost::intrusive_ptr<IModule>        IModuleRef;
-    typedef boost::intrusive_ptr<IModuleManager> IModuleManagerRef;
-    typedef boost::intrusive_ptr<IObject>        IObjectRef;
-    typedef boost::intrusive_ptr<IParameter>     IParameterRef;
-    typedef boost::intrusive_ptr<IParser>        IParserRef;
-    typedef boost::intrusive_ptr<IPass>          IPassRef;
-    typedef boost::intrusive_ptr<IShader>        IShaderRef;
-    typedef boost::intrusive_ptr<ITechnique>     ITechniqueRef;
-    typedef boost::intrusive_ptr<ITexture>       ITextureRef;
-    /**
-     * @}
-     * @defgroup voodoo_collections Collections
-     * @{
-     */
-#ifndef VOODOO_NO_COLLECTIONS
-    // Standard collections
-    typedef std::map<String, String>             StringMap;
-    typedef std::list<String>                    StringList;
-    typedef std::vector<String>                  StringVector;
-    typedef std::map<String, IShaderRef>         ShaderMap;
-    typedef std::list<IShaderRef>                ShaderList;
-    typedef std::vector<IShaderRef>              ShaderVector;
-    typedef std::map<String, ITechniqueRef>      TechniqueMap;
-    typedef std::list<ITechniqueRef>             TechniqueList;
-    typedef std::vector<ITechniqueRef>           TechniqueVector;
-    typedef std::map<String, IPassRef>           PassMap;
-    typedef std::list<IPassRef>                  PassList;
-    typedef std::vector<IPassRef>                PassVector;
-    typedef std::map<String, IParameterRef>      ParameterMap;
-    typedef std::list<IParameterRef>             ParameterList;
-    typedef std::vector<IParameterRef>           ParameterVector;
-    typedef std::map<String, ITextureRef>        TextureMap;
-    typedef std::list<ITextureRef>               TextureList;
-    typedef std::vector<ITextureRef>             TextureVector;
-    // Variable handling
-    typedef std::pair<String, uint32_t>          Variable;
-    typedef std::map<String, Variable>           VariableMap;
-    // Module and class
-    typedef std::map<Uuid, IModuleRef>           ModuleMap;
-    typedef std::pair<IModuleRef, uint32_t>      ClassSource;
-    typedef std::map<Uuid, ClassSource>          ClassMap;
-    typedef std::map<String, Uuid>               StrongNameMap;
-    // Misc
-    typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
-#endif
-#endif
-    /**
-     * @}
-     */
-
+{    
     // Disable typed-enum warning
 #pragma warning(push)
 #pragma warning(disable: 4480)
     /**
+     * @defgroup voodoo_types Voodoo Shader Types
+     * @{
      * @defgroup voodoo_enums Enums
      * @{
-     */
-    /**
+     *
      * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture
      * data. These may not be implemented by the underlying graphics API exactly as they are indicated here, but the
      * available components and sizes are guaranteed to be equal to or greater than the indicated values. Further
@@ -566,8 +296,46 @@ namespace VoodooShader
 #pragma warning(pop)
     /**
      * @}
+     * @defgroup voodoo_classes_conditional Conditional Classes
+     * @{
      */
+#if defined(VOODOO_NO_CG)
+    typedef int    CGbool;
+    typedef void * CGcontext;
+    typedef void * CGprogram;
+    typedef void * CGparameter;
+    typedef void * CGobj;
+    typedef void * CGbuffer;
+    typedef void * CGeffect;
+    typedef void * CGtechnique;
+    typedef void * CGpass;
+    typedef void * CGstate;
+    typedef void * CGstateassignment;
+    typedef void * CGannotation;
+    typedef void * CGhandle;
+#endif
 
+#if !defined(VOODOO_NO_PUGIXML)
+    typedef pugi::xml_document * XmlDocument;
+#else
+    typedef void * XmlDocument;
+#endif
+
+#ifndef VOODOO_NO_BOOST
+    typedef boost::uuids::uuid Uuid;
+#else
+    typedef struct
+    {
+        uint8_t data[16];
+    } Uuid;
+#endif
+    /**
+     * @}
+     * @defgroup voodoo_structs Basic Structs 
+     * @{
+     * @defgroup voodoo_structs_vectors Vectors
+     * @{
+     */
     template <typename ValType>
     struct Vector1
     {
@@ -624,8 +392,123 @@ namespace VoodooShader
     typedef Vector2<double>     Double2;
     typedef Vector3<double>     Double3;
     typedef Vector4<double>     Double4;
-
     /**
+     * @}
+     */
+    struct TextureDesc;
+    struct TextureRegion;
+    struct Variant;
+    struct Version;
+    struct VertexStruct;
+    struct LightStruct;
+    /**
+     * @}
+     * @defgroup voodoo_interfaces Interfaces
+     * @{
+     */
+    class IAdapter;
+    class ICore;
+    class IFile;
+    class IFileSystem;
+    class IHookManager;
+    class IImage;
+    class ILogger;
+    class IModule;
+    class IModuleManager;
+    class IObject;
+    class IParameter;
+    class IParser;
+    class IPass;
+    class IShader;
+    class ITechnique;
+    class ITexture;
+    /**
+     * @}
+     * @defgroup voodoo_classes_utility Utility Classes
+     * @{
+     */
+    class Exception;
+    class Format;
+    class Regex;
+    class RegexMatch;
+    class Stream;
+    class String;
+    /**
+     * @}
+     * @defgroup voodoo_functions Function Typedefs
+     * Function pointer types for module interfaces.
+     * @{
+     */
+    namespace Functions
+    {
+        typedef const Version * (VOODOO_CALLTYPE * ModuleVersionFunc)();
+        typedef const uint32_t  (VOODOO_CALLTYPE * ModuleCountFunc)();
+        typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(const uint32_t, Uuid *);
+        typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(const uint32_t, ICore *);
+        typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)(uint32_t);
+    }
+    /**
+     * @}
+     * @defgroup voodoo_references Reference Typedefs
+     * To provide smart intrusive pointers, Boost is required.
+     * @{
+     */
+#if !defined(VOODOO_NO_BOOST)
+    void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
+    void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
+
+    typedef boost::intrusive_ptr<IAdapter>       IAdapterRef;
+    typedef boost::intrusive_ptr<ICore>          ICoreRef;
+    typedef boost::intrusive_ptr<IFile>          IFileRef;
+    typedef boost::intrusive_ptr<IFileSystem>    IFileSystemRef;
+    typedef boost::intrusive_ptr<IHookManager>   IHookManagerRef;
+    typedef boost::intrusive_ptr<IImage>         IImageRef;
+    typedef boost::intrusive_ptr<ILogger>        ILoggerRef;
+    typedef boost::intrusive_ptr<IModule>        IModuleRef;
+    typedef boost::intrusive_ptr<IModuleManager> IModuleManagerRef;
+    typedef boost::intrusive_ptr<IObject>        IObjectRef;
+    typedef boost::intrusive_ptr<IParameter>     IParameterRef;
+    typedef boost::intrusive_ptr<IParser>        IParserRef;
+    typedef boost::intrusive_ptr<IPass>          IPassRef;
+    typedef boost::intrusive_ptr<IShader>        IShaderRef;
+    typedef boost::intrusive_ptr<ITechnique>     ITechniqueRef;
+    typedef boost::intrusive_ptr<ITexture>       ITextureRef;
+    /**
+     * @}
+     * @defgroup voodoo_collections Collections
+     * To provide collections of Voodoo Shader objects, smart pointers are required.
+     * @{
+     */
+#if !defined(VOODOO_NO_STDLIB)
+    typedef std::map<String, String>             StringMap;
+    typedef std::list<String>                    StringList;
+    typedef std::vector<String>                  StringVector;
+    typedef std::map<String, IShaderRef>         ShaderMap;
+    typedef std::list<IShaderRef>                ShaderList;
+    typedef std::vector<IShaderRef>              ShaderVector;
+    typedef std::map<String, ITechniqueRef>      TechniqueMap;
+    typedef std::list<ITechniqueRef>             TechniqueList;
+    typedef std::vector<ITechniqueRef>           TechniqueVector;
+    typedef std::map<String, IPassRef>           PassMap;
+    typedef std::list<IPassRef>                  PassList;
+    typedef std::vector<IPassRef>                PassVector;
+    typedef std::map<String, IParameterRef>      ParameterMap;
+    typedef std::list<IParameterRef>             ParameterList;
+    typedef std::vector<IParameterRef>           ParameterVector;
+    typedef std::map<String, ITextureRef>        TextureMap;
+    typedef std::list<ITextureRef>               TextureList;
+    typedef std::vector<ITextureRef>             TextureVector;
+    typedef std::pair<String, uint32_t>          Variable;
+    typedef std::map<String, Variable>           VariableMap;
+    typedef std::map<Uuid, IModuleRef>           ModuleMap;
+    typedef std::pair<IModuleRef, uint32_t>      ClassSource;
+    typedef std::map<Uuid, ClassSource>          ClassMap;
+    typedef std::map<String, Uuid>               StrongNameMap;
+    typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
+#endif
+#endif
+    /**
+     * @}
      * @addtogroup voodoo_structs
      * @{
      * Describes the precise version of a particular library, including name, main version, revision and debug status.
@@ -641,7 +524,6 @@ namespace VoodooShader
         const wchar_t * Name;
         const wchar_t * RevId;
     };
-
     /**
      * Property variant type. Consists of the value type (filled union field), components in the value (for vector
      * fields), and the value union capable of containing all common basic, vector and pointer types used in the
@@ -651,7 +533,6 @@ namespace VoodooShader
     {
         UnionType   Type;
         uint32_t    Components;
-
         union
         {
             bool        VBool;
@@ -668,8 +549,7 @@ namespace VoodooShader
             IObject *   VIObject;
             void *      VPVoid;
         };
-    };
-    
+    };    
     /**
      * Describes a texture, including size and format.
      */
@@ -680,7 +560,6 @@ namespace VoodooShader
         bool          RenderTarget;
         TextureFormat Format;
     };
-
     /**
      * Describes a portion of a texture. This defines a cube region and provides an optional format the region should be
      * set up as.
@@ -700,7 +579,6 @@ namespace VoodooShader
         UByte4  Color;
         Float4  TexCoord[2];
     };
-
     /**
      * Shader-compatible light structure
      */
@@ -720,29 +598,6 @@ namespace VoodooShader
     };
     /**
      * @}
+     * @}
      */
-
-    /**
-     * Function pointer types for module interfaces.
-     */
-    namespace Functions
-    {
-        typedef const Version * (VOODOO_CALLTYPE * ModuleVersionFunc)();
-        typedef const uint32_t  (VOODOO_CALLTYPE * ModuleCountFunc)();
-        typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(const uint32_t, Uuid *);
-        typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(const uint32_t, ICore *);
-        typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)(uint32_t);
-    }
-
-#ifdef VOODOO_STATIC_LINK
-#pragma comment(lib, "Voodoo_Core.lib")
-
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     *
-     * @param version Version identifier for this core, should be 0.
-     * @return A new ICore object, if one was created successfully.
-     */
-    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(uint32_t version);
-#endif
 }

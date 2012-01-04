@@ -18,14 +18,14 @@
  *   peachykeen@voodooshader.com
  */
 
-#include <string>
+#include "VoodooFramework.hpp"
 
 #pragma warning(push)
 #pragma warning(disable: 6334 6011)
 #include <boost/regex.hpp>
 #pragma warning(pop)
 
-#include "Regex.hpp"
+#include <string>
 
 namespace VoodooShader
 {
@@ -76,16 +76,22 @@ namespace VoodooShader
 
     void Regex::SetExpr(const String & expr)
     {
+        VOODOO_CHECK_IMPL;
+
         m_Impl->m_Regex.set_expression(expr.ToString());
     }
 
     String Regex::GetExpr() const
     {
+        VOODOO_CHECK_IMPL;
+
         return String(m_Impl->m_Regex.str());
     }
 
     RegexMatch Regex::Match(const String & string) const
     {
+        VOODOO_CHECK_IMPL;
+
         RegexMatch match;
         boost::wsmatch mr;
 
@@ -99,11 +105,15 @@ namespace VoodooShader
 
     bool Regex::Find(const String & find) const
     {
+        VOODOO_CHECK_IMPL;
+
         return boost::regex_search(find.ToString(), m_Impl->m_Regex);
     }
 
     String Regex::Replace(const String & find, const String & replace) const
     {
+        VOODOO_CHECK_IMPL;
+
         return boost::regex_replace(find.ToString(), m_Impl->m_Regex, replace.ToString());
     }
 
@@ -124,21 +134,29 @@ namespace VoodooShader
 
     uint32_t RegexMatch::GetCount() const
     {
+        VOODOO_CHECK_IMPL;
+
         return m_Impl->m_Match.size();
     }
 
     bool RegexMatch::IsEmpty() const
     {
+        VOODOO_CHECK_IMPL;
+
         return m_Impl->m_Match.empty();
     }
 
     String RegexMatch::GetMatch(uint32_t index) const
     {
+        VOODOO_CHECK_IMPL;
+
         return m_Impl->m_Match[index];
     }
 
     String RegexMatch::Format(const String & fmt) const
     {
+        VOODOO_CHECK_IMPL;
+
         return m_Impl->m_Match.format(fmt.ToString(), boost::format_all);
     }
 }

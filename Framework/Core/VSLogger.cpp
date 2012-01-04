@@ -20,10 +20,6 @@
 
 #include "VSLogger.hpp"
 
-#include "ICore.hpp"
-
-#include "Format.hpp"
-
 namespace VoodooShader
 {
     VSLogger::VSLogger(ICore * pCore) :

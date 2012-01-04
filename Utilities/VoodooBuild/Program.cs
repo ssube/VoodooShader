@@ -12,7 +12,7 @@ namespace VoodooBuild
         static void Main(string[] args)
         {
             String solutionDir = args[0].Trim();
-            String buildFile = solutionDir + @"\Framework\Core\Version_Build.hpp";
+            String buildFile = solutionDir + @"\Framework\Core\BuildVersion.hpp";
 
             Int32 buildCount = 0;
 
@@ -60,7 +60,7 @@ namespace VoodooBuild
                 lines = new String[3];
                 lines[0] = timestamp;
                 lines[1] = String.Format("#define VOODOO_GLOBAL_VERSION_BUILD {0}", buildCount);
-                lines[2] = String.Format("#define VOODOO_GLOBAL_VERSION_ID VOODOO_META_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
+                lines[2] = String.Format("#define VOODOO_GLOBAL_VERSION_ID VOODOO_STRING(\"{0}\")", gitDesc.TrimEnd('\n'));
                 File.WriteAllLines(buildFile, lines);
             }
         }

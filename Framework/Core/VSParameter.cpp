@@ -20,17 +20,6 @@
 
 #include "VSParameter.hpp"
 
-#include "IAdapter.hpp"
-#include "ICore.hpp"
-#include "ILogger.hpp"
-#include "IShader.hpp"
-#include "ITexture.hpp"
-
-#include "Converter.hpp"
-#include "Exception.hpp"
-#include "Format.hpp"
-#include "Version.hpp"
-
 namespace VoodooShader
 {
     VSParameter::VSParameter(_Pre_notnull_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type) :

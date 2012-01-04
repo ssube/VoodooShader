@@ -38,7 +38,7 @@ namespace VoodooShader
 {
     namespace VoodooWFS
     {
-        static const Version version = VOODOO_META_VERSION_STRUCT(FILESYSTEM);
+        static const Version version = VOODOO_VERSION_STRUCT(FILESYSTEM);
         static const wchar_t * name_VSWFileSystem = VSTR("VSWFileSystem");
         static const Uuid clsid_VSWFileSystem = CLSID_VSWFileSystem;
 
@@ -216,7 +216,8 @@ namespace VoodooShader
 
         bool VSWFileSystem::RemovePath(const String & name)
         {
-            this->m_Directories.remove_if(
+            this->m_Directories.remove_if
+            (
                 [&](const String & current)
                 {
                     return (current == name);

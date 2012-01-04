@@ -20,12 +20,6 @@
 
 #include "VSParser.hpp"
 
-#include "ICore.hpp"
-#include "ILogger.hpp"
-
-#include "Format.hpp"
-#include "Version.hpp"
-
 #include "shlwapi.h"
 
 #include <string>
