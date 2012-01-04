@@ -58,7 +58,9 @@ namespace VoodooShader
             {
                 delete this;
                 return 0;
-            } else {
+            }
+            else
+            {
                 return m_Refs;
             }
         }
@@ -71,18 +73,28 @@ namespace VoodooShader
                 {
                     clsid = IID_ITexture;
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 if (clsid == IID_IObject)
                 {
                     *ppOut = static_cast<const IObject*>(this);
-                } else if (clsid == IID_ITexture) {
+                }
+                else if (clsid == IID_ITexture)
+                {
                     *ppOut = static_cast<const ITexture*>(this);
-                } else if (clsid == CLSID_DX9Texture) {
+                }
+                else if (clsid == CLSID_DX9Texture)
+                {
                     *ppOut = static_cast<const DX9Texture*>(this);
-                } else {
+                }
+                else
+                {
                     *ppOut = nullptr;
                     return false;
                 }

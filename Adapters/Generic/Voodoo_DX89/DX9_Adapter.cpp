@@ -76,18 +76,28 @@ namespace VoodooShader
                 {
                     clsid = CLSID_DX9Adapter;
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 if (clsid == IID_IObject)
                 {
                     *ppOut = static_cast<const IObject*>(this);
-                } else if (clsid == IID_IAdapter) {
+                }
+                else if (clsid == IID_IAdapter)
+                {
                     *ppOut = static_cast<const IAdapter*>(this);
-                } else if (clsid == CLSID_DX9Adapter) {
+                }
+                else if (clsid == CLSID_DX9Adapter)
+                {
                     *ppOut = static_cast<const DX9Adapter*>(this);
-                } else {
+                }
+                else
+                {
                     *ppOut = nullptr;
                     return false;
                 }
@@ -116,8 +126,12 @@ namespace VoodooShader
                 logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to load null pass."));
                 return false;
             }
+            else
+            {
+                return true;
+            }
 
-            IPassRef pass(pPass);
+            /*IPassRef pass(pPass);
 
             CGprogram vertProg = pass->GetProgram(PS_Vertex);
             CGprogram fragProg = pass->GetProgram(PS_Fragment);
@@ -153,7 +167,7 @@ namespace VoodooShader
             }
 
             logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, Format("Successfully loaded programs from '%1%'.") << pass);
-            return true;
+            return true;*/
         }
 
         bool VOODOO_METHODTYPE DX9Adapter::UnloadPass(_In_ IPass * const pPass)
@@ -165,8 +179,12 @@ namespace VoodooShader
                 logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to load null pass."));
                 return false;
             }
+            else
+            {
+                return true;
+            }
 
-            IPassRef pass(pPass);
+            /*IPassRef pass(pPass);
 
             CGprogram vertProg = pass->GetProgram(PS_Vertex);
             CGprogram fragProg = pass->GetProgram(PS_Fragment);
@@ -180,7 +198,7 @@ namespace VoodooShader
                     logger->LogMessage
                     (
                         LL_ModError, VOODOO_DX89_NAME,
-                        Format("Error loading vertex program from '%1%': %2%.") << pass << hr
+                        Format("Error unloading vertex program from '%1%': %2%.") << pass << hr
                     );
 
                     return false;
@@ -201,7 +219,7 @@ namespace VoodooShader
                 }
             }
 
-            return true;
+            return true;*/
         }
 
         bool VOODOO_METHODTYPE DX9Adapter::SetPass(_In_ IPass * const pPass)
@@ -306,23 +324,31 @@ namespace VoodooShader
                     {
                         logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound backbuffer to render target %1%: %2%") << index << result);
                         return true;
-                    } else {
+                    }
+                    else
+                    {
                         logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind backbuffer to render target %1%: %2%") << index << result);
                         return false;
                     }
-                } else {
+                }
+                else
+                {
                     result = m_Device->SetRenderTarget(index, nullptr);
 
                     if (SUCCEEDED(result))
                     {
                         logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture to render target %1%: %2%") << index << result);
                         return true;
-                    } else {
+                    }
+                    else
+                    {
                         logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind null texture to render target %1%: %2%") << index << result);
                         return false;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 IDirect3DTexture9 * pD3D9Tex = reinterpret_cast<IDirect3DTexture9*>(pTarget->GetData());
 
                 if (!pD3D9Tex)
@@ -332,7 +358,9 @@ namespace VoodooShader
                     {
                         logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture data to render target %1%: %2%") << index << result);
                         return true;
-                    } else {
+                    }
+                    else
+                    {
                         logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind null texture data to render target %1%: %2%") << index << result);
                         return false;
                     }
@@ -360,7 +388,9 @@ namespace VoodooShader
                 {
                     logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind texture '%1%' to render target %2%: %3%") << pTarget << index << result);
                     return false;
-                } else {
+                }
+                else
+                {
                     logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound texture '%1%' to render target %2%: %3%") << pTarget << index << result);
                     return true;
                 }
@@ -444,7 +474,9 @@ namespace VoodooShader
             if (flags & VF_Transformed)
             {
                 m_Device->SetVertexDeclaration(m_VertDeclT);
-            } else {
+            }
+            else
+            {
                 m_Device->SetVertexDeclaration(m_VertDecl);
             }
 
@@ -466,7 +498,9 @@ namespace VoodooShader
                     gpVoodooCore->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 hr = m_Device->BeginScene();
 
                 if (SUCCEEDED(hr))
@@ -522,38 +556,43 @@ namespace VoodooShader
             if (strname == VSTR("SdkVersion") && value->Type == UT_UInt32)
             {
                 m_SdkVersion = value->VUInt32.X;
-            } else if (strname == VSTR("IDirect3D8") && value->Type == UT_PVoid) {
+            } 
+            else if (strname == VSTR("IDirect3D8") && value->Type == UT_PVoid) 
+            {
                 if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
                 {
                     IDirect3D8 * origObj = reinterpret_cast<IDirect3D8 *>(value->VPVoid);
-                    if (origObj)
-                    {
-                        origObj->Release();
-                    }
+                    if (!origObj) return false;
+
+                    // Create the wrapper object and build the caps cache from the original
+                    VoodooDX8::CVoodoo3D8 * fakeObj = new VoodooDX8::CVoodoo3D8(m_SdkVersion, nullptr);
+                    fakeObj->VSCacheCaps(origObj);
+                    origObj->Release();
                 
+                    // Load system d3d9.
                     HMODULE d3d9 = nullptr;
                     typedef IDirect3D9 * (WINAPI * Type_Direct3DCreate9)(UINT);
-                    Type_Direct3DCreate9 d3d9func = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), false, "Direct3DCreate9", &d3d9);
+                    Type_Direct3DCreate9 d3d9func = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), true, "Direct3DCreate9", &d3d9);
                     assert(d3d9func);
 
+                    // Create the real object
                     IDirect3D9 * realObj = d3d9func(D3D_SDK_VERSION);
                     assert(realObj);
 
-                    VoodooDX8::CVoodoo3D8 * fakeObj = new VoodooDX8::CVoodoo3D8(m_SdkVersion, realObj);
-
+                    fakeObj->m_RealObject = realObj;
                     value->VPVoid = fakeObj;
-
                     return true;
                 }
-            } else if (strname == VSTR("IDirect3D9") && value->Type == UT_PVoid) {
+            } 
+            else if (strname == VSTR("IDirect3D9") && value->Type == UT_PVoid) 
+            {
                 if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
                 {
                     IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->VPVoid);
+                    if (!origObj) return false;
 
                     CVoodoo3D9 * fakeObj = new CVoodoo3D9(m_SdkVersion, origObj);
-
                     value->VPVoid = fakeObj;
-
                     return true;
                 }
             }
@@ -563,11 +602,15 @@ namespace VoodooShader
 
         bool VOODOO_METHODTYPE DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant * const value) CONST
         {
+            if (!name || !value) return false;
+
             String strname(name);
 
             if (strname == VSTR("SdkVersion"))
             {
+                ZeroMemory(value, sizeof(Variant));
                 value->Type = UT_UInt32;
+                value->Components = 1;
                 value->VUInt32.X = m_SdkVersion;
                 return true;
             }
@@ -593,7 +636,9 @@ namespace VoodooShader
                         LL_ModInfo, VOODOO_DX89_NAME, 
                         Format("Binding texture %1% to parameter %2%.") << pTexture << pParam
                     );
-                } else {
+                } 
+                else 
+                {
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_ModInfo, VOODOO_DX89_NAME, 
@@ -778,7 +823,9 @@ namespace VoodooShader
             if (FAILED(errors))
             {
                 logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
-            } else {
+            }
+            else
+            {
                 memcpy(pVertices, fsVertData, sizeof(fsVertData));
                 gpFSQuadVerts->Unlock();
             }

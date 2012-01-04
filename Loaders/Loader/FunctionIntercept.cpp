@@ -99,7 +99,9 @@ bool WINAPI InstallDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol, LPVOID pFun
 #endif
 
         return true;
-    } else {
+    }
+    else
+    {
         PWCHAR estr = RtlGetLastErrorString();
         ErrorMessage(0x200A, TEXT("EasyHook Error: %s"), estr);
 
@@ -133,7 +135,9 @@ bool WINAPI RemoveDllHook(_In_z_ LPTSTR name, _In_z_ LPCSTR symbol)
         delete hook->second;
         gHooks.erase(hook);
         return true;
-    } else {
+    }
+    else
+    {
         return false;
     }
 }

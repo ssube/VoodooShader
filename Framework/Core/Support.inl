@@ -90,7 +90,9 @@ inline static void * WINAPI FindFunction(const LPTSTR libname, bool system, cons
         if (system)
         {
             *pModule = LoadSystemLibrary(libname);
-        } else {
+        }
+        else
+        {
             *pModule = LoadLibrary(libname);
         }
     }
@@ -110,7 +112,9 @@ inline static HKEY WINAPI GetVoodooKey()
     if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader"), NULL, KEY_READ, &root) == ERROR_SUCCESS)
     {
         return root;
-    } else {
+    }
+    else
+    {
         return nullptr;
     }
 }
@@ -196,7 +200,9 @@ inline static FILE * WINAPI GetVoodooGlobalLog()
     if (_tfopen_s(&pf, path, TEXT("a")) == 0)
     {
         return pf;
-    } else {
+    }
+    else
+    {
         return nullptr;
     }
 }
@@ -225,7 +231,9 @@ inline static HHOOKDEF WINAPI HookFromKey(_In_ HKEY pKey)
         {
             hook->Active = true;
         }
-    } else {
+    }
+    else
+    {
         delete hook;
         return nullptr;
     }
@@ -234,7 +242,9 @@ inline static HHOOKDEF WINAPI HookFromKey(_In_ HKEY pKey)
     if (RegQueryValueEx(pKey, TEXT("Target"), NULL, &valueType, (BYTE*)hook->Target, &valueSize) == ERROR_SUCCESS)
     {
         hook->Target[valueSize - 1] = 0;
-    } else {
+    }
+    else
+    {
         delete hook;
         return nullptr;
     }
@@ -243,7 +253,9 @@ inline static HHOOKDEF WINAPI HookFromKey(_In_ HKEY pKey)
     if (RegQueryValueEx(pKey, TEXT("Name"), NULL, &valueType, (BYTE*)hook->Name, &valueSize) == ERROR_SUCCESS)
     {
         hook->Name[valueSize - 1] = 0;
-    } else {
+    }
+    else
+    {
         delete hook;
         return nullptr;
     }
@@ -252,7 +264,9 @@ inline static HHOOKDEF WINAPI HookFromKey(_In_ HKEY pKey)
     if (RegQueryValueEx(pKey, TEXT("Config"), NULL, &valueType, (BYTE*)hook->Config, &valueSize) == ERROR_SUCCESS)
     {
         hook->Config[valueSize - 1] = 0;
-    } else {
+    }
+    else
+    {
         delete hook;
         return nullptr;
     }
@@ -285,7 +299,9 @@ inline static HHOOKDEF WINAPI SearchHooks(_In_z_ TCHAR * moduleName)
                         RegCloseKey(hookRoot);
 
                         return hook;
-                    } else {
+                    }
+                    else
+                    {
                         delete hook;
                     }
                 }

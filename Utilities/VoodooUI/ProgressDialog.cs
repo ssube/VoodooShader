@@ -119,7 +119,9 @@ namespace VoodooUI
             {
                 AllowCloseDelegate d = new AllowCloseDelegate(SetAllowClose);
                 this.Invoke(d, mode);
-            } else {
+            }
+            else
+            {
                 bOK.Enabled = mode;
             }
         }

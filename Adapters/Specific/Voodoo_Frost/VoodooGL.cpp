@@ -81,7 +81,9 @@ void GLAPIENTRY vglBindTexture(GLenum target, GLuint texture)
      *          bind Pass
      *          gBoundPass = Pass
      *      }
-     *  } else if ( gBoundPass ) {
+     *  } 
+     *  else if ( gBoundPass )
+     *  {
      *      unbind gBoundPass
      *      gBoundPass = nullptr
      *  }

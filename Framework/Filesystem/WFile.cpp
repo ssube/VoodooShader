@@ -54,7 +54,9 @@ namespace VoodooShader
             {
                 delete this;
                 return 0;
-            } else {
+            }
+            else
+            {
                 return m_Refs;
             }
         }
@@ -67,18 +69,28 @@ namespace VoodooShader
                 {
                     clsid = CLSID_VSWFile;
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 if (clsid == IID_IObject)
                 {
                     *ppOut = static_cast<const IObject*>(this);
-                } else if (clsid == IID_IFile) {
+                }
+                else if (clsid == IID_IFile)
+                {
                     *ppOut = static_cast<const IFile*>(this);
-                } else if (clsid == CLSID_VSWFile) {
+                }
+                else if (clsid == CLSID_VSWFile)
+                {
                     *ppOut = static_cast<const VSWFile*>(this);
-                } else {
+                }
+                else
+                {
                     *ppOut = nullptr;
                     return false;
                 }

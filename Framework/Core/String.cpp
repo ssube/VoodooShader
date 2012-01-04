@@ -117,7 +117,9 @@ namespace VoodooShader
         if (other.m_Impl)
         {
             m_Impl = new StringImpl(other.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             m_Impl = new StringImpl();
         }
     }
@@ -138,7 +140,9 @@ namespace VoodooShader
         if (!str)
         {
             m_Impl = new StringImpl();
-        } else {
+        }
+        else
+        {
             int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
             std::vector<wchar_t> wstr(len);
             MultiByteToWideChar(CP_UTF8, NULL, str, -1, &wstr[0], len);
@@ -146,7 +150,9 @@ namespace VoodooShader
             if (size == 0)
             {
                 m_Impl = new StringImpl(&wstr[0]);
-            } else {
+            }
+            else
+            {
                 m_Impl = new StringImpl(size, &wstr[0]);
             }
         }
@@ -159,10 +165,13 @@ namespace VoodooShader
         if (!str)
         {
             m_Impl = new StringImpl();
-        } else if (size == 0)
+        }
+        else if (size == 0)
         {
             m_Impl = new StringImpl(str);
-        } else {
+        }
+        else
+        {
             m_Impl = new StringImpl(size, str);
         }
     }
@@ -341,7 +350,9 @@ namespace VoodooShader
             if (index == tokens.size())
             {
                 return index;
-            } else if (index == count) {
+            }
+            else if (index == count)
+            {
                 cap = tokens.size();
                 while (index < cap)
                 {
@@ -351,7 +362,9 @@ namespace VoodooShader
             }
 
             return index;
-        } else {
+        }
+        else
+        {
             return tokens.size();
         }
     }
@@ -374,7 +387,9 @@ namespace VoodooShader
         if (count == String::Npos)
         {
             return String(m_Impl->m_Str.substr(0, std::string::npos));
-        } else {
+        }
+        else
+        {
             return String(m_Impl->m_Str.substr(0, count));
         }
     }
@@ -391,7 +406,9 @@ namespace VoodooShader
         if (count == String::Npos)
         {
             return String(m_Impl->m_Str.substr(start, std::string::npos));
-        } else {
+        }
+        else
+        {
             return String(m_Impl->m_Str.substr(start, count));
         }
     }
@@ -402,7 +419,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::equals(m_Impl->m_Str, std::wstring(1, ch));
-        } else {
+        }
+        else
+        {
             return boost::iequals(m_Impl->m_Str, std::wstring(1, ch));
         }
     }
@@ -413,7 +432,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::equals(m_Impl->m_Str, str);
-        } else {
+        }
+        else
+        {
             return boost::iequals(m_Impl->m_Str, str);
         }
     }
@@ -424,7 +445,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::equals(m_Impl->m_Str, str.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             return boost::iequals(m_Impl->m_Str, str.m_Impl->m_Str);
         }
     }
@@ -435,7 +458,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::starts_with(m_Impl->m_Str, std::wstring(1, ch));
-        } else {
+        }
+        else
+        {
             return boost::istarts_with(m_Impl->m_Str, std::wstring(1, ch));
         }
     }
@@ -446,7 +471,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::starts_with(m_Impl->m_Str, str);
-        } else {
+        }
+        else
+        {
             return boost::istarts_with(m_Impl->m_Str, str);
         }
     }
@@ -457,7 +484,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::starts_with(m_Impl->m_Str, str.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             return boost::istarts_with(m_Impl->m_Str, str.m_Impl->m_Str);
         }
     }
@@ -468,7 +497,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::ends_with(m_Impl->m_Str, std::wstring(1, ch));
-        } else {
+        }
+        else
+        {
             return boost::iends_with(m_Impl->m_Str, std::wstring(1, ch));
         }
     }
@@ -479,7 +510,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::ends_with(m_Impl->m_Str, str);
-        } else {
+        }
+        else
+        {
             return boost::iends_with(m_Impl->m_Str, str);
         }
     }
@@ -490,7 +523,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::ends_with(m_Impl->m_Str, str.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             return boost::iends_with(m_Impl->m_Str, str.m_Impl->m_Str);
         }
     }
@@ -501,7 +536,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::contains(m_Impl->m_Str, std::wstring(1, ch));
-        } else {
+        }
+        else
+        {
             return boost::icontains(m_Impl->m_Str, std::wstring(1, ch));
         }
     }
@@ -512,7 +549,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::contains(m_Impl->m_Str, str);
-        } else {
+        }
+        else
+        {
             return boost::icontains(m_Impl->m_Str, str);
         }
     }
@@ -523,7 +562,9 @@ namespace VoodooShader
         if (useCase)
         {
             return boost::contains(m_Impl->m_Str, str.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             return boost::icontains(m_Impl->m_Str, str.m_Impl->m_Str);
         }
     }
@@ -534,7 +575,9 @@ namespace VoodooShader
         if (useCase)
         {
             return m_Impl->m_Str.find(ch);
-        } else {
+        }
+        else
+        {
             std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
             wchar_t lch = towlower(ch);
             return lstr.find(lch);
@@ -547,7 +590,9 @@ namespace VoodooShader
         if (useCase)
         {
             return m_Impl->m_Str.find(str);
-        } else {
+        }
+        else
+        {
             std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
             std::wstring lfstr(str);
             boost::to_lower(lfstr);
@@ -561,7 +606,9 @@ namespace VoodooShader
         if (useCase)
         {
             return m_Impl->m_Str.find(str.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
             std::wstring lfstr = boost::to_lower_copy(str.m_Impl->m_Str);
             return lstr.find(lfstr);
@@ -574,7 +621,9 @@ namespace VoodooShader
         if (useCase)
         {
             return m_Impl->m_Str.find(ch);
-        } else {
+        }
+        else
+        {
             std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
             wchar_t lch = towlower(ch);
             return lstr.rfind(lch);
@@ -587,7 +636,9 @@ namespace VoodooShader
         if (useCase)
         {
             return m_Impl->m_Str.find(str);
-        } else {
+        }
+        else
+        {
             std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
             std::wstring lfstr(str);
             boost::to_lower(lfstr);
@@ -601,7 +652,9 @@ namespace VoodooShader
         if (useCase)
         {
             return m_Impl->m_Str.find(str.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             std::wstring lstr = boost::to_lower_copy(m_Impl->m_Str);
             std::wstring lfstr = boost::to_lower_copy(str.m_Impl->m_Str);
             return lstr.rfind(lfstr);
@@ -614,7 +667,9 @@ namespace VoodooShader
         if (useCase)
         {
             boost::replace_all(m_Impl->m_Str, std::wstring(1, fch), std::wstring(1, rch));
-        } else {
+        }
+        else
+        {
             boost::ireplace_all(m_Impl->m_Str, std::wstring(1, fch), std::wstring(1, rch));
         }
         return (*this);
@@ -626,7 +681,9 @@ namespace VoodooShader
         if (useCase)
         {
             boost::replace_all(m_Impl->m_Str, fstr, rstr);
-        } else {
+        }
+        else
+        {
             boost::ireplace_all(m_Impl->m_Str, fstr, rstr);
         }
         return (*this);
@@ -638,7 +695,9 @@ namespace VoodooShader
         if (useCase)
         {
             boost::replace_all(m_Impl->m_Str, fstr.m_Impl->m_Str, rstr.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             boost::ireplace_all(m_Impl->m_Str, fstr.m_Impl->m_Str, rstr.m_Impl->m_Str);
         }
         return (*this);
@@ -650,7 +709,9 @@ namespace VoodooShader
         if (useCase)
         {
             boost::erase_all(m_Impl->m_Str, std::wstring(1, fch));
-        } else {
+        }
+        else
+        {
             boost::ierase_all(m_Impl->m_Str, std::wstring(1, fch));
         }
         return (*this);
@@ -662,7 +723,9 @@ namespace VoodooShader
         if (useCase)
         {
             boost::erase_all(m_Impl->m_Str, fstr);
-        } else {
+        }
+        else
+        {
             boost::ierase_all(m_Impl->m_Str, fstr);
         }
         return (*this);
@@ -674,7 +737,9 @@ namespace VoodooShader
         if (useCase)
         {
             boost::erase_all(m_Impl->m_Str, fstr.m_Impl->m_Str);
-        } else {
+        }
+        else
+        {
             boost::ierase_all(m_Impl->m_Str, fstr.m_Impl->m_Str);
         }
         return (*this);
@@ -752,7 +817,9 @@ namespace VoodooShader
             {
                 return String(VSTR("Unknown Time"));
             }
-        } else {
+        }
+        else
+        {
             time_t now = time(nullptr);
             if (localtime_s(&localTime, &now) != 0)
             {
@@ -776,7 +843,9 @@ namespace VoodooShader
             {
                 return String(VSTR("Unknown Date"));
             }
-        } else {
+        }
+        else
+        {
             time_t now = time(nullptr);
             if (localtime_s(&localTime, &now) != 0)
             {

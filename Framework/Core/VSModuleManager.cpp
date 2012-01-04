@@ -76,18 +76,28 @@ namespace VoodooShader
             {
                 clsid = CLSID_VSModuleManager;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_IModuleManager) {
+            }
+            else if (clsid == IID_IModuleManager)
+            {
                 *ppOut = static_cast<const IModuleManager*>(this);
-            } else if (clsid == CLSID_VSModuleManager) {
+            }
+            else if (clsid == CLSID_VSModuleManager)
+            {
                 *ppOut = static_cast<const VSModuleManager*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }
@@ -142,7 +152,9 @@ namespace VoodooShader
                 );
 
                 return false;
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarning, VOODOO_CORE_NAME, 
@@ -157,7 +169,9 @@ namespace VoodooShader
         if (filter.IsEmpty())
         {
             compfilter.SetExpr(VSTR(".*\\.dll"));
-        } else {
+        }
+        else
+        {
             compfilter.SetExpr(filter);
         }
 
@@ -265,7 +279,9 @@ namespace VoodooShader
         if (pFile)
         {
             return this->LoadFile(pFile->GetPath());
-        } else {
+        }
+        else
+        {
             return nullptr;
         }
     }
@@ -286,7 +302,9 @@ namespace VoodooShader
             if (classiter != m_ClassNames.end())
             {
                 clsid = classiter->second;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -320,7 +338,9 @@ namespace VoodooShader
             }
 
             return object;
-        } else {
+        }
+        else
+        {
             if (logger)
             {
                 logger->LogMessage
@@ -344,7 +364,9 @@ namespace VoodooShader
             if (classiter != m_ClassNames.end())
             {
                 clsid = classiter->second;
-            } else {
+            }
+            else
+            {
                 return nullptr;
             }
         }

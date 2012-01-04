@@ -99,7 +99,9 @@ namespace VoodooShader
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return m_Refs;
         }
     }
@@ -113,18 +115,28 @@ namespace VoodooShader
             {
                 clsid = CLSID_VSShader;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_IShader) {
+            }
+            else if (clsid == IID_IShader)
+            {
                 *ppOut = static_cast<const IShader*>(this);
-            } else if (clsid == CLSID_VSShader) {
+            }
+            else if (clsid == CLSID_VSShader)
+            {
                 *ppOut = static_cast<const VSShader*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }
@@ -474,7 +486,9 @@ namespace VoodooShader
 
                 return;
             }
-        } else {
+        }
+        else
+        {
             m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("No texture size found."));
             texRegion.Size.X = texRegion.Size.Y = texRegion.Size.Z = 0;
         }
@@ -518,7 +532,9 @@ namespace VoodooShader
 
                 return;
             }
-        } else {
+        }
+        else
+        {
             m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("No texture origin found."));
             texRegion.Origin.X = texRegion.Origin.Y = texRegion.Origin.Z = 0;
         }
@@ -529,7 +545,9 @@ namespace VoodooShader
             if (boolVals && outCount > 0)
             {
                 texRegion.Mipmaps = boolVals[0] == 1;
-            } else {
+            }
+            else
+            {
                 texRegion.Mipmaps = false;
             }
         }
@@ -540,7 +558,9 @@ namespace VoodooShader
             if (boolVals && outCount > 0)
             {
                 texRegion.RenderTarget = boolVals[0] == 1;
-            } else {
+            }
+            else
+            {
                 texRegion.RenderTarget = false;
             }
         }
@@ -582,14 +602,18 @@ namespace VoodooShader
                         Format(VSTR("Adapter was unable to load texture from file '%1%'.")) << texFile
                     );
                 }
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreWarning, VOODOO_CORE_NAME, 
                     Format(VSTR("File '%1%' is not a valid image.")) << texFile
                 );
             }
-        } else {
+        }
+        else
+        {
             m_Core->GetLogger()->LogMessage
             (
                 LL_CoreWarning, VOODOO_CORE_NAME, 

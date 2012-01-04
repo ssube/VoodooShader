@@ -46,7 +46,9 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
     if (nCode < 0)
     {
         return CallNextHookEx(NULL, nCode, wParam, lParam);
-    } else {
+    }
+    else
+    {
         if (nCode == HCBT_CREATEWND || nCode == HCBT_ACTIVATE)
         {
             if (InterlockedCompareExchange(&gLoadOnce, 0, 1) == 1)
@@ -90,7 +92,9 @@ HHOOK WINAPI InstallGlobalHook()
         if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER, 0, error, LANG_USER_DEFAULT, buffer, 1024, NULL) > 0)
         {
             ErrorMessage(0x1001, buffer);
-        } else {
+        }
+        else
+        {
             ErrorMessage(0x1002, TEXT("Error setting global hook."));
         }
         return false;
@@ -112,7 +116,9 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
             if (FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER, 0, error, LANG_USER_DEFAULT, buffer, 1024, NULL) > 0)
             {
                 ErrorMessage(0x1003, buffer);
-            } else {
+            }
+            else
+            {
                 ErrorMessage(0x1004, TEXT("Error removing global hook."));
             }
         }
@@ -135,10 +141,14 @@ bool WINAPI LoadFullLoader()
         if (hookFunc)
         {
             result = hookFunc();
-        } else {
+        }
+        else
+        {
             ErrorMessage(0x1006, TEXT("Unable to launch Voodoo loader."));
         }
-    } else {
+    }
+    else
+    {
         ErrorMessage(0x1005, TEXT("Unable to load Voodoo loader."));
     }
 

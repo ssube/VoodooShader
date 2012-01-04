@@ -62,7 +62,16 @@ HRESULT WINAPI VSDirectInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID rii
         if (LoadVoodoo())
         {
             VoodooShader::Variant DIObj;
+            ZeroMemory(&DIObj, sizeof(VoodooShader::Variant));
+            DIObj.Type = VoodooShader::UT_UInt32;
+            DIObj.Components = 1;
+            DIObj.VUInt32.X = dwVersion;
+
+            gVoodooCore->GetAdapter()->SetProperty(VSTR("DIVersion"), &DIObj);
+
+            ZeroMemory(&DIObj, sizeof(VoodooShader::Variant));
             DIObj.Type = VoodooShader::UT_PVoid;
+            DIObj.Components = 1;
             DIObj.VPVoid = i8obj;
 
             if (gVoodooCore->GetAdapter()->SetProperty(L"IDirectInput8", &DIObj))

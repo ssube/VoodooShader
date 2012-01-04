@@ -71,7 +71,16 @@ LPVOID WINAPI VSDirect3DCreate9(UINT sdkVersion)
         if (LoadVoodoo())
         {
             VoodooShader::Variant D3DObj;
+            ZeroMemory(&D3DObj, sizeof(VoodooShader::Variant));
+            D3DObj.Type = VoodooShader::UT_UInt32;
+            D3DObj.Components = 1;
+            D3DObj.VUInt32.X = sdkVersion;
+
+            gVoodooCore->GetAdapter()->SetProperty(VSTR("SdkVersion"), &D3DObj);
+
+            ZeroMemory(&D3DObj, sizeof(VoodooShader::Variant));
             D3DObj.Type = VoodooShader::UT_PVoid;
+            D3DObj.Components = 1;
             D3DObj.VPVoid = pD3D9;
             
             if (gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9", &D3DObj))
@@ -107,7 +116,16 @@ HRESULT WINAPI VSDirect3DCreate9Ex(UINT sdkVersion, LPVOID * dx)
         if (LoadVoodoo())
         {
             VoodooShader::Variant D3DObj;
+            ZeroMemory(&D3DObj, sizeof(VoodooShader::Variant));
+            D3DObj.Type = VoodooShader::UT_UInt32;
+            D3DObj.Components = 1;
+            D3DObj.VUInt32.X = sdkVersion;
+
+            gVoodooCore->GetAdapter()->SetProperty(VSTR("SdkVersion"), &D3DObj);
+
+            ZeroMemory(&D3DObj, sizeof(VoodooShader::Variant));
             D3DObj.Type = VoodooShader::UT_PVoid;
+            D3DObj.Components = 1;
             D3DObj.VPVoid = *dx;
 
             if (gVoodooCore->GetAdapter()->SetProperty(L"IDirect3D9Ex", &D3DObj))

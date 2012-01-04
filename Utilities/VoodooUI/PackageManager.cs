@@ -90,7 +90,9 @@ namespace VoodooUI
                 if (Directory.Exists(fullpath))
                 {
                     MessageBox.Show(String.Format("Unable to install package {0}, directory already exists.", package), "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } else {
+                }
+                else
+                {
                     m_ProgressForm = new ProgressDialog();
                     m_ProgressForm.WriteLine("Installing package {0}", package);
 

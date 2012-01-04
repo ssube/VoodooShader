@@ -94,7 +94,9 @@ namespace VoodooShader
             if (pf)
             {
                 return pf(*this);
-            } else {
+            }
+            else
+            {
                 return (*this);
             }
         }
@@ -104,7 +106,9 @@ namespace VoodooShader
             if (pf)
             {
                 return pf(*this);
-            } else {
+            }
+            else
+            {
                 return this->ToString();
             }
         }
@@ -281,7 +285,9 @@ namespace VoodooShader
             {
                 Uuid t = (*v.VUuid);
                 os << t;
-            } else {
+            }
+            else
+            {
                 os << VSTR("(null)");
             }
             break;
@@ -289,7 +295,9 @@ namespace VoodooShader
             if (v.VString)
             {
                 os << v.VString->GetData();
-            } else {
+            }
+            else
+            {
                 os << VSTR("(null)");
             }
             break;
@@ -327,7 +335,9 @@ namespace VoodooShader
         if (v)
         {
             os << v->ToString();
-        } else {
+        }
+        else
+        {
             os << VSTR("IObject(null)");
         }
         return os;

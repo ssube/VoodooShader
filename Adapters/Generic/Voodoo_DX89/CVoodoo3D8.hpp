@@ -41,6 +41,7 @@ namespace VoodooShader
         public:
             UINT m_SdkVersion;
             IDirect3D9 * m_RealObject;
+            std::vector<D3DCAPS8> m_Caps;
 
             CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObj);
 
@@ -76,6 +77,11 @@ namespace VoodooShader
             STDMETHOD(GetDeviceCaps)(UINT Adapter,D3DDEVTYPE DeviceType,D3DCAPS8* pCaps);
             STDMETHOD_(HMONITOR, GetAdapterMonitor)(UINT Adapter);
             STDMETHOD(CreateDevice)(UINT Adapter,D3DDEVTYPE DeviceType,HWND hFocusWindow,DWORD BehaviorFlags,D3DPRESENT_PARAMETERS8* pPresentationParameters,IDirect3DDevice8** ppReturnedDeviceInterface);
+
+            /**
+             * Voodoo Shader-specific function to fill the caps when created.
+             */
+            STDMETHOD(VSCacheCaps)(IDirect3D8 * pObject);
         };
     }
 }

@@ -230,7 +230,9 @@ namespace VoodooUI
                     {
                         voodooRoot.DeleteSubKeyTree("Hooks");
                     }
-                } else {
+                }
+                else
+                {
                     voodooRoot = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\VoodooShader");
                 }
                 
@@ -321,7 +323,8 @@ namespace VoodooUI
                 if (result == DialogResult.Cancel)
                 {
                     return false;
-                } else if (result == DialogResult.Yes)
+                }
+                else if (result == DialogResult.Yes)
                 {
                     SaveHook(null, null);
                 }

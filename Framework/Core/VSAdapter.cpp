@@ -50,7 +50,9 @@ namespace VoodooShader
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return m_Refs;
         }
     }
@@ -64,18 +66,28 @@ namespace VoodooShader
             {
                 clsid = CLSID_VSAdapter;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_IAdapter) {
+            }
+            else if (clsid == IID_IAdapter)
+            {
                 *ppOut = static_cast<const IAdapter*>(this);
-            } else if (clsid == CLSID_VSAdapter) {
+            }
+            else if (clsid == CLSID_VSAdapter)
+            {
                 *ppOut = static_cast<const VSAdapter*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }

@@ -93,7 +93,9 @@ namespace VoodooShader
                     Format(VSTR("Unable to open file '%1%'.")) << m_Path
                 );
                 return false;
-            } else {
+            }
+            else
+            {
                 return true;
             }
         }
@@ -160,7 +162,9 @@ namespace VoodooShader
             if (m_File.bad())
             {
                 return -1;
-            } else {
+            }
+            else
+            {
                 return ret;
             }
         }
@@ -179,7 +183,9 @@ namespace VoodooShader
             if (m_File.bad())
             {
                 return -1;
-            } else {
+            }
+            else
+            {
                 return count;
             }
         }

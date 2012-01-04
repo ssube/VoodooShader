@@ -115,18 +115,28 @@ namespace VoodooShader
                 {
                     clsid = CLSID_FrostAdapter;
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 if (clsid == IID_IObject)
                 {
                     *ppOut = static_cast<const IObject*>(this);
-                } else if (clsid == IID_IAdapter) {
+                }
+                else if (clsid == IID_IAdapter)
+                {
                     *ppOut = static_cast<const IAdapter*>(this);
-                } else if (clsid == CLSID_FrostAdapter) {
+                }
+                else if (clsid == CLSID_FrostAdapter)
+                {
                     *ppOut = static_cast<const FrostAdapter*>(this);
-                } else {
+                }
+                else
+                {
                     *ppOut = nullptr;
                     return false;
                 }
@@ -399,7 +409,9 @@ namespace VoodooShader
             if (pTexture)
             {
                 cgGLSetupSampler(pParam->GetCgParameter(), (GLuint) pTexture->GetData());
-            } else {
+            }
+            else
+            {
                 cgGLSetupSampler(pParam->GetCgParameter(), 0);
             }
             return true;

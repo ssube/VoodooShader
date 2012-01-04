@@ -38,7 +38,9 @@ namespace VoodooShader
         if (!m_Technique)
         {
             Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), nullptr);
-        } else if(!cgIsPass(pCgPass)) {
+        }
+        else if(!cgIsPass(pCgPass))
+        {
             Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no Cg pass."), nullptr);
         }
 
@@ -50,7 +52,9 @@ namespace VoodooShader
         if (passName)
         {
             m_Name += passName;
-        } else {
+        }
+        else
+        {
             m_Name += Format(VSTR("pass_%p")) << m_CgPass;
         }
 
@@ -85,7 +89,9 @@ namespace VoodooShader
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return m_Refs;
         }
     }
@@ -99,18 +105,28 @@ namespace VoodooShader
             {
                 clsid = CLSID_VSPass;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_IPass) {
+            }
+            else if (clsid == IID_IPass)
+            {
                 *ppOut = static_cast<const IPass*>(this);
-            } else if (clsid == CLSID_VSPass) {
+            }
+            else if (clsid == CLSID_VSPass)
+            {
                 *ppOut = static_cast<const VSPass*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }
@@ -144,7 +160,9 @@ namespace VoodooShader
         if (index < 4)
         {
             return m_Target[index].get();
-        } else {
+        }
+        else
+        {
             return nullptr;
         }
     }
@@ -156,7 +174,9 @@ namespace VoodooShader
         {
             m_Target[index] = pTarget;
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -232,7 +252,9 @@ namespace VoodooShader
                             m_Target[i] = m_Core->GetStageTexture(TS_Pass);
                         }
                     }
-                } else {
+                }
+                else
+                {
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_CoreWarning, VOODOO_CORE_NAME,
@@ -244,7 +266,9 @@ namespace VoodooShader
                         m_Target[i] = m_Core->GetStageTexture(TS_Pass);
                     }
                 }
-            } else {
+            }
+            else
+            {
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_CoreDebug, VOODOO_CORE_NAME,

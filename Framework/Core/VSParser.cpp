@@ -58,7 +58,9 @@ namespace VoodooShader
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return m_Refs;
         }
     }
@@ -72,18 +74,28 @@ namespace VoodooShader
             {
                 clsid = CLSID_VSParser;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_IParser) {
+            }
+            else if (clsid == IID_IParser)
+            {
                 *ppOut = static_cast<const IParser*>(this);
-            } else if (clsid == CLSID_VSParser) {
+            }
+            else if (clsid == CLSID_VSParser)
+            {
                 *ppOut = static_cast<const VSParser*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }
@@ -134,7 +146,9 @@ namespace VoodooShader
                     msg << finalname;
                     logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, msg);
                 }
-            } else {
+            }
+            else
+            {
                 m_Variables[finalname] = Variable(value, type);
             }
         }
@@ -265,7 +279,9 @@ namespace VoodooShader
                 if (varname[0] == VSParser::VarMarkerModeM)
                 {
                     merge = 1;
-                } else if (varname[0] == VSParser::VarMarkerModeR) {
+                }
+                else if (varname[0] == VSParser::VarMarkerModeR)
+                {
                     merge = -1;
                 }
 
@@ -280,9 +296,13 @@ namespace VoodooShader
                         if (merge == 0)
                         {
                             localFlags = (ParseFlags)newFlags;
-                        } else if (merge == -1) {
+                        }
+                        else if (merge == -1)
+                        {
                             localFlags = (ParseFlags)(flags ^ newFlags);
-                        } else if (merge == 1) {
+                        }
+                        else if (merge == 1)
+                        {
                             localFlags = (ParseFlags)(flags | newFlags);
                         }
 
@@ -333,12 +353,16 @@ namespace VoodooShader
             if (stateiter != state.end())
             {
                 varvalue = stateiter->second;
-            } else {
+            }
+            else
+            {
                 VariableMap::const_iterator variter = m_Variables.find(varname);
                 if (variter != m_Variables.end())
                 {
                     varvalue = variter->second.first;
-                } else {
+                }
+                else
+                {
                     // Unrecognized variable, try env
                     size_t reqSize = 0;
 
@@ -348,7 +372,9 @@ namespace VoodooShader
                         std::vector<wchar_t> buffer(reqSize);
                         _wgetenv_s(&reqSize, &buffer[0], reqSize, varname.GetData());
                         varvalue = String(buffer);
-                    } else {
+                    }
+                    else
+                    {
                         foundvar = false;
                     }
                 }
@@ -461,7 +487,9 @@ namespace VoodooShader
                 }
 
                 delete[] buffer;
-            } else if (flags & PF_PathOnly) {
+            }
+            else if (flags & PF_PathOnly)
+            {
                 LPWSTR buffer = new TCHAR[iteration.GetLength()];
                 CopyMemory(buffer, iteration.GetData(), iteration.GetLength());
 
@@ -471,9 +499,13 @@ namespace VoodooShader
                 }
 
                 delete[] buffer;
-            } else if (flags & PF_PathFile) {
+            }
+            else if (flags & PF_PathFile)
+            {
                 iteration = PathFindFileName(iteration.GetData());
-            } else if (flags & PF_PathExt) {
+            }
+            else if (flags & PF_PathExt)
+            {
                 iteration = PathFindExtension(iteration.GetData());
             }
         }

@@ -59,10 +59,14 @@ namespace VoodooShader
             {
                 delete module;
                 return nullptr;
-            } else {
+            }
+            else
+            {
                 return module;
             }
-        } else {
+        }
+        else
+        {
             return nullptr;
         }
     }
@@ -109,18 +113,28 @@ namespace VoodooShader
             {
                 clsid = CLSID_VSModule;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_IModule) {
+            }
+            else if (clsid == IID_IModule)
+            {
                 *ppOut = static_cast<const IModule*>(this);
-            } else if (clsid == CLSID_VSModule) {
+            }
+            else if (clsid == CLSID_VSModule)
+            {
                 *ppOut = static_cast<const VSModule*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }

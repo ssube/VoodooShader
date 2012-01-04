@@ -114,7 +114,7 @@
 #endif
 
 // Extended logging
-//#if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_EXTLOG)
+#if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_EXTLOG)
 #   define VOODOO_DEBUG_FUNCLOG(logger) \
     { \
         if (logger)\
@@ -123,9 +123,9 @@
                 Format("Entered function %1% in %2% (line %3%).") << __FUNCTION__ << __FILE__ << __LINE__); \
         }\
     }
-//#else
-//#   define VOODOO_DEBUG_FUNCLOG(logger)
-//#endif
+#else
+#   define VOODOO_DEBUG_FUNCLOG(logger)
+#endif
 
 // Memory debug
 #if defined(VOODOO_DEBUG) && defined(VOODOO_DEBUG_MEMORY)

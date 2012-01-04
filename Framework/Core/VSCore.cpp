@@ -124,7 +124,9 @@ namespace VoodooShader
         if (config)
         {
             m_Parser->Add(VSTR("config"), config, VT_System);
-        } else {
+        }
+        else
+        {
             m_Parser->Add(VSTR("config"), VSTR("VoodooShader.xml"), VT_System);
         }
 
@@ -400,18 +402,28 @@ namespace VoodooShader
             {
                 clsid = IID_ICore;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_ICore) {
+            }
+            else if (clsid == IID_ICore)
+            {
                 *ppOut = static_cast<const ICore*>(this);
-            } else if (clsid == CLSID_VSCore) {
+            }
+            else if (clsid == CLSID_VSCore)
+            {
                 *ppOut = static_cast<const VSCore*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }

@@ -109,7 +109,9 @@ bool WINAPI LoadVoodoo()
     if (!gVoodooCore)
     {
         ErrorMessage(0x2008, L"Unable to create Voodoo core.");
-    } else {
+    }
+    else
+    {
         gVoodooCore->AddRef();
 
         if (!gVoodooCore->Initialize(hook->Config))
@@ -130,7 +132,9 @@ bool WINAPI UnloadVoodoo()
     if (gVoodooCore)
     {
         return (gVoodooCore->Release() == 0);
-    } else {
+    }
+    else
+    {
         return true;
     }
 }

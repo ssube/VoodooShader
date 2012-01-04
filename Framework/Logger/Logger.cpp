@@ -108,7 +108,9 @@ namespace VoodooShader
             {
                 delete this;
                 return 0;
-            } else {
+            }
+            else
+            {
                 return m_Refs;
             }
         }
@@ -121,18 +123,28 @@ namespace VoodooShader
                 {
                     clsid = CLSID_VSXmlLogger;
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
-            } else {
+            }
+            else
+            {
                 if (clsid == IID_IObject)
                 {
                     *ppOut = static_cast<const IObject*>(this);
-                } else if (clsid == IID_ILogger) {
+                }
+                else if (clsid == IID_ILogger)
+                {
                     *ppOut = static_cast<const ILogger*>(this);
-                } else if (clsid == CLSID_VSXmlLogger) {
+                }
+                else if (clsid == CLSID_VSXmlLogger)
+                {
                     *ppOut = static_cast<const VSXmlLogger*>(this);
-                } else {
+                }
+                else
+                {
                     *ppOut = nullptr;
                     return false;
                 }
@@ -213,7 +225,9 @@ namespace VoodooShader
             {
                 this->m_LogFile.close();
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -224,7 +238,9 @@ namespace VoodooShader
             {
                 this->m_LogFile.flush();
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -253,22 +269,24 @@ namespace VoodooShader
         {
             if (!this->IsOpen()) return false;
 
-            if ((level & (LL_System | LL_Critical | m_Filter)) == 0) return false;
+            uint32_t reqMask = LL_System | LL_Critical | LL_Warning | LL_Error;
+            if ((level & (reqMask | m_Filter)) == 0) return false;
 
             try
             {
                 // Format the message in memory to prevent partial messages from being dumped
                 std::wstringstream logMsg;
-                logMsg << hex << level << dec << VSTR(", ") << GetTickCount() << VSTR(", ") << source << VSTR(", ") << msg << endl;
+                logMsg << hex << showbase << level << dec << noshowbase << VSTR(", ") << GetTickCount() << VSTR(", ") << 
+                    source << VSTR(", ") << msg << endl;
 
 #ifdef _DEBUG
                 if (level & (LL_ModWarning | LL_ModError))
                 {
                     OutputDebugString(logMsg.str().c_str());
-
 #   ifdef VOODOO_DEBUG_CONSOLE
                     cout << logMsg.str();
 #   endif
+                    VOODOO_DEBUG_BREAK;
                 }
 #endif
                 m_LogFile << logMsg.str();

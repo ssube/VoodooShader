@@ -35,9 +35,9 @@
 #endif
 
 #ifdef VOODOO_DX89_DEBUG3D8
-#   define APILOG(arg) gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, arg)
+#   define VOODOO_API_LOG(...) gpVoodooLogger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, __VA_ARGS__)
 #else
-#   define APILOG(arg)
+#   define VOODOO_API_LOG(...)
 #endif
 
 namespace VoodooShader

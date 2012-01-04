@@ -40,7 +40,9 @@ namespace VoodooShader
         if (!pShader)
         {
             Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no shader."), nullptr);
-        } else if (!cgIsTechnique(pCgTech)) {
+        }
+        else if (!cgIsTechnique(pCgTech))
+        {
             Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no Cg technique."), pShader->GetCore());
         }
 
@@ -52,7 +54,9 @@ namespace VoodooShader
         if (techName)
         {
             m_Name += techName;
-        } else {
+        }
+        else
+        {
             m_Name += Format(VSTR("tech_%p")) << m_CgTechnique;
         }
 
@@ -81,7 +85,9 @@ namespace VoodooShader
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return m_Refs;
         }
     }
@@ -95,18 +101,28 @@ namespace VoodooShader
             {
                 clsid = IID_ITechnique;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_ITechnique) {
+            }
+            else if (clsid == IID_ITechnique)
+            {
                 *ppOut = static_cast<const ITechnique*>(this);
-            } else if (clsid == CLSID_VSTechnique) {
+            }
+            else if (clsid == CLSID_VSTechnique)
+            {
                 *ppOut = static_cast<const VSTechnique*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }
@@ -140,7 +156,9 @@ namespace VoodooShader
         if (index < m_Passes.size())
         {
             return m_Passes[index].get();
-        } else {
+        }
+        else
+        {
             return nullptr;
         }
     }

@@ -60,7 +60,9 @@ const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ V
     {
         *refid = VoodooShader::VoodooDX9::CLSID_DX9Adapter;
         return L"DX9Adapter";
-    } else {
+    }
+    else
+    {
         return nullptr;
     }
 }
@@ -70,7 +72,9 @@ VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t inde
     if (index == 0)
     {
         return new VoodooShader::VoodooDX9::DX9Adapter(pCore);
-    } else {
+    }
+    else
+    {
         return nullptr;
     }
 }

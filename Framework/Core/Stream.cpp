@@ -213,7 +213,9 @@ namespace VoodooShader
         if (val)
         {
             m_Impl->m_Stream << val->ToString();
-        } else {
+        }
+        else
+        {
             m_Impl->m_Stream << VSTR("IObject(null)");
         }
         return (*this);

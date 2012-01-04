@@ -86,7 +86,9 @@ namespace VoodooShader
         {
             delete this;
             return 0;
-        } else {
+        }
+        else
+        {
             return m_Refs;
         }
     }
@@ -100,18 +102,28 @@ namespace VoodooShader
             {
                 clsid = CLSID_VSParameter;
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
-        } else {
+        }
+        else
+        {
             if (clsid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
-            } else if (clsid == IID_IParameter) {
+            }
+            else if (clsid == IID_IParameter)
+            {
                 *ppOut = static_cast<const IParameter*>(this);
-            } else if (clsid == CLSID_VSParameter) {
+            }
+            else if (clsid == CLSID_VSParameter)
+            {
                 *ppOut = static_cast<const VSParameter*>(this);
-            } else {
+            }
+            else
+            {
                 *ppOut = nullptr;
                 return false;
             }
@@ -157,7 +169,8 @@ namespace VoodooShader
         if (!pParam)
         {
             return false;
-        } else if (!m_Virtual)
+        }
+        else if (!m_Virtual)
         {
             m_Core->GetLogger()->LogMessage
             (
