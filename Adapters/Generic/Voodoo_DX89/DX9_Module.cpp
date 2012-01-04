@@ -26,15 +26,17 @@
 VoodooShader::ICoreRef gpVoodooCore = nullptr;
 VoodooShader::ILoggerRef gpVoodooLogger = nullptr;
 
-VoodooShader::IShader* testShader;
+VoodooShader::IShader* testShader = nullptr;
 
 IDirect3DVertexBuffer9 * gpFSQuadVerts = nullptr;
 IDirect3DSurface9 *backbufferSurf = nullptr;
 
 IDirect3DSurface9 *surface_ThisFrame = nullptr;
-VoodooShader::ITexture* texture_ThisFrame;
+VoodooShader::ITexture* texture_ThisFrame = nullptr;
 IDirect3DSurface9 *surface_LastPass = nullptr;
-VoodooShader::ITexture* texture_LastPass;
+VoodooShader::ITexture* texture_LastPass = nullptr;
+
+volatile LONG gObjectLock = 0;
 
 const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion()
 {

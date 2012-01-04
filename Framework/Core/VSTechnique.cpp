@@ -35,9 +35,17 @@
 namespace VoodooShader
 {
     VOODOO_METHODTYPE VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
-        m_Refs(0), m_Shader(pShader), m_Core(pShader->GetCore()), m_CgTechnique(pCgTech), m_Target(nullptr)
+        m_Refs(0), m_Shader(pShader), m_CgTechnique(pCgTech), m_Target(nullptr)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        if (!pShader)
+        {
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no shader."), nullptr);
+        } else if (!cgIsTechnique(pCgTech)) {
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no Cg technique."), pShader->GetCore());
+        }
+
+        m_Core = m_Shader->GetCore();
+
         const char * techName = cgGetTechniqueName(m_CgTechnique);
 
         m_Name = m_Shader->GetName() + VSTR(":");

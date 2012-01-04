@@ -42,7 +42,7 @@
 #endif
 
 #ifdef VOODOO_SDK_VERSION
-#   error Voodoo SDK version already defined.
+#   error Voodoo SDK version already defined. This should only be defined by the primary framework header.
 #else
 #   define VOODOO_SDK_VERSION 0
 #endif

@@ -41,18 +41,16 @@ namespace VoodooShader
     VSShader::VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
         m_Refs(0), m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
         if (!m_Core)
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter with no core."), nullptr);
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create shader with no core."), nullptr);
         }
 
         CGcontext context = m_Core->GetCgContext();
 
         if (!context || !cgIsContext(context))
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter (core has no context)."), m_Core);
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create shader (core has no context)."), m_Core);
         }
 
         int32_t len = m_Name.ToCharStr(0, nullptr);

@@ -19,7 +19,7 @@ try to note everyone and their contribution, in no particular order, but if I ma
 
 ### Names, brainstorming, advice and such:
 * Knots, Danke, arvisrend, Cat, Haplo, Lokey and others for comments and opinions on the UI.
-* Mireneye from the Bethsoft Official forums for suggesting the Voodoo name, as a nod to 3DFX and the old cards.
+* Mireneye from the Bethsoft Official forums for suggesting the Voodoo Shader name, as a nod to 3DFX and the old cards.
 * Mireneye and Anonytroll for the basis of the Gem name (MW)
 * J-Dawg from F3Underground for the Sigil and Raven names (Obv and FO3)
 * Zebranky for the Shard name (NWN2)

@@ -52,8 +52,8 @@ namespace VoodooShader
             /*** IDirect3D8 methods ***/
             /**
              * This is a legacy function to register a software renderer into the DX8 system; however, the DX8 docs state
-             * that it is unsupported. The DX9 reintroduces support for it. Since the Voodoo CVoodoo3D8 layer targets DX9,
-             * the function is callable and will target the appropriate DX9 function. It will log a warning message, due to
+             * that it is unsupported. The DX9 reintroduces support for it. Since the CVoodoo3D8 layer targets DX9, the 
+             * function is callable and will target the appropriate DX9 function. It will log a warning message, due to
              * technically being illegal.
              */
             STDMETHOD(RegisterSoftwareDevice)(void* pInitializeFunction);

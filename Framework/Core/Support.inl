@@ -81,14 +81,26 @@ inline static HMODULE WINAPI LoadSystemLibrary(const LPTSTR libname)
     return LoadLibrary(path);
 }
 
-inline static void * WINAPI FindFunction(const LPTSTR libname, const LPCSTR funcname, HMODULE * pModule)
+inline static void * WINAPI FindFunction(const LPTSTR libname, bool system, const LPCSTR funcname, HMODULE * pModule)
 {
-    if (*pModule == nullptr)
+    void * function = nullptr;
+
+    if (!(*pModule))
     {
-        *pModule = LoadSystemLibrary(libname);
+        if (system)
+        {
+            *pModule = LoadSystemLibrary(libname);
+        } else {
+            *pModule = LoadLibrary(libname);
+        }
     }
 
-    return GetProcAddress(*pModule, funcname);
+    if (*pModule)
+    {
+        function = GetProcAddress(*pModule, funcname);
+    }
+
+    return function;
 }
 
 inline static HKEY WINAPI GetVoodooKey()

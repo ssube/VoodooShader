@@ -35,10 +35,11 @@ namespace VoodooShader
     VOODOO_METHODTYPE VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) :
         m_Refs(0), m_Technique(pTechnique), m_CgPass(pCgPass)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!m_Technique)
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), m_Core);
+            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), nullptr);
+        } else if(!cgIsPass(pCgPass)) {
+            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no Cg pass."), nullptr);
         }
 
         m_Core = m_Technique->GetCore();

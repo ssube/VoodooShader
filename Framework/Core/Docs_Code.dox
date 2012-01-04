@@ -23,19 +23,19 @@
 namespace VoodooShader
 {
      /**
-      * @page voodoo_spec_module Voodoo Module Specifications
+      * @page voodoo_spec_module Voodoo Shader Module Specifications
       *
-      * The Voodoo core library is designed to provide a generic framework and certain Voodoo-specific features to help
-      * support shaders. To allow additional features without breaking compatibility with other compilers or systems, Voodoo
-      * provides a class-based plugin interface. Modules may be added and classes provided by those modules created and used
-      * within Voodoo or adapters. To handle loading these modules, a known interface is required with a few specific
-      * features.
+      * The Voodoo Shader core library is designed to provide a generic framework and certain Voodoo-specific features to 
+      * help support shaders. To allow additional features without breaking compatibility with other compilers or systems, 
+      * Voodoo Shader provides a class-based plugin interface. Modules may be added and classes provided by those modules 
+      * created and used within Voodoo or adapters. To handle loading these modules, a known interface is required with a 
+      * few specific features.
       *
       * @section voodoo_spec_module_exports Module Exports
       *
-      * Each Voodoo module must export a set of 4 functions. These are used by the core to load and query the module's
-      * version and what classes it provides. All these functions must be exported by name only, with no mangling or
-      * decoration of any kind.
+      * Each Voodoo Shader module must export a set of 4 functions. These are used by the core to load and query the 
+      * module's version and what classes it provides. All these functions must be exported by name only, with no mangling 
+      * or decoration of any kind.
       *
       * @subsection voodoo_spec_module_exports_version ModuleVersion
       *
@@ -78,9 +78,9 @@ namespace VoodooShader
       *
       * @section voodoo_spec_iobject IObject Interface
       *
-      * Every class used in Voodoo @em must derive from the IObject interface. The methods provided are vital for object
-      * lifetime management and garbage collection. This is performed in a manner very much like COM, with each object
-      * managing reference count internally.
+      * Every class used in Voodoo Shader @em must derive from the IObject interface. The methods provided are vital for 
+      * object lifetime management and garbage collection. This is performed in a manner very much like COM, with each 
+      * object managing reference count internally.
       *
       * Every object, except one which implements ICore, must hold a non-incremented reference to its parent. This allows
       * tracking up without causing circular references. The object may both temporarily increment the reference, when it
@@ -191,17 +191,17 @@ namespace VoodooShader
       * If possible, module creators should provide full documentation for modules, including class names and interfaces
       * implemented from each.
       *
-      * The Voodoo project offers hosting for this documentation on the Github project site. Modules may request a wiki page
-      * and space for doxygen-generated documents, which will be fully linked into the main project. Modules not wishing to
-      * be on the main project may instead request a link to other documentation.
+      * The Voodoo Shader project offers hosting for this documentation on the Github project site. Modules may request a 
+      * wiki page and space for doxygen-generated documents, which will be fully linked into the main project. Modules not 
+      * wishing to be on the main project may instead request a link to other documentation.
       *
       * @page voodoo_spec_adapter Adapter Specifications
       *
-      * The adapter serves as a binding between an unknown (by the core library) graphics API and the Voodoo framework. The
-      * adapter is responsible for handling any interaction between the two, performing translation as necessary, and
-      * generally polishing the details. In many senses, adapters are regular classes provided by modules and they must
-      * follow the @ref voodoo_spec_module as any other module. However, adapter classes must fit a very specific set of
-      * behavior rules and perform exactly as expected by the core, and only one adapter object is created at a time.
+      * The adapter serves as a binding between an unknown (by the core library) graphics API and the Voodoo Shader 
+      * Framework. The adapter is responsible for handling any interaction between the two, performing translation as 
+      * necessary, and generally polishing the details. In many senses, adapters are regular classes provided by modules and
+      * they must follow the @ref voodoo_spec_module as any other module. However, adapter classes must fit a very specific 
+      * set of behavior rules and perform exactly as expected by the core, and only one adapter object is created at a time.
       *
       * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter itself. The adapter
       * must provide at least one implementation each of IAdapter and ITexture.
@@ -209,7 +209,7 @@ namespace VoodooShader
       * It is recommended that the adapter name be of the form <tt>[Name]Adapter</tt> and each supporting class use
       * <tt>[Name]classname</tt>, to easily identify them. If the adapter or module is part of the framework, the name
       * scheme extends to the module's name (<tt>Voodoo/[Name]</tt>) and filename (<tt>Voodoo_[Name].dll</tt>). Each
-      * framework Voodoo adapter is given a short one word somewhat-game-related name.
+      * framework adapter is given a short one word name related to its game in some manner.
       *
       * For further details on the behavior required of adapters, please refer to the IAdapter interface documentation.
       *
@@ -227,15 +227,15 @@ namespace VoodooShader
       * the core is reset and all Cg-derived resources are released when the context is set to null.
       *
       * @warning Adapters must not create any shaders or parameters until they have provided the core with a valid context.
-      *     Errors will be returned if this is attempted. To fully support Voodoo features, adapter's must not directly use
-      *     the context where the core provides methods to handle a particular feature.
+      *     Errors will be returned if this is attempted. To fully support Voodoo Shader features, adapter's must not 
+      *     directly use the context where the core provides methods to handle a particular feature.
       *
       * @section voodoo_spec_adapter_caps Capabilities
       *
-      * Voodoo provides a mechanism for shaders to verify the hardware has certain capabilities, for the shader in general
-      * or a particular technique. If the hardware does not meet these caps, as reported by the adapter, the shader will
-      * fail to load or the technique fail to validate. Adapters must provide accurate values for all given caps, and may
-      * provide more.
+      * Voodoo Shader provides a mechanism for shaders to verify the hardware has certain capabilities, for the shader in 
+      * general or a particular technique. If the hardware does not meet these caps, as reported by the adapter, the shader 
+      * will fail to load or the technique fail to validate. Adapters must provide accurate values for all given caps, and 
+      * may provide more.
       *
       * Capabilities are validated as a minimum and true is considered greater than false, thus a target requirement of 4 
       * will succeed with 4 or more, and a flow control requirement of false will succeed on true or false.
@@ -296,14 +296,14 @@ namespace VoodooShader
       *
       * The Voodoo Shader Framework is designed to work across many games, created across a wide variety of compilers,
       * with numerous graphics libraries, code styles and time periods. To maximize stability and speed, both critical to
-      * Voodoo's purpose, all Voodoo projects must meet extremely strict code quality and testing requirements. These are
-      * designed to eradicate bugs within Voodoo itself and provide the best user and developer experience possible,
-      * especially considering the high degree of complexity within Voodoo and wide scope.
+      * Voodoo's purpose, all framework projects must meet extremely strict code quality and testing requirements. These are
+      * designed to eradicate bugs within Voodoo Shader itself and provide the best user and developer experience possible,
+      * especially considering the high degree of complexity and wide scope of the project.
       *
-      * Third-party code that is used in Voodoo, or adapters that are not part of the official project, do not need to use
-      * these rules, but they can rely on Voodoo to follow them. Any bugs, potential bugs, performance bottlenecks, possible
-      * points of improvement or generally questionable code encountered in Voodoo should be reported as soon as possible.
-      * Please file an issue with as much information as possible in the Voodoo bug tracker.
+      * Third-party code that is used in Voodoo Shader, or adapters that are not part of the official project, do not need 
+      * to use these rules, but they can rely on Voodoo Shader to follow them. Any bugs, potential bugs, performance 
+      * bottlenecks, possible points of improvement or generally questionable code encountered in Voodoo should be reported 
+      * as soon as possible. Please file an issue with as much information as possible in the Voodoo Shader bug tracker.
       *
       * @section voodoo_quality_code Code Quality
       *

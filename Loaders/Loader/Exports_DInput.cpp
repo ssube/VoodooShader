@@ -45,7 +45,7 @@ HRESULT WINAPI VSDirectInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID rii
 
     if (!gFunc_DirectInput8Create)
     {
-        gFunc_DirectInput8Create = (Type_DirectInput8Create)FindFunction(TEXT("dinput8.dll"), "DirectInput8Create", &gModule_DInput8);
+        gFunc_DirectInput8Create = (Type_DirectInput8Create)FindFunction(TEXT("dinput8.dll"), true, "DirectInput8Create", &gModule_DInput8);
     }
 
     LPVOID i8obj = nullptr;
@@ -86,7 +86,7 @@ HRESULT WINAPI VSDirectInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * l
 
     if (!gFunc_Type_DirectInputCreateA)
     {
-        gFunc_Type_DirectInputCreateA = (Type_DirectInputCreate)FindFunction(TEXT("dinput8.dll"), "DirectInputCreateA", &gModule_DInput8);
+        gFunc_Type_DirectInputCreateA = (Type_DirectInputCreate)FindFunction(TEXT("dinput8.dll"), true, "DirectInputCreateA", &gModule_DInput8);
     }
 
     LPVOID iaobj = nullptr;
@@ -116,7 +116,7 @@ HRESULT WINAPI VSDirectInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * l
 
     if (!gFunc_Type_DirectInputCreateW)
     {
-        gFunc_Type_DirectInputCreateW = (Type_DirectInputCreate)FindFunction(TEXT("dinput8.dll"), "DirectInputCreateW", &gModule_DInput8);
+        gFunc_Type_DirectInputCreateW = (Type_DirectInputCreate)FindFunction(TEXT("dinput8.dll"), true, "DirectInputCreateW", &gModule_DInput8);
     }
 
     LPVOID iwobj = nullptr;

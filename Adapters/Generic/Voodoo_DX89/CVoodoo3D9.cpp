@@ -58,6 +58,7 @@ namespace VoodooShader
         ULONG STDMETHODCALLTYPE CVoodoo3D9::Release()
         {
             ULONG count = m_RealObject->Release();
+            InterlockedCompareExchange(&gObjectLock, 0, 1);
 
             if (count == 0)
             {

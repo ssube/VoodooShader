@@ -29,7 +29,6 @@ namespace VoodooShader
     VSLogger::VSLogger(ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { 
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
     }
 
     VSLogger::~VSLogger()

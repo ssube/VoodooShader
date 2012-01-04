@@ -28,7 +28,7 @@ namespace VoodooShader
     namespace VoodooDX8
     {
         /**
-         * Implements a thin wrapper around D3D8 textures to make them compatible with the Voodoo API. This internally
+         * Implements a thin wrapper around D3D8 textures to make them compatible with the CVoodoo3D8 API. This internally
          * translates all calls into appropriate D3D9 calls and keeps a pointer to the internal IDirect3DTexture9 object.
          */
         class CVoodoo3DTexture8 :

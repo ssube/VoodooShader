@@ -39,7 +39,7 @@ HRESULT WINAPI VSD3D10CreateDevice(LPVOID pAdapter, DWORD DriverType, HMODULE So
 {
     if (!gFunc_D3D10CreateDevice)
     {
-        gFunc_D3D10CreateDevice = (Type_D3D10CreateDevice)FindFunction(TEXT("d3d10.dll"), "D3D10CreateDevice", &gModule_D3D10);
+        gFunc_D3D10CreateDevice = (Type_D3D10CreateDevice)FindFunction(TEXT("d3d10.dll"), true, "D3D10CreateDevice", &gModule_D3D10);
     }
 
     return gFunc_D3D10CreateDevice(pAdapter, DriverType, Software, Flags, SDKVersion, ppDevice);
@@ -49,7 +49,7 @@ HRESULT WINAPI VSD3D10CreateDeviceAndSwapChain(LPVOID pAdapter, DWORD DriverType
 {
     if (!gFunc_D3D10CreateDeviceAndSwapChain)
     {
-        gFunc_D3D10CreateDeviceAndSwapChain = (Type_D3D10CreateDeviceAndSwapChain)FindFunction(TEXT("d3d10.dll"), "D3D10CreateDeviceAndSwapChain", &gModule_D3D10);
+        gFunc_D3D10CreateDeviceAndSwapChain = (Type_D3D10CreateDeviceAndSwapChain)FindFunction(TEXT("d3d10.dll"), true, "D3D10CreateDeviceAndSwapChain", &gModule_D3D10);
     }
 
     return gFunc_D3D10CreateDeviceAndSwapChain(pAdapter, DriverType, Software, Flags, SDKVersion, pSwapChainDesc, ppSwapChain, ppDevice);
@@ -59,7 +59,7 @@ HRESULT WINAPI VSD3D10CreateBlob(SIZE_T NumBytes, LPVOID *ppBuffer)
 {
     if (!gFunc_D3D10CreateBlob)
     {
-        gFunc_D3D10CreateBlob = (Type_D3D10CreateBlob)FindFunction(TEXT("d3d10.dll"), "D3D10CreateBlob", &gModule_D3D10);
+        gFunc_D3D10CreateBlob = (Type_D3D10CreateBlob)FindFunction(TEXT("d3d10.dll"), true, "D3D10CreateBlob", &gModule_D3D10);
     }
 
     return gFunc_D3D10CreateBlob(NumBytes, ppBuffer);

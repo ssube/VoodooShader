@@ -39,7 +39,7 @@ HRESULT WINAPI VSDirectSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOI
 
     if (!gFunc_DirectSoundCreate8)
     {
-        gFunc_DirectSoundCreate8 = (Type_DirectSoundCreate8)FindFunction(TEXT("dsound8.dll"), "DirectSoundCreate8", &gModule_DS8);
+        gFunc_DirectSoundCreate8 = (Type_DirectSoundCreate8)FindFunction(TEXT("dsound8.dll"), true, "DirectSoundCreate8", &gModule_DS8);
     }
 
     LPVOID s8obj = nullptr;

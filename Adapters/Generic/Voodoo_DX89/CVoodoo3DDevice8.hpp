@@ -30,9 +30,9 @@ namespace VoodooShader
     namespace VoodooDX8
     {
         /**
-         * The core Voodoo wrapper class for D3D8 devices. This class is responsible for processing, translating and
-         * handling most API calls. Due to this, it should be as optimized as possible (considering the circumstances) and
-         * must contain only tested code.
+         * The core wrapper class for D3D8 devices. This class is responsible for processing, translating and handling most 
+         * API calls. Due to this, it should be as optimized as possible (considering the circumstances) and must contain 
+         * only tested code.
          *
          * @note The various CVoodoo3D8 interfaces provide an application-opaque wrapper that actually implements a
          *      Direct3D 8.9 layer (8 to 9 translation). For use with D3D9 applications, the CVoodoo3D9 interface set must
@@ -72,7 +72,7 @@ namespace VoodooShader
             STDMETHOD_(void, SetGammaRamp)(DWORD Flags,CONST D3DGAMMARAMP* pRamp);
             STDMETHOD_(void, GetGammaRamp)(D3DGAMMARAMP* pRamp);
             /**
-             * Creates a texture in the IVoodoo runtime. The new texture must be registered with the core and, for shader
+             * Creates a texture in the CVoodoo3D8 runtime. The new texture must be registered with the core and, for shader
              * purposes, we should attempt to create it as a render-target.
              */
             STDMETHOD(CreateTexture)(UINT Width,UINT Height,UINT Levels,DWORD Usage,D3DFORMAT Format,D3DPOOL Pool,IDirect3DTexture8** ppTexture);
@@ -197,7 +197,7 @@ namespace VoodooShader
         private:
             /**
              * A pointer to the true underlying IDirect3DDevice9 object wrapped by this
-             * IVoodoo interface.
+             * CVoodoo3D8 interface.
              */
             IDirect3DDevice9 * m_RealDevice;
 

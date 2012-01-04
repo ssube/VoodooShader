@@ -36,7 +36,6 @@ namespace VoodooShader
     VSParameter::VSParameter(_Pre_notnull_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type) :
          m_Refs(0), m_Core(pCore), m_Shader(nullptr), m_Virtual(true), m_Type(type)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_Core->GetLogger()->LogMessage
         (
             LL_CoreDebug, VOODOO_CORE_NAME,

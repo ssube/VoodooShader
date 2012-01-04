@@ -41,7 +41,6 @@ namespace VoodooShader
     VSModuleManager::VSModuleManager(_In_ ICore *core) :
         m_Refs(0), m_Core(core)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
     }
 
     VSModuleManager::~VSModuleManager()

@@ -56,7 +56,7 @@ LPVOID WINAPI VSDirect3DCreate9(UINT sdkVersion)
 
     if (!gFunc_Direct3DCreate9)
     {
-        gFunc_Direct3DCreate9 = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), "Direct3DCreate9", &gModule_D3D9);
+        gFunc_Direct3DCreate9 = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), true, "Direct3DCreate9", &gModule_D3D9);
     }
 
     LPVOID pD3D9 = gFunc_Direct3DCreate9(sdkVersion);
@@ -92,7 +92,7 @@ HRESULT WINAPI VSDirect3DCreate9Ex(UINT sdkVersion, LPVOID * dx)
 
     if (!gFunc_Direct3DCreate9Ex)
     {
-        gFunc_Direct3DCreate9Ex = (Type_Direct3DCreate9Ex)FindFunction(TEXT("d3d9.dll"), "Direct3DCreate9Ex", &gModule_D3D9);
+        gFunc_Direct3DCreate9Ex = (Type_Direct3DCreate9Ex)FindFunction(TEXT("d3d9.dll"), true, "Direct3DCreate9Ex", &gModule_D3D9);
     }
 
     DWORD hr = gFunc_Direct3DCreate9Ex(sdkVersion, dx);
@@ -125,7 +125,7 @@ int WINAPI VSD3DPERF_BeginEvent(DWORD dw, LPCWSTR str)
 {
     if (!gFunc_D3DPERF_BeginEvent)
     {
-        gFunc_D3DPERF_BeginEvent = (Type_D3DPERF_BeginEvent)FindFunction(TEXT("d3d9.dll"), "D3DPERF_BeginEvent", &gModule_D3D9);
+        gFunc_D3DPERF_BeginEvent = (Type_D3DPERF_BeginEvent)FindFunction(TEXT("d3d9.dll"), true, "D3DPERF_BeginEvent", &gModule_D3D9);
     }
 
     return gFunc_D3DPERF_BeginEvent(dw, str);
@@ -135,7 +135,7 @@ int WINAPI VSD3DPERF_EndEvent()
 {
     if (!gFunc_D3DPERF_EndEvent)
     {
-        gFunc_D3DPERF_EndEvent = (Type_D3DPERF_EndEvent)FindFunction(TEXT("d3d9.dll"), "D3DPERF_EndEvent", &gModule_D3D9);
+        gFunc_D3DPERF_EndEvent = (Type_D3DPERF_EndEvent)FindFunction(TEXT("d3d9.dll"), true, "D3DPERF_EndEvent", &gModule_D3D9);
     }
 
     return gFunc_D3DPERF_EndEvent();
@@ -145,7 +145,7 @@ DWORD WINAPI VSD3DPERF_GetStatus()
 {
     if (!gFunc_D3DPERF_GetStatus)
     {
-        gFunc_D3DPERF_GetStatus = (Type_D3DPERF_GetStatus)FindFunction(TEXT("d3d9.dll"), "D3DPERF_GetStatus", &gModule_D3D9);
+        gFunc_D3DPERF_GetStatus = (Type_D3DPERF_GetStatus)FindFunction(TEXT("d3d9.dll"), true, "D3DPERF_GetStatus", &gModule_D3D9);
     }
 
     return gFunc_D3DPERF_GetStatus();
@@ -155,7 +155,7 @@ BOOL WINAPI VSD3DPERF_QueryRepeatFrame()
 {
     if (!gFunc_D3DPERF_QueryRepeatFrame)
     {
-        gFunc_D3DPERF_QueryRepeatFrame = (Type_D3DPERF_QueryRepeatFrame)FindFunction(TEXT("d3d9.dll"), "D3DPERF_QueryRepeatFrame", &gModule_D3D9);
+        gFunc_D3DPERF_QueryRepeatFrame = (Type_D3DPERF_QueryRepeatFrame)FindFunction(TEXT("d3d9.dll"), true, "D3DPERF_QueryRepeatFrame", &gModule_D3D9);
     }
 
     return gFunc_D3DPERF_QueryRepeatFrame();
@@ -165,7 +165,7 @@ void WINAPI VSD3DPERF_SetMarker(DWORD dw, LPCWSTR str)
 {
     if (!gFunc_D3DPERF_SetMarker)
     {
-        gFunc_D3DPERF_SetMarker = (Type_D3DPERF_SetMarker)FindFunction(TEXT("d3d9.dll"), "D3DPERF_SetMarker", &gModule_D3D9);
+        gFunc_D3DPERF_SetMarker = (Type_D3DPERF_SetMarker)FindFunction(TEXT("d3d9.dll"), true, "D3DPERF_SetMarker", &gModule_D3D9);
     }
 
     return gFunc_D3DPERF_SetMarker(dw, str);
@@ -175,7 +175,7 @@ void WINAPI VSD3DPERF_SetOptions(DWORD dwOptions)
 {
     if (!gFunc_D3DPERF_SetOptions)
     {
-        gFunc_D3DPERF_SetOptions = (Type_D3DPERF_SetOptions)FindFunction(TEXT("d3d9.dll"), "D3DPERF_SetOptions", &gModule_D3D9);
+        gFunc_D3DPERF_SetOptions = (Type_D3DPERF_SetOptions)FindFunction(TEXT("d3d9.dll"), true, "D3DPERF_SetOptions", &gModule_D3D9);
     }
 
     return gFunc_D3DPERF_SetOptions(dwOptions);
@@ -185,7 +185,7 @@ void WINAPI VSD3DPERF_SetRegion(DWORD dw, LPCWSTR str)
 {
     if (!gFunc_D3DPERF_SetRegion)
     {
-        gFunc_D3DPERF_SetRegion = (Type_D3DPERF_SetRegion)FindFunction(TEXT("d3d9.dll"), "D3DPERF_SetRegion", &gModule_D3D9);
+        gFunc_D3DPERF_SetRegion = (Type_D3DPERF_SetRegion)FindFunction(TEXT("d3d9.dll"), true, "D3DPERF_SetRegion", &gModule_D3D9);
     }
 
     return gFunc_D3DPERF_SetRegion(dw, str);

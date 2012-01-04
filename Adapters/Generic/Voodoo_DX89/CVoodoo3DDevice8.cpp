@@ -312,10 +312,9 @@ namespace VoodooShader
         }
 
         /**
-        * Creates a texture in the IVoodoo runtime. The new texture must be registered
-        * with the core and, for shader purposes, we should attempt to create it as a
-        * render-target.
-        */
+         * Creates a texture in the CVoodoo3D8 runtime. The new texture must be registered with the core and, for shader 
+         * purposes, we should attempt to create it as a render-target.
+         */
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::CreateTexture
         (
             UINT width,

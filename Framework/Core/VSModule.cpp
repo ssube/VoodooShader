@@ -36,7 +36,6 @@ namespace VoodooShader
 {
     VSModule * VSModule::Load(_In_ ICore * const pCore, _In_ const String & path)
     {
-        VOODOO_DEBUG_FUNCLOG(pCore->GetLogger());
         // Load the module
         HMODULE hmodule = LoadLibraryEx(path.GetData(), nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
 

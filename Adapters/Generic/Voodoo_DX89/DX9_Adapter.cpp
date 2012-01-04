@@ -517,15 +517,13 @@ namespace VoodooShader
 
         bool VOODOO_METHODTYPE DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant * const value)
         {
-            static volatile LONG setDevice = 0;
-
             String strname(name);
 
             if (strname == VSTR("SdkVersion") && value->Type == UT_UInt32)
             {
                 m_SdkVersion = value->VUInt32.X;
             } else if (strname == VSTR("IDirect3D8") && value->Type == UT_PVoid) {
-                if (InterlockedCompareExchange(&setDevice, 1, 0) == 0)
+                if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
                 {
                     IDirect3D8 * origObj = reinterpret_cast<IDirect3D8 *>(value->VPVoid);
                     if (origObj)
@@ -535,7 +533,7 @@ namespace VoodooShader
                 
                     HMODULE d3d9 = nullptr;
                     typedef IDirect3D9 * (WINAPI * Type_Direct3DCreate9)(UINT);
-                    Type_Direct3DCreate9 d3d9func = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), "Direct3DCreate9", &d3d9);
+                    Type_Direct3DCreate9 d3d9func = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), false, "Direct3DCreate9", &d3d9);
                     assert(d3d9func);
 
                     IDirect3D9 * realObj = d3d9func(D3D_SDK_VERSION);
@@ -548,7 +546,7 @@ namespace VoodooShader
                     return true;
                 }
             } else if (strname == VSTR("IDirect3D9") && value->Type == UT_PVoid) {
-                if (InterlockedCompareExchange(&setDevice, 1, 0) == 0)
+                if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
                 {
                     IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->VPVoid);
 

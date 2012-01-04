@@ -72,6 +72,8 @@ extern VoodooShader::ITexture* texture_ThisFrame;
 extern IDirect3DSurface9 *surface_LastPass;
 extern VoodooShader::ITexture* texture_LastPass;
 
+extern volatile LONG gObjectLock;
+
 typedef IDirect3D9 * (__stdcall * D3DFunc9) (UINT);
 
 const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion();

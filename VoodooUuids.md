@@ -1,4 +1,4 @@
-# Voodoo Framework Uuid list
+# Voodoo Shader Framework Uuid List
 
 ### Module Uuids (LIBIDs)
 * __Voodoo Shader Framework (global Uuid, PackId)__
@@ -22,11 +22,9 @@
 * __Voodoo/FullLoader__
   * f84ac3b4-073f-11e1-83d4-005056c00008
   * {0xB4, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};
-* __Voodoo GUI__
+* __Voodoo UI__
   * 7bb33acf-a2e5-4331-9ba6-01cf535802b4
-* __Voodoo Regedit__
-  * 6085a4e0-b02b-4dc0-94d3-2e2c739aca9d
-* __Voodoo NetClasses__
+* __Voodoo Sharp__
   * 8a35c176-6a2d-4018-983d-8ed952ffa31d
 
 ### Interface Uuids (IIDs)

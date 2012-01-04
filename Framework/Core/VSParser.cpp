@@ -37,7 +37,6 @@ namespace VoodooShader
     VOODOO_METHODTYPE VSParser::VSParser(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
     }
 
     VOODOO_METHODTYPE VSParser::~VSParser()

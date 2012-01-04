@@ -40,7 +40,7 @@ LPVOID WINAPI VSDirect3DCreate8(UINT sdkVersion)
 
     if (!gFunc_Direct3DCreate8)
     {
-        gFunc_Direct3DCreate8 = (Type_Direct3DCreate8)FindFunction(TEXT("d3d8.dll"), "Direct3DCreate8", &gModule_D3D8);
+        gFunc_Direct3DCreate8 = (Type_Direct3DCreate8)FindFunction(TEXT("d3d8.dll"), true, "Direct3DCreate8", &gModule_D3D8);
     }
 
     LPVOID pD3D8 = gFunc_Direct3DCreate8(sdkVersion);

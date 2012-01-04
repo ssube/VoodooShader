@@ -30,7 +30,6 @@ namespace VoodooShader
     VSHookManager::VSHookManager(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { 
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
     }
 
     VSHookManager::~VSHookManager()

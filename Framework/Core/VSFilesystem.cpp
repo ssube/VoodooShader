@@ -30,7 +30,6 @@ namespace VoodooShader
     VSFileSystem::VSFileSystem(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
     }
 
     VSFileSystem::~VSFileSystem()
