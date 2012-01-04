@@ -20,7 +20,6 @@
 #pragma once
 
 #include "VoodooFramework.hpp"
-#include "IObject.hpp"
 
 namespace VoodooShader
 {
