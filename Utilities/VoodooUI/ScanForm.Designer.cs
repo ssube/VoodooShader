@@ -100,7 +100,7 @@
             this.col_Check.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.col_Check.HeaderText = "Add";
             this.col_Check.Name = "col_Check";
-            this.col_Check.Width = 32;
+            this.col_Check.Width = 30;
             // 
             // col_Name
             // 
@@ -133,6 +133,8 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ScanForm";
             this.Text = "Supported Games";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
+            this.Shown += new System.EventHandler(this.OnShow);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

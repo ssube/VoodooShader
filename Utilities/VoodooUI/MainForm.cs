@@ -73,17 +73,8 @@ namespace VoodooUI
         /// <param name="e"></param>
         private void SearchSupported(object sender, EventArgs e)
         {
-            // Verify they want to do this/security check
-            if (MessageBox.Show(
-                "Using this function will scan your hard drive for installed programs.\n"+
-                "This uses file names only and will only scan folders you can open; file contents will not be accessed and no data will be sent to the server.\n"+
-                "This may take some time if you have many files and may not be entirely accurate. A list of probable results will be shown when the scan is done.\n"+
-                "Are you sure you want to run this scan?",
-                "Confirm Scan", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-            {
-                Form scanWindow = new ScanForm();
-                scanWindow.ShowDialog();
-            }
+            Form scanWindow = new ScanForm();
+            scanWindow.ShowDialog();
         }
 
         private void Menu_Hook_Add(object sender, EventArgs e)

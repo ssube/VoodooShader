@@ -21,26 +21,6 @@ namespace VoodooUI
         public ScanForm()
         {
             InitializeComponent();
-
-            search = new Dictionary<string, string>();
-            search.Add("morrowind.exe", "Morrowind");
-            search.Add("oblivion.exe", "Oblivion");
-            search.Add("hl2.exe", "Source Engine");
-            search.Add("nwmain.exe", "Neverwinter Nights");
-            search.Add("nwn2main.exe", "Neverwinter Nights 2");
-            errors = new List<String>();
-            results = new List<KeyValuePair<String, String>>();
-
-            // Estimate scan size
-            progressBar1.Maximum = EstimateScan();
-
-            // Basic counter
-            worker = new BackgroundWorker();
-            worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
-            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
-            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
-            worker.WorkerReportsProgress = true;
-            worker.RunWorkerAsync(search);
         }
 
         int EstimateScan()
@@ -79,17 +59,22 @@ namespace VoodooUI
             textBox2.Lines = errors.ToArray();
 
             MessageBox.Show(String.Format("Scanned {0} files in {1} seconds, found {2} results.", info.Key, info.Value.TotalSeconds, results.Count));
+            worker = null;
         }
 
         void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            BackgroundWorker myWorker = (BackgroundWorker)sender;
+
             DateTime start = DateTime.Now;
             Int64 count = 0;
             foreach (DriveInfo drive in DriveInfo.GetDrives())
             {
+                if (myWorker.CancellationPending) break;
+
                 try
                 {
-                    CountDir(ref count, drive.RootDirectory, 0, e);
+                    CountDir(ref count, drive.RootDirectory, 0, myWorker, e);
                 }
                 catch (Exception exc)
                 {
@@ -119,8 +104,10 @@ namespace VoodooUI
             }
         }
 
-        private Int64 CountDir(ref Int64 count, DirectoryInfo dir, int level, DoWorkEventArgs e)
+        private Int64 CountDir(ref Int64 count, DirectoryInfo dir, int level, BackgroundWorker w, DoWorkEventArgs e)
         {
+            if (w.CancellationPending) return 0;
+
             ++level;
             FileInfo[] files = dir.GetFiles();
 
@@ -151,6 +138,53 @@ namespace VoodooUI
             }
 
             return count;
+        }
+
+        private void OnShow(object sender, EventArgs e)
+        {
+            // Verify they want to do this/security check
+            DialogResult dr = MessageBox.Show(
+                "Using this function will scan your hard drive for installed programs.\n" +
+                "Only folders you can open will be checked and only filenames will be used; files will not be opened.\n" +
+                "This may take some time if you have many files and may not be entirely accurate.\n" +
+                "A list of probable results will be shown when the scan is done.\n" +
+                "Are you sure you want to run this scan?",
+                "Confirm Scan", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (dr != DialogResult.Yes)
+            {
+                this.DialogResult = dr;
+                this.Close();
+                return;
+            }
+
+            search = new Dictionary<string, string>();
+            search.Add("morrowind.exe", "Morrowind");
+            search.Add("oblivion.exe", "Oblivion");
+            search.Add("hl2.exe", "Source Engine");
+            search.Add("nwmain.exe", "Neverwinter Nights");
+            search.Add("nwn2main.exe", "Neverwinter Nights 2");
+            errors = new List<String>();
+            results = new List<KeyValuePair<String, String>>();
+
+            // Estimate scan size
+            progressBar1.Maximum = EstimateScan();
+
+            // Basic counter
+            worker = new BackgroundWorker();
+            worker.WorkerSupportsCancellation = true;
+            worker.WorkerReportsProgress = true;
+            worker.ProgressChanged += new ProgressChangedEventHandler(worker_ProgressChanged);
+            worker.DoWork += new DoWorkEventHandler(worker_DoWork);
+            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(worker_RunWorkerCompleted);
+            worker.RunWorkerAsync(search);
+        }
+
+        private void OnClosing(object sender, FormClosingEventArgs e)
+        {
+            if (worker != null)
+            {
+                worker.CancelAsync();
+            }
         }
     }
 }
