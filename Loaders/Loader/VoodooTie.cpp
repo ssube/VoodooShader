@@ -65,6 +65,8 @@ bool WINAPI LoadVoodoo()
 {
     if (gVoodooCore) return true;
 
+    GlobalLog(TEXT("Loading Voodoo Shader framework."));
+
     // Get the target
     HMODULE targetModule = GetModuleHandle(nullptr);
     if (targetModule == nullptr)
@@ -94,6 +96,8 @@ bool WINAPI LoadVoodoo()
     {
         ErrorMessage(0x2006, L"Voodoo Loader: Unable to load core DLL.");
         return false;
+    } else {
+        GlobalLog(TEXT("Loaded core from %s."), corePath);
     }
 
     VoodooShader::Functions::CoreCreateFunc createFunc = (VoodooShader::Functions::CoreCreateFunc)GetProcAddress(coreLibrary, "CreateCore");
@@ -108,7 +112,7 @@ bool WINAPI LoadVoodoo()
     
     if (!gVoodooCore)
     {
-        ErrorMessage(0x2008, L"Unable to create Voodoo core.");
+        ErrorMessage(0x2008, L"Unable to create Voodoo Shader core.");
     }
     else
     {
@@ -116,9 +120,11 @@ bool WINAPI LoadVoodoo()
 
         if (!gVoodooCore->Initialize(hook->Config))
         {
-            ErrorMessage(0x2009, L"Unable to initialize Voodoo core.");
+            ErrorMessage(0x2009, L"Unable to initialize Voodoo Shader core.");
             gVoodooCore->Release();
             gVoodooCore = nullptr;
+        } else {
+            GlobalLog(TEXT("Initialized Voodoo Shader, passing logging to core."), corePath);
         }
     }
 

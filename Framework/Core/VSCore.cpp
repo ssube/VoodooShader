@@ -31,7 +31,8 @@
 
 namespace VoodooShader
 {
-    DebugCache(VSCore);
+    #define VOODOO_DEBUG_TYPE VSCore
+    DeclareDebugCache();
     HMODULE gCoreHandle = nullptr;
 
     void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore)
@@ -67,8 +68,8 @@ namespace VoodooShader
 
     VSCore::VSCore(uint32_t version) :
         m_Refs(0), m_Version(version), m_ConfigFile(nullptr), m_CgContext(nullptr)
-        {
-#ifdef VOODOO_DEBUG_MEMORY
+    {
+#if defined(VOODOO_DEBUG_MEMORY)
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRT0DBG_LEAK_CHECK_DF);
         _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
         _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
@@ -80,12 +81,12 @@ namespace VoodooShader
         m_ModuleManager = new VSModuleManager(this);
         m_Parser = new VSParser(this);
 
-        AddThisToDebugCache(VSCore);
+        AddThisToDebugCache();
     };
 
     VSCore::~VSCore()
     {
-        RemoveThisFromDebugCache(VSCore);
+        RemoveThisFromDebugCache();
 
         this->SetCgContext(nullptr);
 
@@ -107,8 +108,9 @@ namespace VoodooShader
             delete m_ConfigFile;
         }
 
-#ifdef VOODOO_DEBUG_MEMORY
+#if defined(VOODOO_DEBUG_MEMORY)
         _CrtDumpMemoryLeaks();
+        //! @todo Dump debug object caches as well.
 #endif
     }
 
@@ -346,7 +348,9 @@ namespace VoodooShader
         {
             if (m_Logger)
             {
-                m_Logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format(VSTR("Exception during Core creation: %1%")) << exc.what());
+                m_Logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format(VSTR("Exception during Core creation: %1%")) << exc.strwhat());
+            } else {
+                GlobalLog(VSTR("Unlogged exception during core creation: %s"), exc.what());
             }
 
             return false;

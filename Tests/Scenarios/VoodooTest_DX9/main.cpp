@@ -16,8 +16,7 @@ struct MYVERTEX
 
 #define D3DFVF_MYVERTEX ( D3DFVF_XYZ | D3DFVF_DIFFUSE )
 
-
-#define SafeRelease(pObject) if(pObject != NULL) {pObject->Release(); pObject=NULL;}
+#define SafeRelease(pObject) if (pObject) { pObject->Release(); pObject = nullptr; }
 
 HRESULT InitDX(HWND hWnd)
 {

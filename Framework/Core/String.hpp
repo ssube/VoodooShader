@@ -107,7 +107,7 @@ namespace VoodooShader
          * This is considered the standard form for Voodoo Uuids.
          */
         String(_In_ const Uuid & uuid);
-#ifdef _VECTOR_
+#if defined(_VECTOR_)
         /**
          * Create a string from a vector, treating it as a character array (performs conversion).
          * @param vec The vector to convert and use.
@@ -127,7 +127,7 @@ namespace VoodooShader
             this->WInit(0, &vec[0]);
         }
 #endif
-#ifdef _STRING_
+#if defined(_STRING_)
         /**
          * Create a string from a std::string (performs conversion).
          * @param str The string to use.
@@ -245,7 +245,7 @@ namespace VoodooShader
          * @return Necessary buffer size or bytes converted.
          */
         int32_t ToCharStr(_In_ int32_t size, _Inout_opt_count_(size) char * const pBuffer) const;
-#ifdef _STRING_
+#if defined(_STRING_)
         /**
          * Creates a std::wstring from this string.
          *

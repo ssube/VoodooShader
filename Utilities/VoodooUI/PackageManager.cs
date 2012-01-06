@@ -98,7 +98,7 @@ namespace VoodooUI
 
                     String wd = Directory.GetCurrentDirectory();
                     Directory.SetCurrentDirectory(GlobalRegistry.Instance.Path);
-                    m_ProgressForm.QueueCommand(String.Format("git clone {0}.git {1}", source, fullpath));
+                    m_ProgressForm.QueueCommand(String.Format("git clone {0}.git \"{1}\"", source, fullpath));
                     m_ProgressForm.QueueCommand
                     (
                         delegate() { Directory.SetCurrentDirectory(fullpath); },

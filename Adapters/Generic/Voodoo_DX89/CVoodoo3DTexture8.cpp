@@ -124,11 +124,20 @@ namespace VoodooShader
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DTexture8::GetLevelDesc(UINT Level, D3DSURFACE_DESC8 * pDesc)
         {
+            if (!pDesc) return D3DERR_INVALIDCALL;
+
             D3DSURFACE_DESC rDesc;
             HRESULT hr = m_RealTexture->GetLevelDesc(Level, &rDesc);
             if (SUCCEEDED(hr))
             {
-                memcpy(pDesc, &rDesc, sizeof(D3DSURFACE_DESC8));
+                pDesc->Format = rDesc.Format;
+                pDesc->Height = rDesc.Height;
+                pDesc->MultiSampleType = rDesc.MultiSampleType;
+                pDesc->Pool = rDesc.Pool;
+                pDesc->Size = 0;
+                pDesc->Type = rDesc.Type;
+                pDesc->Usage = rDesc.Usage;
+                pDesc->Width = rDesc.Width;
             }
             return hr;
         }

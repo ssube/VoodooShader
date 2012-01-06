@@ -28,17 +28,18 @@
 
 namespace VoodooShader
 {
-    DebugCache(VSParser);
+    #define VOODOO_DEBUG_TYPE VSParser
+    DeclareDebugCache();
 
     VOODOO_METHODTYPE VSParser::VSParser(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     {
-        AddThisToDebugCache(VSParser);
+        AddThisToDebugCache();
     }
 
     VOODOO_METHODTYPE VSParser::~VSParser()
     {
-        RemoveThisFromDebugCache(VSParser);
+        RemoveThisFromDebugCache();
 
         m_Variables.clear();
     }

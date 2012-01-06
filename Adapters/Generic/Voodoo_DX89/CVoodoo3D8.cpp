@@ -157,49 +157,50 @@ namespace VoodooShader
             D3DDEVTYPE DeviceType,
             HWND hFocusWindow,
             DWORD BehaviorFlags,
-            D3DPRESENT_PARAMETERS8 * pPresentationParameters,
+            D3DPRESENT_PARAMETERS8 * pPP,
             IDirect3DDevice8 **ppReturnedDeviceInterface
         )
         {
-            D3DPRESENT_PARAMETERS mpPresentationParameters;
+            D3DPRESENT_PARAMETERS mpPP;
+            ZeroMemory(&mpPP, sizeof(D3DPRESENT_PARAMETERS));
 
-            mpPresentationParameters.Flags = pPresentationParameters->Flags ^ D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
-            mpPresentationParameters.Windowed = pPresentationParameters->Windowed;
-            mpPresentationParameters.BackBufferCount = pPresentationParameters->BackBufferCount;
-            mpPresentationParameters.BackBufferFormat = pPresentationParameters->BackBufferFormat;
-            mpPresentationParameters.BackBufferHeight = pPresentationParameters->BackBufferHeight;
-            mpPresentationParameters.BackBufferWidth = pPresentationParameters->BackBufferWidth;
-            mpPresentationParameters.hDeviceWindow = pPresentationParameters->hDeviceWindow;
-            mpPresentationParameters.EnableAutoDepthStencil = pPresentationParameters->EnableAutoDepthStencil;
-            mpPresentationParameters.SwapEffect = pPresentationParameters->SwapEffect;
-            mpPresentationParameters.MultiSampleQuality = 0;
-            mpPresentationParameters.MultiSampleType = pPresentationParameters->MultiSampleType;
-            mpPresentationParameters.AutoDepthStencilFormat = D3DFMT_D24S8;
-            mpPresentationParameters.FullScreen_RefreshRateInHz = 0;
-            mpPresentationParameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+            mpPP.AutoDepthStencilFormat = pPP->AutoDepthStencilFormat;
+            mpPP.BackBufferCount = pPP->BackBufferCount;
+            mpPP.BackBufferFormat = pPP->BackBufferFormat;
+            mpPP.BackBufferHeight = pPP->BackBufferHeight;
+            mpPP.BackBufferWidth = pPP->BackBufferWidth;
+            mpPP.EnableAutoDepthStencil = pPP->EnableAutoDepthStencil;
+            mpPP.Flags = pPP->Flags;
+            mpPP.FullScreen_RefreshRateInHz = pPP->FullScreen_RefreshRateInHz;
+            mpPP.hDeviceWindow = pPP->hDeviceWindow;
+            mpPP.MultiSampleQuality = pPP->MultiSampleType;
+            mpPP.MultiSampleType = pPP->MultiSampleType;
+            mpPP.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+            mpPP.SwapEffect = pPP->SwapEffect;
+            mpPP.Windowed = pPP->Windowed;
 
 #ifdef _DEBUG
             const wchar_t * textureType = VoodooShader::Converter::ToString
             (
-                VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(mpPresentationParameters.BackBufferFormat)
+                VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(mpPP.BackBufferFormat)
             );
 
             gpVoodooLogger->LogMessage
             (
                 LL_ModInfo, VOODOO_DX89_NAME, Format("Backbuffer parameters for new device: %d by %d (%d buffers), %s.") <<
-                mpPresentationParameters.BackBufferWidth << mpPresentationParameters.BackBufferHeight <<
-                mpPresentationParameters.BackBufferCount << textureType
+                mpPP.BackBufferWidth << mpPP.BackBufferHeight <<
+                mpPP.BackBufferCount << textureType
             );
 #endif
 
             IDirect3DDevice9 * pRealDevice;
-            HRESULT hr = m_RealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPresentationParameters, &pRealDevice);
+            HRESULT hr = m_RealObject->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, &mpPP, &pRealDevice);
 
 #ifdef _DEBUG
             VOODOO_API_LOG
             (
                 LL_ModInfo, VOODOO_DX89_NAME, Format("CVoodoo3D8::CreateDevice(%d, %d, %p, %d, %p, %p) == %d") << Adapter << 
-                DeviceType << hFocusWindow << BehaviorFlags << &mpPresentationParameters << pRealDevice << hr
+                DeviceType << hFocusWindow << BehaviorFlags << &mpPP << pRealDevice << hr
             );
 #endif
 
@@ -233,8 +234,8 @@ namespace VoodooShader
 
                 TextureDesc backbufferDesc;
                 ZeroMemory(&backbufferDesc, sizeof(TextureDesc));
-                backbufferDesc.Size.X = pPresentationParameters->BackBufferWidth;
-                backbufferDesc.Size.Y = pPresentationParameters->BackBufferHeight;
+                backbufferDesc.Size.X = mpPP.BackBufferWidth;
+                backbufferDesc.Size.Y = mpPP.BackBufferHeight;
                 backbufferDesc.Size.Z = 0;
                 backbufferDesc.Mipmaps = true;
                 backbufferDesc.RenderTarget = true;

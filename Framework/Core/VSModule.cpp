@@ -22,7 +22,8 @@
 
 namespace VoodooShader
 {
-    DebugCache(VSModule);
+    #define VOODOO_DEBUG_TYPE VSModule
+    DeclareDebugCache();
 
     VSModule * VSModule::Load(_In_ ICore * const pCore, _In_ const String & path)
     {
@@ -64,12 +65,12 @@ namespace VoodooShader
     VOODOO_METHODTYPE VSModule::VSModule(_In_ ICore * pCore, HMODULE hmodule) :
         m_Refs(0), m_Core(pCore), m_Handle(hmodule)
     {
-        AddThisToDebugCache(VSModule);
+        AddThisToDebugCache();
     }
 
     VOODOO_METHODTYPE VSModule::~VSModule()
     {
-        RemoveThisFromDebugCache(VSModule);
+        RemoveThisFromDebugCache();
 
         if (m_Handle != INVALID_HANDLE_VALUE)
         {

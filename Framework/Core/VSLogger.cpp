@@ -22,17 +22,18 @@
 
 namespace VoodooShader
 {
-    DebugCache(VSLogger);
+    #define VOODOO_DEBUG_TYPE VSLogger
+    DeclareDebugCache();
 
     VSLogger::VSLogger(ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { 
-        AddThisToDebugCache(VSLogger);
+        AddThisToDebugCache();
     }
 
     VSLogger::~VSLogger()
     { 
-        RemoveThisFromDebugCache(VSLogger);
+        RemoveThisFromDebugCache();
     }
 
     uint32_t VOODOO_METHODTYPE VSLogger::AddRef() CONST
@@ -179,7 +180,7 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(source);
         UNREFERENCED_PARAMETER(msg);
 
-#ifdef _DEBUG
+#if defined(_DEBUG)
         if ((level & (LL_Critical | LL_Warning | LL_Error)) > 0)
         {
             OutputDebugString(msg.GetData());

@@ -22,7 +22,8 @@
 
 namespace VoodooShader
 {
-    DebugCache(VSPass);
+    #define VOODOO_DEBUG_TYPE VSPass
+    DeclareDebugCache();
 
     VOODOO_METHODTYPE VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) :
         m_Refs(0), m_Technique(pTechnique), m_CgPass(pCgPass)
@@ -54,12 +55,12 @@ namespace VoodooShader
         this->Link();
         --this->m_Refs;
 
-        AddThisToDebugCache(VSPass);
+        AddThisToDebugCache();
     }
 
     VOODOO_METHODTYPE VSPass::~VSPass()
     {
-        RemoveThisFromDebugCache(VSPass);
+        RemoveThisFromDebugCache();
 
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (m_Core)

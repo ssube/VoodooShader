@@ -127,7 +127,7 @@ namespace VoodooUI
             {
                 try
                 {
-                    CountDir(ref count, innerdir, level, e);
+                    CountDir(ref count, innerdir, level, w, e);
                 }
                 catch (Exception exc)
                 {

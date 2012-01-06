@@ -37,7 +37,7 @@
  * @defgroup voodoo_macros_version Versioning Macros
  * @{
  */
-#ifdef _DEBUG
+#if defined(_DEBUG)
 #   define VOODOO_DEBUG_BOOL   true
 #   define VOODOO_DEBUG_STRING VSTR(" (DEBUG)")
 #else

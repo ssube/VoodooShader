@@ -53,6 +53,7 @@ HRESULT WINAPI VSDirectSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOI
     
     if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
     {
+        GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
         if (LoadVoodoo())
         {
             VoodooShader::Variant DSObj;

@@ -52,6 +52,7 @@ LPVOID WINAPI VSDirect3DCreate8(UINT sdkVersion)
 
     if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
     {
+        GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
         if (LoadVoodoo())
         {
             VoodooShader::Variant D3DObj;

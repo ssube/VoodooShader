@@ -28,22 +28,22 @@
 
 #include "VoodooVersion.hpp"
 
-namespace VoodooShader
+EXTERN_C BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
 {
-    BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
+    UNREFERENCED_PARAMETER(lpvReserved);
+
+    if (fdwReason == DLL_PROCESS_ATTACH)
     {
-        UNREFERENCED_PARAMETER(lpvReserved);
+        DisableThreadLibraryCalls(hinstDLL);
 
-        if (fdwReason == DLL_PROCESS_ATTACH)
-        {
-            DisableThreadLibraryCalls(hinstDLL);
-
-            gCoreHandle = hinstDLL;
-        }
-
-        return TRUE;
+        VoodooShader::gCoreHandle = hinstDLL;
     }
 
+    return TRUE;
+}    
+
+namespace VoodooShader
+{
     static const Version coreVersion = VOODOO_VERSION_STRUCT(CORE);
     static const wchar_t * name_VSAdapter = VSTR("VSAdapter");
     static const wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
@@ -110,7 +110,7 @@ namespace VoodooShader
     // Boost intrusive_ptr functions
     void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj)
     {
-#ifdef VOODOO_DEBUG_MEMORY
+#if defined(VOODOO_DEBUG_MEMORY)
         uint32_t refs = obj->AddRef();
         if (obj && obj->GetCore() && obj->GetCore()->GetLogger())
         {
@@ -123,7 +123,7 @@ namespace VoodooShader
 
     void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj)
     {
-#ifdef VOODOO_DEBUG_MEMORY
+#if defined(VOODOO_DEBUG_MEMORY)
         if (obj && obj->GetCore() && obj->GetCore()->GetLogger())
         {
             obj->AddRef();

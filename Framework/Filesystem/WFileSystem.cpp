@@ -88,24 +88,17 @@ namespace VoodooShader
             IParser* parser = m_Core->GetParser();
             wchar_t cvar[MAX_PATH];
 
-            if (SHGetFolderPath(nullptr, CSIDL_COMMON_DOCUMENTS, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
-            {
-                PathCombine(cvar, cvar, VSTR("My Games"));
-                PathAddBackslash(cvar);
-                parser->Add(VSTR("allgames"), cvar, VT_System);
-            }
-
             if (SHGetFolderPath(nullptr, CSIDL_PERSONAL, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
                 PathCombine(cvar, cvar, VSTR("My Games"));
                 PathAddBackslash(cvar);
-                parser->Add(VSTR("mygames"), cvar, VT_System);
+                parser->Add(VSTR("games"), cvar, VT_System);
             }
 
             if (SHGetFolderPath(nullptr, CSIDL_SYSTEM, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
                 PathAddBackslash(cvar);
-                parser->Add(VSTR("systemroot"), cvar, VT_System);
+                parser->Add(VSTR("system"), cvar, VT_System);
             }
 
             // Init DevIL

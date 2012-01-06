@@ -59,6 +59,7 @@ HRESULT WINAPI VSDirectInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID rii
     
     if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
     {
+        GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
         if (LoadVoodoo())
         {
             VoodooShader::Variant DIObj;

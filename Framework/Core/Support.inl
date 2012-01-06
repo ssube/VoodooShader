@@ -40,6 +40,40 @@ struct HookDef
 
 typedef HookDef * HHOOKDEF;
 
+inline static FILE * WINAPI GetVoodooGlobalLog()
+{
+    TCHAR path[MAX_PATH];
+    ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\VoodooShader.log"), path, MAX_PATH);
+    FILE * pf = nullptr;
+    if (_tfopen_s(&pf, path, TEXT("a")) == 0)
+    {
+        return pf;
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+/**
+ * Logs a message to the Voodoo Shader global log (located in the user directory). These are for simple, vital messages,
+ * such as hooks being matched or core files not being found.
+ */
+inline static void WINAPI GlobalLog(_In_ LPTSTR msg, ...)
+{
+    va_list args;
+    va_start(args, msg);
+
+    FILE * pf = GetVoodooGlobalLog();
+    if (pf)
+    {
+        _vftprintf_s(pf, msg, args);
+        fclose(pf);
+    }
+
+    va_end(args);
+}
+
 /**
  * Display a formatted error message.
  * 
@@ -57,6 +91,8 @@ inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format
     _vsntprintf_s(&buffer[0], bufsize, bufsize-1, msg, args);
 
     va_end(args);
+
+    GlobalLog(TEXT("Error: %s"), &buffer[0]);
 
     TCHAR title[32];
     _stprintf_s(title, TEXT("Voodoo Error 0X%04X"), errorCode);
@@ -190,21 +226,6 @@ inline static bool WINAPI GetVoodooBinPath(_In_count_c_(MAX_PATH) TCHAR * pBuffe
     PathAddBackslash(pBuffer);
 
     return true;
-}
-
-inline static FILE * WINAPI GetVoodooGlobalLog()
-{
-    TCHAR path[MAX_PATH];
-    ExpandEnvironmentStrings(TEXT("%HOMEDRIVE%\\%HOMEPATH%\\VoodooShader.log"), path, MAX_PATH);
-    FILE * pf = nullptr;
-    if (_tfopen_s(&pf, path, TEXT("a")) == 0)
-    {
-        return pf;
-    }
-    else
-    {
-        return nullptr;
-    }
 }
 
 inline static bool WINAPI MatchHook(_In_z_ TCHAR * module, _In_ HHOOKDEF pHook)

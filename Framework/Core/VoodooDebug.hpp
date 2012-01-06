@@ -25,7 +25,7 @@
  * memory management and program flow will be logged.
  * @{
  */
-#ifdef VOODOO_DEBUG
+#if defined(VOODOO_DEBUG)
 #   define VOODOO_DEBUG_BREAK   DebugBreak()
 #   define VOODOO_CHECK_IMPL    if (!m_Impl) { Throw(VSTR("Extended Debug"), VSTR("String has no impl."), nullptr); }
 #   define SAFE_INCREMENT(x)    InterlockedIncrement(&x)
@@ -63,15 +63,15 @@
 #   include <stdlib.h>
 #   include <crtdbg.h>
 #   include <set>
-#   define DebugCache(type) std::set<type *> DebugCache_##type
-#   define AddThisToDebugCache(type) DebugCache_##type.insert(this)
-#   define RemoveThisFromDebugCache(type) DebugCache_##type.erase(this)
+#   define DeclareDebugCache() std::set<VOODOO_DEBUG_TYPE *> DebugCache_##VOODOO_DEBUG_TYPE
+#   define AddThisToDebugCache() DebugCache_##VOODOO_DEBUG_TYPE.insert(this)
+#   define RemoveThisFromDebugCache() DebugCache_##VOODOO_DEBUG_TYPE.erase(this)
 #   define vnew new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #   define vdelete delete
 #else
-#   define DebugCache(type)
-#   define AddThisToDebugCache(type)
-#   define RemoveThisFromDebugCache(type)
+#   define DeclareDebugCache()
+#   define AddThisToDebugCache()
+#   define RemoveThisFromDebugCache()
 #   define vnew new
 #   define vdelete delete
 #endif

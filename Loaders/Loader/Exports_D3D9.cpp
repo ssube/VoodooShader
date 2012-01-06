@@ -68,6 +68,8 @@ LPVOID WINAPI VSDirect3DCreate9(UINT sdkVersion)
         
     if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
     {
+        GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
+
         if (LoadVoodoo())
         {
             VoodooShader::Variant D3DObj;
@@ -113,6 +115,7 @@ HRESULT WINAPI VSDirect3DCreate9Ex(UINT sdkVersion, LPVOID * dx)
     
     if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
     {
+        GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
         if (LoadVoodoo())
         {
             VoodooShader::Variant D3DObj;

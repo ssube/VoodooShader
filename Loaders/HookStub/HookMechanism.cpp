@@ -60,15 +60,10 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
 
                 HHOOKDEF hook = SearchHooks(moduleName);
 
-                FILE * pf = GetVoodooGlobalLog();
-                if (pf)
-                {
-                    _ftprintf_s(pf, TEXT("%s = %s\n"), moduleName, (hook ? hook->Target : TEXT("false")));
-                    fclose(pf);
-                }
-
                 if (hook)
                 {
+                    GlobalLog(TEXT("Hook matched for module %s.\n"), moduleName, hook->Target);
+
                     LoadFullLoader();
                 }
             }
@@ -100,6 +95,8 @@ HHOOK WINAPI InstallGlobalHook()
         return false;
     }
 
+    GlobalLog(TEXT("Installed global hook.\n"));
+
     return gSystemHook;
 }
 
@@ -121,6 +118,8 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
             {
                 ErrorMessage(0x1004, TEXT("Error removing global hook."));
             }
+        } else {
+            GlobalLog(TEXT("Removed global hook.\n"));
         }
     }
 }
@@ -137,10 +136,13 @@ bool WINAPI LoadFullLoader()
 
     if (gFullLoader)
     {
+        GlobalLog(TEXT("Loaded full loader module from %s.\n"), binPath);
+
         FARPROC hookFunc = GetProcAddress(gFullLoader, "InstallKnownHooks");
         if (hookFunc)
         {
             result = hookFunc();
+            GlobalLog(TEXT("Installed %d known local hooks.\n"), result);
         }
         else
         {

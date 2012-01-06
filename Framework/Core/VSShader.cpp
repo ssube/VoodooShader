@@ -25,7 +25,8 @@
 
 namespace VoodooShader
 {
-    DebugCache(VSShhader);
+    #define VOODOO_DEBUG_TYPE VSShhader
+    DeclareDebugCache();
 
     VSShader::VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
         m_Refs(0), m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
@@ -61,12 +62,12 @@ namespace VoodooShader
         this->Link();
         --this->m_Refs;
 
-        AddThisToDebugCache(VSShader);
+        AddThisToDebugCache();
     }
 
     VSShader::~VSShader()
     {
-        RemoveThisFromDebugCache(VSShader);
+        RemoveThisFromDebugCache();
 
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_DefaultTechnique = nullptr;
