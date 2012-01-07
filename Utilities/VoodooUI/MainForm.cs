@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -59,6 +60,35 @@ namespace VoodooUI
             InitializeComponent();
 
             // Do the installation check
+            if (!GlobalRegistry.Exists)
+            {
+                FolderBrowserDialog dFolderBrowser = new FolderBrowserDialog();
+                dFolderBrowser.Description = "Select Voodoo Shader installation path.";
+                if (dFolderBrowser.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory(dFolderBrowser.SelectedPath);
+                        GlobalRegistry.Instance.Path = dFolderBrowser.SelectedPath;
+                        GlobalRegistry.Instance.Write();
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show(String.Format("Error accessing root directory {0}:\n{1}", dFolderBrowser.SelectedPath, exc.Message), "Root Directory Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else if (!Directory.Exists(GlobalRegistry.Instance.Path))
+            {
+                try
+                {
+                    Directory.CreateDirectory(GlobalRegistry.Instance.Path);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(String.Format("Root directory was not found. Error creating root directory {0}:\n{1}", GlobalRegistry.Instance.Path, exc.Message), "Root Directory Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
             LoadHooks();
             cHook_Table.AutoGenerateColumns = false;
             cHook_Table.DataSource = m_Hooks;

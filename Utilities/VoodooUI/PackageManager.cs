@@ -70,8 +70,8 @@ namespace VoodooUI
 
             foreach (string subdir in subdirs)
             {
-                if (String.Compare(subdir, "bin", true) != 0 && 
-                    String.Compare(subdir, "user", true) != 0 && 
+                if (String.Compare(subdir, "bin", true) != 0 &&
+                    String.Compare(subdir, "user", true) != 0 &&
                     Directory.Exists(Path.Combine(subdir, ".git")))
                 {
                     packages.Add(Path.GetFileName(subdir));
@@ -159,7 +159,7 @@ namespace VoodooUI
             }
             catch (System.Exception exc)
             {
-                MessageBox.Show("Error removing package:\n" + exc.Message, "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);            	
+                MessageBox.Show("Error removing package:\n" + exc.Message, "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -207,36 +207,7 @@ namespace VoodooUI
 
         void StartupCheck()
         {
-            if (!GlobalRegistry.Exists)
-            {
-                dFolderBrowser.Description = "Select Voodoo Shader installation path.";
-                if (dFolderBrowser.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        Directory.CreateDirectory(dFolderBrowser.SelectedPath);
-                        GlobalRegistry.Instance.Path = dFolderBrowser.SelectedPath;
-                        GlobalRegistry.Instance.Write();
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show(String.Format("Error accessing root directory {0}:\n{1}", dFolderBrowser.SelectedPath, exc.Message), "Root Directory Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else if (!Directory.Exists(GlobalRegistry.Instance.Path))
-            {
-                try
-                {
-                    Directory.CreateDirectory(GlobalRegistry.Instance.Path);
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(String.Format("Root directory was not found. Error creating root directory {0}:\n{1}", dFolderBrowser.SelectedPath, exc.Message), "Root Directory Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-            if (GitInPath())
+            if (!GitInPath())
             {
                 m_ProgressForm = new ProgressDialog();
                 m_ProgressForm.WriteLine("Unable to locate git for package management.");
@@ -281,7 +252,6 @@ namespace VoodooUI
             {
                 m_ProgressForm.WriteLine("Launching git installer...");
                 Process installer = Process.Start("msysgit.exe", "/silent");
-                installer.Start();
                 installer.WaitForExit();
                 if (installer.ExitCode == 0)
                 {
@@ -425,12 +395,17 @@ namespace VoodooUI
         {
             if (ExistsInPath("git.exe") || ExistsInPath("git.cmd")) return true;
 
-            if (Directory.Exists(GitProgramFiles()) && File.Exists(Path.Combine(GitProgramFiles(), "git.exe")))
+            String progFiles = GitProgramFiles();
+            MessageBox.Show(progFiles);
+            if (Directory.Exists(progFiles))
             {
+                MessageBox.Show("PFx86 exists.");
                 String envpath = Environment.GetEnvironmentVariable("Path");
-                envpath += ";" + GitProgramFiles();
+                envpath += ";" + progFiles;
                 Environment.SetEnvironmentVariable("Path", envpath);
-                return true;
+                MessageBox.Show(envpath);
+
+                if (ExistsInPath("git.exe") || ExistsInPath("git.cmd")) return true;
             }
 
             return false;
@@ -438,19 +413,8 @@ namespace VoodooUI
 
         string GitProgramFiles()
         {
-            return Path.Combine(Path.Combine(ProgramFilesx86(), "Git"), "bin");
-        }
-
-        string ProgramFilesx86()
-        {
-            if (IntPtr.Size == 8 ||
-                (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))
-               )
-            {
-                return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
-            }
-
-            return Environment.GetEnvironmentVariable("ProgramFiles");
+            String path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            return Path.Combine(Path.Combine(path, "Git"), "cmd");
         }
     }
 }
