@@ -20,6 +20,9 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.lightbox-0.5.js"></script>
+    <link rel="stylesheet" href="css/jquery.lightbox-0.5.css" type="text/css" media="screen" />
   </head>
   <body>
   <div id="container"> 
@@ -49,6 +52,29 @@
         without sacrificing speed or introducing bugs. Voodoo Shader is one of the only graphics extenders to use unit 
         tests, ensuring the best possible performance and functionality. In addition, comprehensive documentation, support
         forums, and an integrated bug tracker are offered to users and developers, along with direct access to the code.</p>
+
+        <div id="imagelist">
+        <ul>
+        <li><a href="screenshots/ui.jpg" rel="lightbox" title="Voodoo Shader UI"><img src="screenshots/thumb/ui.jpg" alt="Voodoo UI" /></a></li>
+        <li><a href="screenshots/skyrim-1.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-1.jpg" alt="Skyrim" /></a></li>
+        <li><a href="screenshots/skyrim-2.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-2.jpg" alt="Skyrim" /></a></li>
+        <li><a href="screenshots/skyrim-3.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-3.jpg" alt="Skyrim" /></a></li>
+        <li><a href="screenshots/morrowind-1.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-1.jpg" alt="Morrowind" /></a></li>
+        <li><a href="screenshots/morrowind-2.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-2.jpg" alt="Morrowind" /></a></li>
+        <li><a href="screenshots/morrowind-3.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-3.jpg" alt="Morrowind" /></a></li>
+        <li><a href="screenshots/nwn2-1.jpg" rel="lightbox" title="Neverwinter Nights 2 - Test Pattern"><img src="screenshots/thumb/nwn2-1.jpg" alt="Neverwinter Nights 2" /></a></li>
+        <li><a href="screenshots/nwn2-2.jpg" rel="lightbox" title="Neverwinter Nights 2 - Test Pattern"><img src="screenshots/thumb/nwn2-2.jpg" alt="Neverwinter Nights 2" /></a></li>
+        <li><a href="screenshots/oblivion-1.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-1.jpg" alt="Oblivion" /></a></li>
+        <li><a href="screenshots/oblivion-2.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-2.jpg" alt="Oblivion" /></a></li>
+        <li><a href="screenshots/oblivion-3.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-3.jpg" alt="Oblivion" /></a></li>
+        <li><a href="screenshots/fallout3-1.jpg" rel="lightbox" title="Fallout 3 - Test Pattern"><img src="screenshots/thumb/fallout3-1.jpg" alt="Fallout 3" /></a></li>
+        <li><a href="screenshots/gothic3-1.jpg" rel="lightbox" title="Gothic 3 - Test Pattern"><img src="screenshots/thumb/gothic3-1.jpg" alt="Gothic 3" /></a></li>
+        <li><a href="screenshots/gothic3-2.jpg" rel="lightbox" title="Gothic 3 - Test Pattern"><img src="screenshots/thumb/gothic3-2.jpg" alt="Gothic 3" /></a></li>
+        </ul> 
+        <script type="text/javascript">
+            $('a[@rel*=lightbox]').lightBox();
+        </script>
+        </div>
 
         <p>Right now, Voodoo Shader is in alpha testing. It works but is not complete. A public alpha test is being set up; 
         the process will be simple: download the UI and demo package, then make sure Voodoo Shader runs properly. If you are 

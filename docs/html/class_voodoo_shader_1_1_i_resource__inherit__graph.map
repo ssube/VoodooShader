@@ -1,6 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node5" href="$class_voodoo_shader_1_1_i_parameter.html" title="Provides access to shader parameters, with attach/detach and value set (for most data types)..." alt="" coords="432,5,611,32"/>
-<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_i_pass.html" title="Each IPass contains a single set of programs, each operating on a different stage of the render pipel..." alt="" coords="447,56,595,83"/>
+<area shape="rect" id="node9" href="$class_voodoo_shader_1_1_i_pass.html" title="Each pass contains a single set of programs, each operating on a different stage of the render pipeli..." alt="" coords="447,56,595,83"/>
 <area shape="rect" id="node13" href="$class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="442,107,601,133"/>
 <area shape="rect" id="node17" href="$class_voodoo_shader_1_1_i_technique.html" title="Contains a set of passes, designed to be used sequentially to create a shader effect." alt="" coords="433,157,610,184"/>
 <area shape="rect" id="node21" href="$class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects." alt="" coords="441,208,602,235"/>

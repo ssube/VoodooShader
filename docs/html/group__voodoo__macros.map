@@ -1,0 +1,5 @@
+<map id="structs" name="structs">
+<area shape="rect" id="node1" href="$group__voodoo__macros__debug.html" title="These will enable a significant amount of additional code and will cause major performance loss..." alt="" coords="135,5,241,32"/>
+<area shape="rect" id="node3" href="$group__voodoo__macros__decl.html" title="Declaration Macros" alt="" coords="121,56,255,83"/>
+<area shape="rect" id="node4" href="$group__voodoo__macros__version.html" title="A variety of macros to simplify project versioning and resources." alt="" coords="131,107,245,133"/>
+</map>

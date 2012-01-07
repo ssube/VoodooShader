@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -59,21 +59,33 @@
 
 
 <h3><a class="anchor" id="voodoo_tut_basics"></a>Basics</h3><div class="textblock"><p>To launch Voodoo Shader, a core must be created.</p>
-<p>This is done by calling the function </p>
-<div class="fragment"><pre class="fragment"> <a class="code" href="namespace_voodoo_shader.html#a7dd9c2e3f32f0bd4c853d4d20567dfac">CreateCore</a> 
-</pre></div><p>, exported undecorated from the core module. It is possible to link to the Voodoo Core, by defining </p>
-<div class="fragment"><pre class="fragment"> VOODOO_STATIC_LINK 
-</pre></div><p> before including <a class="el" href="_voodoo_framework_8hpp.html">VoodooFramework.hpp</a>, or load the module at runtime. As the location of the core is unknown, loading at runtime is highly recommended. Once loaded, calling CreateCore will return an </p>
-<div class="fragment"><pre class="fragment"> ICore * 
-</pre></div><p>.</p>
-<p>If a valid core is returned, it must be initialized to load the config and plugins. An InitParams structure must be passed to </p>
-<div class="fragment"><pre class="fragment"> pCore-&gt;Initialize() 
-</pre></div><p> with the desired startup parameters, and the core will load the config, modules, and other necessary data. The core must not be used until initialized, except for adding and releasing references. </p>
-</div></div><!-- contents -->
+<p>This is done by calling the function <code>CreateCore</code>, exported undecorated from the core module.</p>
+<p>It is possible to link to the Voodoo Core, by defining <code>VOODOO_STATIC_LINK</code> before including <a class="el" href="_voodoo_framework_8hpp.html" title="This file is the public-facing include for the Voodoo Shader core.">VoodooFramework.hpp</a>, or load the module at runtime. As the location of the core is unknown, loading at runtime is highly recommended. Once loaded, calling CreateCore will return an <code><a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *</code>.</p>
+<p>If a valid core is returned, it must be initialized to load the config and plugins. The desired config file must be passed to <code>pCore-&gt;Initialize()</code> with the desired startup parameters, and the core will load the config, modules, and other necessary data. The core must not be used until initialized, except for adding and releasing references.</p>
+<div class="fragment"><pre class="fragment"> <span class="comment">// Look up the path</span>
+ TCHAR path[MAX_PATH];
+ <a class="code" href="_support_8inl.html#ade3f689962648f73d1330dd1f6ac29e0">GetVoodooBinPath</a>(path);
+ PathCombine(path, path, <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;Voodoo_Core.dll&quot;</span>));
+
+ <span class="comment">// Load the core</span>
+ HMODULE core = LoadLibraryEx(path, NULL, LOAD_WITH_ALTERED_SEARCH_PATHS);
+ assert(core);
+ 
+ <a class="code" href="namespace_voodoo_shader_1_1_functions.html#acad482879b2d5d3514b2a934491de2e3">CoreCreateFunc</a> create = (<a class="code" href="namespace_voodoo_shader_1_1_functions.html#acad482879b2d5d3514b2a934491de2e3">CoreCreateFunc</a>)GetProcAddress(core, <span class="stringliteral">&quot;CreateCore&quot;</span>);
+ assert(create);
+
+ ICore * pCore = create(<a class="code" href="group__voodoo__macros.html#ga52c6a8e70ab75842559c062432b7205a" title="Current core version.">VOODOO_SDK_VERSION</a>);
+ assert(pCore);
+ 
+ <span class="keywordflow">if</span> (pCore-&gt;Initialize(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;config.xml&quot;</span>)))
+ {
+     <span class="comment">// Core is ready for use</span>
+ }
+</pre></div> </div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:13 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

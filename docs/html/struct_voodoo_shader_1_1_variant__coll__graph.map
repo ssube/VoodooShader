@@ -1,6 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node2" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; uint32_t \&gt;" alt="" coords="1257,220,1487,247"/>
-<area shape="rect" id="node44" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="1297,44,1447,71"/>
+<area shape="rect" id="node44" href="$class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="1297,44,1447,71"/>
 <area shape="rect" id="node6" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; ValType \&gt;" alt="" coords="902,649,1133,676"/>
 <area shape="rect" id="node10" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; int8_t \&gt;" alt="" coords="1264,355,1480,381"/>
 <area shape="rect" id="node17" href="$struct_voodoo_shader_1_1_vector4.html" title="VoodooShader::Vector4\&lt; uint8_t \&gt;" alt="" coords="1261,669,1483,696"/>

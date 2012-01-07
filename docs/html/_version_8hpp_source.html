@@ -71,7 +71,7 @@
 <a href="_version_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
-<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2012 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
 <a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
 <a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
@@ -137,8 +137,8 @@
 <a name="l00082"></a>00082 <span class="preprocessor">      VOODOO_##token##_NAME, VOODOO_##token##_VERSION_ID }</span>
 <a name="l00083"></a>00083 <span class="preprocessor"></span>
 <a name="l00084"></a>00084 <span class="comment">// Copyright info</span>
-<a name="l00085"></a><a class="code" href="_version_8hpp.html#ae431daae79fd2c81113bd21cf452ecf6">00085</a> <span class="preprocessor">#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VSTR(&quot;Copyright © 2010-2011 by Sean Sube&quot;)</span>
-<a name="l00086"></a><a class="code" href="_version_8hpp.html#a9951d1488ef5b6f7d477059b83c9dd7a">00086</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_COPYRIGHT_FULL    VSTR(&quot;Voodoo Shader Framework, Copyright &amp;copy; 2010-2011 by Sean Sube.&amp;lt;br /&amp;gt;\n&quot;) \</span>
+<a name="l00085"></a><a class="code" href="_version_8hpp.html#ae431daae79fd2c81113bd21cf452ecf6">00085</a> <span class="preprocessor">#define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VSTR(&quot;Copyright © 2010-2012 by Sean Sube&quot;)</span>
+<a name="l00086"></a><a class="code" href="_version_8hpp.html#a9951d1488ef5b6f7d477059b83c9dd7a">00086</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_GLOBAL_COPYRIGHT_FULL    VSTR(&quot;Voodoo Shader Framework, Copyright &amp;copy; 2010-2012 by Sean Sube.&amp;lt;br /&amp;gt;\n&quot;) \</span>
 <a name="l00087"></a>00087 <span class="preprocessor">    VSTR(&quot;The Voodoo Shader Framework comes with ABSOLUTELY NO WARRANTY.&amp;lt;br /&amp;gt;\n&quot;) \</span>
 <a name="l00088"></a>00088 <span class="preprocessor">    VSTR(&quot;This is free software and you are welcome to redistribute it under certain conditions.&amp;lt;br /&amp;gt;\n&quot;) \</span>
 <a name="l00089"></a>00089 <span class="preprocessor">    VSTR(&quot;Please see the included license file for more details.&quot;)</span>
@@ -173,7 +173,7 @@
 <a name="l00118"></a><a class="code" href="_version_8hpp.html#a24331ba6ffa35ae0ba3a1391cf4b2195">00118</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_MINOR         0</span>
 <a name="l00119"></a><a class="code" href="_version_8hpp.html#a1bc3b7710a34291734ccde6646c1d46e">00119</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_PATCH         0</span>
 <a name="l00120"></a><a class="code" href="_version_8hpp.html#ad805680173f3cbd4a75d2468a0161938">00120</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_BUILD         16</span>
-<a name="l00121"></a><a class="code" href="_version_8hpp.html#a4aabc38aa4052a651698bcf47a139b2b">00121</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_ID            VSTR(&quot;&quot;)</span>
+<a name="l00121"></a><a class="code" href="_version_8hpp.html#a4aabc38aa4052a651698bcf47a139b2b">00121</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CG_VERSION_ID            nullptr</span>
 <a name="l00122"></a>00122 <span class="preprocessor"></span>
 <a name="l00123"></a>00123 <span class="comment">// VC</span>
 <a name="l00124"></a><a class="code" href="_version_8hpp.html#a1d0e3b227cbe965960679856a5f36796">00124</a> <span class="preprocessor">#define VOODOO_VC_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}</span>
@@ -184,12 +184,12 @@
 <a name="l00129"></a><a class="code" href="_version_8hpp.html#a64467844a30043d5acc356b3e2cf4e44">00129</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_MINOR         0</span>
 <a name="l00130"></a><a class="code" href="_version_8hpp.html#ae82cfe6941e30c243fa9e3d8ccca8b8b">00130</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER</span>
 <a name="l00131"></a><a class="code" href="_version_8hpp.html#a85ee327c2406d1b87a7c9f5d9f309b1f">00131</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_BUILD         _MSC_BUILD</span>
-<a name="l00132"></a><a class="code" href="_version_8hpp.html#a05f8d69fccff2296938d0a8f7b8da300">00132</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_ID            VSTR(&quot;&quot;)</span>
+<a name="l00132"></a><a class="code" href="_version_8hpp.html#a05f8d69fccff2296938d0a8f7b8da300">00132</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_VC_VERSION_ID            nullptr</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jan 2 2012 14:53:11 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

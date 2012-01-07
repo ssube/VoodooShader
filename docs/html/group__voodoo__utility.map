@@ -1,4 +1,4 @@
 <map id="structs" name="structs">
-<area shape="rect" id="node2" href="$group__voodoo__utility__regex.html" title="Voodoo internal regex class, providing constant and compiler&#45;safe regex handling between modules..." alt="" coords="160,5,267,32"/>
-<area shape="rect" id="node3" href="$group__voodoo__utility__string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="158,56,269,83"/>
+<area shape="rect" id="node1" href="$group__voodoo__stdstream.html" title="Standard Stream Operators" alt="" coords="160,5,341,32"/>
+<area shape="rect" id="node3" href="$group__voodoo__stream__manipulators.html" title="Stream Manipulators" alt="" coords="179,56,322,83"/>
 </map>

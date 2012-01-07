@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,10 +71,13 @@
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">VoodooShader::Regex Class Reference<div class="ingroups"><a class="el" href="group__voodoo__utility.html">Voodoo Utility</a></div></div>  </div>
+<div class="title">VoodooShader::Regex Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="VoodooShader::Regex" -->
+<p>Voodoo internal regex class, providing constant and compiler-safe regex handling between modules.  
+ <a href="class_voodoo_shader_1_1_regex.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_regex_8hpp_source.html">Regex.hpp</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for VoodooShader::Regex:</div>
@@ -93,29 +96,81 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html">RegexImpl</a></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__regex__ctor.html#ga1856f2b4450d38cd957cf96b0fc0541e">Regex</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty regular expression.  <a href="group__voodoo__utility__regex__ctor.html#ga1856f2b4450d38cd957cf96b0fc0541e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__regex__ctor.html#ga25b35593113cd2193268f53702e6db3f">Regex</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;expr)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a regular expression from the given string, using extended syntax.  <a href="group__voodoo__utility__regex__ctor.html#ga25b35593113cd2193268f53702e6db3f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#a1be90dc1cc4f28febfa5c5bd4c29ab5a">~Regex</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__regex__expr.html#gaef2ecd204ac773064788c585c31f0b89">SetExpr</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;expr)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the internal expression and recompiles.  <a href="group__voodoo__utility__regex__expr.html#gaef2ecd204ac773064788c585c31f0b89"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__regex__expr.html#ga8d43d2967dc7f676244b9e0d1f91dd41">GetExpr</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current expression.  <a href="group__voodoo__utility__regex__expr.html#ga8d43d2967dc7f676244b9e0d1f91dd41"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_regex_match.html">RegexMatch</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__regex__expr.html#ga1482d4ac4dae5d4dedf30ff320547ee0">Match</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;string) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to match the given string against the stored expression.  <a href="group__voodoo__utility__regex__expr.html#ga1482d4ac4dae5d4dedf30ff320547ee0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__regex__expr.html#ga05d0fe89740187f7a4302044cb6d107e">Find</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;find) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if the given string is matched by the expression.  <a href="group__voodoo__utility__regex__expr.html#ga05d0fe89740187f7a4302044cb6d107e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__utility__regex__expr.html#gabdf7ddb415680172fbd7fb4ad93fc00f">Replace</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;find, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;replace) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a find and replace on all segments which this regex matches.  <a href="group__voodoo__utility__regex__expr.html#gabdf7ddb415680172fbd7fb4ad93fc00f"></a><br/></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Regex Constructors</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#a1856f2b4450d38cd957cf96b0fc0541e">Regex</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty regular expression.  <a href="#a1856f2b4450d38cd957cf96b0fc0541e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#a25b35593113cd2193268f53702e6db3f">Regex</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;expr)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a regular expression from the given string, using extended syntax.  <a href="#a25b35593113cd2193268f53702e6db3f"></a><br/></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Regex Expression</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#aef2ecd204ac773064788c585c31f0b89">SetExpr</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;expr)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the internal expression and recompiles.  <a href="#aef2ecd204ac773064788c585c31f0b89"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#a8d43d2967dc7f676244b9e0d1f91dd41">GetExpr</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current expression.  <a href="#a8d43d2967dc7f676244b9e0d1f91dd41"></a><br/></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Regex Operations</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_regex_match.html">RegexMatch</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#a1482d4ac4dae5d4dedf30ff320547ee0">Match</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;string) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to match the given string against the stored expression.  <a href="#a1482d4ac4dae5d4dedf30ff320547ee0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#a05d0fe89740187f7a4302044cb6d107e">Find</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;find) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if the given string is matched by the expression.  <a href="#a05d0fe89740187f7a4302044cb6d107e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#abdf7ddb415680172fbd7fb4ad93fc00f">Replace</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;find, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;replace) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a find and replace on all segments which this regex matches.  <a href="#abdf7ddb415680172fbd7fb4ad93fc00f"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html">RegexImpl</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock">
-<p>Definition at line <a class="el" href="_regex_8hpp_source.html#l00043">43</a> of file <a class="el" href="_regex_8hpp_source.html">Regex.hpp</a>.</p>
+<div class="textblock"><p>Voodoo internal regex class, providing constant and compiler-safe regex handling between modules. </p>
+<p>This internally uses <a href="http://www.boost.org/doc/libs/1_48_0/libs/regex/doc/html/index.html">Boost.Regex</a> in extended-syntax mode for both expressions and match formatting. </p>
+
+<p>Definition at line <a class="el" href="_regex_8hpp_source.html#l00035">35</a> of file <a class="el" href="_regex_8hpp_source.html">Regex.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a1856f2b4450d38cd957cf96b0fc0541e"></a><!-- doxytag: member="VoodooShader::Regex::Regex" ref="a1856f2b4450d38cd957cf96b0fc0541e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_regex.html#a1856f2b4450d38cd957cf96b0fc0541e">VoodooShader::Regex::Regex</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates an empty regular expression. </p>
+
+<p>Definition at line <a class="el" href="_regex_8cpp_source.html#l00062">62</a> of file <a class="el" href="_regex_8cpp_source.html">Regex.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a25b35593113cd2193268f53702e6db3f"></a><!-- doxytag: member="VoodooShader::Regex::Regex" ref="a25b35593113cd2193268f53702e6db3f" args="(const String &amp;expr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_regex.html#a1856f2b4450d38cd957cf96b0fc0541e">VoodooShader::Regex::Regex</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>expr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Creates a regular expression from the given string, using extended syntax. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expr</td><td>The string to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_regex_8cpp_source.html#l00067">67</a> of file <a class="el" href="_regex_8cpp_source.html">Regex.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a1be90dc1cc4f28febfa5c5bd4c29ab5a"></a><!-- doxytag: member="VoodooShader::Regex::~Regex" ref="a1be90dc1cc4f28febfa5c5bd4c29ab5a" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -134,6 +189,151 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a05d0fe89740187f7a4302044cb6d107e"></a><!-- doxytag: member="VoodooShader::Regex::Find" ref="a05d0fe89740187f7a4302044cb6d107e" args="(const String &amp;find) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_voodoo_shader_1_1_regex.html#a05d0fe89740187f7a4302044cb6d107e">VoodooShader::Regex::Find</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>find</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Test if the given string is matched by the expression. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">find</td><td>The string to search. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>True if the expression matches the string in full. </dd></dl>
+
+<p>Definition at line <a class="el" href="_regex_8cpp_source.html#l00106">106</a> of file <a class="el" href="_regex_8cpp_source.html">Regex.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8d43d2967dc7f676244b9e0d1f91dd41"></a><!-- doxytag: member="VoodooShader::Regex::GetExpr" ref="a8d43d2967dc7f676244b9e0d1f91dd41" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> <a class="el" href="class_voodoo_shader_1_1_regex.html#a8d43d2967dc7f676244b9e0d1f91dd41">VoodooShader::Regex::GetExpr</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the current expression. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The expression string. </dd></dl>
+
+<p>Definition at line <a class="el" href="_regex_8cpp_source.html#l00084">84</a> of file <a class="el" href="_regex_8cpp_source.html">Regex.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1482d4ac4dae5d4dedf30ff320547ee0"></a><!-- doxytag: member="VoodooShader::Regex::Match" ref="a1482d4ac4dae5d4dedf30ff320547ee0" args="(const String &amp;string) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_regex_match.html">RegexMatch</a> <a class="el" href="class_voodoo_shader_1_1_regex.html#a1482d4ac4dae5d4dedf30ff320547ee0">VoodooShader::Regex::Match</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>string</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Attempt to match the given string against the stored expression. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>The string to search. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="class_voodoo_shader_1_1_regex_match.html" title="Voodoo internal regex match class, encapsulating matches found by Regex.">RegexMatch</a> for all match groups. </dd></dl>
+
+<p>Definition at line <a class="el" href="_regex_8cpp_source.html#l00091">91</a> of file <a class="el" href="_regex_8cpp_source.html">Regex.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abdf7ddb415680172fbd7fb4ad93fc00f"></a><!-- doxytag: member="VoodooShader::Regex::Replace" ref="abdf7ddb415680172fbd7fb4ad93fc00f" args="(const String &amp;find, const String &amp;replace) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a> <a class="el" href="class_voodoo_shader_1_1_regex.html#abdf7ddb415680172fbd7fb4ad93fc00f">VoodooShader::Regex::Replace</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>find</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>replace</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Perform a find and replace on all segments which this regex matches. </p>
+<p>Matches are replaced using the same rules as RegexMatch::Replace().</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">find</td><td>The string to search. </td></tr>
+    <tr><td class="paramname">replace</td><td>The replace format string. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A copy of find with all matches replaced. </dd></dl>
+
+<p>Definition at line <a class="el" href="_regex_8cpp_source.html#l00113">113</a> of file <a class="el" href="_regex_8cpp_source.html">Regex.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aef2ecd204ac773064788c585c31f0b89"></a><!-- doxytag: member="VoodooShader::Regex::SetExpr" ref="aef2ecd204ac773064788c585c31f0b89" args="(const String &amp;expr)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_voodoo_shader_1_1_regex.html#aef2ecd204ac773064788c585c31f0b89">VoodooShader::Regex::SetExpr</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>expr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Sets the internal expression and recompiles. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expr</td><td>The string to use. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_regex_8cpp_source.html#l00077">77</a> of file <a class="el" href="_regex_8cpp_source.html">Regex.cpp</a>.</p>
+
+</div>
+</div>
 <hr/><h2>Member Data Documentation</h2>
 <a class="anchor" id="a9dc154b70093b5e49825d616cfaaad21"></a><!-- doxytag: member="VoodooShader::Regex::m_Impl" ref="a9dc154b70093b5e49825d616cfaaad21" args="" -->
 <div class="memitem">
@@ -146,7 +346,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_regex_8hpp_source.html#l00146">146</a> of file <a class="el" href="_regex_8hpp_source.html">Regex.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_regex_8hpp_source.html#l00107">107</a> of file <a class="el" href="_regex_8hpp_source.html">Regex.hpp</a>.</p>
 
 </div>
 </div>
@@ -158,7 +358,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

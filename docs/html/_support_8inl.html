@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -109,16 +109,18 @@ Typedefs</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_hook_def.html">HookDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#a61e286a11f708c21d04bfb0e266ea60a">HHOOKDEF</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static FILE *WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#ae9c0356162a0c9dda5d21de59262f097">GetVoodooGlobalLog</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#ae5a14b094eda6ea4fd0ddab32eb65529">GlobalLog</a> (LPTSTR msg,...)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a message to the Voodoo Shader global log (located in the user directory).  <a href="#ae5a14b094eda6ea4fd0ddab32eb65529"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static void WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#aa656cebde503546efcd1710bcf15f774">ErrorMessage</a> (DWORD errorCode, LPTSTR msg,...)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Display a formatted error message.  <a href="#aa656cebde503546efcd1710bcf15f774"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static HMODULE WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#a9388a5b6af06d1e2bc9af80a10ad5f0e">LoadSystemLibrary</a> (const LPTSTR libname)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a module from the system directory (uses absolute path to guarantee proper file).  <a href="#a9388a5b6af06d1e2bc9af80a10ad5f0e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static void *WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#a3048fc8fee724dc9d3a592df43470c45">FindFunction</a> (const LPTSTR libname, const LPCSTR funcname, HMODULE *pModule)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static void *WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#aefb73524278220ee48eb469f9d98db59">FindFunction</a> (const LPTSTR libname, bool system, const LPCSTR funcname, HMODULE *pModule)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static HKEY WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#a9854c0740d8e77471d74e19273a497b6">GetVoodooKey</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#a88011dd18b3818ec3786f616a5d58154">GetVoodooPath</a> (TCHAR *pBuffer)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#a225e7f4713e1eaeb2e492a1c4ccf7b61">GetVoodooBinPrefix</a> (TCHAR *pBuffer)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#ade3f689962648f73d1330dd1f6ac29e0">GetVoodooBinPath</a> (TCHAR *pBuffer)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static FILE *WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#ae9c0356162a0c9dda5d21de59262f097">GetVoodooGlobalLog</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static bool WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#aa3247342a9d19e02b7267e549405d3f1">MatchHook</a> (TCHAR *module, <a class="el" href="_support_8inl.html#a61e286a11f708c21d04bfb0e266ea60a">HHOOKDEF</a> pHook)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_support_8inl.html#a61e286a11f708c21d04bfb0e266ea60a">HHOOKDEF</a> WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#ad9c1b20bce7465efefabd4f5eb35ee87">HookFromKey</a> (HKEY pKey)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_support_8inl.html#a61e286a11f708c21d04bfb0e266ea60a">HHOOKDEF</a> WINAPI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_support_8inl.html#a011de05ef528a7396730cd209f36e7af">SearchHooks</a> (TCHAR *moduleName)</td></tr>
@@ -129,7 +131,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define <a class="el" href="_support_8inl.html#ac7bef5d85e3dcd73eef56ad39ffc84a9">WIN32_LEAN_AND_MEAN</a></td>
+          <td class="memname">#define <a class="el" href="_voodoo_framework_8hpp.html#ac7bef5d85e3dcd73eef56ad39ffc84a9">WIN32_LEAN_AND_MEAN</a></td>
         </tr>
       </table>
 </div>
@@ -196,19 +198,25 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00049">49</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00083">83</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a3048fc8fee724dc9d3a592df43470c45"></a><!-- doxytag: member="Support.inl::FindFunction" ref="a3048fc8fee724dc9d3a592df43470c45" args="(const LPTSTR libname, const LPCSTR funcname, HMODULE *pModule)" -->
+<a class="anchor" id="aefb73524278220ee48eb469f9d98db59"></a><!-- doxytag: member="Support.inl::FindFunction" ref="aefb73524278220ee48eb469f9d98db59" args="(const LPTSTR libname, bool system, const LPCSTR funcname, HMODULE *pModule)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static void* WINAPI <a class="el" href="_support_8inl.html#a3048fc8fee724dc9d3a592df43470c45">FindFunction</a> </td>
+          <td class="memname">static void* WINAPI <a class="el" href="_support_8inl.html#aefb73524278220ee48eb469f9d98db59">FindFunction</a> </td>
           <td>(</td>
           <td class="paramtype">const LPTSTR&#160;</td>
           <td class="paramname"><em>libname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>system</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -231,7 +239,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00084">84</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00120">120</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -250,7 +258,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00162">162</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00214">214</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -269,7 +277,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00134">134</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00186">186</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -287,7 +295,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00179">179</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00043">43</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -305,7 +313,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00094">94</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00144">144</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -324,7 +332,39 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00106">106</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00158">158</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae5a14b094eda6ea4fd0ddab32eb65529"></a><!-- doxytag: member="Support.inl::GlobalLog" ref="ae5a14b094eda6ea4fd0ddab32eb65529" args="(LPTSTR msg,...)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void WINAPI <a class="el" href="_support_8inl.html#ae5a14b094eda6ea4fd0ddab32eb65529">GlobalLog</a> </td>
+          <td>(</td>
+          <td class="paramtype">LPTSTR&#160;</td>
+          <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [inline, static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Logs a message to the Voodoo Shader global log (located in the user directory). </p>
+<p>These are for simple, vital messages, such as hooks being matched or core files not being found. </p>
+
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00062">62</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -343,7 +383,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00199">199</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00239">239</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -371,7 +411,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A handle to the module if loaded or a nullptr handle otherwise. </dd></dl>
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00074">74</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00110">110</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -400,7 +440,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00192">192</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00231">231</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -419,7 +459,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_support_8inl_source.html#l00251">251</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
+<p>Definition at line <a class="el" href="_support_8inl_source.html#l00299">299</a> of file <a class="el" href="_support_8inl_source.html">Support.inl</a>.</p>
 
 </div>
 </div>
@@ -427,7 +467,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:13 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

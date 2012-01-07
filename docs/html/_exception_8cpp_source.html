@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,7 +71,7 @@
 <a href="_exception_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
-<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2012 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
 <a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
 <a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
@@ -88,84 +88,84 @@
 <a name="l00018"></a>00018 <span class="comment"> *   peachykeen@voodooshader.com</span>
 <a name="l00019"></a>00019 <span class="comment"> */</span>
 <a name="l00020"></a>00020 
-<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_exception_8hpp.html">Exception.hpp</a>&quot;</span>
+<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_framework_8hpp.html" title="This file is the public-facing include for the Voodoo Shader core.">VoodooFramework.hpp</a>&quot;</span>
 <a name="l00022"></a>00022 
-<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_i_core_8hpp.html">ICore.hpp</a>&quot;</span>
-<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;<a class="code" href="_i_logger_8hpp.html">ILogger.hpp</a>&quot;</span>
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;<a class="code" href="_format_8hpp.html">Format.hpp</a>&quot;</span>
+<a name="l00023"></a>00023 <span class="keyword">namespace </span>VoodooShader
+<a name="l00024"></a>00024 {
+<a name="l00025"></a><a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">00025</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a> = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;Exception thrown from %1% in file %2% (line %3%): %4%&quot;</span>);
+<a name="l00026"></a><a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">00026</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">ExceptionFmtMsg</a> = <span class="stringliteral">&quot;VoodooShader::Exception thrown from %1% in module %2%, file %3% at %4% (line %5%): %6%&quot;</span>;
 <a name="l00027"></a>00027 
-<a name="l00028"></a>00028 <span class="keyword">namespace </span>VoodooShader
-<a name="l00029"></a>00029 {
-<a name="l00030"></a><a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">00030</a>     <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a> = <a class="code" href="_version_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;Exception thrown from %1% in file %2% (line %3%): %4%&quot;</span>);
-<a name="l00031"></a><a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">00031</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="namespace_voodoo_shader.html#af91303123a470ac6bcd859f4d4424139">ExceptionFmtMsg</a> = <span class="stringliteral">&quot;VoodooShader::Exception thrown from %1% in module %2%, file %3% at %4% (line %5%): %6%&quot;</span>;
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033     <a class="code" href="class_voodoo_shader_1_1_exception.html#aa768410a063fac11a394e1903e89ce85">Exception::Exception</a>
-<a name="l00034"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#aa768410a063fac11a394e1903e89ce85">00034</a>     (
-<a name="l00035"></a>00035         _In_z_ <span class="keywordtype">wchar_t</span> * file,
-<a name="l00036"></a>00036         _In_z_ <span class="keywordtype">wchar_t</span> * <span class="keyword">function</span>,
-<a name="l00037"></a>00037         _In_ <span class="keywordtype">int</span> line,
-<a name="l00038"></a>00038         _In_ <span class="keywordtype">wchar_t</span> * module,
-<a name="l00039"></a>00039         _In_ <span class="keywordtype">wchar_t</span> * message,
-<a name="l00040"></a>00040         _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore
-<a name="l00041"></a>00041     ) :
-<a name="l00042"></a>00042         m_Core(pCore)
-<a name="l00043"></a>00043     {
-<a name="l00044"></a>00044         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> msg(<a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a>);
-<a name="l00045"></a>00045         msg &lt;&lt; file &lt;&lt; <span class="keyword">function</span> &lt;&lt; line &lt;&lt; message;
-<a name="l00046"></a>00046         m_What = msg;
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048         <span class="keywordflow">if</span> (pCore)
-<a name="l00049"></a>00049         {
-<a name="l00050"></a>00050             <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = pCore-&gt;GetLogger();
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052             <span class="keywordflow">if</span> (logger)
-<a name="l00053"></a>00053             {
-<a name="l00054"></a>00054                 logger-&gt;LogMessage(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29">LL_CoreException</a>, module, msg);
-<a name="l00055"></a>00055             }
-<a name="l00056"></a>00056         }
-<a name="l00057"></a>00057     }
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059     <a class="code" href="class_voodoo_shader_1_1_exception.html#aa768410a063fac11a394e1903e89ce85">Exception::Exception</a>
-<a name="l00060"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#aadb384247e8a18fa10820c6bf0309e65">00060</a>     (
-<a name="l00061"></a>00061         _In_z_ <span class="keywordtype">wchar_t</span> * file,
-<a name="l00062"></a>00062         _In_z_ <span class="keywordtype">wchar_t</span> * <span class="keyword">function</span>,
-<a name="l00063"></a>00063         _In_ <span class="keywordtype">int</span> line,
-<a name="l00064"></a>00064         _In_ <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> module,
-<a name="l00065"></a>00065         _In_ <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> message,
-<a name="l00066"></a>00066         _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore
-<a name="l00067"></a>00067     ) :
-<a name="l00068"></a>00068             m_Core(pCore)
-<a name="l00069"></a>00069     {
-<a name="l00070"></a>00070         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> msg(<a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a>);
-<a name="l00071"></a>00071         msg &lt;&lt; file &lt;&lt; <span class="keyword">function</span> &lt;&lt; line &lt;&lt; message;
-<a name="l00072"></a>00072         m_What = msg;
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074         <span class="keywordflow">if</span> (pCore)
-<a name="l00075"></a>00075         {
-<a name="l00076"></a>00076             <a class="code" href="namespace_voodoo_shader.html#ac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = pCore-&gt;GetLogger();
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078             <span class="keywordflow">if</span> (logger)
-<a name="l00079"></a>00079             {
-<a name="l00080"></a>00080                 logger-&gt;LogMessage(<a class="code" href="namespace_voodoo_shader.html#a3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29">LL_CoreException</a>, module, msg);
-<a name="l00081"></a>00081             }
-<a name="l00082"></a>00082         }
-<a name="l00083"></a>00083     }
-<a name="l00084"></a>00084 
-<a name="l00085"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#a4ca32057af44838237fa261c1745a46a">00085</a>     <a class="code" href="class_voodoo_shader_1_1_exception.html#a4ca32057af44838237fa261c1745a46a">Exception::~Exception</a>()
-<a name="l00086"></a>00086     {
+<a name="l00028"></a>00028     <a class="code" href="class_voodoo_shader_1_1_exception.html#aa768410a063fac11a394e1903e89ce85">Exception::Exception</a>
+<a name="l00029"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#aa768410a063fac11a394e1903e89ce85">00029</a>     (
+<a name="l00030"></a>00030         _In_z_ <span class="keywordtype">wchar_t</span> * file,
+<a name="l00031"></a>00031         _In_z_ <span class="keywordtype">wchar_t</span> * <span class="keyword">function</span>,
+<a name="l00032"></a>00032         _In_ <span class="keywordtype">int</span> line,
+<a name="l00033"></a>00033         _In_ <span class="keywordtype">wchar_t</span> * module,
+<a name="l00034"></a>00034         _In_ <span class="keywordtype">wchar_t</span> * message,
+<a name="l00035"></a>00035         _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore
+<a name="l00036"></a>00036     ) :
+<a name="l00037"></a>00037         m_Core(pCore)
+<a name="l00038"></a>00038     {
+<a name="l00039"></a>00039         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> msg(<a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a>);
+<a name="l00040"></a>00040         msg &lt;&lt; file &lt;&lt; <span class="keyword">function</span> &lt;&lt; line &lt;&lt; message;
+<a name="l00041"></a>00041         m_What = msg;
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043         <span class="keywordflow">if</span> (pCore)
+<a name="l00044"></a>00044         {
+<a name="l00045"></a>00045             <a class="code" href="group__voodoo__references.html#gac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = pCore-&gt;GetLogger();
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047             <span class="keywordflow">if</span> (logger)
+<a name="l00048"></a>00048             {
+<a name="l00049"></a>00049                 logger-&gt;LogMessage(<a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29">LL_CoreException</a>, module, msg);
+<a name="l00050"></a>00050             }
+<a name="l00051"></a>00051         }
+<a name="l00052"></a>00052     }
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     <a class="code" href="class_voodoo_shader_1_1_exception.html#aa768410a063fac11a394e1903e89ce85">Exception::Exception</a>
+<a name="l00055"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#aadb384247e8a18fa10820c6bf0309e65">00055</a>     (
+<a name="l00056"></a>00056         _In_z_ <span class="keywordtype">wchar_t</span> * file,
+<a name="l00057"></a>00057         _In_z_ <span class="keywordtype">wchar_t</span> * <span class="keyword">function</span>,
+<a name="l00058"></a>00058         _In_ <span class="keywordtype">int</span> line,
+<a name="l00059"></a>00059         _In_ <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> module,
+<a name="l00060"></a>00060         _In_ <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> message,
+<a name="l00061"></a>00061         _In_opt_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore
+<a name="l00062"></a>00062     ) :
+<a name="l00063"></a>00063             m_Core(pCore)
+<a name="l00064"></a>00064     {
+<a name="l00065"></a>00065         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> msg(<a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a>);
+<a name="l00066"></a>00066         msg &lt;&lt; file &lt;&lt; <span class="keyword">function</span> &lt;&lt; line &lt;&lt; message;
+<a name="l00067"></a>00067         m_What = msg;
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069         <span class="keywordflow">if</span> (pCore)
+<a name="l00070"></a>00070         {
+<a name="l00071"></a>00071             <a class="code" href="group__voodoo__references.html#gac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = pCore-&gt;GetLogger();
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073             <span class="keywordflow">if</span> (logger)
+<a name="l00074"></a>00074             {
+<a name="l00075"></a>00075                 logger-&gt;LogMessage(<a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29">LL_CoreException</a>, module, msg);
+<a name="l00076"></a>00076             }
+<a name="l00077"></a>00077         }
+<a name="l00078"></a>00078     }
+<a name="l00079"></a>00079 
+<a name="l00080"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#a4ca32057af44838237fa261c1745a46a">00080</a>     <a class="code" href="class_voodoo_shader_1_1_exception.html#a4ca32057af44838237fa261c1745a46a">Exception::~Exception</a>()
+<a name="l00081"></a>00081     {
+<a name="l00082"></a>00082     }
+<a name="l00083"></a>00083 
+<a name="l00084"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">00084</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">Exception::what</a>()<span class="keyword"> const</span>
+<a name="l00085"></a>00085 <span class="keyword">    </span>{
+<a name="l00086"></a>00086         <span class="keywordflow">return</span> (<span class="keyword">const</span> <span class="keywordtype">char</span>*)<a class="code" href="class_voodoo_shader_1_1_exception.html#a42524bf5094a7675e9a7d65527067d3a">m_What</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="Get a pointer to the data of the string, often for use as a LPWSTR.">GetData</a>();
 <a name="l00087"></a>00087     }
 <a name="l00088"></a>00088 
-<a name="l00089"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">00089</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">Exception::what</a>()<span class="keyword"> const</span>
+<a name="l00089"></a><a class="code" href="class_voodoo_shader_1_1_exception.html#a2e960ec2bfab4956dc49bfeab2dcc140">00089</a>     <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_exception.html#a2e960ec2bfab4956dc49bfeab2dcc140">Exception::strwhat</a>()<span class="keyword"> const</span>
 <a name="l00090"></a>00090 <span class="keyword">    </span>{
-<a name="l00091"></a>00091         <span class="keywordflow">return</span> (<span class="keyword">const</span> <span class="keywordtype">char</span>*)<a class="code" href="class_voodoo_shader_1_1_exception.html#a42524bf5094a7675e9a7d65527067d3a">m_What</a>.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="Get a pointer to the data of the string, often for use as a LPWSTR.">GetData</a>();
+<a name="l00091"></a>00091         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_exception.html#a42524bf5094a7675e9a7d65527067d3a">m_What</a>;
 <a name="l00092"></a>00092     }
 <a name="l00093"></a>00093 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

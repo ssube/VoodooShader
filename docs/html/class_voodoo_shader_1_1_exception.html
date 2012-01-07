@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -70,7 +70,7 @@
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">VoodooShader::Exception Class Reference<div class="ingroups"><a class="el" href="group__voodoo__utility.html">Voodoo Utility</a></div></div>  </div>
+<div class="title">VoodooShader::Exception Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="VoodooShader::Exception" --><!-- doxytag: inherits="std::exception" -->
@@ -94,7 +94,7 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_exception__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_exception_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_exception_coll__map" id="_voodoo_shader_1_1_exception_coll__map">
-<area shape="rect" id="node2" title="STL class." alt="" coords="124,277,228,304"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="252,277,401,304"/><area shape="rect" id="node6" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="73,187,287,213"/><area shape="rect" id="node10" title="STL class." alt="" coords="95,5,264,32"/><area shape="rect" id="node14" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="426,277,571,304"/><area shape="rect" id="node16" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="421,187,576,213"/></map>
+<area shape="rect" id="node2" title="STL class." alt="" coords="124,277,228,304"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="252,277,401,304"/><area shape="rect" id="node6" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="73,187,287,213"/><area shape="rect" id="node10" title="STL class." alt="" coords="95,5,264,32"/><area shape="rect" id="node14" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="426,277,571,304"/><area shape="rect" id="node16" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="421,187,576,213"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_exception-members.html">List of all members.</a></p>
@@ -105,6 +105,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#aadb384247e8a18fa10820c6bf0309e65">Exception</a> (wchar_t *file, wchar_t *function, int line, <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> module, <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> Message, <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *pCore)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#a4ca32057af44838237fa261c1745a46a">~Exception</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">what</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#a2e960ec2bfab4956dc49bfeab2dcc140">strwhat</a> () const </td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_exception.html#a74128837e70df49db21402bca39f9790">m_Core</a></td></tr>
@@ -115,7 +116,7 @@ Private Attributes</h2></td></tr>
 <p>Combines a generic standard exception with extended error location data.</p>
 <dl class="note"><dt><b>Note:</b></dt><dd>If possible, thrown Exceptions will automatically log as much data as they contain in a formatted way. You can retrieve this string with the <a class="el" href="class_voodoo_shader_1_1_exception.html#a7ca3e5ac60c7f3baf84a3673a063237d">Exception::what()</a> method (compatible with std::exception). </dd></dl>
 
-<p>Definition at line <a class="el" href="_exception_8hpp_source.html#l00040">40</a> of file <a class="el" href="_exception_8hpp_source.html">Exception.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_exception_8hpp_source.html#l00035">35</a> of file <a class="el" href="_exception_8hpp_source.html">Exception.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aa768410a063fac11a394e1903e89ce85"></a><!-- doxytag: member="VoodooShader::Exception::Exception" ref="aa768410a063fac11a394e1903e89ce85" args="(wchar_t *file, wchar_t *function, int line, wchar_t *module, wchar_t *message, ICore *pCore)" -->
 <div class="memitem">
@@ -166,7 +167,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00034">34</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00029">29</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
 
 </div>
 </div>
@@ -219,7 +220,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00060">60</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00055">55</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
 
 </div>
 </div>
@@ -237,11 +238,29 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00085">85</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00080">80</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a2e960ec2bfab4956dc49bfeab2dcc140"></a><!-- doxytag: member="VoodooShader::Exception::strwhat" ref="a2e960ec2bfab4956dc49bfeab2dcc140" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> <a class="el" href="class_voodoo_shader_1_1_exception.html#a2e960ec2bfab4956dc49bfeab2dcc140">VoodooShader::Exception::strwhat</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00089">89</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a7ca3e5ac60c7f3baf84a3673a063237d"></a><!-- doxytag: member="VoodooShader::Exception::what" ref="a7ca3e5ac60c7f3baf84a3673a063237d" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -256,7 +275,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00089">89</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_exception_8cpp_source.html#l00084">84</a> of file <a class="el" href="_exception_8cpp_source.html">Exception.cpp</a>.</p>
 
 </div>
 </div>
@@ -272,7 +291,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exception_8hpp_source.html#l00069">69</a> of file <a class="el" href="_exception_8hpp_source.html">Exception.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_exception_8hpp_source.html#l00065">65</a> of file <a class="el" href="_exception_8hpp_source.html">Exception.hpp</a>.</p>
 
 </div>
 </div>
@@ -287,7 +306,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_exception_8hpp_source.html#l00070">70</a> of file <a class="el" href="_exception_8hpp_source.html">Exception.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_exception_8hpp_source.html#l00066">66</a> of file <a class="el" href="_exception_8hpp_source.html">Exception.hpp</a>.</p>
 
 </div>
 </div>
@@ -299,7 +318,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:13 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

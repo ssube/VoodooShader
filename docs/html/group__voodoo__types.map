@@ -1,0 +1,10 @@
+<map id="structs" name="structs">
+<area shape="rect" id="node1" href="$group__voodoo__structs.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status." alt="" coords="224,5,325,32"/>
+<area shape="rect" id="node2" href="$group__voodoo__classes__conditional.html" title="Conditional Classes" alt="" coords="206,56,343,83"/>
+<area shape="rect" id="node3" href="$group__voodoo__interfaces.html" title="Interfaces" alt="" coords="235,107,314,133"/>
+<area shape="rect" id="node4" href="$group__voodoo__classes__utility.html" title="Utility Classes" alt="" coords="221,157,328,184"/>
+<area shape="rect" id="node5" href="$group__voodoo__enums.html" title="Texture formats for use by Textures, describing the layout and size of the texture data..." alt="" coords="243,208,306,235"/>
+<area shape="rect" id="node6" href="$group__voodoo__collections.html" title="To provide collections of Voodoo Shader objects, smart pointers are required." alt="" coords="231,259,318,285"/>
+<area shape="rect" id="node8" href="$group__voodoo__references.html" title="To provide smart intrusive pointers, Boost is required." alt="" coords="207,309,343,336"/>
+<area shape="rect" id="node9" href="$group__voodoo__functions.html" title="Function pointer types for module interfaces." alt="" coords="211,360,339,387"/>
+</map>

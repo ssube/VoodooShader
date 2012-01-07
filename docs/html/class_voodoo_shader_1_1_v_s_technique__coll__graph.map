@@ -4,7 +4,7 @@
 <area shape="rect" id="node8" href="$class_voodoo_shader_1_1_i_shader.html" title="Complete shader class, managing techniques, passes and metadata." alt="" coords="1341,56,1499,83"/>
 <area shape="rect" id="node6" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="559,91,715,117"/>
 <area shape="rect" id="node32" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1161,107,1306,133"/>
-<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="1345,232,1495,259"/>
+<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="1345,232,1495,259"/>
 <area shape="rect" id="node19" title="STL class." alt="" coords="971,368,1085,395"/>
 <area shape="rect" id="node25" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="921,251,1135,277"/>
 <area shape="rect" id="node29" title="STL class." alt="" coords="6,251,175,277"/>

@@ -1,8 +1,9 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1622,5,1767,32"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1622,40,1767,67"/>
 <area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="1225,5,1381,32"/>
-<area shape="rect" id="node16" href="$class_voodoo_shader_1_1_string.html" title="VoodooShader::String" alt="" coords="1228,235,1377,261"/>
-<area shape="rect" id="node18" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="902,235,1117,261"/>
-<area shape="rect" id="node22" title="STL class." alt="" coords="6,235,175,261"/>
-<area shape="rect" id="node26" title="STL class." alt="" coords="1242,129,1363,156"/>
+<area shape="rect" id="node14" title="STL class." alt="" coords="1255,107,1351,133"/>
+<area shape="rect" id="node34" title="STL class." alt="" coords="1242,172,1363,199"/>
+<area shape="rect" id="node24" href="$class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="1228,323,1377,349"/>
+<area shape="rect" id="node26" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="902,323,1117,349"/>
+<area shape="rect" id="node30" title="STL class." alt="" coords="6,323,175,349"/>
 </map>

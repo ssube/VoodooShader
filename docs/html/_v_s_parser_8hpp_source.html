@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,7 +71,7 @@
 <a href="_v_s_parser_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
-<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2012 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
 <a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
 <a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
@@ -89,48 +89,52 @@
 <a name="l00019"></a>00019 <span class="comment"> */</span>
 <a name="l00020"></a>00020 <span class="preprocessor">#pragma once</span>
 <a name="l00021"></a>00021 <span class="preprocessor"></span>
-<a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_i_parser_8hpp.html">IParser.hpp</a>&quot;</span>
+<a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_framework_8hpp.html" title="This file is the public-facing include for the Voodoo Shader core.">VoodooFramework.hpp</a>&quot;</span>
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00029"></a><a class="code" href="namespace_voodoo_shader.html#ab369c30bea5a16a9ba569ea39cb666de">00029</a>     <a class="code" href="_includes_8hpp.html#aa84497f368d5929ecfa0e288a9243066">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html">VSParser</a>, <a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>, {0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
+<a name="l00029"></a><a class="code" href="namespace_voodoo_shader.html#ab369c30bea5a16a9ba569ea39cb666de">00029</a>     <a class="code" href="group__voodoo__macros__decl.html#ga58d5926d4e28ae4cd7db81a5e7fbe2c7" title="Declares a class-type Uuid for cname with the value given in uuid and a class named cname...">VOODOO_CLASS</a>(<a class="code" href="class_voodoo_shader_1_1_v_s_parser.html">VSParser</a>, <a class="code" href="class_voodoo_shader_1_1_i_parser.html" title="Provides extensive variable handling and string parsing.">IParser</a>, ({0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
 <a name="l00030"></a>00030     {
 <a name="l00031"></a>00031     <span class="keyword">public</span>:
 <a name="l00032"></a>00032         VSParser(_In_ ICore * <span class="keyword">const</span> pCore);
 <a name="l00033"></a>00033         ~VSParser();
 <a name="l00034"></a>00034 
-<a name="l00035"></a>00035         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
-<a name="l00036"></a>00036         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
-<a name="l00037"></a>00037         <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
-<a name="l00038"></a>00038         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(String, ToString)() CONST;
-<a name="l00039"></a>00039         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(ICore *, GetCore)() CONST;
+<a name="l00035"></a>00035         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
+<a name="l00036"></a>00036         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
+<a name="l00037"></a>00037         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
+<a name="l00038"></a>00038         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(String, ToString)() CONST;
+<a name="l00039"></a>00039         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(ICore *, GetCore)() CONST;
 <a name="l00040"></a>00040 
-<a name="l00041"></a>00041         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<span class="keywordtype">void</span>, Add)(_In_ <span class="keyword">const</span> String &amp; name, _In_ <span class="keyword">const</span> String &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="namespace_voodoo_shader.html#a0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>);
-<a name="l00042"></a>00042         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<span class="keywordtype">void</span>, Remove)(_In_ <span class="keyword">const</span> String &amp; name);
-<a name="l00043"></a>00043         <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(String, Parse)(_In_ <span class="keyword">const</span> String &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) CONST;
+<a name="l00041"></a>00041         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(<span class="keywordtype">void</span>, Add)(_In_ <span class="keyword">const</span> String &amp; name, _In_ <span class="keyword">const</span> String &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="group__voodoo__enums.html#ga0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>);
+<a name="l00042"></a>00042         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(<span class="keywordtype">void</span>, Remove)(_In_ <span class="keyword">const</span> String &amp; name);
+<a name="l00043"></a>00043         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(String, Parse)(_In_ <span class="keyword">const</span> String &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="group__voodoo__enums.html#ga97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) CONST;
 <a name="l00044"></a>00044 
 <a name="l00045"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a368b2f3418cb6e261acea0292b2a08cd">00045</a>         <span class="keyword">static</span> <span class="keyword">const</span> uint32_t VarMaxDepth    = 8;
-<a name="l00046"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a638c78f10c0f3ecc428f746ef3e4a73c">00046</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarDelimPre    = <a class="code" href="_version_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;$&#39;</span>);
-<a name="l00047"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af837daf6c7308f0288d0b009280874d7">00047</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarDelimStart  = <a class="code" href="_version_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;(&#39;</span>);
-<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a74b2097d82460ae7c246e9d038424294">00048</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarDelimEnd    = <a class="code" href="_version_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00049"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#ab8888a0a744d6b90db757384d62fc1e8">00049</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerState = <a class="code" href="_version_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;:&#39;</span>);
-<a name="l00050"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a92c79dc65d1d297eff1f6e343ada64c6">00050</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerRaw   = <a class="code" href="_version_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;!&#39;</span>);
-<a name="l00051"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a060082b229894dc9e205ecb50215bfa4">00051</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerSupp  = <a class="code" href="_version_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;?&#39;</span>);
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053     <span class="keyword">private</span>:
-<a name="l00054"></a>00054         <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> ParseStringRaw(_In_ <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> input, _In_ <a class="code" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags, _In_ uint32_t depth, _In_ <a class="code" href="namespace_voodoo_shader.html#aee143c00fbcb3e0013d9ba096d1f028f">StringMap</a> &amp; state) <span class="keyword">const</span>;
-<a name="l00055"></a>00055 
-<a name="l00056"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0">00056</a>         <span class="keyword">mutable</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0">m_Refs</a>;
-<a name="l00057"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">00057</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>;
-<a name="l00058"></a>00058 
-<a name="l00059"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a71101161076286935a88a6bf16bfa45c">00059</a>         <a class="code" href="namespace_voodoo_shader.html#a2c39f0897ed2a28bdcdbbcd24eae12be">VariableMap</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a71101161076286935a88a6bf16bfa45c">m_Variables</a>;
-<a name="l00060"></a>00060     };
-<a name="l00061"></a>00061 }
+<a name="l00046"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a638c78f10c0f3ecc428f746ef3e4a73c">00046</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarDelimPre    = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;$&#39;</span>);
+<a name="l00047"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af837daf6c7308f0288d0b009280874d7">00047</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarDelimStart  = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;(&#39;</span>);
+<a name="l00048"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a74b2097d82460ae7c246e9d038424294">00048</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarDelimEnd    = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;)&#39;</span>);
+<a name="l00049"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#ab8888a0a744d6b90db757384d62fc1e8">00049</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerState = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;:&#39;</span>);
+<a name="l00050"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af571d458c9dd725c59fd6324eb58d892">00050</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerReq   = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;!&#39;</span>);
+<a name="l00051"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a02a1a72f5387ec8118375ab9c9463a83">00051</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerDelay = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;~&#39;</span>);
+<a name="l00052"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af37b0773ca943e8bbf4d50d5d9354742">00052</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerMode  = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;@&#39;</span>);
+<a name="l00053"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a2affbd2b5cdd6c5ed981f797acba6708">00053</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerModeD = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39; &#39;</span>);
+<a name="l00054"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a905b7b42196c6d59b1a010d91f431524">00054</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerModeM = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;+&#39;</span>);
+<a name="l00055"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#afcacfb40aaec3c0ac120503fdd93304a">00055</a>         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span>  VarMarkerModeR = <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="charliteral">&#39;-&#39;</span>);
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057     <span class="keyword">private</span>:
+<a name="l00058"></a>00058         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> ParseStringRaw(_In_ <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> input, _In_ <a class="code" href="group__voodoo__enums.html#ga97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags, _In_ uint32_t depth, _In_ <a class="code" href="group__voodoo__collections.html#gaee143c00fbcb3e0013d9ba096d1f028f">StringMap</a> &amp; state) <span class="keyword">const</span>;
+<a name="l00059"></a>00059 
+<a name="l00060"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0">00060</a>         <span class="keyword">mutable</span> uint32_t <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0">m_Refs</a>;
+<a name="l00061"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">00061</a>         <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201">m_Core</a>;
+<a name="l00062"></a>00062 
+<a name="l00063"></a><a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a71101161076286935a88a6bf16bfa45c">00063</a>         <a class="code" href="group__voodoo__collections.html#ga2c39f0897ed2a28bdcdbbcd24eae12be">VariableMap</a> <a class="code" href="class_voodoo_shader_1_1_v_s_parser.html#a71101161076286935a88a6bf16bfa45c">m_Variables</a>;
+<a name="l00064"></a>00064     };
+<a name="l00065"></a>00065 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,7 +71,7 @@
 <a href="_hook_manager_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
-<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2012 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
 <a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
 <a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
@@ -94,7 +94,7 @@
 <a name="l00024"></a><a class="code" href="_hook_manager_8hpp.html#a31aa5b186d9930592013d83372996923">00024</a> <span class="preprocessor">#define VOODOO_IMPORT</span>
 <a name="l00025"></a><a class="code" href="_hook_manager_8hpp.html#a13772837aa4287effbfcabf4163c16e0">00025</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_NO_CG</span>
 <a name="l00026"></a><a class="code" href="_hook_manager_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9">00026</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_NO_PUGIXML</span>
-<a name="l00027"></a>00027 <span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="_voodoo_framework_8hpp.html">VoodooFramework.hpp</a>&quot;</span>
+<a name="l00027"></a>00027 <span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="_voodoo_framework_8hpp.html" title="This file is the public-facing include for the Voodoo Shader core.">VoodooFramework.hpp</a>&quot;</span>
 <a name="l00028"></a>00028 
 <a name="l00029"></a>00029 <span class="keyword">namespace </span>VoodooShader
 <a name="l00030"></a>00030 {
@@ -102,48 +102,44 @@
 <a name="l00038"></a>00038     {
 <a name="l00039"></a><a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">00039</a>         <span class="keyword">typedef</span> std::map&lt;String, TRACED_HOOK_HANDLE&gt; <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">HookMap</a>;
 <a name="l00040"></a>00040 
-<a name="l00041"></a>00041         <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html" title="Describes the precise version of a particular library, including name, main version, revision and debug status.">Version</a> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#abcf87a179f84eeb5e5f4d55ac803d4ae">API_ModuleVersion</a>();
-<a name="l00042"></a>00042         <span class="keyword">const</span> uint32_t  <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a65a1f42e4ddc732d381c2c15c01bd451">API_ClassCount</a>();
-<a name="l00043"></a>00043         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#ae99b845a110539b943449b868d4d12ee">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid);
-<a name="l00044"></a>00044         <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> *       <a class="code" href="_includes_8hpp.html#a0a3e5af0f45bff54944fe1b49baaba37">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#ae5b449a0df06633ca9b63a1016ec2d31">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t index, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore);
+<a name="l00041"></a>00041         <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html">Version</a> * <a class="code" href="group__voodoo__macros__decl.html#ga0a3e5af0f45bff54944fe1b49baaba37" title="Declares the standard Voodoo Shader function calling convention.">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#abcf87a179f84eeb5e5f4d55ac803d4ae">API_ModuleVersion</a>();
+<a name="l00042"></a>00042         <span class="keyword">const</span> uint32_t  <a class="code" href="group__voodoo__macros__decl.html#ga0a3e5af0f45bff54944fe1b49baaba37" title="Declares the standard Voodoo Shader function calling convention.">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a65a1f42e4ddc732d381c2c15c01bd451">API_ClassCount</a>();
+<a name="l00043"></a>00043         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * <a class="code" href="group__voodoo__macros__decl.html#ga0a3e5af0f45bff54944fe1b49baaba37" title="Declares the standard Voodoo Shader function calling convention.">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#ae99b845a110539b943449b868d4d12ee">API_ClassInfo</a>(_In_ <span class="keyword">const</span> uint32_t index, _Out_ <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid);
+<a name="l00044"></a>00044         <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> *       <a class="code" href="group__voodoo__macros__decl.html#ga0a3e5af0f45bff54944fe1b49baaba37" title="Declares the standard Voodoo Shader function calling convention.">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#ae5b449a0df06633ca9b63a1016ec2d31">API_ClassCreate</a>(_In_ <span class="keyword">const</span> uint32_t index, _In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore);
 <a name="l00045"></a>00045 
-<a name="l00054"></a><a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a5ffd9981817afbdc5e1c87ff4c0813cf">00054</a>         <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a5ffd9981817afbdc5e1c87ff4c0813cf">VOODOO_CLASS</a>(<a class="code" href="class_v_s_e_h_hook_manager.html" title="Handles function-level hooks, redirecting function calls into new locations.">VSEHHookManager</a>, <a class="code" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function-level hooks, redirecting existing functions and calls int...">IHookManager</a>, {0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08})
-<a name="l00055"></a>00055         {
-<a name="l00056"></a>00056         <span class="keyword">public</span>:
-<a name="l00057"></a>00057             <span class="comment">/* Creates a new VSEHHookManager bound to the current process. */</span>
-<a name="l00058"></a>00058             <a class="code" href="class_v_s_e_h_hook_manager.html" title="Handles function-level hooks, redirecting function calls into new locations.">VSEHHookManager</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore);
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060             <span class="comment">/* Removes all hooks and cleans up the VSEHHookManager. */</span>
-<a name="l00061"></a>00061             <span class="keyword">virtual</span> ~<a class="code" href="class_v_s_e_h_hook_manager.html" title="Handles function-level hooks, redirecting function calls into new locations.">VSEHHookManager</a>();
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
-<a name="l00064"></a>00064             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
-<a name="l00065"></a>00065             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
-<a name="l00066"></a>00066             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a>, ToString)() CONST;
-<a name="l00067"></a>00067             <a class="code" href="_includes_8hpp.html#a2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
-<a name="l00068"></a>00068 
-<a name="l00082"></a>00082             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Add)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name, _In_ <span class="keywordtype">void</span> * pSrc, _In_ <span class="keywordtype">void</span> * pDest);
-<a name="l00083"></a>00083 
-<a name="l00093"></a>00093             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(Remove)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; name);
-<a name="l00094"></a>00094 
-<a name="l00098"></a>00098             <a class="code" href="_includes_8hpp.html#a7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(RemoveAll)();
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100         <span class="keyword">private</span>:
-<a name="l00101"></a>00101             <span class="keyword">mutable</span> uint32_t m_Refs;
-<a name="l00102"></a>00102             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core;
-<a name="l00103"></a>00103 
-<a name="l00104"></a>00104             <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">HookMap</a> m_Hooks;
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> m_ThreadCount;
-<a name="l00107"></a>00107             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> * m_ThreadIDs;
-<a name="l00108"></a>00108         };
-<a name="l00109"></a>00109     }
-<a name="l00113"></a>00113 }
+<a name="l00053"></a>00053         <a class="code" href="group__voodoo__macros__decl.html#ga58d5926d4e28ae4cd7db81a5e7fbe2c7" title="Declares a class-type Uuid for cname with the value given in uuid and a class named cname...">VOODOO_CLASS</a>(<a class="code" href="class_v_s_e_h_hook_manager.html" title="Handles function-level hooks, redirecting function calls into new locations.">VSEHHookManager</a>, <a class="code" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function-level hooks, redirecting existing functions and calls int...">IHookManager</a>, ({0xB5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+<a name="l00054"></a>00054         {
+<a name="l00055"></a>00055         <span class="keyword">public</span>:
+<a name="l00059"></a>00059             <a class="code" href="class_v_s_e_h_hook_manager.html" title="Handles function-level hooks, redirecting function calls into new locations.">VSEHHookManager</a>(_In_ <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * pCore);
+<a name="l00060"></a>00060 
+<a name="l00064"></a>00064             ~<a class="code" href="class_v_s_e_h_hook_manager.html" title="Handles function-level hooks, redirecting function calls into new locations.">VSEHHookManager</a>();
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066             <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST;
+<a name="l00067"></a>00067             <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(uint32_t, Release)() CONST;
+<a name="l00068"></a>00068             <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST;
+<a name="l00069"></a>00069             <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>, ToString)() CONST;
+<a name="l00070"></a>00070             <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(<a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> *, GetCore)() CONST;
+<a name="l00071"></a>00071 
+<a name="l00085"></a>00085             <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(Add)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name, _In_ <span class="keywordtype">void</span> * pSrc, _In_ <span class="keywordtype">void</span> * pDest);
+<a name="l00095"></a>00095             <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(Remove)(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; name);
+<a name="l00099"></a>00099             <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(RemoveAll)();
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101         <span class="keyword">private</span>:
+<a name="l00102"></a>00102             <span class="keyword">mutable</span> uint32_t m_Refs;
+<a name="l00103"></a>00103             <a class="code" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> * m_Core;
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105             <a class="code" href="namespace_voodoo_shader_1_1_easy_hook.html#a1ece99ebf0836a5af70d9922c5409824">HookMap</a> m_Hooks;
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> m_ThreadCount;
+<a name="l00108"></a>00108             <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> * m_ThreadIDs;
+<a name="l00109"></a>00109         };
+<a name="l00110"></a>00110     }
+<a name="l00114"></a>00114 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

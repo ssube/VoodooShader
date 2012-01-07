@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,7 +71,7 @@
 <a href="_regex_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
-<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2012 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
 <a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
 <a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
@@ -88,14 +88,14 @@
 <a name="l00018"></a>00018 <span class="comment"> *   peachykeen@voodooshader.com</span>
 <a name="l00019"></a>00019 <span class="comment"> */</span>
 <a name="l00020"></a>00020 
-<a name="l00021"></a>00021 <span class="preprocessor">#include &lt;string&gt;</span>
+<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_framework_8hpp.html" title="This file is the public-facing include for the Voodoo Shader core.">VoodooFramework.hpp</a>&quot;</span>
 <a name="l00022"></a>00022 
 <a name="l00023"></a>00023 <span class="preprocessor">#pragma warning(push)</span>
 <a name="l00024"></a>00024 <span class="preprocessor"></span><span class="preprocessor">#pragma warning(disable: 6334 6011)</span>
 <a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">#include &lt;boost/regex.hpp&gt;</span>
 <a name="l00026"></a>00026 <span class="preprocessor">#pragma warning(pop)</span>
 <a name="l00027"></a>00027 <span class="preprocessor"></span>
-<a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="_regex_8hpp.html">Regex.hpp</a>&quot;</span>
+<a name="l00028"></a>00028 <span class="preprocessor">#include &lt;string&gt;</span>
 <a name="l00029"></a>00029 
 <a name="l00030"></a>00030 <span class="keyword">namespace </span>VoodooShader
 <a name="l00031"></a>00031 {
@@ -106,7 +106,7 @@
 <a name="l00036"></a>00036             : <a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>()
 <a name="l00037"></a>00037         { };
 <a name="l00038"></a>00038 
-<a name="l00039"></a><a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#a51eb976e98f5469ba86cbfdbcb12e9d0">00039</a>         <a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#a74837cd029d43231b026db08fdbc3556">RegexImpl</a>(<a class="code" href="class_voodoo_shader_1_1_string.html">String</a> expr)
+<a name="l00039"></a><a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#a51eb976e98f5469ba86cbfdbcb12e9d0">00039</a>         <a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#a74837cd029d43231b026db08fdbc3556">RegexImpl</a>(<a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> expr)
 <a name="l00040"></a>00040             : <a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>(expr.GetData(), boost::regex::extended)
 <a name="l00041"></a><a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">00041</a>         { };
 <a name="l00042"></a>00042 
@@ -129,12 +129,12 @@
 <a name="l00059"></a>00059         boost::wsmatch <a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>;
 <a name="l00060"></a>00060     };
 <a name="l00061"></a>00061 
-<a name="l00062"></a><a class="code" href="group__voodoo__utility__regex__ctor.html#ga1856f2b4450d38cd957cf96b0fc0541e">00062</a>     <a class="code" href="group__voodoo__utility__regex__ctor.html#ga1856f2b4450d38cd957cf96b0fc0541e" title="Creates an empty regular expression.">Regex::Regex</a>()
+<a name="l00062"></a><a class="code" href="class_voodoo_shader_1_1_regex.html#a1856f2b4450d38cd957cf96b0fc0541e">00062</a>     <a class="code" href="class_voodoo_shader_1_1_regex.html#a1856f2b4450d38cd957cf96b0fc0541e" title="Creates an empty regular expression.">Regex::Regex</a>()
 <a name="l00063"></a>00063     {
 <a name="l00064"></a>00064         <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html">RegexImpl</a>();
 <a name="l00065"></a>00065     }
 <a name="l00066"></a>00066 
-<a name="l00067"></a><a class="code" href="group__voodoo__utility__regex__ctor.html#ga25b35593113cd2193268f53702e6db3f">00067</a>     <a class="code" href="group__voodoo__utility__regex__ctor.html#ga1856f2b4450d38cd957cf96b0fc0541e" title="Creates an empty regular expression.">Regex::Regex</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; expr)
+<a name="l00067"></a><a class="code" href="class_voodoo_shader_1_1_regex.html#a25b35593113cd2193268f53702e6db3f">00067</a>     <a class="code" href="class_voodoo_shader_1_1_regex.html#a1856f2b4450d38cd957cf96b0fc0541e" title="Creates an empty regular expression.">Regex::Regex</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; expr)
 <a name="l00068"></a>00068     {
 <a name="l00069"></a>00069         <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html">RegexImpl</a>(expr);
 <a name="l00070"></a>00070     }
@@ -144,79 +144,97 @@
 <a name="l00074"></a>00074         <span class="keyword">delete</span> <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>;
 <a name="l00075"></a>00075     }
 <a name="l00076"></a>00076 
-<a name="l00077"></a><a class="code" href="group__voodoo__utility__regex__expr.html#gaef2ecd204ac773064788c585c31f0b89">00077</a>     <span class="keywordtype">void</span> <a class="code" href="group__voodoo__utility__regex__expr.html#gaef2ecd204ac773064788c585c31f0b89" title="Sets the internal expression and recompiles.">Regex::SetExpr</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; expr)
+<a name="l00077"></a><a class="code" href="class_voodoo_shader_1_1_regex.html#aef2ecd204ac773064788c585c31f0b89">00077</a>     <span class="keywordtype">void</span> <a class="code" href="class_voodoo_shader_1_1_regex.html#aef2ecd204ac773064788c585c31f0b89" title="Sets the internal expression and recompiles.">Regex::SetExpr</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; expr)
 <a name="l00078"></a>00078     {
-<a name="l00079"></a>00079         <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>.set_expression(expr.ToString());
-<a name="l00080"></a>00080     }
-<a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="group__voodoo__utility__regex__expr.html#ga8d43d2967dc7f676244b9e0d1f91dd41">00082</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__utility__regex__expr.html#ga8d43d2967dc7f676244b9e0d1f91dd41" title="Retrieve the current expression.">Regex::GetExpr</a>()<span class="keyword"> const</span>
-<a name="l00083"></a>00083 <span class="keyword">    </span>{
-<a name="l00084"></a>00084         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a>(<a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>.str());
-<a name="l00085"></a>00085     }
-<a name="l00086"></a>00086 
-<a name="l00087"></a><a class="code" href="group__voodoo__utility__regex__expr.html#ga1482d4ac4dae5d4dedf30ff320547ee0">00087</a>     <a class="code" href="class_voodoo_shader_1_1_regex_match.html">RegexMatch</a> <a class="code" href="group__voodoo__utility__regex__expr.html#ga1482d4ac4dae5d4dedf30ff320547ee0" title="Attempt to match the given string against the stored expression.">Regex::Match</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; <span class="keywordtype">string</span>)<span class="keyword"> const</span>
-<a name="l00088"></a>00088 <span class="keyword">    </span>{
-<a name="l00089"></a>00089         <a class="code" href="class_voodoo_shader_1_1_regex_match.html">RegexMatch</a> match;
-<a name="l00090"></a>00090         boost::wsmatch mr;
-<a name="l00091"></a>00091 
-<a name="l00092"></a>00092         <span class="keywordflow">if</span> (boost::regex_match(<span class="keywordtype">string</span>.ToString(), mr, <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>))
-<a name="l00093"></a>00093         {
-<a name="l00094"></a>00094             match.<a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a> = mr;
-<a name="l00095"></a>00095         }
-<a name="l00096"></a>00096 
-<a name="l00097"></a>00097         <span class="keywordflow">return</span> match;
-<a name="l00098"></a>00098     }
-<a name="l00099"></a>00099 
-<a name="l00100"></a><a class="code" href="group__voodoo__utility__regex__expr.html#ga05d0fe89740187f7a4302044cb6d107e">00100</a>     <span class="keywordtype">bool</span> <a class="code" href="group__voodoo__utility__regex__expr.html#ga05d0fe89740187f7a4302044cb6d107e" title="Test if the given string is matched by the expression.">Regex::Find</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; find)<span class="keyword"> const</span>
-<a name="l00101"></a>00101 <span class="keyword">    </span>{
-<a name="l00102"></a>00102         <span class="keywordflow">return</span> boost::regex_search(find.ToString(), <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>);
-<a name="l00103"></a>00103     }
-<a name="l00104"></a>00104 
-<a name="l00105"></a><a class="code" href="group__voodoo__utility__regex__expr.html#gabdf7ddb415680172fbd7fb4ad93fc00f">00105</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="group__voodoo__utility__regex__expr.html#gabdf7ddb415680172fbd7fb4ad93fc00f" title="Perform a find and replace on all segments which this regex matches.">Regex::Replace</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; find, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; replace)<span class="keyword"> const</span>
-<a name="l00106"></a>00106 <span class="keyword">    </span>{
-<a name="l00107"></a>00107         <span class="keywordflow">return</span> boost::regex_replace(find.ToString(), <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>, replace.ToString());
-<a name="l00108"></a>00108     }
+<a name="l00079"></a>00079         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081         <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>.set_expression(expr.ToString());
+<a name="l00082"></a>00082     }
+<a name="l00083"></a>00083 
+<a name="l00084"></a><a class="code" href="class_voodoo_shader_1_1_regex.html#a8d43d2967dc7f676244b9e0d1f91dd41">00084</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_regex.html#a8d43d2967dc7f676244b9e0d1f91dd41" title="Retrieve the current expression.">Regex::GetExpr</a>()<span class="keyword"> const</span>
+<a name="l00085"></a>00085 <span class="keyword">    </span>{
+<a name="l00086"></a>00086         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(<a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>.str());
+<a name="l00089"></a>00089     }
+<a name="l00090"></a>00090 
+<a name="l00091"></a><a class="code" href="class_voodoo_shader_1_1_regex.html#a1482d4ac4dae5d4dedf30ff320547ee0">00091</a>     <a class="code" href="class_voodoo_shader_1_1_regex_match.html" title="Voodoo internal regex match class, encapsulating matches found by Regex.">RegexMatch</a> <a class="code" href="class_voodoo_shader_1_1_regex.html#a1482d4ac4dae5d4dedf30ff320547ee0" title="Attempt to match the given string against the stored expression.">Regex::Match</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; <span class="keywordtype">string</span>)<span class="keyword"> const</span>
+<a name="l00092"></a>00092 <span class="keyword">    </span>{
+<a name="l00093"></a>00093         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095         <a class="code" href="class_voodoo_shader_1_1_regex_match.html" title="Voodoo internal regex match class, encapsulating matches found by Regex.">RegexMatch</a> match;
+<a name="l00096"></a>00096         boost::wsmatch mr;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098         <span class="keywordflow">if</span> (boost::regex_match(<span class="keywordtype">string</span>.ToString(), mr, <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>))
+<a name="l00099"></a>00099         {
+<a name="l00100"></a>00100             match.<a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a> = mr;
+<a name="l00101"></a>00101         }
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103         <span class="keywordflow">return</span> match;
+<a name="l00104"></a>00104     }
+<a name="l00105"></a>00105 
+<a name="l00106"></a><a class="code" href="class_voodoo_shader_1_1_regex.html#a05d0fe89740187f7a4302044cb6d107e">00106</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_regex.html#a05d0fe89740187f7a4302044cb6d107e" title="Test if the given string is matched by the expression.">Regex::Find</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; find)<span class="keyword"> const</span>
+<a name="l00107"></a>00107 <span class="keyword">    </span>{
+<a name="l00108"></a>00108         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
 <a name="l00109"></a>00109 
-<a name="l00110"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#acce9cabc578e940dd9f492a637470563">00110</a>     <a class="code" href="class_voodoo_shader_1_1_regex_match.html#acce9cabc578e940dd9f492a637470563">RegexMatch::RegexMatch</a>()
-<a name="l00111"></a>00111     {
-<a name="l00112"></a>00112         <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html">RegexMatchImpl</a>();
-<a name="l00113"></a>00113     }
-<a name="l00114"></a>00114 
-<a name="l00115"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#aab4a75dadcdeceea1b498ac80e77d7ca">00115</a>     <a class="code" href="class_voodoo_shader_1_1_regex_match.html#acce9cabc578e940dd9f492a637470563">RegexMatch::RegexMatch</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html">RegexMatch</a> &amp; other)
-<a name="l00116"></a>00116     {
-<a name="l00117"></a>00117         <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html">RegexMatchImpl</a>(other.<a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>);
+<a name="l00110"></a>00110         <span class="keywordflow">return</span> boost::regex_search(find.ToString(), <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>);
+<a name="l00111"></a>00111     }
+<a name="l00112"></a>00112 
+<a name="l00113"></a><a class="code" href="class_voodoo_shader_1_1_regex.html#abdf7ddb415680172fbd7fb4ad93fc00f">00113</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_regex.html#abdf7ddb415680172fbd7fb4ad93fc00f" title="Perform a find and replace on all segments which this regex matches.">Regex::Replace</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; find, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; replace)<span class="keyword"> const</span>
+<a name="l00114"></a>00114 <span class="keyword">    </span>{
+<a name="l00115"></a>00115         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117         <span class="keywordflow">return</span> boost::regex_replace(find.ToString(), <a class="code" href="class_voodoo_shader_1_1_regex.html#a9dc154b70093b5e49825d616cfaaad21">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_1_1_regex_impl.html#afbb047b87815775b86e533bdcb226c44">m_Regex</a>, replace.ToString());
 <a name="l00118"></a>00118     }
 <a name="l00119"></a>00119 
-<a name="l00120"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#a5b4844858a37f43d9579419fd9c78810">00120</a>     <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a5b4844858a37f43d9579419fd9c78810">RegexMatch::~RegexMatch</a>()
+<a name="l00120"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#acce9cabc578e940dd9f492a637470563">00120</a>     <a class="code" href="class_voodoo_shader_1_1_regex_match.html#acce9cabc578e940dd9f492a637470563">RegexMatch::RegexMatch</a>()
 <a name="l00121"></a>00121     {
-<a name="l00122"></a>00122         <span class="keyword">delete</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>;
+<a name="l00122"></a>00122         <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html">RegexMatchImpl</a>();
 <a name="l00123"></a>00123     }
 <a name="l00124"></a>00124 
-<a name="l00125"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#a3ea38e6e56ec208d9494c54da5af240b">00125</a>     uint32_t <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a3ea38e6e56ec208d9494c54da5af240b" title="Gets the number of submatches in this match.">RegexMatch::GetCount</a>()<span class="keyword"> const</span>
-<a name="l00126"></a>00126 <span class="keyword">    </span>{
-<a name="l00127"></a>00127         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>.size();
+<a name="l00125"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#aab4a75dadcdeceea1b498ac80e77d7ca">00125</a>     <a class="code" href="class_voodoo_shader_1_1_regex_match.html#acce9cabc578e940dd9f492a637470563">RegexMatch::RegexMatch</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html" title="Voodoo internal regex match class, encapsulating matches found by Regex.">RegexMatch</a> &amp; other)
+<a name="l00126"></a>00126     {
+<a name="l00127"></a>00127         <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a> = <span class="keyword">new</span> <a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html">RegexMatchImpl</a>(other.<a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>);
 <a name="l00128"></a>00128     }
 <a name="l00129"></a>00129 
-<a name="l00130"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#aeef54e6675bf8a2c781a76f272e3e877">00130</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#aeef54e6675bf8a2c781a76f272e3e877" title="Check if any matches were found.">RegexMatch::IsEmpty</a>()<span class="keyword"> const</span>
-<a name="l00131"></a>00131 <span class="keyword">    </span>{
-<a name="l00132"></a>00132         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>.empty();
+<a name="l00130"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#a5b4844858a37f43d9579419fd9c78810">00130</a>     <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a5b4844858a37f43d9579419fd9c78810">RegexMatch::~RegexMatch</a>()
+<a name="l00131"></a>00131     {
+<a name="l00132"></a>00132         <span class="keyword">delete</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>;
 <a name="l00133"></a>00133     }
 <a name="l00134"></a>00134 
-<a name="l00135"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#a4472d36ba4aff9404165525404e8cf33">00135</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a4472d36ba4aff9404165525404e8cf33" title="Retrieve a particular match within this group.">RegexMatch::GetMatch</a>(uint32_t index)<span class="keyword"> const</span>
+<a name="l00135"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#a3ea38e6e56ec208d9494c54da5af240b">00135</a>     uint32_t <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a3ea38e6e56ec208d9494c54da5af240b" title="Gets the number of submatches in this match.">RegexMatch::GetCount</a>()<span class="keyword"> const</span>
 <a name="l00136"></a>00136 <span class="keyword">    </span>{
-<a name="l00137"></a>00137         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>[index];
-<a name="l00138"></a>00138     }
-<a name="l00139"></a>00139 
-<a name="l00140"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#a81d2e7db4e9d2be728e93ea538c44049">00140</a>     <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a81d2e7db4e9d2be728e93ea538c44049" title="Formats the found submatches into an output string.">RegexMatch::Format</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html">String</a> &amp; fmt)<span class="keyword"> const</span>
-<a name="l00141"></a>00141 <span class="keyword">    </span>{
-<a name="l00142"></a>00142         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>.format(fmt.ToString(), boost::format_all);
-<a name="l00143"></a>00143     }
-<a name="l00144"></a>00144 }
+<a name="l00137"></a>00137         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
+<a name="l00138"></a>00138 
+<a name="l00139"></a>00139         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>.size();
+<a name="l00140"></a>00140     }
+<a name="l00141"></a>00141 
+<a name="l00142"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#aeef54e6675bf8a2c781a76f272e3e877">00142</a>     <span class="keywordtype">bool</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#aeef54e6675bf8a2c781a76f272e3e877" title="Check if any matches were found.">RegexMatch::IsEmpty</a>()<span class="keyword"> const</span>
+<a name="l00143"></a>00143 <span class="keyword">    </span>{
+<a name="l00144"></a>00144         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>.empty();
+<a name="l00147"></a>00147     }
+<a name="l00148"></a>00148 
+<a name="l00149"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#a4472d36ba4aff9404165525404e8cf33">00149</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a4472d36ba4aff9404165525404e8cf33" title="Retrieve a particular match within this group.">RegexMatch::GetMatch</a>(uint32_t index)<span class="keyword"> const</span>
+<a name="l00150"></a>00150 <span class="keyword">    </span>{
+<a name="l00151"></a>00151         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
+<a name="l00152"></a>00152 
+<a name="l00153"></a>00153         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>[index];
+<a name="l00154"></a>00154     }
+<a name="l00155"></a>00155 
+<a name="l00156"></a><a class="code" href="class_voodoo_shader_1_1_regex_match.html#a81d2e7db4e9d2be728e93ea538c44049">00156</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a81d2e7db4e9d2be728e93ea538c44049" title="Formats the found submatches into an output string.">RegexMatch::Format</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; fmt)<span class="keyword"> const</span>
+<a name="l00157"></a>00157 <span class="keyword">    </span>{
+<a name="l00158"></a>00158         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160         <span class="keywordflow">return</span> <a class="code" href="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_regex_match_1_1_regex_match_impl.html#aafdbc986cde74de2eab593aab6f14f13">m_Match</a>.format(fmt.ToString(), boost::format_all);
+<a name="l00161"></a>00161     }
+<a name="l00162"></a>00162 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

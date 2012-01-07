@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -63,15 +63,16 @@ Syntax</h2>
 <p>Variables are used by inserting <code>$(variable)</code> tokens into a string. Each variable will be removed and replaced with the value currently assigned to it. Variables are parsed when used, allowing delayed resolution and recursion. Variables are replaced innermost to outermost and left to right (see examples below). Four levels of priority are used in parsing. Builtin variables are searched first, then state variables, then regular variables, and finally environment variables supplied by the system.</p>
 <h3><a class="anchor" id="voodoo_vars_syntax_names"></a>
 Variable Names</h3>
-<p>Variable names may contain any characters but ':' and may start with any character but '?' or '!'. These characters have special meaning and will be stripped or will modify the name before it is used. Variable names may contain variables, which will be resolved using standard rules (this allows for variable variable names and dynamic string creation). When a variable is added to the parser, the name is immediately parsed using <code>PF_Lowercase</code> and the result is used as the actual name. This contrasts with values, which are parsed when used.</p>
+<p>Variable names may contain any characters not listed to have a special meaning; these characters will be stripped before the name is used. Variable names may contain variables, with the full syntax, but these are parsed when the variable is added to the parser (rather than when used, as values are).</p>
 <h4><a class="anchor" id="voodoo_vars_syntax_names_spec"></a>
-Special Characters</h4>
+Variable Flags &amp; Modes</h4>
 <ul>
-<li>The ':' character indicates state variables, described below. </li>
-<li>The '?' character indicates optional variables, which are not replaced with an error note if they are not found. </li>
-<li>The '!' character indicates express variables, which do not have their value parsed (and so may contain other variables without replacements). This can be useful when building variable variables to avoid recursion constraints. </li>
-<li>The remaining listed characters are reserved.</li>
+<li>The '!' character indicates required variables, which are replaced with an error note if they are not found. </li>
+<li>The '~' character indicates delayed variables, which do not have their value parsed (and so may contain other variables without replacements). This can be useful when building variable variables to avoid recursion constraints. </li>
+<li>The '@' character indicates recursive flags. The '@' must be followed by a number, which may be prefixed with '-' or '+' and followed by a space. If no symbol is given, the flags replace those given to the parse call; if '+' the flags are added (logical OR) and if '-' the flags are removed (logical XOR). </li>
+<li>The ':' character indicates state variables, described below.</li>
 </ul>
+<p>These flags can be combined, but must appear in the order given. With the exception of the state delimiter (':'), flags must begin at the start of the variable and no other content may come before the end of the flags.</p>
 <h3><a class="anchor" id="voodoo_vars_syntax_value"></a>
 Variable Values</h3>
 <p>Variable values may contain any characters and embedded variables. Values are parsed when used, using the current state and flags (in contrast to names, which are parsed when added).</p>
@@ -94,7 +95,7 @@ Variable States &amp; Recursion</h3>
 
  $(basepath)/$($(adapter)_respath) = M:\VoodooShader\resources\frost\
 </pre></div></dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807">IParser::Parse()</a> with the <a class="el" href="namespace_voodoo_shader.html#a97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb">PF_SlashSingle</a> flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807">IParser::Parse()</a> with the <a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb">PF_SlashSingle</a> flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
 <dl class="user"><dt><b>Examples:</b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\
  game.exe = $(adapter:Gem)
  Gem_Adapter = Voodoo_Gem.dll
@@ -192,7 +193,7 @@ Environment Variables</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:13 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

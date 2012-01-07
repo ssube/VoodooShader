@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -65,7 +65,9 @@
 </div>
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Defines</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">VSHookManager.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -78,7 +80,7 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_v_s_hook_manager_8cpp__incl.png" border="0" usemap="#_framework_2_core_2_v_s_hook_manager_8cpp" alt=""/></div>
 <map name="_framework_2_core_2_v_s_hook_manager_8cpp" id="_framework_2_core_2_v_s_hook_manager_8cpp">
-<area shape="rect" id="node3" href="_v_s_hook_manager_8hpp.html" title="VSHookManager.hpp" alt="" coords="513,80,657,107"/><area shape="rect" id="node5" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="520,155,651,181"/><area shape="rect" id="node7" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="541,229,629,256"/><area shape="rect" id="node9" href="_includes_8hpp.html" title="Includes.hpp" alt="" coords="489,379,583,405"/><area shape="rect" id="node29" href="_string_8hpp.html" title="String.hpp" alt="" coords="589,304,669,331"/></map>
+<area shape="rect" id="node3" href="_v_s_hook_manager_8hpp.html" title="VSHookManager.hpp" alt="" coords="1798,80,1943,107"/><area shape="rect" id="node5" href="_voodoo_framework_8hpp.html" title="This file is the public&#45;facing include for the Voodoo Shader core." alt="" coords="1793,155,1948,181"/><area shape="rect" id="node9" href="_voodoo_debug_8hpp.html" title="VoodooDebug.hpp" alt="" coords="296,229,424,256"/><area shape="rect" id="node11" href="_voodoo_types_8hpp.html" title="VoodooTypes.hpp" alt="" coords="449,229,575,256"/><area shape="rect" id="node29" href="_voodoo_version_8hpp.html" title="VoodooVersion.hpp" alt="" coords="599,229,733,256"/><area shape="rect" id="node33" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="759,229,860,256"/><area shape="rect" id="node36" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="885,229,989,256"/><area shape="rect" id="node39" href="_string_8hpp.html" title="String.hpp" alt="" coords="999,304,1080,331"/><area shape="rect" id="node44" href="_format_8hpp.html" title="Format.hpp" alt="" coords="1089,229,1177,256"/><area shape="rect" id="node48" href="_regex_8hpp.html" title="Regex.hpp" alt="" coords="1202,229,1285,256"/><area shape="rect" id="node53" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="1311,229,1399,256"/><area shape="rect" id="node56" href="_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="1423,229,1517,256"/><area shape="rect" id="node59" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="1543,229,1620,256"/><area shape="rect" id="node62" href="_i_file_8hpp.html" title="IFile.hpp" alt="" coords="1645,229,1715,256"/><area shape="rect" id="node65" href="_i_filesystem_8hpp.html" title="IFilesystem.hpp" alt="" coords="1740,229,1855,256"/><area shape="rect" id="node68" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="1879,229,2009,256"/><area shape="rect" id="node71" href="_i_image_8hpp.html" title="IImage.hpp" alt="" coords="2033,229,2119,256"/><area shape="rect" id="node74" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="2143,229,2232,256"/><area shape="rect" id="node77" href="_i_module_8hpp.html" title="IModule.hpp" alt="" coords="2257,229,2348,256"/><area shape="rect" id="node80" href="_i_module_manager_8hpp.html" title="IModuleManager.hpp" alt="" coords="2373,229,2515,256"/><area shape="rect" id="node83" href="_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="2540,229,2628,256"/><area shape="rect" id="node86" href="_i_resource_8hpp.html" title="IResource.hpp" alt="" coords="2653,229,2757,256"/><area shape="rect" id="node89" href="_i_parameter_8hpp.html" title="IParameter.hpp" alt="" coords="2782,229,2892,256"/><area shape="rect" id="node92" href="_i_pass_8hpp.html" title="IPass.hpp" alt="" coords="2917,229,2997,256"/><area shape="rect" id="node95" href="_i_shader_8hpp.html" title="IShader.hpp" alt="" coords="3021,229,3112,256"/><area shape="rect" id="node98" href="_i_technique_8hpp.html" title="ITechnique.hpp" alt="" coords="3136,229,3245,256"/><area shape="rect" id="node101" href="_i_texture_8hpp.html" title="ITexture.hpp" alt="" coords="3269,229,3363,256"/><area shape="rect" id="node31" href="_build_version_8hpp.html" title="BuildVersion.hpp" alt="" coords="848,304,968,331"/></map>
 </div>
 </div>
 <p><a href="_v_s_hook_manager_8cpp_source.html">Go to the source code of this file.</a></p>
@@ -86,12 +88,34 @@
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html">VoodooShader</a></td></tr>
+<tr><td colspan="2"><h2><a name="define-members"></a>
+Defines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_v_s_hook_manager_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VOODOO_DEBUG_TYPE</a>&#160;&#160;&#160;VSHookManager</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a4a204f567401446f11495b188fd3b5d6">VoodooShader::DeclareDebugCache</a> ()</td></tr>
 </table>
+<hr/><h2>Define Documentation</h2>
+<a class="anchor" id="ad296213f98e2c7f4bfa0d1a84be8ad50"></a><!-- doxytag: member="VSHookManager.cpp::VOODOO_DEBUG_TYPE" ref="ad296213f98e2c7f4bfa0d1a84be8ad50" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define <a class="el" href="_v_s_technique_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VOODOO_DEBUG_TYPE</a>&#160;&#160;&#160;VSHookManager</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00025">25</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:13 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

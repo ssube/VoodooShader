@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,7 +71,7 @@
 <a href="_w_file_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> * This file is part of the Voodoo Shader Framework.</span>
 <a name="l00003"></a>00003 <span class="comment"> *</span>
-<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2011 by Sean Sube</span>
+<a name="l00004"></a>00004 <span class="comment"> * Copyright (c) 2010-2012 by Sean Sube</span>
 <a name="l00005"></a>00005 <span class="comment"> *</span>
 <a name="l00006"></a>00006 <span class="comment"> * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser</span>
 <a name="l00007"></a>00007 <span class="comment"> * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)</span>
@@ -115,105 +115,117 @@
 <a name="l00045"></a>00045 
 <a name="l00046"></a>00046         uint32_t VSWFile::AddRef()<span class="keyword"> const</span>
 <a name="l00047"></a>00047 <span class="keyword">        </span>{
-<a name="l00048"></a>00048             <span class="keywordflow">return</span> <a class="code" href="_includes_8hpp.html#a20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(m_Refs);
+<a name="l00048"></a>00048             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__macros__debug.html#ga20995f5d1445643e9bf065321b2c9808">SAFE_INCREMENT</a>(m_Refs);
 <a name="l00049"></a>00049         }
 <a name="l00050"></a>00050 
 <a name="l00051"></a>00051         uint32_t VSWFile::Release()<span class="keyword"> const</span>
 <a name="l00052"></a>00052 <span class="keyword">        </span>{
-<a name="l00053"></a>00053             <span class="keywordflow">if</span> (<a class="code" href="_includes_8hpp.html#ada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(m_Refs) == 0)
+<a name="l00053"></a>00053             <span class="keywordflow">if</span> (<a class="code" href="group__voodoo__macros__debug.html#gada3dca094f5833dc6eba241090265ac2">SAFE_DECREMENT</a>(m_Refs) == 0)
 <a name="l00054"></a>00054             {
 <a name="l00055"></a>00055                 <span class="keyword">delete</span> <span class="keyword">this</span>;
 <a name="l00056"></a>00056                 <span class="keywordflow">return</span> 0;
-<a name="l00057"></a>00057             } <span class="keywordflow">else</span> {
-<a name="l00058"></a>00058                 <span class="keywordflow">return</span> m_Refs;
-<a name="l00059"></a>00059             }
-<a name="l00060"></a>00060         }
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062         <span class="keywordtype">bool</span> VSWFile::QueryInterface(_In_ <a class="code" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
-<a name="l00063"></a>00063 <span class="keyword">        </span>{
-<a name="l00064"></a>00064             <span class="keywordflow">if</span> (!ppOut)
-<a name="l00065"></a>00065             {
-<a name="l00066"></a>00066                 <span class="keywordflow">if</span> (clsid.is_nil())
-<a name="l00067"></a>00067                 {
-<a name="l00068"></a>00068                     clsid = CLSID_VSWFile;
-<a name="l00069"></a>00069                     <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00070"></a>00070                 } <span class="keywordflow">else</span> {
-<a name="l00071"></a>00071                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00057"></a>00057             }
+<a name="l00058"></a>00058             <span class="keywordflow">else</span>
+<a name="l00059"></a>00059             {
+<a name="l00060"></a>00060                 <span class="keywordflow">return</span> m_Refs;
+<a name="l00061"></a>00061             }
+<a name="l00062"></a>00062         }
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064         <span class="keywordtype">bool</span> VSWFile::QueryInterface(_In_ <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut)<span class="keyword"> const</span>
+<a name="l00065"></a>00065 <span class="keyword">        </span>{
+<a name="l00066"></a>00066             <span class="keywordflow">if</span> (!ppOut)
+<a name="l00067"></a>00067             {
+<a name="l00068"></a>00068                 <span class="keywordflow">if</span> (clsid.is_nil())
+<a name="l00069"></a>00069                 {
+<a name="l00070"></a>00070                     clsid = CLSID_VSWFile;
+<a name="l00071"></a>00071                     <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00072"></a>00072                 }
-<a name="l00073"></a>00073             } <span class="keywordflow">else</span> {
-<a name="l00074"></a>00074                 <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#ga62817948333934d8276718972fd0e817">IID_IObject</a>)
-<a name="l00075"></a>00075                 {
-<a name="l00076"></a>00076                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00077"></a>00077                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__framework__interfaces.html#gae30a8fb1c4b453c0ff175ded89398597">IID_IFile</a>) {
-<a name="l00078"></a>00078                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IFile*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00079"></a>00079                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSWFile) {
-<a name="l00080"></a>00080                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_v_s_w_file.html">VSWFile</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
-<a name="l00081"></a>00081                 } <span class="keywordflow">else</span> {
-<a name="l00082"></a>00082                     *ppOut = <span class="keyword">nullptr</span>;
-<a name="l00083"></a>00083                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00084"></a>00084                 }
-<a name="l00085"></a>00085 
-<a name="l00086"></a>00086                 <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
-<a name="l00087"></a>00087                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00088"></a>00088             }
-<a name="l00089"></a>00089         }
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091         String VSWFile::ToString()<span class="keyword"> const</span>
-<a name="l00092"></a>00092 <span class="keyword">        </span>{
-<a name="l00093"></a>00093             <span class="keywordflow">return</span> <a class="code" href="_version_8hpp.html#a808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;VSWFile()&quot;</span>);
-<a name="l00094"></a>00094         }
-<a name="l00095"></a>00095 
-<a name="l00096"></a>00096         ICore * VSWFile::GetCore()<span class="keyword"> const</span>
-<a name="l00097"></a>00097 <span class="keyword">        </span>{
-<a name="l00098"></a>00098             <span class="keywordflow">return</span> m_Core;
-<a name="l00099"></a>00099         }
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101         String VSWFile::GetPath()<span class="keyword"> const</span>
-<a name="l00102"></a>00102 <span class="keyword">        </span>{
-<a name="l00103"></a>00103             <span class="keywordflow">return</span> m_Path;
-<a name="l00104"></a>00104         }
-<a name="l00105"></a>00105 
-<a name="l00106"></a>00106         <span class="keywordtype">bool</span> VSWFile::Open(<a class="code" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6" title="File open access modes.">FileOpenMode</a> mode)
-<a name="l00107"></a>00107         {
-<a name="l00108"></a>00108             <span class="keywordflow">return</span> VSWFileImpl::Open(m_Core, m_Path, m_File, mode);
-<a name="l00109"></a>00109         }
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111         IImage * VSWFile::OpenImage()<span class="keyword"> const</span>
-<a name="l00112"></a>00112 <span class="keyword">        </span>{
-<a name="l00113"></a>00113             <span class="keywordflow">return</span> VSWImage::Load(m_Core, m_Path);
-<a name="l00114"></a>00114         }
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116         <span class="keywordtype">bool</span> VSWFile::Close()
-<a name="l00117"></a>00117         {
-<a name="l00118"></a>00118             <span class="keywordflow">return</span> VSWFileImpl::Close(m_File);
-<a name="l00119"></a>00119         }
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121         <span class="keywordtype">bool</span> VSWFile::Seek(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset)
-<a name="l00122"></a>00122         {
-<a name="l00123"></a>00123             <span class="keywordflow">return</span> VSWFileImpl::Seek(m_File, stream, mode, offset);
-<a name="l00124"></a>00124         }
-<a name="l00125"></a>00125 
-<a name="l00126"></a>00126         int32_t VSWFile::Tell(_In_ <a class="code" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream)
-<a name="l00127"></a>00127         {
-<a name="l00128"></a>00128             <span class="keywordflow">return</span> VSWFileImpl::Tell(m_File, stream);
-<a name="l00129"></a>00129         }
-<a name="l00130"></a>00130 
-<a name="l00131"></a>00131         <span class="keywordtype">int</span> VSWFile::Read(_In_ <span class="keywordtype">int</span> count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> *buffer)
-<a name="l00132"></a>00132         {
-<a name="l00133"></a>00133             <span class="keywordflow">return</span> VSWFileImpl::Read(m_Core, m_File, count, buffer);
-<a name="l00134"></a>00134         }
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136         int32_t VSWFile::Write(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * buffer)
-<a name="l00137"></a>00137         {
-<a name="l00138"></a>00138             <span class="keywordflow">return</span> VSWFileImpl::Write(m_Core, m_File, count, buffer);
-<a name="l00139"></a>00139         }
-<a name="l00140"></a>00140     }
-<a name="l00141"></a>00141 }
+<a name="l00073"></a>00073                 <span class="keywordflow">else</span>
+<a name="l00074"></a>00074                 {
+<a name="l00075"></a>00075                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00076"></a>00076                 }
+<a name="l00077"></a>00077             }
+<a name="l00078"></a>00078             <span class="keywordflow">else</span>
+<a name="l00079"></a>00079             {
+<a name="l00080"></a>00080                 <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__interfaces.html#ga62817948333934d8276718972fd0e817">IID_IObject</a>)
+<a name="l00081"></a>00081                 {
+<a name="l00082"></a>00082                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00083"></a>00083                 }
+<a name="l00084"></a>00084                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == <a class="code" href="group__voodoo__interfaces.html#gae30a8fb1c4b453c0ff175ded89398597">IID_IFile</a>)
+<a name="l00085"></a>00085                 {
+<a name="l00086"></a>00086                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>IFile*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00087"></a>00087                 }
+<a name="l00088"></a>00088                 <span class="keywordflow">else</span> <span class="keywordflow">if</span> (clsid == CLSID_VSWFile)
+<a name="l00089"></a>00089                 {
+<a name="l00090"></a>00090                     *ppOut = <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="class_v_s_w_file.html">VSWFile</a>*<span class="keyword">&gt;</span>(<span class="keyword">this</span>);
+<a name="l00091"></a>00091                 }
+<a name="l00092"></a>00092                 <span class="keywordflow">else</span>
+<a name="l00093"></a>00093                 {
+<a name="l00094"></a>00094                     *ppOut = <span class="keyword">nullptr</span>;
+<a name="l00095"></a>00095                     <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00096"></a>00096                 }
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098                 <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>IObject*<span class="keyword">&gt;</span>(*ppOut)-&gt;AddRef();
+<a name="l00099"></a>00099                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00100"></a>00100             }
+<a name="l00101"></a>00101         }
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103         String VSWFile::ToString()<span class="keyword"> const</span>
+<a name="l00104"></a>00104 <span class="keyword">        </span>{
+<a name="l00105"></a>00105             <span class="keywordflow">return</span> <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;VSWFile()&quot;</span>);
+<a name="l00106"></a>00106         }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108         ICore * VSWFile::GetCore()<span class="keyword"> const</span>
+<a name="l00109"></a>00109 <span class="keyword">        </span>{
+<a name="l00110"></a>00110             <span class="keywordflow">return</span> m_Core;
+<a name="l00111"></a>00111         }
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113         String VSWFile::GetPath()<span class="keyword"> const</span>
+<a name="l00114"></a>00114 <span class="keyword">        </span>{
+<a name="l00115"></a>00115             <span class="keywordflow">return</span> m_Path;
+<a name="l00116"></a>00116         }
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118         <span class="keywordtype">bool</span> VSWFile::Open(<a class="code" href="group__voodoo__enums.html#ga980f04b17b862a238d6c9c7854b862b6" title="File open access modes.">FileOpenMode</a> mode)
+<a name="l00119"></a>00119         {
+<a name="l00120"></a>00120             <span class="keywordflow">return</span> VSWFileImpl::Open(m_Core, m_Path, m_File, mode);
+<a name="l00121"></a>00121         }
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123         IImage * VSWFile::OpenImage()<span class="keyword"> const</span>
+<a name="l00124"></a>00124 <span class="keyword">        </span>{
+<a name="l00125"></a>00125             <span class="keywordflow">return</span> VSWImage::Load(m_Core, m_Path);
+<a name="l00126"></a>00126         }
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128         <span class="keywordtype">bool</span> VSWFile::Close()
+<a name="l00129"></a>00129         {
+<a name="l00130"></a>00130             <span class="keywordflow">return</span> VSWFileImpl::Close(m_File);
+<a name="l00131"></a>00131         }
+<a name="l00132"></a>00132 
+<a name="l00133"></a>00133         <span class="keywordtype">bool</span> VSWFile::Seek(_In_ <a class="code" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="group__voodoo__enums.html#ga68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset)
+<a name="l00134"></a>00134         {
+<a name="l00135"></a>00135             <span class="keywordflow">return</span> VSWFileImpl::Seek(m_File, stream, mode, offset);
+<a name="l00136"></a>00136         }
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138         int32_t VSWFile::Tell(_In_ <a class="code" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream)
+<a name="l00139"></a>00139         {
+<a name="l00140"></a>00140             <span class="keywordflow">return</span> VSWFileImpl::Tell(m_File, stream);
+<a name="l00141"></a>00141         }
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143         <span class="keywordtype">int</span> VSWFile::Read(_In_ <span class="keywordtype">int</span> count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> *buffer)
+<a name="l00144"></a>00144         {
+<a name="l00145"></a>00145             <span class="keywordflow">return</span> VSWFileImpl::Read(m_Core, m_File, count, buffer);
+<a name="l00146"></a>00146         }
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148         int32_t VSWFile::Write(_In_ <span class="keyword">const</span> int32_t count, _In_opt_bytecount_(count) <span class="keywordtype">void</span> * buffer)
+<a name="l00149"></a>00149         {
+<a name="l00150"></a>00150             <span class="keywordflow">return</span> VSWFileImpl::Write(m_Core, m_File, count, buffer);
+<a name="l00151"></a>00151         }
+<a name="l00152"></a>00152     }
+<a name="l00153"></a>00153 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:12 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -20,12 +20,12 @@
  <tbody>
  <tr style="height: 56px;">
   
-  <td id="projectlogo"><img alt="Logo" src="voodoo-banner.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="voodoo.png"/></td>
   
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.3-43-g397ee4e</span>
+   &#160;<span id="projectnumber">framework-5.5</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -69,7 +69,7 @@
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
-<div class="title">VoodooShader::IImage Class Reference<div class="ingroups"><a class="el" href="group__voodoo__framework__interfaces.html">Voodoo Framework interfaces</a></div></div>  </div>
+<div class="title">VoodooShader::IImage Class Reference<div class="ingroups"><a class="el" href="group__voodoo__interfaces.html">Interfaces</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="VoodooShader::IImage" --><!-- doxytag: inherits="VoodooShader::IFile" -->
@@ -102,13 +102,13 @@
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a980db5fa76555d659b77bae85d33210a">GetPath</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the absolute path of this file.  <a href="#a980db5fa76555d659b77bae85d33210a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a89db22c98599094818e5e7d1972310dc">Open</a> (<a class="el" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6">FileOpenMode</a> mode)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a89db22c98599094818e5e7d1972310dc">Open</a> (<a class="el" href="group__voodoo__enums.html#ga980f04b17b862a238d6c9c7854b862b6">FileOpenMode</a> mode)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Open the file with the given access mode.  <a href="#a89db22c98599094818e5e7d1972310dc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#aed572dee4da98cb1c353e2ba3245a258">Close</a> ()=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the file if it is open.  <a href="#aed572dee4da98cb1c353e2ba3245a258"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a88f9f6ead3cf3ce8a49f5694069ebb22">Seek</a> (<a class="el" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465">StreamType</a> stream, <a class="el" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db">SeekMode</a> mode, int32_t offset)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a88f9f6ead3cf3ce8a49f5694069ebb22">Seek</a> (<a class="el" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465">StreamType</a> stream, <a class="el" href="group__voodoo__enums.html#ga68a5aa1e8d5ddc2a43a629cd036264db">SeekMode</a> mode, int32_t offset)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Seek to the given position in the file.  <a href="#a88f9f6ead3cf3ce8a49f5694069ebb22"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#af4c4feba0352a09ee7bde2bfcdfea5bf">Tell</a> (<a class="el" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465">StreamType</a> stream)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#af4c4feba0352a09ee7bde2bfcdfea5bf">Tell</a> (<a class="el" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465">StreamType</a> stream)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the position of the given stream.  <a href="#af4c4feba0352a09ee7bde2bfcdfea5bf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a51dcc24ea863dc4a51210cd4d65a1cfd">Read</a> (const int32_t size, void *const pBuffer)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the given number of bytes from the file, starting at the current position.  <a href="#a51dcc24ea863dc4a51210cd4d65a1cfd"></a><br/></td></tr>
@@ -125,7 +125,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a8c01fc1faad1301b2e3baa3e73405490"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#afe87fd4356c7ed1c6540e2a3a43ea1fd">Release</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#afe87fd4356c7ed1c6540e2a3a43ea1fd"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a41e82498cc7db73478bd4d4494865010">QueryInterface</a> (<a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#a41e82498cc7db73478bd4d4494865010">QueryInterface</a> (<a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a41e82498cc7db73478bd4d4494865010"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_image.html#aa0043d8d8a12203a18b5f07308963d7a">ToString</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#aa0043d8d8a12203a18b5f07308963d7a"></a><br/></td></tr>
@@ -293,7 +293,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_image.html#a89db22c98599094818e5e7d1972310dc">VoodooShader::IImage::Open</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#a980f04b17b862a238d6c9c7854b862b6">FileOpenMode</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__voodoo__enums.html#ga980f04b17b862a238d6c9c7854b862b6">FileOpenMode</a>&#160;</td>
           <td class="paramname"><em>mode</em></td><td>)</td>
           <td><code> [pure virtual]</code></td>
         </tr>
@@ -343,7 +343,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_image.html#a41e82498cc7db73478bd4d4494865010">VoodooShader::IImage::QueryInterface</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#ab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
           <td class="paramname"><em>clsid</em>, </td>
         </tr>
         <tr>
@@ -452,13 +452,13 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
         <tr>
           <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_image.html#a88f9f6ead3cf3ce8a49f5694069ebb22">VoodooShader::IImage::Seek</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465">StreamType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465">StreamType</a>&#160;</td>
           <td class="paramname"><em>stream</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#a68a5aa1e8d5ddc2a43a629cd036264db">SeekMode</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__voodoo__enums.html#ga68a5aa1e8d5ddc2a43a629cd036264db">SeekMode</a>&#160;</td>
           <td class="paramname"><em>mode</em>, </td>
         </tr>
         <tr>
@@ -498,7 +498,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
         <tr>
           <td class="memname">virtual int32_t <a class="el" href="class_voodoo_shader_1_1_i_image.html#af4c4feba0352a09ee7bde2bfcdfea5bf">VoodooShader::IImage::Tell</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_voodoo_shader.html#a30d2b0a9546b7da2d60804ab53d65465">StreamType</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465">StreamType</a>&#160;</td>
           <td class="paramname"><em>stream</em></td><td>)</td>
           <td><code> [pure virtual]</code></td>
         </tr>
@@ -588,7 +588,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Dec 30 2011 14:16:14 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

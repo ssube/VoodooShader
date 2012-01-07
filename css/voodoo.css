@@ -179,6 +179,42 @@ blockquote
     -webkit-border-radius: 2px;
 }
 
+#imagelist
+{
+    margin: 0px 20px;
+    padding: 10px;
+    background: #000000;
+    background: rgba(0,0,0,0.25);
+    border: 1px #000000 solid;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    overflow: auto;
+    overflow-y: hidden;
+    -ms-overflow-y: hidden;
+} 
+    
+#imagelist ul
+{
+    display: inline-block;
+    list-style: none;
+    width: 100%;
+}
+
+#imagelist ul li
+{
+    display: table-cell;
+    padding: 4px;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#imagelist ul li:hover
+{
+    background: #666666;
+    background: rgb(128,128,128,0.25);
+}
+
 #footer
 {
     padding: 16px 0 16px 0;
