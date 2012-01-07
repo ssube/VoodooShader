@@ -257,6 +257,23 @@ namespace VoodooShader
                     }
                 }
 
+                texture_LastPass = gpVoodooCore->CreateTexture(VSTR(":lastpass"), backbufferDesc);
+                if (texture_LastPass)
+                {
+                    IDirect3DTexture9 * texture = (IDirect3DTexture9 *)texture_LastPass->GetData();
+                    hrt = texture->GetSurfaceLevel(0, &surface_LastPass);
+                    if (SUCCEEDED(hrt))
+                    {
+                        gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :lastpass surface.");
+                    }
+                    else
+                    {
+                        gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :lastpass surface.");
+                    }
+
+                    gpVoodooCore->SetStageTexture(TS_Pass, texture_LastPass);
+                }
+
                 try
                 {
                     IFileRef shaderfile = gpVoodooCore->GetFileSystem()->GetFile(L"test.cgfx");

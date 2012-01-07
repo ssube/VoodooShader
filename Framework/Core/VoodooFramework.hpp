@@ -19,13 +19,6 @@
  */
 #pragma once
 
-/**
- * @file
- * This file is the public-facing include for the Voodoo Shader core. All libraries using the Voodoo Shader Framework should
- * include this file, and optionally <tt>Support.inl</tt>; this file includes all other headers necessary to use Voodoo
- * Shader.
- */
-
 #if !defined(__cplusplus)
 #   error Voodoo Shader requires a C++ compiler, preferably Microsoft Visual C++ 10 or better.
 #elif !defined(_WIN32) 
@@ -36,9 +29,9 @@
 #   error Voodoo SDK version already defined. This should only be defined by the primary framework header.
 #endif
 
-/**
- * Current core version for Voodoo Shader. Only incremented on significant changes to the behavior of the core.
- */
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
 #define VOODOO_SDK_VERSION 0
 
 #if !defined(VOODOO_STRING_MACROS)
@@ -54,10 +47,6 @@
 #   define VOODOO_STRING(arg)      VOODOO_STRING_STR(arg)
 #   define VSTR(arg)               VOODOO_STRING_STR(arg)
 #endif
-
-// Windows includes and macros
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
 
 #if !defined(PURE)
 #   define PURE = 0
@@ -75,10 +64,6 @@
 #   define DECLSPEC_NOVTABLE __declspec(novtable)
 #endif
 
-/**
- * @defgroup voodoo_macros_decl Declaration Macros
- * @{
- */
 #define VOODOO_STRIP(...) __VA_ARGS__
 
 #define DEFINE_UUID(name)     EXTERN_C CONST Uuid DECLSPEC_SELECTANY name
@@ -104,11 +89,8 @@
     class DECLSPEC_NOVTABLE iname
 #define VOODOO_INTERFACE(iname, ibase, uuid) DEFINE_IID(iname) = VOODOO_STRIP##uuid; \
     class DECLSPEC_NOVTABLE iname : public ibase
-#define VOODOO_CLASS(iname, ibase, uuid)     DEFINE_CLSID(iname) = VOODOO_STRIP##uuid; \
-    class iname : public ibase
-/**
- * @}
- */
+#define VOODOO_CLASS(cname, ibase, uuid)     DEFINE_CLSID(cname) = VOODOO_STRIP##uuid; \
+    class cname : public ibase
 
 #include "VoodooDebug.hpp"
 #include "VoodooTypes.hpp"

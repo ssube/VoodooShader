@@ -123,13 +123,13 @@ namespace VoodooUI
 
             if (version)
             {
-                Console.WriteLine("VoodooUI-0.5.2");
+                Console.WriteLine("VoodooUI-0.5.4");
                 return;
             }
             else if (!nologo)
             {
                 Console.WriteLine("Voodoo Shader Framework GUI");
-                Console.WriteLine("version 0.5.2");
+                Console.WriteLine("version 0.5.4");
                 Console.WriteLine("Copyright (c) 2010-2012 by Sean Sube, All Rights Reserved. See COPYING for license details.\n");
 
                 if (logo)
@@ -227,35 +227,25 @@ namespace VoodooUI
         static String CreateExceptionReport(Exception e)
         {
             StringBuilder data = new StringBuilder();
-            data.AppendLine("### Voodoo UI Exception Report");
+            data.AppendLine("Voodoo UI Error Report");
 
             try
             {
                 Assembly asm = Assembly.GetExecutingAssembly();
-                data.AppendLine("Voodoo UI File: " + asm.Location);
+                data.AppendLine("UI File: " + asm.Location);
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(asm.Location);
-                data.AppendLine("Voodoo UI Version: " + fvi);
+                data.AppendLine("UI Version: " + fvi);
             } 
             catch (Exception exc)
             {
-                data.AppendLine("Voodoo UI Version: Error: " + exc.Message);
+                data.AppendLine("UI Error: " + exc.Message);
             }
 
             data.AppendLine("CLR Version: " + Environment.Version);
             data.AppendLine("OS Version: " + Environment.OSVersion);
 
             data.AppendLine("Error Time: " + DateTime.Now);
-
-            int level = 0;
-            Exception re = e;
-            while (re != null)
-            {
-                data.AppendLine("#### Error Level: " + level++);
-                data.AppendLine("Error Message: " + e.Message);
-                data.AppendLine("Error Stack:");
-                data.AppendLine(e.StackTrace);
-                re = re.InnerException;
-            }
+            data.AppendLine(e.ToString());
 
             try
             {

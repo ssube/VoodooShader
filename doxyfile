@@ -32,7 +32,7 @@ PROJECT_NAME           = "Voodoo Shader Framework"
 # This could be handy for archiving the generated documentation or 
 # if some version control system is used.
 
-PROJECT_NUMBER         = framework-5.4-4-ga7b54ed
+PROJECT_NUMBER         = framework-5.4-8-g757237b
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description 
 # for a project that appears at the top of each page and should give viewer 
@@ -45,7 +45,7 @@ PROJECT_BRIEF          = "Comprehensive shader support library"
 # exceed 55 pixels and the maximum width should not exceed 200 pixels. 
 # Doxygen will copy the logo to the output directory.
 
-PROJECT_LOGO           = C:/Users/Sean/Documents/voodoo/voodoo-banner.png
+PROJECT_LOGO           = D:/Code/VoodooShader/Framework/voodoo.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) 
 # base path where the generated documentation will be put. 
@@ -1586,7 +1586,8 @@ EXPAND_AS_DEFINED      = DEFINE_LIBID \
                          EXTERN_C \
                          VOODOO_CLASS \
                          VOODOO_METHOD \
-                         VOODOO_METHOD_
+                         VOODOO_METHOD_ \
+                         VOODOO_STRIP
 
 # If the SKIP_FUNCTION_MACROS tag is set to YES (the default) then 
 # doxygen's preprocessor will remove all references to function-like macros 

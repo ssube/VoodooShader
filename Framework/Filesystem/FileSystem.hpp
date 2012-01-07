@@ -78,7 +78,6 @@ namespace VoodooShader
         {
         public:
             VSWFileSystem(_In_ ICore *core);
-
             ~VSWFileSystem();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -116,7 +115,6 @@ namespace VoodooShader
              * Creates a file object from a path (usually an absolute path).
              */
             VSWFile(_In_ ICore * pCore, _In_ const String & path);
-
             ~VSWFile();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;

@@ -33,10 +33,6 @@
 #   define VSTR(arg)               VOODOO_STRING_STR(arg)
 #endif
 
-/**
- * @defgroup voodoo_macros_version Versioning Macros
- * @{
- */
 #if defined(_DEBUG)
 #   define VOODOO_DEBUG_BOOL   true
 #   define VOODOO_DEBUG_STRING VSTR(" (DEBUG)")
@@ -51,29 +47,15 @@
 #define VOODOO_STRING_NAME_BASIC(token)    VOODOO_##token##_NAME VOODOO_DEBUG_STRING
 #define VOODOO_STRING_NAME_FULL(token)     VOODOO_##token##_PRETTYNAME VOODOO_DEBUG_STRING
 #define VOODOO_STRING_AUTHOR(token)        VOODOO_##token##_AUTHOR
-/**
- * Creates a basic version string separated with periods.
- */
 #define VOODOO_STRING_VERSION_BASIC(token) \
     VOODOO_TOSTRING(VOODOO_##token##_VERSION_MAJOR) VSTR(".")\
     VOODOO_TOSTRING(VOODOO_##token##_VERSION_MINOR) VSTR(".")\
     VOODOO_TOSTRING(VOODOO_##token##_VERSION_PATCH) VSTR(".")\
     VOODOO_TOSTRING(VOODOO_##token##_VERSION_BUILD) VOODOO_DEBUG_STRING
-/**
- * Creates an extended version string with the module's full name and strong version ID.
- */
 #define VOODOO_STRING_VERSION_FULL(token) VOODOO_##token##_VERSION_ID VOODOO_DEBUG_STRING
-
-/**
- * Creates a comma-separated chain of version tokens (not string).
- */
 #define VOODOO_VERSION_CHAIN(token) \
     VOODOO_##token##_VERSION_MAJOR, VOODOO_##token##_VERSION_MINOR, VOODOO_##token##_VERSION_PATCH, \
     VOODOO_##token##_VERSION_BUILD
-
-/**
- * Creates a Version structure with data for the given module.
- */
 #define VOODOO_VERSION_STRUCT(token) \
     { VOODOO_##token##_LIBID, VOODOO_VERSION_CHAIN(token), VOODOO_DEBUG_BOOL, \
       VOODOO_##token##_NAME, VOODOO_##token##_VERSION_ID }

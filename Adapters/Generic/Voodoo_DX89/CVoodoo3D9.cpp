@@ -272,6 +272,8 @@ namespace VoodooShader
                     {
                         logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to :lastpass scratch surface.");
                     }
+
+                    gpVoodooCore->SetStageTexture(TS_Pass, texture_LastPass);
                 }
 
                 try

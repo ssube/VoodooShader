@@ -98,7 +98,7 @@ namespace VoodooUI
 
                     String wd = Directory.GetCurrentDirectory();
                     Directory.SetCurrentDirectory(GlobalRegistry.Instance.Path);
-                    m_ProgressForm.QueueCommand(String.Format("git clone {0}.git \"{1}\"", source, fullpath));
+                    m_ProgressForm.QueueCommand(String.Format("git clone \"{0}.git\" \"{1}\"", source, fullpath));
                     m_ProgressForm.QueueCommand
                     (
                         delegate() { Directory.SetCurrentDirectory(fullpath); },
@@ -136,9 +136,6 @@ namespace VoodooUI
                     m_ProgressForm.ShowDialog();
                     Directory.SetCurrentDirectory(wd);
 
-                    // Copy all binaries
-                    //m_ProgressForm.WriteLine("Copying all binaries from package {0}", package);
-                    //CopyToGlobal(fullpath, "bin");
                     m_ProgressForm.WriteLine("Done updating package {0}.", package);
                 }
             }
@@ -239,7 +236,7 @@ namespace VoodooUI
                 }
             }
 
-            if (!ExistsInPath("git.exe") && !ExistsInPath("git.cmd"))
+            if (GitInPath())
             {
                 m_ProgressForm = new ProgressDialog();
                 m_ProgressForm.WriteLine("Unable to locate git for package management.");
@@ -283,10 +280,20 @@ namespace VoodooUI
             else
             {
                 m_ProgressForm.WriteLine("Launching git installer...");
-                Process.Start("msysgit.exe").WaitForExit();
-                m_ProgressForm.WriteLine("Git installer has completed.");
+                Process installer = Process.Start("msysgit.exe", "/silent");
+                installer.Start();
+                installer.WaitForExit();
+                if (installer.ExitCode == 0)
+                {
+                    m_ProgressForm.WriteLine("Git installer has completed successfully.");
+                }
+                else
+                {
+                    m_ProgressForm.WriteLine("Errors may have occurred during git installation.");
+                }
 
                 m_ProgressForm.AllowClose = true;
+                GitInPath();
             }
         }
 
@@ -412,6 +419,38 @@ namespace VoodooUI
             }
 
             RefreshTree();
+        }
+
+        bool GitInPath()
+        {
+            if (ExistsInPath("git.exe") || ExistsInPath("git.cmd")) return true;
+
+            if (Directory.Exists(GitProgramFiles()) && File.Exists(Path.Combine(GitProgramFiles(), "git.exe")))
+            {
+                String envpath = Environment.GetEnvironmentVariable("Path");
+                envpath += ";" + GitProgramFiles();
+                Environment.SetEnvironmentVariable("Path", envpath);
+                return true;
+            }
+
+            return false;
+        }
+
+        string GitProgramFiles()
+        {
+            return Path.Combine(Path.Combine(ProgramFilesx86(), "Git"), "bin");
+        }
+
+        string ProgramFilesx86()
+        {
+            if (IntPtr.Size == 8 ||
+                (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))
+               )
+            {
+                return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
+            }
+
+            return Environment.GetEnvironmentVariable("ProgramFiles");
         }
     }
 }

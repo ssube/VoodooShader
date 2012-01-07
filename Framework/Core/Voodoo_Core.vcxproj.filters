@@ -177,6 +177,9 @@
     <ClInclude Include="BuildVersion.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="VoodooDocs.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">
