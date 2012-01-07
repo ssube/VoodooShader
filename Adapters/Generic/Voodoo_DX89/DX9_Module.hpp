@@ -67,10 +67,12 @@ extern VoodooShader::IShader * testShader;
 extern IDirect3DVertexBuffer9 * gpFSQuadVerts;
 extern IDirect3DSurface9 *backbufferSurf;
 
-extern IDirect3DSurface9 *surface_ThisFrame;
-extern VoodooShader::ITexture* texture_ThisFrame;
-extern IDirect3DSurface9 *surface_LastPass;
-extern VoodooShader::ITexture* texture_LastPass;
+extern IDirect3DSurface9 *surface_Frame0;
+extern VoodooShader::ITexture* texture_Frame0;
+extern IDirect3DSurface9 *surface_Pass0;
+extern VoodooShader::ITexture* texture_Pass0;
+extern IDirect3DSurface9 * surface_Scratch;
+extern VoodooShader::ITexture* texture_Scratch;
 
 extern volatile LONG gObjectLock;
 

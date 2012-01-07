@@ -173,7 +173,7 @@ namespace VoodooShader
             mpPP.Flags = pPP->Flags;
             mpPP.FullScreen_RefreshRateInHz = pPP->FullScreen_RefreshRateInHz;
             mpPP.hDeviceWindow = pPP->hDeviceWindow;
-            mpPP.MultiSampleQuality = pPP->MultiSampleType;
+            mpPP.MultiSampleQuality = 0;
             mpPP.MultiSampleType = pPP->MultiSampleType;
             mpPP.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
             mpPP.SwapEffect = pPP->SwapEffect;
@@ -241,37 +241,35 @@ namespace VoodooShader
                 backbufferDesc.RenderTarget = true;
                 backbufferDesc.Format = VoodooShader::TF_RGB8;
 
-                texture_ThisFrame = gpVoodooCore->CreateTexture(L":thisframe", backbufferDesc);
+                texture_Frame0 = gpVoodooCore->CreateTexture(L":frame0", backbufferDesc);
 
-                if (texture_ThisFrame)
+                if (texture_Frame0)
                 {
-                    IDirect3DTexture9 * texture = (IDirect3DTexture9 *)texture_ThisFrame->GetData();
-                    hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
+                    IDirect3DTexture9 * texture = (IDirect3DTexture9 *)texture_Frame0->GetData();
+                    hrt = texture->GetSurfaceLevel(0, &surface_Frame0);
                     if (SUCCEEDED(hrt))
                     {
-                        gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :thisframe surface.");
+                        gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
                     }
                     else
                     {
-                        gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :thisframe surface.");
+                        gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
                     }
                 }
 
-                texture_LastPass = gpVoodooCore->CreateTexture(VSTR(":lastpass"), backbufferDesc);
-                if (texture_LastPass)
+                texture_Pass0 = gpVoodooCore->CreateTexture(VSTR(":pass0"), backbufferDesc);
+                if (texture_Pass0)
                 {
-                    IDirect3DTexture9 * texture = (IDirect3DTexture9 *)texture_LastPass->GetData();
-                    hrt = texture->GetSurfaceLevel(0, &surface_LastPass);
+                    IDirect3DTexture9 * texture = (IDirect3DTexture9 *)texture_Pass0->GetData();
+                    hrt = texture->GetSurfaceLevel(0, &surface_Pass0);
                     if (SUCCEEDED(hrt))
                     {
-                        gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :lastpass surface.");
+                        gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
                     }
                     else
                     {
-                        gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :lastpass surface.");
+                        gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
                     }
-
-                    gpVoodooCore->SetStageTexture(TS_Pass, texture_LastPass);
                 }
 
                 try

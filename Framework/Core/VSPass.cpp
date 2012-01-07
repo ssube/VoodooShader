@@ -234,20 +234,13 @@ namespace VoodooShader
                 {
                     const char *targetName = cgGetStringAnnotationValue(targetAnnotation);
 
-                    m_Target[i] = m_Core->GetTexture(targetName);
-
-                    if (!m_Target[i])
+                    if (!(m_Target[i] = m_Core->GetTexture(targetName)))
                     {
                         m_Core->GetLogger()->LogMessage
                         (
                             LL_CoreWarning, VOODOO_CORE_NAME,
                             Format(VSTR("%1% cannot find target '%2%'.")) << this << targetName 
                         );
-
-                        if (i == 0)
-                        {
-                            m_Target[i] = m_Core->GetStageTexture(TS_Pass);
-                        }
                     }
                 }
                 else
@@ -257,11 +250,6 @@ namespace VoodooShader
                         LL_CoreWarning, VOODOO_CORE_NAME,
                         Format(VSTR("%1% has target annotation of invalid type.")) << this
                     );
-
-                    if (i == 0)
-                    {
-                        m_Target[i] = m_Core->GetStageTexture(TS_Pass);
-                    }
                 }
             }
             else
@@ -271,11 +259,6 @@ namespace VoodooShader
                     LL_CoreDebug, VOODOO_CORE_NAME,
                     Format(VSTR("%1% has no target annotation.")) << this
                 );
-
-                if (i == 0)
-                {
-                    m_Target[i] = m_Core->GetStageTexture(TS_Pass);
-                }
             }
         }
 

@@ -253,10 +253,7 @@ namespace VoodooShader
             for (uint32_t i = 0; i < 4; ++i)
             {
                 ITexture * pTarget = pPass->GetTarget(i);
-                if (pTarget)
-                {
-                    this->SetTarget(i, pTarget);
-                }
+                this->SetTarget(i, pTarget);
             }
 
             m_BoundPass = pPass;
@@ -322,7 +319,7 @@ namespace VoodooShader
 
                     if (SUCCEEDED(result))
                     {
-                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound backbuffer to render target %1%: %2%") << index << result);
+                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound backbuffer to render target %1%.") << index);
                         return true;
                     }
                     else
@@ -333,11 +330,11 @@ namespace VoodooShader
                 }
                 else
                 {
-                    result = m_Device->SetRenderTarget(index, nullptr);
+                    result = m_Device->SetRenderTarget(index, NULL);
 
                     if (SUCCEEDED(result))
                     {
-                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture to render target %1%: %2%") << index << result);
+                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture to render target %1%.") << index);
                         return true;
                     }
                     else

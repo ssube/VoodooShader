@@ -193,7 +193,7 @@ namespace VoodooShader
             D3DDEVTYPE DeviceType,
             HWND hFocusWindow,
             DWORD BehaviorFlags,
-            D3DPRESENT_PARAMETERS *pPresentationParameters,
+            D3DPRESENT_PARAMETERS *pPP,
             IDirect3DDevice9 **ppReturnedDeviceInterface
         )
         {
@@ -205,7 +205,7 @@ namespace VoodooShader
                 DeviceType,
                 hFocusWindow,
                 BehaviorFlags,
-                pPresentationParameters,
+                pPP,
                 &realDevice
             );
 
@@ -235,45 +235,43 @@ namespace VoodooShader
                 }
 
                 TextureDesc bufferTextureDesc;
-                bufferTextureDesc.Size.X = pPresentationParameters->BackBufferWidth;
-                bufferTextureDesc.Size.Y = pPresentationParameters->BackBufferHeight;
+                bufferTextureDesc.Size.X = pPP->BackBufferWidth;
+                bufferTextureDesc.Size.Y = pPP->BackBufferHeight;
                 bufferTextureDesc.Size.Z = 0;
-                bufferTextureDesc.Format = VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(pPresentationParameters->BackBufferFormat);
+                bufferTextureDesc.Format = VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(pPP->BackBufferFormat);
                 bufferTextureDesc.Mipmaps = true;
                 bufferTextureDesc.RenderTarget = true;
 
-                texture_ThisFrame = gpVoodooCore->CreateTexture(L":thisframe", bufferTextureDesc);
-                if (texture_ThisFrame)
+                texture_Frame0 = gpVoodooCore->CreateTexture(L":frame0", bufferTextureDesc);
+                if (texture_Frame0)
                 {
-                    IDirect3DTexture9 * texture = reinterpret_cast<IDirect3DTexture9 *>(texture_ThisFrame->GetData());
+                    IDirect3DTexture9 * texture = reinterpret_cast<IDirect3DTexture9 *>(texture_Frame0->GetData());
 
-                    hrt = texture->GetSurfaceLevel(0, &surface_ThisFrame);
+                    hrt = texture->GetSurfaceLevel(0, &surface_Frame0);
                     if (SUCCEEDED(hrt))
                     {
-                        logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :thisframe surface.");
+                        logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
                     }
                     else
                     {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to :thisframe scratch surface.");
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
                     }
                 }
 
-                texture_LastPass = gpVoodooCore->CreateTexture(L":lastpass", bufferTextureDesc);
-                if (texture_LastPass)
+                texture_Pass0 = gpVoodooCore->CreateTexture(L":pass0", bufferTextureDesc);
+                if (texture_Pass0)
                 {
-                    IDirect3DTexture9 * texture = reinterpret_cast<IDirect3DTexture9 *>(texture_LastPass->GetData());
+                    IDirect3DTexture9 * texture = reinterpret_cast<IDirect3DTexture9 *>(texture_Pass0->GetData());
 
-                    hrt = texture->GetSurfaceLevel(0, &surface_LastPass);
+                    hrt = texture->GetSurfaceLevel(0, &surface_Pass0);
                     if (SUCCEEDED(hrt))
                     {
-                        logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :lastpass surface.");
+                        logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
                     }
                     else
                     {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to :lastpass scratch surface.");
+                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
                     }
-
-                    gpVoodooCore->SetStageTexture(TS_Pass, texture_LastPass);
                 }
 
                 try

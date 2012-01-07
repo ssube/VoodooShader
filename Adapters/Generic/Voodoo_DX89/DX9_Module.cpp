@@ -31,10 +31,12 @@ VoodooShader::IShader* testShader = nullptr;
 IDirect3DVertexBuffer9 * gpFSQuadVerts = nullptr;
 IDirect3DSurface9 *backbufferSurf = nullptr;
 
-IDirect3DSurface9 *surface_ThisFrame = nullptr;
-VoodooShader::ITexture* texture_ThisFrame = nullptr;
-IDirect3DSurface9 *surface_LastPass = nullptr;
-VoodooShader::ITexture* texture_LastPass = nullptr;
+IDirect3DSurface9 *surface_Frame0 = nullptr;
+VoodooShader::ITexture* texture_Frame0 = nullptr;
+IDirect3DSurface9 *surface_Pass0 = nullptr;
+VoodooShader::ITexture* texture_Pass0 = nullptr;
+IDirect3DSurface9 * surface_Scratch = nullptr;
+VoodooShader::ITexture* texture_Scratch = nullptr;
 
 volatile LONG gObjectLock = 0;
 

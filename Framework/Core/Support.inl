@@ -231,6 +231,7 @@ inline static bool WINAPI GetVoodooBinPath(_In_count_c_(MAX_PATH) TCHAR * pBuffe
 inline static bool WINAPI MatchHook(_In_z_ TCHAR * module, _In_ HHOOKDEF pHook)
 {
     if (!module || !pHook) return false;
+    if (!pHook->Active) return false;
 
     return (PathMatchSpec(module, pHook->Target) == TRUE);
 }
