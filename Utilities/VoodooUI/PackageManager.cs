@@ -396,14 +396,11 @@ namespace VoodooUI
             if (ExistsInPath("git.exe") || ExistsInPath("git.cmd")) return true;
 
             String progFiles = GitProgramFiles();
-            MessageBox.Show(progFiles);
             if (Directory.Exists(progFiles))
             {
-                MessageBox.Show("PFx86 exists.");
                 String envpath = Environment.GetEnvironmentVariable("Path");
                 envpath += ";" + progFiles;
                 Environment.SetEnvironmentVariable("Path", envpath);
-                MessageBox.Show(envpath);
 
                 if (ExistsInPath("git.exe") || ExistsInPath("git.cmd")) return true;
             }

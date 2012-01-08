@@ -86,7 +86,6 @@ namespace VoodooShader
 
         FrostAdapter::~FrostAdapter(void)
         {
-
             // mLogger->Log(LL_ModInfo, VOODOO_FROST_NAME, "Frost adapter shutdown.");
         }
 
@@ -228,25 +227,21 @@ namespace VoodooShader
                 texIFmt = GL_RGBA8;
                 texType = GL_UNSIGNED_BYTE;
                 break;
-
             case TF_RGB8:
                 texFmt = GL_RGB;
                 texIFmt = GL_RGB8;
                 texType = GL_UNSIGNED_BYTE;
                 break;
-
             case TF_RGBA16F:
                 texFmt = GL_RGBA;
                 texIFmt = GL_RGBA16F;
                 texType = GL_FLOAT;
                 break;
-
             case TF_RGBA32F:
                 texFmt = GL_RGBA;
                 texIFmt = GL_RGBA32F;
                 texType = GL_DOUBLE;
                 break;
-
             case TF_D16:
                 texFmt = GL_DEPTH_COMPONENT;
                 texIFmt = GL_DEPTH_COMPONENT16;
@@ -506,17 +501,14 @@ namespace VoodooShader
                     return;
                 }
 
-                m_Core->SetCgContext(context);
+                //cgSetContextBehavior(context, CG_BEHAVIOR_LATEST);
+                //cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
 
-                cgSetContextBehavior(context, CG_BEHAVIOR_LATEST);
-                cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
-
-                cgSetAutoCompile(context, CG_COMPILE_IMMEDIATE);
-                cgSetParameterSettingMode(context, CG_IMMEDIATE_PARAMETER_SETTING);
+                //cgSetAutoCompile(context, CG_COMPILE_IMMEDIATE);
+                //cgSetParameterSettingMode(context, CG_IMMEDIATE_PARAMETER_SETTING);
 
                 cgGLRegisterStates(context);
                 cgGLSetManageTextureParameters(context, CG_TRUE);
-
                 m_Core->SetCgContext(context);
 
                 // Setup resources

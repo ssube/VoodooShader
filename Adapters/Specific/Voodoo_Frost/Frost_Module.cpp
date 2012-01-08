@@ -36,24 +36,24 @@ namespace VoodooShader
 {
     namespace VoodooFrost
     {
-        const Version * API_ModuleVersion(void)
+        const Version * VOODOO_CALLTYPE API_ModuleVersion(void)
         {
             static const Version moduleVersion = VOODOO_VERSION_STRUCT(FROST);
 
             return &moduleVersion;
         }
 
-        uint32_t API_ClassCount(void)
+        uint32_t VOODOO_CALLTYPE API_ClassCount(void)
         {
             return 1;
         }
 
-        const wchar_t * API_ClassInfo(_In_ uint32_t number, Uuid & clsid)
+        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ uint32_t number, Uuid & clsid)
         {
             if (number == 0)
             {
                 clsid = CLSID_FrostAdapter;
-                return L"Frost_Adapter";
+                return L"FrostAdapter";
             }
             else
             {
@@ -61,7 +61,7 @@ namespace VoodooShader
             }
         }
 
-        IObject * API_ClassCreate(_In_ uint32_t index, _In_ ICore * pCore)
+        IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ uint32_t index, _In_ ICore * pCore)
         {
             if (index == 0)
             {

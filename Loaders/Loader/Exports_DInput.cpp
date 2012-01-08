@@ -96,7 +96,7 @@ HRESULT WINAPI VSDirectInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * l
 
     if (!gFunc_Type_DirectInputCreateA)
     {
-        gFunc_Type_DirectInputCreateA = (Type_DirectInputCreate)FindFunction(TEXT("dinput8.dll"), true, "DirectInputCreateA", &gModule_DInput8);
+        gFunc_Type_DirectInputCreateA = (Type_DirectInputCreate)FindFunction(TEXT("dinput.dll"), true, "DirectInputCreateA", &gModule_DInput8);
     }
 
     LPVOID iaobj = nullptr;
@@ -108,9 +108,7 @@ HRESULT WINAPI VSDirectInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * l
         DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.VPVoid = iaobj;
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputA", &DIObj);
-
-        if (DIObj.VPVoid != iaobj)
+        if (gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputA", &DIObj))
         {
             iaobj = DIObj.VPVoid;
         }
@@ -126,7 +124,7 @@ HRESULT WINAPI VSDirectInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * l
 
     if (!gFunc_Type_DirectInputCreateW)
     {
-        gFunc_Type_DirectInputCreateW = (Type_DirectInputCreate)FindFunction(TEXT("dinput8.dll"), true, "DirectInputCreateW", &gModule_DInput8);
+        gFunc_Type_DirectInputCreateW = (Type_DirectInputCreate)FindFunction(TEXT("dinput.dll"), true, "DirectInputCreateW", &gModule_DInput8);
     }
 
     LPVOID iwobj = nullptr;
