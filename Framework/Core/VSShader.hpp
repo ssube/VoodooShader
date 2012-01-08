@@ -21,6 +21,8 @@
 
 #include "VoodooFramework.hpp"
 
+#include <d3dx9shader.h>
+
 namespace VoodooShader
 {
     /**
@@ -28,6 +30,8 @@ namespace VoodooShader
      */
     VOODOO_CLASS(VSShader, IShader, ({0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
+        friend class VSProgram;
+
     public:
         VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
         ~VSShader();
@@ -45,7 +49,6 @@ namespace VoodooShader
         VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique);
         VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST;
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
-        VOODOO_METHOD_(CGeffect, GetCgEffect)() CONST;
 
     private:
         /**
@@ -86,6 +89,6 @@ namespace VoodooShader
         TechniqueVector m_Techniques;
         ParameterVector m_Parameters;
 
-        CGeffect m_CgEffect;
+        std::vector<D3DXMACRO> m_Defines;
     };
 }

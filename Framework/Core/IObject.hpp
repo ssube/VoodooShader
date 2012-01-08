@@ -58,15 +58,11 @@ namespace VoodooShader
         /**
          * Performs type checking internally, then provides a pointer to this object with the desired interface if possible.
          *
-         * @param clsid The interface Uuid desired.
+         * @param refid IID of the interface desired.
          * @param ppOut A pointer to the new interface, passed as <code>void**</code>.
          * @return Success of the cast or uuid-fill.
-         *
-         * @note If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID.
-         * @note If ppOut is nullptr and clsid is @em not a null Uuid, this will simply check if the Uuid is allowed without
-         *      performing a cast.
          */
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_ const IObject ** ppOut) CONST PURE;
         /**
          * Get a string identifying this object. This must follow the form given in @ref voodoo_spec_iobject_tostring.
          *

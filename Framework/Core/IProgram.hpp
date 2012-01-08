@@ -36,7 +36,7 @@ namespace VoodooShader
      * @restag  A UT_PVoid pointing to the compiled shader code.
      * @iid     e6f31293-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IProgram, IResource, ({0x98, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08};))
+    VOODOO_INTERFACE(IProgram, IResource, ({0x98, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
         /**
@@ -64,13 +64,13 @@ namespace VoodooShader
         /**
          * Gets the profile this program is compiled with.
          */
-         VOODOO_METHOD_(String, GetProfile)() CONST PURE;
+         VOODOO_METHOD_(ProgramProfile, GetProfile)() CONST PURE;
          /**
           * Sets the profile this program is compiled with.
           * 
           * @warning        This may trigger recompilation.
           */
-         VOODOO_METHOD(SetProfile)(const String & profile) PURE;
+         VOODOO_METHOD(SetProfile)(const ProgramProfile profile) PURE;
          /**
           * Gets the function this program is created from.
           */
@@ -97,6 +97,15 @@ namespace VoodooShader
          /**
           * @}
           */
+        /**
+         * Forces the shader to be recompiled with the current set of definitions.
+         * 
+         * @param flags     The flags to be used during compilation. If this is CF_Default, the current set of core defaults
+         *                  are used.
+         *                  
+         * @warning This is slow.
+         */
+        VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default) PURE;
     };
     /**
      * @}

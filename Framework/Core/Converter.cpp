@@ -232,24 +232,26 @@ namespace VoodooShader
         }
     }
 
-#define CASESTRING(x) case x: return VOODOO_TOSTRING(x)
+#define CASESTRING(x) case PREFIX##x: return VOODOO_TOSTRING(x)
 
     const wchar_t * Converter::ToString(_In_ TextureFormat tf)
     {
         switch (tf)
         {
-            CASESTRING(TF_RGB5);
-            CASESTRING(TF_RGB5A1);
-            CASESTRING(TF_RGB8);
-            CASESTRING(TF_RGBA8);
-            CASESTRING(TF_RGB10A2);
-            CASESTRING(TF_RGBA16F);
-            CASESTRING(TF_RGBA32F);
-            CASESTRING(TF_D16);
-            CASESTRING(TF_D32);
+#define PREFIX TF_
+            CASESTRING(RGB5);
+            CASESTRING(RGB5A1);
+            CASESTRING(RGB8);
+            CASESTRING(RGBA8);
+            CASESTRING(RGB10A2);
+            CASESTRING(RGBA16F);
+            CASESTRING(RGBA32F);
+            CASESTRING(D16);
+            CASESTRING(D32);
+#undef PREFIX
         case TF_Unknown:
         default:
-            return VSTR("TF_Unknown");
+            return VSTR("Unknown");
         }
     }
 
@@ -257,29 +259,31 @@ namespace VoodooShader
     {
         switch (pt)
         {
-            CASESTRING(PT_Sampler1D);
-            CASESTRING(PT_Sampler2D);
-            CASESTRING(PT_Sampler3D);
-            CASESTRING(PT_Float1x1);
-            CASESTRING(PT_Float1x2);
-            CASESTRING(PT_Float1x3);
-            CASESTRING(PT_Float1x4);
-            CASESTRING(PT_Float2x1);
-            CASESTRING(PT_Float2x2);
-            CASESTRING(PT_Float2x3);
-            CASESTRING(PT_Float2x4);
-            CASESTRING(PT_Float3x1);
-            CASESTRING(PT_Float3x2);
-            CASESTRING(PT_Float3x3);
-            CASESTRING(PT_Float3x4);
-            CASESTRING(PT_Float4x1);
-            CASESTRING(PT_Float4x2);
-            CASESTRING(PT_Float4x3);
-            CASESTRING(PT_Float4x4);
-            CASESTRING(PT_Struct);
+#define PREFIX PT_
+            CASESTRING(Sampler1D);
+            CASESTRING(Sampler2D);
+            CASESTRING(Sampler3D);
+            CASESTRING(Float1x1);
+            CASESTRING(Float1x2);
+            CASESTRING(Float1x3);
+            CASESTRING(Float1x4);
+            CASESTRING(Float2x1);
+            CASESTRING(Float2x2);
+            CASESTRING(Float2x3);
+            CASESTRING(Float2x4);
+            CASESTRING(Float3x1);
+            CASESTRING(Float3x2);
+            CASESTRING(Float3x3);
+            CASESTRING(Float3x4);
+            CASESTRING(Float4x1);
+            CASESTRING(Float4x2);
+            CASESTRING(Float4x3);
+            CASESTRING(Float4x4);
+            CASESTRING(Struct);
+#undef PREFIX
         case PT_Unknown:
         default:
-            return VSTR("PT_Unknown");
+            return VSTR("Unknown");
         }
     }
 
@@ -287,12 +291,36 @@ namespace VoodooShader
     {
         switch (cat)
         {
-            CASESTRING(PC_Float);
-            CASESTRING(PC_Sampler);
-            CASESTRING(PC_Struct);
+#define PREFIX PC_
+            CASESTRING(Float);
+            CASESTRING(Sampler);
+            CASESTRING(Struct);
+#undef PREFIX
         case PC_Unknown:
         default:
-            return VSTR("PC_Unknown");
+            return VSTR("Unknown");
+        }
+    }
+
+    const wchar_t * Converter::ToString(ProgramProfile profile)
+    {
+        switch (profile)
+        {
+            CASESTRING(ps_1_1);
+            CASESTRING(ps_1_2);
+            CASESTRING(ps_1_3);
+            CASESTRING(ps_1_4);
+            CASESTRING(ps_2_0);
+            CASESTRING(ps_3_0);
+            CASESTRING(vs_1_1);
+            CASESTRING(vs_2_0);
+            CASESTRING(vs_3_0);
+            CASESTRING(glsl);
+            CASESTRING(glsl12);
+            CASESTRING(arb1);
+        case PP_Unknown:
+        default:
+            return VSTR("Unknown");
         }
     }
 

@@ -106,6 +106,18 @@ namespace VoodooShader
          * Retrieve the parent technique of this pass.
          */
         VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST PURE;
+        /**
+         * @}
+         */
+        /**
+         * Forces the shader to be recompiled with the current set of definitions.
+         * 
+         * @param flags     The flags to be used during compilation. If this is CF_Default, the current set of core defaults
+         *                  are used.
+         *                  
+         * @warning This is slow.
+         */
+        VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default) PURE;
     };
     /**
      * @}

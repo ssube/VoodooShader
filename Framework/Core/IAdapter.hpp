@@ -228,24 +228,6 @@ namespace VoodooShader
          * @return Success of the property get.
          */
         VOODOO_METHOD(GetProperty)(_In_ const wchar_t * name, _Out_ Variant * const pValue) CONST PURE;
-        /**
-         * A generic error-handling callback provided to the Cg runtime. This will be called by Core::CgErrorHandler() in
-         * the event of a error. This allows the adapter to internally handle any cleanup or other state changes that become
-         * necessary.
-         *
-         * @param pContext The associated Cg context.
-         * @param error The error raised.
-         * @return True if the adapter has successfully handled the error internally.
-         *
-         * @note Not all Cg errors will call this; the core performs error validation and handles all context-related errors
-         *     internally, as well as logging what data it can find. Malformed errors will not be passed to the adapter.
-         *
-         * @note In the case of compiler errors, the exact messages can be gotten by calling cgGetLastListing until it
-         *     returns nullptr. The Core error handler does just this, @e after the adapter's error handler returns. Thus,
-         *     if the adapter does not dump compiler listings, the core will. This is intended to ensure compilation errors
-         *     are noted, but provide the adapter a chance to handle and potentially correct them.
-         */
-        VOODOO_METHOD(HandleError)(_In_ CGcontext const pContext, _In_ uint32_t error) PURE;
     };
     /**
      * @}

@@ -42,10 +42,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(BoostInclude);$(CgInclude);$(PugiXmlInclude);$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(BoostLib);$(CgLib);$(PugiXmlLib);$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(BoostInclude);$(CgInclude);$(PugiXmlInclude);$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(BoostLib);$(CgLib);$(PugiXmlLib);$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(BoostInclude);$(DXInclude);$(PugiXmlInclude);$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(BoostLib);$(DXLib);$(PugiXmlLib);$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(BoostInclude);$(DXInclude);$(PugiXmlInclude);$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(BoostLib);$(DXLib);$(PugiXmlLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -95,6 +95,7 @@
     <ClCompile Include="VSParameter.cpp" />
     <ClCompile Include="VSParser.cpp" />
     <ClCompile Include="VSPass.cpp" />
+    <ClCompile Include="VSProgram.cpp" />
     <ClCompile Include="VSShader.cpp" />
     <ClCompile Include="VSTechnique.cpp" />
   </ItemGroup>
@@ -130,6 +131,7 @@
     <ClInclude Include="VSParameter.hpp" />
     <ClInclude Include="VSParser.hpp" />
     <ClInclude Include="VSPass.hpp" />
+    <ClInclude Include="VSProgram.hpp" />
     <ClInclude Include="VSShader.hpp" />
     <ClInclude Include="VSTechnique.hpp" />
     <ClInclude Include="Converter.hpp" />

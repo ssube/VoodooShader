@@ -116,11 +116,11 @@ namespace VoodooShader
         /**
          * Gets the default compilation flags.
          */
-        VOODOO_METHOD_(CompilationFlags, GetDefaultFlags)() CONST PURE;
+        VOODOO_METHOD_(CompileFlags, GetDefaultFlags)() CONST PURE;
         /**
          * Sets the default compilation flags.
          */
-        VOODOO_METHOD(SetDefaultFlags)() PURE;
+        VOODOO_METHOD(SetDefaultFlags)(const CompileFlags flags) PURE;
         /**
          * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage
          * may have a single texture bound to it for use by the shader linker.

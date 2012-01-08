@@ -31,10 +31,6 @@
 #   endif
 #endif
 
-#if !defined(VOODOO_NO_CG)
-#   include "Cg/cg.h"
-#endif
-
 #if !defined(VOODOO_NO_PUGIXML)
 #   include "pugixml.hpp"
 #endif
@@ -125,6 +121,23 @@ namespace VoodooShader
         PS_Hull         = 0x05      /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info). */
     };
 
+    enum ProgramProfile : uint32_t
+    {
+        PP_Unknown      = 0x0000,     /* !< Unknown program profile. */
+        PP_ps_1_1       = 0x0111,
+        PP_ps_1_2       = 0x0112,
+        PP_ps_1_3       = 0x0113,
+        PP_ps_1_4       = 0x0114,
+        PP_ps_2_0       = 0x0120,
+        PP_ps_3_0       = 0x0130,
+        PP_vs_1_1       = 0x0211,
+        PP_vs_2_0       = 0x0220,
+        PP_vs_3_0       = 0x0230,
+        PP_glsl         = 0x8001,
+        PP_glsl12       = 0x8002,
+        PP_arb1         = 0x8003,
+    };
+
     enum TextureStage : uint32_t
     {
         TS_Unknown      = 0x00,     /* !< Unknown texture stage. */
@@ -132,7 +145,7 @@ namespace VoodooShader
         TS_Pass         = 0x02      /* !< Pass target texture. */
     };
 
-    enum CompilationFlags : uint32_t
+    enum CompileFlags : uint32_t
     {
         CF_Default      = 0x0000,   /* !< Compile with the core's default flags. */
         CF_DelayCompile = 0x0001,   /* !< Prevents automatic compiling of shaders and programs. This can be used to set many
@@ -197,7 +210,7 @@ namespace VoodooShader
     /**
      * Log message levels. These are set up to quickly filter messages based on severity and source. Each message must have
      * a severity and source bit set, which the logger tests against its internal filter, like so:
-
+     *
      * @code
      * LogLevel maskedLevel = level & storedLevel;
      * if ( (maskedLevel & LL_Origin) && (maskedLevel & LL_Severity) )
@@ -272,7 +285,7 @@ namespace VoodooShader
         PF_PathExt      = 0x008000, /* !< Isolate the file extension, if one is present (eg "C:\dir\file.txt" becomes "txt"). */
         PF_PathCanon    = 0x010000, /* !< Canonicalize the path (parse any relative tokens, eg "C:\dir\..\file.txt" becomes "C:\file.txt"). */
 
-        PF_SlashFlags   = 0x0000013F,
+        PF_SlashFlags   = 0x00000137,
         PF_PathFlags    = 0x000FF000,
     };
 
@@ -314,28 +327,6 @@ namespace VoodooShader
      * @defgroup voodoo_classes_conditional Conditional Classes
      * @{
      */
-#if defined(VOODOO_NO_CG)
-    typedef int    CGbool;
-    typedef void * CGcontext;
-    typedef void * CGprogram;
-    typedef void * CGparameter;
-    typedef void * CGobj;
-    typedef void * CGbuffer;
-    typedef void * CGeffect;
-    typedef void * CGtechnique;
-    typedef void * CGpass;
-    typedef void * CGstate;
-    typedef void * CGstateassignment;
-    typedef void * CGannotation;
-    typedef void * CGhandle;
-#endif
-
-#if !defined(VOODOO_NO_PUGIXML)
-    typedef pugi::xml_document * XmlDocument;
-#else
-    typedef void * XmlDocument;
-#endif
-
 #ifndef VOODOO_NO_BOOST
     typedef boost::uuids::uuid Uuid;
 #else
@@ -344,11 +335,30 @@ namespace VoodooShader
         uint8_t data[16];
     } Uuid;
 #endif
+
+#if !defined(VOODOO_NO_PUGIXML)
+    typedef pugi::xml_document * XmlDocument;
+    typedef pugi::xml_node * XmlNode;
+#else
+    typedef void * XmlDocument;
+    typedef void * XmlNode;
+#endif
     /**
      * @}
-     * @defgroup voodoo_structs Basic Structs 
+     * @defgroup voodoo_types Basic Types 
      * @{
-     * @defgroup voodoo_structs_vectors Vectors
+     */
+    /**
+     * Standard return type for Voodoo Shader functions, indicating various levels of success or failure.
+     */
+    typedef int32_t VoodooResult;
+
+#define VSUCCESS(r) (((VoodooResult)(r)) >= 0)
+#define VFAILURE(r) (((VoodooResult)(r)) <  0)
+#define VSF_FAIL    -1
+#define VSF_OK      0
+    /**
+     * @defgroup voodoo_types_vectors Vectors
      * @{
      */
     template <typename ValType>
@@ -434,6 +444,7 @@ namespace VoodooShader
     class IParameter;
     class IParser;
     class IPass;
+    class IProgram;
     class IShader;
     class ITechnique;
     class ITexture;
@@ -446,7 +457,6 @@ namespace VoodooShader
     class Format;
     class Regex;
     class RegexMatch;
-    class Stream;
     class String;
     /**
      * @}
@@ -485,6 +495,7 @@ namespace VoodooShader
     typedef boost::intrusive_ptr<IParameter>     IParameterRef;
     typedef boost::intrusive_ptr<IParser>        IParserRef;
     typedef boost::intrusive_ptr<IPass>          IPassRef;
+    typedef boost::intrusive_ptr<IProgram>       IProgramRef;
     typedef boost::intrusive_ptr<IShader>        IShaderRef;
     typedef boost::intrusive_ptr<ITechnique>     ITechniqueRef;
     typedef boost::intrusive_ptr<ITexture>       ITextureRef;
@@ -510,6 +521,9 @@ namespace VoodooShader
     typedef std::map<String, IParameterRef>      ParameterMap;
     typedef std::list<IParameterRef>             ParameterList;
     typedef std::vector<IParameterRef>           ParameterVector;
+    typedef std::map<String, IProgramRef>        ProgramMap;
+    typedef std::list<IProgramRef>               ProgramList;
+    typedef std::vector<IProgramRef>             ProgramVector;
     typedef std::map<String, ITextureRef>        TextureMap;
     typedef std::list<ITextureRef>               TextureList;
     typedef std::vector<ITextureRef>             TextureVector;

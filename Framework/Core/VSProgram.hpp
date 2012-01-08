@@ -20,42 +20,60 @@
 #pragma once
 
 #include "VoodooFramework.hpp"
+#include "VSShader.hpp"
+#include "VSPass.hpp"
+
+#include <d3dx9shader.h>
 
 namespace VoodooShader
 {
     /**
-     * @clsid e6f312a3-05af-11e1-9e05-005056c00008
+     * @clsid e6f312a7-05af-11e1-9e05-005056c00008
      */
-    VOODOO_CLASS(VSPass, IPass, ({0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    VOODOO_CLASS(VSProgram, IProgram, ({0xA7, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSPass(_In_ ITechnique * pTechnique, _In_ XmlNode pPassNode);
-        ~VSPass();
+        VSProgram(_In_ IPass * pPass, _In_ XmlNode * pProgNode);
+        ~VSProgram();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
-
+        
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST;
-        VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget);
-        VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST;
-        VOODOO_METHOD_(IProgram *, GetProgram)(_In_ const ProgramStage stage) CONST;
+        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetTag)(_In_ const Variant & value);
+         
+        VOODOO_METHOD_(ProgramProfile, GetProfile)() CONST;
+        VOODOO_METHOD(SetProfile)(const ProgramProfile profile);
+        VOODOO_METHOD_(String, GetFunction)() CONST;
+        VOODOO_METHOD(SetFunction)(const String & function);
+        VOODOO_METHOD_(IParameter *, GetConstant)(const String & name) CONST;
+        VOODOO_METHOD(SetConstant)(_In_ IParameter * pValue);
+        VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default);
 
     private:
+        VSProgram(const VSProgram & other);
+        VSProgram & operator=(VSProgram & other);
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
         String m_Name;
 
-        ITechnique * m_Technique;
-        ITextureRef m_Target[4];
+        VSPass * m_Pass;
 
-        IProgramRef m_GeometryProgram;
-        IProgramRef m_VertexProgram;
-        IProgramRef m_FragmentProgram;
-        IProgramRef m_DomainProgram;
-        IProgramRef m_HullProgram;
+        ProgramProfile m_Profile;
+        String m_Function;
+        LPD3DXBUFFER m_Buffer;
+        LPD3DXCONSTANTTABLE m_ConstantTable;
+    };
+
+    class VSProgramInclude : public ID3DXInclude
+    {
+    public:
+        VSProgramInclude(_In_ ICore * pCore);
+        ~VSProgramInclude();
     };
 }

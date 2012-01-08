@@ -55,6 +55,9 @@
     <ClCompile Include="Format.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="VSProgram.cpp">
+      <Filter>Source\Implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -182,6 +185,9 @@
     </ClInclude>
     <ClInclude Include="IProgram.hpp">
       <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VSProgram.hpp">
+      <Filter>Headers\Implementations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

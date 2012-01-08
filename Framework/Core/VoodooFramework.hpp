@@ -83,7 +83,7 @@
 #define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALLTYPE
 
 #define VOODOO_METHOD_(type, name)  virtual DECLSPEC_NOTHROW type VOODOO_METHODTYPE name
-#define VOODOO_METHOD(name)         VOODOO_METHOD_(bool, name)
+#define VOODOO_METHOD(name)         VOODOO_METHOD_(VoodooResult, name)
 
 #define VOODOO_INTERFACE_(iname, uuid)       DEFINE_IID(iname) = VOODOO_STRIP##uuid; \
     class DECLSPEC_NOVTABLE iname
@@ -117,6 +117,7 @@
 #include "IResource.hpp"
 #include "IParameter.hpp"
 #include "IPass.hpp"
+#include "IProgram.hpp"
 #include "IShader.hpp"
 #include "ITechnique.hpp"
 #include "ITexture.hpp"

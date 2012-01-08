@@ -105,6 +105,12 @@ namespace VoodooShader
          */
         VOODOO_METHOD(IsVirtual)() CONST PURE;
         /**
+         * Gets the parent shader if the parameter is not virtual.
+         * 
+         * @return Parent shader.
+         */
+        VOODOO_METHOD_(IShader * const, GetProgram)() CONST PURE;
+        /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value is changed.
          *
          * @param pParam The parameter to bind to this one.
@@ -120,14 +126,7 @@ namespace VoodooShader
          * @warning If called on a parameter that has other parameters bound to it (a source), it will disconnect all of
          *      those. This breaks connections from either end, source or bound.
          */
-        VOODOO_METHOD(DetachParameter)() PURE;
-
-        /**
-         * Gets the parent shader if the parameter is not virtual.
-         * 
-         * @return Parent shader.
-         */
-        VOODOO_METHOD_(IShader * const, GetProgram)() CONST PURE;
+        VOODOO_METHOD(DetachParameter)(_In_opt_ IParameter * const pParam) PURE;
         /**
          * @}
          */

@@ -29,7 +29,7 @@ namespace VoodooShader
     VOODOO_CLASS(VSTechnique, ITechnique, ({0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSTechnique(_In_ IShader * pShader, _In_ CGtechnique pCgTech);
+        VSTechnique(_In_ IShader * pShader, _In_ XmlNode pTechNode);
         ~VSTechnique();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -39,16 +39,15 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD_(ITexture *, GetTarget)() CONST;
+        VOODOO_METHOD_(Variant *, GetTag)() CONST;
+        VOODOO_METHOD(SetTag)(const Variant & value);
+
         VOODOO_METHOD_(uint32_t, GetPassCount)() CONST;
         VOODOO_METHOD_(IPass *, GetPass)(_In_ const uint32_t index) CONST;
         VOODOO_METHOD_(IShader *, GetShader)() CONST;
-
-        VOODOO_METHOD_(CGtechnique, GetCgTechnique)() CONST;
+        VOODOO_METHOD(Compile)(const CompileFlags flags);
 
     private:
-        void Link();
-
         mutable uint32_t m_Refs;
         ICore * m_Core;
         String m_Name;
@@ -57,6 +56,5 @@ namespace VoodooShader
         PassVector m_Passes;
 
         IShader * m_Shader;
-        CGtechnique m_CgTechnique;
     };
 }
