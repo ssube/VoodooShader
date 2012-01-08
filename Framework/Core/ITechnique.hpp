@@ -35,11 +35,12 @@ namespace VoodooShader
      * will be used, although shaders may contain multiple techniques. Each technique may contain a number of passes and
      * some technique-level metadata.
      *
-     * @note All passes in a valid technique are guaranteed to be valid.
+     * @note    All passes in a valid technique are guaranteed to be valid.
      * @warning While a shader may contain a number of techniques, not all are guaranteed to be valid. Techniques are
-     *     typically validated when the Shader is created and loaded.
+     *          typically validated when the Shader is created and loaded.
      *
-     * @iid e6f31295-05af-11e1-9e05-005056c00008
+     * @restag  None.
+     * @iid     e6f31295-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(ITechnique, IResource, ({0x95, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
@@ -55,40 +56,31 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name IResource Methods
+         * @{
+         */
+        VOODOO_METHOD_(String, GetName)() CONST PURE;
+        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        /**
+         * @}
          * @name Technique Data Methods
          * Access technique information and passes.
          * @{
          */
-        /**
-         * Retrieve the technique's name, as given in the shader.
-         * 
-         * @return The name.
-         */
-        VOODOO_METHOD_(String, GetName)() CONST PURE;
         /* Retrieve the number of passes in this technique.
-         *
-         * @return The number of passes
          */
         VOODOO_METHOD_(uint32_t, GetPassCount)() CONST PURE;
         /**
          * Retrieve a specific pass from this technique.
          *
-         * @param index The pass number to retrieve.
-         * @return A reference to the given pass.
+         * @param index     The pass number to retrieve.
          */
         VOODOO_METHOD_(IPass *, GetPass)(_In_ const uint32_t index) CONST PURE;
         /**
          * Retrieve the parent shader of this technique.
-         *
-         * @return The parent shader.
          */
         VOODOO_METHOD_(IShader *, GetShader)() CONST PURE;
-        /**
-         * Retrieve the underlying Cg technique.
-         *
-         * @return A pointer to the Cg technique.
-         */
-        VOODOO_METHOD_(CGtechnique, GetCgTechnique)() CONST PURE;
         /**
          * @}
          */

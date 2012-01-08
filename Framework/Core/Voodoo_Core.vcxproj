@@ -99,6 +99,7 @@
     <ClCompile Include="VSTechnique.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IProgram.hpp" />
     <ClInclude Include="VoodooDocs.hpp" />
     <ClInclude Include="VoodooTypes.hpp" />
     <ClInclude Include="IAdapter.hpp" />

@@ -59,9 +59,9 @@ namespace VoodooShader
     {
         TF_Unknown  = 0x0,      /* !< Unknown texture format. */
         // Backbuffer formats
-        TF_RGB5     = 0x101,    /* !< 5 bit RGB (1 bit X in DX, may be R5G6B5 in OGL) */
+        TF_RGB5     = 0x101,    /* !< 5 bit RGB (1 bit X in D3D, may be R5G6B5 in OGL) */
         TF_RGB5A1   = 0x102,    /* !< 5 bit RGB, 1 bit alpha */
-        TF_RGB8     = 0x103,    /* !< 8 bit RGB (8 bit X in DX). Most common backbuffer format, common texture format. */
+        TF_RGB8     = 0x103,    /* !< 8 bit RGB (8 bit X in D3D). Most common backbuffer format, common texture format. */
         TF_RGBA8    = 0x104,    /* !< 8 bit RGBA. Common texture format. */
         TF_RGB10A2  = 0x105,    /* !< 10 bit RGB, 2 bit A */
         // float texture formats
@@ -71,7 +71,6 @@ namespace VoodooShader
         TF_D16      = 0x401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
         TF_D32      = 0x402     /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
     };
-
     /**
      * Parameter types valid for @ref VoodooShader::IParameter. These types are available across hardware, exposing most
      * common shader language types.
@@ -131,6 +130,22 @@ namespace VoodooShader
         TS_Unknown      = 0x00,     /* !< Unknown texture stage. */
         TS_Shader       = 0x01,     /* !< Shader target texture. */
         TS_Pass         = 0x02      /* !< Pass target texture. */
+    };
+
+    enum CompilationFlags : uint32_t
+    {
+        CF_Default      = 0x0000,   /* !< Compile with the core's default flags. */
+        CF_DelayCompile = 0x0001,   /* !< Prevents automatic compiling of shaders and programs. This can be used to set many
+                                          defines or uniforms without compilation overhead, but requires IProgram::Compile()
+                                          be called before use. */
+        CF_AvoidFlow    = 0x0010,   /* !< Hints the compiler to avoid flow-control instructions. */
+        CF_PreferFlow   = 0x0020,   /* !< Hints the compiler to prefer flow-control instructions. */
+        CF_Debug        = 0x0040,   /* !< Insert debug information during compilation. Always on in debug builds. */
+        CF_NoOpt        = 0x0080,   /* !< Disables all optimizations. Useful for extended debugging. */
+        CF_OptLevel0    = 0x0100,   /* !< Lowest optimization level. Quickly produces slow code. */
+        CF_OptLevel1    = 0x0200,   /* !< Low optimization level. */
+        CF_OptLevel2    = 0x0400,   /* !< Medium optimization level. The default. */
+        CF_OptLevel3    = 0x0800,   /* !< Highest optimization level. Slowly produces fast code. */
     };
 
     /**

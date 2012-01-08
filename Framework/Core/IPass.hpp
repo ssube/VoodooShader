@@ -27,19 +27,19 @@ namespace VoodooShader
      * @addtogroup voodoo_interfaces
      * @{
      */
-
     /**
      * @class IPass
      *
      * Each pass contains a single set of programs, each operating on a different stage of the render pipeline.
      *
-     * @note A pass may contain programs for each stage. Valid stages vary by underlying API and version. In OpenGL and
-     *     DirectX 9 and earlier, stages may be left to the fixed-function pipeline by not specifying any program to be
-     *     used. Later APIs require the vertex and pixel shaders to be specified in each pass.
+     * @note    A pass may contain programs for each stage. Valid stages vary by underlying API and version. In OpenGL 2.0,
+     *          DirectX 9, and earlier APIs, stages may be left to the fixed-function pipeline by not specifying any program
+     *          to be used. Later APIs require the vertex and pixel shaders to be specified in each pass.
      *
      * @warning Some adapters may require programs to be provided for certain stages.
      *
-     * @iid e6f31293-05af-11e1-9e05-005056c00008
+     * @restag  None.
+     * @iid     e6f31293-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(IPass, IResource, ({0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
@@ -55,45 +55,57 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name IResource Methods
+         * @{
          */
-
         VOODOO_METHOD_(String, GetName)() CONST PURE;
+        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        /**
+         * @}
+         * @name IPass Methods
+         * @{
+         */
+        /**
+         * Retrieve a uniform variable from this pass.
+         * 
+         * @param name      The name of the uniform to get.
+         */
+        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST PURE;
+        /**
+         * Set a uniform variable in this pass.
+         *
+         * @param name      The name of the uniform to set.
+         * @param pValue    The parameter to set the uniform to.
+         */
+        VOODOO_METHOD(SetUniform)(_In_ IParameter * pValue) PURE;
         /**
          * Retrieve a the target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
          *
-         * @param index The target index.
-         * @return The target texture.
+         * @param index     The target index.
+         * @return          The target texture.
          */
         VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST PURE;
         /**
-         * Set the target texture buffer this pass should render to. This must be a texture created with the render
+         * Set a target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
          *
-         * @param index The target index.
-         * @param pTarget The target texture.
-         * @return The target texture.
+         * @param index     The target index.
+         * @param pTarget   The target texture.
          */
         VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget) PURE;
         /**
-         * Retrieve the parent technique of this pass.
-         *
-         * @return The parent technique.
-         */
-        VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST PURE;
-        /**
          * Retrieve a specific program stage from this pass.
          *
-         * @param stage The stage to retrieve.
-         * @return The program corresponding to the desired stage.
+         * @param stage     The stage to retrieve.
+         * @param pValue    A Variant to be filled with the program.
          */
-        VOODOO_METHOD_(CGprogram, GetProgram)(_In_ const ProgramStage stage) CONST PURE;
+        VOODOO_METHOD(GetProgram)(_In_ const ProgramStage stage, _In_ Variant * pValue) CONST PURE;
         /**
-         * Retrieve the underlying Cg technique.
-         *
-         * @return A pointer to the Cg technique.
+         * Retrieve the parent technique of this pass.
          */
-        VOODOO_METHOD_(CGpass, GetCgPass)() CONST PURE;
+        VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST PURE;
     };
     /**
      * @}

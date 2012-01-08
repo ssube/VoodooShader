@@ -27,17 +27,14 @@ namespace VoodooShader
      * @addtogroup voodoo_interfaces
      * @{
      */
-
     /**
      * @class IShader
      *
      * Complete shader class, managing techniques, passes and metadata.
      *
      * Shaders contain significant linking and processing data, as well as the Voodoo-specific linking stage. IShader file
-     * loading and compilation are handled internally, the shader can be constructed from a file location or existing Cg
-     * effect object.
+     * loading and compilation are handled internally, with the shader being compiled from a VSFX file.
      *
-     * @note Shaders correspond to DirectX effects or a group of OpenGL programs.
      * @note A shader may contain multiple @ref ITechnique techniques. IShader techniques must be separately validated,
      *     only techniques valid on the current hardware will be usable in the shader.
      *
@@ -46,7 +43,8 @@ namespace VoodooShader
      *     keyword, as this may cause unsupported techniques to generate compile errors, preventing all techniques
      *     from being used.
      *
-     * @iid e6f31294-05af-11e1-9e05-005056c00008
+     * @restag  None.
+     * @iid     e6f31294-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(IShader, IResource, ({0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
@@ -62,13 +60,43 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name IResource Methods
+         * @{
          */
-
         VOODOO_METHOD_(String, GetName)() CONST PURE;
+        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        /**
+         * @}
+         * @name Source Code Methods
+         * @{
+         */
+        /**
+         * Retrieve a preprocessor definition from the shader header. If the symbol is not defined, an empty string is
+         * returned.
+         * 
+         * @param name      The name of the define.
+         */
+        VOODOO_METHOD_(String, GetDefine)(const String & name) CONST PURE;
+        /**
+         * Set the value of a preprocessor definition.
+         * 
+         * @param name      The name of the define.
+         * @param value     The value of the define.
+         */
+        VOODOO_METHOD(SetDefine)(const String & name, const String & value) PURE;
+        /**
+         * Retrieve the source code for the shader. Preprocessor defines and includes are left in their original form, but
+         * variables are parsed out.
+         */
+        VOODOO_METHOD_(String, GetSource)() CONST PURE;
+        /**
+         * @}
+         * @name Technique Methods
+         * @{
+         */
         /**
          * Get the number of validated techniques this shader contains.
-         *
-         * @return The number of techniques.
          */
         VOODOO_METHOD_(uint32_t, GetTechniqueCount)() CONST PURE;
         /**
@@ -76,15 +104,12 @@ namespace VoodooShader
          * applications may want a particular technique.
          *
          * @param index The index of the technique to get.
-         * @return The technique, if it is found.
          */
-        VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST PURE;
+        VOODOO_METHOD_(ITechnique *, GetTechnique)(const uint32_t index) CONST PURE;
         /**
          * Retrieves the default technique from this shader. All drawing should be done with the default technique: it is
          * guaranteed to be valid for the current shader profiles and API. The default technique is the first technique
          * to validate.
-
-         * @return A reference to the default technique.
          *
          * @note To influence the priority of techniques, simply place the most specific or least compatible first (often
          *     high-quality ones) and count down with the most compatible and simplest technique last. The first valid
@@ -96,31 +121,13 @@ namespace VoodooShader
          * default technique to draw with.
          *
          * @param pTechnique The technique within this shader to use.
-         * @return Success of the setting.
          *
          * @note This will validate that the technique belongs to this shader.
          */
         VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) PURE;
         /**
-         * Retrieve the number of effect-level parameters in this shader. These hold a single value for all passes.
-         *
-         * @return The parameter count.
+         * @}
          */
-        VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST PURE;
-        /**
-         * Retrieve a specific parameter from the shader. These may be modified at runtime and will automatically update Cg
-         * and the GPU with their value (in most cases).
-         *
-         * @param index The index of the parameter to retrieve.
-         * @return The parameter, if valid.
-         */
-        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST PURE;
-        /**
-         * Retrieve the underlying Cg technique.
-         *
-         * @return A pointer to the Cg technique.
-         */
-        VOODOO_METHOD_(CGeffect, GetCgEffect)() CONST PURE;
     };
     /**
      * @}

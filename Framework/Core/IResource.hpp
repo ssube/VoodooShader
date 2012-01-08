@@ -27,13 +27,12 @@ namespace VoodooShader
      * @addtogroup voodoo_interfaces
      * @{
      */
-
     /**
      * @class IResource
      *
-     * Describes a Cg or graphics API-backed resource, managed or indexed by the core and adapter.
+     * Describes a graphics API-backed resource, managed by the core or adapter.
      *
-     * @iid e6f31297-05af-11e1-9e05-005056c00008
+     * @iid     e6f31297-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(IResource, IObject, ({0x97, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
@@ -50,14 +49,21 @@ namespace VoodooShader
         /**
          * @}
          */
-
         /**
          * Returns the name of the object, as defined by the object and resource type. This may be texture
          * name or filename, shader filename, technique name, pass name, etc.
-         *
-         * @return Name in resource-defined format.
          */
         VOODOO_METHOD_(String, GetName)() CONST PURE;
+        /**
+         * Returns the resource tag, a bit of API-defined data stored in the resource.
+         */
+        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
+        /**
+         * Sets the resource tag.
+         * 
+         * @param value     The value to store in the tag.
+         */
+        VOODOO_METHOD(SetTag)(_In_ const Variant & value) CONST PURE;
     };
     /**
      * @}

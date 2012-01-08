@@ -27,7 +27,6 @@ namespace VoodooShader
      * @addtogroup voodoo_interfaces
      * @{
      */
-
     /**
      * @class ITexture
      *
@@ -35,7 +34,8 @@ namespace VoodooShader
      * parameters and shaders can sample pixels within them to create the on-screen images. Textures may be used to
      * represent various other surfaces, including render targets or even the backbuffer.
      *
-     * @iid e6f31296-05af-11e1-9e05-005056c00008
+     * @restag  A UT_PVoid to the underlying texture object.
+     * @iid     e6f31296-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(ITexture, IResource, ({0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
@@ -51,31 +51,19 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
-         * @name Texture Data
-         * Access texture information.
+         * @name IResource Methods
+         * @{
+         */
+        VOODOO_METHOD_(String, GetName)() CONST PURE;
+        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        /**
+         * @}
+         * @name ITexture Methods
          * @{
          */
         /**
-         * 
-         */
-        VOODOO_METHOD_(String, GetName)() CONST PURE;
-        /**
-         * Gets the data.
-         *
-         * @return nullptr if it fails, else the data.
-         */
-        VOODOO_METHOD_(void *, GetData)() CONST PURE;
-        /**
-         * Set the texture data. This must also update the description, if the texture attributes change.
-         *
-         * @param pData The new data value.
-         * @return The previous data value.
-         */
-        VOODOO_METHOD_(void *, SetData)(_In_ void * pData) PURE;
-        /**
          * Gets the texture description.
-         *
-         * @return The description.
          */
         VOODOO_METHOD_(TextureDesc, GetDesc)() CONST PURE;
         /**

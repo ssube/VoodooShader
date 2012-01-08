@@ -114,22 +114,13 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(XmlDocument, GetConfig)() CONST PURE;
         /**
-         * Retrieve the Cg context associated with this ICore.
-         *
-         * @return The Cg context currently associated with the core.
-         *
-         * @note Each Voodoo ICore is associated with a single Cg context. This context is used to create all
-         *     @ref IShader shaders and most other graphics resources.
+         * Gets the default compilation flags.
          */
-        VOODOO_METHOD_(CGcontext, GetCgContext)() CONST PURE;
+        VOODOO_METHOD_(CompilationFlags, GetDefaultFlags)() CONST PURE;
         /**
-         * Sets the Cg context attached to the core.
-         *
-         * @param pContext The Cg context to bind.
-         * @return False if a context is already bound, true if no context is bound or a context is being
-         *     unbound.
+         * Sets the default compilation flags.
          */
-        VOODOO_METHOD(SetCgContext)(_In_opt_ CGcontext const pContext) PURE;
+        VOODOO_METHOD(SetDefaultFlags)() PURE;
         /**
          * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage
          * may have a single texture bound to it for use by the shader linker.

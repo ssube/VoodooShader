@@ -27,13 +27,14 @@ namespace VoodooShader
      * @addtogroup voodoo_interfaces
      * @{
      */
-
     /**
      * @class IParameter
      *
      * Provides access to shader parameters, with attach/detach and value set (for most data types).
      *
-     * @iid e6f31291-05af-11e1-9e05-005056c00008
+     * @restag  A UT_PVoid pointing to the underlying constant. For virtual parameters, there may not be an underlying
+     *          constant.
+     * @iid     e6f31291-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(IParameter, IResource, ({0x91, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
@@ -49,34 +50,67 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name IResource Methods
+         * @{
          */
-
         VOODOO_METHOD_(String, GetName)() CONST PURE;
+        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        /**
+         * @}
+         * @name Value Methods
+         * @{
+         */
         /**
          * Retrieves the type of this parameter. This specifies what type and how many data components are used (one texture
          * or 1-16 floats).
          */
         VOODOO_METHOD_(ParameterType, GetType)() CONST PURE;
         /**
-         * Checks if the parameter is virtual (belongs to the core only) or physical (from a shader).
+         * Get the component count for this parameter.
          *
-         * @return Virtual status.
+         * @note    This will have different meanings depending on parameter type:
+         *     @li For a texture, this represents the number of dimensions (2 for texture2D).
+         *     @li For a vector or matrix, this represents the raw number of components (2 for float2, 4 for float2x2, etc).
+         *     @li Structs and other types that do not also match one of the above will always return 0.
+         */
+        VOODOO_METHOD_(uint32_t, GetComponents)() CONST PURE;
+        /**
+         * Retrieves the texture source for this parameter. This will return null if the parameter is not a sampler.
+         */
+        VOODOO_METHOD_(ITexture *, GetTexture)() CONST PURE;
+        /**
+         * Set the texture source for the parameter. This will fail if the parameter is not a sampler.
+         * 
+         * @param pTexture  The source texture.
+         */
+        VOODOO_METHOD(SetTexture)(_In_opt_ ITexture * const pTexture) PURE;
+        /**
+         * Retrieves the float buffer for this parameter. This contains all 16 float components, for all sizes 
+         * (float1 to float4x4). Any number of components may be written to, but only the appropriate number will be sent to
+         * the hardware parameter.
+         */
+        _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetFloat)() PURE;
+        /**
+         * Set the float buffer for this parameter. This will fail if the parameter is not a float-based type.
+         */
+        VOODOO_METHOD_(void, SetFloat)(_In_ const uint32_t count, _In_count_(count) float * const pValues) PURE;
+        /**
+         * @}
+         * @name Link Methods
+         * @{
+         */
+        /**
+         * Checks if the parameter is virtual (belongs to the core only) or physical (from a program).
          */
         VOODOO_METHOD(IsVirtual)() CONST PURE;
-        /**
-         * Gets the parent shader if the parameter is not virtual.
-         * 
-         * @return Parent shader.
-         */
-        VOODOO_METHOD_(IShader * const, GetShader)() CONST PURE;
         /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value is changed.
          *
          * @param pParam The parameter to bind to this one.
-         * @return Success of the bind.
          *
          * @warning This @e cannot be used to bind one effect's parameter to another. It can only be used to bind
-         *     actual parameters to virtual parameters.
+         *     parameters to virtual parameters.
          *
          */
         VOODOO_METHOD(AttachParameter)(_In_opt_ IParameter * const pParam) PURE;
@@ -87,46 +121,16 @@ namespace VoodooShader
          *      those. This breaks connections from either end, source or bound.
          */
         VOODOO_METHOD(DetachParameter)() PURE;
+
         /**
-         * Get the component count for this parameter.
-         *
-         * @return The number of components.
-         *
-         * @note This will have different meanings depending on parameter type:
-         *     @li For a texture, this represents the number of dimensions (2 for texture2D).
-         *     @li For a vector or matrix, this represents the raw number of components (2 for Float2, 4 for Float2x2, etc).
-         *     @li For an array, this represents the number of elements in the array (2 for Light[2]).
-         *     @li Structs and other types that do not also match one of the above will always return -1.
+         * Gets the parent shader if the parameter is not virtual.
+         * 
+         * @return Parent shader.
          */
-        VOODOO_METHOD_(uint32_t, GetComponents)() CONST PURE;
-        /**
-         * @name Data Access Methods
-         * Get and set the underlying data fields.
-         * @{
-         */
-        /**
-         * Retrieves the texture source for this parameter.
-         *
-         * @return The texture source, if this parameter has a texture.
-         */
-        VOODOO_METHOD_(ITexture *, GetTexture)() CONST PURE;
-        VOODOO_METHOD_(void, SetTexture)(_In_opt_ ITexture * const pTexture) PURE;
-        /**
-         * Retrieves the float buffer for this parameter. This contains all 16 float
-         * components, for all sizes (float1 to Float4x4). Any component may be written
-         * to, but only the appropriate number will be sent to the Cg parameter.
-         */
-        _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetScalar)() PURE;
-        VOODOO_METHOD_(void, SetScalar)(_In_ const uint32_t count, _In_count_(count) float * const pValues) PURE;
+        VOODOO_METHOD_(IShader * const, GetProgram)() CONST PURE;
         /**
          * @}
          */
-        /**
-         * Retrieves the underlying Cg parameter object.
-         *
-         * @returns The Cg parameter this object is bound to.
-         */
-        VOODOO_METHOD_(CGparameter, GetCgParameter)() CONST PURE;
     };
     /**
      * @}
