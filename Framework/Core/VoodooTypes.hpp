@@ -115,10 +115,11 @@ namespace VoodooShader
     {
         PS_Unknown      = 0x00,     /* !< Unknown program stage */
         PS_Vertex       = 0x01,     /* !< Vertex program stage (usually supported, see @ref programstages "program stages" for more info). */
-        PS_Fragment     = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info). */
+        PS_Pixel        = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info). */
         PS_Geometry     = 0x03,     /* !< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info). */
         PS_Domain       = 0x04,     /* !< Domain program stage (not always supported, see @ref programstages "program stages" for more info). */
-        PS_Hull         = 0x05      /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info). */
+        PS_Hull         = 0x05,     /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info). */
+        PS_Compute      = 0x06,     /* !< Compute program stage. Rarely supported. */
     };
 
     enum ProgramProfile : uint32_t
@@ -355,9 +356,17 @@ namespace VoodooShader
 
 #define VSUCCESS(r) (((VoodooResult)(r)) >= 0)
 #define VFAILURE(r) (((VoodooResult)(r)) <  0)
+    /**
+     * @defgroup voodoo_types_codes Return Codes
+     * @{
+     */
 #define VSF_FAIL    -1
 #define VSF_OK      0
+#define VSFERR_INVALIDCALL      MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1001)
+#define VSFERR_INVALIDPARAMS    MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1002)
+#define VSFERR_UNKNOWNPROPERTY  MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1003)
     /**
+     * @}
      * @defgroup voodoo_types_vectors Vectors
      * @{
      */
@@ -527,6 +536,9 @@ namespace VoodooShader
     typedef std::map<String, ITextureRef>        TextureMap;
     typedef std::list<ITextureRef>               TextureList;
     typedef std::vector<ITextureRef>             TextureVector;
+    typedef std::map<String, Variant>            VariantMap;
+    typedef std::list<Variant>                   VariantList;
+    typedef std::vector<Variant>                 VariantVector;
     typedef std::pair<String, uint32_t>          Variable;
     typedef std::map<String, Variable>           VariableMap;
     typedef std::map<Uuid, IModuleRef>           ModuleMap;

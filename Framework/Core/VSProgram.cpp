@@ -21,12 +21,14 @@
 
 #include "VSProgram.hpp"
 
+#include "VSParameter.hpp"
+
 namespace VoodooShader
 {
     #define VOODOO_DEBUG_TYPE VSProgram
     DeclareDebugCache();
 
-    VSProgram::VSProgram(IPass * pPass, XmlNode * pProgNode) :
+    VSProgram::VSProgram(VSPass * pPass, XmlNode * pProgNode) :
         m_Refs(0), m_Pass(pPass) 
     {
         if (!m_Pass)
@@ -49,16 +51,6 @@ namespace VoodooShader
     VSProgram::~VSProgram()
     {
         RemoveThisFromDebugCache();
-
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        if (m_Core)
-        {
-            IAdapter * pAdapter = m_Core->GetAdapter();
-            if (pAdapter)
-            {
-                pAdapter->UnloadPass(this);
-            }
-        }
     }
 
     uint32_t VOODOO_METHODTYPE VSPass::AddRef() CONST
@@ -127,20 +119,43 @@ namespace VoodooShader
         return m_Name;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSProgram::GetTag(_In_ Variant * pValue) CONST
+    VoodooResult VOODOO_METHODTYPE VSProgram::GetProperty(const String & name, Variant * pValue) CONST
     {
         if (!pValue) return VSF_FAIL;
 
-        pValue->Type = UT_PVoid;
-        pValue->Components = 1;
-        pValue->VPVoid = m_Buffer;
+        if (name.Compare("FunctionStream", false))
+        {
+            ZeroMemory(pValue, sizeof(Variant));
+            pValue->Type = UT_PVoid;
+            pValue->Components = 1;
+            pValue->VPVoid = m_Buffer;
 
-        return VSF_OK;
+            return VSF_OK;
+        }
+        else 
+        {
+            VariantMap::const_iterator property = m_Properties.find(name);
+            if (property != m_Properties.end())
+            {
+                CopyMemory(pValue, &property->second, sizeof(Variant));
+                return VSF_OK;
+            }
+        }
+
+        return VSFERR_UNKNOWNPROPERTY;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSProgram::SetTag(_In_ const Variant & value)
+    VoodooResult VOODOO_METHODTYPE VSProgram::SetProperty(const String & name, const Variant & value)
     {
-        return VSF_FAIL;
+        if (name.Compare("FunctionStream", false))
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+        else
+        {
+            m_Properties[name] = value;
+            return VSF_OK;
+        }
     }
      
     ProgramProfile VOODOO_METHODTYPE VSProgram::GetProfile() CONST
@@ -163,8 +178,17 @@ namespace VoodooShader
     {
         m_Function = function;
     }
-    VOODOO_METHOD_(IParameter *, GetConstant)(const String & name) CONST;
-    VOODOO_METHOD(SetConstant)(_In_ IParameter * pValue);
+
+    IParameter * VOODOO_METHODTYPE VSProgram::GetConstant(const String & name) CONST
+    {
+        if (!m_ConstantTable) return nullptr;
+
+        D3DXHANDLE handle = m_ConstantTable->GetConstantByName(NULL, (LPCSTR)name.GetData());
+        if (!handle) return nullptr;
+
+        VSParameter param = new VSParameter(this, handle, m_ConstantTable);
+        return param;
+    }
 
     VoodooResult VOODOO_METHODTYPE VSProgram::Compile(const CompileFlags flags)
     {
@@ -172,16 +196,11 @@ namespace VoodooShader
         if (m_ConstantTable) m_ConstantTable->Release();
 
         // Convert the source to ASCII
-        VSShader * pShader = (VSShader*)m_Pass->GetTechnique()->GetShader(); //! @todo Remove cast.
-        String sourceUTF = pShader->GetSource();
-        int32_t sourceSize = sourceUTF.ToCharStr(0, nullptr);
-        std::vector<char> source(sourceSize);
-        sourceUTF.ToCharStr(sourceSize, &source[0]);
+        VSShader * pShader = m_Pass->GetTechnique()->GetShader();
+        std::string source = pShader->GetSource().ToStringA();
 
         // Convert function to ASCII
-        int32_t funcSize = m_Function.ToCharStr(0, nullptr);
-        std::vector<char> function(funcSize);
-        m_Function.ToCharStr(funcSize, &function[0]);
+        std::string function = m_Function.ToStringA();
 
         D3DXMACRO * pMacros = pShader->m_Defines.size() > 0 ? &pShader->m_Defines[0] : NULL;
         LPCSTR profile = (LPCSTR)Converter::ToString(m_Profile);
@@ -198,9 +217,25 @@ namespace VoodooShader
         // Compile
         HRESULT hr = D3DXCompileShader
         (
-            &source[0], (uint32_t)sourceSize, 
-            pMacros, NULL, &function[0], profile, cflags, 
+            source.c_str(), source.length(), 
+            pMacros, NULL, function.c_str(), profile, cflags, 
             &m_Buffer, &errors, &m_ConstantTable
         );
+
+        if (FAILED(hr))
+        {
+            if (errors)
+            {
+                m_Core->GetLogger()->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format("Error compiling shader:\n%1%") << (LPCSTR)errors->GetBufferPointer());
+                errors->Release();
+            } else {
+                m_Core->GetLogger()->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format("Unknown error while compiling program %1%") << this);
+            }
+
+            if (m_Buffer) m_Buffer->Release(); m_Buffer = nullptr;
+            if (m_ConstantTable) m_ConstantTable->Release(); m_ConstantTable = nullptr;
+        }
+
+        return VSF_OK;
     }
 }

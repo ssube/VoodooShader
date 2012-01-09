@@ -33,7 +33,7 @@ namespace VoodooShader
     VOODOO_CLASS(VSProgram, IProgram, ({0xA7, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSProgram(_In_ IPass * pPass, _In_ XmlNode * pProgNode);
+        VSProgram(_In_ VSPass * pPass, _In_ XmlNode * pProgNode);
         ~VSProgram();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -43,15 +43,14 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
         
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetTag)(_In_ const Variant & value);
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
          
         VOODOO_METHOD_(ProgramProfile, GetProfile)() CONST;
         VOODOO_METHOD(SetProfile)(const ProgramProfile profile);
         VOODOO_METHOD_(String, GetFunction)() CONST;
         VOODOO_METHOD(SetFunction)(const String & function);
         VOODOO_METHOD_(IParameter *, GetConstant)(const String & name) CONST;
-        VOODOO_METHOD(SetConstant)(_In_ IParameter * pValue);
         VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default);
 
     private:
@@ -61,6 +60,7 @@ namespace VoodooShader
         mutable uint32_t m_Refs;
         ICore * m_Core;
         String m_Name;
+        VariantMap m_Properties;
 
         VSPass * m_Pass;
 
@@ -75,5 +75,8 @@ namespace VoodooShader
     public:
         VSProgramInclude(_In_ ICore * pCore);
         ~VSProgramInclude();
+
+        STDMETHOD(Close)(LPCVOID pData);
+        STDMETHOD(Open)(D3DXINCLUDE_TYPE IncludeType, LPCSTR pFileName, LPCVOID pParentData, LPCVOID * ppData, UINT * pBytes);
     };
 }

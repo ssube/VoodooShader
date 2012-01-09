@@ -24,115 +24,6 @@
 
 namespace VoodooShader
 {
-    CGtype Converter::ToCGType(_In_ ParameterType pt)
-    {
-        switch (pt)
-        {
-        // Vectors
-        case PT_Float1x1:
-            return CG_FLOAT;
-        case PT_Float1x2:
-            return CG_FLOAT2;
-        case PT_Float1x3:
-            return CG_FLOAT3;
-        case PT_Float1x4:
-            return CG_FLOAT4;
-        case PT_Float2x1:
-            return CG_FLOAT2x1;
-        case PT_Float2x2:
-            return CG_FLOAT2x2;
-        case PT_Float2x3:
-            return CG_FLOAT2x3;
-        case PT_Float2x4:
-            return CG_FLOAT2x4;
-        case PT_Float3x1:
-            return CG_FLOAT3x1;
-        case PT_Float3x2:
-            return CG_FLOAT3x2;
-        case PT_Float3x3:
-            return CG_FLOAT3x3;
-        case PT_Float3x4:
-            return CG_FLOAT3x4;
-        case PT_Float4x1:
-            return CG_FLOAT4x1;
-        case PT_Float4x2:
-            return CG_FLOAT4x2;
-        case PT_Float4x3:
-            return CG_FLOAT4x3;
-        case PT_Float4x4:
-            return CG_FLOAT4x4;
-        // Samplers
-        case PT_Sampler1D:
-            return CG_SAMPLER1D;
-        case PT_Sampler2D:
-            return CG_SAMPLER2D;
-        case PT_Sampler3D:
-            return CG_SAMPLER3D;
-        // Structs
-        case PT_Struct:
-            return CG_STRUCT;
-        // Other
-        case PT_Unknown:
-        default:
-            return CG_UNKNOWN_TYPE;
-        }
-    }
-
-    ParameterType Converter::ToParameterType(_In_ CGtype pt)
-    {
-        switch (pt)
-        {
-        case CG_FLOAT:
-        case CG_FLOAT1:
-        case CG_FLOAT1x1:
-            return PT_Float1x1;
-        case CG_FLOAT2:
-        case CG_FLOAT1x2:
-            return PT_Float1x2;
-        case CG_FLOAT3:
-        case CG_FLOAT1x3:
-            return PT_Float1x3;
-        case CG_FLOAT4:
-        case CG_FLOAT1x4:
-            return PT_Float1x4;
-        case CG_FLOAT2x1:
-            return PT_Float2x1;
-        case CG_FLOAT2x2:
-            return PT_Float2x2;
-        case CG_FLOAT2x3:
-            return PT_Float2x3;
-        case CG_FLOAT2x4:
-            return PT_Float2x4;
-        case CG_FLOAT3x1:
-            return PT_Float3x1;
-        case CG_FLOAT3x2:
-            return PT_Float3x2;
-        case CG_FLOAT3x3:
-            return PT_Float3x3;
-        case CG_FLOAT3x4:
-            return PT_Float3x4;
-        case CG_FLOAT4x1:
-            return PT_Float4x1;
-        case CG_FLOAT4x2:
-            return PT_Float4x2;
-        case CG_FLOAT4x3:
-            return PT_Float4x3;
-        case CG_FLOAT4x4:
-            return PT_Float4x4;
-        case CG_SAMPLER1D:
-            return PT_Sampler1D;
-        case CG_SAMPLER2D:
-            return PT_Sampler2D;
-        case CG_SAMPLER3D:
-            return PT_Sampler3D;
-        case CG_STRUCT:
-            return PT_Struct;
-        case CG_UNKNOWN_TYPE:
-        default:
-            return PT_Unknown;
-        }
-    }
-
     ParameterCategory Converter::ToParameterCategory(_In_ ParameterType type)
     {
         switch (type)
@@ -193,7 +84,7 @@ namespace VoodooShader
         return TF_Unknown;
     }
 
-    int Converter::ToComponents(_In_ ParameterType type)
+    uint32_t Converter::ToComponents(_In_ ParameterType type)
     {
         switch (type)
         {
@@ -223,12 +114,15 @@ namespace VoodooShader
         case PT_Float4x4:
             return 16;
         case PT_Sampler1D:
+            return 1;
         case PT_Sampler2D:
+            return 2;
         case PT_Sampler3D:
+            return 3;
         case PT_Struct:
         case PT_Unknown:
         default:
-            return -1;
+            return 0;
         }
     }
 
@@ -304,6 +198,7 @@ namespace VoodooShader
 
     const wchar_t * Converter::ToString(ProgramProfile profile)
     {
+#define PREFIX PP_
         switch (profile)
         {
             CASESTRING(ps_1_1);
@@ -322,6 +217,25 @@ namespace VoodooShader
         default:
             return VSTR("Unknown");
         }
+#undef PREFIX
+    }
+
+    const wchar_t * Converter::ToString(ProgramStage stage)
+    {
+#define PREFIX PS_
+        switch (stage)
+        {
+            CASESTRING(Vertex);
+            CASESTRING(Pixel);
+            CASESTRNIG(Geometry);
+            CASESTRING(Domain);
+            CASESTRING(Hull);
+            CASESTRING(Compute);
+        case PS_Unknown:
+        default:
+            return VSTR("Unknown");
+        }
+#undef PREFIX
     }
 
 #undef CASESTRING

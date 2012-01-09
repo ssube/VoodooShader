@@ -29,33 +29,41 @@ namespace VoodooShader
     VOODOO_CLASS(VSPass, IPass, ({0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSPass(_In_ ITechnique * pTechnique, _In_ XmlNode pPassNode);
+        VSPass(_In_ ITechnique * pTechnique, _In_ pugi::xml_node passNode);
         ~VSPass();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
+        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetTag)(_In_ const Variant & value);
+
+        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST;
+        VOODOO_METHOD(SetUniform)(const IParameter * pValue);
         VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST;
         VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget);
         VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST;
         VOODOO_METHOD_(IProgram *, GetProgram)(_In_ const ProgramStage stage) CONST;
+        VOODOO_METHOD(Compile)(const CompileFlags flags);
 
     private:
         mutable uint32_t m_Refs;
         ICore * m_Core;
         String m_Name;
+        pugi::xml_node m_Node;
 
-        ITechnique * m_Technique;
-        ITextureRef m_Target[4];
+        VSTechnique * m_Technique;
+        TextureVector m_Targets;
 
-        IProgramRef m_GeometryProgram;
-        IProgramRef m_VertexProgram;
-        IProgramRef m_FragmentProgram;
-        IProgramRef m_DomainProgram;
-        IProgramRef m_HullProgram;
+        IProgramRef m_VertexShader;
+        IProgramRef m_PixelShader;
+        IProgramRef m_GeometryShader;
+        IProgramRef m_DomainShader;
+        IProgramRef m_HullShader;
+        IProgramRef m_ComputeShader;
     };
 }

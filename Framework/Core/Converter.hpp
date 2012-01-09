@@ -35,7 +35,7 @@ namespace VoodooShader
 
         static TextureFormat ToTextureFormat(_In_ const wchar_t * format);
 
-        static int ToComponents(_In_ ParameterType Type);
+        static uint32_t ToComponents(_In_ ParameterType Type);
 
         /**
          * Helper function to convert enum values into readable strings used in logging;
@@ -65,5 +65,6 @@ namespace VoodooShader
         static const wchar_t * ToString(_In_ ParameterCategory category);
 
         static const wchar_t * ToString(_In_ ProgramProfile profile);
+        static const wchar_t * ToString(_In_ ProgramStage stage);
     };
 }

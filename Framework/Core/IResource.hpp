@@ -55,15 +55,18 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(String, GetName)() CONST PURE;
         /**
-         * Returns the resource tag, a bit of API-defined data stored in the resource.
+         * Returns a resource property, an API-defined variant stored in the resource.
+         *
+         * @param name      The name of the tag to get.
+         * @param pValue    The to be filled
          */
-        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST PURE;
         /**
-         * Sets the resource tag.
+         * Sets a resource property.
          * 
          * @param value     The value to store in the tag.
          */
-        VOODOO_METHOD(SetTag)(_In_ const Variant & value) CONST PURE;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value) CONST PURE;
     };
     /**
      * @}

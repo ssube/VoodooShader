@@ -30,7 +30,7 @@ namespace VoodooShader
     {
     public:
         VSParameter(_Pre_notnull_ ICore * const pCore, _In_ const String & name, _In_ const ParameterType type);
-        VSParameter(_In_ IShader * const pShader, _In_ CGparameter const pParam);
+        VSParameter(_In_ IShader * const pProgram, _In_ D3DXHANDLE pHandle, _In_ LPD3DXCONSTANTTABLE pTable);
         ~VSParameter();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -46,25 +46,24 @@ namespace VoodooShader
         VOODOO_METHOD(DetachParameter)();
         VOODOO_METHOD_(uint32_t, GetComponents)() CONST;
         VOODOO_METHOD_(ITexture *, GetTexture)() CONST;
-        VOODOO_METHOD_(void, SetTexture)(_In_opt_ ITexture * const pTexture);
+        VOODOO_METHOD(SetTexture)(_In_opt_ ITexture * const pTexture);
         _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetScalar)();
         VOODOO_METHOD_(void, SetScalar)(const uint32_t count, _In_count_(count) float * const pValues);
         VOODOO_METHOD_(IShader * const, GetShader)() CONST;
-
-        VOODOO_METHOD_(CGparameter, GetCgParameter)() CONST;
 
     private:
         mutable uint32_t m_Refs;
         ICore * m_Core;
         String m_Name;
 
-        IShader * m_Shader;
+        IProgram * m_Program;
 
         bool m_Virtual;
-        CGparameter m_Param;
         ParameterType m_Type;
 
         // Value
+        D3DXHANDLE m_Handle;
+        LPD3DXCONSTANTTABLE m_ConstantTable;
         ITextureRef m_ValueTexture;
         float m_Valuefloat[16];
     };

@@ -20,40 +20,30 @@
 
 #include "VSPass.hpp"
 
+#include "VSProgram.hpp"
+
 namespace VoodooShader
 {
     #define VOODOO_DEBUG_TYPE VSPass
     DeclareDebugCache();
 
-    VOODOO_METHODTYPE VSPass::VSPass(ITechnique * pTechnique, CGpass pCgPass) :
-        m_Refs(0), m_Technique(pTechnique), m_CgPass(pCgPass)
+    VOODOO_METHODTYPE VSPass::VSPass(ITechnique * pTechnique, pugi::xml_node passNode) :
+        m_Refs(0), m_Technique(pTechnique), m_Node(passNode)
     {
         if (!m_Technique)
         {
             Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), nullptr);
-        }
-        else if (!cgIsPass(pCgPass))
+        } 
+        else if (!passNode) 
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no Cg pass."), nullptr);
+            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no definition node."), nullptr);
         }
 
         m_Core = m_Technique->GetCore();
 
-        const char * passName = cgGetPassName(m_CgPass);
-
-        m_Name = m_Technique->GetName() + VSTR(":");
-        if (passName)
-        {
-            m_Name += passName;
-        }
-        else
-        {
-            m_Name += Format(VSTR("pass_%p")) << m_CgPass;
-        }
-
-        ++this->m_Refs;
-        this->Link();
-        --this->m_Refs;
+        // Parse the XML
+        pugi::xml_attribute xName = passNode.attribute(VSTR("name"));
+        m_Name = xName.value();
 
         AddThisToDebugCache();
     }
@@ -62,7 +52,6 @@ namespace VoodooShader
     {
         RemoveThisFromDebugCache();
 
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (m_Core)
         {
             IAdapter * pAdapter = m_Core->GetAdapter();
@@ -93,20 +82,12 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODTYPE VSPass::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSPass::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
-            if (clsid.is_nil())
-            {
-                clsid = CLSID_VSPass;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return VSFERROR_INVALIDPARAMS;
         }
         else
         {
@@ -128,7 +109,7 @@ namespace VoodooShader
                 return false;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+            (*ppOut)->AddRef();
             return true;
         }
     }
@@ -154,9 +135,9 @@ namespace VoodooShader
     ITexture * VOODOO_METHODTYPE VSPass::GetTarget(uint32_t index) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        if (index < 4)
+        if (index < m_Targets.size())
         {
-            return m_Target[index].get();
+            return m_Targets[index].get();
         }
         else
         {
@@ -164,12 +145,12 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODTYPE VSPass::SetTarget(uint32_t index, ITexture * pTarget)
+    VoodooResult VOODOO_METHODTYPE VSPass::SetTarget(uint32_t index, ITexture * pTarget)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        if (index < 4)
+        if (index < m_Targets.size())
         {
-            m_Target[index] = pTarget;
+            m_Targets[index] = pTarget;
             return true;
         }
         else
@@ -178,21 +159,23 @@ namespace VoodooShader
         }
     }
 
-    CGprogram VOODOO_METHODTYPE VSPass::GetProgram(ProgramStage stage) CONST
+    IProgram * VOODOO_METHODTYPE VSPass::GetProgram(ProgramStage stage) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         switch (stage)
         {
         case PS_Vertex:
-            return m_VertexProgram;
-        case PS_Fragment:
-            return m_FragmentProgram;
+            return m_VertexShader.get();
+        case PS_Pixel:
+            return m_PixelShader.get();
         case PS_Geometry:
-            return m_GeometryProgram;
+            return m_GeometryShader.get();
         case PS_Domain:
-            return m_DomainProgram;
+            return m_DomainShader.get();
         case PS_Hull:
-            return m_HullProgram;
+            return m_HullShader.get();
+        case PS_Compute:
+            return m_ComputeShader.get();
         case PS_Unknown:
         default:
             return nullptr;
@@ -205,60 +188,65 @@ namespace VoodooShader
         return m_Technique;
     }
 
-    CGpass VOODOO_METHODTYPE VSPass::GetCgPass() CONST
+    VoodooResult VOODOO_METHODTYPE VSPass::Compile(const CompileFlags flags)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_CgPass;
-    }
 
-    void VSPass::Link()
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        m_VertexProgram = cgGetPassProgram(m_CgPass, CG_VERTEX_DOMAIN);
-        m_FragmentProgram = cgGetPassProgram(m_CgPass, CG_FRAGMENT_DOMAIN);
-        m_GeometryProgram = cgGetPassProgram(m_CgPass, CG_GEOMETRY_DOMAIN);
-        m_DomainProgram = cgGetPassProgram(m_CgPass, CG_TESSELLATION_CONTROL_DOMAIN);
-        m_HullProgram = cgGetPassProgram(m_CgPass, CG_TESSELLATION_EVALUATION_DOMAIN);
-        
-        char targetAnnotationName[] = "target0";
-
-        for (uint8_t i = 0; i < 4; ++i)
+        pugi::xml_node xTarget = m_Node.child(VSTR("Target"));
+        while (xTarget)
         {
-            targetAnnotationName[6] = '0' + i;
-
-            CGannotation targetAnnotation = cgGetNamedPassAnnotation(m_CgPass, targetAnnotationName);
-
-            if (cgIsAnnotation(targetAnnotation))
+            String targetName = xTarget.value();
+            if (!targetName.IsEmpty())
             {
-                if (cgGetAnnotationType(targetAnnotation) == CG_STRING)
+                ITexture * pTarget = m_Core->GetTexture(targetName);
+                if (pTarget)
                 {
-                    const char *targetName = cgGetStringAnnotationValue(targetAnnotation);
-
-                    if (!(m_Target[i] = m_Core->GetTexture(targetName)))
-                    {
-                        m_Core->GetLogger()->LogMessage
-                        (
-                            LL_CoreWarning, VOODOO_CORE_NAME,
-                            Format(VSTR("%1% cannot find target '%2%'.")) << this << targetName 
-                        );
-                    }
+                    m_Targets.push_back(pTarget);
                 }
                 else
                 {
                     m_Core->GetLogger()->LogMessage
                     (
                         LL_CoreWarning, VOODOO_CORE_NAME,
-                        Format(VSTR("%1% has target annotation of invalid type.")) << this
+                        Format(VSTR("%1% cannot find target '%2%'.")) << this << targetName 
                     );
                 }
             }
-            else
+
+            xTarget = xTarget.next_sibling();
+        }
+
+        for (ProgramStage stage = PS_Vertex; stage <= PS_Compute; stage = static_cast<ProgramStage>(stage + 1))
+        {
+            const wchar_t * name = Converter::ToString(stage);
+            try
             {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreDebug, VOODOO_CORE_NAME,
-                    Format(VSTR("%1% has no target annotation.")) << this
-                );
+                IProgramRef tempProgram = new VSProgram(this, m_Node.child(name));
+                VoodooResult vr = tempProgram->Compile(flags);
+
+                if (VSUCCESS(vr))
+                {
+                    switch (stage)
+                    {
+                    case PS_Vertex:
+                        m_VertexShader = tempProgram; break;
+                    case PS_Pixel:
+                        m_PixelShader = tempProgram; break;
+                    case PS_Geometry:
+                        m_GeometryShader = tempProgram; break;
+                    case PS_Domain:
+                        m_DomainShader = tempProgram; break;
+                    case PS_Hull:
+                        m_HullShader = tempProgram; break;
+                    case PS_Compute:
+                        m_ComputeShader = tempProgram; break;
+                    }
+                }
+            }
+            catch (Exception & exc)
+            {
+                m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                    Format("Error compiling program: %1%") << exc.strwhat());
             }
         }
 

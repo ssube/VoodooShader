@@ -55,6 +55,6 @@ namespace VoodooShader
         ITextureRef m_Target;
         PassVector m_Passes;
 
-        IShader * m_Shader;
+        VSShader * m_Shader;
     };
 }
