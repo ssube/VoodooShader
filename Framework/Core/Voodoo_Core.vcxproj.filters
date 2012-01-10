@@ -16,19 +16,7 @@
     <ClCompile Include="Regex.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="VSTechnique.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
-    <ClCompile Include="VSShader.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
-    <ClCompile Include="VSPass.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="VSParser.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
-    <ClCompile Include="VSParameter.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
     <ClCompile Include="VsModule.cpp">
@@ -55,10 +43,19 @@
     <ClCompile Include="Format.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="VSProgram.cpp">
+    <ClCompile Include="VSCompiler.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="VSCompiler.cpp">
+    <ClCompile Include="VSParameterDX9.cpp">
+      <Filter>Source\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="VSPassDX9.cpp">
+      <Filter>Source\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="VSTechniqueDX9.cpp">
+      <Filter>Source\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="VSEffectDX9.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
   </ItemGroup>
@@ -96,9 +93,6 @@
     <ClInclude Include="IPass.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="IShader.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
     <ClInclude Include="ITechnique.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
@@ -116,9 +110,6 @@
     </ClInclude>
     <ClInclude Include="Converter.hpp">
       <Filter>Headers\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="VSParameter.hpp">
-      <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="VSAdapter.hpp">
       <Filter>Headers\Implementations</Filter>
@@ -139,15 +130,6 @@
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="VSParser.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
-    <ClInclude Include="VSPass.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
-    <ClInclude Include="VSShader.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
-    <ClInclude Include="VSTechnique.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="IFile.hpp">
@@ -183,16 +165,25 @@
     <ClInclude Include="VoodooDocs.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="IProgram.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="VSProgram.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
     <ClInclude Include="VoodooInternal.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="VSCompiler.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="IEffect.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VSEffectDX9.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VSTechniqueDX9.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VSPassDX9.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VSParameterDX9.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
   </ItemGroup>

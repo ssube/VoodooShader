@@ -115,9 +115,8 @@
 #include "IParser.hpp"
 
 #include "IResource.hpp"
-#include "IParameter.hpp"
+#include "IEffect.hpp"
 #include "IPass.hpp"
-#include "IProgram.hpp"
-#include "IShader.hpp"
 #include "ITechnique.hpp"
+#include "IParameter.hpp"
 #include "ITexture.hpp"

@@ -18,49 +18,111 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "VSShader.hpp"
+#include "VSEffectDX9.hpp"
 
-#include "VSParameter.hpp"
-#include "VSTechnique.hpp"
+#include "VSParameterDX9.hpp"
+#include "VSTechniqueDX9.hpp"
 
 namespace VoodooShader
 {
-    #define VOODOO_DEBUG_TYPE VSShhader
+    #define VOODOO_DEBUG_TYPE VSEffectDX9
     DeclareDebugCache();
 
-    VSShader::VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & path, _In_opt_ const char ** ppArgs) :
-        m_Refs(0), m_Core(pCore), m_Name(path), m_DefaultTechnique(nullptr)
+    VSEffectDX9::VSEffectDX9(_In_ IFile * pFile, CompileFlags flags) :
+        m_Refs(0) 
     {
-        if (!m_Core)
+        if (!pFile)
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create shader with no core."), nullptr);
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create effect without file."), nullptr);
         }
 
-        CGcontext context = m_Core->GetCgContext();
+        m_Core = pFile->GetCore();
 
-        if (!context || !cgIsContext(context))
+        // Cache core objects
+        ILoggerRef  logger  = m_Core->GetLogger();
+        IAdapterRef adapter = m_Core->GetAdapter();
+
+        if (!logger)
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create shader (core has no context)."), m_Core);
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create effect without logger."), m_Core);
+        }
+        else if (!adapter)
+        {
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create effect without adapter."), m_Core);
         }
 
-        int32_t len = m_Name.ToCharStr(0, nullptr);
-        std::vector<char> buffer(len);
-        path.ToCharStr(len, &buffer[0]);
-
-        m_CgEffect = cgCreateEffectFromFile(context, &buffer[0], ppArgs);
-
-        if (!cgIsEffect(m_CgEffect))
+        // Get the D3D9 device from the adapter
+        IDirect3DDevice9 * device = nullptr;
+        Variant deviceVar;
+        if (SUCCEEDED(adapter->GetProperty(VSTR("IDirect3DDevice9"), &deviceVar)) && deviceVar.Type == UT_PVoid && deviceVar.VPVoid)
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Failed to create shader."), m_Core);
+            device = (IDirect3DDevice9*)deviceVar.VPVoid;
+            device->AddRef();
         }
         else
         {
-            cgSetEffectName(m_CgEffect, &buffer[0]);
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to retrieve device from adapter."), m_Core);
         }
 
-        ++this->m_Refs;
-        this->Link();
-        --this->m_Refs;
+        // Build the flags
+        DWORD d3dxflags = 0;
+        if ((flags & CF_AvoidFlow) > 0)     d3dxflags |= D3DXSHADER_AVOID_FLOW_CONTROL;
+        if ((flags & CF_PreferFlow) > 0)    d3dxflags |= D3DXSHADER_PREFER_FLOW_CONTROL;
+        if ((flags & CF_Debug) > 0)         d3dxflags |= D3DXSHADER_DEBUG;
+        if ((flags & CF_NoOpt) > 0)         d3dxflags |= D3DXSHADER_SKIPOPTIMIZATION;
+
+        // Output/buffer
+        LPD3DXBUFFER errors = NULL;
+
+        HRESULT hr = D3DXCreateEffectFromFile(device, pFile->GetPath().GetData(), NULL, NULL, d3dxflags, NULL, &m_DXEffect, &errors);
+        if (FAILED(hr))
+        {
+            logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, 
+                Format("Error compiling effect from file '%1%'. Errors:\n%2%") << 
+                pFile->GetPath() << (LPCSTR)errors->GetBufferPointer());
+
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to compile effect."), m_Core);
+        }
+
+        // Get desc
+        D3DXEFFECT_DESC desc;
+        ZeroMemory(&desc, sizeof(D3DXEFFECT_DESC));
+        if (FAILED(m_DXEffect->GetDesc(&desc)))
+        {
+            Throw(VOODOO_CORE_NAME, VSTR("Failed to retrieve effect description."), m_Core);
+        }
+
+        // Get parameters
+        for (UINT paramIndex = 0; paramIndex < desc.Parameters; ++paramIndex)
+        {
+            D3DXHANDLE paramHandle = m_DXEffect->GetParameter(NULL, paramIndex);
+            if (!paramHandle)
+            {
+                break;
+            }
+            boost::intrusive_ptr<VSParameterDX9> parameter = new VSParameterDX9(this, m_DXEffect, paramHandle);
+            m_DXEffect->m_Parameters.push_back(parameter);
+        }
+
+        // Get techniques
+        for (UINT techIndex = 0; techIndex < desc.Techniques; ++techIndex)
+        {
+            D3DXHANDLE techHandle = m_DXEffect->GetTechnique(techIndex++);
+            if (!techHandle)
+            {
+                break;
+            }
+
+            try
+            {
+                VSTechniqueDX9 * technique = new VSTechniqueDX9(this, m_DXEffect, techHandle);
+                m_DXEffect->m_Techniques.push_back(technique);
+            }
+            catch (Exception & exc)
+            {
+                //logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%.") <<
+            }
+        } 
 
         AddThisToDebugCache();
     }
@@ -69,15 +131,9 @@ namespace VoodooShader
     {
         RemoveThisFromDebugCache();
 
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_DefaultTechnique = nullptr;
         m_Techniques.clear();
         m_Parameters.clear();
-
-        if (cgIsEffect(m_CgEffect))
-        {
-            cgDestroyEffect(m_CgEffect);
-        }
     }
 
     uint32_t VOODOO_METHODTYPE VSShader::AddRef() CONST

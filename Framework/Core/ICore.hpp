@@ -56,8 +56,8 @@ namespace VoodooShader
         /**
          * Initializes the core, loading the config file and all required modules and creating objects.
          *
-         * @param config Name of the configuration file used to initialize this core.
-         * @return Success of the initialization.
+         * @param   config  Name of the configuration file used to initialize this core.
+         * @return          Success of the initialization.
          */
         _Check_return_ VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config) PURE;
         /**
@@ -65,7 +65,7 @@ namespace VoodooShader
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this
          * core may be reinitialized.
          *
-         * @return Success of the destroy operation.
+         * @return          Success of the destroy operation.
          *
          * @warning If this method fails, this core is in an undefined state and must be destroyed; calling any method but
          *      AddRef or Release is undefined. All resources created by this core are immediately considered invalid.
@@ -122,23 +122,6 @@ namespace VoodooShader
          */
         VOODOO_METHOD(SetDefaultFlags)(const CompileFlags flags) PURE;
         /**
-         * Retrieves a texture from the ICore's texture map by stage. Each specialized texture stage
-         * may have a single texture bound to it for use by the shader linker.
-         *
-         * @param stage The stage whose bound texture should be returned.
-         * @return A reference to the Texture if one is bound, empty otherwise.
-         *
-         * @sa To bind a texture to one of the special functions, use ICore::SetStageTexture().
-         */
-        VOODOO_METHOD_(ITexture *, GetStageTexture)(_In_ const TextureStage stage) CONST PURE;
-        /**
-         * Binds a texture to a specialized stage for the shader linker.
-         *
-         * @param stage The texture stage to set.
-         * @param pTexture The texture to bind.
-         */
-        VOODOO_METHOD_(void, SetStageTexture)(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture) PURE;
-        /**
          * @}
          * @name Resource Methods
          * Creator methods for the core's resource factory aspect, and retrieval and removal methods for the internal
@@ -148,11 +131,10 @@ namespace VoodooShader
         /**
          * Loads and compiles an effect from file, using the current file system and search paths.
          *
-         * @param pFile The file to load and compile. May be an absolute or relative filename.
-         * @param ppArgs Optional arguments providing compiler directives, usually shader model specific
-         *     definitions or preprocessor defines.
+         * @param   pFile   The file to load and compile. May be an absolute or relative filename.
+         * @param   ppArgs  Optional flags to the compiler, usually optimization or API hints.
          */
-        VOODOO_METHOD_(IShader *, CreateShader)(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ const IFile * const pFile, const CompileFlags flags = CF_Default) PURE;
         /**
          * Creates a global virtual parameter. This parameter exists in the Cg runtime, but is not a part of
          * any shader or program.
@@ -160,23 +142,20 @@ namespace VoodooShader
          * This is most useful for creating parameters that must be shared between programs. Only parameters
          * created with this function may be used in Parameter::Link().
          *
-         * @param name The name for this parameter.
-         * @param type The type of the parameter to create.
-         *
-         * @return A new parameter.
+         * @param   name    The name for this parameter.
+         * @param   type    The type of the parameter to create.
          *
          * @note This function is the only way to create global parameters. You can then attach effect
-         *     parameters to the global and any value changes will propagate down.
+         *      parameters to the global and any value changes will propagate down.
          */
         VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterType type) PURE;
         /**
-         * Registers a texture with this ICore.
+         * Registers a texture with this core.
          *
          * Textures will not be used by the shader linker unless they have been registered with the core.
          *
-         * @param name The texture name (must be unique).
-         * @param desc Information for the texture to be created.
-         * @return A shared pointer to the newly created Texture object, if successful.
+         * @param   name    The texture name (must be unique).
+         * @param   desc    Information for the texture to be created.
          *
          * @note This method calls IAdapter::CreateTexture() to handle the actual creation, then registers
          *     the returned texture with the core and sets things up properly.
@@ -185,9 +164,8 @@ namespace VoodooShader
         /**
          * Retrieve a parameter by name.
          *
-         * @param name The name to search for.
-         * @param type The type to verify.
-         * @return A reference to the parameter if found, nullptr reference otherwise.
+         * @param   name    The name to search for.
+         * @param   type    The type to verify.
          *
          * @note If type is PT_Unknown, no type checking is performed, only the name is used.
          */
@@ -195,24 +173,22 @@ namespace VoodooShader
         /**
          * Retrieves a texture from the ICore's texture map by name.
          *
-         * @param name The texture name.
+         * @param   name    The texture name.
          * @return A reference to the Texture if it exists, empty otherwise.
          */
         VOODOO_METHOD_(ITexture *, GetTexture)(_In_ const String & name) CONST PURE;
         /**
-         * Removes a virtual parameter from ICore. If all references are released, the parameter is
-         * destroyed.
+         * Removes a virtual parameter from the core's parameter index.
          *
-         * @param name The name of the parameter.
-         * @return True if the parameter was found and removed, false if not found.
+         * @param   name    The name of the parameter.
+         * @return          Succeeds if the parameter was found and removed.
          */
         VOODOO_METHOD(RemoveParameter)(_In_ const String & name) PURE;
         /**
-         * Removes a texture from the ICore's texture map and unbinds it from any
-         * specialized functions it may be attached to.
+         * Removes a texture from the core's texture index.
          *
-         * @param name The name of texture to be removed.
-         * @return True if the texture was found and removed, false if not.
+         * @param   name    The name of texture to be removed.
+         * @return          Succeeds if the texture was found and removed.
          */
         VOODOO_METHOD(RemoveTexture)(_In_ const String & name) PURE;
         /**

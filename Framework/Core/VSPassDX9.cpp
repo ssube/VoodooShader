@@ -18,37 +18,56 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "VSPass.hpp"
-
-#include "VSProgram.hpp"
+#include "VSPassDX9.hpp"
+#include "VSTechniqueDX9.hpp"
 
 namespace VoodooShader
 {
-    #define VOODOO_DEBUG_TYPE VSPass
+    #define VOODOO_DEBUG_TYPE VSPassDX9
     DeclareDebugCache();
 
-    VOODOO_METHODTYPE VSPass::VSPass(ITechnique * pTechnique, pugi::xml_node passNode) :
-        m_Refs(0), m_Technique(pTechnique), m_Node(passNode)
+    VSPassDX9::VSPassDX9(VSTechniqueDX9 * pTechnique, LPD3DXEFFECT pDXEffect, D3DXHANDLE pPassHandle) :
+        m_Refs(0), m_Technique(pTechnique), m_DXEffect(pDXEffect), m_DXHandle(pPassHandle)
     {
         if (!m_Technique)
         {
             Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), nullptr);
         } 
-        else if (!passNode) 
-        {
-            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no definition node."), nullptr);
-        }
 
         m_Core = m_Technique->GetCore();
 
-        // Parse the XML
-        pugi::xml_attribute xName = passNode.attribute(VSTR("name"));
-        m_Name = xName.value();
+        if (!m_DXEffect) 
+        {
+            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no hardware effect."), m_Core);
+        }
+        else if (!m_DXHandle)
+        {
+            Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no hardware handle."), m_Core);
+        }
+
+        // Get the targets
+        char targetAnnotName[] = "target0";
+        while (targetAnnotName[6] < '4')
+        {
+            D3DXHANDLE annotation = m_DXEffect->GetAnnotationByName(m_DXHandle, targetAnnotName);
+            if (!annotation)
+            {
+                break;
+            }
+            LPCSTR annotationValue = NULL;
+            if (FAILED(m_DXEffect->GetString(annotation, &annotationValue)) || !annotationValue)
+            {
+                break;
+            }
+            m_Targets.push_back(m_Core->GetTexture(annotationValue));
+
+            ++targetAnnotName[6];
+        }
 
         AddThisToDebugCache();
     }
 
-    VOODOO_METHODTYPE VSPass::~VSPass()
+    VSPassDX9::~VSPassDX9()
     {
         RemoveThisFromDebugCache();
 

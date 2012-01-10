@@ -31,15 +31,16 @@ namespace VoodooShader
     class VSLogger;
     class VSModule;
     class VSModuleManager;
-    class VSParameter;
     class VSParser;
-    class VSPass;
-    class VSProgram;
-    class VSShader;
-    class VSTechnique;
+    
+    // API classes
+    class VSEffectDX9;
+    class VSTechniqueDX9;
+    class VSPassDX9;
+    class VSParameterDX9;
 
     // Compiler classes
-    class VSCompiler;
+    class VSCompilerDX9;
 
     /**
      * Creates a new core. This function is exported and meant for use by the loader.

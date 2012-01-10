@@ -105,12 +105,6 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(bool, IsVirtual)() CONST PURE;
         /**
-         * Gets the parent shader if the parameter is not virtual.
-         * 
-         * @return Parent shader.
-         */
-        VOODOO_METHOD_(IProgram *, GetProgram)() CONST PURE;
-        /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value is changed.
          *
          * @param pParam The parameter to bind to this one.

@@ -80,7 +80,7 @@ namespace VoodooShader
         /**
          * Retrieve the parent shader of this technique.
          */
-        VOODOO_METHOD_(IShader *, GetShader)() CONST PURE;
+        VOODOO_METHOD_(IEffect *, GetEffect)() CONST PURE;
         /**
          * @}
          */

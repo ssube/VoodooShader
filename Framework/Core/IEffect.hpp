@@ -28,11 +28,11 @@ namespace VoodooShader
      * @{
      */
     /**
-     * @class IShader
+     * @class IEffect
      *
-     * Complete shader class, managing techniques, passes and metadata.
+     * Complete effect class, managing techniques, passes and metadata.
      *
-     * Shaders contain significant linking and processing data, as well as the Voodoo-specific linking stage. IShader file
+     * Effects contain significant linking and processing data, as well as the Voodoo-specific linking stage. IShader file
      * loading and compilation are handled internally, with the shader being compiled from a VSFX file.
      *
      * @note A shader may contain multiple @ref ITechnique techniques. IShader techniques must be separately validated,
@@ -46,7 +46,7 @@ namespace VoodooShader
      * @restag  None.
      * @iid     e6f31294-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IShader, IResource, ({0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    VOODOO_INTERFACE(IEffect, IResource, ({0x94, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
         /**
@@ -68,23 +68,12 @@ namespace VoodooShader
         VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
         /**
          * @}
-         * @name Sampler Methods
+         * @name Parameter Methods
          * @{
          */
-        /**
-         * Get the number of samplers this program has.
-         */
-        VOODOO_METHOD_(uint32_t, GetSamplerCount)() CONST PURE;
-        /**
-         * Retrieve a texture sampler from this program. <i>Sampler order is critical</i>.
-         * 
-         * @param index     The sampler index.
-         */
-        VOODOO_METHOD_(ITexture *, GetSampler)(const uint32_t index) CONST PURE;
-        /**
-         * Set the texture bound to a sampler in this shader. 
-         */
-        VOODOO_METHOD(SetSampler)(const uint32_t index, ITexture * pTexture) PURE;
+        VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST PURE;
+        VOODOO_METHOD_(IParameter *, GetParameter)(const uint32_t index) CONST PURE;
+        VOODOO_METHOD_(IParameter *, GetParameterByName)(const String & name) CONST PURE;
         /**
          * @}
          * @name Technique Methods
@@ -101,6 +90,7 @@ namespace VoodooShader
          * @param index The index of the technique to get.
          */
         VOODOO_METHOD_(ITechnique *, GetTechnique)(const uint32_t index) CONST PURE;
+        VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(const String & name) CONST PURE;
         /**
          * Retrieves the default technique from this shader. All drawing should be done with the default technique: it is
          * guaranteed to be valid for the current shader profiles and API. The default technique is the first technique

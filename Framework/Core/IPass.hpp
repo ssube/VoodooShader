@@ -50,7 +50,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -67,19 +67,13 @@ namespace VoodooShader
          * @{
          */
         /**
-         * Retrieve a uniform variable from this program.
-         * 
-         * @param name      The name of the uniform to get, case-sensitive.
-         */
-        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST PURE;
-        /**
          * Retrieve a the target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
          *
          * @param index     The target index.
          * @return          The target texture.
          */
-        VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST PURE;
+        VOODOO_METHOD_(ITexture *, GetTarget)(const uint32_t index) CONST PURE;
         /**
          * Set a target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
@@ -87,14 +81,14 @@ namespace VoodooShader
          * @param index     The target index.
          * @param pTarget   The target texture.
          */
-        VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget) PURE;
+        VOODOO_METHOD(SetTarget)(const uint32_t index, ITexture * pTarget) PURE;
         /**
-         * Retrieve a specific program stage from this pass.
+         * Retrieve a specific shader stage from this pass.
          *
          * @param stage     The stage to retrieve.
-         * @param pValue    A Variant to be filled with the program.
+         * @param pValue    A Variant to be filled with the shader.
          */
-        VOODOO_METHOD(GetProgram)(_In_ const ProgramStage stage, _In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(GetShader)(const ShaderStage stage, _In_ Variant * pValue) CONST PURE;
         /**
          * Retrieve the parent technique of this pass.
          */

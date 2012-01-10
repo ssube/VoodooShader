@@ -106,55 +106,23 @@ namespace VoodooShader
     enum ParameterCategory : uint32_t
     {
         PC_Unknown      = 0x00,     /* !< Unknown parameter category. */
-        PC_Float        = 0x01,     /* !< float vector parameter (may have 1 to 4 components). */
-        PC_Sampler      = 0x02,     /* !< Sampler parameter (may sample 1D to 3D textures). */
-        PC_Struct       = 0x04
+        PC_Bool         = 0x01,
+        PC_Int          = 0x02,
+        PC_Float        = 0x03,     /* !< float vector parameter (may have 1 to 4 components). */
+        PC_Sampler      = 0x04,     /* !< Sampler parameter (may sample 1D to 3D textures). */
+        PC_String       = 0x05,
+        PC_Struct       = 0x06,
     };
 
-    enum ProgramStage : uint32_t
+    enum ShaderStage : uint32_t
     {
-        PS_Unknown      = 0x00,     /* !< Unknown program stage */
-        PS_Vertex       = 0x01,     /* !< Vertex program stage (usually supported, see @ref programstages "program stages" for more info). */
-        PS_Pixel        = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info). */
-        PS_Geometry     = 0x03,     /* !< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info). */
-        PS_Domain       = 0x04,     /* !< Domain program stage (not always supported, see @ref programstages "program stages" for more info). */
-        PS_Hull         = 0x05,     /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info). */
-        PS_Compute      = 0x06,     /* !< Compute program stage. Rarely supported. */
-    };
-
-    enum ProgramProfile : uint32_t
-    {
-        PP_Unknown      = 0x0000,     /* !< Unknown program profile. */
-        PP_ps_1_1       = 0x0111,
-        PP_ps_1_2       = 0x0112,
-        PP_ps_1_3       = 0x0113,
-        PP_ps_1_4       = 0x0114,
-        PP_ps_2_0       = 0x0120,
-        PP_ps_3_0       = 0x0130,
-        PP_ps_4_0       = 0x0140,
-        PP_ps_4_1       = 0x0141,
-        PP_ps_5_0       = 0x0150,
-        PP_vs_1_1       = 0x0211,
-        PP_vs_2_0       = 0x0220,
-        PP_vs_3_0       = 0x0230,
-        PP_vs_4_0       = 0x0240,
-        PP_vs_4_1       = 0x0241,
-        PP_vs_5_0       = 0x0250,
-        PP_gs_4_0       = 0x0340,
-        PP_gs_5_0       = 0x0350,
-        PP_hs_5_0       = 0x0450,
-        PP_ds_5_0       = 0x0460,
-        PP_cs_5_0       = 0x0470,
-        PP_glsl         = 0x8001,
-        PP_glsl12       = 0x8002,
-        PP_arb1         = 0x8003,
-    };
-
-    enum TextureStage : uint32_t
-    {
-        TS_Unknown      = 0x00,     /* !< Unknown texture stage. */
-        TS_Shader       = 0x01,     /* !< Shader target texture. */
-        TS_Pass         = 0x02      /* !< Pass target texture. */
+        SS_Unknown      = 0x00,     /* !< Unknown program stage */
+        SS_Vertex       = 0x01,     /* !< Vertex program stage (usually supported, see @ref programstages "program stages" for more info). */
+        SS_Pixel        = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info). */
+        SS_Geometry     = 0x03,     /* !< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info). */
+        SS_Domain       = 0x04,     /* !< Domain program stage (not always supported, see @ref programstages "program stages" for more info). */
+        SS_Hull         = 0x05,     /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info). */
+        SS_Compute      = 0x06,     /* !< Compute program stage. Rarely supported. */
     };
 
     /**
@@ -469,6 +437,7 @@ namespace VoodooShader
      */
     class IAdapter;
     class ICore;
+    class IEffect;
     class IFile;
     class IFileSystem;
     class IHookManager;
@@ -480,8 +449,6 @@ namespace VoodooShader
     class IParameter;
     class IParser;
     class IPass;
-    class IProgram;
-    class IShader;
     class ITechnique;
     class ITexture;
     /**
@@ -520,6 +487,7 @@ namespace VoodooShader
 
     typedef boost::intrusive_ptr<IAdapter>       IAdapterRef;
     typedef boost::intrusive_ptr<ICore>          ICoreRef;
+    typedef boost::intrusive_ptr<IEffect>        IEffectRef;
     typedef boost::intrusive_ptr<IFile>          IFileRef;
     typedef boost::intrusive_ptr<IFileSystem>    IFileSystemRef;
     typedef boost::intrusive_ptr<IHookManager>   IHookManagerRef;
@@ -531,8 +499,6 @@ namespace VoodooShader
     typedef boost::intrusive_ptr<IParameter>     IParameterRef;
     typedef boost::intrusive_ptr<IParser>        IParserRef;
     typedef boost::intrusive_ptr<IPass>          IPassRef;
-    typedef boost::intrusive_ptr<IProgram>       IProgramRef;
-    typedef boost::intrusive_ptr<IShader>        IShaderRef;
     typedef boost::intrusive_ptr<ITechnique>     ITechniqueRef;
     typedef boost::intrusive_ptr<ITexture>       ITextureRef;
     /**
@@ -546,9 +512,9 @@ namespace VoodooShader
     typedef std::map<String, String>             StringMap;
     typedef std::list<String>                    StringList;
     typedef std::vector<String>                  StringVector;
-    typedef std::map<String, IShaderRef>         ShaderMap;
-    typedef std::list<IShaderRef>                ShaderList;
-    typedef std::vector<IShaderRef>              ShaderVector;
+    typedef std::map<String, IEffectRef>         EffectMap;
+    typedef std::list<IEffectRef>                EffectList;
+    typedef std::vector<IEffectRef>              EffectVector;
     typedef std::map<String, ITechniqueRef>      TechniqueMap;
     typedef std::list<ITechniqueRef>             TechniqueList;
     typedef std::vector<ITechniqueRef>           TechniqueVector;
@@ -558,9 +524,6 @@ namespace VoodooShader
     typedef std::map<String, IParameterRef>      ParameterMap;
     typedef std::list<IParameterRef>             ParameterList;
     typedef std::vector<IParameterRef>           ParameterVector;
-    typedef std::map<String, IProgramRef>        ProgramMap;
-    typedef std::list<IProgramRef>               ProgramList;
-    typedef std::vector<IProgramRef>             ProgramVector;
     typedef std::map<String, ITextureRef>        TextureMap;
     typedef std::list<ITextureRef>               TextureList;
     typedef std::vector<ITextureRef>             TextureVector;
@@ -573,7 +536,7 @@ namespace VoodooShader
     typedef std::pair<IModuleRef, uint32_t>      ClassSource;
     typedef std::map<Uuid, ClassSource>          ClassMap;
     typedef std::map<String, Uuid>               StrongNameMap;
-    typedef std::map<ITextureRef, IShaderRef>    MaterialMap;
+    typedef std::map<ITextureRef, IEffectRef>    MaterialMap;
 #endif
 #endif
     /**

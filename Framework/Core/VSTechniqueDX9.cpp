@@ -18,54 +18,69 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "VSTechnique.hpp"
-
-#include "VSPass.hpp"
+#include "VSTechniqueDX9.hpp"
+#include "VSEffectDX9.hpp"
+#include "VSPassDX9.hpp"
 
 namespace VoodooShader
 {
-    #define VOODOO_DEBUG_TYPE VSTechnique
+    #define VOODOO_DEBUG_TYPE VSTechniqueDX9
     DeclareDebugCache();
 
-    VOODOO_METHODTYPE VSTechnique::VSTechnique(IShader * pShader, CGtechnique pCgTech) :
-        m_Refs(0), m_Shader(pShader), m_CgTechnique(pCgTech), m_Target(nullptr)
+    VSTechniqueDX9::VSTechniqueDX9(VSEffectDX9 * pEffect, LPD3DXEFFECT pDXEffect, D3DXHANDLE pTechHandle) :
+        m_Refs(0), m_Effect(pEffect), m_DXEffect(pDXEffect), m_DXHandle(pTechHandle)
     {
-        if (!pShader)
+        if (!m_Effect)
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no shader."), nullptr);
-        }
-        else if (!cgIsTechnique(pCgTech))
-        {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no Cg technique."), pShader->GetCore());
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no effect."), nullptr);
         }
 
-        m_Core = m_Shader->GetCore();
+        m_Core = m_Effect->GetCore();
 
-        const char * techName = cgGetTechniqueName(m_CgTechnique);
-
-        m_Name = m_Shader->GetName() + VSTR(":");
-        if (techName)
+        if (!m_DXEffect)
         {
-            m_Name += techName;
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware effect."), nullptr);
         }
-        else
+        else if (!m_DXHandle)
         {
-            m_Name += Format(VSTR("tech_%p")) << m_CgTechnique;
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware handle."), nullptr);
         }
 
-        ++this->m_Refs;
-        this->Link();
-        --this->m_Refs;
+        D3DXTECHNIQUE_DESC desc;
+        ZeroMemory(&desc, sizeof(D3DXTECHNIQUE_DESC));
+        if (FAILED(pDXEffect->GetTechniqueDesc(pTechHandle, &desc)))
+        {
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to get technique description."), m_Core);
+        }
+
+        m_Name = desc.Name;
+
+        if (FAILED(m_DXEffect->ValidateTechnique(m_DXHandle)))
+        {
+            Throw(VOODOO_CORE_NAME, VSTR("Unable to validate technique."), m_Core);
+        }
+
+        for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)
+        {
+            D3DXHANDLE passHandle = m_DXEffect->GetPass(m_DXHandle, passIndex++);
+            try
+            {
+                VSPassDX9 * pass = new VSPassDX9(this, m_DXEffect, passHandle);
+                m_Passes.push_back(pass);
+            }
+            catch (Exception & exc)
+            {
+
+            }
+        }
 
         AddThisToDebugCache();
     }
 
-    VOODOO_METHODTYPE VSTechnique::~VSTechnique()
+    VSTechniqueDX9::~VSTechniqueDX9()
     {
         RemoveThisFromDebugCache();
 
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        m_Target = nullptr;
         m_Passes.clear();
     }
 

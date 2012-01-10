@@ -26,15 +26,20 @@
 
 namespace VoodooShader
 {
-    class VSCompiler
+    class VSCompilerDX9
     {
     public:
-        static VoodooResult VOODOO_METHODTYPE CreateEffectFromFile(IFile * pFile, CompileFlags flags, VSShader ** ppShader);
-        static VoodooResult VOODOO_METHODTYPE CompileProgramDX9(
-            ICore * pCore, const std::string & source,
-            const std::vector<std::pair<std::string, std::string>> & defines, 
-            const std::string & function, const std::string & profile, CompileFlags flags,
-            VSProgram ** ppProgram
-        );
+        static ParameterType VOODOO_METHODTYPE GetParameterType(const D3DXPARAMETER_DESC & desc);
+        static ParameterCategory VOODOO_METHODTYPE GetParameterCategory(D3DXPARAMETER_TYPE type);
+    };
+
+    class VSProgramInclude : public ID3DXInclude
+    {
+    public:
+        VSProgramInclude(_In_ ICore * pCore);
+        ~VSProgramInclude();
+
+        STDMETHOD(Close)(LPCVOID pData);
+        STDMETHOD(Open)(D3DXINCLUDE_TYPE IncludeType, LPCSTR pFileName, LPCVOID pParentData, LPCVOID * ppData, UINT * pBytes);
     };
 }

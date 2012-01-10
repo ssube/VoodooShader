@@ -21,21 +21,20 @@
 
 #include "VoodooFramework.hpp"
 
-#include <d3dx9shader.h>
+#include <d3dx9effect.h>
 
 namespace VoodooShader
 {
     /**
      * @clsid e6f312a4-05af-11e1-9e05-005056c00008
      */
-    VOODOO_CLASS(VSShader, IShader, ({0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    VOODOO_CLASS(VSEffectDX9, IEffect, ({0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
-        friend class VSProgram;
-        friend class VSCompiler;
+        friend class VSCompilerDX9;
 
     public:
-        VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
-        ~VSShader();
+        VSEffectDX9(_In_ IFile * pFile, CompileFlags flags);
+        ~VSEffectDX9();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -47,44 +46,17 @@ namespace VoodooShader
         VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
 
-        VOODOO_METHOD_(uint32_t, GetTechniqueCount)() CONST;
-        VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
-        VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;
-        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique);
         VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST;
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
+        VOODOO_METHOD_(IParameter *, GetParameterByName)(const String & name) CONST;
+
+        VOODOO_METHOD_(uint32_t, GetTechniqueCount)() CONST;
+        VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
+        VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(const String & name) CONST;
+        VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;
+        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique);
 
     private:
-        /**
-         * Initialize delayed linking (or relinking) for this shader. This function rebuilds the technique and pass
-         * structure, but <em>does not </em> reload or recompile the effect (Cg effects are handled by the core).
-         */
-        void Link();
-
-        void SetupTechniques();
-
-        /**
-         * Link a particular effect-level parameter against various core elements (exact behavior depends on param type).
-         *
-         * @param pParam The parameter to link.
-         */
-        void LinkParameter(_In_ IParameter * pParam);
-
-        /**
-         * Links a particular effect-level sampler against a core texture. This should be called by IShader::LinkParameter().
-         *
-         * @param pParam The sampler to link
-         */
-        void LinkSampler(_In_ IParameter * pParam);
-
-        /**
-         * Find texture information from a parameter and create a texture based on that data. Calls IShader::LinkSampler()
-         * after texture creation if appropriate.
-         *
-         * @param pParam The parameter to use.
-         */
-        void CreateParameterTexture(_In_ IParameter * pParam);
-
         mutable uint32_t m_Refs;
         ICore * m_Core;
         String m_Name;
@@ -93,6 +65,6 @@ namespace VoodooShader
         TechniqueVector m_Techniques;
         ParameterVector m_Parameters;
 
-        std::vector<StringPair> m_Defines;
+        LPD3DXEFFECT m_DXEffect;
     };
 }
