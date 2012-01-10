@@ -392,7 +392,7 @@ namespace VoodooShader
         return count;
     }
 
-    bool VOODOO_METHODTYPE VSCore::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+    bool VOODOO_METHODTYPE VSCore::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
         if (!ppOut)

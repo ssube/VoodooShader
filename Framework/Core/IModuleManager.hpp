@@ -45,7 +45,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -119,7 +119,7 @@ namespace VoodooShader
          * @param clsid The class Uuid.
          * @return Existence of the class.
          */
-        VOODOO_METHOD(ClassExists)(_In_ const Uuid & clsid) CONST PURE;
+        VOODOO_METHOD(ClassExists)(_In_ const Uuid refid) CONST PURE;
         /**
          * Tests to see if a class exists in the list provided by all loaded modules.
          *
@@ -138,7 +138,7 @@ namespace VoodooShader
          * @param clsid The class Uuid to create.
          * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid & clsid) CONST PURE;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid refid) CONST PURE;
         /**
          * Create a new instance of the given class, using a class name or Uuid in string form.
          *

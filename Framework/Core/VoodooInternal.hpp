@@ -23,6 +23,21 @@
 
 namespace VoodooShader
 {
+    // Main classes
+    class VSAdapter;
+    class VSCore;
+    class VSFileSystem;
+    class VSHookManager;
+    class VSLogger;
+    class VSModule;
+    class VSModuleManager;
+    class VSParameter;
+    class VSParser;
+    class VSPass;
+    class VSProgram;
+    class VSShader;
+    class VSTechnique;
+
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      *

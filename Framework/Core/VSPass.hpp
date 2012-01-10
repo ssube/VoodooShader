@@ -39,11 +39,9 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetTag)(_In_ const Variant & value);
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
 
-        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST;
-        VOODOO_METHOD(SetUniform)(const IParameter * pValue);
         VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST;
         VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget);
         VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST;
@@ -54,9 +52,11 @@ namespace VoodooShader
         mutable uint32_t m_Refs;
         ICore * m_Core;
         String m_Name;
-        pugi::xml_node m_Node;
 
         VSTechnique * m_Technique;
+        VariantMap m_Properties;
+
+        pugi::xml_node m_Node;
         TextureVector m_Targets;
 
         IProgramRef m_VertexShader;

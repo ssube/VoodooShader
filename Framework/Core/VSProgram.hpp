@@ -20,8 +20,7 @@
 #pragma once
 
 #include "VoodooFramework.hpp"
-#include "VSShader.hpp"
-#include "VSPass.hpp"
+#include "VoodooInternal.hpp"
 
 #include <d3dx9shader.h>
 
@@ -46,23 +45,21 @@ namespace VoodooShader
         VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
          
+        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST;
+        VOODOO_METHOD(SetUniform)(const IParameter * pValue);
         VOODOO_METHOD_(ProgramProfile, GetProfile)() CONST;
         VOODOO_METHOD(SetProfile)(const ProgramProfile profile);
         VOODOO_METHOD_(String, GetFunction)() CONST;
         VOODOO_METHOD(SetFunction)(const String & function);
-        VOODOO_METHOD_(IParameter *, GetConstant)(const String & name) CONST;
         VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default);
 
     private:
-        VSProgram(const VSProgram & other);
-        VSProgram & operator=(VSProgram & other);
-
         mutable uint32_t m_Refs;
         ICore * m_Core;
         String m_Name;
-        VariantMap m_Properties;
 
         VSPass * m_Pass;
+        VariantMap m_Properties;
 
         ProgramProfile m_Profile;
         String m_Function;

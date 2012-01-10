@@ -131,9 +131,20 @@ namespace VoodooShader
         PP_ps_1_4       = 0x0114,
         PP_ps_2_0       = 0x0120,
         PP_ps_3_0       = 0x0130,
+        PP_ps_4_0       = 0x0140,
+        PP_ps_4_1       = 0x0141,
+        PP_ps_5_0       = 0x0150,
         PP_vs_1_1       = 0x0211,
         PP_vs_2_0       = 0x0220,
         PP_vs_3_0       = 0x0230,
+        PP_vs_4_0       = 0x0240,
+        PP_vs_4_1       = 0x0241,
+        PP_vs_5_0       = 0x0250,
+        PP_gs_4_0       = 0x0340,
+        PP_gs_5_0       = 0x0350,
+        PP_hs_5_0       = 0x0450,
+        PP_ds_5_0       = 0x0460,
+        PP_cs_5_0       = 0x0470,
         PP_glsl         = 0x8001,
         PP_glsl12       = 0x8002,
         PP_arb1         = 0x8003,
@@ -146,6 +157,15 @@ namespace VoodooShader
         TS_Pass         = 0x02      /* !< Pass target texture. */
     };
 
+    /**
+     * Various hints and flags to the shader compiler. This should be used to hint various modules to use a particular
+     * compilation method or API.
+     * 
+     * Some bits of this enum are reserved for various purposes:
+     *  @li @a 0x000F: Compilation event (immediate, delay, etc).
+     *  @li @a 0x0FF0: Debug and optimization settings.
+     *  @li @a 0xF000: Target API settings.
+     */
     enum CompileFlags : uint32_t
     {
         CF_Default      = 0x0000,   /* !< Compile with the core's default flags. */
@@ -160,6 +180,10 @@ namespace VoodooShader
         CF_OptLevel1    = 0x0200,   /* !< Low optimization level. */
         CF_OptLevel2    = 0x0400,   /* !< Medium optimization level. The default. */
         CF_OptLevel3    = 0x0800,   /* !< Highest optimization level. Slowly produces fast code. */
+        CF_DirectX9     = 0x1000,
+        CF_DirectX10    = 0x2000,
+        CF_DirectX11    = 0x4000,
+        CF_OpenGL       = 0x8000,
     };
 
     /**
@@ -364,7 +388,8 @@ namespace VoodooShader
 #define VSF_OK      0
 #define VSFERR_INVALIDCALL      MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1001)
 #define VSFERR_INVALIDPARAMS    MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1002)
-#define VSFERR_UNKNOWNPROPERTY  MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1003)
+#define VSFERR_INVALIDXML       MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1003)
+#define VSFERR_UNKNOWNPROPERTY  MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1004)
     /**
      * @}
      * @defgroup voodoo_types_vectors Vectors

@@ -34,7 +34,7 @@ namespace VoodooShader
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
@@ -43,9 +43,9 @@ namespace VoodooShader
         VOODOO_METHOD(LoadPath)(_In_ const String & path, _In_ const String & filter);
         VOODOO_METHOD(LoadFile)(_In_ const IFile * pFile);
         VOODOO_METHOD(LoadFile)(_In_ const String & filename);
-        VOODOO_METHOD(ClassExists)(_In_ const Uuid & clsid) CONST;
+        VOODOO_METHOD(ClassExists)(_In_ const Uuid refid) CONST;
         VOODOO_METHOD(ClassExists)(_In_ const String & name) CONST;
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid & clsid) CONST;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid refid) CONST;
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const String & name) CONST;
 
     private:

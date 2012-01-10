@@ -192,7 +192,7 @@ namespace VoodooShader
         }
     }
 
-    int32_t String::ToCharStr(int32_t size, char * const pBuffer) const
+    int32_t String::ToChars(int32_t size, char * const pBuffer) const
     {
         VOODOO_CHECK_IMPL;
         return WideCharToMultiByte(CP_UTF8, NULL, m_Impl->m_Str.c_str(), -1, pBuffer, size, NULL, NULL);

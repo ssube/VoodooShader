@@ -45,7 +45,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -53,9 +53,9 @@ namespace VoodooShader
          * @name IResource Methods
          * @{
          */
-        VOODOO_METHOD_(String, GetName)() CONST PURE;
-        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
-        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        VOODOO_METHOD_(String, GetName)() CONST;
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
         /**
          * @}
          * @name Value Methods
@@ -103,13 +103,13 @@ namespace VoodooShader
         /**
          * Checks if the parameter is virtual (belongs to the core only) or physical (from a program).
          */
-        VOODOO_METHOD(IsVirtual)() CONST PURE;
+        VOODOO_METHOD_(bool, IsVirtual)() CONST PURE;
         /**
          * Gets the parent shader if the parameter is not virtual.
          * 
          * @return Parent shader.
          */
-        VOODOO_METHOD_(IShader * const, GetProgram)() CONST PURE;
+        VOODOO_METHOD_(IProgram *, GetProgram)() CONST PURE;
         /**
          * Attaches a second parameter to this one, forcing the other to update whenever this value is changed.
          *

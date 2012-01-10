@@ -54,7 +54,7 @@ namespace VoodooShader
       *
       * @subsection voodoo_spec_module_exports_info ClassInfo
       *
-      * @code const wchar_t * ClassInfo(const uint32_t index, Uuid & clsid); @endcode
+      * @code const wchar_t * ClassInfo(const uint32_t index, Uuid refid); @endcode
       *
       * Returns the name and CLSID of the given class. This is used to register the classes in the core ModuleManager when
       * the module is loaded. The return value is a pointer to the class name or nullptr if the index is invalid, and the

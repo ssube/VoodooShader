@@ -58,13 +58,13 @@
     <ClCompile Include="VSProgram.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
+    <ClCompile Include="VSCompiler.cpp">
+      <Filter>Source\Implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Exports.hpp">
-      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="ICore.hpp">
       <Filter>Headers\Interfaces</Filter>
@@ -187,6 +187,12 @@
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="VSProgram.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VoodooInternal.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="VSCompiler.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
   </ItemGroup>

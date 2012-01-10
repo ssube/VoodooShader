@@ -20,8 +20,9 @@
 #pragma once
 
 #include "VSProgram.hpp"
-
 #include "VSParameter.hpp"
+#include "VSPass.hpp"
+#include "VSShader.hpp"
 
 namespace VoodooShader
 {
@@ -179,7 +180,7 @@ namespace VoodooShader
         m_Function = function;
     }
 
-    IParameter * VOODOO_METHODTYPE VSProgram::GetConstant(const String & name) CONST
+    IParameter * VOODOO_METHODTYPE VSProgram::GetUniform(const String & name) CONST
     {
         if (!m_ConstantTable) return nullptr;
 

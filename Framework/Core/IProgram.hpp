@@ -33,7 +33,6 @@ namespace VoodooShader
      * A compiled program, created from shader source code and a single entry-point function. Code is compiled to fit a
      * particular profile, following the features given.
      * 
-     * @restag  A UT_PVoid pointing to the compiled shader code.
      * @iid     e6f31293-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(IProgram, IResource, ({0x98, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
@@ -45,7 +44,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -54,13 +53,21 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST PURE;
-        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
-        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
         /**
          * @}
          * @name IProgram Methods
          * @{
          */
+        /**
+         * Retrieve a uniform variable from this pass.
+         * 
+         * @param name      The name of the uniform to get.
+         */
+        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST PURE;
+        /**
+         * Retrieve a 
         /**
          * Gets the profile this program is compiled with.
          */
@@ -83,18 +90,6 @@ namespace VoodooShader
           */
          VOODOO_METHOD(SetFunction)(const String & function) PURE;
          /**
-          * Gets a constant variable from the shader.
-          * 
-          * @param name     The name of the variable to get.
-          */
-         VOODOO_METHOD_(IParameter *, GetConstant)(const String & name) CONST PURE;
-         /**
-          * Sets a constant variable in the shader. This only needs done manually if CF_DelayCompile is set in the core.
-          * 
-          * @param pValue   The parameter to set. This must be a parameter retrieved from IProgram::GetConstant().
-          */
-         VOODOO_METHOD(SetConstant)(_In_ IParameter * pValue) PURE;
-         /**
           * @}
           */
         /**
@@ -103,7 +98,7 @@ namespace VoodooShader
          * @param flags     The flags to be used during compilation. If this is CF_Default, the current set of core defaults
          *                  are used.
          *                  
-         * @warning This is slow.
+         * @warning         This is slow.
          */
         VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default) PURE;
     };

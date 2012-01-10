@@ -38,11 +38,14 @@ namespace VoodooShader
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
+
         VOODOO_METHOD_(uint32_t, GetTechniqueCount)() CONST;
         VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
         VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;

@@ -34,13 +34,13 @@ namespace VoodooShader
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD_(Variant *, GetTag)() CONST;
-        VOODOO_METHOD(SetTag)(const Variant & value);
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
 
         VOODOO_METHOD_(uint32_t, GetPassCount)() CONST;
         VOODOO_METHOD_(IPass *, GetPass)(_In_ const uint32_t index) CONST;
@@ -52,9 +52,9 @@ namespace VoodooShader
         ICore * m_Core;
         String m_Name;
 
-        ITextureRef m_Target;
-        PassVector m_Passes;
-
         VSShader * m_Shader;
+        VariantMap m_Properties;
+
+        PassVector m_Passes;
     };
 }

@@ -50,7 +50,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -58,27 +58,14 @@ namespace VoodooShader
          * @name IResource Methods
          * @{
          */
-        VOODOO_METHOD_(String, GetName)() CONST PURE;
-        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
-        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        VOODOO_METHOD_(String, GetName)() CONST;
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
         /**
          * @}
          * @name IPass Methods
          * @{
          */
-        /**
-         * Retrieve a uniform variable from this pass.
-         * 
-         * @param name      The name of the uniform to get.
-         */
-        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST PURE;
-        /**
-         * Set a uniform variable in this pass.
-         *
-         * @param name      The name of the uniform to set.
-         * @param pValue    The parameter to set the uniform to.
-         */
-        VOODOO_METHOD(SetUniform)(_In_ IParameter * pValue) PURE;
         /**
          * Retrieve a the target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.

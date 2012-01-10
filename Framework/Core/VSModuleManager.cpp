@@ -60,7 +60,7 @@ namespace VoodooShader
         return count;
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+    bool VOODOO_METHODTYPE VSModuleManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
@@ -279,7 +279,7 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const Uuid & clsid) CONST
+    bool VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const Uuid refid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return (m_Classes.find(clsid) != m_Classes.end());
@@ -305,7 +305,7 @@ namespace VoodooShader
         return this->ClassExists(clsid);
     }
 
-    IObject * VOODOO_METHODTYPE VSModuleManager::CreateObject(_In_ const Uuid & clsid) CONST
+    IObject * VOODOO_METHODTYPE VSModuleManager::CreateObject(_In_ const Uuid refid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         ILogger* logger = m_Core->GetLogger();

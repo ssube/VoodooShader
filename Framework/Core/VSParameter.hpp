@@ -20,6 +20,9 @@
 #pragma once
 
 #include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
+
+#include <d3dx9shader.h>
 
 namespace VoodooShader
 {
@@ -35,21 +38,25 @@ namespace VoodooShader
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
-
+        
         VOODOO_METHOD_(String, GetName)() CONST;
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
+
         VOODOO_METHOD_(ParameterType, GetType)() CONST;
-        VOODOO_METHOD(IsVirtual)() CONST;
-        VOODOO_METHOD(AttachParameter)(_In_ IParameter * const pParam);
-        VOODOO_METHOD(DetachParameter)();
         VOODOO_METHOD_(uint32_t, GetComponents)() CONST;
         VOODOO_METHOD_(ITexture *, GetTexture)() CONST;
         VOODOO_METHOD(SetTexture)(_In_opt_ ITexture * const pTexture);
-        _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetScalar)();
-        VOODOO_METHOD_(void, SetScalar)(const uint32_t count, _In_count_(count) float * const pValues);
-        VOODOO_METHOD_(IShader * const, GetShader)() CONST;
+        _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetFloat)();
+        VOODOO_METHOD_(void, SetFloat)(const uint32_t count, _In_count_(count) float * const pValues);
+        
+        VOODOO_METHOD_(bool, IsVirtual)() CONST;
+        VOODOO_METHOD_(IProgram *, GetProgram)() CONST;
+        VOODOO_METHOD(AttachParameter)(_In_ IParameter * const pParam);
+        VOODOO_METHOD(DetachParameter)(_In_ IParameter * const pParam);
 
     private:
         mutable uint32_t m_Refs;
@@ -57,11 +64,12 @@ namespace VoodooShader
         String m_Name;
 
         IProgram * m_Program;
+        VariantMap m_Properties;
 
         bool m_Virtual;
-        ParameterType m_Type;
+        ParameterList m_Attached;
 
-        // Value
+        ParameterType m_Type;
         D3DXHANDLE m_Handle;
         LPD3DXCONSTANTTABLE m_ConstantTable;
         ITextureRef m_ValueTexture;
