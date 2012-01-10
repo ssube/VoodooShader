@@ -389,7 +389,9 @@ namespace VoodooShader
 #define VSFERR_INVALIDCALL      MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1001)
 #define VSFERR_INVALIDPARAMS    MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1002)
 #define VSFERR_INVALIDXML       MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1003)
-#define VSFERR_UNKNOWNPROPERTY  MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1004)
+#define VSFERR_COMPILEFAILED    MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1004)
+#define VSFERR_INVALIDPROFILE   MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1005)
+#define VSFERR_INVALIDPROPERTY  MAKE_HRESULT(VSF_FAIL, FACILITY_ITF, 0x1006)
     /**
      * @}
      * @defgroup voodoo_types_vectors Vectors
@@ -540,6 +542,7 @@ namespace VoodooShader
      * @{
      */
 #if !defined(VOODOO_NO_STDLIB)
+    typedef std::pair<String, String>            StringPair;
     typedef std::map<String, String>             StringMap;
     typedef std::list<String>                    StringList;
     typedef std::vector<String>                  StringVector;

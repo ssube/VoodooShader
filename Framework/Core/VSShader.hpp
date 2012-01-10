@@ -31,6 +31,7 @@ namespace VoodooShader
     VOODOO_CLASS(VSShader, IShader, ({0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
         friend class VSProgram;
+        friend class VSCompiler;
 
     public:
         VSShader(_Pre_notnull_ ICore * const pCore, _In_ const String & Path, _In_opt_ const char ** ppArgs = nullptr);
@@ -92,6 +93,6 @@ namespace VoodooShader
         TechniqueVector m_Techniques;
         ParameterVector m_Parameters;
 
-        std::vector<D3DXMACRO> m_Defines;
+        std::vector<StringPair> m_Defines;
     };
 }

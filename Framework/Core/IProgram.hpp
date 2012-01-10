@@ -61,46 +61,16 @@ namespace VoodooShader
          * @{
          */
         /**
-         * Retrieve a uniform variable from this pass.
-         * 
-         * @param name      The name of the uniform to get.
-         */
-        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST PURE;
-        /**
-         * Retrieve a 
-        /**
          * Gets the profile this program is compiled with.
          */
-         VOODOO_METHOD_(ProgramProfile, GetProfile)() CONST PURE;
-         /**
-          * Sets the profile this program is compiled with.
-          * 
-          * @warning        This may trigger recompilation.
-          */
-         VOODOO_METHOD(SetProfile)(const ProgramProfile profile) PURE;
+        VOODOO_METHOD_(ProgramProfile, GetProfile)() CONST PURE;
          /**
           * Gets the function this program is created from.
           */
-         VOODOO_METHOD_(String, GetFunction)() CONST PURE;
-         /**
-          * Sets the function this program is created from. This must be a valid function with profile-appropriate semantics
-          * in the source code (or included files).
-          * 
-          * @warning        This may trigger recompilation.
-          */
-         VOODOO_METHOD(SetFunction)(const String & function) PURE;
+        VOODOO_METHOD_(String, GetFunction)() CONST PURE;
          /**
           * @}
           */
-        /**
-         * Forces the shader to be recompiled with the current set of definitions.
-         * 
-         * @param flags     The flags to be used during compilation. If this is CF_Default, the current set of core defaults
-         *                  are used.
-         *                  
-         * @warning         This is slow.
-         */
-        VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default) PURE;
     };
     /**
      * @}

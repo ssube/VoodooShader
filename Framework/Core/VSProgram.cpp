@@ -193,50 +193,5 @@ namespace VoodooShader
 
     VoodooResult VOODOO_METHODTYPE VSProgram::Compile(const CompileFlags flags)
     {
-        if (m_Buffer) m_Buffer->Release();
-        if (m_ConstantTable) m_ConstantTable->Release();
-
-        // Convert the source to ASCII
-        VSShader * pShader = m_Pass->GetTechnique()->GetShader();
-        std::string source = pShader->GetSource().ToStringA();
-
-        // Convert function to ASCII
-        std::string function = m_Function.ToStringA();
-
-        D3DXMACRO * pMacros = pShader->m_Defines.size() > 0 ? &pShader->m_Defines[0] : NULL;
-        LPCSTR profile = (LPCSTR)Converter::ToString(m_Profile);
-        DWORD cflags;
-        if (flags != 0)
-        {
-            cflags = flags;
-        } else {
-            cflags = m_Core->GetDefaultFlags();
-        }
-
-        LPD3DXBUFFER errors = NULL;
-
-        // Compile
-        HRESULT hr = D3DXCompileShader
-        (
-            source.c_str(), source.length(), 
-            pMacros, NULL, function.c_str(), profile, cflags, 
-            &m_Buffer, &errors, &m_ConstantTable
-        );
-
-        if (FAILED(hr))
-        {
-            if (errors)
-            {
-                m_Core->GetLogger()->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format("Error compiling shader:\n%1%") << (LPCSTR)errors->GetBufferPointer());
-                errors->Release();
-            } else {
-                m_Core->GetLogger()->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format("Unknown error while compiling program %1%") << this);
-            }
-
-            if (m_Buffer) m_Buffer->Release(); m_Buffer = nullptr;
-            if (m_ConstantTable) m_ConstantTable->Release(); m_ConstantTable = nullptr;
-        }
-
-        return VSF_OK;
     }
 }

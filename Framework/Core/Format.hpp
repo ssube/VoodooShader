@@ -58,6 +58,17 @@ namespace VoodooShader
 
         Format & operator<<(wchar_t val);
 
+#if defined(_STRING)
+        Format & operator<<(std::string val)
+        {
+            return this->operator<<(val.c_str());
+        }
+        Format & operator<<(std::wstring val)
+        {
+            return this->operator<<(val.c_str());
+        }
+#endif
+
         Format & operator<<(const Exception & val);
         Format & operator<<(const Format & val);
         Format & operator<<(const Regex & val);

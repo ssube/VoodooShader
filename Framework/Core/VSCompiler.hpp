@@ -20,37 +20,21 @@
 #pragma once
 
 #include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
+
+#include <d3dx9shader.h>
 
 namespace VoodooShader
 {
-    // Main classes
-    class VSAdapter;
-    class VSCore;
-    class VSFileSystem;
-    class VSHookManager;
-    class VSLogger;
-    class VSModule;
-    class VSModuleManager;
-    class VSParameter;
-    class VSParser;
-    class VSPass;
-    class VSProgram;
-    class VSShader;
-    class VSTechnique;
-
-    // Compiler classes
-    class VSCompiler;
-
-    /**
-     * Creates a new core. This function is exported and meant for use by the loader.
-     *
-     * @param version Version identifier for this core, should always be <tt>VOODOO_SDK_VERSION</tt>.
-     * @return A new ICore object, if one was created successfully.
-     */
-    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(uint32_t version);
-    /* Plugin exports. */
-    const Version * VOODOO_CALLTYPE API_ModuleVersion();
-    const uint32_t  VOODOO_CALLTYPE API_ClassCount();
-    const wchar_t * VOODOO_CALLTYPE API_ClassInfo(const uint32_t index, _Out_ Uuid * pUuid);
-    IObject *       VOODOO_CALLTYPE API_ClassCreate(const uint32_t index, _Pre_notnull_ ICore * pCore);
+    class VSCompiler
+    {
+    public:
+        static VoodooResult VOODOO_METHODTYPE CreateEffectFromFile(IFile * pFile, CompileFlags flags, VSShader ** ppShader);
+        static VoodooResult VOODOO_METHODTYPE CompileProgramDX9(
+            ICore * pCore, const std::string & source,
+            const std::vector<std::pair<std::string, std::string>> & defines, 
+            const std::string & function, const std::string & profile, CompileFlags flags,
+            VSProgram ** ppProgram
+        );
+    };
 }

@@ -68,37 +68,23 @@ namespace VoodooShader
         VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
         /**
          * @}
-         * @name Source Code Methods
+         * @name Sampler Methods
          * @{
          */
         /**
-         * Retrieve a preprocessor definition from the shader header. If the symbol is not defined, an empty string is
-         * returned.
-         * 
-         * @param name      The name of the define.
+         * Get the number of samplers this program has.
          */
-        VOODOO_METHOD_(String, GetDefine)(const String & name) CONST PURE;
+        VOODOO_METHOD_(uint32_t, GetSamplerCount)() CONST PURE;
         /**
-         * Set the value of a preprocessor definition.
+         * Retrieve a texture sampler from this program. <i>Sampler order is critical</i>.
          * 
-         * @param name      The name of the define.
-         * @param value     The value of the define.
+         * @param index     The sampler index.
          */
-        VOODOO_METHOD(SetDefine)(const String & name, const String & value) PURE;
+        VOODOO_METHOD_(ITexture *, GetSampler)(const uint32_t index) CONST PURE;
         /**
-         * Retrieve the source code for the shader. Preprocessor defines and includes are left in their original form, but
-         * variables are parsed out.
+         * Set the texture bound to a sampler in this shader. 
          */
-        VOODOO_METHOD_(String, GetSource)() CONST PURE;
-        /**
-         * Forces the shader to be recompiled with the current set of definitions.
-         * 
-         * @param flags     The flags to be used during compilation. If this is CF_Default, the current set of core defaults
-         *                  are used.
-         *                  
-         * @warning This is slow.
-         */
-        VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default) PURE;
+        VOODOO_METHOD(SetSampler)(const uint32_t index, ITexture * pTexture) PURE;
         /**
          * @}
          * @name Technique Methods

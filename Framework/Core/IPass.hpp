@@ -67,6 +67,12 @@ namespace VoodooShader
          * @{
          */
         /**
+         * Retrieve a uniform variable from this program.
+         * 
+         * @param name      The name of the uniform to get, case-sensitive.
+         */
+        VOODOO_METHOD_(IParameter *, GetUniform)(const String & name) CONST PURE;
+        /**
          * Retrieve a the target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
          *
@@ -96,15 +102,6 @@ namespace VoodooShader
         /**
          * @}
          */
-        /**
-         * Forces the shader to be recompiled with the current set of definitions.
-         * 
-         * @param flags     The flags to be used during compilation. If this is CF_Default, the current set of core defaults
-         *                  are used.
-         *                  
-         * @warning This is slow.
-         */
-        VOODOO_METHOD(Compile)(const CompileFlags flags = CF_Default) PURE;
     };
     /**
      * @}
