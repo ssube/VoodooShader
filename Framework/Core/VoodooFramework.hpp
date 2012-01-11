@@ -84,6 +84,8 @@
 
 #define VOODOO_METHOD_(type, name)  virtual DECLSPEC_NOTHROW type VOODOO_METHODTYPE name
 #define VOODOO_METHOD(name)         VOODOO_METHOD_(VoodooResult, name)
+#define VOODOO_METHODDEF_(type, name) type VOODOO_METHODTYPE name
+#define VOODOO_METHODDEF(name)      VOODOO_METHODDEF_(VoodooResult, name)
 
 #define VOODOO_INTERFACE_(iname, uuid)       DEFINE_IID(iname) = VOODOO_STRIP##uuid; \
     class DECLSPEC_NOVTABLE iname

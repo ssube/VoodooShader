@@ -58,43 +58,30 @@ namespace VoodooShader
         VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
         /**
          * @}
-         * @name Value Methods
+         * @name Value Type Methods
          * @{
          */
         /**
-         * Retrieves the type of this parameter. This specifies what type and how many data components are used (one texture
-         * or 1-16 floats).
+         * Retrieves the type and dimensions of this parameter. 
          */
-        VOODOO_METHOD_(ParameterType, GetType)() CONST PURE;
+        VOODOO_METHOD_(ParameterDesc, GetDesc)() CONST PURE;
         /**
-         * Get the component count for this parameter.
-         *
-         * @note    This will have different meanings depending on parameter type:
-         *     @li For a texture, this represents the number of dimensions (2 for texture2D).
-         *     @li For a vector or matrix, this represents the raw number of components (2 for float2, 4 for float2x2, etc).
-         *     @li Structs and other types that do not also match one of the above will always return 0.
+         * @}
+         * @name Value Access Methods
+         * @{
          */
-        VOODOO_METHOD_(uint32_t, GetComponents)() CONST PURE;
-        /**
-         * Retrieves the texture source for this parameter. This will return null if the parameter is not a sampler.
-         */
-        VOODOO_METHOD_(ITexture *, GetTexture)() CONST PURE;
-        /**
-         * Set the texture source for the parameter. This will fail if the parameter is not a sampler.
-         * 
-         * @param pTexture  The source texture.
-         */
-        VOODOO_METHOD(SetTexture)(_In_opt_ ITexture * const pTexture) PURE;
-        /**
-         * Retrieves the float buffer for this parameter. This contains all 16 float components, for all sizes 
-         * (float1 to float4x4). Any number of components may be written to, but only the appropriate number will be sent to
-         * the hardware parameter.
-         */
-        _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetFloat)() PURE;
-        /**
-         * Set the float buffer for this parameter. This will fail if the parameter is not a float-based type.
-         */
-        VOODOO_METHOD_(void, SetFloat)(_In_ const uint32_t count, _In_count_(count) float * const pValues) PURE;
+        VOODOO_METHOD(GetBool)(bool * pVal) CONST PURE;
+        VOODOO_METHOD(GetFloat)(float * pVal) CONST PURE;
+        VOODOO_METHOD(GetInt)(int32_t * pVal) CONST PURE;
+        VOODOO_METHOD(GetString)(String * pVal) CONST PURE;
+        VOODOO_METHOD(GetTexture)(ITexture ** pVal) CONST PURE;
+        VOODOO_METHOD(GetVector)(Float4 * pVal) CONST PURE;
+        VOODOO_METHOD(SetBool)(bool val) PURE;
+        VOODOO_METHOD(SetFloat)(float val) PURE;
+        VOODOO_METHOD(SetInt)(int32_t val) PURE;
+        VOODOO_METHOD(SetString)(const String & val) PURE;
+        VOODOO_METHOD(SetTexture)(ITexture * pVal) PURE;
+        VOODOO_METHOD(SetVector)(Float4 val) PURE;
         /**
          * @}
          * @name Link Methods
@@ -124,6 +111,7 @@ namespace VoodooShader
         /**
          * @}
          */
+        VOODOO_METHOD_(IEffect *, GetEffect)() CONST PURE;
     };
     /**
      * @}

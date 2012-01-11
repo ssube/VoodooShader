@@ -163,7 +163,7 @@ namespace VoodooShader
          * @note If @a pDesc's RenderTarget flag is true, this must create a texture that can be rendered directly into or 
          *      that have the backbuffer copied efficiently into it, depending on how the adapter chooses to implement RTT.
          *
-         * @warning You should not call this method directly; it should only be used via Core::CreateTexture(). This method
+         * @warning You should not call this method directly; it should only be used via ICore::CreateTexture(). This method
          *     does not set up the texture for use with the core.
          */
         VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc pDesc) PURE;
@@ -182,15 +182,14 @@ namespace VoodooShader
          */
         VOODOO_METHOD(LoadTexture)(_In_ IImage * const pImage, _In_ const TextureRegion region, _Inout_ ITexture * const pTexture) PURE;
         /**
-         * Connects a texture to a sampler-type parameter. This is performed differently in each API, but often uses
-         * Cg-provided functions (in OpenGL, cgGLSetTextureParameter). The parameter and texture should be connected for the
-         * duration of the shader's life or until a different texture is bound to the parameter.
+         * Connects a texture to a sampler-type parameter.
          *
          * @param   pParam  The parameter to bind to (must be a sampler type).
-         * @param   pTexture The texture to be bound.
-         * @return          Whether or not the binding was successful
+         * @param   pTexture The texture to be bound or null to clear any bindings.
+         *
+         * @warning You should not call this method directly; it should only be used via IParameter::SetTexture().
          */
-        VOODOO_METHOD(ConnectTexture)(_In_ IParameter * const pParam, _In_ ITexture * const pTexture) PURE;
+        VOODOO_METHOD(BindTexture)(_In_ IParameter * const pParam, _In_ ITexture * const pTexture) PURE;
         /**
          * @}
          * @name Geometry Methods

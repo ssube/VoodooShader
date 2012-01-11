@@ -31,11 +31,7 @@ namespace VoodooShader
     class VOODOO_API Converter
     {
     public:
-        static ParameterCategory ToParameterCategory(_In_ ParameterType type);
-
         static TextureFormat ToTextureFormat(_In_ const wchar_t * format);
-
-        static uint32_t ToComponents(_In_ ParameterType Type);
 
         /**
          * Helper function to convert enum values into readable strings used in logging;
@@ -54,14 +50,5 @@ namespace VoodooShader
          * @return A string with the name (usually identical to the identifier).
          */
         static const wchar_t * ToString(_In_ ParameterType type);
-
-        /**
-         * Helper function to convert enum values into readable strings used in logging;
-         * this overload handles parameter types.
-         *
-         * @param category The parameter type to find the name of.
-         * @return A string with the name (usually identical to the identifier).
-         */
-        static const wchar_t * ToString(_In_ ParameterCategory category);
     };
 }

@@ -49,7 +49,7 @@ namespace VoodooShader
 
         VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST;
         VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget);
-        VOODOO_METHOD(GetShader)(ShaderStage stage) CONST;
+        VOODOO_METHOD(GetShader)(ShaderStage stage, _In_ Variant * pShader) CONST;
         VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST;
 
     private:

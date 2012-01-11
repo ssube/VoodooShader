@@ -67,51 +67,18 @@ namespace VoodooShader
         TF_D16      = 0x401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
         TF_D32      = 0x402     /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
     };
-    /**
-     * Parameter types valid for @ref VoodooShader::IParameter. These types are available across hardware, exposing most
-     * common shader language types.
-     */
+
     enum ParameterType : uint32_t
     {
-        PT_Unknown      = 0x00,     /* !< Unknown parameter type. */
-        // floats
-        PT_Float1       = 0x11,     /* !< Single-component float. */
-        PT_Float2       = 0x12,     /* !< Two-component float. */
-        PT_Float3       = 0x13,     /* !< Three-component float. */
-        PT_Float4       = 0x14,     /* !< Four-component float. */
-        PT_Float1x1     = 0x11,
-        PT_Float1x2     = 0x12,
-        PT_Float1x3     = 0x13,
-        PT_Float1x4     = 0x14,
-        PT_Float2x1     = 0x21,
-        PT_Float2x2     = 0x22,
-        PT_Float2x3     = 0x23,
-        PT_Float2x4     = 0x24,
-        PT_Float3x1     = 0x31,
-        PT_Float3x2     = 0x32,
-        PT_Float3x3     = 0x33,
-        PT_Float3x4     = 0x34,
-        PT_Float4x1     = 0x41,
-        PT_Float4x2     = 0x42,
-        PT_Float4x3     = 0x43,
-        PT_Float4x4     = 0x44,
-        // Samplers
-        PT_Sampler1D    = 0x101,    /* !< One-dimensional sampler (for a 1D texture, see @ref texturetypes "texture types" for more info). */
-        PT_Sampler2D    = 0x102,    /* !< Two-dimensional sampler (for a 2D texture, see @ref texturetypes "texture types" for more info). */
-        PT_Sampler3D    = 0x103,    /* !< Three-dimensional sampler (for a 3D/volume texture, see @ref texturetypes "texture types" for more info). */
-        // Structs
-        PT_Struct       = 0x1000
-    };
-
-    enum ParameterCategory : uint32_t
-    {
-        PC_Unknown      = 0x00,     /* !< Unknown parameter category. */
-        PC_Bool         = 0x01,
-        PC_Int          = 0x02,
-        PC_Float        = 0x03,     /* !< float vector parameter (may have 1 to 4 components). */
-        PC_Sampler      = 0x04,     /* !< Sampler parameter (may sample 1D to 3D textures). */
-        PC_String       = 0x05,
-        PC_Struct       = 0x06,
+        PT_Unknown      = 0x00,     /* !< Unknown parameter category. */
+        PT_Bool         = 0x01,
+        PT_Int          = 0x02,
+        PT_Float        = 0x03,     /* !< float vector parameter (may have 1 to 4 components). */
+        PT_String       = 0x04,
+        PT_Sampler1D    = 0x0B,     /* !< Sampler parameter (may sample 1D to 3D textures). */
+        PT_Sampler2D    = 0x0C,
+        PT_Sampler3D    = 0x0D,
+        PT_SamplerCube  = 0x0E,
     };
 
     enum ShaderStage : uint32_t
@@ -424,12 +391,13 @@ namespace VoodooShader
     /**
      * @}
      */
+    struct Light;
+    struct ParameterDesc;
     struct TextureDesc;
     struct TextureRegion;
     struct Variant;
     struct Version;
-    struct VertexStruct;
-    struct LightStruct;
+    struct Vertex;
     /**
      * @}
      * @defgroup voodoo_interfaces Interfaces
@@ -601,11 +569,10 @@ namespace VoodooShader
     {
         UInt3 Origin;
     };
-
     /**
      * Standard vertex structure.
      */
-    struct VertexStruct
+    struct VertexDesc
     {
         Float4  Position;
         UByte4  Color;
@@ -614,7 +581,7 @@ namespace VoodooShader
     /**
      * Shader-compatible light structure
      */
-    struct LightStruct
+    struct LightDesc
     {
         uint32_t Type;
         Float4   Diffuse;
@@ -627,6 +594,16 @@ namespace VoodooShader
         Float3   Attenuation;
         float    Theta;
         float    Phi;
+    };
+    /**
+     * Parameter description.
+     */
+    struct ParameterDesc
+    {
+        ParameterType Type;
+        uint32_t      Rows;
+        uint32_t      Columns;
+        uint32_t      Elements;
     };
     /**
      * @}

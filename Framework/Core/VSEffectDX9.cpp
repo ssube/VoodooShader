@@ -101,7 +101,7 @@ namespace VoodooShader
                 break;
             }
             boost::intrusive_ptr<VSParameterDX9> parameter = new VSParameterDX9(this, m_DXEffect, paramHandle);
-            m_DXEffect->m_Parameters.push_back(parameter);
+            m_Parameters.push_back(parameter);
         }
 
         // Get techniques
@@ -116,7 +116,7 @@ namespace VoodooShader
             try
             {
                 VSTechniqueDX9 * technique = new VSTechniqueDX9(this, m_DXEffect, techHandle);
-                m_DXEffect->m_Techniques.push_back(technique);
+                m_Techniques.push_back(technique);
             }
             catch (Exception & exc)
             {
@@ -127,7 +127,7 @@ namespace VoodooShader
         AddThisToDebugCache();
     }
 
-    VSShader::~VSShader()
+    VSEffectDX9::~VSEffectDX9()
     {
         RemoveThisFromDebugCache();
 
@@ -136,13 +136,13 @@ namespace VoodooShader
         m_Parameters.clear();
     }
 
-    uint32_t VOODOO_METHODTYPE VSShader::AddRef() CONST
+    uint32_t VOODOO_METHODTYPE VSEffectDX9::AddRef() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODTYPE VSShader::Release() CONST
+    uint32_t VOODOO_METHODTYPE VSEffectDX9::Release() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
@@ -156,34 +156,26 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODTYPE VSShader::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSEffectDX9::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
-            if (clsid.is_nil())
-            {
-                clsid = CLSID_VSShader;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return VSFERR_INVALIDPARAMS;
         }
         else
         {
-            if (clsid == IID_IObject)
+            if (refid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
             }
-            else if (clsid == IID_IShader)
+            else if (refid == IID_IEffect)
             {
-                *ppOut = static_cast<const IShader*>(this);
+                *ppOut = static_cast<const IEffect*>(this);
             }
-            else if (clsid == CLSID_VSShader)
+            else if (refid == CLSID_VSEffectDX9)
             {
-                *ppOut = static_cast<const VSShader*>(this);
+                *ppOut = static_cast<const VSEffectDX9*>(this);
             }
             else
             {
@@ -191,36 +183,36 @@ namespace VoodooShader
                 return false;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+            (*ppOut)->AddRef();
             return true;
         }
     }
 
-    String VOODOO_METHODTYPE VSShader::ToString() CONST
+    String VOODOO_METHODTYPE VSEffectDX9::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return Format(VSTR("VSShader(%1%)")) << m_Name;
+        return Format(VSTR("VSEffectDX9(%1%)")) << m_Name;
     }
 
-    ICore * VOODOO_METHODTYPE VSShader::GetCore() CONST
+    ICore * VOODOO_METHODTYPE VSEffectDX9::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
-    String VOODOO_METHODTYPE VSShader::GetName() CONST
+    String VOODOO_METHODTYPE VSEffectDX9::GetName() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
     }
 
-    uint32_t VOODOO_METHODTYPE VSShader::GetTechniqueCount() CONST
+    uint32_t VOODOO_METHODTYPE VSEffectDX9::GetTechniqueCount() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Techniques.size();
     }
 
-    ITechnique * VOODOO_METHODTYPE VSShader::GetTechnique(const uint32_t index) CONST
+    ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetTechnique(const uint32_t index) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Techniques.size())
@@ -233,18 +225,18 @@ namespace VoodooShader
         }
     }
 
-    ITechnique * VOODOO_METHODTYPE VSShader::GetDefaultTechnique() CONST
+    ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetDefaultTechnique() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_DefaultTechnique.get();
     }
 
-    bool VOODOO_METHODTYPE VSShader::SetDefaultTechnique(ITechnique * pTechnique)
+    VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetDefaultTechnique(ITechnique * pTechnique)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (pTechnique != nullptr)
         {
-            if (pTechnique->GetShader() == this)
+            if (pTechnique->GetEffect() == this)
             {
                 m_DefaultTechnique = pTechnique;
                 return true;
@@ -263,13 +255,13 @@ namespace VoodooShader
         return false;
     }
 
-    uint32_t VOODOO_METHODTYPE VSShader::GetParameterCount() CONST
+    uint32_t VOODOO_METHODTYPE VSEffectDX9::GetParameterCount() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Parameters.size();
     }
 
-    IParameter * VOODOO_METHODTYPE VSShader::GetParameter(_In_ const uint32_t index) CONST
+    IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameter(_In_ const uint32_t index) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Parameters.size())
@@ -282,438 +274,20 @@ namespace VoodooShader
         }
     }
 
-    CGeffect VOODOO_METHODTYPE VSShader::GetCgEffect() CONST
+    IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameterByName(const String & name) CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        ParameterVector::const_iterator param = m_Parameters.begin();
+        while (param != m_Parameters.end())
+        {
+            if (param->GetName() == name) return (*param);
+        }
+        return nullptr;
+    }
+
+    CGeffect VOODOO_METHODTYPE VSEffectDX9::GetCgEffect() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_CgEffect;
-    }
-
-    void VSShader::Link()
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        // Make sure it's a valid effect
-        if (!cgIsEffect(m_CgEffect))
-        {
-            return;
-        }
-
-        // Link parameters first
-        CGparameter cParam = cgGetFirstEffectParameter(m_CgEffect);
-
-        while (cgIsParameter(cParam))
-        {
-            try
-            {
-                IParameterRef pParam = new VSParameter(this, cParam);
-
-                this->LinkParameter(pParam.get());
-
-                m_Parameters.push_back(pParam);
-            }
-            catch (const std::exception & exc)
-            {
-                const char * name = cgGetParameterName(cParam);
-
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreDebug, VOODOO_CORE_NAME,
-                    Format(VSTR("Error creating linking parameter %1%: %2%")) << name << exc.what()
-                );
-            }
-
-            cParam = cgGetNextParameter(cParam);
-        }
-
-        this->SetupTechniques();
-    }
-
-    void VSShader::LinkParameter(IParameter * pParam)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        IParameterRef param = pParam;
-
-        // Cache basic data for future use
-        ParameterType type = param->GetType();
-        CGparameter cgparam = param->GetCgParameter();
-
-        // Check if it has a global link annotation
-        CGannotation globalAnnotation = cgGetNamedParameterAnnotation(cgparam, "source");
-
-        if (cgIsAnnotation(globalAnnotation) && cgGetAnnotationType(globalAnnotation) == CG_STRING)
-        {
-            const char * globalName = cgGetStringAnnotationValue(globalAnnotation);
-
-            if (globalName != nullptr && strlen(globalName) > 0)
-            {
-                IParameterRef globalParam = m_Core->GetParameter(globalName, type);
-
-                if (globalParam)
-                {
-                    globalParam->AttachParameter(param.get());
-                }
-                else
-                {
-                    m_Core->GetLogger()->LogMessage
-                    (
-                        LL_CoreWarning, VOODOO_CORE_NAME,
-                        Format(VSTR("Unable to find global param '%1%' for parameter '%2%'.")) << globalName << param
-                    );
-                }
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreWarning, VOODOO_CORE_NAME,
-                    Format(VSTR("Unable to read global annotation for parameter '%1%'.")) << param
-                );
-            }
-
-            return;
-        }
-
-        // If it's not linked to a global, it doesn't need linked unless it is a sampler.
-        if (Converter::ToParameterCategory(type) == PC_Sampler)
-        {
-            this->LinkSampler(param.get());
-        }
-    }
-
-    void VSShader::LinkSampler(IParameter * pParam)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        IParameterRef param = pParam;
-
-        CGparameter cgparam = param->GetCgParameter();
-        // Link to a texture
-        CGannotation textureAnnotation = cgGetNamedParameterAnnotation(cgparam, "texture");
-
-        if (!cgIsAnnotation(textureAnnotation) || cgGetAnnotationType(textureAnnotation) != CG_STRING)
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreWarning, VOODOO_CORE_NAME,
-                Format(VSTR("Could not retrieve texture annotation for parameter '%1%'.")) << param
-            );
-
-            return;
-        }
-
-        const char * textureName = cgGetStringAnnotationValue(textureAnnotation);
-
-        if (textureName == nullptr || strlen(textureName) == 0)
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreWarning, VOODOO_CORE_NAME,
-                Format(VSTR("Could not retrieve texture name for parameter '%1%'.")) << param
-            );
-
-            return;
-        }
-
-        // Try to get the texture first, otherwise pass to adapter
-        ITextureRef texture = m_Core->GetTexture(textureName);
-
-        if (texture)
-        {
-            m_Core->GetAdapter()->ConnectTexture(param.get(), texture.get());
-        }
-        else
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreWarning, VOODOO_CORE_NAME,
-                Format(VSTR("Could not find texture '%1%' for parameter '%1%', attempting to load."))  << textureName << param
-            );
-
-            this->CreateParameterTexture(param.get());
-        }
-    }
-
-    void VSShader::CreateParameterTexture(_In_ IParameter * pParam)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        IParameterRef param = pParam;
-
-        CGparameter parameter = param->GetCgParameter();
-
-        if (!cgIsParameter(parameter))
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreError, VOODOO_CORE_NAME,
-                VSTR("Could not create parameter texture for unknown parameter.")
-            );
-
-            return;
-        }
-
-        CGannotation atexName = cgGetNamedParameterAnnotation(parameter, "texture");
-
-        if (!cgIsAnnotation(atexName) || cgGetAnnotationType(atexName) != CG_STRING)
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreError, VOODOO_CORE_NAME,
-                Format(VSTR("Invalid or missing texture name for parameter '%1%'.")) << param
-            );
-
-            return;
-        }
-
-        String texName;
-
-        if (cgGetAnnotationType(atexName) != CG_STRING)
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreError, VOODOO_CORE_NAME,
-                Format(VSTR("Invalid texture name annotation type in '%1%'.")) << param
-            );
-
-            return;
-        }
-        else
-        {
-            String rawname = String(cgGetStringAnnotationValue(atexName));
-            texName = m_Core->GetParser()->Parse(rawname);
-        }
-
-        // Check for a valid texture file
-        TextureRegion texRegion;
-        ZeroMemory(&texRegion, sizeof(TextureRegion));
-
-        /* @todo Load texture region info from the annotations. */
-        CGannotation atexSize = cgGetNamedParameterAnnotation(parameter, "size");
-        CGannotation atexOrigin = cgGetNamedParameterAnnotation(parameter, "origin");
-        CGannotation atexFormat = cgGetNamedParameterAnnotation(parameter, "format");
-        CGannotation atexMips = cgGetNamedParameterAnnotation(parameter, "mipmaps");
-        CGannotation atexTarget = cgGetNamedParameterAnnotation(parameter, "target");
-
-        // CGannotation atexColor = cgGetNamedParameterAnnotation(parameter, "color");
-        if (cgIsAnnotation(atexSize))
-        {
-            CGtype sizeType = cgGetAnnotationType(atexSize);
-
-            int outCount;
-            const int * texSize = cgGetIntAnnotationValues(atexSize, &outCount);
-
-            switch (sizeType)
-            {
-            case CG_INT:
-                m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("1-dimensional texture size found."));
-
-                texRegion.Size.X = texSize[0];
-                texRegion.Size.Y = texRegion.Size.Z = 1;
-                break;
-            case CG_INT2:
-                m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME,VSTR("2-dimensional texture size found."));
-
-                texRegion.Size.X = texSize[0];
-                texRegion.Size.Y = texSize[1];
-                texRegion.Size.Z = 1;
-                break;
-            case CG_INT3:
-                m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("3-dimensional texture size found."));
-
-                texRegion.Size.X = texSize[0];
-                texRegion.Size.Y = texSize[1];
-                texRegion.Size.Z = texSize[2];
-                break;
-            case CG_INT4:
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreError,
-                    VOODOO_CORE_NAME,
-                    VSTR("4-dimensional texture size found (creating quantum texture).")
-                );
-            default:
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreError,
-                    VOODOO_CORE_NAME,
-                    Format(VSTR("Invalid texture size annotation type for parameter '%1%'.")) << param
-                );
-
-                return;
-            }
-        }
-        else
-        {
-            m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("No texture size found."));
-            texRegion.Size.X = texRegion.Size.Y = texRegion.Size.Z = 0;
-        }
-
-        if (cgIsAnnotation(atexOrigin))
-        {
-            CGtype originType = cgGetAnnotationType(atexOrigin);
-
-            int outCount;
-            const int * texOrigin = cgGetIntAnnotationValues(atexSize, &outCount);
-
-            switch (originType)
-            {
-            case CG_INT:
-                m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("1-dimensional texture origin found."));
-
-                texRegion.Origin.X = texOrigin[0];
-                texRegion.Origin.Y = texRegion.Size.Z = 1;
-                break;
-            case CG_INT2:
-                m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("2-dimensional texture origin found."));
-
-                texRegion.Origin.X = texOrigin[0];
-                texRegion.Origin.Y = texOrigin[1];
-                texRegion.Origin.Z = 1;
-                break;
-            case CG_INT3:
-                m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("3-dimensional texture origin found."));
-
-                texRegion.Origin.X = texOrigin[0];
-                texRegion.Origin.Y = texOrigin[1];
-                texRegion.Origin.Z = texOrigin[2];
-                break;
-            default:
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreError,
-                    VOODOO_CORE_NAME,
-                    Format(VSTR("Invalid texture size annotation type for parameter '%1%'.")) << param
-                );
-
-                return;
-            }
-        }
-        else
-        {
-            m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, VSTR("No texture origin found."));
-            texRegion.Origin.X = texRegion.Origin.Y = texRegion.Origin.Z = 0;
-        }
-
-        {
-            int outCount = 0;
-            const CGbool * boolVals = cgGetBoolAnnotationValues(atexMips, &outCount);
-            if (boolVals && outCount > 0)
-            {
-                texRegion.Mipmaps = boolVals[0] == 1;
-            }
-            else
-            {
-                texRegion.Mipmaps = false;
-            }
-        }
-
-        {
-            int outCount = 0;
-            const CGbool * boolVals = cgGetBoolAnnotationValues(atexTarget, &outCount);
-            if (boolVals && outCount > 0)
-            {
-                texRegion.RenderTarget = boolVals[0] == 1;
-            }
-            else
-            {
-                texRegion.RenderTarget = false;
-            }
-        }
-
-        if (cgGetAnnotationType(atexFormat) != CG_STRING)
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreError, VOODOO_CORE_NAME,
-                Format(VSTR("Invalid texture format annotation type in '%1%'.")) << param
-            );
-
-            return;
-        }
-        else
-        {
-            String formatString = cgGetStringAnnotationValue(atexFormat);
-
-            texRegion.Format = Converter::ToTextureFormat(formatString.GetData());
-        }
-
-        // Attempt to load the texture from a file
-        IAdapterRef adapter = m_Core->GetAdapter();
-        ITextureRef texture = m_Core->CreateTexture(texName, (TextureDesc)texRegion);
-
-        IFile * texFile = m_Core->GetFileSystem()->GetFile(texName);
-        if (texFile)
-        {
-            IImage * texImage = texFile->OpenImage();
-            if (texImage)
-            {
-                adapter->LoadTexture(texImage, texRegion, texture.get());
-
-                if (!texture)
-                {
-                    m_Core->GetLogger()->LogMessage
-                    (
-                        LL_CoreWarning, VOODOO_CORE_NAME, 
-                        Format(VSTR("Adapter was unable to load texture from file '%1%'.")) << texFile
-                    );
-                }
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreWarning, VOODOO_CORE_NAME, 
-                    Format(VSTR("File '%1%' is not a valid image.")) << texFile
-                );
-            }
-        }
-        else
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreWarning, VOODOO_CORE_NAME, 
-                Format(VSTR("Unable to find texture file '%1%'.")) << texName
-            );
-        }
-
-        param->SetTexture(texture.get());
-    }
-
-    void VSShader::SetupTechniques()
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        CGtechnique cTech = cgGetFirstTechnique(m_CgEffect);
-
-        while (cgIsTechnique(cTech))
-        {
-            CGbool valid = cgValidateTechnique(cTech);
-
-            if (valid == CG_TRUE)
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreDebug, VOODOO_CORE_NAME,
-                    Format(VSTR("Validated technique '%1%'.")) << cgGetTechniqueName(cTech)
-                );
-
-                // Insert the technique into the map
-                ITechniqueRef tech = new VSTechnique(this, cTech);
-
-                m_Techniques.push_back(tech);
-
-                // The first valid technique is the default one
-                if (!m_DefaultTechnique)
-                {
-                    m_DefaultTechnique = tech;
-                }
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreWarning, VOODOO_CORE_NAME,
-                    Format(VSTR("Technique '%1%' failed to validate.")) << cgGetTechniqueName(cTech)
-                );
-            }
-
-            cTech = cgGetNextTechnique(cTech);
-        }
     }
 }

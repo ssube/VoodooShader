@@ -45,23 +45,46 @@ namespace VoodooShader
             Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no hardware handle."), m_Core);
         }
 
+        m_DXEffect->AddRef();
+
         // Get the targets
-        char targetAnnotName[] = "target0";
-        while (targetAnnotName[6] < '4')
+        char targetIndex = '0';
+        char targetName[] = "target0";
+        while (targetIndex < '4')
         {
-            D3DXHANDLE annotation = m_DXEffect->GetAnnotationByName(m_DXHandle, targetAnnotName);
+            targetName[6] = targetIndex;
+
+            D3DXHANDLE annotation = m_DXEffect->GetAnnotationByName(m_DXHandle, targetName);
             if (!annotation)
             {
                 break;
             }
+
             LPCSTR annotationValue = NULL;
             if (FAILED(m_DXEffect->GetString(annotation, &annotationValue)) || !annotationValue)
             {
                 break;
             }
+
             m_Targets.push_back(m_Core->GetTexture(annotationValue));
 
-            ++targetAnnotName[6];
+            ++targetIndex;
+        }
+
+        // Call the adapter to load the pass
+        IAdapterRef adapter = m_Core->GetAdapter();
+        if (adapter)
+        {
+            if (FAILED(adapter->LoadPass(this)))
+            {
+                m_DXEffect->Release();
+                Throw(VOODOO_CORE_NAME, VSTR("Failed to load pass."), m_Core);
+            }
+        }
+        else
+        {
+            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                Format("No adapter found, pass %1% must be manually loaded later.") << m_Name);
         }
 
         AddThisToDebugCache();
@@ -79,15 +102,20 @@ namespace VoodooShader
                 pAdapter->UnloadPass(this);
             }
         }
+
+        if (m_DXEffect)
+        {
+            m_DXEffect->Release();
+        }
     }
 
-    uint32_t VOODOO_METHODTYPE VSPass::AddRef() CONST
+    uint32_t VOODOO_METHODTYPE VSPassDX9::AddRef() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODTYPE VSPass::Release() CONST
+    uint32_t VOODOO_METHODTYPE VSPassDX9::Release() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
@@ -101,12 +129,12 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSPass::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSPassDX9::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
-            return VSFERROR_INVALIDPARAMS;
+            return VSFERR_INVALIDPARAMS;
         }
         else
         {
@@ -118,9 +146,9 @@ namespace VoodooShader
             {
                 *ppOut = static_cast<const IPass*>(this);
             }
-            else if (clsid == CLSID_VSPass)
+            else if (clsid == CLSID_VSPassDX9)
             {
-                *ppOut = static_cast<const VSPass*>(this);
+                *ppOut = static_cast<const VSPassDX9*>(this);
             }
             else
             {
@@ -133,25 +161,25 @@ namespace VoodooShader
         }
     }
 
-    String VOODOO_METHODTYPE VSPass::ToString() CONST
+    String VOODOO_METHODTYPE VSPassDX9::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return Format(VSTR("VSPass(%1%)")) << m_Name;
     }
 
-    ICore * VOODOO_METHODTYPE VSPass::GetCore() CONST
+    ICore * VOODOO_METHODTYPE VSPassDX9::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
-    String VOODOO_METHODTYPE VSPass::GetName() CONST
+    String VOODOO_METHODTYPE VSPassDX9::GetName() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
     }
 
-    ITexture * VOODOO_METHODTYPE VSPass::GetTarget(uint32_t index) CONST
+    ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(uint32_t index) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Targets.size())
@@ -164,7 +192,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSPass::SetTarget(uint32_t index, ITexture * pTarget)
+    VoodooResult VOODOO_METHODTYPE VSPassDX9::SetTarget(uint32_t index, ITexture * pTarget)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Targets.size())
@@ -178,126 +206,32 @@ namespace VoodooShader
         }
     }
 
-    IProgram * VOODOO_METHODTYPE VSPass::GetProgram(ProgramStage stage) CONST
+    VoodooResult VOODOO_METHODTYPE VSPassDX9::GetShader(ShaderStage stage, _In_ Variant * pShader) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
+        if (!pShader) return VSFERR_INVALIDPARAMS;
+        ZeroMemory(pShader, sizeof(Variant));
+
         switch (stage)
         {
-        case PS_Vertex:
-            return m_VertexShader.get();
-        case PS_Pixel:
-            return m_PixelShader.get();
-        case PS_Geometry:
-            return m_GeometryShader.get();
-        case PS_Domain:
-            return m_DomainShader.get();
-        case PS_Hull:
-            return m_HullShader.get();
-        case PS_Compute:
-            return m_ComputeShader.get();
-        case PS_Unknown:
+        case SS_Vertex:
+            pShader->Type = UT_PVoid;
+            pShader->VPVoid = m_VertexShader;
+            return VSF_OK;
+        case SS_Pixel:
+            pShader->Type = UT_PVoid;
+            pShader->VPVoid = m_PixelShader;
+            return VSF_OK;
+        case SS_Unknown:
         default:
-            return nullptr;
+            return VSFERR_INVALIDPARAMS;
         }
     }
 
-    ITechnique * VOODOO_METHODTYPE VSPass::GetTechnique() CONST
+    ITechnique * VOODOO_METHODTYPE VSPassDX9::GetTechnique() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Technique;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSPass::Compile(const CompileFlags flags)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
-        pugi::xml_node xTarget = m_Node.child(VSTR("Target"));
-        while (xTarget)
-        {
-            String targetName = xTarget.value();
-            if (!targetName.IsEmpty())
-            {
-                ITexture * pTarget = m_Core->GetTexture(targetName);
-                if (pTarget)
-                {
-                    m_Targets.push_back(pTarget);
-                }
-                else
-                {
-                    m_Core->GetLogger()->LogMessage
-                    (
-                        LL_CoreWarning, VOODOO_CORE_NAME,
-                        Format(VSTR("%1% cannot find target '%2%'.")) << this << targetName 
-                    );
-                }
-            }
-
-            xTarget = xTarget.next_sibling();
-        }
-
-        for (ProgramStage stage = PS_Vertex; stage <= PS_Compute; stage = static_cast<ProgramStage>(stage + 1))
-        {
-            const wchar_t * name = Converter::ToString(stage);
-            try
-            {
-                IProgramRef tempProgram = new VSProgram(this, m_Node.child(name));
-                VoodooResult vr = tempProgram->Compile(flags);
-
-                if (VSUCCESS(vr))
-                {
-                    switch (stage)
-                    {
-                    case PS_Vertex:
-                        m_VertexShader = tempProgram; break;
-                    case PS_Pixel:
-                        m_PixelShader = tempProgram; break;
-                    case PS_Geometry:
-                        m_GeometryShader = tempProgram; break;
-                    case PS_Domain:
-                        m_DomainShader = tempProgram; break;
-                    case PS_Hull:
-                        m_HullShader = tempProgram; break;
-                    case PS_Compute:
-                        m_ComputeShader = tempProgram; break;
-                    }
-                }
-            }
-            catch (Exception & exc)
-            {
-                m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
-                    Format("Error compiling program: %1%") << exc.strwhat());
-            }
-        }
-
-        // Load the programs
-        IAdapter * adapter = m_Core->GetAdapter();
-
-        if (!adapter)
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreWarning, VOODOO_CORE_NAME,
-                Format(VSTR("No adapter found, %1% must be explicitly loaded later.")) << this
-            );
-        }
-        else
-        {
-            if (!adapter->LoadPass(this))
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreError, VOODOO_CORE_NAME,
-                    Format(VSTR("Failed to load %1%.")) << this
-                );
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreInfo, VOODOO_CORE_NAME,
-                    Format(VSTR("Successfully loaded %1%.")) << this
-                );
-            }
-        }
     }
 }

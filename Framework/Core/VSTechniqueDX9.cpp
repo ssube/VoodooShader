@@ -84,13 +84,13 @@ namespace VoodooShader
         m_Passes.clear();
     }
 
-    uint32_t VOODOO_METHODTYPE VSTechnique::AddRef() CONST
+    uint32_t VOODOO_METHODTYPE VSTechniqueDX9::AddRef() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODTYPE VSTechnique::Release() CONST
+    uint32_t VOODOO_METHODTYPE VSTechniqueDX9::Release() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
@@ -104,34 +104,26 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODTYPE VSTechnique::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
-            if (clsid.is_nil())
-            {
-                clsid = IID_ITechnique;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return VSFERR_INVALIDPARAMS;
         }
         else
         {
-            if (clsid == IID_IObject)
+            if (refid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
             }
-            else if (clsid == IID_ITechnique)
+            else if (refid == IID_ITechnique)
             {
                 *ppOut = static_cast<const ITechnique*>(this);
             }
-            else if (clsid == CLSID_VSTechnique)
+            else if (refid == CLSID_VSTechniqueDX9)
             {
-                *ppOut = static_cast<const VSTechnique*>(this);
+                *ppOut = static_cast<const VSTechniqueDX9*>(this);
             }
             else
             {
@@ -139,30 +131,30 @@ namespace VoodooShader
                 return false;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+            (*ppOut)->AddRef();
             return true;
         }
     }
 
-    String VOODOO_METHODTYPE VSTechnique::ToString() CONST
+    String VOODOO_METHODTYPE VSTechniqueDX9::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return Format(VSTR("VSTechnique(%1%)")) << m_Name;
     }
 
-    ICore * VOODOO_METHODTYPE VSTechnique::GetCore() CONST
+    ICore * VOODOO_METHODTYPE VSTechniqueDX9::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Core;
     }
 
-    String VOODOO_METHODTYPE VSTechnique::GetName() CONST
+    String VOODOO_METHODTYPE VSTechniqueDX9::GetName() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
     }
 
-    IPass * VOODOO_METHODTYPE VSTechnique::GetPass(const uint32_t index) CONST
+    IPass * VOODOO_METHODTYPE VSTechniqueDX9::GetPass(const uint32_t index) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Passes.size())
@@ -175,103 +167,15 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VOODOO_METHODTYPE VSTechnique::GetTarget() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_Target.get();
-    }
-
-    uint32_t VOODOO_METHODTYPE VSTechnique::GetPassCount() CONST
+    uint32_t VOODOO_METHODTYPE VSTechniqueDX9::GetPassCount() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Passes.size();
     }
 
-    IShader * VOODOO_METHODTYPE VSTechnique::GetShader() CONST
+    IEffect * VOODOO_METHODTYPE VSTechniqueDX9::GetEffect() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_Shader;
-    }
-
-    CGtechnique VOODOO_METHODTYPE VSTechnique::GetCgTechnique() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_CgTechnique;
-    }
-
-    void VSTechnique::Link()
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        // Process the technique's target annotation
-        CGannotation targetAnnotation = cgGetNamedTechniqueAnnotation(m_CgTechnique, "target");
-
-        if (cgIsAnnotation(targetAnnotation))
-        {
-            if (cgGetAnnotationType(targetAnnotation) == CG_STRING)
-            {
-
-                const char *targetName = cgGetStringAnnotationValue(targetAnnotation);
-
-                m_Target = m_Core->GetTexture(targetName);
-
-                if (!m_Target)
-                {
-                    m_Core->GetLogger()->LogMessage
-                    (
-                        LL_CoreWarning, VOODOO_CORE_NAME,
-                        Format(VSTR("Technique %1% cannot find target %2%.")) << this << targetName
-                    );
-
-                    m_Target = m_Core->GetStageTexture(TS_Shader);
-                }
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreWarning, VOODOO_CORE_NAME,
-                    Format(VSTR("Technique %1% has target annotation of invalid type.")) << this
-                );
-
-                m_Target = m_Core->GetStageTexture(TS_Shader);
-            }
-        }
-        else
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreDebug, VOODOO_CORE_NAME,
-                Format(VSTR("Technique %1% has no target annotation.")) << this
-            );
-
-            m_Target = m_Core->GetStageTexture(TS_Shader);
-        }
-
-        m_Passes.clear();
-
-        CGpass cPass = cgGetFirstPass(m_CgTechnique);
-
-        while (cgIsPass(cPass))
-        {
-            // Insert the pass into the vector
-            try
-            {
-                IPassRef pass = new VSPass(this, cPass);
-
-                m_Passes.push_back(pass);
-            }
-            catch (const std::exception & exc)
-            {
-                const char * name = cgGetPassName(cPass);
-
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreDebug, VOODOO_CORE_NAME,
-                    Format(VSTR("Error linking pass %1%: %2%")) << name << exc.what()
-                );
-            }
-
-            cPass = cgGetNextPass(cPass);
-        }
+        return m_Effect;
     }
 }

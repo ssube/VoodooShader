@@ -32,8 +32,8 @@ namespace VoodooShader
     VOODOO_CLASS(VSParameterDX9, IParameter, ({0xA1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSParameterDX9(_Pre_notnull_ IEffect * const pEffect, _In_ LPD3DXEFFECT pDXEffect = nullptr, _In_ D3DXHANDLE pParamHandle = nullptr);
-        VSParameterDX9(_In_ ICore * pCore, const String & name, ParameterType type);
+        VSParameterDX9(_Pre_notnull_ IEffect * const pEffect, _In_ LPD3DXEFFECT pDXEffect, _In_ D3DXHANDLE pParamHandle);
+        VSParameterDX9(_In_ ICore * pCore, const String & name, ParameterDesc desc);
         ~VSParameterDX9();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -46,16 +46,26 @@ namespace VoodooShader
         VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
 
-        VOODOO_METHOD_(ParameterType, GetType)() CONST;
-        VOODOO_METHOD_(uint32_t, GetComponents)() CONST;
-        VOODOO_METHOD_(ITexture *, GetTexture)() CONST;
-        VOODOO_METHOD(SetTexture)(_In_opt_ ITexture * const pTexture);
-        _Ret_count_c_(16) VOODOO_METHOD_(float * const, GetFloat)();
-        VOODOO_METHOD_(void, SetFloat)(const uint32_t count, _In_count_(count) float * const pValues);
+        VOODOO_METHOD_(ParameterDesc, GetDesc)() CONST PURE;
+
+        VOODOO_METHOD(GetBool)(bool * pVal) CONST PURE;
+        VOODOO_METHOD(GetFloat)(float * pVal) CONST PURE;
+        VOODOO_METHOD(GetInt)(int32_t * pVal) CONST PURE;
+        VOODOO_METHOD(GetString)(String * pVal) CONST PURE;
+        VOODOO_METHOD(GetTexture)(ITexture ** pVal) CONST PURE;
+        VOODOO_METHOD(GetVector)(Float4 * pVal) CONST PURE;
+        VOODOO_METHOD(SetBool)(bool val) PURE;
+        VOODOO_METHOD(SetFloat)(float val) PURE;
+        VOODOO_METHOD(SetInt)(int32_t val) PURE;
+        VOODOO_METHOD(SetString)(const String & val) PURE;
+        VOODOO_METHOD(SetTexture)(ITexture * pVal) PURE;
+        VOODOO_METHOD(SetVector)(Float4 val) PURE;
         
         VOODOO_METHOD_(bool, IsVirtual)() CONST;
         VOODOO_METHOD(AttachParameter)(_In_ IParameter * const pParam);
         VOODOO_METHOD(DetachParameter)(_In_ IParameter * const pParam);
+
+        VOODOO_METHOD_(IEffect *, GetEffect)() CONST;
 
     private:
         mutable uint32_t m_Refs;
@@ -65,14 +75,12 @@ namespace VoodooShader
         IEffect * m_Effect;
         VariantMap m_Properties;
 
-        ParameterType m_Type;
-        ITextureRef m_ValueTexture;
-        float m_Valuefloat[16];
-
+        ParameterDesc m_Desc;
         bool m_Virtual;
         ParameterList m_Attached;
 
         LPD3DXEFFECT m_DXEffect;
-        D3DXHANDLE m_Handle;
+        D3DXHANDLE m_DXHandle;
+        ITextureRef m_Texture;
     };
 }
