@@ -45,30 +45,30 @@ namespace VoodooShader
             bool success = true;
 
             // System-related
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glGetString));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glViewport));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglCreateContext));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglDeleteContext));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglGetProcAddress));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglMakeCurrent));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glGetString)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glViewport)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglCreateContext)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglDeleteContext)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglGetProcAddress)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglMakeCurrent)));
 
             // Shader-related
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glClear));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglSwapLayerBuffers));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glClear)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(wglSwapLayerBuffers)));
 
             // Material-related
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glBindTexture));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glDeleteTextures));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glBindTexture)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glDeleteTextures)));
 
             // Shader/material shared
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glBegin));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glDrawElements));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glEnd));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glBegin)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glDrawElements)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glEnd)));
 
             // Fog-related
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glEnable));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glFogf));
-            success &= hooker->Add(VOODOO_OGL_HOOK_PARAMS(glFogfv));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glEnable)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glFogf)));
+            success &= SUCCEEDED(hooker->Add(VOODOO_OGL_HOOK_PARAMS(glFogfv)));
 
             // Check the results and handle
             if (success)
@@ -106,7 +106,7 @@ namespace VoodooShader
             return value;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
         {
             if (!ppOut)
             {
@@ -155,35 +155,31 @@ namespace VoodooShader
             return m_Core;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::LoadPass(_In_ IPass *pass)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::LoadPass(_In_ IPass *pass)
         {
             UNREFERENCED_PARAMETER(pass);
 
-            return true;
+            return VSFERR_NOTIMPLEMENTED;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::UnloadPass(_In_ IPass *pass)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::UnloadPass(_In_ IPass *pass)
         {
             UNREFERENCED_PARAMETER(pass);
 
-            return true;
+            return VSFERR_NOTIMPLEMENTED;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::SetPass(_In_ IPass * pPass)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::SetPass(_In_ IPass * pPass)
         {
             if (!pPass)
             {
                 m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, VSTR("Unable to bind null pass."));
-                return false;
+                return VSFERR_INVALIDPARAMS;
             }
-
-            CGpass cgpass = pPass->GetCgPass();
-
-            cgSetPassState(cgpass);
 
             m_BoundPass = pPass;
 
-            return true;
+            return VSFERR_NOTIMPLEMENTED;
         }
 
         IPass * VOODOO_METHODTYPE FrostAdapter::GetPass() CONST
@@ -191,28 +187,11 @@ namespace VoodooShader
             return m_BoundPass.get();
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::ResetPass(_In_ IPass * pPass)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::ResetPass(_In_ IPass * pPass)
         {
             if (!pPass) return false;
 
-            cgResetPassState(pPass->GetCgPass());
-            return true;
-        }
-
-        bool VOODOO_METHODTYPE FrostAdapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget)
-        {
-            UNREFERENCED_PARAMETER(index);
-            UNREFERENCED_PARAMETER(pTarget);
-
-            // Set render target (somewhat complex for OGL)
-            return true;
-        }
-
-        ITexture * VOODOO_METHODTYPE FrostAdapter::GetTarget(uint32_t index) CONST
-        {
-            UNREFERENCED_PARAMETER(index);
-
-            return nullptr;
+            return VSFERR_NOTIMPLEMENTED;
         }
 
         ITexture * VOODOO_METHODTYPE FrostAdapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
@@ -291,7 +270,7 @@ namespace VoodooShader
             return new FrostTexture(m_Core, name, texture);
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
         {
             UNREFERENCED_PARAMETER(pFile);
             UNREFERENCED_PARAMETER(pRegion);
@@ -302,13 +281,13 @@ namespace VoodooShader
 
 #pragma warning(push)
 #pragma warning(disable : 6385)
-        bool VOODOO_METHODTYPE FrostAdapter::DrawGeometry(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::DrawGeometry(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags)
         {
             UNREFERENCED_PARAMETER(flags);
 
             if (pData)
             {
-                VertexStruct * pVerts = reinterpret_cast<VertexStruct*>(pData);
+                VertexDesc * pVerts = reinterpret_cast<VertexDesc*>(pData);
 
                 glBegin(GL_QUADS);
                 for (uint32_t v = offset; v < offset + count; ++v)
@@ -332,95 +311,34 @@ namespace VoodooShader
                 glEnd();
             }
 
-            return true;
+            return VSF_OK;
         }
 #pragma warning(pop)
 
-        bool VOODOO_METHODTYPE FrostAdapter::ApplyParameter(_In_ IParameter * pParam)
-        {
-            ParameterType pt = pParam->GetType();
-            ParameterCategory pc = Converter::ToParameterCategory(pt);
-            CGparameter cgparam = pParam->GetCgParameter();
-
-            if (pc == PC_Float)
-            {
-                float * values = pParam->GetScalar();
-
-                switch (pt)
-                {
-                case PT_Float1:
-                    cgGLSetParameter1fv(cgparam, values);
-                    break;
-
-                case PT_Float2:
-                    cgGLSetParameter2fv(cgparam, values);
-                    break;
-
-                case PT_Float3:
-                    cgGLSetParameter3fv(cgparam, values);
-                    break;
-
-                case PT_Float4:
-                    cgGLSetParameter4fv(cgparam, values);
-                    break;
-                }
-            }
-            else if (pc == PC_Sampler)
-            {
-                GLuint textureID = (GLuint) pParam->GetTexture()->GetData();
-
-                cgGLSetupSampler(cgparam, textureID);
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, Format("Unable to apply parameter %1%.") << pParam);
-                return false;
-            }
-
-            return true;
-        }
-
-        bool VOODOO_METHODTYPE FrostAdapter::SetProperty(const wchar_t * name, Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::SetProperty(const wchar_t * name, Variant * pValue)
         {
             UNREFERENCED_PARAMETER(name);
             UNREFERENCED_PARAMETER(pValue);
 
-            return false;
+            return VSFERR_NOTIMPLEMENTED;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::GetProperty(const wchar_t * name, Variant * pValue) const
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::GetProperty(const wchar_t * name, Variant * pValue) const
         {
             UNREFERENCED_PARAMETER(name);
             UNREFERENCED_PARAMETER(pValue);
 
-            return false;
+            return VSFERR_NOTIMPLEMENTED;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::ConnectTexture(_In_ IParameter* const pParam, _In_opt_ ITexture* const pTexture)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::BindTexture(_In_ IParameter* const pParam, _In_opt_ ITexture* const pTexture)
         {
-            if (!pParam) return false;
+            if (!pParam || !pTexture) return false;
 
-            pParam->SetTexture(pTexture);
-            if (pTexture)
-            {
-                cgGLSetupSampler(pParam->GetCgParameter(), (GLuint) pTexture->GetData());
-            }
-            else
-            {
-                cgGLSetupSampler(pParam->GetCgParameter(), 0);
-            }
-            return true;
+            return VSFERR_NOTIMPLEMENTED;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::HandleError(CGcontext pContext, uint32_t error)
-        {
-            UNREFERENCED_PARAMETER(pContext);
-            UNREFERENCED_PARAMETER(error);
-
-            return false;
-        }
-
-        void FrostAdapter::DrawShader(_In_ IShader* shader)
+        void FrostAdapter::DrawEffect(_In_ IEffect * effect)
         {
             if (!shader)
             {
@@ -428,14 +346,14 @@ namespace VoodooShader
                 return;
             }
 
-            ITechniqueRef tech = shader->GetDefaultTechnique();
+            ITechniqueRef tech = effect->GetDefaultTechnique();
 
             if (!tech)
             {
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_FROST_NAME,
-                    Format("No default technique given for shader %1%.") << shader
+                    Format("No default technique given for shader %1%.") << effect 
                 );
                 return;
             }
@@ -519,10 +437,7 @@ namespace VoodooShader
                 m_TexLastPass = this->CreateTexture(L":lastpass", desc);
                 m_TexLastShader = this->CreateTexture(L":lastshader", desc);
 
-                m_Core->SetStageTexture(TS_Shader, m_TexLastShader.get());
-                m_Core->SetStageTexture(TS_Pass, m_TexLastPass.get());
-
-                gDepthTexture = (GLint) m_TexDepthFrame->GetData();
+                gDepthTexture = (GLint) m_TexDepthFrame->();
                 gThisFrame = (GLint) m_TexThisFrame->GetData();
                 gLastPass = (GLint) m_TexLastPass->GetData();
                 gLastShader = (GLint) m_TexLastShader->GetData();

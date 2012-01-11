@@ -118,7 +118,7 @@ namespace VoodooShader
         return true;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::IsOpen() const
+    bool VOODOO_METHODTYPE VSLogger::IsOpen() const
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return true;
@@ -130,10 +130,9 @@ namespace VoodooShader
         return true;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::Flush()
+    void VOODOO_METHODTYPE VSLogger::Flush()
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return true;
     }
 
     void VOODOO_METHODTYPE VSLogger::SetFilter(_In_ const uint32_t level)

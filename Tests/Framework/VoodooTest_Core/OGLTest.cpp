@@ -43,7 +43,6 @@ namespace
 {
     ICore *gpCore;
     int gGlutWindow;
-    CGcontext gCgContext;
 }
 
 FIXTURE(OGLCore);
@@ -64,26 +63,19 @@ SETUP(OGLCore)
     WIN_ASSERT_NOT_NULL(gpCore, L"OGLCore::Setup: gpCore is nullptr.");
     gpCore->AddRef();
     gpCore->Initialize(L"D:\\Code\\VoodooShader\\Tests\\Resources\\OpenGL.xmlconfig");
-
-    gCgContext = cgCreateContext();
-    WIN_ASSERT_TRUE(cgIsContext(gCgContext), L"OGLCore::Setup: gCgContext is not valid.");
-
-    WIN_ASSERT_TRUE(gpCore->SetCgContext(gCgContext), L"OGLCore::Setup: Unable to set core.");
 }
 
 TEARDOWN(OGLCore)
 {
-    gpCore->SetCgContext(nullptr);
     gpCore->Release();
 
-    cgDestroyContext(gCgContext);
     glutDestroyWindow(gGlutWindow);
 }
 
 BEGIN_TESTF(Core_CreateShader, OGLCore)
 {
     IFile * file = gpCore->GetFileSystem()->GetFile(L"test.cgfx");
-    IShader* shader = gpCore->CreateShader(file, nullptr);
-    WIN_ASSERT_NULL(shader, L"Core_CreateShader: Unable to create shader.");
+    IEffect * effect = gpCore->CreateEffect(file);
+    WIN_ASSERT_NULL(effect, L"Core_CreateEffect: Unable to create effect.");
 }
 END_TESTF;

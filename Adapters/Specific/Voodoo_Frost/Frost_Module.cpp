@@ -22,7 +22,7 @@
 #include "Frost_Adapter.hpp"
 
 VoodooShader::ICore * gpVoodooCore = nullptr;
-VoodooShader::IShader * gpTestShader;
+VoodooShader::IEffect * gpTestEffect;
 
 GLint gDepthTexture = 0;
 GLint gThisFrame = 0;

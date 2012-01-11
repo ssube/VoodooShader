@@ -68,7 +68,7 @@ namespace VoodooShader
             return value;
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
         {
             if (!ppOut)
             {
@@ -117,7 +117,7 @@ namespace VoodooShader
             return m_Core;
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::LoadPass(_In_ IPass * const pPass)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadPass(_In_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -170,7 +170,7 @@ namespace VoodooShader
             return true;*/
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::UnloadPass(_In_ IPass * const pPass)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::UnloadPass(_In_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -222,7 +222,7 @@ namespace VoodooShader
             return true;*/
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::SetPass(_In_ IPass * const pPass)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetPass(_In_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -240,20 +240,11 @@ namespace VoodooShader
                 logger->LogMessage(LL_ModWarning, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
             }
 
-            cgSetPassState(pPass->GetCgPass());
-
-#ifdef _DEBUG
-            CGerror cgerr = cgGetError();
-            assert(cgerr == CG_NO_ERROR);
-            HRESULT cgd3derr = cgD3D9GetLastError();
-            assert(cgd3derr == D3D_OK);
-#endif
-
             // Bind render targets
             for (uint32_t i = 0; i < 4; ++i)
             {
                 ITexture * pTarget = pPass->GetTarget(i);
-                this->SetTarget(i, pTarget);
+                //this->SetTarget(i, pTarget);
             }
 
             m_BoundPass = pPass;
@@ -266,7 +257,7 @@ namespace VoodooShader
             return m_BoundPass.get();
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::ResetPass(_In_ IPass * pPass)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::ResetPass(_In_ IPass * pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -281,15 +272,6 @@ namespace VoodooShader
                 logger->LogMessage(LL_ModWarning, VOODOO_DX89_NAME, VSTR("Resetting pass different than the previously bound pass."));
             }
 
-            cgResetPassState(pPass->GetCgPass());
-
-#ifdef _DEBUG
-            CGerror cgerr = cgGetError();
-            assert(cgerr == CG_NO_ERROR);
-            HRESULT cgd3derr = cgD3D9GetLastError();
-            assert(cgd3derr == D3D_OK);
-#endif
-
             m_BoundPass = nullptr;
 
             m_PassState->Apply();
@@ -298,7 +280,7 @@ namespace VoodooShader
             return true;
         }
 
-        bool DX9Adapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget)
+        VoodooResult DX9Adapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * pTarget)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -394,17 +376,6 @@ namespace VoodooShader
             }
         }
 
-        ITexture * VOODOO_METHODTYPE DX9Adapter::GetTarget(_In_ const uint32_t index) CONST
-        {
-            if (index > 3)
-            {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Invalid render target index %1%.") << index);
-                return false;
-            }
-
-            return m_RenderTarget[index].get();
-        }
-
         ITexture * VOODOO_METHODTYPE DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
         {
             IDirect3DTexture9 * tex = nullptr;
@@ -436,7 +407,7 @@ namespace VoodooShader
             }
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
         {
             UNREFERENCED_PARAMETER(pFile);
             UNREFERENCED_PARAMETER(pRegion);
@@ -446,7 +417,7 @@ namespace VoodooShader
             return false;
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::DrawGeometry
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::DrawGeometry
         (
             _In_ const uint32_t offset,
             _In_ const uint32_t count,
@@ -481,7 +452,7 @@ namespace VoodooShader
             {
                 IDirect3DVertexBuffer9 * pVertexBuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pData);
 
-                hr = m_Device->SetStreamSource(0, pVertexBuffer, 0, sizeof(VertexStruct));
+                hr = m_Device->SetStreamSource(0, pVertexBuffer, 0, sizeof(VertexDesc));
 
                 hr = m_Device->BeginScene();
 
@@ -502,7 +473,7 @@ namespace VoodooShader
 
                 if (SUCCEEDED(hr))
                 {
-                    hr = m_Device->DrawPrimitiveUP(D3DPT_TRIANGLELIST, count, pData, sizeof(VertexStruct));
+                    hr = m_Device->DrawPrimitiveUP(D3DPT_TRIANGLELIST, count, pData, sizeof(VertexDesc));
                     hr = m_Device->EndScene();
                 }
                 else
@@ -515,38 +486,7 @@ namespace VoodooShader
             return true;
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::ApplyParameter(_In_ IParameter * const pParam)
-        {
-            if (!pParam)
-            {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to apply null parameter."));
-                return false;
-            }
-
-            IParameterRef param(pParam);
-
-            switch (Converter::ToParameterCategory(param->GetType()))
-            {
-            case PC_Float:
-                cgD3D9SetUniform(param->GetCgParameter(), param->GetScalar());
-                break;
-            case PC_Sampler:
-                cgD3D9SetTextureParameter(param->GetCgParameter(), reinterpret_cast<IDirect3DTexture9 *>(param->GetTexture()->GetData()));
-                break;
-            case PC_Unknown:
-            default:
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_ModError, VOODOO_DX89_NAME, 
-                    Format("Unable to bind parameter %1% of unknown type.") << param
-                );
-                return false;
-            }
-
-            return true;
-        }
-
-        bool VOODOO_METHODTYPE DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant * const value)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant * const value)
         {
             String strname(name);
 
@@ -597,7 +537,7 @@ namespace VoodooShader
             return false;
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant * const value) CONST
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant * const value) CONST
         {
             if (!name || !value) return false;
 
@@ -615,37 +555,11 @@ namespace VoodooShader
             return false;
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::ConnectTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::BindTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture)
         {
             if (!pParam)
             {
                 return false;
-            }
-            else if (Converter::ToParameterCategory(pParam->GetType()) == PC_Sampler)
-            {
-                IDirect3DTexture9 * texObj = nullptr;
-
-                if (pTexture)
-                {
-                    texObj = reinterpret_cast<IDirect3DTexture9 *>(pTexture->GetData());
-                    m_Core->GetLogger()->LogMessage
-                    (
-                        LL_ModInfo, VOODOO_DX89_NAME, 
-                        Format("Binding texture %1% to parameter %2%.") << pTexture << pParam
-                    );
-                } 
-                else 
-                {
-                    m_Core->GetLogger()->LogMessage
-                    (
-                        LL_ModInfo, VOODOO_DX89_NAME, 
-                        Format("Binding null texture to parameter %1%.") << pParam);
-                }
-
-                CGparameter texParam = pParam->GetCgParameter();
-
-                cgD3D9SetTextureParameter(texParam, texObj);
-                return true;
             }
             else
             {
@@ -658,23 +572,7 @@ namespace VoodooShader
             }
         }
 
-        bool VOODOO_METHODTYPE DX9Adapter::HandleError(_In_opt_ CGcontext const pContext, _In_ uint32_t error)
-        {
-            UNREFERENCED_PARAMETER(pContext);
-
-            CGerror ecode = (CGerror)error;
-
-            if (ecode == cgD3D9DebugTrace)
-            {
-                const char * emsg = cgD3D9TranslateCGerror(ecode);
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("D3D9 Debug %1%: %2%") << ecode << emsg);
-                return true;
-            }
-
-            return false;
-        }
-
-        bool VOODOO_METHODTYPE DX9Adapter::SetDXDevice(IDirect3DDevice9 * pDevice)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetDXDevice(IDirect3DDevice9 * pDevice)
         {
             if (pDevice == m_Device)
             {
@@ -685,13 +583,6 @@ namespace VoodooShader
                 if (m_VertDecl) m_VertDecl->Release();
                 if (m_VertDeclT) m_VertDeclT->Release();
 
-                CGcontext context = m_Core->GetCgContext();
-                if (cgIsContext(context))
-                {
-                    cgD3D9UnloadAllPrograms();
-                    m_Core->SetCgContext(nullptr);
-                }
-
                 if (!pDevice) return true;
             }
 
@@ -700,15 +591,6 @@ namespace VoodooShader
             HRESULT errors = m_Device->CreateStateBlock(D3DSBT_ALL, &m_CleanState);
 
             ILoggerRef logger = m_Core->GetLogger();
-            CGcontext context = m_Core->GetCgContext();
-
-            if (!cgIsContext(context))
-            {
-                context = cgCreateContext();
-                m_Core->SetCgContext(context);
-            }
-
-            errors = cgD3D9SetDevice(m_Device);
 
             if (!SUCCEEDED(errors))
             {
@@ -717,23 +599,6 @@ namespace VoodooShader
             else
             {
                 logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Cg D3D9 device set successfully."));
-            }
-
-            cgD3D9RegisterStates(context);
-
-            cgD3D9EnableDebugTracing(CG_TRUE);
-
-            cgD3D9SetManageTextureParameters(context, CG_TRUE);
-
-            errors = cgD3D9GetLastError();
-
-            if (!SUCCEEDED(errors))
-            {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Errors registering Cg states."));
-            }
-            else
-            {
-                logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Cg states registered successfully."));
             }
 
             // Setup profiles
@@ -795,7 +660,7 @@ namespace VoodooShader
             float fl = 15.0f;
             float fr = viewport.Width - 15.0f;
 
-            VertexStruct fsVertData[6] =
+            VertexDesc fsVertData[6] =
             {
             //    POSITION              COLOR                  TEXCOORD[0]               TEXCOORD[1]
                 {{fl, fb, 0.5f, 1.0f}, {255, 255,   0,   0}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
@@ -816,7 +681,7 @@ namespace VoodooShader
                 logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
             }
 
-            VertexStruct * pVertices = nullptr;
+            VertexDesc * pVertices = nullptr;
             errors = gpFSQuadVerts->Lock(0, 0, (void**)&pVertices, 0);
 
             if (FAILED(errors))

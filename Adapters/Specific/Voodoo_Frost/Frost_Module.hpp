@@ -47,7 +47,7 @@ namespace VoodooShader
 }
 
 extern VoodooShader::ICore * gpVoodooCore;
-extern VoodooShader::IShader * gpTestShader;
+extern VoodooShader::IEffect * gpTestEffect;
 
 extern GLint gDepthTexture;
 extern GLint gThisFrame;

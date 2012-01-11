@@ -55,8 +55,8 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST PURE;
-        VOODOO_METHOD(GetTag)(_In_ Variant * pValue) CONST PURE;
-        VOODOO_METHOD(SetTag)(_In_ const Variant & value) PURE;
+        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value) PURE;
         /**
          * @}
          * @name ITexture Methods

@@ -144,7 +144,7 @@ namespace VoodooShader
             }
         }
 
-        bool VSWFileSystem::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        VoodooResult VSWFileSystem::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
         {
             if (!ppOut)
             {
@@ -193,7 +193,7 @@ namespace VoodooShader
             return m_Core;
         }
 
-        bool VSWFileSystem::AddPath(const String & name)
+        VoodooResult VSWFileSystem::AddPath(const String & name)
         {
             uint32_t count = name.Split(VSTR(";"), 0, nullptr);
 
@@ -204,10 +204,10 @@ namespace VoodooShader
                 this->m_Directories.push_front(*i);
             }
 
-            return true;
+            return VSF_OK;
         }
 
-        bool VSWFileSystem::RemovePath(const String & name)
+        VoodooResult VSWFileSystem::RemovePath(const String & name)
         {
             this->m_Directories.remove_if
             (
@@ -217,7 +217,7 @@ namespace VoodooShader
                 }
             );
 
-            return true;
+            return VSF_OK;
         }
 
         IFile * VSWFileSystem::GetFile(const String & name, const GetFileMode mode) const

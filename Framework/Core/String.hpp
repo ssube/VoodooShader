@@ -23,6 +23,7 @@
 
 #if !defined(VOODOO_NO_STDLIB)
 #   include <string>
+#   include <vector>
 #endif
 
 namespace VoodooShader

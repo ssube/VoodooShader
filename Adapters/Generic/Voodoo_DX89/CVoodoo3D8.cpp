@@ -216,7 +216,7 @@ namespace VoodooShader
 
                 Uuid adapterID = VoodooShader::VoodooDX9::CLSID_DX9Adapter;
                 VoodooShader::VoodooDX9::DX9Adapter * pDXAdapter = nullptr;
-                if (gpVoodooCore->GetAdapter()->QueryInterface(adapterID, (const void**)&pDXAdapter) && pDXAdapter)
+                if (gpVoodooCore->GetAdapter()->QueryInterface(adapterID, (const IObject **)&pDXAdapter) && pDXAdapter)
                 {
                     pDXAdapter->SetDXDevice(pRealDevice);
                 }
@@ -275,7 +275,7 @@ namespace VoodooShader
                 try
                 {
                     IFileRef shaderfile = gpVoodooCore->GetFileSystem()->GetFile(L"test.cgfx");
-                    testShader = gpVoodooCore->CreateShader(shaderfile.get(), nullptr);
+                    testEffect = gpVoodooCore->CreateEffect(shaderfile.get(), CF_DirectX9);
                 }
                 catch (std::exception & exc)
                 {

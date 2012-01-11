@@ -36,7 +36,7 @@ namespace VoodooShader
 {
     namespace VoodooWFS
     {
-        bool VSWFileImpl::Open(_In_ ICore * m_Core, _In_ String & m_Path, _In_ std::fstream & m_File, _In_ FileOpenMode mode)
+        VoodooResult VSWFileImpl::Open(_In_ ICore * m_Core, _In_ String & m_Path, _In_ std::fstream & m_File, _In_ FileOpenMode mode)
         {
             std::ios_base::openmode access = 0;
 
@@ -72,7 +72,7 @@ namespace VoodooShader
                     LL_ModWarning, VOODOO_FILESYSTEM_NAME,
                     Format(VSTR("Attempted to open file '%1%' with unknown mode (%2%).")) << m_Path << mode
                 );
-                return false;
+                return VSFERR_INVALIDPARAMS;
             }
 
             access |= std::ios_base::binary;
@@ -92,25 +92,25 @@ namespace VoodooShader
                     LL_ModWarning, VOODOO_FILESYSTEM_NAME, 
                     Format(VSTR("Unable to open file '%1%'.")) << m_Path
                 );
-                return false;
+                return VSFERR_FILENOTFOUND;
             }
             else
             {
-                return true;
+                return VSF_OK;
             }
         }
 
-        bool VSWFileImpl::Close(_In_ std::fstream & m_File)
+        VoodooResult VSWFileImpl::Close(_In_ std::fstream & m_File)
         {
             if (m_File.is_open())
             {
                 m_File.close();
             }
 
-            return true;
+            return VSF_OK;
         }
 
-        bool VSWFileImpl::Seek(_In_ std::fstream & m_File, _In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset)
+        VoodooResult VSWFileImpl::Seek(_In_ std::fstream & m_File, _In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset)
         {
             std::ios_base::seekdir dir;
 
@@ -128,7 +128,14 @@ namespace VoodooShader
                 m_File.seekp(offset, dir);
             }
 
-            return m_File.failbit;
+            if (m_File.fail())
+            {
+                return VSFERR_INVALIDCALL;
+            }
+            else
+            {
+                return VSF_OK;
+            }
         }
 
         int32_t VSWFileImpl::Tell(_In_ std::fstream & m_File, _In_ StreamType stream)

@@ -113,19 +113,11 @@ namespace VoodooShader
             }
         }
 
-        bool VSXmlLogger::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        VoodooResult VSXmlLogger::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
         {
             if (!ppOut)
             {
-                if (clsid.is_nil())
-                {
-                    clsid = CLSID_VSXmlLogger;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return VSFERR_INVALIDPARAMS;
             }
             else
             {
@@ -144,10 +136,10 @@ namespace VoodooShader
                 else
                 {
                     *ppOut = nullptr;
-                    return false;
+                    return VSFERR_INVALIDPARAMS;
                 }
 
-                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+                (*ppOut)->AddRef();
                 return true;
             }
         }
@@ -162,7 +154,7 @@ namespace VoodooShader
             return m_Core;
         }
 
-        bool VSXmlLogger::Open(_In_ const String & filename, _In_ const bool append)
+        VoodooResult VSXmlLogger::Open(_In_ const String & filename, _In_ const bool append)
         {
             if (this->m_LogFile.is_open())
             {
@@ -199,15 +191,15 @@ namespace VoodooShader
 #endif
                 m_LogFile << logMsg.str();
 
-                return true;
+                return VSF_OK;
             }
             else
             {
-                return false;
+                return VSFERR_INVALIDCALL;
             }
         }
 
-        bool VSXmlLogger::Open(_In_ IFile *const pFile, _In_ const bool append)
+        VoodooResult VSXmlLogger::Open(_In_ IFile *const pFile, _In_ const bool append)
         {
             return this->Open(pFile->GetPath(), append);
         }
@@ -217,29 +209,24 @@ namespace VoodooShader
             return m_LogFile.is_open();
         }
 
-        bool VSXmlLogger::Close()
+        VoodooResult VSXmlLogger::Close()
         {
             if (this->IsOpen())
             {
                 this->m_LogFile.close();
-                return true;
+                return VSF_OK;
             }
             else
             {
-                return false;
+                return VSFERR_INVALIDCALL;
             }
         }
 
-        bool VSXmlLogger::Flush()
+        void VSXmlLogger::Flush()
         {
             if (this->IsOpen())
             {
                 this->m_LogFile.flush();
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -263,7 +250,7 @@ namespace VoodooShader
             return m_Filter;
         }
 
-        bool VSXmlLogger::LogMessage(const uint32_t level, const String & source, const String & msg)
+        VoodooResult VSXmlLogger::LogMessage(const uint32_t level, const String & source, const String & msg)
         {
             if (!this->IsOpen()) return false;
 

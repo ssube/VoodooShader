@@ -116,19 +116,11 @@ namespace VoodooShader
             }
         }
 
-        bool VSEHHookManager::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        VoodooResult VSEHHookManager::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
         {
             if (!ppOut)
             {
-                if (clsid.is_nil())
-                {
-                    clsid = CLSID_VSEHHookManager;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return VSFERR_INVALIDPARAMS;
             }
             else
             {
@@ -147,11 +139,11 @@ namespace VoodooShader
                 else
                 {
                     *ppOut = nullptr;
-                    return false;
+                    return VSFERR_INVALIDPARAMS;
                 }
 
-                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
-                return true;
+                (*ppOut)->AddRef();
+                return VSF_OK;
             }
         }
 
@@ -165,7 +157,7 @@ namespace VoodooShader
             return m_Core;
         }
 
-        bool VSEHHookManager::Add(const String & name, void * pSrc, void * pDest)
+        VoodooResult VSEHHookManager::Add(const String & name, void * pSrc, void * pDest)
         {
             HookMap::iterator hook = m_Hooks.find(name);
 
@@ -177,7 +169,7 @@ namespace VoodooShader
                     Format(VSTR("Attempted to create a hook with a duplicate name (%1%).")) << name
                 );
 
-                return false;
+                return VSFERR_INVALIDPARAMS;
             }
 
             m_Core->GetLogger()->LogMessage
@@ -197,7 +189,7 @@ namespace VoodooShader
                     Format(VSTR("Error %1 creating hook %s.")) << (uint32_t)result << name
                 );
 
-                return false;
+                return VSFERR_INVALIDCALL;
             }
             else
             {
@@ -205,11 +197,11 @@ namespace VoodooShader
 
                 m_Hooks[name] = hookHandle;
 
-                return true;
+                return VSF_OK;
             }
         }
 
-        bool VSEHHookManager::Remove(const String & name)
+        VoodooResult VSEHHookManager::Remove(const String & name)
         {
             HookMap::iterator hook = m_Hooks.find(name);
 
@@ -230,13 +222,14 @@ namespace VoodooShader
                         Format("Error %1% removing hook %2%.") << (uint32_t)result << name
                     );
 
-                    return true;
+                    return VSFERR_INVALIDCALL;
                 }
                 else
                 {
+                    delete hook->second;
                     m_Hooks.erase(hook);
 
-                    return false;
+                    return VSF_OK;
                 }
             }
             else
@@ -246,24 +239,24 @@ namespace VoodooShader
                     LL_ModDebug, VOODOO_HOOK_NAME,
                     Format(VSTR("Trying to remove hook %1% (does not exist).")) << name.GetData()
                 );
-                return false;
+                return VSFERR_INVALIDPARAMS;
             }
         }
 
-        bool VSEHHookManager::RemoveAll()
+        VoodooResult VSEHHookManager::RemoveAll()
         {
-            LhUninstallAllHooks();
-            LhWaitForPendingRemovals();
-
             std::for_each
             (
                 m_Hooks.begin(), m_Hooks.end(),
-                [](std::pair<String, TRACED_HOOK_HANDLE> chook){delete chook.second;}
+                [this](std::pair<String, TRACED_HOOK_HANDLE> chook)
+                {
+                    this->Remove(chook.first);
+                }
             );
 
             m_Hooks.clear();
 
-            return true;
+            return VSF_OK;
         }
     }
 }

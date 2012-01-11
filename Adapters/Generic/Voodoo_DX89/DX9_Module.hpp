@@ -62,7 +62,7 @@ namespace VoodooShader
 extern VoodooShader::ICoreRef gpVoodooCore;
 extern VoodooShader::ILoggerRef gpVoodooLogger;
 
-extern VoodooShader::IShader * testShader;
+extern VoodooShader::IEffect * testEffect;
 
 extern IDirect3DVertexBuffer9 * gpFSQuadVerts;
 extern IDirect3DSurface9 *backbufferSurf;

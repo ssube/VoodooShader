@@ -33,7 +33,7 @@ namespace VoodooShader
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
@@ -42,18 +42,15 @@ namespace VoodooShader
             VOODOO_METHOD(SetPass)(_In_ IPass * const pPass);
             VOODOO_METHOD_(IPass *, GetPass)() CONST;
             VOODOO_METHOD(ResetPass)(_In_ IPass * const pPass);
-            VOODOO_METHOD(SetTarget)(_In_ const uint32_t index, _In_opt_ ITexture * const pTarget);
-            VOODOO_METHOD_(ITexture *, GetTarget)(_In_ const uint32_t index) CONST;
             VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc pDesc);
             VOODOO_METHOD(LoadTexture)(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture);
             VOODOO_METHOD(DrawGeometry)(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags);
-            VOODOO_METHOD(ApplyParameter)(_In_ IParameter * const pParam);
             VOODOO_METHOD(SetProperty)(_In_ const wchar_t * name, _In_ Variant * const value);
             VOODOO_METHOD(GetProperty)(_In_ const wchar_t * name, _In_ Variant * const value) CONST;
-            VOODOO_METHOD(ConnectTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
-            VOODOO_METHOD(HandleError)(_In_opt_ CGcontext const pContext, _In_ uint32_t error);
+            VOODOO_METHOD(BindTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
 
             VOODOO_METHOD(SetDXDevice)(IDirect3DDevice9 * pDevice);
+            VOODOO_METHOD(SetTarget)(const uint32_t index, _In_opt_ ITexture * pTexture);
 
         private:
             mutable uint32_t m_Refs;

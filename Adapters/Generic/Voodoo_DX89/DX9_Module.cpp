@@ -26,7 +26,7 @@
 VoodooShader::ICoreRef gpVoodooCore = nullptr;
 VoodooShader::ILoggerRef gpVoodooLogger = nullptr;
 
-VoodooShader::IShader* testShader = nullptr;
+VoodooShader::IEffect * testEffect = nullptr;
 
 IDirect3DVertexBuffer9 * gpFSQuadVerts = nullptr;
 IDirect3DSurface9 *backbufferSurf = nullptr;

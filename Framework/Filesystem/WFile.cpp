@@ -61,19 +61,11 @@ namespace VoodooShader
             }
         }
 
-        bool VSWFile::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) const
+        VoodooResult VSWFile::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
         {
             if (!ppOut)
             {
-                if (clsid.is_nil())
-                {
-                    clsid = CLSID_VSWFile;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return VSFERR_INVALIDPARAMS;
             }
             else
             {
@@ -95,7 +87,7 @@ namespace VoodooShader
                     return false;
                 }
 
-                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+                (*ppOut)->AddRef();
                 return true;
             }
         }
@@ -115,7 +107,7 @@ namespace VoodooShader
             return m_Path;
         }
 
-        bool VSWFile::Open(FileOpenMode mode)
+        VoodooResult VSWFile::Open(FileOpenMode mode)
         {
             return VSWFileImpl::Open(m_Core, m_Path, m_File, mode);
         }
@@ -125,12 +117,12 @@ namespace VoodooShader
             return VSWImage::Load(m_Core, m_Path);
         }
 
-        bool VSWFile::Close()
+        VoodooResult VSWFile::Close()
         {
             return VSWFileImpl::Close(m_File);
         }
 
-        bool VSWFile::Seek(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset)
+        VoodooResult VSWFile::Seek(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset)
         {
             return VSWFileImpl::Seek(m_File, stream, mode, offset);
         }

@@ -94,7 +94,7 @@ BEGIN_TEST(String_ToCharStr)
     int32_t size = str.GetLength();
     std::vector<char> buffer(size);
 
-    WIN_ASSERT_EQUAL(str.GetLength(), str.ToCharStr(size, &buffer[0]), L"ToCharStr returnd bad length.");
+    WIN_ASSERT_EQUAL(size, str.ToChars(size, &buffer[0]), L"ToCharStr returned bad length.");
     WIN_ASSERT_ZERO(strcmp("testing", &buffer[0]), L"Strings do not match.");
 }
 END_TEST;

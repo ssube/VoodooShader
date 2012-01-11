@@ -71,7 +71,7 @@ namespace VoodooShader
         /**
          * Checks if this logger has an open file.
          */
-        VOODOO_METHOD(IsOpen)() CONST PURE;
+        VOODOO_METHOD_(bool, IsOpen)() CONST PURE;
         /**
          * Closes the log file, if one is open.
          */
@@ -84,7 +84,7 @@ namespace VoodooShader
          *     debug logging, call Logger::SetBufferSize(int32_t) with a buffer size of 0 and all logged messages @e should
          *     make it to disk, even during fatal crashes.
          */
-        VOODOO_METHOD(Flush)() PURE;
+        VOODOO_METHOD_(void, Flush)() PURE;
         /**
          * @}
          * @name Field Methods

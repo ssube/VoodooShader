@@ -259,9 +259,8 @@ BOOL WINAPI vwglMakeCurrent(HDC hdc, HGLRC hglrc)
             SetWindowText(gWindow, title);
         }
 
-        Uuid clsid = VoodooFrost::CLSID_FrostAdapter;
         VoodooFrost::FrostAdapter * adapter = nullptr;
-        if (gpVoodooCore->GetAdapter()->QueryInterface(clsid, (const void**)&adapter) && adapter)
+        if (gpVoodooCore->GetAdapter()->QueryInterface(VoodooFrost::CLSID_FrostAdapter, (const IObject **)&adapter) && adapter)
         {
             adapter->SetDC(hdc);
             adapter->SetGLRC(hglrc);

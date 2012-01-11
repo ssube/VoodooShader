@@ -56,9 +56,9 @@ namespace VoodooShader
         class VSWFileImpl
         {
         public:
-            static bool Open(_In_ ICore * m_Core, _In_ String & m_Path, _In_ std::fstream & m_File, _In_ FileOpenMode mode);
-            static bool Close(_In_ std::fstream & m_File);
-            static bool Seek(_In_ std::fstream & m_File, _In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset);
+            static VoodooResult Open(_In_ ICore * m_Core, _In_ String & m_Path, _In_ std::fstream & m_File, _In_ FileOpenMode mode);
+            static VoodooResult Close(_In_ std::fstream & m_File);
+            static VoodooResult Seek(_In_ std::fstream & m_File, _In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset);
             static int32_t Tell(_In_ std::fstream & m_File, _In_ StreamType stream);
             static int32_t Read(_In_ ICore * m_Core, _In_ std::fstream & m_File, _In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
             static int32_t Write(_In_ ICore * m_Core, _In_ std::fstream & m_File, _In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
@@ -82,7 +82,7 @@ namespace VoodooShader
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
@@ -119,7 +119,7 @@ namespace VoodooShader
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
@@ -161,7 +161,7 @@ namespace VoodooShader
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 

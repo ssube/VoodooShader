@@ -48,9 +48,9 @@ namespace VoodooShader
 
         VOODOO_METHOD(Open)(_In_ const String & filename, _In_ const bool append);
         VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append);
-        VOODOO_METHOD(IsOpen)() CONST;
+        VOODOO_METHOD_(bool, IsOpen)() CONST;
         VOODOO_METHOD(Close)();
-        VOODOO_METHOD(Flush)();
+        VOODOO_METHOD_(void, Flush)();
         VOODOO_METHOD_(void, SetFilter)(_In_ const uint32_t level);
         VOODOO_METHOD_(LogLevel, GetFilter)() const;
         VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flush);

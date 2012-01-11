@@ -256,7 +256,7 @@ namespace VoodooShader
             CONST RGNDATA *pDirtyRegion
         )
         {
-            if (gpVoodooCore && testShader)
+            if (gpVoodooCore && testEffect)
             {
                 IAdapterRef adapter = gpVoodooCore->GetAdapter();
 
@@ -266,7 +266,7 @@ namespace VoodooShader
                     gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to frame texture.");
                 }
 
-                VoodooShader::ITechniqueRef tech = testShader->GetDefaultTechnique();
+                VoodooShader::ITechniqueRef tech = testEffect->GetDefaultTechnique();
                 uint32_t passCount = tech->GetPassCount();
                 for (uint32_t i = 0; i < passCount; ++i)
                 {

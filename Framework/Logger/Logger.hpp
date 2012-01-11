@@ -77,7 +77,7 @@ namespace VoodooShader
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
@@ -93,7 +93,7 @@ namespace VoodooShader
             /**
              * Checks if the log file is open.
              */
-            VOODOO_METHOD(IsOpen)() CONST;
+            VOODOO_METHOD_(bool, IsOpen)() CONST;
             /**
              * Closes the log file, if one is open.
              */
@@ -108,7 +108,7 @@ namespace VoodooShader
              *      complete debug logging, call Logger::SetBufferSize(unsigned int) with a buffer size of 0 and all logged
              *      messages @em should make it to disk, even during fatal crashes
              */
-            VOODOO_METHOD(Flush)();
+            VOODOO_METHOD_(void, Flush)();
             /**
              * Set the default minimum message level. Messages below this level will not be logged.
              *

@@ -56,7 +56,7 @@ namespace VoodooShader
                 {
                     Uuid clsid = CLSID_DX9Adapter;
                     DX9Adapter * dx9a = nullptr;
-                    if (gpVoodooCore->GetAdapter()->QueryInterface(clsid, (const void**)&dx9a) && dx9a)
+                    if (gpVoodooCore->GetAdapter()->QueryInterface(clsid, (const IObject**)&dx9a) && dx9a)
                     {
                         dx9a->SetDXDevice(nullptr);
                         dx9a->Release();
@@ -158,7 +158,7 @@ namespace VoodooShader
             CONST RGNDATA * pDirtyRegion
         )
         {
-            if (gpVoodooCore && testShader)
+            if (gpVoodooCore && testEffect)
             {
                 ILoggerRef logger = gpVoodooCore->GetLogger();
                 IAdapterRef adapter = gpVoodooCore->GetAdapter();
@@ -169,7 +169,7 @@ namespace VoodooShader
                     logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                 }
 
-                VoodooShader::ITechniqueRef tech = testShader->GetDefaultTechnique();
+                VoodooShader::ITechniqueRef tech = testEffect->GetDefaultTechnique();
                 uint32_t passCount = tech->GetPassCount();
                 for (uint32_t i = 0; i < passCount; ++i)
                 {

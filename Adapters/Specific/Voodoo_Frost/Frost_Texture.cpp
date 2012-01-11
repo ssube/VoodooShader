@@ -57,19 +57,11 @@ namespace VoodooShader
             }
         }
 
-        bool VOODOO_METHODTYPE FrostTexture::QueryInterface(_In_ Uuid & clsid, _Deref_out_opt_ const void ** ppOut) CONST
+        VoodooResult VOODOO_METHODTYPE FrostTexture::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST
         {
             if (!ppOut)
             {
-                if (clsid.is_nil())
-                {
-                    clsid = CLSID_FrostTexture;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return VSFERR_INVALIDPARAMS;
             }
             else
             {
@@ -88,10 +80,10 @@ namespace VoodooShader
                 else
                 {
                     *ppOut = nullptr;
-                    return false;
+                    return VSFERR_INVALIDPARAMS;
                 }
 
-                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+                (*ppOut)->AddRef();
                 return true;
             }
         }
@@ -106,9 +98,19 @@ namespace VoodooShader
             return m_Core;
         }
 
-        String VOODOO_METHODTYPE FrostTexture::GetName() CONST
+        VOODOO_METHODDEF_(String, FrostTexture::GetName)() CONST
         {
             return m_Name;
+        }
+
+        VOODOO_METHODDEF(FrostTexture::GetProperty)(const String & name, _In_ Variant * pValue) CONST
+        {
+            return VSFERR_NOTIMPLEMENTED;
+        }
+
+        VOODOO_METHODDEF(FrostTexture::SetProperty)(const String & name, _In_ const Variant & value)
+        {
+            return VSFERR_NOTIMPLEMENTED;
         }
 
         void * VOODOO_METHODTYPE FrostTexture::GetData() CONST
