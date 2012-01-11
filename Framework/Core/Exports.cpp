@@ -18,7 +18,7 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "Exports.hpp"
+#include "VoodooInternal.hpp"
 
 #include "VSAdapter.hpp"
 #include "VSCore.hpp"

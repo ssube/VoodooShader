@@ -38,7 +38,7 @@ namespace VoodooShader
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
         
@@ -46,20 +46,20 @@ namespace VoodooShader
         VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
 
-        VOODOO_METHOD_(ParameterDesc, GetDesc)() CONST PURE;
+        VOODOO_METHOD_(ParameterDesc, GetDesc)() CONST;
 
-        VOODOO_METHOD(GetBool)(bool * pVal) CONST PURE;
-        VOODOO_METHOD(GetFloat)(float * pVal) CONST PURE;
-        VOODOO_METHOD(GetInt)(int32_t * pVal) CONST PURE;
-        VOODOO_METHOD(GetString)(String * pVal) CONST PURE;
-        VOODOO_METHOD(GetTexture)(ITexture ** pVal) CONST PURE;
-        VOODOO_METHOD(GetVector)(Float4 * pVal) CONST PURE;
-        VOODOO_METHOD(SetBool)(bool val) PURE;
-        VOODOO_METHOD(SetFloat)(float val) PURE;
-        VOODOO_METHOD(SetInt)(int32_t val) PURE;
-        VOODOO_METHOD(SetString)(const String & val) PURE;
-        VOODOO_METHOD(SetTexture)(ITexture * pVal) PURE;
-        VOODOO_METHOD(SetVector)(Float4 val) PURE;
+        VOODOO_METHOD(GetBool)(bool * pVal) CONST;
+        VOODOO_METHOD(GetFloat)(float * pVal) CONST;
+        VOODOO_METHOD(GetInt)(int32_t * pVal) CONST;
+        VOODOO_METHOD(GetString)(String * pVal) CONST;
+        VOODOO_METHOD(GetTexture)(ITexture ** pVal) CONST;
+        VOODOO_METHOD(GetVector)(Float4 * pVal) CONST;
+        VOODOO_METHOD(SetBool)(bool val);
+        VOODOO_METHOD(SetFloat)(float val);
+        VOODOO_METHOD(SetInt)(int32_t val);
+        VOODOO_METHOD(SetString)(const String & val);
+        VOODOO_METHOD(SetTexture)(ITexture * pVal);
+        VOODOO_METHOD(SetVector)(Float4 val);
         
         VOODOO_METHOD_(bool, IsVirtual)() CONST;
         VOODOO_METHOD(AttachParameter)(_In_ IParameter * const pParam);

@@ -64,32 +64,24 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODTYPE VSParser::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
-            if (clsid.is_nil())
-            {
-                clsid = CLSID_VSParser;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return VSFERR_INVALIDPARAMS;
         }
         else
         {
-            if (clsid == IID_IObject)
+            if (refid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
             }
-            else if (clsid == IID_IParser)
+            else if (refid == IID_IParser)
             {
                 *ppOut = static_cast<const IParser*>(this);
             }
-            else if (clsid == CLSID_VSParser)
+            else if (refid == CLSID_VSParser)
             {
                 *ppOut = static_cast<const VSParser*>(this);
             }
@@ -99,7 +91,7 @@ namespace VoodooShader
                 return false;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+            (*ppOut)->AddRef();
             return true;
         }
     }

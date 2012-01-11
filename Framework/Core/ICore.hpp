@@ -45,7 +45,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -120,7 +120,7 @@ namespace VoodooShader
         /**
          * Sets the default compilation flags.
          */
-        VOODOO_METHOD(SetDefaultFlags)(const CompileFlags flags) PURE;
+        VOODOO_METHOD_(void, SetDefaultFlags)(const CompileFlags flags) PURE;
         /**
          * @}
          * @name Resource Methods
@@ -134,7 +134,7 @@ namespace VoodooShader
          * @param   pFile   The file to load and compile. May be an absolute or relative filename.
          * @param   ppArgs  Optional flags to the compiler, usually optimization or API hints.
          */
-        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ const IFile * const pFile, const CompileFlags flags = CF_Default) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile, const CompileFlags flags = CF_Default) PURE;
         /**
          * Creates a global virtual parameter. This parameter exists in the Cg runtime, but is not a part of
          * any shader or program.
@@ -143,12 +143,12 @@ namespace VoodooShader
          * created with this function may be used in Parameter::Link().
          *
          * @param   name    The name for this parameter.
-         * @param   type    The type of the parameter to create.
+         * @param   desc    The desc of the parameter to create.
          *
          * @note This function is the only way to create global parameters. You can then attach effect
          *      parameters to the global and any value changes will propagate down.
          */
-        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterType type) PURE;
+        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterDesc desc) PURE;
         /**
          * Registers a texture with this core.
          *
@@ -165,11 +165,11 @@ namespace VoodooShader
          * Retrieve a parameter by name.
          *
          * @param   name    The name to search for.
-         * @param   type    The type to verify.
+         * @param   desc    The desc to verify.
          *
          * @note If type is PT_Unknown, no type checking is performed, only the name is used.
          */
-        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST PURE;
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterDesc desc) CONST PURE;
         /**
          * Retrieves a texture from the ICore's texture map by name.
          *

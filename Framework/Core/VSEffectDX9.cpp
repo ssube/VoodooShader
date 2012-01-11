@@ -120,7 +120,15 @@ namespace VoodooShader
             }
             catch (Exception & exc)
             {
-                //logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%.") <<
+                D3DXTECHNIQUE_DESC techdesc;
+                if (SUCCEEDED(m_DXEffect->GetTechniqueDesc(techHandle, &techdesc)) && techdesc.Name)
+                {
+                    logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%: %2%") << techdesc.Name << exc.strwhat());
+                }
+                else
+                {
+                    logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%: %2%") << techIndex << exc.strwhat());
+                }
             }
         } 
 
@@ -206,6 +214,40 @@ namespace VoodooShader
         return m_Name;
     }
 
+    VoodooResult VOODOO_METHODTYPE VSEffectDX9::GetProperty(const String & name, _In_ Variant * pValue) CONST
+    {
+        if (!pValue) VSFERR_INVALIDPARAMS;
+
+        if (name.Compare(VSTR("D3DX9EFFECT")))
+        {
+            pValue->Type = UT_PVoid;
+            pValue->VPVoid = (PVOID)m_DXEffect;
+            return VSF_OK;
+        }
+        else
+        {
+            VariantMap::const_iterator property = m_Properties.find(name);
+            if (property != m_Properties.end())
+            {
+                CopyMemory(pValue, &property->second, sizeof(Variant));
+                return VSF_OK;
+            }
+        }
+
+        return VSFERR_INVALIDCALL;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetProperty(const String & name, const Variant & value)
+    {
+        if (name.Compare(VSTR("D3DX9EFFECT")))
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+
+        m_Properties[name] = value;
+        return VSF_OK;
+    }
+
     uint32_t VOODOO_METHODTYPE VSEffectDX9::GetTechniqueCount() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
@@ -223,6 +265,17 @@ namespace VoodooShader
         {
             return nullptr;
         }
+    }
+
+    ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetTechniqueByName(const String & name) CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        TechniqueVector::const_iterator tech = m_Techniques.begin();
+        while (tech != m_Techniques.end())
+        {
+            if ((*tech)->GetName() == name) return (*tech).get();
+        }
+        return nullptr;
     }
 
     ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetDefaultTechnique() CONST
@@ -280,14 +333,8 @@ namespace VoodooShader
         ParameterVector::const_iterator param = m_Parameters.begin();
         while (param != m_Parameters.end())
         {
-            if (param->GetName() == name) return (*param);
+            if ((*param)->GetName() == name) return (*param).get();
         }
         return nullptr;
-    }
-
-    CGeffect VOODOO_METHODTYPE VSEffectDX9::GetCgEffect() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_CgEffect;
     }
 }

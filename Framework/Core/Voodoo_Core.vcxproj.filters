@@ -43,9 +43,6 @@
     <ClCompile Include="Format.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="VSCompiler.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="VSParameterDX9.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
@@ -167,9 +164,6 @@
     </ClInclude>
     <ClInclude Include="VoodooInternal.hpp">
       <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VSCompiler.hpp">
-      <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="IEffect.hpp">
       <Filter>Headers\Interfaces</Filter>

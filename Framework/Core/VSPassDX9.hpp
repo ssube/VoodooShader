@@ -31,8 +31,6 @@ namespace VoodooShader
      */
     VOODOO_CLASS(VSPassDX9, IPass, ({0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
-        friend VSCompilerDX9;
-
     public:
         VSPassDX9(_In_ VSTechniqueDX9 * pTechnique, _In_ LPD3DXEFFECT pEffect, _In_ D3DXHANDLE pPassHandle);
         ~VSPassDX9();
@@ -47,9 +45,9 @@ namespace VoodooShader
         VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
 
-        VOODOO_METHOD_(ITexture *, GetTarget)(uint32_t index) CONST;
-        VOODOO_METHOD(SetTarget)(uint32_t index, ITexture * pTarget);
-        VOODOO_METHOD(GetShader)(ShaderStage stage, _In_ Variant * pShader) CONST;
+        VOODOO_METHOD_(ITexture *, GetTarget)(const uint32_t index) CONST;
+        VOODOO_METHOD(SetTarget)(const uint32_t index, ITexture * pTarget);
+        VOODOO_METHOD(GetShader)(const ShaderStage stage, _In_ Variant * pShader) CONST;
         VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST;
 
     private:

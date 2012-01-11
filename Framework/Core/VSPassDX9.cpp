@@ -129,7 +129,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSPassDX9::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSPassDX9::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
@@ -138,15 +138,15 @@ namespace VoodooShader
         }
         else
         {
-            if (clsid == IID_IObject)
+            if (refid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
             }
-            else if (clsid == IID_IPass)
+            else if (refid == IID_IPass)
             {
                 *ppOut = static_cast<const IPass*>(this);
             }
-            else if (clsid == CLSID_VSPassDX9)
+            else if (refid == CLSID_VSPassDX9)
             {
                 *ppOut = static_cast<const VSPassDX9*>(this);
             }
@@ -179,7 +179,47 @@ namespace VoodooShader
         return m_Name;
     }
 
-    ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(uint32_t index) CONST
+    VoodooResult VOODOO_METHODTYPE VSPassDX9::GetProperty(const String & name, _In_ Variant * pValue) CONST
+    {
+        if (!pValue) VSFERR_INVALIDPARAMS;
+
+        if (name.Compare(VSTR("D3DX9HANDLE")))
+        {
+            pValue->Type = UT_PVoid;
+            pValue->VPVoid = (PVOID)m_DXHandle;
+            return VSF_OK;
+        } 
+        else if (name.Compare(VSTR("D3DX9EFFECT")))
+        {
+            pValue->Type = UT_PVoid;
+            pValue->VPVoid = (PVOID)m_DXEffect;
+            return VSF_OK;
+        }
+        else
+        {
+            VariantMap::const_iterator property = m_Properties.find(name);
+            if (property != m_Properties.end())
+            {
+                CopyMemory(pValue, &property->second, sizeof(Variant));
+                return VSF_OK;
+            }
+        }
+
+        return VSFERR_INVALIDCALL;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSPassDX9::SetProperty(const String & name, const Variant & value)
+    {
+        if (name.Compare(VSTR("D3DX9HANDLE")) || name.Compare(VSTR("D3DX9EFFECT")))
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+
+        m_Properties[name] = value;
+        return VSF_OK;
+    }
+
+    ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(const uint32_t index) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Targets.size())
@@ -192,7 +232,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSPassDX9::SetTarget(uint32_t index, ITexture * pTarget)
+    VoodooResult VOODOO_METHODTYPE VSPassDX9::SetTarget(const uint32_t index, ITexture * pTarget)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (index < m_Targets.size())
@@ -206,7 +246,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSPassDX9::GetShader(ShaderStage stage, _In_ Variant * pShader) CONST
+    VoodooResult VOODOO_METHODTYPE VSPassDX9::GetShader(const ShaderStage stage, _In_ Variant * pShader) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 

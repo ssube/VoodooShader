@@ -189,6 +189,14 @@ namespace VoodooShader
         return (*this);
     }
 
+    Format & Format::operator<<(const ParameterDesc & val)
+    {
+        VOODOO_CHECK_IMPL;
+
+        m_Impl->m_Format % val;
+        return (*this);
+    }
+
     Format & Format::operator<<(const TextureDesc & val)
     {
         VOODOO_CHECK_IMPL;

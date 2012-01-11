@@ -50,5 +50,6 @@ namespace VoodooShader
          * @return A string with the name (usually identical to the identifier).
          */
         static const wchar_t * ToString(_In_ ParameterType type);
+        static const wchar_t * ToString(ShaderStage stage);
     };
 }

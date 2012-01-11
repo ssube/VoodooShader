@@ -39,9 +39,6 @@ namespace VoodooShader
     class VSPassDX9;
     class VSParameterDX9;
 
-    // Compiler classes
-    class VSCompilerDX9;
-
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      *

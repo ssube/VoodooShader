@@ -74,6 +74,7 @@ namespace VoodooShader
         Format & operator<<(const Regex & val);
         Format & operator<<(const String & val);
 
+        Format & operator<<(const ParameterDesc & val);
         Format & operator<<(const TextureDesc & val);
         Format & operator<<(const TextureRegion & val);
         Format & operator<<(const Uuid & val);
@@ -170,6 +171,14 @@ namespace VoodooShader
     {
         out << "[" << val.X << ", " << val.Y << ", " << val.Z << ", " << val.W << "]";
         return out;
+    }
+
+    template<typename Elem>
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & os, const ParameterDesc & v)
+    {
+        os << VSTR("ParameterDesc(Type: ") << Converter::ToString(v.Type) << VSTR("; Rows: ") << v.Rows << 
+            VSTR("; Columns: ") << v.Columns << VSTR("; Elements: ") << v.Elements << VSTR(")");
+        return os;
     }
 
     template<typename Elem>

@@ -63,15 +63,8 @@ namespace VoodooShader
         for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)
         {
             D3DXHANDLE passHandle = m_DXEffect->GetPass(m_DXHandle, passIndex++);
-            try
-            {
-                VSPassDX9 * pass = new VSPassDX9(this, m_DXEffect, passHandle);
-                m_Passes.push_back(pass);
-            }
-            catch (Exception & exc)
-            {
-
-            }
+            VSPassDX9 * pass = new VSPassDX9(this, m_DXEffect, passHandle);
+            m_Passes.push_back(pass);
         }
 
         AddThisToDebugCache();
@@ -152,6 +145,46 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::GetProperty(const String & name, _In_ Variant * pValue) CONST
+    {
+        if (!pValue) VSFERR_INVALIDPARAMS;
+
+        if (name.Compare(VSTR("D3DX9HANDLE")))
+        {
+            pValue->Type = UT_PVoid;
+            pValue->VPVoid = (PVOID)m_DXHandle;
+            return VSF_OK;
+        } 
+        else if (name.Compare(VSTR("D3DX9EFFECT")))
+        {
+            pValue->Type = UT_PVoid;
+            pValue->VPVoid = (PVOID)m_DXEffect;
+            return VSF_OK;
+        }
+        else
+        {
+            VariantMap::const_iterator property = m_Properties.find(name);
+            if (property != m_Properties.end())
+            {
+                CopyMemory(pValue, &property->second, sizeof(Variant));
+                return VSF_OK;
+            }
+        }
+
+        return VSFERR_INVALIDCALL;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::SetProperty(const String & name, const Variant & value)
+    {
+        if (name.Compare(VSTR("D3DX9HANDLE")) || name.Compare(VSTR("D3DX9EFFECT")))
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+
+        m_Properties[name] = value;
+        return VSF_OK;
     }
 
     IPass * VOODOO_METHODTYPE VSTechniqueDX9::GetPass(const uint32_t index) CONST

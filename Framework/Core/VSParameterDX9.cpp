@@ -66,7 +66,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Unable to get link annotation for parameter %1%.") << m_Name);
             } else {
-                IParameter * linkParam = m_Core->GetParameter(linkName, m_Desc.Type);
+                IParameter * linkParam = m_Core->GetParameter(linkName, m_Desc);
                 if (linkParam)
                 {
                     linkParam->AttachParameter(this);
@@ -158,6 +158,46 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return m_Name;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSParameterDX9::GetProperty(const String & name, _In_ Variant * pValue) CONST
+    {
+        if (!pValue) VSFERR_INVALIDPARAMS;
+
+        if (name.Compare(VSTR("D3DX9HANDLE")))
+        {
+            pValue->Type = UT_PVoid;
+            pValue->VPVoid = (PVOID)m_DXHandle;
+            return VSF_OK;
+        } 
+        else if (name.Compare(VSTR("D3DX9EFFECT")))
+        {
+            pValue->Type = UT_PVoid;
+            pValue->VPVoid = (PVOID)m_DXEffect;
+            return VSF_OK;
+        }
+        else
+        {
+            VariantMap::const_iterator property = m_Properties.find(name);
+            if (property != m_Properties.end())
+            {
+                CopyMemory(pValue, &property->second, sizeof(Variant));
+                return VSF_OK;
+            }
+        }
+
+        return VSFERR_INVALIDCALL;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSParameterDX9::SetProperty(const String & name, const Variant & value)
+    {
+        if (name.Compare(VSTR("D3DX9HANDLE")) || name.Compare(VSTR("D3DX9EFFECT")))
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+
+        m_Properties[name] = value;
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF_(ParameterDesc, VSParameterDX9::GetDesc)() CONST

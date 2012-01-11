@@ -60,32 +60,24 @@ namespace VoodooShader
         return count;
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
-            if (clsid.is_nil())
-            {
-                clsid = CLSID_VSModuleManager;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return VSFERR_INVALIDPARAMS;
         }
         else
         {
-            if (clsid == IID_IObject)
+            if (refid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
             }
-            else if (clsid == IID_IModuleManager)
+            else if (refid == IID_IModuleManager)
             {
                 *ppOut = static_cast<const IModuleManager*>(this);
             }
-            else if (clsid == CLSID_VSModuleManager)
+            else if (refid == CLSID_VSModuleManager)
             {
                 *ppOut = static_cast<const VSModuleManager*>(this);
             }
@@ -95,7 +87,7 @@ namespace VoodooShader
                 return false;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+            (*ppOut)->AddRef();
             return true;
         }
     }
@@ -112,19 +104,19 @@ namespace VoodooShader
         return m_Core;
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const String & name) CONST
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const String & name) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return (m_ModuleNames.find(name) != m_ModuleNames.end());
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const Uuid & libid) CONST
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const Uuid & libid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return (m_Modules.find(libid) != m_Modules.end());
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         String mask = m_Core->GetParser()->Parse(path) + VSTR("\\*");
@@ -182,7 +174,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::LoadFile(_In_ const String & filename)
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::LoadFile(_In_ const String & filename)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         ILoggerRef logger = m_Core->GetLogger();
@@ -266,7 +258,7 @@ namespace VoodooShader
     }
 
 
-    bool VOODOO_METHODTYPE VSModuleManager::LoadFile(_In_ const IFile * pFile)
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::LoadFile(_In_ const IFile * pFile)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (pFile)
@@ -275,17 +267,17 @@ namespace VoodooShader
         }
         else
         {
-            return nullptr;
+            return VSFERR_INVALIDPARAMS;
         }
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const Uuid refid) CONST
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const Uuid clsid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return (m_Classes.find(clsid) != m_Classes.end());
     }
 
-    bool VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const String & name) CONST
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const String & name) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         Uuid clsid;
@@ -305,7 +297,7 @@ namespace VoodooShader
         return this->ClassExists(clsid);
     }
 
-    IObject * VOODOO_METHODTYPE VSModuleManager::CreateObject(_In_ const Uuid refid) CONST
+    IObject * VOODOO_METHODTYPE VSModuleManager::CreateObject(_In_ const Uuid clsid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         ILogger* logger = m_Core->GetLogger();

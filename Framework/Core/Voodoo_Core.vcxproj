@@ -54,7 +54,7 @@
       <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);cg.lib;shell32.lib;shlwapi.lib;pugixml_d.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);d3dx9.lib;shell32.lib;shlwapi.lib;pugixml_d.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
       <EntryPointSymbol>
@@ -70,7 +70,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);cg.lib;shell32.lib;shlwapi.lib;pugixml.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);d3dx9.lib;shell32.lib;shlwapi.lib;pugixml.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
     </Link>
@@ -86,7 +86,6 @@
     <ClCompile Include="Format.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="VSAdapter.cpp" />
-    <ClCompile Include="VSCompiler.cpp" />
     <ClCompile Include="VSCore.cpp" />
     <ClCompile Include="VSFilesystem.cpp" />
     <ClCompile Include="VSHookManager.cpp" />
@@ -121,7 +120,6 @@
     <ClInclude Include="ITexture.hpp" />
     <ClInclude Include="VoodooDebug.hpp" />
     <ClInclude Include="VSAdapter.hpp" />
-    <ClInclude Include="VSCompiler.hpp" />
     <ClInclude Include="VSCore.hpp" />
     <ClInclude Include="VSFilesystem.hpp" />
     <ClInclude Include="VSHookManager.hpp" />

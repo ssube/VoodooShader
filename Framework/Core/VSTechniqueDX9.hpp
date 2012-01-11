@@ -31,15 +31,13 @@ namespace VoodooShader
      */
     VOODOO_CLASS(VSTechniqueDX9, ITechnique, ({0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
-        friend VSCompilerDX9;
-
     public:
         VSTechniqueDX9(_In_ VSEffectDX9 * pEffect, _In_ LPD3DXEFFECT pDXEffect, _In_ D3DXHANDLE pTechHandle);
         ~VSTechniqueDX9();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 

@@ -29,15 +29,6 @@ namespace VoodooShader
     extern HMODULE gCoreHandle;
 
     /**
-     * Non-member function provided to Cg as an error handling callback.
-     *
-     * @param pContext The Cg context throwing the error.
-     * @param error    The error code.
-     * @param pCore    The core associated with the error, if any.
-     */
-    void Voodoo_CgErrorHandler_Func(_In_ CGcontext pContext, _In_ CGerror error, _In_opt_ void * pCore);
-
-    /**
      * ICore engine class for the Voodoo Shader Framework. Provides centralized management and handling for
      * shaders, textures, plugins and variable/configuration mechanics.
      *
@@ -45,8 +36,6 @@ namespace VoodooShader
      */
     VOODOO_CLASS(VSCore, ICore, ({0x9B, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
-        friend void Voodoo_CgErrorHandler_Func(CGcontext, CGerror, void *);
-
     public:
         VSCore(uint32_t version);
         ~VSCore();
@@ -54,43 +43,39 @@ namespace VoodooShader
         // IObject
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST;
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         // ICore
         VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config);
         VOODOO_METHOD(Reset)();
+
         VOODOO_METHOD_(IParser *, GetParser)() CONST;
         VOODOO_METHOD_(IHookManager *, GetHookManager)() CONST;
         VOODOO_METHOD_(IFileSystem *, GetFileSystem)() CONST;
         VOODOO_METHOD_(IAdapter *, GetAdapter)() CONST;
         VOODOO_METHOD_(ILogger *, GetLogger)() CONST;
         VOODOO_METHOD_(XmlDocument, GetConfig)() CONST;
-        VOODOO_METHOD_(IShader *, CreateShader)(_In_ const IFile * const pFile, _In_opt_ const char ** ppArgs);
-        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterType type);
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc Desc);
-        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterType type) CONST;
+        VOODOO_METHOD_(CompileFlags, GetDefaultFlags)() CONST;
+        VOODOO_METHOD_(void, SetDefaultFlags)(const CompileFlags flags);
+
+        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile, const CompileFlags flags); 
+        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterDesc desc);
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc desc);
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterDesc desc) CONST;
         VOODOO_METHOD_(ITexture *, GetTexture)(_In_ const String & name) CONST;
         VOODOO_METHOD(RemoveParameter)(_In_ const String & name);
         VOODOO_METHOD(RemoveTexture)(_In_ const String & name);
-        VOODOO_METHOD_(ITexture *, GetStageTexture)(_In_ const TextureStage stage) CONST;
-        VOODOO_METHOD_(void, SetStageTexture)(_In_ const TextureStage stage, _In_opt_ ITexture * const pTexture);
-        _Check_return_ VOODOO_METHOD_(CGcontext, GetCgContext)() CONST;
-        VOODOO_METHOD(SetCgContext)(_In_opt_ CGcontext const pContext);
-
-    private:
-        void CgErrorHandler(_In_ CGcontext pContext, _In_ CGerror error) const;
 
     private:
         mutable uint32_t m_Refs;
         uint32_t m_Version;
 
+        CompileFlags m_DefaultFlags;
+
         /** Config file. */
         XmlDocument m_ConfigFile;
-
-        /** Cg context used by this pCore. */
-        CGcontext m_CgContext;
 
         /** The current IAdapter implementation. */
         IAdapterRef m_Adapter;
@@ -111,7 +96,7 @@ namespace VoodooShader
         IParserRef m_Parser;
 
         /** Collection of all usable shaders. */
-        ShaderList m_Shaders;
+        EffectList m_Effects;
 
         /** Collection of all usable textures. */
         TextureMap m_Textures;

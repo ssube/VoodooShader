@@ -61,6 +61,8 @@ namespace VoodooShader
         ICore * m_Core;
         String m_Name;
 
+        VariantMap m_Properties;
+
         ITechniqueRef m_DefaultTechnique;
         TechniqueVector m_Techniques;
         ParameterVector m_Parameters;

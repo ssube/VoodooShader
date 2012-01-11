@@ -56,32 +56,24 @@ namespace VoodooShader
         }
     }
 
-    bool VOODOO_METHODTYPE VSFileSystem::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const void ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSFileSystem::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
-            if (clsid.is_nil())
-            {
-                clsid = IID_IFileSystem;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return VSFERR_INVALIDPARAMS;
         }
         else
         {
-            if (clsid == IID_IObject)
+            if (refid == IID_IObject)
             {
                 *ppOut = static_cast<const IObject*>(this);
             }
-            else if (clsid == IID_IFileSystem)
+            else if (refid == IID_IFileSystem)
             {
                 *ppOut = static_cast<const IFileSystem*>(this);
             }
-            else if (clsid == CLSID_VSFileSystem)
+            else if (refid == CLSID_VSFileSystem)
             {
                 *ppOut = static_cast<const VSFileSystem*>(this);
             }
@@ -91,7 +83,7 @@ namespace VoodooShader
                 return false;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
+            (*ppOut)->AddRef();
             return true;
         }
     }
@@ -108,7 +100,7 @@ namespace VoodooShader
         return m_Core;
     }
 
-    bool VOODOO_METHODTYPE VSFileSystem::AddPath(_In_ const String & dir)
+    VoodooResult VOODOO_METHODTYPE VSFileSystem::AddPath(_In_ const String & dir)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(dir);
@@ -116,7 +108,7 @@ namespace VoodooShader
         return true;
     }
 
-    bool VOODOO_METHODTYPE VSFileSystem::RemovePath(_In_ const String & dir)
+    VoodooResult VOODOO_METHODTYPE VSFileSystem::RemovePath(_In_ const String & dir)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(dir);
