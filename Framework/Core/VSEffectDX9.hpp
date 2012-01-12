@@ -33,7 +33,7 @@ namespace VoodooShader
         friend class VSCompilerDX9;
 
     public:
-        VSEffectDX9(_In_ IFile * pFile, CompileFlags flags);
+        VSEffectDX9(_Pre_notnull_ IFile * pFile, CompileFlags flags);
         ~VSEffectDX9();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -43,8 +43,8 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
+        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
         VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST;
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
@@ -61,7 +61,7 @@ namespace VoodooShader
         ICore * m_Core;
         String m_Name;
 
-        VariantMap m_Properties;
+        PropertyMap m_Properties;
 
         ITechniqueRef m_DefaultTechnique;
         TechniqueVector m_Techniques;

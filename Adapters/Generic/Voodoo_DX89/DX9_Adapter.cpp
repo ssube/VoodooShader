@@ -117,7 +117,80 @@ namespace VoodooShader
             return m_Core;
         }
 
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadPass(_In_ IPass * const pPass)
+        String VOODOO_METHODTYPE DX9Adapter::GetName() CONST
+        {
+            return VSTR("DX9Adapter");
+        }
+
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetProperty(const Uuid propid, _In_ Variant * pValue)
+        {
+            if (!pValue) return VSFERR_INVALIDPARAMS;
+
+            if (propid == PropIds::D3DSdkVersion && pValue->Type == UT_UInt32)
+            {
+                m_SdkVersion = pValue->VUInt32.X;
+                return VSF_OK;
+            } 
+            else if (propid == PropIds::D3D8Object && pValue->Type == UT_PVoid) 
+            {
+                if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
+                {
+                    IDirect3D8 * origObj = reinterpret_cast<IDirect3D8 *>(pValue->VPVoid);
+                    if (!origObj) return false;
+
+                    // Create the wrapper object and build the caps cache from the original
+                    VoodooDX8::CVoodoo3D8 * fakeObj = new VoodooDX8::CVoodoo3D8(m_SdkVersion, nullptr);
+                    fakeObj->VSCacheCaps(origObj);
+                    origObj->Release();
+                
+                    // Load system d3d9.
+                    HMODULE d3d9 = nullptr;
+                    typedef IDirect3D9 * (WINAPI * Type_Direct3DCreate9)(UINT);
+                    Type_Direct3DCreate9 d3d9func = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), true, "Direct3DCreate9", &d3d9);
+                    assert(d3d9func);
+
+                    // Create the real object
+                    IDirect3D9 * realObj = d3d9func(D3D_SDK_VERSION);
+                    assert(realObj);
+
+                    fakeObj->m_RealObject = realObj;
+                    pValue->VPVoid = fakeObj;
+                    return VSFOK_PROPERTYCHANGED;
+                }
+            } 
+            else if (propid == PropIds::D3D9Object && pValue->Type == UT_PVoid) 
+            {
+                if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
+                {
+                    IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(pValue->VPVoid);
+                    if (!origObj) return false;
+
+                    CVoodoo3D9 * fakeObj = new CVoodoo3D9(m_SdkVersion, origObj);
+                    pValue->VPVoid = fakeObj;
+                    return VSFOK_PROPERTYCHANGED;
+                }
+            }
+
+            return VSFERR_INVALIDPARAMS;
+        }
+
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
+        {
+            if (!pValue) return VSFERR_INVALIDPARAMS;
+
+            if (propid == PropIds::D3DSdkVersion)
+            {
+                ZeroMemory(pValue, sizeof(Variant));
+                pValue->Type = UT_UInt32;
+                pValue->Components = 1;
+                pValue->VUInt32.X = m_SdkVersion;
+                return true;
+            }
+
+            return false;
+        }
+
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadPass(_In_ IPass * pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -130,44 +203,12 @@ namespace VoodooShader
             {
                 return true;
             }
+        }
 
-            /*IPassRef pass(pPass);
-
-            CGprogram vertProg = pass->GetProgram(PS_Vertex);
-            CGprogram fragProg = pass->GetProgram(PS_Fragment);
-            HRESULT hr = S_OK;
-
-            if (cgIsProgram(vertProg))
-            {
-                hr = cgD3D9LoadProgram(vertProg, CG_TRUE, 0);
-                if (!SUCCEEDED(hr))
-                {
-                    logger->LogMessage
-                    (
-                        LL_ModError, VOODOO_DX89_NAME,
-                        Format("Error loading vertex program from '%1%': %2%.") << pass << hr
-                    );
-
-                    return false;
-                }
-            }
-
-            if (cgIsProgram(fragProg))
-            {
-                hr = cgD3D9LoadProgram(fragProg, CG_TRUE, 0);
-                if (!SUCCEEDED(hr))
-                {
-                    logger->LogMessage
-                    (
-                        LL_ModError, VOODOO_DX89_NAME,
-                        Format("Error loading fragment program from '%1%': %2%.") << pass << hr
-                    );
-                    return false;
-                }
-            }
-
-            logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, Format("Successfully loaded programs from '%1%'.") << pass);
-            return true;*/
+        bool VOODOO_METHODTYPE DX9Adapter::IsPassLoaded(_In_ IPass * const pPass) CONST
+        {
+            if (!pPass) return false;
+            return true;
         }
 
         VoodooResult VOODOO_METHODTYPE DX9Adapter::UnloadPass(_In_ IPass * const pPass)
@@ -183,43 +224,6 @@ namespace VoodooShader
             {
                 return true;
             }
-
-            /*IPassRef pass(pPass);
-
-            CGprogram vertProg = pass->GetProgram(PS_Vertex);
-            CGprogram fragProg = pass->GetProgram(PS_Fragment);
-            HRESULT hr = S_OK;
-
-            if (cgIsProgram(vertProg))
-            {
-                hr = cgD3D9UnloadProgram(vertProg);
-                if (!SUCCEEDED(hr))
-                {
-                    logger->LogMessage
-                    (
-                        LL_ModError, VOODOO_DX89_NAME,
-                        Format("Error unloading vertex program from '%1%': %2%.") << pass << hr
-                    );
-
-                    return false;
-                }
-            }
-
-            if (cgIsProgram(fragProg))
-            {
-                hr = cgD3D9UnloadProgram(fragProg);
-                if (!SUCCEEDED(hr))
-                {
-                    logger->LogMessage
-                    (
-                        LL_ModError, VOODOO_DX89_NAME,
-                        Format("Error loading fragment program from '%1%': %2%.") << pass << hr
-                    );
-                    return false;
-                }
-            }
-
-            return true;*/
         }
 
         VoodooResult VOODOO_METHODTYPE DX9Adapter::SetPass(_In_ IPass * const pPass)
@@ -244,7 +248,7 @@ namespace VoodooShader
             for (uint32_t i = 0; i < 4; ++i)
             {
                 ITexture * pTarget = pPass->GetTarget(i);
-                //this->SetTarget(i, pTarget);
+                this->SetTarget(i, pTarget);
             }
 
             m_BoundPass = pPass;
@@ -280,7 +284,7 @@ namespace VoodooShader
             return true;
         }
 
-        VoodooResult DX9Adapter::SetTarget(_In_ const uint32_t index, _In_opt_ ITexture * pTarget)
+        VoodooResult DX9Adapter::SetTarget(const uint32_t index, _In_opt_ ITexture * pTarget)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -328,7 +332,14 @@ namespace VoodooShader
             }
             else
             {
-                IDirect3DTexture9 * pD3D9Tex = reinterpret_cast<IDirect3DTexture9*>(pTarget->GetData());
+                Variant texVar = {UT_Unknown, 0, nullptr};
+                if (FAILED(pTarget->GetProperty(PropIds::D3D9Texture, &texVar)))
+                {
+                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to retrieve hardware texture property from texture %1%.") << pTarget);
+                    return VSFERR_INVALIDPARAMS;
+                }
+
+                IDirect3DTexture9 * pD3D9Tex = reinterpret_cast<IDirect3DTexture9*>(texVar.VPVoid);
 
                 if (!pD3D9Tex)
                 {
@@ -486,89 +497,75 @@ namespace VoodooShader
             return true;
         }
 
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetProperty(_In_ const wchar_t * name, _In_ Variant * const value)
-        {
-            String strname(name);
-
-            if (strname == VSTR("SdkVersion") && value->Type == UT_UInt32)
-            {
-                m_SdkVersion = value->VUInt32.X;
-            } 
-            else if (strname == VSTR("IDirect3D8") && value->Type == UT_PVoid) 
-            {
-                if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
-                {
-                    IDirect3D8 * origObj = reinterpret_cast<IDirect3D8 *>(value->VPVoid);
-                    if (!origObj) return false;
-
-                    // Create the wrapper object and build the caps cache from the original
-                    VoodooDX8::CVoodoo3D8 * fakeObj = new VoodooDX8::CVoodoo3D8(m_SdkVersion, nullptr);
-                    fakeObj->VSCacheCaps(origObj);
-                    origObj->Release();
-                
-                    // Load system d3d9.
-                    HMODULE d3d9 = nullptr;
-                    typedef IDirect3D9 * (WINAPI * Type_Direct3DCreate9)(UINT);
-                    Type_Direct3DCreate9 d3d9func = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), true, "Direct3DCreate9", &d3d9);
-                    assert(d3d9func);
-
-                    // Create the real object
-                    IDirect3D9 * realObj = d3d9func(D3D_SDK_VERSION);
-                    assert(realObj);
-
-                    fakeObj->m_RealObject = realObj;
-                    value->VPVoid = fakeObj;
-                    return true;
-                }
-            } 
-            else if (strname == VSTR("IDirect3D9") && value->Type == UT_PVoid) 
-            {
-                if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
-                {
-                    IDirect3D9 * origObj = reinterpret_cast<IDirect3D9 *>(value->VPVoid);
-                    if (!origObj) return false;
-
-                    CVoodoo3D9 * fakeObj = new CVoodoo3D9(m_SdkVersion, origObj);
-                    value->VPVoid = fakeObj;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::GetProperty(_In_ const wchar_t * name, _In_ Variant * const value) CONST
-        {
-            if (!name || !value) return false;
-
-            String strname(name);
-
-            if (strname == VSTR("SdkVersion"))
-            {
-                ZeroMemory(value, sizeof(Variant));
-                value->Type = UT_UInt32;
-                value->Components = 1;
-                value->VUInt32.X = m_SdkVersion;
-                return true;
-            }
-
-            return false;
-        }
-
         VoodooResult VOODOO_METHODTYPE DX9Adapter::BindTexture(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture)
         {
-            if (!pParam)
+            if (!pParam || !pTexture)
             {
-                return false;
+                return VSFERR_INVALIDPARAMS;
             }
-            else
+
+            ParameterDesc desc = pParam->GetDesc();
+            if (desc.Type != PT_Sampler1D && desc.Type != PT_Sampler2D && desc.Type != PT_Sampler3D)
             {
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_DX89_NAME, 
                     Format("Invalid texture binding, parameter %1% is not a sampler.") << pParam
                 );
-                return false;
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            LPD3DXEFFECT pDXEffect;
+            D3DXHANDLE pDXParam;
+            LPDIRECT3DTEXTURE9 pDXTexture;
+
+            Variant propVar = {UT_PVoid, 0, nullptr};
+            if (FAILED(pParam->GetProperty(PropIds::D3DX9Effect, &propVar))) 
+            {
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware effect from parameter %1%.") << pParam);
+                return VSFERR_INVALIDPARAMS;
+            }
+            pDXEffect = reinterpret_cast<LPD3DXEFFECT>(propVar.VPVoid);
+            if (!pDXEffect)
+            {
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Parameter %1% has no hardware effect.") << pParam);
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            if (FAILED(pParam->GetProperty(PropIds::D3DX9Handle, &propVar)))
+            {
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware handle from parameter %1%.") << pParam);
+                return VSFERR_INVALIDPARAMS;
+            }
+            pDXParam = reinterpret_cast<D3DXHANDLE>(propVar.VPVoid);
+            if (!pDXParam)
+            {
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Parameter %1% has no hardware handle.") << pParam);
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            if (FAILED(pTexture->GetProperty(PropIds::D3D9Texture, &propVar)))
+            {
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware texture from texture %1%.") << pTexture);
+                return VSFERR_INVALIDPARAMS;
+            }
+            pDXTexture = reinterpret_cast<LPDIRECT3DTEXTURE9>(propVar.VPVoid);
+
+            pDXEffect->AddRef();
+            pDXTexture->AddRef();
+            HRESULT hr = pDXEffect->SetTexture(pDXParam, pDXTexture);
+            pDXEffect->Release();
+            pDXTexture->Release();
+
+            if (FAILED(hr))
+            {
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to bind texture %1% to parameter %2%.") << pTexture << pParam);
+                return VSFERR_INVALIDCALL;
+            }
+            else
+            {
+                m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound texture %1% to parameter %2%.") << pTexture << pParam);
+                return VSF_OK;
             }
         }
 

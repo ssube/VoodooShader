@@ -100,6 +100,29 @@ namespace VoodooShader
         return m_Core;
     }
 
+    String VOODOO_METHODTYPE VSAdapter::GetName() CONST
+    {
+        return VSTR("Null");
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSAdapter::GetProperty(const Uuid propid, Variant * pValue) CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        UNREFERENCED_PARAMETER(propid);
+        UNREFERENCED_PARAMETER(pValue);
+
+        return false;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSAdapter::SetProperty(const Uuid propid, Variant * pValue)
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        UNREFERENCED_PARAMETER(propid);
+        UNREFERENCED_PARAMETER(pValue);
+
+        return true;
+    }
+
     VoodooResult VOODOO_METHODTYPE VSAdapter::LoadPass(IPass * pPass)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
@@ -181,24 +204,6 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(pParam);
 
         return true;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSAdapter::SetProperty(const wchar_t * name, Variant * const value)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(name);
-        UNREFERENCED_PARAMETER(value);
-
-        return true;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSAdapter::GetProperty(const wchar_t * name, Variant * const value) CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(name);
-        UNREFERENCED_PARAMETER(value);
-
-        return false;
     }
 
     VoodooResult VOODOO_METHODTYPE VSAdapter::BindTexture(IParameter * const pParam, ITexture * const pTexture)

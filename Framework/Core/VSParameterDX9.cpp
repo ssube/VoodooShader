@@ -64,7 +64,8 @@ namespace VoodooShader
             LPCSTR linkName = NULL;
             if (FAILED(m_DXEffect->GetString(linkAnnotHandle, &linkName)))
             {
-                m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Unable to get link annotation for parameter %1%.") << m_Name);
+                m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                    Format("Unable to get link annotation for parameter %1%.") << m_Name);
             } else {
                 IParameter * linkParam = m_Core->GetParameter(linkName, m_Desc);
                 if (linkParam)
@@ -160,17 +161,17 @@ namespace VoodooShader
         return m_Name;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSParameterDX9::GetProperty(const String & name, _In_ Variant * pValue) CONST
+    VoodooResult VOODOO_METHODTYPE VSParameterDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
     {
         if (!pValue) VSFERR_INVALIDPARAMS;
 
-        if (name.Compare(VSTR("D3DX9HANDLE")))
+        if (propid == PropIds::D3DX9Handle)
         {
             pValue->Type = UT_PVoid;
             pValue->VPVoid = (PVOID)m_DXHandle;
             return VSF_OK;
         } 
-        else if (name.Compare(VSTR("D3DX9EFFECT")))
+        else if (propid == PropIds::D3DX9Effect)
         {
             pValue->Type = UT_PVoid;
             pValue->VPVoid = (PVOID)m_DXEffect;
@@ -178,7 +179,7 @@ namespace VoodooShader
         }
         else
         {
-            VariantMap::const_iterator property = m_Properties.find(name);
+            PropertyMap::const_iterator property = m_Properties.find(propid);
             if (property != m_Properties.end())
             {
                 CopyMemory(pValue, &property->second, sizeof(Variant));
@@ -189,14 +190,14 @@ namespace VoodooShader
         return VSFERR_INVALIDCALL;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSParameterDX9::SetProperty(const String & name, const Variant & value)
+    VoodooResult VOODOO_METHODTYPE VSParameterDX9::SetProperty(const Uuid propid, Variant * pValue)
     {
-        if (name.Compare(VSTR("D3DX9HANDLE")) || name.Compare(VSTR("D3DX9EFFECT")))
+        if (propid == PropIds::D3DX9Handle || propid == PropIds::D3DX9Effect)
         {
             return VSFERR_INVALIDPARAMS;
         }
 
-        m_Properties[name] = value;
+        m_Properties[propid] = (*pValue);
         return VSF_OK;
     }
 

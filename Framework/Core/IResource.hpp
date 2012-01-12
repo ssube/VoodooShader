@@ -57,16 +57,24 @@ namespace VoodooShader
         /**
          * Returns a resource property, an API-defined variant stored in the resource.
          *
-         * @param name      The name of the tag to get.
-         * @param pValue    The to be filled
+         * @param propid    The Uuid of the tag to get.
+         * @param pValue    The to be filled.
+         * 
+         * @note This is equivalent to IDirect3DResource*::GetPrivateData.
          */
-        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST PURE;
         /**
          * Sets a resource property.
          * 
-         * @param value     The value to store in the tag.
+         * @param propid    The Uuid of the tag to set.
+         * @param pValue    The value to store in the tag.
+         * 
+         * @note In some cases, the resource may need to reply with an updated value. If so, it will return
+         *      @a VSFOK_PROPERTYCHANGED and update @a pValue with the new data.
+         *      
+         * @note This is equivalent to IDirect3DResource*::SetPrivateData.
          */
-        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value) PURE;
+        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue) PURE;
     };
     /**
      * @}

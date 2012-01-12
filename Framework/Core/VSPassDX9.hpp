@@ -42,8 +42,8 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
+        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
         VOODOO_METHOD_(ITexture *, GetTarget)(const uint32_t index) CONST;
         VOODOO_METHOD(SetTarget)(const uint32_t index, ITexture * pTarget);
@@ -56,7 +56,7 @@ namespace VoodooShader
         String m_Name;
 
         VSTechniqueDX9 * m_Technique;
-        VariantMap m_Properties;
+        PropertyMap m_Properties;
         TextureVector m_Targets;
 
         LPD3DXEFFECT m_DXEffect;

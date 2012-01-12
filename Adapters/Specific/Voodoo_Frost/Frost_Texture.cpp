@@ -103,27 +103,20 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VOODOO_METHODDEF(FrostTexture::GetProperty)(const String & name, _In_ Variant * pValue) CONST
+        VOODOO_METHODDEF(FrostTexture::GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST
         {
+            UNREFERENCED_PARAMETER(propid);
+            UNREFERENCED_PARAMETER(pValue);
+
             return VSFERR_NOTIMPLEMENTED;
         }
 
-        VOODOO_METHODDEF(FrostTexture::SetProperty)(const String & name, _In_ const Variant & value)
+        VOODOO_METHODDEF(FrostTexture::SetProperty)(const Uuid propid, _In_ Variant * pValue)
         {
+            UNREFERENCED_PARAMETER(propid);
+            UNREFERENCED_PARAMETER(pValue);
+
             return VSFERR_NOTIMPLEMENTED;
-        }
-
-        void * VOODOO_METHODTYPE FrostTexture::GetData() CONST
-        {
-            return reinterpret_cast<void*>(m_Texture);
-        }
-
-        void * VOODOO_METHODTYPE FrostTexture::SetData(_In_ void * pData)
-        {
-            GLuint oldData = m_Texture;
-            m_Texture = reinterpret_cast<GLuint>(pData);
-            this->GetTexDesc();
-            return reinterpret_cast<void*>(oldData);
         }
 
         TextureDesc VOODOO_METHODTYPE FrostTexture::GetDesc() CONST

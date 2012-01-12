@@ -155,11 +155,39 @@ namespace VoodooShader
             return m_Core;
         }
 
+        String VOODOO_METHODTYPE FrostAdapter::GetName() CONST
+        {
+            return VSTR("FrostAdapter");
+        }
+
+        VOODOO_METHODDEF(FrostAdapter::GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST
+        {
+            UNREFERENCED_PARAMETER(propid);
+            UNREFERENCED_PARAMETER(pValue);
+
+            return VSFERR_NOTIMPLEMENTED;
+        }
+
+        VOODOO_METHODDEF(FrostAdapter::SetProperty)(const Uuid propid, _In_ Variant * pValue)
+        {
+            UNREFERENCED_PARAMETER(propid);
+            UNREFERENCED_PARAMETER(pValue);
+
+            return VSFERR_NOTIMPLEMENTED;
+        }
+
         VoodooResult VOODOO_METHODTYPE FrostAdapter::LoadPass(_In_ IPass *pass)
         {
             UNREFERENCED_PARAMETER(pass);
 
             return VSFERR_NOTIMPLEMENTED;
+        }
+
+        bool VOODOO_METHODTYPE FrostAdapter::IsPassLoaded(_In_ IPass * pPass) CONST
+        {
+            UNREFERENCED_PARAMETER(pPass);
+
+            return true;
         }
 
         VoodooResult VOODOO_METHODTYPE FrostAdapter::UnloadPass(_In_ IPass *pass)
@@ -315,22 +343,6 @@ namespace VoodooShader
         }
 #pragma warning(pop)
 
-        VoodooResult VOODOO_METHODTYPE FrostAdapter::SetProperty(const wchar_t * name, Variant * pValue)
-        {
-            UNREFERENCED_PARAMETER(name);
-            UNREFERENCED_PARAMETER(pValue);
-
-            return VSFERR_NOTIMPLEMENTED;
-        }
-
-        VoodooResult VOODOO_METHODTYPE FrostAdapter::GetProperty(const wchar_t * name, Variant * pValue) const
-        {
-            UNREFERENCED_PARAMETER(name);
-            UNREFERENCED_PARAMETER(pValue);
-
-            return VSFERR_NOTIMPLEMENTED;
-        }
-
         VoodooResult VOODOO_METHODTYPE FrostAdapter::BindTexture(_In_ IParameter* const pParam, _In_opt_ ITexture* const pTexture)
         {
             if (!pParam || !pTexture) return false;
@@ -340,7 +352,7 @@ namespace VoodooShader
 
         void FrostAdapter::DrawEffect(_In_ IEffect * effect)
         {
-            if (!shader)
+            if (!effect)
             {
                 m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, VSTR("Unable to draw null shader."));
                 return;
@@ -380,10 +392,14 @@ namespace VoodooShader
 
                 if (target)
                 {
-                    GLuint passtarget = (GLuint) target->GetData();
+                    Variant targetVar = {UT_Unknown, 0, nullptr};
+                    if (SUCCEEDED(target->GetProperty(PropIds::OpenGLTexture, &targetVar)) && targetVar.Type == UT_UInt32)
+                    {
+                        GLuint passtarget = (GLuint) targetVar.VUInt32.X;
 
-                    glBindTexture(GL_TEXTURE_2D, passtarget);
-                    glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
+                        glBindTexture(GL_TEXTURE_2D, passtarget);
+                        glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 250, 250, 0);
+                    }
                 }
             }
 
@@ -410,25 +426,6 @@ namespace VoodooShader
 
             if (hglrc != nullptr)
             {
-                // Init Cg
-                CGcontext context = cgCreateContext();
-
-                if (!cgIsContext(context))
-                {
-                    m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, VSTR("Unable to create Cg context."));
-                    return;
-                }
-
-                //cgSetContextBehavior(context, CG_BEHAVIOR_LATEST);
-                //cgSetLockingPolicy(CG_NO_LOCKS_POLICY);
-
-                //cgSetAutoCompile(context, CG_COMPILE_IMMEDIATE);
-                //cgSetParameterSettingMode(context, CG_IMMEDIATE_PARAMETER_SETTING);
-
-                cgGLRegisterStates(context);
-                cgGLSetManageTextureParameters(context, CG_TRUE);
-                m_Core->SetCgContext(context);
-
                 // Setup resources
                 TextureDesc desc = { {256, 256, 0}, false, true, TF_RGBA8};
 
@@ -437,23 +434,34 @@ namespace VoodooShader
                 m_TexLastPass = this->CreateTexture(L":lastpass", desc);
                 m_TexLastShader = this->CreateTexture(L":lastshader", desc);
 
-                gDepthTexture = (GLint) m_TexDepthFrame->();
-                gThisFrame = (GLint) m_TexThisFrame->GetData();
-                gLastPass = (GLint) m_TexLastPass->GetData();
-                gLastShader = (GLint) m_TexLastShader->GetData();
+                Variant textureVar = {UT_Unknown, 0, nullptr};
+                if (SUCCEEDED(m_TexDepthFrame->GetProperty(PropIds::OpenGLTexture, &textureVar)))
+                {
+                    gDepthTexture = (GLint)textureVar.VInt32.X;
+                }
+                if (SUCCEEDED(m_TexDepthFrame->GetProperty(PropIds::OpenGLTexture, &textureVar)))
+                {
+                    gThisFrame = (GLint)textureVar.VInt32.X;
+                }
+                if (SUCCEEDED(m_TexDepthFrame->GetProperty(PropIds::OpenGLTexture, &textureVar)))
+                {
+                    gLastPass = (GLint)textureVar.VInt32.X;
+                }
+                if (SUCCEEDED(m_TexDepthFrame->GetProperty(PropIds::OpenGLTexture, &textureVar)))
+                {
+                    gLastShader = (GLint)textureVar.VInt32.X;
+                }
 
                 // Load shader
                 IFile * shaderFile = m_Core->GetFileSystem()->GetFile(L"test.cgfx");
-                gpTestShader = m_Core->CreateShader(shaderFile, nullptr);
+                gpTestEffect = m_Core->CreateEffect(shaderFile);
             }
             else
             {
-                m_Core->SetCgContext(nullptr);
-
                 m_TexLastPass = nullptr;
                 m_TexLastShader = nullptr;
 
-                gpTestShader = nullptr;
+                gpTestEffect = nullptr;
             }
         }
     }

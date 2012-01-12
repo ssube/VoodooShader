@@ -239,9 +239,9 @@ namespace VoodooShader
             os << v.VDouble;
             break;
         case UT_Uuid:
-            if (v.VUuid)
+            if (v.VPUuid)
             {
-                Uuid t = (*v.VUuid);
+                Uuid t = (*v.VPUuid);
                 os << t;
             }
             else
@@ -250,9 +250,9 @@ namespace VoodooShader
             }
             break;
         case UT_String:
-            if (v.VString)
+            if (v.VPString)
             {
-                os << v.VString->GetData();
+                os << v.VPString->GetData();
             }
             else
             {
@@ -260,7 +260,7 @@ namespace VoodooShader
             }
             break;
         case UT_IObject:
-            os << VSTR("; ") << v.VIObject;
+            os << VSTR("; ") << v.VPIObject;
             break;
         case UT_PVoid:
             os << VSTR("; ") << v.VPVoid;

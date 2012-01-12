@@ -60,7 +60,7 @@ HRESULT WINAPI VSDirectSoundCreate8(LPCGUID lpcGuidDevice, LPVOID * ppDS8, LPVOI
             DSObj.Type = VoodooShader::UT_PVoid;
             DSObj.VPVoid = s8obj;
 
-            if (gVoodooCore->GetAdapter()->SetProperty(L"IDirectSound8", &DSObj))
+            if (gVoodooCore->GetAdapter()->SetProperty(VoodooShader::PropIds::DS8Device, &DSObj) == VSFOK_PROPERTYCHANGED)
             {
                 s8obj = DSObj.VPVoid;
             }

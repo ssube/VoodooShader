@@ -105,7 +105,6 @@
 #include "String.hpp"
 
 #include "IObject.hpp"
-#include "IAdapter.hpp"
 #include "ICore.hpp"
 #include "IFile.hpp"
 #include "IFilesystem.hpp"
@@ -117,6 +116,7 @@
 #include "IParser.hpp"
 
 #include "IResource.hpp"
+#include "IAdapter.hpp"
 #include "IEffect.hpp"
 #include "IPass.hpp"
 #include "ITechnique.hpp"

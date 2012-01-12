@@ -42,11 +42,9 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
+            VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
-            VOODOO_METHOD_(void *, GetData)() CONST;
-            VOODOO_METHOD_(void *, SetData)(_In_ void * pData);
             VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
 
         private:

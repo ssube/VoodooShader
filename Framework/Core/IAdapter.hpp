@@ -41,7 +41,7 @@ namespace VoodooShader
      *
      * @iid e6f31288-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IAdapter, IObject, ({0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    VOODOO_INTERFACE(IAdapter, IResource, ({0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
         /**
@@ -55,44 +55,21 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
-         * @name IAdapter Methods
+         * @name IResource Methods
          * @{
          */
-        /**
-         * Set a property on the adapter.
-         *
-         * @param name The property name to set.
-         * @param pValue The value to set the property to.
-         * @return True if any value was changed.
-         *
-         * @note Adapters may define the meaning of any properties not given in the core adapter specification. Adapters may
-         *     require a specific format or form for properties.
-         *
-         * @note To allow for significant variations in property setups and allow for use outside of the framework
-         *      (particularly from the loader), this function takes the name as a basic string and a variant for the value.
-         *
-         * @warning Adapters may change values stored in the variant given, but must not change the type.
-         */
-        VOODOO_METHOD(SetProperty)(_In_ const wchar_t * name, _In_ Variant * const pValue) PURE;
-        /**
-         * Get a property from the adapter.
-         *
-         * @param name The property to get.
-         * @param pValue Value of the property, if it exists. Variant is unchanged otherwise.
-         *
-         * @return Success of the property get.
-         */
-        VOODOO_METHOD(GetProperty)(_In_ const wchar_t * name, _Out_ Variant * const pValue) CONST PURE;
+        VOODOO_METHOD_(String, GetName)() CONST;
+        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
         /**
          * @}
          * @name Pass Methods
          * @{
          */
         /**
-         * Loads a pass in a manner that is compatible with the adapter's underlying API. For Cg-supported APIs, this may
-         * use the appropriate module loading function (cgD3D9LoadProgram, cgGLLoadProgram, etc). This may involve
-         * additional compilation or linking. In some cases, the pass may not be specifically loaded and this may simply
-         * return true.
+         * Loads a pass in a manner that is compatible with the adapter's underlying API, and register the pass with the
+         * adapter if necessary. This is likely to require API-specific calls and retrieving the API properties from the
+         * pass class. Some APIs may not require explicit loading here (D3DX Effects, primarily).
          *
          * @param   pPass   The pass to be loaded.
          * @return          Whether or not the pass was successfully loaded.

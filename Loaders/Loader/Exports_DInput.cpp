@@ -68,14 +68,14 @@ HRESULT WINAPI VSDirectInput8Create(HINSTANCE hinst, DWORD dwVersion, REFIID rii
             DIObj.Components = 1;
             DIObj.VUInt32.X = dwVersion;
 
-            gVoodooCore->GetAdapter()->SetProperty(VSTR("DIVersion"), &DIObj);
+            gVoodooCore->GetAdapter()->SetProperty(VoodooShader::PropIds::DI8Version, &DIObj);
 
             ZeroMemory(&DIObj, sizeof(VoodooShader::Variant));
             DIObj.Type = VoodooShader::UT_PVoid;
             DIObj.Components = 1;
             DIObj.VPVoid = i8obj;
 
-            if (gVoodooCore->GetAdapter()->SetProperty(L"IDirectInput8", &DIObj))
+            if (gVoodooCore->GetAdapter()->SetProperty(VoodooShader::PropIds::DI8Device, &DIObj))
             {
                 i8obj = DIObj.VPVoid;
             }
@@ -108,7 +108,7 @@ HRESULT WINAPI VSDirectInputCreateA(HINSTANCE hinst, DWORD dwVersion, LPVOID * l
         DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.VPVoid = iaobj;
 
-        if (gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputA", &DIObj))
+        if (gVoodooCore->GetAdapter()->SetProperty(VoodooShader::PropIds::DIADevice, &DIObj) == VSFOK_PROPERTYCHANGED)
         {
             iaobj = DIObj.VPVoid;
         }
@@ -136,10 +136,9 @@ HRESULT WINAPI VSDirectInputCreateW(HINSTANCE hinst, DWORD dwVersion, LPVOID * l
         DIObj.Type = VoodooShader::UT_PVoid;
         DIObj.VPVoid = iwobj;
 
-        gVoodooCore->GetAdapter()->SetProperty(L"IDirectInputW", &DIObj);
-
-        if (DIObj.VPVoid != iwobj)
+        if (gVoodooCore->GetAdapter()->SetProperty(VoodooShader::PropIds::DIWDevice, &DIObj) == VSFOK_PROPERTYCHANGED)
         {
+
             iwobj = DIObj.VPVoid;
         }
     }

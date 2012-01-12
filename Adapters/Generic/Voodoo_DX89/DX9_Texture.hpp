@@ -32,7 +32,7 @@ namespace VoodooShader
         VOODOO_CLASS(DX9Texture, ITexture, ({0xC2, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
         {
         public:
-            DX9Texture(_In_ ICore * pCore, _In_ String name, _In_ IDirect3DBaseTexture9 * pTexture);
+            DX9Texture(_In_ ICore * pCore, _In_ String name, _In_ IDirect3DTexture9 * pTexture);
             ~DX9Texture();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -42,8 +42,9 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD_(void *, GetData)() CONST;
-            VOODOO_METHOD_(void *, SetData)(_In_ void * pData);
+            VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+
             VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
 
         private:
@@ -53,7 +54,8 @@ namespace VoodooShader
             ICore * m_Core;
             String m_Name;
 
-            IDirect3DBaseTexture9 * m_Texture;
+            IDirect3DTexture9 * m_Texture;
+            IDirect3DSurface9 * m_Surface;
             TextureDesc m_Desc;
         };
     }

@@ -42,8 +42,8 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(const String & name, _In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetProperty)(const String & name, _In_ const Variant & value);
+        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
         VOODOO_METHOD_(uint32_t, GetPassCount)() CONST;
         VOODOO_METHOD_(IPass *, GetPass)(_In_ const uint32_t index) CONST;
@@ -55,7 +55,7 @@ namespace VoodooShader
         String m_Name;
 
         VSEffectDX9 * m_Effect;
-        VariantMap m_Properties;
+        PropertyMap m_Properties;
         PassVector m_Passes;
 
         LPD3DXEFFECT m_DXEffect;

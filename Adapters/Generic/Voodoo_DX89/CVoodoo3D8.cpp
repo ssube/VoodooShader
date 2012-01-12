@@ -245,10 +245,10 @@ namespace VoodooShader
 
                 if (texture_Frame0)
                 {
-                    IDirect3DTexture9 * texture = (IDirect3DTexture9 *)texture_Frame0->GetData();
-                    hrt = texture->GetSurfaceLevel(0, &surface_Frame0);
-                    if (SUCCEEDED(hrt))
+                    Variant texvar = {UT_PVoid, 0, nullptr};
+                    if (SUCCEEDED(texture_Frame0->GetProperty(PropIds::D3D9Surface, &texvar)))
                     {
+                        surface_Frame0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
                         gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
                     }
                     else
@@ -260,10 +260,10 @@ namespace VoodooShader
                 texture_Pass0 = gpVoodooCore->CreateTexture(VSTR(":pass0"), backbufferDesc);
                 if (texture_Pass0)
                 {
-                    IDirect3DTexture9 * texture = (IDirect3DTexture9 *)texture_Pass0->GetData();
-                    hrt = texture->GetSurfaceLevel(0, &surface_Pass0);
-                    if (SUCCEEDED(hrt))
+                    Variant texvar = {UT_PVoid, 0, nullptr};
+                    if (SUCCEEDED(texture_Pass0->GetProperty(PropIds::D3D9Surface, &texvar)))
                     {
+                        surface_Pass0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
                         gpVoodooLogger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
                     }
                     else
