@@ -87,12 +87,12 @@ namespace VoodooShader
       * needs a short-term guarantee of validity, or pass the reference (where it may be incremented).
       *
       * @subsection voodoo_spec_iobject_addref IObject::AddRef
-      * @code virtual uint32_t IObject::AddRef() const  @endcode
+      * @code uint32_t IObject::AddRef() CONST @endcode
       *
       * Increments the internal reference count by 1 and returns the new count, no other effects shall be caused.
       *
       * @subsection voodoo_spec_iobject_release IObject::Release
-      * @code virtual uint32_t IObject::Release() const  @endcode
+      * @code uint32_t IObject::Release() CONST @endcode
       *
       * Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object must be
       * deleted (<tt>delete this;</tt>), no other effects shall be caused. This guarantees correct memory allocation and
@@ -102,20 +102,18 @@ namespace VoodooShader
       *     functions. This additionally helps provide safer setup/teardown, outside of process startup and termination.
       *
       * @subsection voodoo_spec_iobject_query IObject::QueryInterface
-      * @code virtual bool IObject::QueryInterface(Uuid & refid, void ** ppOut) const  @endcode
+      * @code VoodooResult IObject::QueryInterface(Uuid refid, IObject ** ppOut) CONST @endcode
       *
       * Queries the object for a particular interface.
       *
-      * If refid is a not-null IID and the object implements the interface passed in refid or if refid is the object's
-      * CLSID, it must place a pointer to itself providing that interface into ppOut and return true. The pointer must
-      * evaluate equal to any other pointer to the same object, regardless of interface. The object's reference count must
-      * be incremented, from the pointer to be returned.
+      * If @a refid is a not-null IID and the object implements the interface passed in @a refid or if @a refid is the 
+      * object's ClsId, it must place a pointer providing that interface into @a ppOut and return @a VSF_OK. The pointer 
+      * must evaluate equal to any other pointer to the same object, regardless of interface. The object's reference count 
+      * must be incremented, from the pointer to be returned.
       *
-      * If ppOut is a nullptr and refid is a null Uuid (all zeroes), refid must be filled must the object's CLSID and the
-      * method must return true. The object's reference count must not change in this case.
+      * If @a ppOut is a nullptr, the call must fail with invalid parameters.
       *
-      * If the object does not implement the class or interface in refid, or refid and ppOut are not both null, it must
-      * return false. The object's reference count must not change in this case.
+      * If the object does not implement the class or interface in @a refid, the call must fail with invalid Uuid.
       *
       * All IObject-derived classes must provide interfaces for IObject, their parent interface(s), and their class. Calls
       * to QueryInterface must be symmetric (if <tt>QI(A)->B</tt> succeeds, then <tt>QI(QI(A)->B)->A</tt> must as well),
@@ -133,15 +131,7 @@ namespace VoodooShader
       * @code
       * if (!ppOut)
       * {
-      *     if (clsid.is_nil())
-      *     {
-      *         clsid = IID_ICore;
-      *         return true;
-      *     }
-      *     else
-      *     {
-      *         return false;
-      *     }
+      *     return VSFERR_INVALIDPARAMS;
       * } 
       * else 
       * {
@@ -160,17 +150,17 @@ namespace VoodooShader
       *     else
       *     {
       *         *ppOut = nullptr;
-      *         return false;
+      *         return vSFERR_INVALIDUUID;
       *     }
-      *     reinterpret_cast<const IObject*>(*ppOut)->AddRef();
-      *     return true;
+      *     (*ppOut)->AddRef();
+      *     return VSF_OK;
       * }
       * @endcode
       *
       * @subsection voodoo_spec_iobject_tostring IObject::ToString
-      * @code virtual String IObject::ToString() const  @endcode
+      * @code String IObject::ToString() CONST @endcode
       *
-      * Returns a formatted string made up of the object's type <em>name</em> (which may be the object's CLSID, although
+      * Returns a formatted string made up of the object's type <em>name</em> (which may be the object's ClsId, although
       * this is not recommended) and optionally some data. This string must follow the form:
       *
       * @code
@@ -179,10 +169,11 @@ namespace VoodooShader
       * @endcode
       *
       * If no data is provided, the data section inside the parentheses must be empty but the parentheses must be present.
-      * If data is provided, it must be in a <tt>(key: value[, ...])</tt> form with all colons and commas escaped.
+      * If data is provided, it must be in a <tt>(key: value[, ...])</tt> form with all colons, commas, and paranthese 
+      * escaped.
       *
       * @subsection voodoo_spec_iobject_getcore IObject::GetCore
-      * @code virtual ICore * IObject::GetCore() const  @endcode
+      * @code ICore * IObject::GetCore() CONST @endcode
       *
       * Returns a reference to the object's parent core.
       *
@@ -223,21 +214,16 @@ namespace VoodooShader
       *
       * For further details on the behavior required of adapters, please refer to the IAdapter interface documentation.
       *
-      * @section voodoo_spec_adapter_cg Cg Context
+      * @section voodoo_spec_adapter_context Adapter Context
       *
-      * @attention Due to varying needs between adapters regarding the management, and destruction, of the Cg context,
-      *     ICore now exposes methods to get and set the active context and no longer creates a context of its own. This
-      *     allows more flexibility within adapters, but is a breaking change. Adapters compiled for earlier versions will
-      *     find themselves without a context at all.
-      * @since 0.2.0
+      * Due to varying needs between adapters regarding the management, and destruction, of hardware render contexts, the 
+      * core will query the adapter for the context or device when necessary and only hold a reference for the duration of 
+      * the call needing the context. The type of context to be retrieved depends on the core's default compile flags, or 
+      * explicit flags if given in the call.
+      * @since 0.5.6
       *
-      * This can avoid some crashes with certain adapters due to context lifespan, and allows adapters to handle cleanup. If
-      * at all possible, the Cg context should be created in the adapter's constructor and destroyed in the adapter's
-      * destructor, but this is left up to the discretion of the adapter. The core releases and invalidates all objects when
-      * the core is reset and all Cg-derived resources are released when the context is set to null.
-      *
-      * @warning Adapters must not create any shaders or parameters until they have provided the core with a valid context.
-      *     Errors will be returned if this is attempted. To fully support Voodoo Shader features, adapter's must not 
+      * @warning Adapters must not create any shaders or parameters if they cannot provide the core with a valid context.
+      *     Errors will be returned if this is attempted. To fully support Voodoo Shader features, adapters should not 
       *     directly use the context where the core provides methods to handle a particular feature.
       *
       * @section voodoo_spec_adapter_caps Capabilities
@@ -317,7 +303,7 @@ namespace VoodooShader
       *
       * @section voodoo_quality_code Code Quality
       *
-      * To maintain high quality code within Voodoo, a number of systems are used.
+      * To maintain high code quality within Voodoo Shader, a number of systems are used.
       *
       * The simplest, and often most important, is proper use of compiler messages. The framework is compiled with level 4
       * warnings enabled (the strictest standard level, significantly higher than the default) and warnings-as-errors

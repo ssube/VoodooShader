@@ -84,41 +84,46 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
             (*ppOut)->AddRef();
-            return true;
+            return VSF_OK;
         }
     }
 
     String VOODOO_METHODTYPE VSModuleManager::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return VSTR("VSModuleManager()");
     }
 
     ICore * VOODOO_METHODTYPE VSModuleManager::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_Core;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const String & name) CONST
+    bool VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const String & name) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return (m_ModuleNames.find(name) != m_ModuleNames.end());
     }
 
-    VoodooResult VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const Uuid & libid) CONST
+    bool VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const Uuid & libid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return (m_Modules.find(libid) != m_Modules.end());
     }
 
     VoodooResult VOODOO_METHODTYPE VSModuleManager::LoadPath(_In_ const String & path, _In_ const String & filter)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         String mask = m_Core->GetParser()->Parse(path) + VSTR("\\*");
 
         WIN32_FIND_DATA findFile;
@@ -136,7 +141,7 @@ namespace VoodooShader
                     Format("No plugins found in directory '%1%'.") << path
                 );
 
-                return false;
+                return VSFERR_FILENOTFOUND;
             }
             else
             {
@@ -146,7 +151,7 @@ namespace VoodooShader
                     Format("Error searching directory '%1%'.") << path
                 );
 
-                return false;
+                return VSF_FAIL;
             }
         }
 
@@ -171,12 +176,13 @@ namespace VoodooShader
             }
         } while (FindNextFile(searchHandle, &findFile) != 0);
 
-        return true;
+        return VSF_OK;
     }
 
     VoodooResult VOODOO_METHODTYPE VSModuleManager::LoadFile(_In_ const String & filename)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         ILoggerRef logger = m_Core->GetLogger();
 
         String fullname = m_Core->GetParser()->Parse(filename, PF_PathCanon);
@@ -190,7 +196,7 @@ namespace VoodooShader
         // Check for already loaded
         if (m_ModuleNames.find(fullname) != m_ModuleNames.end())
         {
-            return true;
+            return VSF_OK;
         }
 
         // Create struct and load functions
@@ -207,7 +213,7 @@ namespace VoodooShader
                 );
             }
 
-            return false;
+            return VSFERR_INVALIDPARAMS;
         }
 
         // Register classes from module
@@ -217,9 +223,9 @@ namespace VoodooShader
         {
             if (logger)
             {
-                logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Null version returned by module '%1%'.") << fullname);
+                logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format("Null version returned by module '%1%'.") << fullname);
             }
-            return false;
+            return VSFERR_INVALIDPARAMS;
         }
 
         m_ModuleNames[fullname] = moduleversion->LibId;
@@ -254,13 +260,14 @@ namespace VoodooShader
             }
         }
 
-        return true;
+        return VSF_OK;
     }
 
 
     VoodooResult VOODOO_METHODTYPE VSModuleManager::LoadFile(_In_ const IFile * pFile)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (pFile)
         {
             return this->LoadFile(pFile->GetPath());
@@ -271,15 +278,17 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const Uuid clsid) CONST
+    bool VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const Uuid clsid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return (m_Classes.find(clsid) != m_Classes.end());
     }
 
-    VoodooResult VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const String & name) CONST
+    bool VOODOO_METHODTYPE VSModuleManager::ClassExists(_In_ const String & name) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         Uuid clsid;
         if (!name.ToUuid(&clsid))
         {

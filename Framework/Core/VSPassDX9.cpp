@@ -71,37 +71,12 @@ namespace VoodooShader
             ++targetIndex;
         }
 
-        // Call the adapter to load the pass
-        IAdapterRef adapter = m_Core->GetAdapter();
-        if (adapter)
-        {
-            if (FAILED(adapter->LoadPass(this)))
-            {
-                m_DXEffect->Release();
-                Throw(VOODOO_CORE_NAME, VSTR("Failed to load pass."), m_Core);
-            }
-        }
-        else
-        {
-            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
-                Format("No adapter found, pass %1% must be manually loaded later.") << m_Name);
-        }
-
         AddThisToDebugCache();
     }
 
     VSPassDX9::~VSPassDX9()
     {
         RemoveThisFromDebugCache();
-
-        if (m_Core)
-        {
-            IAdapter * pAdapter = m_Core->GetAdapter();
-            if (pAdapter)
-            {
-                pAdapter->UnloadPass(this);
-            }
-        }
 
         if (m_DXEffect)
         {
@@ -112,12 +87,14 @@ namespace VoodooShader
     uint32_t VOODOO_METHODTYPE VSPassDX9::AddRef() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSPassDX9::Release() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -132,6 +109,7 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSPassDX9::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (!ppOut)
         {
             return VSFERR_INVALIDPARAMS;
@@ -153,34 +131,39 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
             (*ppOut)->AddRef();
-            return true;
+            return VSF_OK;
         }
     }
 
     String VOODOO_METHODTYPE VSPassDX9::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return Format(VSTR("VSPass(%1%)")) << m_Name;
     }
 
     ICore * VOODOO_METHODTYPE VSPassDX9::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_Core;
     }
 
     String VOODOO_METHODTYPE VSPassDX9::GetName() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_Name;
     }
 
     VoodooResult VOODOO_METHODTYPE VSPassDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (!pValue) VSFERR_INVALIDPARAMS;
 
         if (propid == PropIds::D3DX9Handle)
@@ -210,6 +193,8 @@ namespace VoodooShader
 
     VoodooResult VOODOO_METHODTYPE VSPassDX9::SetProperty(const Uuid propid, _In_ Variant * pValue)
     {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (propid == PropIds::D3DX9Handle || propid == PropIds::D3DX9Effect)
         {
             return VSFERR_INVALIDPARAMS;
@@ -222,6 +207,7 @@ namespace VoodooShader
     ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(const uint32_t index) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (index < m_Targets.size())
         {
             return m_Targets[index].get();
@@ -235,14 +221,15 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSPassDX9::SetTarget(const uint32_t index, ITexture * pTarget)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (index < m_Targets.size())
         {
             m_Targets[index] = pTarget;
-            return true;
+            return VSF_OK;
         }
         else
         {
-            return false;
+            return VSFERR_INVALIDPARAMS;
         }
     }
 
@@ -272,6 +259,7 @@ namespace VoodooShader
     ITechnique * VOODOO_METHODTYPE VSPassDX9::GetTechnique() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_Technique;
     }
 }

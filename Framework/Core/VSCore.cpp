@@ -332,6 +332,7 @@ namespace VoodooShader
             m_Logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, VSTR("Core initialization complete."));
 
             // Return
+            return VSF_OK;
         }
         catch (const Exception & exc)
         {
@@ -342,7 +343,7 @@ namespace VoodooShader
                 GlobalLog(VSTR("Unlogged exception during core creation: %s"), exc.what());
             }
 
-            return false;
+            return VSF_FAIL;
         }
         catch (const std::exception & exc)
         {
@@ -351,17 +352,15 @@ namespace VoodooShader
                 m_Logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format(VSTR("Error during Core creation: %1%")) << exc.what());
             }
 
-            return false;
+            return VSF_FAIL;
         }
-
-        return true;
     }
 
     VoodooResult VOODOO_METHODTYPE VSCore::Reset()
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
         //! @todo Actually reset stuff.
-        return true;
+        return VSF_OK;
     }
 
     uint32_t VOODOO_METHODTYPE VSCore::AddRef() CONST
@@ -384,6 +383,7 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSCore::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         if (!ppOut)
         {
             return VSFERR_INVALIDPARAMS;
@@ -405,65 +405,74 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
-            return true;
+            (*ppOut)->AddRef();
+            return VSF_OK;
         }
     }
 
     String VOODOO_METHODTYPE VSCore::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return Format("VSCore(%1%)") << m_Version;
     }
 
     ICore * VOODOO_METHODTYPE VSCore::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return nullptr;
     }
 
     IParser * VOODOO_METHODTYPE VSCore::GetParser() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return m_Parser.get();
     }
 
     IHookManager * VOODOO_METHODTYPE VSCore::GetHookManager() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return m_HookManager.get();
     }
 
     IFileSystem * VOODOO_METHODTYPE VSCore::GetFileSystem() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return m_FileSystem.get();
     }
 
     IAdapter * VOODOO_METHODTYPE VSCore::GetAdapter() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return m_Adapter.get();
     }
 
     ILogger * VOODOO_METHODTYPE VSCore::GetLogger() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return m_Logger.get();
     }
 
     XmlDocument VOODOO_METHODTYPE VSCore::GetConfig() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return m_ConfigFile;
     }
 
     IEffect * VOODOO_METHODTYPE VSCore::CreateEffect(_In_ IFile * pFile, const CompileFlags flags)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         if (!pFile)
         {
             return nullptr;
@@ -477,7 +486,7 @@ namespace VoodooShader
             m_Logger->LogMessage
             (
                 LL_CoreDebug, VOODOO_CORE_NAME, 
-                Format(VSTR("Successfully created shader from %1%.")) << pFile->GetPath()
+                Format(VSTR("Successfully created effect from %1%.")) << pFile->GetPath()
             );
         }
         catch (const std::exception & exc)
@@ -485,7 +494,7 @@ namespace VoodooShader
             m_Logger->LogMessage
             (
                 LL_CoreError, VOODOO_CORE_NAME,
-                Format(VSTR("Error creating shader from %1%: %2%")) << pFile->GetPath() << exc.what()
+                Format(VSTR("Error creating effect from %1%: %2%")) << pFile->GetPath() << exc.what()
             );
         }
 
@@ -563,33 +572,32 @@ namespace VoodooShader
     IParameter * VOODOO_METHODTYPE VSCore::GetParameter(const String & name, const ParameterDesc desc) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         ParameterMap::const_iterator paramIter = m_Parameters.find(name);
 
-        if (paramIter != m_Parameters.end())
-        {
-            m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Got parameter %1%.")) << name);
-            IParameterRef param = paramIter->second;
-            ParameterDesc pdesc = param->GetDesc();
-
-            if (desc.Type != PT_Unknown && desc.Type != pdesc.Type) return nullptr;
-            if (desc.Rows != 0 && desc.Rows != pdesc.Rows) return nullptr;
-            if (desc.Columns != 0 && desc.Columns != pdesc.Columns) return nullptr;
-            if (desc.Elements != 0 && desc.Elements != pdesc.Elements) return nullptr;
-
-            return param.get();
-        }
-        else
+        if (paramIter == m_Parameters.end())
         {
             m_Logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format(VSTR("Unable to find parameter %1%.")) << name);
             return nullptr;
         }
+
+        m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Got parameter %1%.")) << name);
+        IParameterRef param = paramIter->second;
+        ParameterDesc pdesc = param->GetDesc();
+
+        if (desc.Type != PT_Unknown && desc.Type != pdesc.Type) return nullptr;
+        if (desc.Rows != 0 && desc.Rows != pdesc.Rows) return nullptr;
+        if (desc.Columns != 0 && desc.Columns != pdesc.Columns) return nullptr;
+        if (desc.Elements != 0 && desc.Elements != pdesc.Elements) return nullptr;
+
+        return param.get();
     }
 
     ITexture * VOODOO_METHODTYPE VSCore::GetTexture(const String & name) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
-        TextureMap::const_iterator textureEntry = m_Textures.find(name);
 
+        TextureMap::const_iterator textureEntry = m_Textures.find(name);
         if (textureEntry != m_Textures.end())
         {
             m_Logger->LogMessage
@@ -611,36 +619,36 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSCore::RemoveParameter(_In_ const String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
-        ParameterMap::iterator parameter = m_Parameters.find(name);
 
+        ParameterMap::iterator parameter = m_Parameters.find(name);
         if (parameter != m_Parameters.end())
         {
             m_Parameters.erase(parameter);
             m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Removed parameter %1%.")) << name);
-            return true;
+            return VSF_OK;
         }
         else
         {
             m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Unable to find parameter %1%.")) << name);
-            return false;
+            return VSFERR_INVALIDPARAMS;
         }
     }
 
     VoodooResult VOODOO_METHODTYPE VSCore::RemoveTexture(_In_ const String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
-        TextureMap::iterator texture = m_Textures.find(name);
 
+        TextureMap::iterator texture = m_Textures.find(name);
         if (texture != m_Textures.end())
         {
             m_Textures.erase(texture);
             m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Removed texture %1%.")) << name);
-            return true;
+            return VSF_OK;
         }
         else
         {
             m_Logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Unable to find texture %1%.")) << name);
-            return false;
+            return VSFERR_INVALIDPARAMS;
         }
     }
 

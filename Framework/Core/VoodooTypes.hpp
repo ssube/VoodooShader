@@ -53,19 +53,19 @@ namespace VoodooShader
      */
     enum TextureFormat : uint32_t
     {
-        TF_Unknown  = 0x0,      /* !< Unknown texture format. */
-        // Backbuffer formats
-        TF_RGB5     = 0x101,    /* !< 5 bit RGB (1 bit X in D3D, may be R5G6B5 in OGL) */
-        TF_RGB5A1   = 0x102,    /* !< 5 bit RGB, 1 bit alpha */
-        TF_RGB8     = 0x103,    /* !< 8 bit RGB (8 bit X in D3D). Most common backbuffer format, common texture format. */
-        TF_RGBA8    = 0x104,    /* !< 8 bit RGBA. Common texture format. */
-        TF_RGB10A2  = 0x105,    /* !< 10 bit RGB, 2 bit A */
-        // float texture formats
-        TF_RGBA16F  = 0x201,    /* !< Half-precision RGBA. HDR format. */
-        TF_RGBA32F  = 0x202,    /* !< Full-precision RGBA (float/single). HDR format. */
-        // Depth-buffer formats
-        TF_D16      = 0x401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
-        TF_D32      = 0x402     /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
+        TF_Unknown      = 0x0000,    /* !< Unknown texture format. */
+        // General texture formats
+        TF_RGB5         = 0x0101,    /* !< 5 bit RGB (1 bit X in D3D, may be R5G6B5 in OGL) */
+        TF_RGB5A1       = 0x0102,    /* !< 5 bit RGB, 1 bit alpha */
+        TF_RGB8         = 0x0103,    /* !< 8 bit RGB (8 bit X in D3D). Most common backbuffer format, common texture format. */
+        TF_RGBA8        = 0x0104,    /* !< 8 bit RGBA. Common texture format. */
+        TF_RGB10A2      = 0x0105,    /* !< 10 bit RGB, 2 bit A */
+        // Float texture formats
+        TF_RGBA16F      = 0x0201,    /* !< Half-precision RGBA. HDR format. */
+        TF_RGBA32F      = 0x0202,    /* !< Full-precision RGBA (float/single). HDR format. */
+        // Depth texture formats
+        TF_D16          = 0x0401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
+        TF_D32          = 0x0402,    /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
     };
 
     enum ParameterType : uint32_t
@@ -287,7 +287,7 @@ namespace VoodooShader
      * @defgroup voodoo_classes_conditional Conditional Classes
      * @{
      */
-#ifndef VOODOO_NO_BOOST
+#if !defined(VOODOO_NO_BOOST)
     typedef boost::uuids::uuid Uuid;
 #else
     typedef struct
@@ -309,6 +309,7 @@ namespace VoodooShader
         DEFINE_UUID(D3D9Surface)   = {0x4c, 0xe7, 0xa6, 0xb5, 0x13, 0x1b, 0x4d, 0x08, 0x84, 0x4c, 0x55, 0xa6, 0x17, 0xb6, 0xb3, 0x5d};
         DEFINE_UUID(D3DX9Effect)   = {0xb5, 0x8d, 0xc7, 0xf0, 0xde, 0x72, 0x4e, 0xcd, 0xa0, 0x0c, 0x01, 0x8e, 0xae, 0xf5, 0x63, 0x4b};
         DEFINE_UUID(D3DX9Handle)   = {0xdf, 0x34, 0x48, 0x55, 0xc1, 0x1e, 0x4f, 0xf6, 0x8c, 0x0a, 0x1e, 0x1f, 0xba, 0xea, 0xb6, 0xa8};
+        DEFINE_UUID(D3DX9PassId)   = {0x3b, 0xfe, 0x94, 0x9c, 0x11, 0x5e, 0x48, 0x12, 0xb1, 0xa2, 0x77, 0xc0, 0x41, 0xbb, 0xcd, 0x69};
         DEFINE_UUID(D3DSdkVersion) = {0xf7, 0xc8, 0xec, 0x01, 0x95, 0x7f, 0x48, 0xf1, 0x91, 0xbc, 0x1a, 0x9b, 0xa0, 0x84, 0xec, 0xc4};
         DEFINE_UUID(OpenGLTexture) = {0x98, 0x9f, 0x58, 0x94, 0x19, 0xb9, 0x47, 0x8f, 0xb0, 0xb7, 0x0f, 0x40, 0xbc, 0x76, 0xeb, 0xd5};
         DEFINE_UUID(OpenGLContext) = {0x1e, 0x88, 0xc6, 0x7a, 0x49, 0xa6, 0x42, 0x2b, 0xb7, 0x95, 0xb1, 0x54, 0x26, 0x90, 0xf7, 0x19};
@@ -348,6 +349,7 @@ namespace VoodooShader
 #define VSF_FAIL                MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x0000)
 
 #define VSFOK_PROPERTYCHANGED   MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x1001)
+#define VSFOK_REDUNDANT         MAKE_HRESULT(SEVERITY_SUCCESS, FACILITY_ITF, 0x1002)
 
 #define VSFERR_INVALIDCALL      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1001)
 #define VSFERR_INVALIDPARAMS    MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1002)
@@ -357,6 +359,8 @@ namespace VoodooShader
 #define VSFERR_INVALIDPROPERTY  MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1006)
 #define VSFERR_FILENOTFOUND     MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1007)
 #define VSFERR_NOTIMPLEMENTED   MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1008)
+#define VSFERR_CONFLICTING      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1009)
+#define VSFERR_INVALIDUUID      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100A)
     /**
      * @}
      * @}

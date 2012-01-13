@@ -120,47 +120,53 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
             (*ppOut)->AddRef();
-            return true;
+            return VSF_OK;
         }
     }
 
     String VOODOO_METHODTYPE VSModule::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return VSTR("VSModule()");
     }
 
     ICore * VOODOO_METHODTYPE VSModule::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_Core;
     }
 
     const Version * VOODOO_METHODTYPE VSModule::ModuleVersion() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_ModuleVersion();
     }
 
     uint32_t VOODOO_METHODTYPE VSModule::ClassCount() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_ClassCount();
     }
 
     const wchar_t * VOODOO_METHODTYPE VSModule::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_ClassInfo(number, pUuid);
     }
 
     IObject * VOODOO_METHODTYPE VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * const pCore) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_ClassCreate(number, pCore);
     }
 }

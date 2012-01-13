@@ -63,46 +63,39 @@ namespace VoodooShader
         VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
         /**
          * @}
-         * @name Pass Methods
+         * @name Effect Methods
          * @{
          */
         /**
-         * Loads a pass in a manner that is compatible with the adapter's underlying API, and register the pass with the
-         * adapter if necessary. This is likely to require API-specific calls and retrieving the API properties from the
-         * pass class. Some APIs may not require explicit loading here (D3DX Effects, primarily).
-         *
-         * @param   pPass   The pass to be loaded.
-         * @return          Whether or not the pass was successfully loaded.
-         *
-         * @warning         The adapter may load any combination of programs from the given pass and may ignore the 
-         *                  remainder. If this call returns true, the pass may be bound to this adapter in the future. If 
-         *                  this returns false, the pass may be unable to be bound.
-         */
-        VOODOO_METHOD(LoadPass)(_In_ IPass * const pPass) PURE;
-        /**
-         * Check if a pass has been loaded successfully.
+         * Binds an effect to the adapter, capturing state and downloading parameters as needed. The currently active
+         * technique will be used.
          * 
-         * @param   pPass   The pass to check.
+         * @param   pEffect The effect to be bound.
+         * 
+         * @note Passes from an effect must not be used in IAdapter::SetPass until the effect has been set. When desired
+         *      passes have been used and reset, the effect must be reset. Failing to reset the effect may cause unwanted
+         *      states for future draw calls.
          */
-        VOODOO_METHOD_(bool, IsPassLoaded)(_In_ IPass * const pPass) CONST PURE;
+        VOODOO_METHOD(SetEffect)(_In_ IEffect * const pEffect) PURE;
         /**
-         * Unloads a pass from the adapter.
-         *
-         * @param   pPass   The pass to unload.
-         *
-         * @warning         A pass given should not be bound after being unloaded.
+         * Get the current bound effect.
          */
-        VOODOO_METHOD(UnloadPass)(_In_ IPass * const pPass) PURE;
+        VOODOO_METHOD_(IEffect *, GetEffect)() CONST PURE;
+        /**
+         * Reset the effect bound to this adapter, resetting states to their previous values as needed.
+         */
+        VOODOO_METHOD(ResetEffect)() PURE;
+        /**
+         * @}
+         * @name Pass Methods
+         * @{
+         */
         /**
          * Causes the adapter to load a pass for drawing. The adapter may choose which programs to bind and how to handle
          * the binding, as well as managing any errors that may arise.
          *
          * @param   pPass   A shared pointer to the pass to be bound.
          * @return          Success of the binding operation.
-         *
-         * @note Adapters may, at their discretion, bind some or even no programs to the true graphics API. An example of 
-         *      this is the Direct3D 9 adapter, which binds only vertex and fragment programs, ignoring any geometry, domain 
-         *      or hull programs.
          *
          * @note The Adapter may implement passes using deferred parameters; if so it must update all relevant parameters 
          *      before binding the pass. Virtual parameters must be updated before actual, to guarantee propagation. All 
@@ -119,10 +112,8 @@ namespace VoodooShader
         /**
          * Resets the state of the adapter and unbinds the pass. This may trigger state reset or texture copying, so it is
          * required for proper shader handling.
-         * 
-         * @param   pPass   The pass to reset. This must be the currently bound pass.
          */
-        VOODOO_METHOD(ResetPass)(_In_ IPass * const pPass) PURE;
+        VOODOO_METHOD(ResetPass)() PURE;
         /**
          * @}
          * @name Texture Methods

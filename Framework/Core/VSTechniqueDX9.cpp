@@ -121,11 +121,11 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
             (*ppOut)->AddRef();
-            return true;
+            return VSF_OK;
         }
     }
 

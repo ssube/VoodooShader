@@ -58,13 +58,13 @@ namespace VoodooShader
          * 
          * @param name The module name to check.
          */
-        VOODOO_METHOD(IsLoaded)(_In_ const String & name) CONST PURE;
+        VOODOO_METHOD_(bool, IsLoaded)(_In_ const String & name) CONST PURE;
         /**
          * Tests if the module with the given Uuid is currently loaded.
          * 
          * @param libid The module Uuid to check.
          */
-        VOODOO_METHOD(IsLoaded)(_In_ const Uuid & libid) CONST PURE;
+        VOODOO_METHOD_(bool, IsLoaded)(_In_ const Uuid & libid) CONST PURE;
         /**
          * Loads a set of modules from a given path.
          *
@@ -119,7 +119,7 @@ namespace VoodooShader
          * @param clsid The class Uuid.
          * @return Existence of the class.
          */
-        VOODOO_METHOD(ClassExists)(_In_ const Uuid refid) CONST PURE;
+        VOODOO_METHOD_(bool, ClassExists)(_In_ const Uuid refid) CONST PURE;
         /**
          * Tests to see if a class exists in the list provided by all loaded modules.
          *
@@ -130,7 +130,7 @@ namespace VoodooShader
          * @param name The class name.
          * @return Existence of the class.
          */
-        VOODOO_METHOD(ClassExists)(_In_ const String & name) CONST PURE;
+        VOODOO_METHOD_(bool, ClassExists)(_In_ const String & name) CONST PURE;
         /**
          * Create a new instance of the given class, using specific class Uuid. This requires a precise match and will fail
          * if no class is available.

@@ -190,11 +190,11 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
             (*ppOut)->AddRef();
-            return true;
+            return VSF_OK;
         }
     }
 
@@ -289,36 +289,38 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetDefaultTechnique(ITechnique * pTechnique)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        if (pTechnique != nullptr)
+
+        if (!pTechnique)
         {
-            if (pTechnique->GetEffect() == this)
-            {
-                m_DefaultTechnique = pTechnique;
-                return true;
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_CoreError, VOODOO_CORE_NAME,
-                    Format(VSTR("Technique %1% cannot be set as default (technique originated from another effect)."))
-                    << pTechnique
-                );
-            }
+            m_Core->GetLogger()->LogMessage(LL_CoreError, VOODOO_CORE_NAME, VSTR("Cannot set null technique as default."));
+            return VSFERR_INVALIDPARAMS;
+        }
+        else if (pTechnique->GetEffect() != this)
+        {
+            m_Core->GetLogger()->LogMessage
+            (
+                LL_CoreError, VOODOO_CORE_NAME,
+                Format(VSTR("Technique %1% cannot be set as default (technique originated from another effect)."))
+                << pTechnique
+            );
+            return VSFERR_INVALIDPARAMS;
         }
 
-        return false;
+        m_DefaultTechnique = pTechnique;
+        return VSF_OK;
     }
 
     uint32_t VOODOO_METHODTYPE VSEffectDX9::GetParameterCount() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_Parameters.size();
     }
 
     IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameter(_In_ const uint32_t index) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (index < m_Parameters.size())
         {
             return m_Parameters[index].get();
@@ -332,6 +334,7 @@ namespace VoodooShader
     IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameterByName(const String & name) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         ParameterVector::const_iterator param = m_Parameters.begin();
         while (param != m_Parameters.end())
         {

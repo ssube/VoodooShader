@@ -80,23 +80,25 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
-            return true;
+            (*ppOut)->AddRef();
+            return VSF_OK;
         }
     }
 
     String VOODOO_METHODTYPE VSLogger::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return VSTR("VSLogger()");
     }
 
     ICore * VOODOO_METHODTYPE VSLogger::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_Core;
     }
 
@@ -106,7 +108,7 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(filename);
         UNREFERENCED_PARAMETER(append);
 
-        return true;
+        return VSFERR_INVALIDCALL;
     }
 
     VoodooResult VOODOO_METHODTYPE VSLogger::Open(_In_ IFile * const pFile, _In_ const bool append)
@@ -115,19 +117,21 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(pFile);
         UNREFERENCED_PARAMETER(append);
 
-        return true;
+        return VSFERR_INVALIDCALL;
     }
 
     bool VOODOO_METHODTYPE VSLogger::IsOpen() const
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return true;
+
+        return false;
     }
 
     VoodooResult VOODOO_METHODTYPE VSLogger::Close()
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return true;
+
+        return VSFERR_INVALIDCALL;
     }
 
     void VOODOO_METHODTYPE VSLogger::Flush()
@@ -144,6 +148,7 @@ namespace VoodooShader
     LogLevel VOODOO_METHODTYPE VSLogger::GetFilter() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return LL_Unknown;
     }
 
@@ -156,6 +161,7 @@ namespace VoodooShader
     LogFlags VOODOO_METHODTYPE VSLogger::GetFlags() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return LF_Unknown;
     }
 
@@ -178,6 +184,6 @@ namespace VoodooShader
         }
 #endif
 
-        return true;
+        return VSFERR_INVALIDCALL;
     }
 }

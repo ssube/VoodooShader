@@ -39,12 +39,14 @@ namespace VoodooShader
     uint32_t VOODOO_METHODTYPE VSHookManager::AddRef() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSHookManager::Release() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -59,6 +61,7 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSHookManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (!ppOut)
         {
             return VSFERR_INVALIDPARAMS;
@@ -80,23 +83,25 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
             (*ppOut)->AddRef();
-            return true;
+            return VSF_OK;
         }
     }
 
     String VOODOO_METHODTYPE VSHookManager::ToString() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return VSTR("VSHookManager()");
     }
 
     ICore * VOODOO_METHODTYPE VSHookManager::GetCore() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return m_Core;
     }
 
@@ -107,7 +112,7 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(pSrc);
         UNREFERENCED_PARAMETER(pDest);
 
-        return true;
+        return VSFERR_INVALIDCALL;
     }
 
     VoodooResult VOODOO_METHODTYPE VSHookManager::Remove(_In_ const String & name)
@@ -115,12 +120,13 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(name);
 
-        return true;
+        return VSFERR_INVALIDCALL;
     }
 
     VoodooResult VOODOO_METHODTYPE VSHookManager::RemoveAll()
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return true;
+
+        return VSFERR_INVALIDCALL;
     }
 }

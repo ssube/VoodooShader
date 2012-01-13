@@ -80,11 +80,11 @@ namespace VoodooShader
             else
             {
                 *ppOut = nullptr;
-                return false;
+                return VSFERR_INVALIDUUID;
             }
 
-            reinterpret_cast<const IObject*>(*ppOut)->AddRef();
-            return true;
+            (*ppOut)->AddRef();
+            return VSF_OK;
         }
     }
 
@@ -111,7 +111,7 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(propid);
         UNREFERENCED_PARAMETER(pValue);
 
-        return false;
+        return VSFERR_INVALIDPROPERTY;
     }
 
     VoodooResult VOODOO_METHODTYPE VSAdapter::SetProperty(const Uuid propid, Variant * pValue)
@@ -120,52 +120,51 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(propid);
         UNREFERENCED_PARAMETER(pValue);
 
-        return true;
+        return VSFERR_INVALIDCALL;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSAdapter::LoadPass(IPass * pPass)
+    VoodooResult VOODOO_METHODTYPE VSAdapter::SetEffect(IEffect * const pEffect)
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        UNREFERENCED_PARAMETER(pEffect);
+
+        return VSFERR_INVALIDCALL;
+    }
+
+    IEffect * VOODOO_METHODTYPE VSAdapter::GetEffect() CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
+        return nullptr;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSAdapter::ResetEffect()
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
+        return VSFERR_INVALIDCALL;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSAdapter::SetPass(IPass * const pPass)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(pPass);
 
-        return VSF_OK;
-    }
-
-    bool VOODOO_METHODTYPE VSAdapter::IsPassLoaded(IPass * pPass) CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(pPass);
-        return true;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSAdapter::UnloadPass(IPass * pPass)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(pPass);
-
-        return VSF_OK;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSAdapter::SetPass(IPass * pPass)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(pPass);
-
-        return VSF_OK;
+        return VSFERR_INVALIDCALL;
     }
 
     IPass * VOODOO_METHODTYPE VSAdapter::GetPass() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return nullptr;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSAdapter::ResetPass(IPass * pPass)
+    VoodooResult VOODOO_METHODTYPE VSAdapter::ResetPass()
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(pPass);
 
-        return VSF_OK;
+        return VSFERR_INVALIDCALL;
     }
 
     ITexture * VOODOO_METHODTYPE VSAdapter::CreateTexture(const String & name, const TextureDesc pDesc)
@@ -184,7 +183,16 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(pRegion);
         UNREFERENCED_PARAMETER(pTexture);
 
-        return false;
+        return VSFERR_INVALIDCALL;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSAdapter::BindTexture(IParameter * const pParam, ITexture * const pTexture)
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        UNREFERENCED_PARAMETER(pParam);
+        UNREFERENCED_PARAMETER(pTexture);
+
+        return VSFERR_INVALIDCALL;
     }
 
     VoodooResult VOODOO_METHODTYPE VSAdapter::DrawGeometry(const uint32_t offset, const uint32_t count, void * const pData, const VertexFlags flags)
@@ -195,23 +203,6 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(pData);
         UNREFERENCED_PARAMETER(flags);
 
-        return true;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSAdapter::ApplyParameter(IParameter * const pParam)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(pParam);
-
-        return true;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSAdapter::BindTexture(IParameter * const pParam, ITexture * const pTexture)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(pParam);
-        UNREFERENCED_PARAMETER(pTexture);
-
-        return true;
+        return VSFERR_INVALIDCALL;
     }
 }
