@@ -325,19 +325,13 @@ namespace VoodooUI
             PackageDialog details = new PackageDialog();
             if (details.ShowDialog() == DialogResult.OK)
             {
-                if (String.Compare(details.Path, "user") == 0 || String.Compare(details.Path, "bin") == 0)
+                if (String.IsNullOrEmpty(details.Branch))
                 {
-                    MessageBox.Show(String.Format("Unable to install package {0}, illegal path.", details.Path), "Package Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    details.Branch = "master";
                 }
-                else
-                {
-                    if (String.IsNullOrEmpty(details.Branch))
-                    {
-                        details.Branch = "master";
-                    }
 
-                    ClonePackage(details.Origin, details.Branch, details.Path);
-                }
+                String source = String.Format("{0}/{1}/.git", details.Origin, details.Path);
+                ClonePackage(source, details.Branch, details.Path);
             }
 
             RefreshTree();

@@ -99,6 +99,7 @@
     <ClCompile Include="VSTechniqueDX9.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Stream.hpp" />
     <ClInclude Include="VoodooDocs.hpp" />
     <ClInclude Include="VoodooTypes.hpp" />
     <ClInclude Include="IAdapter.hpp" />

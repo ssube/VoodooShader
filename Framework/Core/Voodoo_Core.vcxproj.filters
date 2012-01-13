@@ -180,6 +180,9 @@
     <ClInclude Include="VSParameterDX9.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
+    <ClInclude Include="Stream.hpp">
+      <Filter>Headers\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">

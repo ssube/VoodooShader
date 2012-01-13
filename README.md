@@ -1,6 +1,6 @@
 ## Voodoo Shader Framework
-### version 0.5.4 - alpha
-#### [VoodooShader.com](http://www.voodooshader.com)
+### version 0.5.6 - alpha
+#### [VoodooShader.com](https://www.voodooshader.com)
 
 -----
 
@@ -13,13 +13,22 @@ your favorites and tweak them how you want.
 
 ### 2. Installation
 
-The Voodoo Shader Framework function using a core-and-adapter model. The Voodoo core handles most vital functions, and
-program-specific adapters interface with each program in detail. The core and all bundled basic plugins are refered to as
-the Voodoo framework (it is possible to use the core without any framework plugins, but they are recommended).
+To install the Voodoo framework, you need to download and run the Voodoo Shader UI. This will check for and create 
+installation information and allow you to download and install packages, as well as view a list of available packages. 
 
-To install the Voodoo framework, you need to download and run the Voodoo Package Manager. This will check for and create
-installation information and offer a list of available packages. It is highly recommended you select the Voodoo Framework
-package to install, along with any others you may need.
+If you prefer not to use the UI package manager, you may download full archives from the Voodoo Shader website.
+
+Once the UI or full archive has been downloaded, you will need to install the framework package. In the UI, this involves
+opening the package manager and clicking install, then entering the following information:
+
+* Origin: https://www.voodooshader.com/packages
+* Path: framework
+
+You should also install any adapters needed for particular games; supported games, the adapters needed, and a package list 
+may be found at:
+
+* https://github.com/peachykeen/VoodooShader/wiki/Game-List
+* https://github.com/peachykeen/VoodooShader/wiki/Package-List
 
 
 ### 3. Modules & Adapters
@@ -29,20 +38,20 @@ adapters are available for a number of Direct3D 8, 9 and OpenGL games.
 
 Adapters and other modules may be downloaded or updated from the Voodoo UI. These are listed in the download manager window.
 
-Third-party modules may be downloaded with the UI by adding additional remote locations. _Care should be taken when using
-modules from third parties, as they may be unsafe. No support is given for third-party modules, nor do Voodoo license terms
-apply. Make sure you read all documentation carefully and don't use modules from untrusted sources._
+Third-party modules may be downloaded with the UI by giving the proper path and package name. _Care should be taken when 
+using modules from third parties, as they may be unsafe. No support is given for third-party modules, nor do Voodoo Shader 
+license terms apply. Make sure you read all documentation carefully and don't use modules from untrusted sources._
 
 
 ### 4. Running Voodoo
 
-Voodoo has two major modes of operation.
+Voodoo has two major modes of operation:
 
-The primary and preferred mode is for the Voodoo UI to be running. This will automatically load into any applications for
-which a hook is present and active. Hooks may be managed within the UI.
+* The primary and preferred mode is for the Voodoo UI to be running. This will automatically load into any applications for
+  which a hook is present and active. Hooks may be managed within the UI.
 
-The secondary method is to drop the Voodoo intercept DLL into the game directory. This is significantly more limited, but
-does not require the UI to be running. Hooks must still be defined for the application.
+* The secondary method is to drop the Voodoo Shader intercept DLL into the game directory. This is significantly more 
+  limited, but does not require the UI to be running. Hooks must still be defined for the application.
 
 Once the game has been hooked, Voodoo will automatically load itself and all plugins given in the config file. Behavior
 after this depends on the modules used.
@@ -75,7 +84,8 @@ Questions, comments, suggestions, reports, bugs, and almost anything else are we
 If you would like a game or application supported by Voodoo, please file a request issue with the title and as much
 information as you can.
 
-If you have any interest in helping test or contributing code to Voodoo, please get in touch by email or irc.
+If you have any interest in helping test or contributing code to Voodoo, please get in touch by email or IRC.
+
 
 ### 7. Legal
 
@@ -84,5 +94,5 @@ Voodoo Shader Framework &copy; 2010-2012 by Sean Sube, All Rights Reserved.
 The Voodoo Shader Framework, all associated binary or object files and source code is released under the terms and
 conditions of the GNU Lesser General Public License, version 3. See the included LICENSE file for more details.
 
-The Voodoo Shader Framework has absolutely no warranty, as described in the license document. Some support may be provided,
-at the developer's discretion; please use the above contact methods to get in touch.
+The Voodoo Shader Framework has absolutely no warranty, as described in the license document. Some support may be provided
+at the discretion of the developer; please use the above contact methods to get in touch.

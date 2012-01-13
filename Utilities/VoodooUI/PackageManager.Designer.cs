@@ -35,6 +35,7 @@
             this.cBrowserDesc = new System.Windows.Forms.WebBrowser();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -110,13 +111,14 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
+            this.toolStripButton4,
             this.toolStripSeparator1,
             this.toolStripComboBox1,
             this.toolStripButton2,
             this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(334, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(426, 25);
             this.toolStrip1.TabIndex = 0;
             // 
             // toolStripButton1
@@ -127,6 +129,16 @@
             this.toolStripButton1.Size = new System.Drawing.Size(58, 22);
             this.toolStripButton1.Text = "Install";
             this.toolStripButton1.Click += new System.EventHandler(this.ButtonInstall);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.Enabled = false;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(92, 22);
+            this.toolStripButton4.Text = "Package List";
+            this.toolStripButton4.ToolTipText = "Download the central repository package list.";
             // 
             // toolStripSeparator1
             // 
@@ -196,5 +208,6 @@
         private System.Windows.Forms.WebBrowser cBrowserDesc;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
     }
 }
