@@ -28,8 +28,6 @@
 
 #include <windows.h>
 
-#pragma comment(lib, "cg.lib")
-
 #define VOODOO_STATIC_LINK
 #include "VoodooFramework.hpp"
 using namespace VoodooShader;

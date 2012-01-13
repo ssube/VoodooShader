@@ -132,7 +132,7 @@ namespace VoodooShader
      * resourcedir = \resources\
      *
      * $(localroot)\subdir\file.png = M:\VoodooShader\\subdir\file.png
-     * $(gempath)\shaders\test.cgfx = M:\VoodooShader\Gem\\shaders\test.cgfx
+     * $(gempath)\shaders\test.fx = M:\VoodooShader\Gem\\shaders\test.fx
      * $(localroot)\$(resourcedir)\image.dds = M:\VoodooShader\\\resources\\image.dds
      * @endcode
      *

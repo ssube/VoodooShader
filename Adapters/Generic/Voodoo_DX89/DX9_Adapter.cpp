@@ -190,7 +190,67 @@ namespace VoodooShader
             return false;
         }
 
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadPass(_In_ IPass * pPass)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetEffect(_In_ IEffect * const pEffect)
+        {
+            if (!pEffect)
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
+            else if (m_BoundEffect)
+            {
+                return VSFERR_INVALIDCALL;
+            }
+
+            Variant effectVar = {UT_PVoid, 0, nullptr};
+            if (FAILED(pEffect->GetProperty(PropIds::D3DX9Effect, &effectVar)) || effectVar.Type != UT_PVoid)
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            LPD3DXEFFECT pDXEffect = reinterpret_cast<LPD3DXEFFECT>(effectVar.VPVoid);
+
+            if (!pDXEffect)
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            UINT dxPass = 0;
+            if (FAILED(pDXEffect->Begin(&dxPass, 0)))
+            {
+                return VSF_FAIL;
+            }
+
+            m_BoundDXEffect = pDXEffect;
+            m_BoundDXEffect->AddRef();
+            m_BoundEffect = pEffect;
+
+            return VSF_OK;
+        }
+
+        IEffect * VOODOO_METHODTYPE DX9Adapter::GetEffect() CONST
+        {
+            return m_BoundEffect.get();
+        }
+
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::ResetEffect()
+        {
+            if (!m_BoundEffect || !m_BoundDXEffect)
+            {
+                return VSFERR_INVALIDCALL;
+            }
+
+            if (FAILED(m_BoundDXEffect->End()))
+            {
+                return VSF_FAIL;
+            }
+
+            m_BoundDXEffect->Release();
+            m_BoundEffect = nullptr;
+
+            return VSF_OK;
+        }
+
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadPass(_In_ IPass * const pPass)
         {
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -230,18 +290,41 @@ namespace VoodooShader
         {
             ILoggerRef logger = m_Core->GetLogger();
 
-            m_Device->CreateStateBlock(D3DSBT_ALL, &m_PassState);
-            m_CleanState->Apply();
-
             if (!pPass)
             {
                 logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set null pass."));
                 return false;
             }
-
-            if (m_BoundPass && m_BoundPass != pPass)
+            else if (m_BoundPass)
             {
                 logger->LogMessage(LL_ModWarning, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
+                return VSFERR_INVALIDCALL;
+            }
+            else if (!m_BoundEffect)
+            {
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set pass with no effect set."));
+                return VSFERR_INVALIDCALL;
+            }
+            else if (pPass->GetTechnique() != m_BoundEffect->GetDefaultTechnique())
+            {
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set pass, not from default technique of current effect."));
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            Variant propvar = {UT_PVoid, 0, nullptr};
+            if (FAILED(pPass->GetProperty(PropIds::D3DX9PassId, &propvar)) || propvar.Type != UT_UInt32)
+            {
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware handle from pass %1%.") << pPass);
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            m_Device->CreateStateBlock(D3DSBT_ALL, &m_PassState);
+            m_CleanState->Apply();
+
+            if (FAILED(m_BoundDXEffect->BeginPass(propvar.VUInt32.X)))
+            {
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to set pass %1% in hardware.") << pPass);
+                return VSF_FAIL;
             }
 
             // Bind render targets
@@ -253,7 +336,7 @@ namespace VoodooShader
 
             m_BoundPass = pPass;
 
-            return true;
+            return VSF_OK;
         }
 
         IPass * VOODOO_METHODTYPE DX9Adapter::GetPass() CONST
@@ -261,19 +344,13 @@ namespace VoodooShader
             return m_BoundPass.get();
         }
 
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::ResetPass(_In_ IPass * pPass)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::ResetPass()
         {
             ILoggerRef logger = m_Core->GetLogger();
 
-            if (!pPass)
+            if (!m_BoundPass)
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to reset null pass."));
-                return false;
-            }
-
-            if (m_BoundPass && m_BoundPass != pPass)
-            {
-                logger->LogMessage(LL_ModWarning, VOODOO_DX89_NAME, VSTR("Resetting pass different than the previously bound pass."));
+                return VSFOK_REDUNDANT;
             }
 
             m_BoundPass = nullptr;
@@ -281,7 +358,7 @@ namespace VoodooShader
             m_PassState->Apply();
             m_PassState->Release();
 
-            return true;
+            return VSF_OK;
         }
 
         VoodooResult DX9Adapter::SetTarget(const uint32_t index, _In_opt_ ITexture * pTarget)
@@ -411,9 +488,7 @@ namespace VoodooShader
             }
             else
             {
-                const char * error = cgD3D9TranslateHRESULT(hr);
-
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error creating texture %1%: %2%") << name << error);
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error creating texture %1%: %2%") << name << hr);
                 return nullptr;
             }
         }
@@ -589,21 +664,9 @@ namespace VoodooShader
 
             ILoggerRef logger = m_Core->GetLogger();
 
-            if (!SUCCEEDED(errors))
-            {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set Cg D3D9 device."));
-            }
-            else
-            {
-                logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, VSTR("Cg D3D9 device set successfully."));
-            }
-
             // Setup profiles
-            CGprofile bestFrag = cgD3D9GetLatestPixelProfile();
-            CGprofile bestVert = cgD3D9GetLatestVertexProfile();
-
-            const char * bestVertStr = cgGetProfileString(bestVert);
-            const char * bestFragStr = cgGetProfileString(bestFrag);
+            const char * bestVertStr = D3DXGetVertexShaderProfile(pDevice);
+            const char * bestFragStr = D3DXGetPixelShaderProfile(pDevice);
 
             logger->LogMessage
             (

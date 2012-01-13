@@ -106,19 +106,11 @@ namespace VoodooShader
             return value;
         }
 
-        VoodooResult VOODOO_METHODTYPE FrostAdapter::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::QueryInterface(_In_ const Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
         {
             if (!ppOut)
             {
-                if (clsid.is_nil())
-                {
-                    clsid = CLSID_FrostAdapter;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return VSFERR_INVALIDPARAMS;
             }
             else
             {
@@ -137,11 +129,11 @@ namespace VoodooShader
                 else
                 {
                     *ppOut = nullptr;
-                    return false;
+                    return VSFERR_INVALIDUUID;
                 }
 
-                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
-                return true;
+                (*ppOut)->AddRef();
+                return VSF_OK;
             }
         }
 
@@ -176,24 +168,24 @@ namespace VoodooShader
             return VSFERR_NOTIMPLEMENTED;
         }
 
-        VoodooResult VOODOO_METHODTYPE FrostAdapter::LoadPass(_In_ IPass *pass)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::SetEffect(IEffect * pEffect)
         {
-            UNREFERENCED_PARAMETER(pass);
+            if (!pEffect)
+            {
+                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_FROST_NAME, VSTR("Unable to bind null effect."));
+                return VSFERR_INVALIDPARAMS;
+            }
 
             return VSFERR_NOTIMPLEMENTED;
         }
 
-        bool VOODOO_METHODTYPE FrostAdapter::IsPassLoaded(_In_ IPass * pPass) CONST
+        IEffect * VOODOO_METHODTYPE FrostAdapter::GetEffect() CONST
         {
-            UNREFERENCED_PARAMETER(pPass);
-
-            return true;
+            return nullptr;
         }
 
-        VoodooResult VOODOO_METHODTYPE FrostAdapter::UnloadPass(_In_ IPass *pass)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::ResetEffect()
         {
-            UNREFERENCED_PARAMETER(pass);
-
             return VSFERR_NOTIMPLEMENTED;
         }
 
@@ -205,8 +197,6 @@ namespace VoodooShader
                 return VSFERR_INVALIDPARAMS;
             }
 
-            m_BoundPass = pPass;
-
             return VSFERR_NOTIMPLEMENTED;
         }
 
@@ -215,10 +205,8 @@ namespace VoodooShader
             return m_BoundPass.get();
         }
 
-        VoodooResult VOODOO_METHODTYPE FrostAdapter::ResetPass(_In_ IPass * pPass)
+        VoodooResult VOODOO_METHODTYPE FrostAdapter::ResetPass()
         {
-            if (!pPass) return false;
-
             return VSFERR_NOTIMPLEMENTED;
         }
 
@@ -378,7 +366,8 @@ namespace VoodooShader
             glPushMatrix();
             glLoadIdentity();
 
-            size_t passes = tech->GetPassCount();
+            this->SetEffect(effect);
+            uint32_t passes = tech->GetPassCount();
 
             for (size_t curpass = 0; curpass < passes; ++curpass)
             {
@@ -386,7 +375,7 @@ namespace VoodooShader
 
                 this->SetPass(pass.get());
                 //this->DrawGeometry(0, 0, nullptr, VF_None);
-                this->ResetPass(pass.get());
+                this->ResetPass();
 
                 ITextureRef target = pass->GetTarget(0);
 
@@ -402,6 +391,7 @@ namespace VoodooShader
                     }
                 }
             }
+            this->ResetEffect();
 
             glMatrixMode(GL_PROJECTION);
             glPopMatrix();
@@ -453,7 +443,7 @@ namespace VoodooShader
                 }
 
                 // Load shader
-                IFile * shaderFile = m_Core->GetFileSystem()->GetFile(L"test.cgfx");
+                IFile * shaderFile = m_Core->GetFileSystem()->GetFile(L"test.fx");
                 gpTestEffect = m_Core->CreateEffect(shaderFile);
             }
             else

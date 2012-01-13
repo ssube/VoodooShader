@@ -87,25 +87,3 @@
 #define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBAL_VERSION_PATCH
 #define VOODOO_CORE_VERSION_BUILD       VOODOO_GLOBAL_VERSION_BUILD
 #define VOODOO_CORE_VERSION_ID          VOODOO_GLOBAL_VERSION_ID
-
-// External defs Cg
-#define VOODOO_CG_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
-#define VOODOO_CG_AUTHOR                VSTR("nVidia")
-#define VOODOO_CG_NAME                  VSTR("Cg")
-#define VOODOO_CG_PRETTYNAME            VSTR("nVidia Cg Toolkit (July 2010)")
-#define VOODOO_CG_VERSION_MAJOR         3
-#define VOODOO_CG_VERSION_MINOR         0
-#define VOODOO_CG_VERSION_PATCH         0
-#define VOODOO_CG_VERSION_BUILD         16
-#define VOODOO_CG_VERSION_ID            nullptr
-
-// VC
-#define VOODOO_VC_LIBID                 {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
-#define VOODOO_VC_AUTHOR                VSTR("Microsoft")
-#define VOODOO_VC_NAME                  VSTR("MSVC")
-#define VOODOO_VC_PRETTYNAME            VSTR("Microsoft Visual C++")
-#define VOODOO_VC_VERSION_MAJOR         _MSC_VER
-#define VOODOO_VC_VERSION_MINOR         0
-#define VOODOO_VC_VERSION_PATCH         _MSC_FULL_VER
-#define VOODOO_VC_VERSION_BUILD         _MSC_BUILD
-#define VOODOO_VC_VERSION_ID            nullptr

@@ -266,6 +266,7 @@ namespace VoodooShader
                     gpVoodooLogger->LogMessage(LL_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to frame texture.");
                 }
 
+                adapter->SetEffect(testEffect);
                 VoodooShader::ITechniqueRef tech = testEffect->GetDefaultTechnique();
                 uint32_t passCount = tech->GetPassCount();
                 for (uint32_t i = 0; i < passCount; ++i)
@@ -281,9 +282,10 @@ namespace VoodooShader
 
                         adapter->SetPass(pass.get());
                         adapter->DrawGeometry(0, 2, gpFSQuadVerts, (VertexFlags)(VF_Buffer|VF_Transformed));
-                        adapter->ResetPass(pass.get());
+                        adapter->ResetPass();
                     }
                 }
+                adapter->ResetEffect();
             }
 
             HRESULT hr = m_RealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);

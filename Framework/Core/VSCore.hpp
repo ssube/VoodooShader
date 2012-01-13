@@ -101,7 +101,7 @@ namespace VoodooShader
         /** Collection of all usable textures. */
         TextureMap m_Textures;
 
-        /** Collection of all virtual parameters created by this pCore and used by the Cg context. */
+        /** Collection of all virtual parameters created by this pCore. */ 
         ParameterMap m_Parameters;
 
         /** Default pass target texture for shader linker. */

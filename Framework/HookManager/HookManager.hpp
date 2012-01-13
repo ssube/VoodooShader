@@ -22,7 +22,6 @@
 #include <easyhook.h>
 
 #define VOODOO_IMPORT
-#define VOODOO_NO_CG
 #define VOODOO_NO_PUGIXML
 #include "VoodooFramework.hpp"
 

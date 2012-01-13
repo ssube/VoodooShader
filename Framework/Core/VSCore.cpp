@@ -301,11 +301,6 @@ namespace VoodooShader
             m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, configMsg);
             m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
-            Version vsver = VOODOO_VERSION_STRUCT(VC);
-            Version cgver = VOODOO_VERSION_STRUCT(CG);
-            m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << vsver);
-            m_Logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << cgver);
-
             // Load less vital classes
             m_FileSystem = dynamic_cast<IFileSystem*>(m_ModuleManager->CreateObject(fsClass));
             if (!m_FileSystem)

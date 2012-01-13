@@ -136,8 +136,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile, const CompileFlags flags = CF_Default) PURE;
         /**
-         * Creates a global virtual parameter. This parameter exists in the Cg runtime, but is not a part of
-         * any shader or program.
+         * Creates a global virtual parameter. This parameter exists in the core, but is not a part of any effect.
          *
          * This is most useful for creating parameters that must be shared between programs. Only parameters
          * created with this function may be used in Parameter::Link().

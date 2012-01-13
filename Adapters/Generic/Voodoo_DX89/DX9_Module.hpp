@@ -25,9 +25,6 @@
 
 #include "D3D9.h"
 
-#include "Cg/cgD3D9.h"
-#pragma comment(lib, "cgD3D9.lib")
-
 #ifndef VOODOO_IMPORT_DX9
 #   define VOODOO_API_DX9 __declspec(dllexport)
 #else

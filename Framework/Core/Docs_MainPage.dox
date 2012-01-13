@@ -28,21 +28,22 @@ namespace VoodooShader
      * graphics applications, both before and after development.
      *
      * Voodoo uses a system of core modules and adapters to provide the widest compatibility and best performance possible
-     * across a wide range of applications and APIs. Voodoo supports both OpenGL and DirectX, using nVidia's Cg language.
-     * In addition, Voodoo provides a second processing step to provide shaders with easy access to other resources,
-     * especially textures.
+     * across a wide range of applications and APIs. Voodoo supports both OpenGL and DirectX, using the HLSL shader language
+     * and the MojoShader project.
+     *
+     * In addition, Voodoo provides a second processing step to provide shaders with easy access to game resources.
      *
      * The Voodoo core and supported shaders remain constant between target applications and adapters, providing a unified
      * set of features and single target for shaders.
      *
      * @section voodoo_main_shaders Shader Support
      *
-     * Voodoo uses nVidia's Cg Toolkit to provide a common, simple shader language and cross-API compiler for widely
-     * supported shaders. Voodoo shaders run under both OpenGL and DirectX and can scale over a great variety of hardware,
-     * from OpenGL 1.1 to 4.0 and DirectX 8 to 11. Applications using any of the supported APIs are supported within Voodoo,
-     * with a near-identical feature set provided across the board.
+     * Voodoo uses the HLSL shader language and various compilers and processors to provide a simple-to-use and 
+     * API-independent shader system with wide support. Voodoo shaders run under both OpenGL and DirectX and can scale over 
+     * across a great variety of hardware, from OpenGL 1.1 to 4.0 and DirectX 8 to 11. Applications using any of the 
+     * supported APIs are supported within Voodoo, with a near-identical feature set provided across the board.
      *
-     * In addition to fully supporting the Cg language, Voodoo implements a second, internal linking stage to offer more
+     * In addition to fully supporting the HLSL language, Voodoo implements a second, internal linking stage to offer more
      * powerful features such as deferred rendering and material shaders, with or without original application support.
      * Voodoo uses features such as semantics and annotations to provide these features without adding complexity to the
      * language or breaking compatibility with other shader tools. Voodoo provides a set of compiler options to allow

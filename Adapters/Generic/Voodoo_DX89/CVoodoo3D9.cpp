@@ -274,7 +274,7 @@ namespace VoodooShader
 
                 try
                 {
-                    IFile * shaderFile = gpVoodooCore->GetFileSystem()->GetFile(L"test.cgfx");
+                    IFile * shaderFile = gpVoodooCore->GetFileSystem()->GetFile(L"test.fx");
                     if (shaderFile)
                     {
                         testEffect = gpVoodooCore->CreateEffect(shaderFile, CF_DirectX9);

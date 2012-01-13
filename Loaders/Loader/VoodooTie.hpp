@@ -20,7 +20,6 @@
 #pragma once
 
 #define VOODOO_NO_BOOST
-#define VOODOO_NO_CG
 #define VOODOO_NO_PUGIXML
 #include "VoodooFramework.hpp"
 

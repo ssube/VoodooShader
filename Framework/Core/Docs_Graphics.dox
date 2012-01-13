@@ -73,7 +73,7 @@ namespace VoodooShader
       *
       * @section voodoo_graphics_shaders_system Shader System
       *
-      * In addition to the standard Cg compiler, Voodoo adds a few additional features to the shader system:
+      * In addition to the standard HLSL compiler, Voodoo adds a few additional features to the shader system:
       *
       * @subsection voodoo_graphics_shaders_system_parameters Shader Parameters
       *

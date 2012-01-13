@@ -41,16 +41,19 @@ namespace VoodooShader
             VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
             VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
-            VOODOO_METHOD(LoadPass)(_In_ IPass * const pPass);
-            VOODOO_METHOD_(bool, IsPassLoaded)(_In_ IPass * const pPass) CONST;
-            VOODOO_METHOD(UnloadPass)(_In_ IPass * const pPass);
+            VOODOO_METHOD(SetEffect)(_In_ IEffect * const pEffect);
+            VOODOO_METHOD_(IEffect *, GetEffect)() CONST;
+            VOODOO_METHOD(ResetEffect)();
+
             VOODOO_METHOD(SetPass)(_In_ IPass * const pPass);
             VOODOO_METHOD_(IPass *, GetPass)() CONST;
-            VOODOO_METHOD(ResetPass)(_In_ IPass * const pPass);
+            VOODOO_METHOD(ResetPass)();
+
             VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc pDesc);
             VOODOO_METHOD(LoadTexture)(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture);
-            VOODOO_METHOD(DrawGeometry)(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags);
             VOODOO_METHOD(BindTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
+
+            VOODOO_METHOD(DrawGeometry)(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags);
 
             void DrawEffect(_In_ IEffect * pShader);
             void SetDC(_In_opt_ HDC hdc);

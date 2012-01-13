@@ -20,7 +20,6 @@
 #pragma once
 
 #define VOODOO_IMPORT
-#define VOODOO_NO_CG
 #include "VoodooFramework.hpp"
 
 #include "IL/il.h"

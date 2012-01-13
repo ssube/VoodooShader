@@ -33,8 +33,6 @@
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glut32.lib")
 
-#pragma comment(lib, "cg.lib")
-
 #define VOODOO_STATIC_LINK
 #include "VoodooFramework.hpp"
 using namespace VoodooShader;
@@ -74,7 +72,7 @@ TEARDOWN(OGLCore)
 
 BEGIN_TESTF(Core_CreateShader, OGLCore)
 {
-    IFile * file = gpCore->GetFileSystem()->GetFile(L"test.cgfx");
+    IFile * file = gpCore->GetFileSystem()->GetFile(L"test.fx");
     IEffect * effect = gpCore->CreateEffect(file);
     WIN_ASSERT_NULL(effect, L"Core_CreateEffect: Unable to create effect.");
 }

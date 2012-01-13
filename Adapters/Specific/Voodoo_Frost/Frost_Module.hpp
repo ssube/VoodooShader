@@ -27,9 +27,6 @@
 #include <GL/glew.h>
 #include <GL/wglew.h>
 
-#include "GL/gl.h"
-#include "Cg/cgGL.h"
-
 #include "Frost_Version.hpp"
 
 namespace VoodooShader
