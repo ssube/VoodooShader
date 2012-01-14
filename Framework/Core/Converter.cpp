@@ -26,12 +26,12 @@ namespace VoodooShader
 {
     TextureFormat Converter::ToTextureFormat(_In_ const wchar_t * format)
     {
-        if (_tcsnicmp(format, VSTR("TF_"), 3) != 0)
-        {
-            return TF_Unknown;
-        }
+        const wchar_t * formatBody = format;
 
-        const wchar_t * formatBody = format + 3;
+        if (_tcsnicmp(format, VSTR("TF_"), 3) == 0)
+        {
+            formatBody += 3;
+        }
 
         if (formatBody[0] == VSTR('D'))
         {

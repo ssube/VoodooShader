@@ -57,44 +57,6 @@ namespace VoodooShader
         m_Desc.Rows = desc.Rows;
         m_Desc.Elements = desc.Elements;
 
-        // Handle sampler
-        if (m_Desc.Type >= PT_Texture && m_Desc.Type <= PT_TextureCube)
-        {
-            D3DXHANDLE texAnnot = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texture");
-            if (texAnnot)
-            {
-                LPCSTR texName = nullptr;
-                if (SUCCEEDED(m_DXEffect->GetString(texAnnot, &texName)))
-                {
-                    m_Texture = m_Core->GetTexture(texName);
-                }
-                else
-                {
-                    m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Sampler %1% has no source texture annotation.") << m_Name);
-                }
-            }
-        }
-
-        // Handle linkage
-        D3DXHANDLE sourceAnnot = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_source");
-        if (sourceAnnot)
-        {
-            LPCSTR sourceName = NULL;
-            if (SUCCEEDED(m_DXEffect->GetString(sourceAnnot, &sourceName)))
-            {
-                IParameter * sourceParam = m_Core->GetParameter(sourceName, m_Desc);
-                if (sourceParam)
-                {
-                    sourceParam->AttachParameter(this);
-                }
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
-                    Format("Unable to get source annotation for parameter %1%.") << m_Name);
-            }
-        }
-
         AddThisToDebugCache();
     }
 
@@ -476,5 +438,142 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return m_Effect;
+    }
+
+    void VOODOO_METHODTYPE VSParameterDX9::Link()
+    {
+        // Handle textures 
+        if (m_Desc.Type >= PT_Texture && m_Desc.Type <= PT_TextureCube)
+        {
+            this->LinkNewTexture();
+
+            D3DXHANDLE texAnnot = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texture");
+            if (texAnnot)
+            {
+                LPCSTR texName = nullptr;
+                if (SUCCEEDED(m_DXEffect->GetString(texAnnot, &texName)))
+                {
+                    m_Texture = m_Core->GetTexture(texName);
+                    if (m_Texture)
+                    {
+                        m_Core->GetAdapter()->BindTexture(this, m_Texture.get());
+                    }
+                }
+                else
+                {
+                    m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Texture parameter %1% has no source texture annotation.") << m_Name);
+                }
+            }
+        }
+
+        // Handle linkage
+        D3DXHANDLE sourceAnnot = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_source");
+        if (sourceAnnot)
+        {
+            LPCSTR sourceName = NULL;
+            if (SUCCEEDED(m_DXEffect->GetString(sourceAnnot, &sourceName)))
+            {
+                IParameter * sourceParam = m_Core->GetParameter(sourceName, m_Desc);
+                if (sourceParam)
+                {
+                    sourceParam->AttachParameter(this);
+                }
+            }
+            else
+            {
+                m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                    Format("Unable to get source annotation for parameter %1%.") << m_Name);
+            }
+        }
+    }
+
+    void VOODOO_METHODTYPE VSParameterDX9::LinkNewTexture()
+    {
+        if (m_Desc.Type < PT_Texture || m_Desc.Type > PT_TextureCube)
+        {
+            return;
+        }
+
+        D3DXHANDLE newA = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texcreate");
+        if (newA)
+        {
+            BOOL newFlag = FALSE;
+            if (FAILED(m_DXEffect->GetBool(newA, &newFlag)) || newFlag != TRUE)
+            {
+                return;
+            }
+        }
+
+        D3DXHANDLE nameA = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texture");
+        D3DXHANDLE dimA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texdim");
+        D3DXHANDLE mipA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texmip");
+        D3DXHANDLE rttA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texrtt");
+        D3DXHANDLE fmtA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texfmt");
+        if (!nameA || !dimA || !fmtA)
+        {
+            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                Format("Texture parameter %1% has texture create flag set but is missing required parameters.") << m_Name);
+            return;
+        }
+
+        LPCSTR nameStr = NULL;
+        if (FAILED(m_DXEffect->GetString(nameA, &nameStr)))
+        {
+            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                Format("Unable to get texture name from parameter %1%.") << m_Name);
+            return;
+        }
+
+        DECLARE_AND_ZERO(D3DXVECTOR4, dimVec);
+        if (FAILED(m_DXEffect->GetVector(dimA, &dimVec)))
+        {
+            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                Format("Unable to get texture dimensions from parameter %1%.") << m_Name);
+            return;
+        }
+
+        UInt3 dim = {(uint32_t)dimVec.x, (uint32_t)dimVec.y, (uint32_t)dimVec.z};
+
+        LPCSTR fmtStr = NULL;
+        if (FAILED(m_DXEffect->GetString(fmtA, &fmtStr)))
+        {
+            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                Format("Unable to get texture format from parameter %1%.") << m_Name);
+            return;
+        }
+
+        TextureFormat fmt = Converter::ToTextureFormat(String(fmtStr).GetData());
+        if (fmt == TF_Unknown)
+        {
+            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                Format("Unknown texture format on parameter %1%.") << m_Name);
+            return;
+        }            
+
+        BOOL mipB = FALSE;
+        m_DXEffect->GetBool(mipA, &mipB);
+        bool mip = (mipB == TRUE);
+
+        BOOL rttB = TRUE;
+        m_DXEffect->GetBool(rttA, &rttB);
+        bool rtt = (rttB == TRUE);
+
+        TextureDesc desc = {dim, mip, rtt, fmt};
+
+        m_Core->GetLogger()->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, 
+            Format("Creating texture %1% named %2% for parameter %3%.") << desc << nameStr << m_Name);
+
+        ITexture * pTex = m_Core->CreateTexture(nameStr, desc);
+        if (!pTex)
+        {
+            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                Format("Unable to create texture for parameter %1%.") << m_Name);
+            return;
+        }
+        else
+        {
+            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                Format("Successfully created texture for parameter %1%.") << m_Name);
+        }
     }
 }

@@ -70,6 +70,9 @@ namespace VoodooShader
 
         VOODOO_METHOD_(IEffect *, GetEffect)() CONST;
 
+        VOODOO_METHOD_(void, Link)();
+        VOODOO_METHOD_(void, LinkNewTexture)();
+
     private:
         mutable uint32_t m_Refs;
         ICore * m_Core;
