@@ -58,7 +58,7 @@ namespace VoodooShader
     }
 
     VSCore::VSCore(uint32_t version) :
-        m_Refs(0), m_Version(version), m_ConfigFile(nullptr)
+        m_Refs(0), m_Version(version), m_DefaultFlags(CF_Default), m_ConfigFile(nullptr)
     {
 #if defined(VOODOO_DEBUG_MEMORY)
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRT0DBG_LEAK_CHECK_DF);

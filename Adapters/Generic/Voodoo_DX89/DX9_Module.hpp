@@ -23,7 +23,11 @@
 #define VOODOO_NO_PUGIXML
 #include "VoodooFramework.hpp"
 
+#if defined(_DEBUG)
+#   define D3D_DEBUG_INFO
+#endif
 #include "D3D9.h"
+#include "D3DX9Shader.h"
 
 #ifndef VOODOO_IMPORT_DX9
 #   define VOODOO_API_DX9 __declspec(dllexport)

@@ -37,8 +37,9 @@ namespace VoodooShader
     {
         DX9Adapter::DX9Adapter(ICore * pCore) :
             m_Refs(0), m_Core(pCore),
-            m_SdkVersion(D3D_SDK_VERSION), m_RealDevice(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr),
-            m_BoundPass(nullptr), m_BackBuffer(nullptr)
+            m_SdkVersion(D3D_SDK_VERSION), m_FakeDevice(nullptr), m_RealDevice(nullptr), 
+            m_VertDecl(nullptr), m_VertDeclT(nullptr), m_BackBuffer(nullptr),
+            m_CleanState(nullptr), m_PassState(nullptr), m_BoundDXEffect(nullptr), m_BoundDXPass(nullptr)
         {
             gpVoodooCore = m_Core;
             gpVoodooLogger = gpVoodooCore->GetLogger();
@@ -129,12 +130,12 @@ namespace VoodooShader
                 if (InterlockedCompareExchange(&gObjectLock, 1, 0) == 0)
                 {
                     IDirect3D8 * origObj = reinterpret_cast<IDirect3D8 *>(pValue->VPVoid);
-                    if (!origObj) return false;
+                    if (!origObj) return VSFERR_INVALIDPARAMS;
 
                     // Create the wrapper object and build the caps cache from the original
                     VoodooDX8::CVoodoo3D8 * fakeObj = new VoodooDX8::CVoodoo3D8(m_SdkVersion, nullptr);
                     fakeObj->VSCacheCaps(origObj);
-                    origObj->Release();
+                    while (origObj->Release() > 0) {};
                 
                     // Load system d3d9.
                     HMODULE d3d9 = nullptr;
@@ -175,6 +176,7 @@ namespace VoodooShader
                 if (m_RealDevice) m_RealDevice->Release();
                 m_RealDevice = reinterpret_cast<LPDIRECT3DDEVICE9>(pValue->VPVoid);
                 m_RealDevice->AddRef();
+                this->SetupDevice();
                 return VSF_OK;
             }
 
@@ -222,7 +224,7 @@ namespace VoodooShader
                 return VSFERR_INVALIDCALL;
             }
 
-            Variant effectVar = {UT_PVoid, 0, nullptr};
+            Variant effectVar = CreateVariant();
             if (FAILED(pEffect->GetProperty(PropIds::D3DX9Effect, &effectVar)) || effectVar.Type != UT_PVoid)
             {
                 return VSFERR_INVALIDPARAMS;
@@ -260,7 +262,8 @@ namespace VoodooShader
                 return VSFERR_INVALIDCALL;
             }
 
-            if (FAILED(m_BoundDXEffect->End()))
+            HRESULT hr = m_BoundDXEffect->End();
+            if (FAILED(hr))
             {
                 return VSF_FAIL;
             }
@@ -269,42 +272,6 @@ namespace VoodooShader
             m_BoundEffect = nullptr;
 
             return VSF_OK;
-        }
-
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadPass(_In_ IPass * const pPass)
-        {
-            ILoggerRef logger = m_Core->GetLogger();
-
-            if (!pPass)
-            {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to load null pass."));
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        bool VOODOO_METHODTYPE DX9Adapter::IsPassLoaded(_In_ IPass * const pPass) CONST
-        {
-            if (!pPass) return false;
-            return true;
-        }
-
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::UnloadPass(_In_ IPass * const pPass)
-        {
-            ILoggerRef logger = m_Core->GetLogger();
-
-            if (!pPass)
-            {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Attempting to load null pass."));
-                return false;
-            }
-            else
-            {
-                return true;
-            }
         }
 
         VoodooResult VOODOO_METHODTYPE DX9Adapter::SetPass(_In_ IPass * const pPass)
@@ -332,17 +299,19 @@ namespace VoodooShader
                 return VSFERR_INVALIDPARAMS;
             }
 
-            Variant propvar = {UT_PVoid, 0, nullptr};
+            Variant propvar = CreateVariant();
             if (FAILED(pPass->GetProperty(PropIds::D3DX9PassId, &propvar)) || propvar.Type != UT_UInt32)
             {
                 logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware handle from pass %1%.") << pPass);
                 return VSFERR_INVALIDPARAMS;
             }
+            m_BoundDXPassId = propvar.VUInt32.X;
 
             m_RealDevice->CreateStateBlock(D3DSBT_ALL, &m_PassState);
             m_CleanState->Apply();
 
-            if (FAILED(m_BoundDXEffect->BeginPass(propvar.VUInt32.X)))
+            HRESULT hr = m_BoundDXEffect->BeginPass(m_BoundDXPassId);
+            if (FAILED(hr))
             {
                 logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to set pass %1% in hardware.") << pPass);
                 return VSF_FAIL;
@@ -369,9 +338,15 @@ namespace VoodooShader
         {
             ILoggerRef logger = m_Core->GetLogger();
 
-            if (!m_BoundPass)
+            if (!m_BoundPass || !m_BoundEffect)
             {
                 return VSFOK_REDUNDANT;
+            }
+
+            HRESULT hr = m_BoundDXEffect->EndPass();
+            if (FAILED(hr))
+            {
+                return VSF_FAIL;
             }
 
             m_BoundPass = nullptr;
@@ -430,7 +405,7 @@ namespace VoodooShader
             }
             else
             {
-                Variant texVar = {UT_Unknown, 0, nullptr};
+                Variant texVar = CreateVariant();
                 if (FAILED(pTarget->GetProperty(PropIds::D3D9Texture, &texVar)))
                 {
                     logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to retrieve hardware texture property from texture %1%.") << pTarget);
@@ -601,12 +576,12 @@ namespace VoodooShader
             }
 
             ParameterDesc desc = pParam->GetDesc();
-            if (desc.Type != PT_Sampler1D && desc.Type != PT_Sampler2D && desc.Type != PT_Sampler3D)
+            if (desc.Type < PT_Texture || desc.Type > PT_TextureCube)
             {
                 m_Core->GetLogger()->LogMessage
                 (
                     LL_ModError, VOODOO_DX89_NAME, 
-                    Format("Invalid texture binding, parameter %1% is not a sampler.") << pParam
+                    Format("Invalid texture binding, parameter %1% is not a texture parameter.") << pParam
                 );
                 return VSFERR_INVALIDPARAMS;
             }
@@ -615,7 +590,7 @@ namespace VoodooShader
             D3DXHANDLE pDXParam;
             LPDIRECT3DTEXTURE9 pDXTexture;
 
-            Variant propVar = {UT_PVoid, 0, nullptr};
+            Variant propVar = CreateVariant();
             if (FAILED(pParam->GetProperty(PropIds::D3DX9Effect, &propVar))) 
             {
                 m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware effect from parameter %1%.") << pParam);
@@ -665,29 +640,23 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetDXDevice(IDirect3DDevice9 * pDevice)
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetupDevice()
         {
-            if (pDevice == m_RealDevice)
+            if (!m_RealDevice)
             {
-                return true;
+                return VSFERR_INVALIDCALL;
             }
-            else if (pDevice == nullptr || (pDevice && m_RealDevice))
-            {
-                if (m_VertDecl) m_VertDecl->Release();
-                if (m_VertDeclT) m_VertDeclT->Release();
-
-                if (!pDevice) return true;
-            }
-
-            m_RealDevice = pDevice;
+            
+            if (m_VertDecl) m_VertDecl->Release();
+            if (m_VertDeclT) m_VertDeclT->Release();
 
             HRESULT errors = m_RealDevice->CreateStateBlock(D3DSBT_ALL, &m_CleanState);
 
             ILoggerRef logger = m_Core->GetLogger();
 
             // Setup profiles
-            const char * bestVertStr = D3DXGetVertexShaderProfile(pDevice);
-            const char * bestFragStr = D3DXGetPixelShaderProfile(pDevice);
+            const char * bestVertStr = D3DXGetVertexShaderProfile(m_RealDevice);
+            const char * bestFragStr = D3DXGetPixelShaderProfile(m_RealDevice);
 
             logger->LogMessage
             (

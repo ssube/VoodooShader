@@ -75,6 +75,12 @@ namespace VoodooShader
         PT_Int          = 0x02,
         PT_Float        = 0x03,     /* !< float vector parameter (may have 1 to 4 components). */
         PT_String       = 0x04,
+        PT_Texture      = 0x05,
+        PT_Texture1D    = 0x06,
+        PT_Texture2D    = 0x07,
+        PT_Texture3D    = 0x08,
+        PT_TextureCube  = 0x09,
+        PT_Sampler      = 0x0A,
         PT_Sampler1D    = 0x0B,     /* !< Sampler parameter (may sample 1D to 3D textures). */
         PT_Sampler2D    = 0x0C,
         PT_Sampler3D    = 0x0D,
@@ -592,7 +598,8 @@ namespace VoodooShader
      * @defgroup voodoo_variant_decl Variant Declaration & Init
      * @{
      */
-#define DECLARE_VARIANT(name) Variant name; ZeroMemory(&name, sizeof(Variant))
+#define DECLARE_AND_ZERO(type, name)                type name; ZeroMemory(&name, sizeof(type))
+#define DECLARE_VARIANT(name)                       DECLARE_AND_ZERO(Variant, name)
 #define INITIALIZE_VARIANTC(name, type, comp)       name.Type = UT_##type; name.Components = comp
 #define INITIALIZE_VARIANT1(name, type, x)          INITIALIZE_VARIANTC(name, type, 1); name.V##type.X = x
 #define INITIALIZE_VARIANT2(name, type, x, y)       INITIALIZE_VARIANTC(name, type, 2); name.V##type.X = x; name.V##type.Y = y
@@ -640,6 +647,8 @@ namespace VoodooShader
     inline Variant CreateVariant(void * pV)             { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, PVoid, 0); var.VPVoid = pV; }
     template<typename T>
     inline Variant CreateVariant(T * pV)                { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, PVoid, 0); var.VPVoid = reinterpret_cast<void*>(pV); return var; }
+    template<typename T>
+    inline Variant CreateVariant(const T * pV)          { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, PVoid, 0); var.VPVoid = reinterpret_cast<void*>(const_cast<T*>(pV)); return var; }
     /**
      * @}
      */

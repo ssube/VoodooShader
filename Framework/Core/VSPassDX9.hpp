@@ -22,6 +22,9 @@
 #include "VoodooFramework.hpp"
 #include "VoodooInternal.hpp"
 
+#ifdef _DEBUG
+#define D3D_DEBUG_INFO
+#endif
 #include <d3dx9effect.h>
 
 namespace VoodooShader
@@ -32,7 +35,7 @@ namespace VoodooShader
     VOODOO_CLASS(VSPassDX9, IPass, ({0xA3, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSPassDX9(_In_ VSTechniqueDX9 * pTechnique, _In_ LPD3DXEFFECT pEffect, _In_ D3DXHANDLE pPassHandle);
+        VSPassDX9(_In_ VSTechniqueDX9 * pTechnique, _In_ LPD3DXEFFECT pEffect, _In_ D3DXHANDLE pPassHandle, UINT passId);
         ~VSPassDX9();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -61,6 +64,7 @@ namespace VoodooShader
 
         LPD3DXEFFECT m_DXEffect;
         D3DXHANDLE m_DXHandle;
+        UINT m_DXPassId;
 
         LPDIRECT3DVERTEXSHADER9 m_VertexShader;
         LPDIRECT3DPIXELSHADER9  m_PixelShader;

@@ -26,8 +26,8 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSPassDX9
     DeclareDebugCache();
 
-    VSPassDX9::VSPassDX9(VSTechniqueDX9 * pTechnique, LPD3DXEFFECT pDXEffect, D3DXHANDLE pPassHandle) :
-        m_Refs(0), m_Technique(pTechnique), m_DXEffect(pDXEffect), m_DXHandle(pPassHandle)
+    VSPassDX9::VSPassDX9(VSTechniqueDX9 * pTechnique, LPD3DXEFFECT pDXEffect, D3DXHANDLE pPassHandle, UINT passId) :
+        m_Refs(0), m_Technique(pTechnique), m_DXEffect(pDXEffect), m_DXHandle(pPassHandle), m_DXPassId(passId)
     {
         if (!m_Technique)
         {
@@ -168,14 +168,17 @@ namespace VoodooShader
 
         if (propid == PropIds::D3DX9Handle)
         {
-            pValue->Type = UT_PVoid;
-            pValue->VPVoid = (PVOID)m_DXHandle;
+            (*pValue) = CreateVariant(m_DXHandle);
             return VSF_OK;
         } 
         else if (propid == PropIds::D3DX9Effect)
         {
-            pValue->Type = UT_PVoid;
-            pValue->VPVoid = (PVOID)m_DXEffect;
+            (*pValue) = CreateVariant(m_DXEffect);
+            return VSF_OK;
+        }
+        else if (propid == PropIds::D3DX9PassId)
+        {
+            (*pValue) = CreateVariant(m_DXPassId);
             return VSF_OK;
         }
         else
@@ -195,7 +198,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (propid == PropIds::D3DX9Handle || propid == PropIds::D3DX9Effect)
+        if (propid == PropIds::D3DX9Handle || propid == PropIds::D3DX9Effect || propid == PropIds::D3DX9PassId)
         {
             return VSFERR_INVALIDPARAMS;
         }

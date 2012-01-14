@@ -381,7 +381,7 @@ namespace VoodooShader
 
                 if (target)
                 {
-                    Variant targetVar = {UT_Unknown, 0, nullptr};
+                    Variant targetVar = CreateVariant();
                     if (SUCCEEDED(target->GetProperty(PropIds::OpenGLTexture, &targetVar)) && targetVar.Type == UT_UInt32)
                     {
                         GLuint passtarget = (GLuint) targetVar.VUInt32.X;
@@ -424,7 +424,7 @@ namespace VoodooShader
                 m_TexLastPass = this->CreateTexture(L":lastpass", desc);
                 m_TexLastShader = this->CreateTexture(L":lastshader", desc);
 
-                Variant textureVar = {UT_Unknown, 0, nullptr};
+                Variant textureVar = CreateVariant();
                 if (SUCCEEDED(m_TexDepthFrame->GetProperty(PropIds::OpenGLTexture, &textureVar)))
                 {
                     gDepthTexture = (GLint)textureVar.VInt32.X;

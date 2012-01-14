@@ -102,8 +102,15 @@ namespace VoodooShader
             {
                 break;
             }
+
             boost::intrusive_ptr<VSParameterDX9> parameter = new VSParameterDX9(this, m_DXEffect, paramHandle);
             m_Parameters.push_back(parameter);
+
+            ITexture * pTex = nullptr;
+            if (SUCCEEDED(parameter->GetTexture(&pTex)) && pTex)
+            {
+                adapter->BindTexture(parameter.get(), pTex);
+            }
         }
 
         // Get techniques
@@ -119,6 +126,10 @@ namespace VoodooShader
             {
                 VSTechniqueDX9 * technique = new VSTechniqueDX9(this, m_DXEffect, techHandle);
                 m_Techniques.push_back(technique);
+                if (!m_DefaultTechnique)
+                {
+                    m_DefaultTechnique = technique;
+                }
             }
             catch (Exception & exc)
             {

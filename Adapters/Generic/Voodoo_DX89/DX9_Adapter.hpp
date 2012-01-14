@@ -20,8 +20,6 @@
 #pragma once
 
 #include "DX9_Module.hpp"
-// DirectX 9
-#include <d3dx9shader.h>
 
 namespace VoodooShader
 {
@@ -47,9 +45,6 @@ namespace VoodooShader
             VOODOO_METHOD_(IEffect *, GetEffect)() CONST;
             VOODOO_METHOD(ResetEffect)();
 
-            VOODOO_METHOD(LoadPass)(_In_ IPass * const pPass);
-            VOODOO_METHOD_(bool, IsPassLoaded)(_In_ IPass * const pPass) CONST;
-            VOODOO_METHOD(UnloadPass)(_In_ IPass * const pPass);
             VOODOO_METHOD(SetPass)(_In_ IPass * const pPass);
             VOODOO_METHOD_(IPass *, GetPass)() CONST;
             VOODOO_METHOD(ResetPass)();
@@ -59,7 +54,7 @@ namespace VoodooShader
             VOODOO_METHOD(BindTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
             VOODOO_METHOD(DrawGeometry)(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags);
 
-            VOODOO_METHOD(SetDXDevice)(IDirect3DDevice9 * pDevice);
+            VOODOO_METHOD(SetupDevice)();
             VOODOO_METHOD(SetTarget)(const uint32_t index, _In_opt_ ITexture * pTexture);
 
         private:
@@ -80,6 +75,7 @@ namespace VoodooShader
             IPassRef m_BoundPass;
             LPD3DXEFFECT m_BoundDXEffect;
             D3DXHANDLE m_BoundDXPass;
+            UINT m_BoundDXPassId;
 
             ITextureRef m_RenderTarget[4];
         };

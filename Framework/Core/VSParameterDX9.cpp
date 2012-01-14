@@ -57,21 +57,41 @@ namespace VoodooShader
         m_Desc.Rows = desc.Rows;
         m_Desc.Elements = desc.Elements;
 
-        // Handle linkage
-        D3DXHANDLE linkAnnotHandle = m_DXEffect->GetAnnotationByName(m_DXHandle, "link");
-        if (linkAnnotHandle)
+        // Handle sampler
+        if (m_Desc.Type >= PT_Texture && m_Desc.Type <= PT_TextureCube)
         {
-            LPCSTR linkName = NULL;
-            if (FAILED(m_DXEffect->GetString(linkAnnotHandle, &linkName)))
+            D3DXHANDLE texAnnot = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texture");
+            if (texAnnot)
+            {
+                LPCSTR texName = nullptr;
+                if (SUCCEEDED(m_DXEffect->GetString(texAnnot, &texName)))
+                {
+                    m_Texture = m_Core->GetTexture(texName);
+                }
+                else
+                {
+                    m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Sampler %1% has no source texture annotation.") << m_Name);
+                }
+            }
+        }
+
+        // Handle linkage
+        D3DXHANDLE sourceAnnot = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_source");
+        if (sourceAnnot)
+        {
+            LPCSTR sourceName = NULL;
+            if (SUCCEEDED(m_DXEffect->GetString(sourceAnnot, &sourceName)))
+            {
+                IParameter * sourceParam = m_Core->GetParameter(sourceName, m_Desc);
+                if (sourceParam)
+                {
+                    sourceParam->AttachParameter(this);
+                }
+            }
+            else
             {
                 m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
-                    Format("Unable to get link annotation for parameter %1%.") << m_Name);
-            } else {
-                IParameter * linkParam = m_Core->GetParameter(linkName, m_Desc);
-                if (linkParam)
-                {
-                    linkParam->AttachParameter(this);
-                }
+                    Format("Unable to get source annotation for parameter %1%.") << m_Name);
             }
         }
 
@@ -289,7 +309,7 @@ namespace VoodooShader
 
         if (!ppVal) return VSFERR_INVALIDPARAMS;
 
-        if (m_Desc.Type == PT_Sampler1D || m_Desc.Type == PT_Sampler2D || m_Desc.Type == PT_Sampler3D)
+        if (m_Desc.Type >= PT_Texture && m_Desc.Type <= PT_TextureCube)
         {
             (*ppVal) = m_Texture.get();
             return VSF_OK;

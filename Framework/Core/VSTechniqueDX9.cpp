@@ -62,8 +62,8 @@ namespace VoodooShader
 
         for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)
         {
-            D3DXHANDLE passHandle = m_DXEffect->GetPass(m_DXHandle, passIndex++);
-            VSPassDX9 * pass = new VSPassDX9(this, m_DXEffect, passHandle);
+            D3DXHANDLE passHandle = m_DXEffect->GetPass(m_DXHandle, passIndex);
+            VSPassDX9 * pass = new VSPassDX9(this, m_DXEffect, passHandle, passIndex);
             m_Passes.push_back(pass);
         }
 

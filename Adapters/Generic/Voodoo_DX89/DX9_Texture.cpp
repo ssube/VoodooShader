@@ -127,7 +127,7 @@ namespace VoodooShader
             {
                 pValue->Type = UT_PVoid;
                 pValue->Components = 0;
-                pValue->VPVoid = m_Texture;
+                pValue->VPVoid = m_Surface;
                 return VSF_OK;
             }
 

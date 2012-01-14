@@ -214,13 +214,6 @@ namespace VoodooShader
                 // Succeeded, create a fake device and go from there
                 *ppReturnedDeviceInterface = new CVoodoo3DDevice8(pRealDevice);
 
-                Uuid adapterID = VoodooShader::VoodooDX9::CLSID_DX9Adapter;
-                VoodooShader::VoodooDX9::DX9Adapter * pDXAdapter = nullptr;
-                if (gpVoodooCore->GetAdapter()->QueryInterface(adapterID, (const IObject **)&pDXAdapter) && pDXAdapter)
-                {
-                    pDXAdapter->SetDXDevice(pRealDevice);
-                }
-
                 HRESULT hrt = pRealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &backbufferSurf);
 
                 if (SUCCEEDED(hrt))
@@ -245,7 +238,7 @@ namespace VoodooShader
 
                 if (texture_Frame0)
                 {
-                    Variant texvar = {UT_PVoid, 0, nullptr};
+                    Variant texvar = CreateVariant();
                     if (SUCCEEDED(texture_Frame0->GetProperty(PropIds::D3D9Surface, &texvar)))
                     {
                         surface_Frame0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
@@ -260,7 +253,7 @@ namespace VoodooShader
                 texture_Pass0 = gpVoodooCore->CreateTexture(VSTR(":pass0"), backbufferDesc);
                 if (texture_Pass0)
                 {
-                    Variant texvar = {UT_PVoid, 0, nullptr};
+                    Variant texvar =  CreateVariant();
                     if (SUCCEEDED(texture_Pass0->GetProperty(PropIds::D3D9Surface, &texvar)))
                     {
                         surface_Pass0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);

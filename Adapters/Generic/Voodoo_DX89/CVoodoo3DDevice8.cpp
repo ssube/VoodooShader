@@ -38,8 +38,8 @@ namespace VoodooShader
             VOODOO_API_LOG(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p") << realDevice << this);
 
             IAdapterRef adapter = gpVoodooCore->GetAdapter();
-            Variant device9Var = CreateVariant(this);
-            Variant device8Var = CreateVariant(realDevice);
+            Variant device8Var = CreateVariant(this);
+            Variant device9Var = CreateVariant(realDevice);
             adapter->SetProperty(PropIds::D3D8Device, &device8Var);
             adapter->SetProperty(PropIds::D3D9Device, &device9Var);
         }
@@ -377,7 +377,7 @@ namespace VoodooShader
             HRESULT hr = D3DERR_INVALIDCALL;
 
             // If not a render-target, attempt to create it as one
-            if (!(usage & D3DUSAGE_RENDERTARGET))
+            if (pool == D3DPOOL_DEFAULT && !(usage & D3DUSAGE_RENDERTARGET))
             {
                 hr = m_RealDevice->CreateTexture(width, height, levels, usage | D3DUSAGE_RENDERTARGET, format, pool, &rTexture, NULL);
             }

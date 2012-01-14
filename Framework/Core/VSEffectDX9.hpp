@@ -21,6 +21,9 @@
 
 #include "VoodooFramework.hpp"
 
+#ifdef _DEBUG
+#define D3D_DEBUG_INFO
+#endif
 #include <d3dx9effect.h>
 
 namespace VoodooShader
