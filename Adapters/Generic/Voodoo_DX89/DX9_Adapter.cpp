@@ -25,6 +25,7 @@
 #include "DX9_Version.hpp"
 // CVoodoo3D
 #include "CVoodoo3D8.hpp"
+#include "CVoodoo3DDevice8.hpp"
 #include "CVoodoo3D9.hpp"
 // Voodoo Core
 #include "Format.hpp"
@@ -36,7 +37,7 @@ namespace VoodooShader
     {
         DX9Adapter::DX9Adapter(ICore * pCore) :
             m_Refs(0), m_Core(pCore),
-            m_SdkVersion(D3D_SDK_VERSION), m_Device(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr),
+            m_SdkVersion(D3D_SDK_VERSION), m_RealDevice(nullptr), m_VertDecl(nullptr), m_VertDeclT(nullptr),
             m_BoundPass(nullptr), m_BackBuffer(nullptr)
         {
             gpVoodooCore = m_Core;
@@ -45,9 +46,9 @@ namespace VoodooShader
 
         DX9Adapter::~DX9Adapter()
         {
-            if (m_Device)
+            if (m_RealDevice)
             {
-                m_Device->Release();
+                m_RealDevice->Release();
             }
         }
 
@@ -68,19 +69,11 @@ namespace VoodooShader
             return value;
         }
 
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
+        VoodooResult VOODOO_METHODTYPE DX9Adapter::QueryInterface(const Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
         {
             if (!ppOut)
             {
-                if (clsid.is_nil())
-                {
-                    clsid = CLSID_DX9Adapter;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return VSFERR_INVALIDPARAMS;
             }
             else
             {
@@ -99,11 +92,11 @@ namespace VoodooShader
                 else
                 {
                     *ppOut = nullptr;
-                    return false;
+                    return VSFERR_INVALIDUUID;
                 }
 
-                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
-                return true;
+                (*ppOut)->AddRef();
+                return VSF_OK;
             }
         }
 
@@ -170,6 +163,20 @@ namespace VoodooShader
                     return VSFOK_PROPERTYCHANGED;
                 }
             }
+            else if (propid == PropIds::D3D8Device && pValue->Type == UT_PVoid)
+            {
+                if (m_FakeDevice) m_FakeDevice->Release();
+                m_FakeDevice = reinterpret_cast<VoodooDX8::CVoodoo3DDevice8 *>(pValue->VPVoid);
+                m_FakeDevice->AddRef();
+                return VSF_OK;
+            }
+            else if (propid == PropIds::D3D9Device && pValue->Type == UT_PVoid)
+            {
+                if (m_RealDevice) m_RealDevice->Release();
+                m_RealDevice = reinterpret_cast<LPDIRECT3DDEVICE9>(pValue->VPVoid);
+                m_RealDevice->AddRef();
+                return VSF_OK;
+            }
 
             return VSFERR_INVALIDPARAMS;
         }
@@ -186,8 +193,22 @@ namespace VoodooShader
                 pValue->VUInt32.X = m_SdkVersion;
                 return true;
             }
+            else if (propid == PropIds::D3D8Device)
+            {
+                ZeroMemory(pValue, sizeof(Variant));
+                pValue->Type = UT_PVoid;
+                pValue->VPVoid = reinterpret_cast<LPVOID>(m_FakeDevice);
+                return VSF_OK;
+            }
+            else if (propid == PropIds::D3D9Device)
+            {
+                ZeroMemory(pValue, sizeof(Variant));
+                pValue->Type = UT_PVoid;
+                pValue->VPVoid = reinterpret_cast<LPVOID>(m_RealDevice);
+                return VSF_OK;
+            }
 
-            return false;
+            return VSFERR_PROPERTYNOTFOUND;
         }
 
         VoodooResult VOODOO_METHODTYPE DX9Adapter::SetEffect(_In_ IEffect * const pEffect)
@@ -318,7 +339,7 @@ namespace VoodooShader
                 return VSFERR_INVALIDPARAMS;
             }
 
-            m_Device->CreateStateBlock(D3DSBT_ALL, &m_PassState);
+            m_RealDevice->CreateStateBlock(D3DSBT_ALL, &m_PassState);
             m_CleanState->Apply();
 
             if (FAILED(m_BoundDXEffect->BeginPass(propvar.VUInt32.X)))
@@ -378,7 +399,7 @@ namespace VoodooShader
             {
                 if (index == 0)
                 {
-                    result = m_Device->SetRenderTarget(index, m_BackBuffer);
+                    result = m_RealDevice->SetRenderTarget(index, m_BackBuffer);
 
                     if (SUCCEEDED(result))
                     {
@@ -393,7 +414,7 @@ namespace VoodooShader
                 }
                 else
                 {
-                    result = m_Device->SetRenderTarget(index, NULL);
+                    result = m_RealDevice->SetRenderTarget(index, NULL);
 
                     if (SUCCEEDED(result))
                     {
@@ -420,7 +441,7 @@ namespace VoodooShader
 
                 if (!pD3D9Tex)
                 {
-                    result = m_Device->SetRenderTarget(index, nullptr);
+                    result = m_RealDevice->SetRenderTarget(index, nullptr);
                     if (SUCCEEDED(result))
                     {
                         logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture data to render target %1%: %2%") << index << result);
@@ -446,7 +467,7 @@ namespace VoodooShader
                     return false;
                 }
 
-                result = m_Device->SetRenderTarget(index, pD3D9Surf);
+                result = m_RealDevice->SetRenderTarget(index, pD3D9Surf);
 
                 pD3D9Surf->Release();
                 pD3D9Tex->Release();
@@ -469,7 +490,7 @@ namespace VoodooShader
             IDirect3DTexture9 * tex = nullptr;
             D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pDesc.Format);
 
-            HRESULT hr = m_Device->CreateTexture
+            HRESULT hr = m_RealDevice->CreateTexture
             (
                 pDesc.Size.X,
                 pDesc.Size.Y,
@@ -520,32 +541,32 @@ namespace VoodooShader
             HRESULT hr;
 
             // Set the necessary states
-            hr = m_Device->SetRenderState(D3DRS_CLIPPING, FALSE);
-            hr = m_Device->SetRenderState(D3DRS_ZENABLE, FALSE);
-            hr = m_Device->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
-            hr = m_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+            hr = m_RealDevice->SetRenderState(D3DRS_CLIPPING, FALSE);
+            hr = m_RealDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+            hr = m_RealDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
+            hr = m_RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
             if (flags & VF_Transformed)
             {
-                m_Device->SetVertexDeclaration(m_VertDeclT);
+                m_RealDevice->SetVertexDeclaration(m_VertDeclT);
             }
             else
             {
-                m_Device->SetVertexDeclaration(m_VertDecl);
+                m_RealDevice->SetVertexDeclaration(m_VertDecl);
             }
 
             if (flags & VF_Buffer)
             {
                 IDirect3DVertexBuffer9 * pVertexBuffer = reinterpret_cast<IDirect3DVertexBuffer9*>(pData);
 
-                hr = m_Device->SetStreamSource(0, pVertexBuffer, 0, sizeof(VertexDesc));
+                hr = m_RealDevice->SetStreamSource(0, pVertexBuffer, 0, sizeof(VertexDesc));
 
-                hr = m_Device->BeginScene();
+                hr = m_RealDevice->BeginScene();
 
                 if (SUCCEEDED(hr))
                 {
-                    hr = m_Device->DrawPrimitive(D3DPT_TRIANGLELIST, offset, count);
-                    hr = m_Device->EndScene();
+                    hr = m_RealDevice->DrawPrimitive(D3DPT_TRIANGLELIST, offset, count);
+                    hr = m_RealDevice->EndScene();
                 }
                 else
                 {
@@ -555,12 +576,12 @@ namespace VoodooShader
             }
             else
             {
-                hr = m_Device->BeginScene();
+                hr = m_RealDevice->BeginScene();
 
                 if (SUCCEEDED(hr))
                 {
-                    hr = m_Device->DrawPrimitiveUP(D3DPT_TRIANGLELIST, count, pData, sizeof(VertexDesc));
-                    hr = m_Device->EndScene();
+                    hr = m_RealDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST, count, pData, sizeof(VertexDesc));
+                    hr = m_RealDevice->EndScene();
                 }
                 else
                 {
@@ -646,11 +667,11 @@ namespace VoodooShader
 
         VoodooResult VOODOO_METHODTYPE DX9Adapter::SetDXDevice(IDirect3DDevice9 * pDevice)
         {
-            if (pDevice == m_Device)
+            if (pDevice == m_RealDevice)
             {
                 return true;
             }
-            else if (pDevice == nullptr || (pDevice && m_Device))
+            else if (pDevice == nullptr || (pDevice && m_RealDevice))
             {
                 if (m_VertDecl) m_VertDecl->Release();
                 if (m_VertDeclT) m_VertDeclT->Release();
@@ -658,9 +679,9 @@ namespace VoodooShader
                 if (!pDevice) return true;
             }
 
-            m_Device = pDevice;
+            m_RealDevice = pDevice;
 
-            HRESULT errors = m_Device->CreateStateBlock(D3DSBT_ALL, &m_CleanState);
+            HRESULT errors = m_RealDevice->CreateStateBlock(D3DSBT_ALL, &m_CleanState);
 
             ILoggerRef logger = m_Core->GetLogger();
 
@@ -684,7 +705,7 @@ namespace VoodooShader
                 D3DDECL_END()
             };
 
-            errors = m_Device->CreateVertexDeclaration(vertDeclElems, &m_VertDecl);
+            errors = m_RealDevice->CreateVertexDeclaration(vertDeclElems, &m_VertDecl);
 
             if (!SUCCEEDED(errors))
             {
@@ -693,7 +714,7 @@ namespace VoodooShader
 
             vertDeclElems[0].Usage = D3DDECLUSAGE_POSITIONT;
 
-            errors = m_Device->CreateVertexDeclaration(vertDeclElems, &m_VertDeclT);
+            errors = m_RealDevice->CreateVertexDeclaration(vertDeclElems, &m_VertDeclT);
 
             if (!SUCCEEDED(errors))
             {
@@ -703,7 +724,7 @@ namespace VoodooShader
             // Get params
             D3DVIEWPORT9 viewport;
 
-            m_Device->GetViewport(&viewport);
+            m_RealDevice->GetViewport(&viewport);
 
             logger->LogMessage
             (
@@ -712,7 +733,7 @@ namespace VoodooShader
             );
 
             // Get buffers
-            if (!SUCCEEDED(m_Device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
+            if (!SUCCEEDED(m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
 
             // Create fullscreen vbuffer
             float ft = 15.0f;
@@ -731,7 +752,7 @@ namespace VoodooShader
                 {{fr, fb, 0.5f, 1.0f}, {255, 255,   0, 255}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
             };
 
-            errors = m_Device->CreateVertexBuffer
+            errors = m_RealDevice->CreateVertexBuffer
             (
                 sizeof(fsVertData), D3DUSAGE_WRITEONLY, NULL, D3DPOOL_DEFAULT, &gpFSQuadVerts, NULL
             );

@@ -29,10 +29,17 @@ namespace VoodooShader
     {
         CVoodoo3DDevice9::CVoodoo3DDevice9(IDirect3D9 * pVoodooObject, IDirect3DDevice9 * pRealDevice) :
             m_RealDevice(pRealDevice), m_ParentObj(pVoodooObject)
-        { };
+        {
+            IAdapterRef adapter = gpVoodooCore->GetAdapter();
+            Variant deviceVar = CreateVariant(this);
+            adapter->SetProperty(PropIds::D3D9Device, &deviceVar);
+        };
 
         CVoodoo3DDevice9::~CVoodoo3DDevice9()
         {
+            IAdapterRef adapter = gpVoodooCore->GetAdapter();
+            Variant deviceVar = CreateVariant(UT_PVoid);
+            adapter->SetProperty(PropIds::D3D9Device, &deviceVar);
         }
 
         /* IUnknown methods */

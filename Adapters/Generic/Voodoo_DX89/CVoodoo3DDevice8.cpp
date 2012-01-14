@@ -36,10 +36,22 @@ namespace VoodooShader
             m_RealDevice(realDevice)
         {
             VOODOO_API_LOG(LL_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p") << realDevice << this);
+
+            IAdapterRef adapter = gpVoodooCore->GetAdapter();
+            Variant device9Var = CreateVariant(this);
+            Variant device8Var = CreateVariant(realDevice);
+            adapter->SetProperty(PropIds::D3D8Device, &device8Var);
+            adapter->SetProperty(PropIds::D3D9Device, &device9Var);
         }
 
         CVoodoo3DDevice8::~CVoodoo3DDevice8()
         {
+            IAdapterRef adapter = gpVoodooCore->GetAdapter();
+            Variant deviceVar = CreateVariant(UT_PVoid);
+            adapter->SetProperty(PropIds::D3D8Device, &deviceVar);
+            deviceVar = CreateVariant(UT_PVoid);
+            adapter->SetProperty(PropIds::D3D9Device, &deviceVar);
+
             m_RealDevice = nullptr;
         }
 

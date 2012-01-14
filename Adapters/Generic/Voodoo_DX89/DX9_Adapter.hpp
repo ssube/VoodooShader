@@ -69,7 +69,8 @@ namespace VoodooShader
             PropertyMap m_Properties;
 
             UINT m_SdkVersion;
-            IDirect3DDevice9 * m_Device;
+            VoodooDX8::CVoodoo3DDevice8 * m_FakeDevice;
+            IDirect3DDevice9 * m_RealDevice;
             IDirect3DVertexDeclaration9 * m_VertDecl;
             IDirect3DVertexDeclaration9 * m_VertDeclT;
             IDirect3DSurface9 * m_BackBuffer;

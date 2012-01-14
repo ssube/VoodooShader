@@ -361,6 +361,7 @@ namespace VoodooShader
 #define VSFERR_NOTIMPLEMENTED   MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1008)
 #define VSFERR_CONFLICTING      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1009)
 #define VSFERR_INVALIDUUID      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100A)
+#define VSFERR_PROPERTYNOTFOUND MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100B)
     /**
      * @}
      * @}
@@ -477,6 +478,7 @@ namespace VoodooShader
         typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(const uint32_t, Uuid *);
         typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(const uint32_t, ICore *);
         typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)(uint32_t);
+        typedef VoodooResult    (VOODOO_CALLTYPE * CallbackFunc)();
     }
     /**
      * @}
@@ -585,7 +587,62 @@ namespace VoodooShader
             IObject *   VPIObject;
             void *      VPVoid;
         };
-    };    
+    };
+    /**
+     * @defgroup voodoo_variant_decl Variant Declaration & Init
+     * @{
+     */
+#define DECLARE_VARIANT(name) Variant name; ZeroMemory(&name, sizeof(Variant))
+#define INITIALIZE_VARIANTC(name, type, comp)       name.Type = UT_##type; name.Components = comp
+#define INITIALIZE_VARIANT1(name, type, x)          INITIALIZE_VARIANTC(name, type, 1); name.V##type.X = x
+#define INITIALIZE_VARIANT2(name, type, x, y)       INITIALIZE_VARIANTC(name, type, 2); name.V##type.X = x; name.V##type.Y = y
+#define INITIALIZE_VARIANT3(name, type, x, y, z)    INITIALIZE_VARIANTC(name, type, 3); name.V##type.X = x; name.V##type.Y = y; name.V##type.Z = z
+#define INITIALIZE_VARIANT4(name, type, x, y, z, w) INITIALIZE_VARIANTC(name, type, 4); name.V##type.X = x; name.V##type.Y = y; name.V##type.Z = z; name.V##type.W = w
+
+    inline Variant CreateVariant()                      { DECLARE_VARIANT(var); return var; }
+    inline Variant CreateVariant(const UnionType t)     { DECLARE_VARIANT(var); var.Type = t; return var; }
+    inline Variant CreateVariant(const bool & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, Bool, 0); var.VBool = v; return var; }
+    inline Variant CreateVariant(const int8_t & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int8, v);         return var; }
+    inline Variant CreateVariant(const Byte2 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int8, v.X, v.Y);  return var; }
+    inline Variant CreateVariant(const Byte3 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int8, v.X, v.Y, v.Z); return var; }
+    inline Variant CreateVariant(const Byte4 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int8, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const uint8_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt8, v);         return var; }
+    inline Variant CreateVariant(const UByte2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt8, v.X, v.Y); return var; }
+    inline Variant CreateVariant(const UByte3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt8, v.X, v.Y, v.Z); return var; }
+    inline Variant CreateVariant(const UByte4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt8, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const int16_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int16, v);         return var; }
+    inline Variant CreateVariant(const Short2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int16, v.X, v.Y);  return var; }
+    inline Variant CreateVariant(const Short3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int16, v.X, v.Y, v.Z); return var; }
+    inline Variant CreateVariant(const Short4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int16, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const uint16_t & v)    { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt16, v);        return var; }
+    inline Variant CreateVariant(const UShort2 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt16, v.X, v.Y); return var; }
+    inline Variant CreateVariant(const UShort3 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt16, v.X, v.Y, v.Z); return var; }
+    inline Variant CreateVariant(const UShort4 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt16, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const int32_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int32, v);         return var; }
+    inline Variant CreateVariant(const Int2 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int32, v.X, v.Y);  return var; }
+    inline Variant CreateVariant(const Int3 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int32, v.X, v.Y, v.Z); return var; }
+    inline Variant CreateVariant(const Int4 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int32, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const uint32_t & v)    { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt32, v);        return var; }
+    inline Variant CreateVariant(const UInt2 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt32, v.X, v.Y); return var; }
+    inline Variant CreateVariant(const UInt3 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt32, v.X, v.Y, v.Z); return var; }
+    inline Variant CreateVariant(const UInt4 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt32, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const float & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Float, v);         return var; }
+    inline Variant CreateVariant(const Float2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Float, v.X, v.Y);  return var; }
+    inline Variant CreateVariant(const Float3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Float, v.X, v.Y, v.Z); return var; }
+    inline Variant CreateVariant(const Float4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Float, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const double & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Double, v);        return var; }
+    inline Variant CreateVariant(const Double2 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Double, v.X, v.Y); return var; }
+    inline Variant CreateVariant(const Double3 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Double, v.X, v.Y, v.Z); return var; }
+    inline Variant CreateVariant(const Double4 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Double, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(Uuid * pV)             { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, Uuid, 0); var.VPUuid = pV; }
+    inline Variant CreateVariant(String * pV)           { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, String, 0); var.VPString = pV; }
+    inline Variant CreateVariant(IObject * pV)          { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, IObject, 0); var.VPIObject = pV; }
+    inline Variant CreateVariant(void * pV)             { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, PVoid, 0); var.VPVoid = pV; }
+    template<typename T>
+    inline Variant CreateVariant(T * pV)                { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, PVoid, 0); var.VPVoid = reinterpret_cast<void*>(pV); return var; }
+    /**
+     * @}
+     */
     /**
      * Describes a texture, including size and format.
      */
