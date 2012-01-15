@@ -658,10 +658,16 @@ namespace VoodooShader
             const char * bestVertStr = D3DXGetVertexShaderProfile(m_RealDevice);
             const char * bestFragStr = D3DXGetPixelShaderProfile(m_RealDevice);
 
+            if (!bestVertStr || !bestFragStr)
+            {
+                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Error detecting latest shader profiles."));
+                return VSF_FAIL;
+            }
+
             logger->LogMessage
             (
                 LL_ModInfo, VOODOO_DX89_NAME,
-                Format("Detected latest profiles with %1% as vertex and %2% as fragment.") << bestVertStr << bestFragStr
+                Format("Detected latest profiles as %1% and %2%.") << bestVertStr << bestFragStr
             );
 
             // Create vertex declaration
@@ -705,10 +711,10 @@ namespace VoodooShader
             if (!SUCCEEDED(m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
 
             // Create fullscreen vbuffer
-            float ft = 15.0f;
-            float fb = viewport.Height - 15.0f;
-            float fl = 15.0f;
-            float fr = viewport.Width - 15.0f;
+            float ft = 5.0f;
+            float fb = viewport.Height - 5.0f;
+            float fl = 5.0f;
+            float fr = viewport.Width - 5.0f;
 
             VertexDesc fsVertData[6] =
             {

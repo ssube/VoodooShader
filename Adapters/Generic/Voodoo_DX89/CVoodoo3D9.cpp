@@ -265,12 +265,20 @@ namespace VoodooShader
                     }
                 }
 
+                ParameterDesc rcpres_desc = {PT_Float, 1, 2, 0};
+                IParameter * lpparam_rcpres = gpVoodooCore->CreateParameter(L"rcpres", rcpres_desc);
+
                 try
                 {
                     IFile * shaderFile = gpVoodooCore->GetFileSystem()->GetFile(L"test.fx");
                     if (shaderFile)
                     {
                         testEffect = gpVoodooCore->CreateEffect(shaderFile, CF_DirectX9);
+                        if (lpparam_rcpres)
+                        {
+                            Float4 rcpres_val = {1.0f / pPP->BackBufferWidth, 1.0f / pPP->BackBufferHeight, 0, 0};
+                            lpparam_rcpres->SetVector(rcpres_val);
+                        }
                     }
                 }
                 catch (std::exception & exc)

@@ -64,8 +64,6 @@ namespace VoodooShader
         m_Refs(0), m_Core(pCore), m_Effect(nullptr), m_Name(name), m_Desc(desc), m_DXEffect(nullptr), m_DXHandle(nullptr)
     {
         AddThisToDebugCache();
-
-        // Create an artificial description
     }
 
     VSParameterDX9::~VSParameterDX9()
@@ -202,17 +200,24 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
+        if (m_Desc.Type != PT_Bool) return VSFERR_INVALIDCALL;
 
-        BOOL rv = 0;
-        if (SUCCEEDED(m_DXEffect->GetBool(m_DXHandle, &rv)))
+        if (m_DXEffect && m_DXHandle)
         {
-            (*pVal) = (rv != 0);
-            return VSF_OK;
+            BOOL rv = 0;
+            if (SUCCEEDED(m_DXEffect->GetBool(m_DXHandle, &rv)))
+            {
+                m_VBool = (rv != 0);
+            }
+            else
+            {
+                return VSFERR_APIERROR;
+            }
         }
-        else
-        {
-            return VSFERR_INVALIDCALL;
-        }
+
+        (*pVal) = m_VBool;
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::GetFloat)(float * pVal) CONST
@@ -220,15 +225,24 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
+        if (m_Desc.Type != PT_Float) return VSFERR_INVALIDCALL;
 
-        if (SUCCEEDED(m_DXEffect->GetFloat(m_DXHandle, pVal)))
+        if (m_DXEffect && m_DXHandle)
         {
-            return VSF_OK;
+            float tVal;
+            if (SUCCEEDED(m_DXEffect->GetFloat(m_DXHandle, &tVal)))
+            {
+                m_VFloat.X = tVal;
+            }
+            else
+            {
+                return VSFERR_APIERROR;
+            }
         }
-        else
-        {
-            return VSFERR_INVALIDCALL;
-        }
+        
+        (*pVal) = m_VFloat.X;
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::GetInt)(int32_t * pVal) CONST
@@ -236,15 +250,16 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
+        if (m_Desc.Type != PT_Int) return VSFERR_INVALIDCALL;
 
-        if (SUCCEEDED(m_DXEffect->GetInt(m_DXHandle, pVal)))
+        if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->GetInt(m_DXHandle, &m_VInt)))
         {
-            return VSF_OK;
+            return VSFERR_APIERROR;
         }
-        else
-        {
-            return VSFERR_INVALIDCALL;
-        }
+
+        (*pVal) = m_VInt;
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::GetString)(String * pVal) CONST
@@ -252,17 +267,24 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
+        if (m_Desc.Type != PT_String) return VSFERR_INVALIDCALL;
 
-        LPCSTR rv = nullptr;
-        if (SUCCEEDED(m_DXEffect->GetString(m_DXHandle, &rv)) && rv)
+        if (m_DXEffect && m_DXHandle)
         {
-            (*pVal) = String(rv);
-            return VSF_OK;
+            LPCSTR rv = nullptr;
+            if (SUCCEEDED(m_DXEffect->GetString(m_DXHandle, &rv)) && rv)
+            {
+                m_VString = String(rv);
+            }
+            else
+            {
+                return VSFERR_APIERROR;
+            }
         }
-        else
-        {
-            return VSFERR_INVALIDCALL;
-        }
+
+        (*pVal) = m_VString;
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::GetTexture)(ITexture ** ppVal) CONST
@@ -270,16 +292,11 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!ppVal) return VSFERR_INVALIDPARAMS;
+        if (m_Desc.Type < PT_Texture || m_Desc.Type > PT_TextureCube) return VSFERR_INVALIDCALL;
 
-        if (m_Desc.Type >= PT_Texture && m_Desc.Type <= PT_TextureCube)
-        {
-            (*ppVal) = m_Texture.get();
-            return VSF_OK;
-        }
-        else
-        {
-            return VSFERR_INVALIDCALL;
-        }
+        (*ppVal) = m_Texture.get();
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::GetVector)(Float4 * pVal) CONST
@@ -287,118 +304,179 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
+        if (m_Desc.Type != PT_Float && m_Desc.Type != PT_Bool && m_Desc.Type != PT_Int) return VSFERR_INVALIDCALL;
 
-        D3DXVECTOR4 rv;
-        if (SUCCEEDED(m_DXEffect->GetVector(m_DXHandle, &rv)))
+        if (m_DXEffect && m_DXHandle)
         {
-            pVal->X = rv.x;
-            pVal->Y = rv.y;
-            pVal->Z = rv.z;
-            pVal->W = rv.w;
-            return VSF_OK;
+            D3DXVECTOR4 rv;
+            if (SUCCEEDED(m_DXEffect->GetVector(m_DXHandle, &rv)))
+            {
+                m_VFloat.X = rv.x;
+                m_VFloat.Y = rv.y;
+                m_VFloat.Z = rv.z;
+                m_VFloat.W = rv.w;
+            }
+            else
+            {
+                return VSFERR_APIERROR;
+            }
         }
-        else
-        {
-            return VSFERR_INVALIDCALL;
-        }
+
+        (*pVal) = m_VFloat;
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::SetBool)(bool val)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (SUCCEEDED(m_DXEffect->SetBool(m_DXHandle, val)))
+        if (m_Desc.Type != PT_Bool) return VSFERR_INVALIDCALL;
+
+        m_VBool = val;
+
+        ParameterList::iterator child = m_Attached.begin();
+        while (child != m_Attached.end())
         {
-            return VSF_OK;
+            (*child)->SetBool(val);
         }
-        else
+
+        if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->SetBool(m_DXHandle, val)))
         {
-            return VSFERR_INVALIDCALL;
+            return VSFERR_APIERROR;
         }
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::SetFloat)(float val)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (SUCCEEDED(m_DXEffect->SetFloat(m_DXHandle, val)))
+        if (m_Desc.Type != PT_Float) return VSFERR_INVALIDCALL;
+
+        m_VFloat.X = val;
+
+        ParameterList::iterator child = m_Attached.begin();
+        while (child != m_Attached.end())
         {
-            return VSF_OK;
+            (*child)->SetFloat(val);
         }
-        else
+
+        if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->SetFloat(m_DXHandle, val)))
         {
-            return VSFERR_INVALIDCALL;
+            return VSFERR_APIERROR;
         }
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::SetInt)(int32_t val)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (SUCCEEDED(m_DXEffect->SetInt(m_DXHandle, val)))
+        if (m_Desc.Type != PT_Int) return VSFERR_INVALIDCALL;
+
+        m_VInt = val;
+
+        ParameterList::iterator child = m_Attached.begin();
+        while (child != m_Attached.end())
         {
-            return VSF_OK;
+            (*child)->SetInt(val);
         }
-        else
+
+        if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->SetInt(m_DXHandle, val)))
         {
-            return VSFERR_INVALIDCALL;
+            return VSFERR_APIERROR;
         }
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::SetString)(const String & val)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        std::string vstr = val.ToStringA();
-        if (SUCCEEDED(m_DXEffect->SetString(m_DXHandle, vstr.c_str())))
+        if (m_Desc.Type != PT_String) return VSFERR_INVALIDCALL;
+
+        m_VString = val;
+
+        ParameterList::iterator child = m_Attached.begin();
+        while (child != m_Attached.end())
         {
-            return VSF_OK;
+            (*child)->SetString(val);
         }
-        else
+
+        if (m_DXEffect && m_DXHandle)
         {
-            return VSFERR_INVALIDCALL;
+            std::string vstr = val.ToStringA();
+            if (FAILED(m_DXEffect->SetString(m_DXHandle, vstr.c_str())))
+            {
+                return VSFERR_APIERROR;
+            }
         }
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::SetTexture)(ITexture * pVal)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (m_Desc.Type == PT_Sampler1D || m_Desc.Type == PT_Sampler2D || m_Desc.Type == PT_Sampler3D)
+        if (m_Desc.Type < PT_Texture || m_Desc.Type > PT_TextureCube) return VSFERR_INVALIDCALL;
+
+        m_Texture = pVal;
+
+        ParameterList::iterator child = m_Attached.begin();
+        while (child != m_Attached.end())
+        {
+            (*child)->SetTexture(pVal);
+        }
+
+        if (m_DXEffect && m_DXHandle)
         {
             return m_Core->GetAdapter()->BindTexture(this, pVal);
         }
-        else
-        {
-            return VSFERR_INVALIDCALL;
-        }
+
+        return VSF_OK;
     }
 
     VOODOO_METHODDEF(VSParameterDX9::SetVector)(Float4 val)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        D3DXVECTOR4 sv;
-        sv.x = val.X;
-        sv.y = val.Y;
-        sv.z = val.Z;
-        sv.w = val.W;
+        if (m_Desc.Type != PT_Float) return VSFERR_INVALIDCALL;
 
-        if (SUCCEEDED(m_DXEffect->SetVector(m_DXHandle, &sv)))
+        m_VFloat = val;
+
+        ParameterList::iterator child = m_Attached.begin();
+        while (child != m_Attached.end())
         {
-            return VSF_OK;
+            (*child)->SetVector(val);
         }
-        else
+
+        if (m_DXEffect && m_DXHandle)
         {
-            return VSFERR_INVALIDCALL;
+            D3DXVECTOR4 sv;
+            sv.x = val.X;
+            sv.y = val.Y;
+            sv.z = val.Z;
+            sv.w = val.W;
+
+            if (FAILED(m_DXEffect->SetVector(m_DXHandle, &sv)))
+            {
+                return VSFERR_APIERROR;
+            }
         }
+
+        return VSF_OK;
     }
 
     bool VOODOO_METHODTYPE VSParameterDX9::IsVirtual() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        return m_Virtual;
+        return (m_DXEffect && m_DXHandle);
     }
 
     VoodooResult VOODOO_METHODTYPE VSParameterDX9::AttachParameter(IParameter * const pParam)
@@ -407,15 +485,6 @@ namespace VoodooShader
 
         if (!pParam)
         {
-            return VSFERR_INVALIDPARAMS;
-        }
-        else if (!m_Virtual)
-        {
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_CoreWarning, VOODOO_CORE_NAME, 
-                Format("Cannot attach parameter '%1%' to non-virtual parameter '%2%'.") << pParam << this
-            );
             return VSFERR_INVALIDPARAMS;
         }
 
@@ -495,7 +564,11 @@ namespace VoodooShader
         }
 
         D3DXHANDLE newA = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texcreate");
-        if (newA)
+        if (!newA)
+        {
+            return;
+        }
+        else
         {
             BOOL newFlag = FALSE;
             if (FAILED(m_DXEffect->GetBool(newA, &newFlag)) || newFlag != TRUE)
@@ -561,7 +634,7 @@ namespace VoodooShader
         TextureDesc desc = {dim, mip, rtt, fmt};
 
         m_Core->GetLogger()->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, 
-            Format("Creating texture %1% named %2% for parameter %3%.") << desc << nameStr << m_Name);
+            Format("Creating texture %1% as %2% for parameter %3%.") << nameStr << desc << m_Name);
 
         ITexture * pTex = m_Core->CreateTexture(nameStr, desc);
         if (!pTex)

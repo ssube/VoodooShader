@@ -82,11 +82,16 @@ namespace VoodooShader
         PropertyMap m_Properties;
 
         ParameterDesc m_Desc;
-        bool m_Virtual;
         ParameterList m_Attached;
 
         LPD3DXEFFECT m_DXEffect;
         D3DXHANDLE m_DXHandle;
+
+        // Value cache types
+        mutable bool m_VBool;
+        mutable Float4 m_VFloat;
+        mutable int32_t m_VInt;
+        mutable String m_VString;
         ITextureRef m_Texture;
     };
 }
