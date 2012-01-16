@@ -173,7 +173,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSEffectDX9::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VOODOO_METHODDEF(VSEffectDX9::QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ CONST IObject ** ppOut) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)

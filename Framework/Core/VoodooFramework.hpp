@@ -122,3 +122,16 @@
 #include "ITechnique.hpp"
 #include "IParameter.hpp"
 #include "ITexture.hpp"
+
+#if defined(VOODOO_EXPORT) || defined(VOODOO_STATIC_IMPORT)
+namespace VoodooShader
+{
+    /**
+     * Creates a new core. This function is exported and meant for use by the loader.
+     *
+     * @param version Version identifier for this core, should always be <tt>VOODOO_SDK_VERSION</tt>.
+     * @return A new ICore object, if one was created successfully.
+     */
+    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(uint32_t version);
+}
+#endif

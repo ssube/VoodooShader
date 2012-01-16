@@ -33,7 +33,7 @@
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glut32.lib")
 
-#define VOODOO_STATIC_LINK
+#define VOODOO_STATIC_IMPORT
 #include "VoodooFramework.hpp"
 using namespace VoodooShader;
 

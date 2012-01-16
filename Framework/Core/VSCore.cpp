@@ -103,7 +103,7 @@ namespace VoodooShader
 #endif
     }
 
-    VoodooResult VOODOO_METHODTYPE VSCore::Initialize(_In_ const wchar_t * const config)
+    VOODOO_METHODDEF(VSCore::Initialize)(_In_ CONST wchar_t * CONST config)
     {
         if (config)
         {
@@ -351,20 +351,20 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSCore::Reset()
+    VOODOO_METHODDEF(VSCore::Reset)()
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
         //! @todo Actually reset stuff.
         return VSF_OK;
     }
 
-    uint32_t VOODOO_METHODTYPE VSCore::AddRef() CONST
+    VOODOO_METHODDEF_(uint32_t, VSCore::AddRef)() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
         return SAFE_INCREMENT(m_Refs);
     }
 
-    uint32_t VOODOO_METHODTYPE VSCore::Release() CONST
+    VOODOO_METHODDEF_(uint32_t, VSCore::Release)() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
         uint32_t count = SAFE_DECREMENT(m_Refs);
