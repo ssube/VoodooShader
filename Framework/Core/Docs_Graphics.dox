@@ -17,7 +17,6 @@
  * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
-
 #pragma once
 
 namespace VoodooShader
@@ -84,7 +83,7 @@ namespace VoodooShader
       * on the global parameter and providing the effect parameter, like so:
       *
       * @code
-      * IParameter * global = core->CreateParameter("time", PT_Float);
+      * IParameter * global = core->CreateParameter("time", VSPT_Float);
       * IParameter * effect = shader->GetParameter("time");
       * global->Attach(effect);
       * @endcode
@@ -190,18 +189,18 @@ namespace VoodooShader
       * <table>
       *     <tr><th>Voodoo Format</th> <th>DirectX Format</th> <th>OpenGL Format</th> <th>RT/Copy/Load<sup>4</sup></th> <th>Bits</th> <th>Channels</th></tr>
       *     <tr><td>@ref TF_Unknown</td> <td>D3DFMT_UNKNOWN</td> <td>(unknown)</td> <td>None</td></tr>
-      *     <tr><td>@ref TF_RGB5</td> <td>D3DFMT_X1R5G5B5</td> <td>GL_RGB5</td> <td>Y/Y/N</td> <td>15/16</td> <td>RGB</td></tr>
-      *     <tr><td>@ref TF_RGB5A1</td> <td>D3DFMT_A1R5G5B5</td> <td>GL_RGB5_A1</td> <td>Y/Y/N</td> <td>16</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref TF_RGB8</td> <td>D3DFMT_X8R8G8B8</td> <td>GL_RGB8</td> <td>Yes</td> <td>24</td> <td>RGB</td></tr>
-      *     <tr><td>@ref TF_RGBA8</td> <td>D3DFMT_A8R8G8B8</td> <td>GL_RGBA8</td> <td>Yes</td> <td>32</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref TF_RGB10A2</td> <td>D3DFMT_A2R10G10B10</td> <td>GL_RGB10_A2</td> <td>Y/Y/N</td> <td>32</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref TF_RGBA16F<sup>1</sup></td><td>D3DFMT_A16B16G16R16F</td> <td>GL_RGBA16F</td> <td>N/Y/Y</td> <td>64</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref TF_RGBA32F<sup>1</sup></td><td>D3DFMT_A32B32G32R32F</td> <td>GL_RGBA32F</td> <td>N/Y/Y</td> <td>128</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref TF_D16</td> <td>D3DFMT_D16F</td> <td>GL_DEPTH_COMPONENT16</td> <td>N/Y-ish<sup>2</sup>/N</td> <td>16</td> <td>R<sup>3</sup></td></tr>
-      *     <tr><td>@ref TF_D32</td> <td>D3DFMT_D32F</td> <td>GL_DEPTH_COMPONENT32</td> <td>N/Y-ish<sup>2</sup>/N</td> <td>32</td> <td>R<sup>3</sup></td></tr>
+      *     <tr><td>@ref VSFmt_RGB5</td> <td>D3DFMT_X1R5G5B5</td> <td>GL_RGB5</td> <td>Y/Y/N</td> <td>15/16</td> <td>RGB</td></tr>
+      *     <tr><td>@ref VSFmt_RGB5A1</td> <td>D3DFMT_A1R5G5B5</td> <td>GL_RGB5_A1</td> <td>Y/Y/N</td> <td>16</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_RGB8</td> <td>D3DFMT_X8R8G8B8</td> <td>GL_RGB8</td> <td>Yes</td> <td>24</td> <td>RGB</td></tr>
+      *     <tr><td>@ref VSFmt_RGBA8</td> <td>D3DFMT_A8R8G8B8</td> <td>GL_RGBA8</td> <td>Yes</td> <td>32</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_RGB10A2</td> <td>D3DFMT_A2R10G10B10</td> <td>GL_RGB10_A2</td> <td>Y/Y/N</td> <td>32</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_RGBA16F<sup>1</sup></td><td>D3DFMT_A16B16G16R16F</td> <td>GL_RGBA16F</td> <td>N/Y/Y</td> <td>64</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_RGBA32F<sup>1</sup></td><td>D3DFMT_A32B32G32R32F</td> <td>GL_RGBA32F</td> <td>N/Y/Y</td> <td>128</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_D16</td> <td>D3DFMT_D16F</td> <td>GL_DEPTH_COMPONENT16</td> <td>N/Y-ish<sup>2</sup>/N</td> <td>16</td> <td>R<sup>3</sup></td></tr>
+      *     <tr><td>@ref VSFmt_D32</td> <td>D3DFMT_D32F</td> <td>GL_DEPTH_COMPONENT32</td> <td>N/Y-ish<sup>2</sup>/N</td> <td>32</td> <td>R<sup>3</sup></td></tr>
       * </table>
       * <br/>
-      * <em><sup>1</sup>:</em> floating-point texture formats (@ref TF_RGBA16F and @ref TF_RGBA32F) may not be supported on
+      * <em><sup>1</sup>:</em> floating-point texture formats (@ref VSFmt_RGBA16F and @ref VSFmt_RGBA32F) may not be supported on
       *     all hardware. Any features requiring these formats should provide an alternate render path for old hardware
       *     (quality may suffer).
       * <br/>
@@ -227,8 +226,8 @@ namespace VoodooShader
       * recommended that the depth information be stored in a 32-bit floating point component. Depth data must be accessible
       * to shaders from the R channel of the depth texture. At this time, the GBA components of the texture are considered
       * undefined, but reserved for future use. Depending on implementation, they may contain depth data, uninitialized
-      * memory, or other data and must not be used. As DirectX 9 does not usually allow @ref TF_D32 textures to be read,
-      * this may require rendering to a second target and using a @ref TF_RGBA32F texture. Two-pass or two-target rendering
+      * memory, or other data and must not be used. As DirectX 9 does not usually allow @ref VSFmt_D32 textures to be read,
+      * this may require rendering to a second target and using a @ref VSFmt_RGBA32F texture. Two-pass or two-target rendering
       * can both meet this requirement neatly. Using two passes is slower but more compatible, so this should be made an
       * option if possible.
       *

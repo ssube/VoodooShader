@@ -63,7 +63,7 @@ namespace VoodooShader
             m_Desc.Size.Y = ilGetInteger(IL_IMAGE_HEIGHT);
             m_Desc.Size.Z = ilGetInteger(IL_IMAGE_DEPTH);
             m_Desc.Mipmaps = false;
-            m_Desc.Format = TF_Unknown;
+            m_Desc.Format = VSFmtUnknown;
 
             ILint texFmt = ilGetInteger(IL_IMAGE_FORMAT);
             ILint texType = ilGetInteger(IL_IMAGE_TYPE);
@@ -72,30 +72,30 @@ namespace VoodooShader
             {
                 if (texType == IL_BYTE || texType == IL_UNSIGNED_BYTE)
                 {
-                    m_Desc.Format = TF_RGB8;
+                    m_Desc.Format = VSFmtRGB8;
                 }
             }
             else if (texFmt == IL_RGBA)
             {
                 if (texType == IL_BYTE || texType == IL_UNSIGNED_BYTE)
                 {
-                    m_Desc.Format = TF_RGBA8;
+                    m_Desc.Format = VSFmtRGBA8;
                 }
                 else if (texType == IL_FLOAT)
                 {
-                    m_Desc.Format = TF_RGBA16F;
+                    m_Desc.Format = VSFmtRGBA16F;
                 }
                 else if (texType == IL_DOUBLE)
                 {
-                    m_Desc.Format = TF_RGBA32F;
+                    m_Desc.Format = VSFmtRGBA32F;
                 }
             }
 
-            if (m_Desc.Format == TF_Unknown)
+            if (m_Desc.Format == VSFmtUnknown)
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_ModWarning, VOODOO_FILESYSTEM_NAME,
+                    VSLog_ModWarning, VOODOO_FILESYSTEM_NAME,
                     Format(VSTR("Unable to resolve format for image '%1%' %2%.")) << m_Path << image
                 );
             }
@@ -220,27 +220,27 @@ namespace VoodooShader
             // Convert TextureFormat to DevIL format
             switch (pDesc.Format)
             {
-            case TF_RGB8:
+            case VSFmtRGB8:
                 ilFmt = IL_RGB;
                 ilType = IL_UNSIGNED_BYTE;
                 break;
-            case TF_RGBA8:
+            case VSFmtRGBA8:
                 ilFmt = IL_RGBA;
                 ilType = IL_UNSIGNED_BYTE;
                 break;
-            case TF_RGBA16F:
+            case VSFmtRGBA16F:
                 ilFmt = IL_RGBA;
                 ilType = IL_FLOAT;
                 break;
-            case TF_RGBA32F:
+            case VSFmtRGBA32F:
                 ilFmt = IL_RGBA;
                 ilType = IL_DOUBLE;
                 break;
-            case TF_Unknown:
+            case VSFmtUnknown:
             default:
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_ModWarning, VOODOO_FILESYSTEM_NAME,
+                    VSLog_ModWarning, VOODOO_FILESYSTEM_NAME,
                     Format(VSTR("Invalid texture format for getting image data (%1%).")) << pDesc.Format
                 );
                 return 0;

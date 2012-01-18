@@ -46,7 +46,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -66,6 +66,28 @@ namespace VoodooShader
          * Gets the texture description.
          */
         VOODOO_METHOD_(TextureDesc, GetDesc)() CONST PURE;
+        /**
+         * Copies a 1 or 2D region of texture data from another texture. 
+         * 
+         * @param   pSource The texture to copy from. This must be the same format with the same mipmap flags.
+         * @param   source  The source rectangle.
+         * @param   dest    The destination rectangle.
+         * 
+         * @note This method does not do any stretching of the texture data.
+         * @warning Under some APIs, this call may require extra handling to copy from render target textures to others; 
+         *      this may result in a notable performance hit. Because of this, avoid copying from render target textures.
+         */
+        VOODOO_METHOD(StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, CONST Rect dest);
+        /**
+         * Copies a 3D region of texture data from another texture.
+         * 
+         * @param   pSource The texture to copy from. This must be the same format with the same mipmap flags.
+         * @param   source  The source region.
+         * @param   dest    The destination point.
+         * 
+         * @note This method does not do any stretching of the texture data.
+         */
+        VOODOO_METHOD(CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, CONST UInt3 dest);
         /**
          * @}
          */

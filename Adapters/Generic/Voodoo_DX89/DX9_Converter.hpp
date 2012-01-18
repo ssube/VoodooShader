@@ -32,25 +32,25 @@ namespace VoodooShader
             {
                 switch (tf)
                 {
-                case TF_RGB5:
+                case VSFmtRGB5:
                     return D3DFMT_X1R5G5B5;
-                case TF_RGB5A1:
+                case VSFmtRGB5A1:
                     return D3DFMT_A1R5G5B5;
-                case TF_RGB8:
+                case VSFmtRGB8:
                     return D3DFMT_X8R8G8B8;
-                case TF_RGBA8:
+                case VSFmtRGBA8:
                     return D3DFMT_A8R8G8B8;
-                case TF_RGB10A2:
+                case VSFmtRGB10A2:
                     return D3DFMT_A2B10G10R10;
-                case TF_RGBA16F:
+                case VSFmtRGBA16F:
                     return D3DFMT_A16B16G16R16F;
-                case TF_RGBA32F:
+                case VSFmtRGBA32F:
                     return D3DFMT_A32B32G32R32F;
-                case TF_D16:
+                case VSFmtD16:
                     return D3DFMT_D16;
-                case TF_D32:
+                case VSFmtD32:
                     return D3DFMT_D32;
-                case TF_Unknown:
+                case VSFmtUnknown:
                 default:
                     return D3DFMT_UNKNOWN;
                 }
@@ -61,26 +61,26 @@ namespace VoodooShader
                 switch (tf)
                 {
                 case D3DFMT_X1R5G5B5:
-                    return TF_RGB5;
+                    return VSFmtRGB5;
                 case D3DFMT_A1R5G5B5:
-                    return TF_RGB5A1;
+                    return VSFmtRGB5A1;
                 case D3DFMT_X8R8G8B8:
-                    return TF_RGB8;
+                    return VSFmtRGB8;
                 case D3DFMT_A8R8G8B8:
-                    return TF_RGBA8;
+                    return VSFmtRGBA8;
                 case D3DFMT_A2B10G10R10:
-                    return TF_RGB10A2;
+                    return VSFmtRGB10A2;
                 case D3DFMT_A16B16G16R16F:
-                    return TF_RGBA16F;
+                    return VSFmtRGBA16F;
                 case D3DFMT_A32B32G32R32F:
-                    return TF_RGBA32F;
+                    return VSFmtRGBA32F;
                 case D3DFMT_D16:
-                    return TF_D16;
+                    return VSFmtD16;
                 case D3DFMT_D32:
-                    return TF_D32;
+                    return VSFmtD32;
                 case D3DFMT_UNKNOWN:
                 default:
-                    return TF_Unknown;
+                    return VSFmtUnknown;
                 }
             }
         };

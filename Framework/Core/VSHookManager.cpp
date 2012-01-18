@@ -28,12 +28,27 @@ namespace VoodooShader
     VSHookManager::VSHookManager(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { 
+        m_ThreadCount = 1;
+
+        m_ThreadIDs = new ULONG[m_ThreadCount];
+        m_ThreadIDs[0] = 0;
+
+        LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
+
+        m_Core->GetLogger()->LogMessage(VSLog_ModInfo, VOODOO_CORE_NAME, VSTR("Created hook manager."));
+
         AddThisToDebugCache();
     }
 
     VSHookManager::~VSHookManager()
     { 
         RemoveThisFromDebugCache();
+
+        this->RemoveAll();
+
+        m_Core->GetLogger()->LogMessage(VSLog_ModInfo, VOODOO_CORE_NAME, VSTR("Destroying hook manager."));
+
+        delete[] m_ThreadIDs;
     }
 
     uint32_t VOODOO_METHODTYPE VSHookManager::AddRef() CONST
@@ -58,7 +73,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSHookManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSHookManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -70,15 +85,15 @@ namespace VoodooShader
         {
             if (refid == IID_IObject)
             {
-                *ppOut = static_cast<const IObject*>(this);
+                *ppOut = static_cast<IObject*>(this);
             }
             else if (refid == IID_IHookManager)
             {
-                *ppOut = static_cast<const IHookManager*>(this);
+                *ppOut = static_cast<IHookManager*>(this);
             }
             else if (refid == CLSID_VSHookManager)
             {
-                *ppOut = static_cast<const VSHookManager*>(this);
+                *ppOut = static_cast<VSHookManager*>(this);
             }
             else
             {
@@ -108,25 +123,108 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSHookManager::Add(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(name);
-        UNREFERENCED_PARAMETER(pSrc);
-        UNREFERENCED_PARAMETER(pDest);
 
-        return VSFERR_INVALIDCALL;
+        HookMap::iterator hook = m_Hooks.find(name);
+
+        if (hook != m_Hooks.end())
+        {
+            m_Core->GetLogger()->LogMessage
+            (
+                VSLog_ModError, VOODOO_CORE_NAME,
+                Format(VSTR("Attempted to create a hook with a duplicate name (%1%).")) << name
+            );
+
+            return VSFERR_INVALIDPARAMS;
+        }
+
+        m_Core->GetLogger()->LogMessage
+        (
+            VSLog_ModDebug, VOODOO_CORE_NAME,
+            Format(VSTR("Creating hook %1%. Redirecting function %2% to %3%.")) << name << pSrc << pDest
+        );
+
+        TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
+        DWORD result = LhInstallHook(pSrc, pDest, nullptr, hookHandle);
+
+        if (result == STATUS_NOT_SUPPORTED || result == STATUS_NO_MEMORY || result == STATUS_INSUFFICIENT_RESOURCES)
+        {
+            m_Core->GetLogger()->LogMessage
+            (
+                VSLog_ModError, VOODOO_CORE_NAME,
+                Format(VSTR("Error %1 creating hook %s.")) << (uint32_t)result << name
+            );
+
+            return VSFERR_INVALIDCALL;
+        }
+        else
+        {
+            LhSetInclusiveACL(m_ThreadIDs, m_ThreadCount, hookHandle);
+
+            m_Hooks[name] = hookHandle;
+
+            return VSF_OK;
+        }
     }
 
     VoodooResult VOODOO_METHODTYPE VSHookManager::Remove(_In_ const String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(name);
 
-        return VSFERR_INVALIDCALL;
+        HookMap::iterator hook = m_Hooks.find(name);
+
+        m_Core->GetLogger()->LogMessage(VSLog_ModDebug, VOODOO_CORE_NAME, Format(VSTR("Removing hook %1%.")) << name);
+
+        if (hook != m_Hooks.end())
+        {
+            TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE)hook->second;
+            DWORD result = LhUninstallHook(tracedHandle);
+
+            delete tracedHandle;
+
+            if (result != 0)
+            {
+                m_Core->GetLogger()->LogMessage
+                (
+                    VSLog_ModError, VOODOO_CORE_NAME,
+                    Format("Error %1% removing hook %2%.") << (uint32_t)result << name
+                );
+
+                return VSFERR_INVALIDCALL;
+            }
+            else
+            {
+                delete hook->second;
+                m_Hooks.erase(hook);
+
+                return VSF_OK;
+            }
+        }
+        else
+        {
+            m_Core->GetLogger()->LogMessage
+            (
+                VSLog_ModDebug, VOODOO_CORE_NAME,
+                Format(VSTR("Trying to remove hook %1% (does not exist).")) << name.GetData()
+            );
+            return VSFERR_INVALIDPARAMS;
+        }
     }
 
     VoodooResult VOODOO_METHODTYPE VSHookManager::RemoveAll()
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        return VSFERR_INVALIDCALL;
+        std::for_each
+        (
+            m_Hooks.begin(), m_Hooks.end(),
+            [this](std::pair<String, TRACED_HOOK_HANDLE> chook)
+            {
+                this->Remove(chook.first);
+            }
+        );
+
+        m_Hooks.clear();
+
+        return VSF_OK;
     }
 }

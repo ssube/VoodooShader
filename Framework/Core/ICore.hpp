@@ -45,7 +45,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -78,17 +78,11 @@ namespace VoodooShader
          * @{
          */
         /**
-         * Retrieves this core's variable parser.
+         * Retrieve the Xml config document for this ICore.
          *
-         * @return A reference to the core's parser (always valid).
+         * @return A reference to the config.
          */
-        VOODOO_METHOD_(IParser *, GetParser)() CONST PURE;
-        /**
-         * Retrieves this core's IHookManager implementation.
-         *
-         * @return A reference to the hook manager instance (always valid).
-         */
-        VOODOO_METHOD_(IHookManager *, GetHookManager)() CONST PURE;
+        VOODOO_METHOD_(XmlDocument, GetConfig)() CONST PURE;
         /**
          * Retrieves this core's IFileSystem implementation.
          *
@@ -96,11 +90,11 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(IFileSystem *, GetFileSystem)() CONST PURE;
         /**
-         * Retrieve the IAdapter attached to this ICore.
+         * Retrieves this core's IHookManager implementation.
          *
-         * @return A reference to the adapter instance (always valid).
+         * @return A reference to the hook manager instance (always valid).
          */
-        VOODOO_METHOD_(IAdapter *, GetAdapter)() CONST PURE;
+        VOODOO_METHOD_(IHookManager *, GetHookManager)() CONST PURE;
         /**
          * Retrieve the ILogger attached to this ICore.
          *
@@ -108,19 +102,11 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(ILogger *, GetLogger)() CONST PURE;
         /**
-         * Retrieve the Xml config document for this ICore.
+         * Retrieves this core's variable parser.
          *
-         * @return A reference to the config.
+         * @return A reference to the core's parser (always valid).
          */
-        VOODOO_METHOD_(XmlDocument, GetConfig)() CONST PURE;
-        /**
-         * Gets the default compilation flags.
-         */
-        VOODOO_METHOD_(CompileFlags, GetDefaultFlags)() CONST PURE;
-        /**
-         * Sets the default compilation flags.
-         */
-        VOODOO_METHOD_(void, SetDefaultFlags)(const CompileFlags flags) PURE;
+        VOODOO_METHOD_(IParser *, GetParser)() CONST PURE;
         /**
          * @}
          * @name Resource Methods
@@ -166,7 +152,7 @@ namespace VoodooShader
          * @param   name    The name to search for.
          * @param   desc    The desc to verify.
          *
-         * @note If type is PT_Unknown, no type checking is performed, only the name is used.
+         * @note If type is VSPT_Unknown, no type checking is performed, only the name is used.
          */
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterDesc desc) CONST PURE;
         /**

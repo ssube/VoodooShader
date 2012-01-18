@@ -46,7 +46,7 @@ namespace VoodooShader
 
             if (logger)
             {
-                logger->LogMessage(LL_CoreException, module, msg);
+                logger->LogMessage(VSLog_CoreException, module, msg);
             }
         }
     }
@@ -72,7 +72,7 @@ namespace VoodooShader
 
             if (logger)
             {
-                logger->LogMessage(LL_CoreException, module, msg);
+                logger->LogMessage(VSLog_CoreException, module, msg);
             }
         }
     }

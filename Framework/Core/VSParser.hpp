@@ -34,13 +34,13 @@ namespace VoodooShader
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut);
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal);
         VOODOO_METHOD_(void, Remove)(_In_ const String & name);
-        VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = PF_None) CONST;
+        VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = VSParse_None) CONST;
 
         static const uint32_t VarMaxDepth    = 8;
         static const wchar_t  VarDelimPre    = VSTR('$');

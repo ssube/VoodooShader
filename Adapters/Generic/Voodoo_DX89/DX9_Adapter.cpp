@@ -280,29 +280,29 @@ namespace VoodooShader
 
             if (!pPass)
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set null pass."));
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to set null pass."));
                 return false;
             }
             else if (m_BoundPass)
             {
-                logger->LogMessage(LL_ModWarning, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
+                logger->LogMessage(VSLog_ModWarning, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
                 return VSFERR_INVALIDCALL;
             }
             else if (!m_BoundEffect)
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set pass with no effect set."));
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to set pass with no effect set."));
                 return VSFERR_INVALIDCALL;
             }
             else if (pPass->GetTechnique() != m_BoundEffect->GetDefaultTechnique())
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to set pass, not from default technique of current effect."));
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to set pass, not from default technique of current effect."));
                 return VSFERR_INVALIDPARAMS;
             }
 
             Variant propvar = CreateVariant();
             if (FAILED(pPass->GetProperty(PropIds::D3DX9PassId, &propvar)) || propvar.Type != UT_UInt32)
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware handle from pass %1%.") << pPass);
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware handle from pass %1%.") << pPass);
                 return VSFERR_INVALIDPARAMS;
             }
             m_BoundDXPassId = propvar.VUInt32.X;
@@ -313,7 +313,7 @@ namespace VoodooShader
             HRESULT hr = m_BoundDXEffect->BeginPass(m_BoundDXPassId);
             if (FAILED(hr))
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to set pass %1% in hardware.") << pPass);
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to set pass %1% in hardware.") << pPass);
                 return VSF_FAIL;
             }
 
@@ -362,7 +362,7 @@ namespace VoodooShader
             ILoggerRef logger = m_Core->GetLogger();
 
             if (index > 3) {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Invalid render target index %1%.") << index);
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Invalid render target index %1%.") << index);
                 return false;
             }
 
@@ -378,12 +378,12 @@ namespace VoodooShader
 
                     if (SUCCEEDED(result))
                     {
-                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound backbuffer to render target %1%.") << index);
+                        logger->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, Format("Bound backbuffer to render target %1%.") << index);
                         return true;
                     }
                     else
                     {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind backbuffer to render target %1%: %2%") << index << result);
+                        logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Device failed to bind backbuffer to render target %1%: %2%") << index << result);
                         return false;
                     }
                 }
@@ -393,12 +393,12 @@ namespace VoodooShader
 
                     if (SUCCEEDED(result))
                     {
-                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture to render target %1%.") << index);
+                        logger->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture to render target %1%.") << index);
                         return true;
                     }
                     else
                     {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind null texture to render target %1%: %2%") << index << result);
+                        logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Device failed to bind null texture to render target %1%: %2%") << index << result);
                         return false;
                     }
                 }
@@ -408,7 +408,7 @@ namespace VoodooShader
                 Variant texVar = CreateVariant();
                 if (FAILED(pTarget->GetProperty(PropIds::D3D9Texture, &texVar)))
                 {
-                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to retrieve hardware texture property from texture %1%.") << pTarget);
+                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to retrieve hardware texture property from texture %1%.") << pTarget);
                     return VSFERR_INVALIDPARAMS;
                 }
 
@@ -419,12 +419,12 @@ namespace VoodooShader
                     result = m_RealDevice->SetRenderTarget(index, nullptr);
                     if (SUCCEEDED(result))
                     {
-                        logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture data to render target %1%: %2%") << index << result);
+                        logger->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, Format("Bound null texture data to render target %1%: %2%") << index << result);
                         return true;
                     }
                     else
                     {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind null texture data to render target %1%: %2%") << index << result);
+                        logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Device failed to bind null texture data to render target %1%: %2%") << index << result);
                         return false;
                     }
                 }
@@ -436,7 +436,7 @@ namespace VoodooShader
 
                 if (!SUCCEEDED(result))
                 {
-                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Failed to get surface of texture '%1%', data %2%: %3%") << pTarget << pD3D9Tex << result);
+                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Failed to get surface of texture '%1%', data %2%: %3%") << pTarget << pD3D9Tex << result);
                     pD3D9Surf->Release();
                     pD3D9Tex->Release();
                     return false;
@@ -449,12 +449,12 @@ namespace VoodooShader
 
                 if (!SUCCEEDED(result))
                 {
-                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Device failed to bind texture '%1%' to render target %2%: %3%") << pTarget << index << result);
+                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Device failed to bind texture '%1%' to render target %2%: %3%") << pTarget << index << result);
                     return false;
                 }
                 else
                 {
-                    logger->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound texture '%1%' to render target %2%: %3%") << pTarget << index << result);
+                    logger->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, Format("Bound texture '%1%' to render target %2%: %3%") << pTarget << index << result);
                     return true;
                 }
             }
@@ -484,18 +484,81 @@ namespace VoodooShader
             }
             else
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error creating texture %1%: %2%") << name << hr);
+                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Error creating texture %1%: %2%") << name << hr);
                 return nullptr;
             }
         }
 
         VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
         {
-            UNREFERENCED_PARAMETER(pFile);
-            UNREFERENCED_PARAMETER(pRegion);
-            UNREFERENCED_PARAMETER(pTexture);
+            if (!pFile | !pTexture) return VSFERR_INVALIDPARAMS;
 
-            //! @todo Load texture data into memory.
+            TextureDesc texDesc = pTexture->GetDesc();
+            TextureDesc fileDesc = pFile->GetDesc();
+
+            if (texDesc.Format != pRegion.Format || fileDesc.Format != pRegion.Format) return VSFERR_INVALIDPARAMS;
+
+            D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pRegion.Format);
+            if (fmt == D3DFMT_UNKNOWN) return VSFERR_INVALIDPARAMS;
+
+            // Should succeed, take references
+            IImageRef image = pFile;
+            ITextureRef texture = pTexture;
+
+            // Create a trash texture in system memory
+            Variant destSurfVar = CreateVariant();
+            if (FAILED(texture->GetProperty(PropIds::D3D9Surface, &destSurfVar)) || destSurfVar.Type != UT_PVoid)
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            LPDIRECT3DSURFACE9 pDestSurf = reinterpret_cast<LPDIRECT3DSURFACE9>(destSurfVar.VPVoid);
+
+            if (!pDestSurf)
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            pDestSurf->AddRef();
+
+            IDirect3DSurface9 * pTempSurf = nullptr;
+            HRESULT hr = m_RealDevice->CreateOffscreenPlainSurface(pRegion.Size.X, pRegion.Size.Y, fmt, D3DPOOL_SYSTEMMEM, &pTempSurf, nullptr);
+            if (FAILED(hr))
+            {
+                return VSFERR_APIERROR;
+            }
+
+            uint32_t bufferSize = pFile->GetData(pRegion, 0, nullptr);
+            std::vector<char> buffer(bufferSize);
+            pFile->GetData(pRegion, bufferSize, &buffer[0]);
+
+            RECT rect;
+            ZeroMemory(&rect, sizeof(RECT));
+
+            rect.left = pRegion.Origin.X;
+            rect.top = pRegion.Origin.Y;
+            rect.right = pRegion.Size.X;
+            rect.bottom = pRegion.Size.Y;
+
+            D3DLOCKED_RECT lockRect;
+            hr = pTempSurf->LockRect(&lockRect, &rect, D3DLOCK_DISCARD);
+
+            for (uint32_t row = 0; row < pRegion.Size.Y; ++row)
+            {
+                char * dstBits = (char*)lockRect.pBits;
+                dstBits += (lockRect.Pitch * row);
+
+                char * srcBits = &buffer[0];
+                srcBits += (lockRect.Pitch * row);
+
+                memcpy(dstBits, srcBits, lockRect.Pitch);
+            }
+
+            hr = pTempSurf->UnlockRect();
+
+            POINT o = {pRegion.Origin.X, pRegion.Origin.Y};
+            hr = m_RealDevice->UpdateSurface(pTempSurf, &rect, pDestSurf, &o);
+
             return false;
         }
 
@@ -509,7 +572,7 @@ namespace VoodooShader
         {
             if (!pData)
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("No geometry given to draw."));
+                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("No geometry given to draw."));
                 return false;
             }
 
@@ -519,7 +582,7 @@ namespace VoodooShader
             hr = m_RealDevice->SetRenderState(D3DRS_CLIPPING, FALSE);
             hr = m_RealDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
             hr = m_RealDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
-            hr = m_RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+            hr = m_RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCUVSLog_NONE);
 
             if (flags & VF_Transformed)
             {
@@ -545,7 +608,7 @@ namespace VoodooShader
                 }
                 else
                 {
-                    gpVoodooCore->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
+                    gpVoodooCore->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
                     return false;
                 }
             }
@@ -560,7 +623,7 @@ namespace VoodooShader
                 }
                 else
                 {
-                    gpVoodooCore->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
+                    gpVoodooCore->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to draw geometry."));
                     return false;
                 }
             }
@@ -576,11 +639,11 @@ namespace VoodooShader
             }
 
             ParameterDesc desc = pParam->GetDesc();
-            if (desc.Type < PT_Texture || desc.Type > PT_TextureCube)
+            if (desc.Type < VSPT_Texture || desc.Type > VSPT_TextureCube)
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_ModError, VOODOO_DX89_NAME, 
+                    VSLog_ModError, VOODOO_DX89_NAME, 
                     Format("Invalid texture binding, parameter %1% is not a texture parameter.") << pParam
                 );
                 return VSFERR_INVALIDPARAMS;
@@ -593,31 +656,31 @@ namespace VoodooShader
             Variant propVar = CreateVariant();
             if (FAILED(pParam->GetProperty(PropIds::D3DX9Effect, &propVar))) 
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware effect from parameter %1%.") << pParam);
+                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware effect from parameter %1%.") << pParam);
                 return VSFERR_INVALIDPARAMS;
             }
             pDXEffect = reinterpret_cast<LPD3DXEFFECT>(propVar.VPVoid);
             if (!pDXEffect)
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Parameter %1% has no hardware effect.") << pParam);
+                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Parameter %1% has no hardware effect.") << pParam);
                 return VSFERR_INVALIDPARAMS;
             }
 
             if (FAILED(pParam->GetProperty(PropIds::D3DX9Handle, &propVar)))
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware handle from parameter %1%.") << pParam);
+                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware handle from parameter %1%.") << pParam);
                 return VSFERR_INVALIDPARAMS;
             }
             pDXParam = reinterpret_cast<D3DXHANDLE>(propVar.VPVoid);
             if (!pDXParam)
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Parameter %1% has no hardware handle.") << pParam);
+                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Parameter %1% has no hardware handle.") << pParam);
                 return VSFERR_INVALIDPARAMS;
             }
 
             if (FAILED(pTexture->GetProperty(PropIds::D3D9Texture, &propVar)))
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware texture from texture %1%.") << pTexture);
+                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware texture from texture %1%.") << pTexture);
                 return VSFERR_INVALIDPARAMS;
             }
             pDXTexture = reinterpret_cast<LPDIRECT3DTEXTURE9>(propVar.VPVoid);
@@ -630,12 +693,12 @@ namespace VoodooShader
 
             if (FAILED(hr))
             {
-                m_Core->GetLogger()->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Unable to bind texture %1% to parameter %2%.") << pTexture << pParam);
+                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to bind texture %1% to parameter %2%.") << pTexture << pParam);
                 return VSFERR_INVALIDCALL;
             }
             else
             {
-                m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_DX89_NAME, Format("Bound texture %1% to parameter %2%.") << pTexture << pParam);
+                m_Core->GetLogger()->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, Format("Bound texture %1% to parameter %2%.") << pTexture << pParam);
                 return VSF_OK;
             }
         }
@@ -660,13 +723,13 @@ namespace VoodooShader
 
             if (!bestVertStr || !bestFragStr)
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Error detecting latest shader profiles."));
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Error detecting latest shader profiles."));
                 return VSF_FAIL;
             }
 
             logger->LogMessage
             (
-                LL_ModInfo, VOODOO_DX89_NAME,
+                VSLog_ModInfo, VOODOO_DX89_NAME,
                 Format("Detected latest profiles as %1% and %2%.") << bestVertStr << bestFragStr
             );
 
@@ -684,7 +747,7 @@ namespace VoodooShader
 
             if (!SUCCEEDED(errors))
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to create standard vertex declaration."));
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to create standard vertex declaration."));
             }
 
             vertDeclElems[0].Usage = D3DDECLUSAGE_POSITIONT;
@@ -693,7 +756,7 @@ namespace VoodooShader
 
             if (!SUCCEEDED(errors))
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Unable to create transformed vertex declaration."));
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to create transformed vertex declaration."));
             }
 
             // Get params
@@ -703,7 +766,7 @@ namespace VoodooShader
 
             logger->LogMessage
             (
-                LL_ModInfo, VOODOO_DX89_NAME, 
+                VSLog_ModInfo, VOODOO_DX89_NAME, 
                 Format("Prepping for %1% by %2% target.") << (uint32_t)viewport.Width << (uint32_t)viewport.Height
             );
 
@@ -711,10 +774,10 @@ namespace VoodooShader
             if (!SUCCEEDED(m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
 
             // Create fullscreen vbuffer
-            float ft = 5.0f;
-            float fb = viewport.Height - 5.0f;
-            float fl = 5.0f;
-            float fr = viewport.Width - 5.0f;
+            float ft = -0.5f;
+            float fb = viewport.Height - ft;
+            float fl = -0.5f;
+            float fr = viewport.Width - ft;
 
             VertexDesc fsVertData[6] =
             {
@@ -734,7 +797,7 @@ namespace VoodooShader
 
             if (FAILED(errors))
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
             }
 
             VertexDesc * pVertices = nullptr;
@@ -742,7 +805,7 @@ namespace VoodooShader
 
             if (FAILED(errors))
             {
-                logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
             }
             else
             {

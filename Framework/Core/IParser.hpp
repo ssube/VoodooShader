@@ -44,7 +44,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -71,7 +71,7 @@ namespace VoodooShader
          *
          * @sa @ref voodoo_vars for details on how variables work
          */
-        VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = PF_None) CONST PURE;
+        VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = VSParse_None) CONST PURE;
     };
 
     /**
@@ -139,7 +139,7 @@ namespace VoodooShader
      * Variable names may also contain variables (as mentioned above). The syntax is identical, but the results are
      * slightly more complex.
      *
-     * @par Examples: (with <code>PF_SingleSlash | PF_BackslashOnly</code>)
+     * @par Examples: (with <code>VSParse_SingleSlash | VSParse_BackslashOnly</code>)
      * @code
      * basepath = M:\VoodooShader\
      * adapter = Frost
@@ -150,7 +150,7 @@ namespace VoodooShader
      *
      * @note Repeated consecutive slashes will not cause errors with path parsing, although in some locations they
      *     have special meanings. They may cause errors when using the string for other reasons; calling
-     *     @ref IParser::Parse() with the @ref PF_SlashSingle flag set will attempt to strip these. Finally, state
+     *     @ref IParser::Parse() with the @ref VSParse_SlashSingle flag set will attempt to strip these. Finally, state
      *     variables and suppression use a variation on the name syntax.
      *
      * @par Examples:
@@ -176,15 +176,15 @@ namespace VoodooShader
      * @section voodoo_vars_flags Flags
      * The variable parser provides a small set of flags to control parsing modes.
      *
-     * @subsection voodoo_vars_flags_slash_single PF_SingleSlash
+     * @subsection voodoo_vars_flags_slash_single VSParse_SingleSlash
      * Removes repeated slashes, both forward and back. This processes each stage of the string before it is returned
      * up a level, and is typically very reliable (even if variables place new slashes).
      *
-     * @subsection voodoo_vars_flags_slash_type PF_SlashOnly & PF_BackslashOnly
+     * @subsection voodoo_vars_flags_slash_type VSParse_SlashOnly & VSParse_BackslashOnly
      * Replaces all slashes with a single type (forward or back). This may be necessary; XPath syntax, for example,
      * uses forward slashes while Windows paths tend to prefer backslashes. These may not be combined.
      *
-     * @subsection voodoo_vars_flags_case PF_Lowercase & PF_Uppercase
+     * @subsection voodoo_vars_flags_case VSParse_Lowercase & VSParse_Uppercase
      * Transforms the string into a specific case. All alphabetic characters (a-z and A-Z) will be replaced with the
      * given case.
      *

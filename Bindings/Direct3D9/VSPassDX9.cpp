@@ -245,15 +245,15 @@ namespace VoodooShader
 
         switch (stage)
         {
-        case SS_Vertex:
+        case VSStage_Vertex:
             pShader->Type = UT_PVoid;
             pShader->VPVoid = m_VertexShader;
             return VSF_OK;
-        case SS_Pixel:
+        case VSStage_Pixel:
             pShader->Type = UT_PVoid;
             pShader->VPVoid = m_PixelShader;
             return VSF_OK;
-        case SS_Unknown:
+        case VSStage_Unknown:
         default:
             return VSFERR_INVALIDPARAMS;
         }

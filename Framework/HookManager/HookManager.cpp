@@ -78,23 +78,10 @@ namespace VoodooShader
         VSEHHookManager::VSEHHookManager(ICore * pCore) :
             m_Core(pCore)
         {
-            m_ThreadCount = 1;
-
-            m_ThreadIDs = new ULONG[m_ThreadCount];
-            m_ThreadIDs[0] = 0;
-
-            LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
-
-            m_Core->GetLogger()->LogMessage(LL_ModInfo, VOODOO_HOOK_NAME, VSTR("Created hook manager."));
         }
 
         VSEHHookManager::~VSEHHookManager()
         {
-            this->RemoveAll();
-
-            m_Core->GetLogger()->LogMessage(LL_ModInfo, VOODOO_HOOK_NAME, VSTR("Destroying hook manager."));
-
-            delete[] m_ThreadIDs;
         }
 
         uint32_t VSEHHookManager::AddRef() const
@@ -159,104 +146,14 @@ namespace VoodooShader
 
         VoodooResult VSEHHookManager::Add(const String & name, void * pSrc, void * pDest)
         {
-            HookMap::iterator hook = m_Hooks.find(name);
-
-            if (hook != m_Hooks.end())
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_ModError, VOODOO_HOOK_NAME,
-                    Format(VSTR("Attempted to create a hook with a duplicate name (%1%).")) << name
-                );
-
-                return VSFERR_INVALIDPARAMS;
-            }
-
-            m_Core->GetLogger()->LogMessage
-            (
-                LL_ModDebug, VOODOO_HOOK_NAME,
-                Format(VSTR("Creating hook %1%. Redirecting function %2% to %3%.")) << name << pSrc << pDest
-            );
-
-            TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
-            DWORD result = LhInstallHook(pSrc, pDest, nullptr, hookHandle);
-
-            if (result == STATUS_NOT_SUPPORTED || result == STATUS_NO_MEMORY || result == STATUS_INSUFFICIENT_RESOURCES)
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_ModError, VOODOO_HOOK_NAME,
-                    Format(VSTR("Error %1 creating hook %s.")) << (uint32_t)result << name
-                );
-
-                return VSFERR_INVALIDCALL;
-            }
-            else
-            {
-                LhSetInclusiveACL(m_ThreadIDs, m_ThreadCount, hookHandle);
-
-                m_Hooks[name] = hookHandle;
-
-                return VSF_OK;
-            }
         }
 
         VoodooResult VSEHHookManager::Remove(const String & name)
         {
-            HookMap::iterator hook = m_Hooks.find(name);
-
-            m_Core->GetLogger()->LogMessage(LL_ModDebug, VOODOO_HOOK_NAME, Format(VSTR("Removing hook %1%.")) << name);
-
-            if (hook != m_Hooks.end())
-            {
-                TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE)hook->second;
-                DWORD result = LhUninstallHook(tracedHandle);
-
-                delete tracedHandle;
-
-                if (result != 0)
-                {
-                    m_Core->GetLogger()->LogMessage
-                    (
-                        LL_ModError, VOODOO_HOOK_NAME,
-                        Format("Error %1% removing hook %2%.") << (uint32_t)result << name
-                    );
-
-                    return VSFERR_INVALIDCALL;
-                }
-                else
-                {
-                    delete hook->second;
-                    m_Hooks.erase(hook);
-
-                    return VSF_OK;
-                }
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage
-                (
-                    LL_ModDebug, VOODOO_HOOK_NAME,
-                    Format(VSTR("Trying to remove hook %1% (does not exist).")) << name.GetData()
-                );
-                return VSFERR_INVALIDPARAMS;
-            }
         }
 
         VoodooResult VSEHHookManager::RemoveAll()
         {
-            std::for_each
-            (
-                m_Hooks.begin(), m_Hooks.end(),
-                [this](std::pair<String, TRACED_HOOK_HANDLE> chook)
-                {
-                    this->Remove(chook.first);
-                }
-            );
-
-            m_Hooks.clear();
-
-            return VSF_OK;
         }
     }
 }

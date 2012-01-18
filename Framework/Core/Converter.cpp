@@ -36,27 +36,27 @@ namespace VoodooShader
         if (formatBody[0] == VSTR('D'))
         {
             // Depth format
-            if (_tcsnicmp(formatBody, VSTR("D16"), 3) == 0) return TF_D16;
-            if (_tcsnicmp(formatBody, VSTR("D32"), 3) == 0) return TF_D32;
+            if (_tcsnicmp(formatBody, VSTR("D16"), 3) == 0) return VSFmt_D16;
+            if (_tcsnicmp(formatBody, VSTR("D32"), 3) == 0) return VSFmt_D32;
         }
         else
         {
-            if (_tcsnicmp(formatBody, VSTR("RGB5"),    4) == 0) return TF_RGB5;
-            if (_tcsnicmp(formatBody, VSTR("RGB5A1"),  6) == 0) return TF_RGB5A1;
-            if (_tcsnicmp(formatBody, VSTR("RGB8"),    4) == 0) return TF_RGB8;
-            if (_tcsnicmp(formatBody, VSTR("RGBA8"),   5) == 0) return TF_RGBA8;
-            if (_tcsnicmp(formatBody, VSTR("RGB10A2"), 7) == 0) return TF_RGB10A2;
-            if (_tcsnicmp(formatBody, VSTR("RGBA16F"), 7) == 0) return TF_RGBA16F;
-            if (_tcsnicmp(formatBody, VSTR("RGBA32F"), 7) == 0) return TF_RGBA32F;
+            if (_tcsnicmp(formatBody, VSTR("RGB5"),    4) == 0) return VSFmt_RGB5;
+            if (_tcsnicmp(formatBody, VSTR("RGB5A1"),  6) == 0) return VSFmt_RGB5A1;
+            if (_tcsnicmp(formatBody, VSTR("RGB8"),    4) == 0) return VSFmt_RGB8;
+            if (_tcsnicmp(formatBody, VSTR("RGBA8"),   5) == 0) return VSFmt_RGBA8;
+            if (_tcsnicmp(formatBody, VSTR("RGB10A2"), 7) == 0) return VSFmt_RGB10A2;
+            if (_tcsnicmp(formatBody, VSTR("RGBA16F"), 7) == 0) return VSFmt_RGBA16F;
+            if (_tcsnicmp(formatBody, VSTR("RGBA32F"), 7) == 0) return VSFmt_RGBA32F;
         }
 
-        return TF_Unknown;
+        return VSFmt_Unknown;
     }
 
 #define DONOTHING(a) a
 #define CASESTRING(x) case DONOTHING(PREFIX) ## x: return VOODOO_TOSTRING(x)
 
-#define PREFIX TF_
+#define PREFIX VSFmt_
     const wchar_t * Converter::ToString(_In_ TextureFormat tf)
     {
         switch (tf)
@@ -70,14 +70,14 @@ namespace VoodooShader
             CASESTRING(RGBA32F);
             CASESTRING(D16);
             CASESTRING(D32);
-        case TF_Unknown:
+        case VSFmt_Unknown:
         default:
             return VSTR("Unknown");
         }
     }
 #undef PREFIX
 
-#define PREFIX PT_
+#define PREFIX VSPT_
     const wchar_t * Converter::ToString(_In_ ParameterType pt)
     {
         switch (pt)
@@ -90,14 +90,14 @@ namespace VoodooShader
             CASESTRING(Sampler2D);
             CASESTRING(Sampler3D);
             CASESTRING(SamplerCube);
-        case PT_Unknown:
+        case VSPT_Unknown:
         default:
             return VSTR("Unknown");
         }
     }
 #undef PREFIX
 
-#define PREFIX SS_
+#define PREFIX VSStage_
     const wchar_t * Converter::ToString(ShaderStage stage)
     {
         switch (stage)
@@ -108,7 +108,7 @@ namespace VoodooShader
             CASESTRING(Domain);
             CASESTRING(Hull);
             CASESTRING(Compute);
-        case SS_Unknown:
+        case VSStage_Unknown:
         default:
             return VSTR("Unknown");
         }

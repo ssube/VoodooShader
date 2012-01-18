@@ -43,7 +43,7 @@ namespace VoodooShader
         // IObject
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut);
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
@@ -51,14 +51,11 @@ namespace VoodooShader
         VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config);
         VOODOO_METHOD(Reset)();
 
-        VOODOO_METHOD_(IParser *, GetParser)() CONST;
-        VOODOO_METHOD_(IHookManager *, GetHookManager)() CONST;
-        VOODOO_METHOD_(IFileSystem *, GetFileSystem)() CONST;
-        VOODOO_METHOD_(IAdapter *, GetAdapter)() CONST;
-        VOODOO_METHOD_(ILogger *, GetLogger)() CONST;
         VOODOO_METHOD_(XmlDocument, GetConfig)() CONST;
-        VOODOO_METHOD_(CompileFlags, GetDefaultFlags)() CONST;
-        VOODOO_METHOD_(void, SetDefaultFlags)(const CompileFlags flags);
+        VOODOO_METHOD_(IFileSystem *, GetFileSystem)() CONST;
+        VOODOO_METHOD_(IHookManager *, GetHookManager)() CONST;
+        VOODOO_METHOD_(ILogger *, GetLogger)() CONST;
+        VOODOO_METHOD_(IParser *, GetParser)() CONST;
 
         VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile, const CompileFlags flags); 
         VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterDesc desc);
@@ -78,16 +75,16 @@ namespace VoodooShader
         XmlDocument m_ConfigFile;
 
         /** The current IAdapter implementation. */
-        IAdapterRef m_Adapter;
+        IBindingRef m_Binding;
 
-        /** The current ILogger implementation. */
-        ILoggerRef m_Logger;
+        /** The current IFileSystem implementation. */
+        IFileSystemRef m_FileSystem;
 
         /** The current IHookManager implementation. */
         IHookManagerRef m_HookManager;
 
-        /** The current IFileSystem implementation. */
-        IFileSystemRef m_FileSystem;
+        /** The current ILogger implementation. */
+        ILoggerRef m_Logger;
 
         /** The current module manager. */
         IModuleManagerRef m_ModuleManager;

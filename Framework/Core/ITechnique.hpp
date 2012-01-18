@@ -51,7 +51,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**

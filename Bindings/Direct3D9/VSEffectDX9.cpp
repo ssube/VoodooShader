@@ -28,7 +28,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSEffectDX9
     DeclareDebugCache();
 
-    VSEffectDX9::VSEffectDX9(_Pre_notnull_ IFile * pFile, CompileFlags flags) :
+    VSEffectDX9::VSEffectDX9(_Pre_notnuVSLog_ IFile * pFile, CompileFlags flags) :
         m_Refs(0) 
     {
         if (!pFile)
@@ -79,7 +79,7 @@ namespace VoodooShader
         HRESULT hr = D3DXCreateEffectFromFile(device, pFile->GetPath().GetData(), NULL, NULL, d3dxflags, NULL, &m_DXEffect, &errors);
         if (FAILED(hr))
         {
-            logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, 
+            logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
                 Format("Error compiling effect from file '%1%'. Errors:\n%2%") << 
                 pFile->GetPath() << (LPCSTR)errors->GetBufferPointer());
 
@@ -132,11 +132,11 @@ namespace VoodooShader
                 D3DXTECHNIQUE_DESC techdesc;
                 if (SUCCEEDED(m_DXEffect->GetTechniqueDesc(techHandle, &techdesc)) && techdesc.Name)
                 {
-                    logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%: %2%") << techdesc.Name << exc.strwhat());
+                    logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%: %2%") << techdesc.Name << exc.strwhat());
                 }
                 else
                 {
-                    logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%: %2%") << techIndex << exc.strwhat());
+                    logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%: %2%") << techIndex << exc.strwhat());
                 }
             }
         } 
@@ -299,14 +299,14 @@ namespace VoodooShader
 
         if (!pTechnique)
         {
-            m_Core->GetLogger()->LogMessage(LL_CoreError, VOODOO_CORE_NAME, VSTR("Cannot set null technique as default."));
+            m_Core->GetLogger()->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, VSTR("Cannot set null technique as default."));
             return VSFERR_INVALIDPARAMS;
         }
         else if (pTechnique->GetEffect() != this)
         {
             m_Core->GetLogger()->LogMessage
             (
-                LL_CoreError, VOODOO_CORE_NAME,
+                VSLog_CoreError, VOODOO_CORE_NAME,
                 Format(VSTR("Technique %1% cannot be set as default (technique originated from another effect)."))
                 << pTechnique
             );

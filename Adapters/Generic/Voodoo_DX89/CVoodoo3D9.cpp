@@ -220,11 +220,11 @@ namespace VoodooShader
 
                 if (SUCCEEDED(hrt))
                 {
-                    logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
+                    logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
                 }
                 else
                 {
-                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
+                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
                 }
 
                 TextureDesc bufferTextureDesc;
@@ -242,11 +242,11 @@ namespace VoodooShader
                     if (SUCCEEDED(texture_Frame0->GetProperty(PropIds::D3D9Surface, &texvar)))
                     {
                         surface_Frame0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                        logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
+                        logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
                     }
                     else
                     {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
+                        logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
                     }
                 }
 
@@ -257,15 +257,15 @@ namespace VoodooShader
                     if (SUCCEEDED(texture_Pass0->GetProperty(PropIds::D3D9Surface, &texvar)))
                     {
                         surface_Pass0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                        logger->LogMessage(LL_ModInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
+                        logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
                     }
                     else
                     {
-                        logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
+                        logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
                     }
                 }
 
-                ParameterDesc rcpres_desc = {PT_Float, 1, 2, 0};
+                ParameterDesc rcpres_desc = {VSPT_Float, 1, 2, 0};
                 IParameter * lpparam_rcpres = gpVoodooCore->CreateParameter(L"rcpres", rcpres_desc);
 
                 try
@@ -283,7 +283,7 @@ namespace VoodooShader
                 }
                 catch (std::exception & exc)
                 {
-                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %1%") << exc.what());
+                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %1%") << exc.what());
                 }
             }
 

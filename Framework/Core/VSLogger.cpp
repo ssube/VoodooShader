@@ -20,13 +20,16 @@
 
 #include "VSLogger.hpp"
 
+#include <sstream>
+#include <ios>
+
 namespace VoodooShader
 {
     #define VOODOO_DEBUG_TYPE VSLogger
     DeclareDebugCache();
 
     VSLogger::VSLogger(ICore * pCore) :
-        m_Refs(0), m_Core(pCore)
+        m_Refs(0), m_Core(pCore), m_Filter(VSLog_Default), m_Flags(LF_Unknown)
     { 
         AddThisToDebugCache();
     }
@@ -56,7 +59,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSLogger::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
@@ -67,15 +70,15 @@ namespace VoodooShader
         {
             if (refid == IID_IObject)
             {
-                *ppOut = static_cast<const IObject*>(this);
+                *ppOut = static_cast<IObject*>(this);
             }
             else if (refid == IID_ILogger)
             {
-                *ppOut = static_cast<const ILogger*>(this);
+                *ppOut = static_cast<ILogger*>(this);
             }
             else if (refid == CLSID_VSLogger)
             {
-                *ppOut = static_cast<const VSLogger*>(this);
+                *ppOut = static_cast<VSLogger*>(this);
             }
             else
             {
@@ -105,64 +108,114 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSLogger::Open(_In_ const String & filename, _In_ const bool append)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(filename);
-        UNREFERENCED_PARAMETER(append);
 
-        return VSFERR_INVALIDCALL;
+        if (this->m_LogFile.is_open())
+        {
+            this->Close();
+        }
+
+        unsigned int flags = std::ios_base::out;
+
+        if (append)
+        {
+            flags |= std::ios_base::app;
+        }
+        else
+        {
+            flags |= std::ios_base::trunc;
+        }
+
+        this->m_LogFile.open(filename.GetData(), flags);
+
+        if (this->m_LogFile.is_open())
+        {
+#ifdef _DEBUG
+            this->SetFlags(LF_Flush);
+#endif
+
+            std::wstringstream logMsg;
+
+            logMsg << VSTR("Voodoo Shader Log") << std::endl;
+            logMsg << VSTR("Log opened on ") << String::Date() << VSTR(" at ") << String::Time() << VSTR(" (") << 
+                String::Ticks() << VSTR(")") << std::endl;
+
+#ifdef _DEBUG
+            std::wcout << logMsg.str();
+#endif
+            m_LogFile << logMsg.str();
+
+            return VSF_OK;
+        }
+        else
+        {
+            return VSFERR_INVALIDCALL;
+        }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::Open(_In_ IFile * const pFile, _In_ const bool append)
+    VoodooResult VOODOO_METHODTYPE VSLogger::Open(IFile * CONST pFile, CONST bool append)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(pFile);
-        UNREFERENCED_PARAMETER(append);
 
-        return VSFERR_INVALIDCALL;
+        if (!pFile) return VSFERR_INVALIDPARAMS;
+
+        return this->Open(pFile->GetPath(), append);
     }
 
-    bool VOODOO_METHODTYPE VSLogger::IsOpen() const
+    bool VOODOO_METHODTYPE VSLogger::IsOpen() CONST 
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
-        return false;
+        
+        return m_LogFile.is_open();
     }
 
     VoodooResult VOODOO_METHODTYPE VSLogger::Close()
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        return VSFERR_INVALIDCALL;
+        if (this->IsOpen())
+        {
+            this->m_LogFile.close();
+            return VSF_OK;
+        }
+        else
+        {
+            return VSFERR_INVALIDCALL;
+        }
     }
 
     void VOODOO_METHODTYPE VSLogger::Flush()
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        if (this->IsOpen())
+        {
+            this->m_LogFile.flush();
+        }
     }
 
-    void VOODOO_METHODTYPE VSLogger::SetFilter(_In_ const uint32_t level)
+    void VOODOO_METHODTYPE VSLogger::SetFilter(CONST uint32_t level)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(level);
+        m_Filter = (LogLevel)level;
     }
 
     LogLevel VOODOO_METHODTYPE VSLogger::GetFilter() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        return LL_Unknown;
+        return m_Filter;
     }
 
-    void VOODOO_METHODTYPE VSLogger::SetFlags(_In_ const LogFlags flush)
+    void VOODOO_METHODTYPE VSLogger::SetFlags(CONST LogFlags flags)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(flush);
+        m_Flags = flags;
     }
 
     LogFlags VOODOO_METHODTYPE VSLogger::GetFlags() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        return LF_Unknown;
+        return m_Flags;
     }
 
     VoodooResult VOODOO_METHODTYPE VSLogger::LogMessage
@@ -173,17 +226,48 @@ namespace VoodooShader
     )
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        UNREFERENCED_PARAMETER(level);
-        UNREFERENCED_PARAMETER(source);
-        UNREFERENCED_PARAMETER(msg);
+        
+        if (!this->IsOpen()) return false;
 
-#if defined(_DEBUG)
-        if ((level & (LL_Critical | LL_Warning | LL_Error)) > 0)
+        uint32_t reqMask = VSLog_System | VSLog_Critical | VSLog_Warning | VSLog_Error;
+        if ((level & (reqMask | m_Filter)) == 0) return false;
+
+        try
         {
-            OutputDebugString(msg.GetData());
-        }
-#endif
+            // Format the message in memory to prevent partial messages from being dumped
+            std::wstringstream logMsg;
+            logMsg << std::hex << std::showbase << level << std::dec << std::noshowbase << VSTR(", ") << GetTickCount() << 
+                VSTR(", ") << source << VSTR(", ") << msg << std::endl;
 
-        return VSFERR_INVALIDCALL;
+#ifdef _DEBUG
+            if (level & (VSLog_ModWarning | VSLog_ModError))
+            {
+                OutputDebugString(logMsg.str().c_str());
+#   ifdef VOODOO_DEBUG_CONSOLE
+                cout << logMsg.str();
+#   endif
+                VOODOO_DEBUG_BREAK;
+            }
+#endif
+            m_LogFile << logMsg.str();
+
+#ifndef _DEBUG
+            if (m_Flags & LF_Flush)
+#endif
+            {
+                m_LogFile << std::flush;
+            }
+
+            return true;
+        }
+        catch (const std::exception & exc)
+        {
+#ifdef _DEBUG
+            OutputDebugStringA(exc.what());
+#else
+            UNREFERENCED_PARAMETER(exc);
+#endif
+            return false;
+        }
     }
 }

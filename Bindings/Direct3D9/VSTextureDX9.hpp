@@ -20,26 +20,24 @@
 #pragma once
 
 #include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
+
+#ifdef _DEBUG
+#define D3D_DEBUG_INFO
+#endif
+#include <d3d9.h>
 
 namespace VoodooShader
 {
     /**
-     * @addtogroup voodoo_core_null Null Implementations
-     * @ingroup voodoo_core
-     * @{
-     */
-
-    /**
-     * Voodoo Shader null adapter implementation. Requires no graphics API and does not call core methods, simply
-     * returning true or nullptr for methods. Does not perform logging or parameter validation.
-     *
-     * @clsid e6f3129a-05af-11e1-9e05-005056c00008
-     */
-    VOODOO_CLASS(VSAdapter, IAdapter, ({0x9A, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+        * @par ClassId
+        *      f84ac3c2-073f-11e1-83d4-005056c00008
+        */
+    VOODOO_CLASS(VSTextureDX9, ITexture, ({0xC2, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSAdapter(ICore * pCore);
-        ~VSAdapter();
+        VSTextureDX9(_In_ ICore * pCore, _In_ String name, _In_ IDirect3DTexture9 * pTexture);
+        ~VSTextureDX9();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -51,25 +49,17 @@ namespace VoodooShader
         VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
-        VOODOO_METHOD(SetEffect)(_In_ IEffect * const pEffect);
-        VOODOO_METHOD_(IEffect *, GetEffect)() CONST;
-        VOODOO_METHOD(ResetEffect)();
-
-        VOODOO_METHOD(SetPass)(_In_ IPass * const pPass);
-        VOODOO_METHOD_(IPass *, GetPass)() CONST;
-        VOODOO_METHOD(ResetPass)();
-
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc desc);
-        VOODOO_METHOD(LoadTexture)(_In_ IImage * const pFile, _In_ const TextureRegion region, _Inout_ ITexture * const pTexture);
-        VOODOO_METHOD(BindTexture)(_In_ IParameter * const pParam, _In_opt_ ITexture * const pTexture);
-
-        VOODOO_METHOD(DrawGeometry)(_In_ const uint32_t offset, _In_ const uint32_t count, _In_ void * const pData, _In_ const VertexFlags flags);
+        VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
 
     private:
+        void GetTexDesc();
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
+        String m_Name;
+
+        IDirect3DTexture9 * m_Texture;
+        IDirect3DSurface9 * m_Surface;
+        TextureDesc m_Desc;
     };
-    /**
-     * @}
-     */
 }

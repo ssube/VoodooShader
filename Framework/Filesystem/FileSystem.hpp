@@ -187,7 +187,7 @@ namespace VoodooShader
              * @return The number of bytes retrieved (or, if @p buffer is nullptr, the number that would be retrieved).
              *
              * @warning Due to limitations in this library (or DevIL, not sure which), the only texture formats this
-             *      function can convert into are @ref TF_RGB8, @ref TF_RGBA8, @ref TF_RGBA16F and @ref TF_RGBA32F. Others
+             *      function can convert into are @ref VSFmtRGB8, @ref VSFmtRGBA8, @ref VSFmtRGBA16F and @ref VSFmtRGBA32F. Others
              *      are not supported and will cause this function to throw.
              *
              * @note This can convert data between most formats, so the format given in @p desc will be the returned format.

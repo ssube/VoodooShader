@@ -96,7 +96,7 @@ namespace VoodooShader
         return count;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSModule::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSModule::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
@@ -107,15 +107,15 @@ namespace VoodooShader
         {
             if (refid == IID_IObject)
             {
-                *ppOut = static_cast<const IObject*>(this);
+                *ppOut = static_cast<IObject*>(this);
             }
             else if (refid == IID_IModule)
             {
-                *ppOut = static_cast<const IModule*>(this);
+                *ppOut = static_cast<IModule*>(this);
             }
             else if (refid == CLSID_VSModule)
             {
-                *ppOut = static_cast<const VSModule*>(this);
+                *ppOut = static_cast<VSModule*>(this);
             }
             else
             {

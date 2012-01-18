@@ -19,8 +19,6 @@
  */
 #pragma once
 
-#include <easyhook.h>
-
 #define VOODOO_IMPORT
 #define VOODOO_NO_PUGIXML
 #include "VoodooFramework.hpp"
@@ -35,7 +33,6 @@ namespace VoodooShader
      */
     namespace EasyHook
     {
-        typedef std::map<String, TRACED_HOOK_HANDLE> HookMap;
 
         const Version * VOODOO_CALLTYPE API_ModuleVersion();
         const uint32_t  VOODOO_CALLTYPE API_ClassCount();

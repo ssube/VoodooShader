@@ -33,7 +33,7 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
 
     DisableThreadLibraryCalls(hinstDLL);
 
-    if (fdwReason == DLL_PROCESS_ATTACH)
+    if (fdwReason == DVSLog_PROCESS_ATTACH)
     {
         gHookLoader = hinstDLL;
     }

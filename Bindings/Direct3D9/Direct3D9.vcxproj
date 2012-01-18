@@ -10,9 +10,30 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Voodoo_D3D9.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Voodoo_D3D9.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="VSEffectDX9.hpp" />
+    <ClInclude Include="VSParameterDX9.hpp" />
+    <ClInclude Include="VSPassDX9.hpp" />
+    <ClInclude Include="VSTechniqueDX9.hpp" />
+    <ClInclude Include="VSTextureDX9.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="VSEffectDX9.cpp" />
+    <ClCompile Include="VSParameterDX9.cpp" />
+    <ClCompile Include="VSPassDX9.cpp" />
+    <ClCompile Include="VSTechniqueDX9.cpp" />
+    <ClCompile Include="VSTextureDX9.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>Voodoo_Core</ProjectName>
-    <ProjectGuid>{A5C09646-DA38-4869-82C3-11A66D706C43}</ProjectGuid>
+    <ProjectName>Voodoo_D3D9</ProjectName>
+    <ProjectGuid>{9BC48304-CACF-47DE-B667-9A6CC6B56B25}</ProjectGuid>
     <RootNamespace>Framework</RootNamespace>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
@@ -42,10 +63,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(BoostInclude);$(DevILInclude);$(EasyHookInclude);$(PugiXmlInclude);$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(BoostLib);$(DevILLib);$(EasyHookLib);$(PugiXmlLib);$(LibraryPath)</LibraryPath>
-    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(BoostInclude);$(DevILInclude);$(EasyHookInclude);$(PugiXmlInclude);$(IncludePath)</IncludePath>
-    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(BoostLib);$(DevILLib);$(EasyHookLib);$(PugiXmlLib);$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(CoreInclude);$(BoostInclude);$(DevILInclude);$(DXInclude);$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(CoreLib);$(BoostLib);$(DevILLib);$(DXLib);$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(CoreInclude);$(BoostInclude);$(DevILInclude);$(DXInclude);$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(CoreLib);$(BoostLib);$(DevILLib);$(DXLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -56,7 +77,7 @@
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);d3dx9.lib;shell32.lib;shlwapi.lib;pugixml_d.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Voodoo_D3D9.def</ModuleDefinitionFile>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -72,78 +93,12 @@
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies);d3dx9.lib;shell32.lib;shlwapi.lib;pugixml.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Voodoo_D3D9.def</ModuleDefinitionFile>
     </Link>
     <PreBuildEvent>
       <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(SolutionDir)\ "</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Converter.cpp" />
-    <ClCompile Include="Exception.cpp" />
-    <ClCompile Include="Exports.cpp" />
-    <ClCompile Include="Regex.cpp" />
-    <ClCompile Include="Format.cpp" />
-    <ClCompile Include="String.cpp" />
-    <ClCompile Include="VSCore.cpp" />
-    <ClCompile Include="VSFilesystem.cpp" />
-    <ClCompile Include="VSHookManager.cpp" />
-    <ClCompile Include="VSLogger.cpp" />
-    <ClCompile Include="VSModule.cpp" />
-    <ClCompile Include="VSModuleManager.cpp" />
-    <ClCompile Include="VSParser.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="IBinding.hpp" />
-    <ClInclude Include="Stream.hpp" />
-    <ClInclude Include="VoodooDocs.hpp" />
-    <ClInclude Include="VoodooTypes.hpp" />
-    <ClInclude Include="ICore.hpp" />
-    <ClInclude Include="IFile.hpp" />
-    <ClInclude Include="IFileSystem.hpp" />
-    <ClInclude Include="IHookManager.hpp" />
-    <ClInclude Include="ILogger.hpp" />
-    <ClInclude Include="IModule.hpp" />
-    <ClInclude Include="IModuleManager.hpp" />
-    <ClInclude Include="IObject.hpp" />
-    <ClInclude Include="IParameter.hpp" />
-    <ClInclude Include="IParser.hpp" />
-    <ClInclude Include="IPass.hpp" />
-    <ClInclude Include="IResource.hpp" />
-    <ClInclude Include="IEffect.hpp" />
-    <ClInclude Include="ITechnique.hpp" />
-    <ClInclude Include="ITexture.hpp" />
-    <ClInclude Include="VoodooDebug.hpp" />
-    <ClInclude Include="VSCore.hpp" />
-    <ClInclude Include="VSFilesystem.hpp" />
-    <ClInclude Include="VSHookManager.hpp" />
-    <ClInclude Include="VSLogger.hpp" />
-    <ClInclude Include="VSModule.hpp" />
-    <ClInclude Include="VSModuleManager.hpp" />
-    <ClInclude Include="VSParser.hpp" />
-    <ClInclude Include="Converter.hpp" />
-    <ClInclude Include="Exception.hpp" />
-    <ClInclude Include="VoodooInternal.hpp" />
-    <ClInclude Include="Format.hpp" />
-    <ClInclude Include="Regex.hpp" />
-    <ClInclude Include="String.hpp" />
-    <ClInclude Include="VoodooVersion.hpp" />
-    <ClInclude Include="BuildVersion.hpp" />
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Voodoo_Core.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Docs_Code.dox" />
-    <None Include="Docs_Graphics.dox" />
-    <None Include="Docs_License.dox" />
-    <None Include="Docs_MainPage.dox" />
-    <None Include="Docs_Tutorials.dox" />
-    <None Include="Support.inl" />
-    <None Include="VoodooFramework.hpp" />
-    <None Include="Voodoo_Core.def" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

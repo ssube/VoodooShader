@@ -36,7 +36,7 @@ namespace VoodooShader
         {
             gpVoodooLogger->LogMessage
             (
-                LL_ModDebug, VOODOO_DX89_NAME,
+                VSLog_ModDebug, VOODOO_DX89_NAME,
                 Format("CVoodoo3DTexture8::CVoodoo3DTexture8(%1%, %2%) == %3%") << pDevice << pTexture << this
             );
         }

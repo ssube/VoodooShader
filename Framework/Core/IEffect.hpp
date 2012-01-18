@@ -55,7 +55,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -66,6 +66,44 @@ namespace VoodooShader
         VOODOO_METHOD_(String, GetName)() CONST;
         VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+        /**
+         * @}
+         * @name Effect Methods
+         * @{
+         */
+        /**
+         * Binds this effect to the hardware, capturing state and downloading parameters as needed. The currently active
+         * technique will be used.
+         * 
+         * @param   pPassCount  A uint32_t to be filled with the number of passes needed to render the full effect.
+         * @param   restore     If true, the effect will save hardware states, reset the device to defaults, and later 
+         *                      restore the original states when the effect is unbound.
+         * 
+         * @note Passes from an effect must not be used in IAdapter::SetPass until the effect has been set. When desired
+         *      passes have been used and reset, the effect must be reset. Failing to reset the effect may cause unwanted
+         *      states for future draw calls.
+         */
+        VOODOO_METHOD(SetEffect)(_Out_ uint32_t * pPassCount, bool restore = true) PURE;
+        /**
+         * Reset this effect, unbinding it from hardware and resetting states if needed.
+         */
+        VOODOO_METHOD(ResetEffect)() PURE;
+        /**
+         * Binds a pass from the active technique to the hardware, settings states as needed. The shaders to be bound
+         * depend on the API and flags given.
+         *
+         * @param   passIndex   The index of the pass to set.
+         * @param   stages      A mask limiting which shader stages to use. This can be used to disable vertex shaders for
+         *                      post-processing or other effects.
+         *
+         * @note Each call to SetPass must have a corresponding call to ResetPass.
+         */
+        VOODOO_METHOD(SetPass)(_In_ const uint32_t passIndex, ShaderStage stages = VSStage_All) PURE;
+        /**
+         * Resets the state of the adapter and unbinds the pass. This may trigger state reset or texture copying, so it is
+         * required for proper shader handling.
+         */
+        VOODOO_METHOD(ResetPass)() PURE;
         /**
          * @}
          * @name Parameter Methods
@@ -87,7 +125,7 @@ namespace VoodooShader
          * Retrieve a technique from the shader by name. Most cases should use the default technique, but some specific
          * applications may want a particular technique.
          *
-         * @param index The index of the technique to get.
+         * @param   index   The index of the technique to get.
          */
         VOODOO_METHOD_(ITechnique *, GetTechnique)(const uint32_t index) CONST PURE;
         VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(const String & name) CONST PURE;

@@ -42,7 +42,7 @@ namespace VoodooShader
         /**
          * Add a reference to this object.
          *
-         * @return The new reference count.
+         * @return          The new reference count.
          *
          * @note This function is equivalent to COM's IUnknown::AddRef.
          */
@@ -50,7 +50,7 @@ namespace VoodooShader
         /**
          * Release a reference from this object.
          *
-         * @return The new reference count.
+         * @return          The new reference count.
          *
          * @note This function is equivalent to COM's IUnknown::Release.
          */
@@ -58,11 +58,10 @@ namespace VoodooShader
         /**
          * Performs type checking internally, then provides a pointer to this object with the desired interface if possible.
          *
-         * @param refid IID of the interface desired.
-         * @param ppOut A pointer to the new interface, passed as <code>void**</code>.
-         * @return Success of the cast or uuid-fill.
+         * @param   refid   IID of the interface desired.
+         * @param   ppOut   A pointer to the new interface, passed as <code>void**</code>.
          */
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_ const IObject ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_ IObject ** ppOut) PURE;
         /**
          * Get a string identifying this object. This must follow the form given in @ref voodoo_spec_iobject_tostring.
          *

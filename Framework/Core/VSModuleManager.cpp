@@ -60,7 +60,7 @@ namespace VoodooShader
         return count;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSModuleManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSModuleManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
@@ -71,15 +71,15 @@ namespace VoodooShader
         {
             if (refid == IID_IObject)
             {
-                *ppOut = static_cast<const IObject*>(this);
+                *ppOut = static_cast<IObject*>(this);
             }
             else if (refid == IID_IModuleManager)
             {
-                *ppOut = static_cast<const IModuleManager*>(this);
+                *ppOut = static_cast<IModuleManager*>(this);
             }
             else if (refid == CLSID_VSModuleManager)
             {
-                *ppOut = static_cast<const VSModuleManager*>(this);
+                *ppOut = static_cast<VSModuleManager*>(this);
             }
             else
             {
@@ -137,7 +137,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarning, VOODOO_CORE_NAME,
+                    VSLog_CoreWarning, VOODOO_CORE_NAME,
                     Format("No plugins found in directory '%1%'.") << path
                 );
 
@@ -147,7 +147,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    LL_CoreWarning, VOODOO_CORE_NAME, 
+                    VSLog_CoreWarning, VOODOO_CORE_NAME, 
                     Format("Error searching directory '%1%'.") << path
                 );
 
@@ -185,12 +185,12 @@ namespace VoodooShader
 
         ILoggerRef logger = m_Core->GetLogger();
 
-        String fullname = m_Core->GetParser()->Parse(filename, PF_PathCanon);
+        String fullname = m_Core->GetParser()->Parse(filename, VSParse_PathCanon);
 
         // Check for relative
         if (PathIsRelative(fullname.GetData()))
         {
-            fullname = m_Core->GetParser()->Parse(String(VSTR("$(path)\\")) + fullname, PF_PathCanon);
+            fullname = m_Core->GetParser()->Parse(String(VSTR("$(path)\\")) + fullname, VSParse_PathCanon);
         }
 
         // Check for already loaded
@@ -208,7 +208,7 @@ namespace VoodooShader
             {
                 logger->LogMessage
                 (
-                    LL_CoreError, VOODOO_CORE_NAME, 
+                    VSLog_CoreError, VOODOO_CORE_NAME, 
                     Format("Unable to load module '%1%'.") << filename
                 );
             }
@@ -223,7 +223,7 @@ namespace VoodooShader
         {
             if (logger)
             {
-                logger->LogMessage(LL_CoreError, VOODOO_CORE_NAME, Format("Null version returned by module '%1%'.") << fullname);
+                logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, Format("Null version returned by module '%1%'.") << fullname);
             }
             return VSFERR_INVALIDPARAMS;
         }
@@ -234,14 +234,14 @@ namespace VoodooShader
         {
             logger->LogMessage
             (
-                LL_CoreWarning, VOODOO_CORE_NAME,
+                VSLog_CoreWarning, VOODOO_CORE_NAME,
                 Format("Debug build mismatch with module '%1%'.") << moduleversion->Name
             );
         }
 
         if (logger)
         {
-            logger->LogMessage(LL_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << *module->ModuleVersion());
+            logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << *module->ModuleVersion());
         }
 
         int classCount = module->ClassCount();
@@ -325,7 +325,7 @@ namespace VoodooShader
                 {
                     logger->LogMessage
                     (
-                        LL_CoreError, VOODOO_CORE_NAME,
+                        VSLog_CoreError, VOODOO_CORE_NAME,
                         Format("Error creating instance of class %1%.") << clsid
                     );
                 }
@@ -339,7 +339,7 @@ namespace VoodooShader
             {
                 logger->LogMessage
                 (
-                    LL_CoreError, VOODOO_CORE_NAME, 
+                    VSLog_CoreError, VOODOO_CORE_NAME, 
                     Format("Class %1% not found.") << clsid
                 );
             }

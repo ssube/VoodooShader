@@ -44,7 +44,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -128,7 +128,7 @@ namespace VoodooShader
          *
          * @note When formatting log messages that do not need reused, it may be cleaner to do it inline:
          * @code
-         * pLogger->LogMessage(LL_Module | LL_Info, MODULE_NAME, Format("Hello %1%.") << "World");
+         * pLogger->LogMessage(VSLog_Module | VSLog_Info, MODULE_NAME, Format("Hello %1%.") << "World");
          * @endcode
          * This uses the Format class and implicit casts to String after the last argument is inserted.
          */

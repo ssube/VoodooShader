@@ -21,6 +21,8 @@
 
 #include "VoodooFramework.hpp"
 
+#include <easyhook.h>
+
 namespace VoodooShader
 {
     /**
@@ -38,13 +40,15 @@ namespace VoodooShader
      */
     VOODOO_CLASS(VSHookManager, IHookManager, ({0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
+        typedef std::map<String, TRACED_HOOK_HANDLE> HookMap;
+
     public:
         VSHookManager(_In_ ICore * pCore);
         ~VSHookManager();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut);
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
@@ -55,6 +59,11 @@ namespace VoodooShader
     private:
         mutable uint32_t m_Refs;
         ICore * m_Core;
+
+        HookMap m_Hooks;
+
+        unsigned long m_ThreadCount;
+        unsigned long * m_ThreadIDs;
     };
     /**
      * @}

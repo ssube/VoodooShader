@@ -58,7 +58,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSFileSystem::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSFileSystem::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -70,15 +70,15 @@ namespace VoodooShader
         {
             if (refid == IID_IObject)
             {
-                *ppOut = static_cast<const IObject*>(this);
+                *ppOut = static_cast<IObject*>(this);
             }
             else if (refid == IID_IFileSystem)
             {
-                *ppOut = static_cast<const IFileSystem*>(this);
+                *ppOut = static_cast<IFileSystem*>(this);
             }
             else if (refid == CLSID_VSFileSystem)
             {
-                *ppOut = static_cast<const VSFileSystem*>(this);
+                *ppOut = static_cast<VSFileSystem*>(this);
             }
             else
             {

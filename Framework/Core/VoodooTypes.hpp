@@ -53,49 +53,50 @@ namespace VoodooShader
      */
     enum TextureFormat : uint32_t
     {
-        TF_Unknown      = 0x0000,    /* !< Unknown texture format. */
+        VSFmt_Unknown      = 0x0000,    /* !< Unknown texture format. */
         // General texture formats
-        TF_RGB5         = 0x0101,    /* !< 5 bit RGB (1 bit X in D3D, may be R5G6B5 in OGL) */
-        TF_RGB5A1       = 0x0102,    /* !< 5 bit RGB, 1 bit alpha */
-        TF_RGB8         = 0x0103,    /* !< 8 bit RGB (8 bit X in D3D). Most common backbuffer format, common texture format. */
-        TF_RGBA8        = 0x0104,    /* !< 8 bit RGBA. Common texture format. */
-        TF_RGB10A2      = 0x0105,    /* !< 10 bit RGB, 2 bit A */
+        VSFmt_RGB5         = 0x0101,    /* !< 5 bit RGB (1 bit X in D3D, may be R5G6B5 in OGL) */
+        VSFmt_RGB5A1       = 0x0102,    /* !< 5 bit RGB, 1 bit alpha */
+        VSFmt_RGB8         = 0x0103,    /* !< 8 bit RGB (8 bit X in D3D). Most common backbuffer format, common texture format. */
+        VSFmt_RGBA8        = 0x0104,    /* !< 8 bit RGBA. Common texture format. */
+        VSFmt_RGB10A2      = 0x0105,    /* !< 10 bit RGB, 2 bit A */
         // Float texture formats
-        TF_RGBA16F      = 0x0201,    /* !< Half-precision RGBA. HDR format. */
-        TF_RGBA32F      = 0x0202,    /* !< Full-precision RGBA (float/single). HDR format. */
+        VSFmt_RGBA16F      = 0x0201,    /* !< Half-precision RGBA. HDR format. */
+        VSFmt_RGBA32F      = 0x0202,    /* !< Full-precision RGBA (float/single). HDR format. */
         // Depth texture formats
-        TF_D16          = 0x0401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
-        TF_D32          = 0x0402,    /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
+        VSFmt_D16          = 0x0401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
+        VSFmt_D32          = 0x0402,    /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
     };
 
     enum ParameterType : uint32_t
     {
-        PT_Unknown      = 0x00,     /* !< Unknown parameter category. */
-        PT_Bool         = 0x01,
-        PT_Int          = 0x02,
-        PT_Float        = 0x03,     /* !< float vector parameter (may have 1 to 4 components). */
-        PT_String       = 0x04,
-        PT_Texture      = 0x05,
-        PT_Texture1D    = 0x06,
-        PT_Texture2D    = 0x07,
-        PT_Texture3D    = 0x08,
-        PT_TextureCube  = 0x09,
-        PT_Sampler      = 0x0A,
-        PT_Sampler1D    = 0x0B,     /* !< Sampler parameter (may sample 1D to 3D textures). */
-        PT_Sampler2D    = 0x0C,
-        PT_Sampler3D    = 0x0D,
-        PT_SamplerCube  = 0x0E,
+        VSPT_Unknown      = 0x00,     /* !< Unknown parameter category. */
+        VSPT_Bool         = 0x01,
+        VSPT_Int          = 0x02,
+        VSPT_Float        = 0x03,     /* !< float vector parameter (may have 1 to 4 components). */
+        VSPT_String       = 0x04,
+        VSPT_Texture      = 0x05,
+        VSPT_Texture1D    = 0x06,
+        VSPT_Texture2D    = 0x07,
+        VSPT_Texture3D    = 0x08,
+        VSPT_TextureCube  = 0x09,
+        VSPT_Sampler      = 0x0A,
+        VSPT_Sampler1D    = 0x0B,     /* !< Sampler parameter (may sample 1D to 3D textures). */
+        VSPT_Sampler2D    = 0x0C,
+        VSPT_Sampler3D    = 0x0D,
+        VSPT_SamplerCube  = 0x0E,
     };
 
     enum ShaderStage : uint32_t
     {
-        SS_Unknown      = 0x00,     /* !< Unknown program stage */
-        SS_Vertex       = 0x01,     /* !< Vertex program stage (usually supported, see @ref programstages "program stages" for more info). */
-        SS_Pixel        = 0x02,     /* !< Fragment program stage (usually supported, see @ref programstages "program stages" for more info). */
-        SS_Geometry     = 0x03,     /* !< Geometry program stage (sometimes supported, see @ref programstages "program stages" for more info). */
-        SS_Domain       = 0x04,     /* !< Domain program stage (not always supported, see @ref programstages "program stages" for more info). */
-        SS_Hull         = 0x05,     /* !< Hull program stage (not always supported, see  @ref programstages "program stages" for more info). */
-        SS_Compute      = 0x06,     /* !< Compute program stage. Rarely supported. */
+        VSStage_Unknown      = 0x00,     /* !< Unknown stage */
+        VSStage_Vertex       = 0x01,     /* !< Vertex shader stage (usually supported, see @ref programstages "program stages" for more info). */
+        VSStage_Hull         = 0x02,     /* !< Hull shader stage (not always supported, see  @ref programstages "program stages" for more info). */
+        VSStage_Pixel        = 0x04,     /* !< Fragment shader stage (usually supported, see @ref programstages "program stages" for more info). */
+        VSStage_Domain       = 0x08,     /* !< Domain shader stage (not always supported, see @ref programstages "program stages" for more info). */
+        VSStage_Geometry     = 0x10,     /* !< Geometry shader stage (sometimes supported, see @ref programstages "program stages" for more info). */
+        VSStage_Compute      = 0x20,     /* !< Compute shader stage. Rarely supported. */
+        VSStage_All          = 0x3F,     /* !< All available shader stages. */
     };
 
     /**
@@ -125,6 +126,14 @@ namespace VoodooShader
         CF_DirectX10    = 0x2000,
         CF_DirectX11    = 0x4000,
         CF_OpenGL       = 0x8000,
+    };
+
+    enum TextureFlags : uint32_t
+    {
+        VSUse_Unknown   = 0x00,
+        VSUse_Target    = 0x01,
+        VSUse_AutoMip   = 0x02,
+        VSUse_Dynamic   = 0x04,
     };
 
     /**
@@ -179,7 +188,7 @@ namespace VoodooShader
      *
      * @code
      * LogLevel maskedLevel = level & storedLevel;
-     * if ( (maskedLevel & LL_Origin) && (maskedLevel & LL_Severity) )
+     * if ( (maskedLevel & VSLog_Origin) && (maskedLevel & VSLog_Severity) )
      * {
      *     // Log message
      * }
@@ -187,42 +196,42 @@ namespace VoodooShader
      */
     enum LogLevel : uint32_t
     {
-        LL_Unknown      = 0x00,
+        VSLog_Unknown      = 0x00,
         // Severity
-        LL_Debug        = 0x0001,   /* !< Verbose debugging message. May cause significant performance hit. */
-        LL_Info         = 0x0002,   /* !< General information. */
-        LL_Warning      = 0x0004,   /* !< Potential problem, not fatal within program or function scope. */
-        LL_Error        = 0x0008,   /* !< Problem, fatal at function scope but not program. */
+        VSLog_Debug        = 0x0001,   /* !< Verbose debugging message. May cause significant performance hit. */
+        VSLog_Info         = 0x0002,   /* !< General information. */
+        VSLog_Warning      = 0x0004,   /* !< Potential problem, not fatal within program or function scope. */
+        VSLog_Error        = 0x0008,   /* !< Problem, fatal at function scope but not program. */
         // Source
-        LL_External     = 0x0100,   /* !< Completely external source (network, pipe, IPC, etc). */
-        LL_Module       = 0x0200,   /* !< Voodoo plugin module. Module must conform to Voodoo plugin API. */
-        LL_Core         = 0x0400,   /* !< Voodoo core module. Must not be used elsewhere. */
-        LL_System       = 0x0800,   /* !< System message (OS message, system API error, STL exception, etc). */
+        VSLog_External     = 0x0100,   /* !< Completely external source (network, pipe, IPC, etc). */
+        VSLog_Module       = 0x0200,   /* !< Voodoo plugin module. Module must conform to Voodoo plugin API. */
+        VSLog_Core         = 0x0400,   /* !< Voodoo core module. Must not be used elsewhere. */
+        VSLog_System       = 0x0800,   /* !< System message (OS message, system API error, STL exception, etc). */
         // Flags
-        LL_Critical     = 0x010000, /* !< Special flag: message must be logged, regardless of settings. Typically for notices. */
+        VSLog_Critical     = 0x010000, /* !< Special flag: message must be logged, regardless of settings. Typically for notices. */
         // Compound
-        LL_Exception    = LL_Debug | LL_Critical, /* !< Caught exception from Voodoo or other code. */
-        LL_Notice       = LL_Info  | LL_Critical, /* !< Important info (module loaded, copyright banner, etc). */
+        VSLog_Exception    = VSLog_Debug | VSLog_Critical, /* !< Caught exception from Voodoo or other code. */
+        VSLog_Notice       = VSLog_Info  | VSLog_Critical, /* !< Important info (module loaded, copyright banner, etc). */
         // User
-        LL_CoreDebug    = LL_Core | LL_Debug,
-        LL_CoreException= LL_Core | LL_Exception,
-        LL_CoreInfo     = LL_Core | LL_Info,
-        LL_CoreNotice   = LL_Core | LL_Notice,
-        LL_CoreWarning  = LL_Core | LL_Warning,
-        LL_CoreError    = LL_Core | LL_Error,
-        LL_ModDebug     = LL_Module | LL_Debug,
-        LL_ModException = LL_Module | LL_Exception,
-        LL_ModInfo      = LL_Module | LL_Info,
-        LL_ModNotice    = LL_Module | LL_Notice,
-        LL_ModWarning   = LL_Module | LL_Warning,
-        LL_ModError     = LL_Module | LL_Error,
+        VSLog_CoreDebug    = VSLog_Core | VSLog_Debug,
+        VSLog_CoreException= VSLog_Core | VSLog_Exception,
+        VSLog_CoreInfo     = VSLog_Core | VSLog_Info,
+        VSLog_CoreNotice   = VSLog_Core | VSLog_Notice,
+        VSLog_CoreWarning  = VSLog_Core | VSLog_Warning,
+        VSLog_CoreError    = VSLog_Core | VSLog_Error,
+        VSLog_ModDebug     = VSLog_Module | VSLog_Debug,
+        VSLog_ModException = VSLog_Module | VSLog_Exception,
+        VSLog_ModInfo      = VSLog_Module | VSLog_Info,
+        VSLog_ModNotice    = VSLog_Module | VSLog_Notice,
+        VSLog_ModWarning   = VSLog_Module | VSLog_Warning,
+        VSLog_ModError     = VSLog_Module | VSLog_Error,
         // Masks
-        LL_Severity     = LL_Debug | LL_Info | LL_Warning | LL_Error,
-        LL_Flags        = LL_Critical,
-        LL_Origin       = LL_External | LL_Module | LL_Core | LL_System,
+        VSLog_Severity     = VSLog_Debug | VSLog_Info | VSLog_Warning | VSLog_Error,
+        VSLog_Flags        = VSLog_Critical,
+        VSLog_Origin       = VSLog_External | VSLog_Module | VSLog_Core | VSLog_System,
         // Other
-        LL_Default      = LL_Info | LL_Warning | LL_Module | LL_Core | LL_System,
-        LL_All          = LL_Severity | LL_Origin | LL_Flags
+        VSLog_Default      = VSLog_Info | VSLog_Warning | VSLog_Module | VSLog_Core | VSLog_System,
+        VSLog_All          = VSLog_Severity | VSLog_Origin | VSLog_Flags
     };
 
     enum LogFlags  : uint32_t
@@ -236,23 +245,23 @@ namespace VoodooShader
      */
     enum ParseFlags : uint32_t
     {
-        PF_None         = 0x00,
+        VSParse_None         = 0x00,
 
-        PF_SlashSingle  = 0x0001,   /* !< Compress any consecutive slashes into one. */
-        PF_SlashDouble  = 0x0002,   /* !< Double any slashes found. */
-        PF_SlashEscape  = 0x0004,   /* !< Prefix any slashes with a backslash. */
-        PF_SlashOnly    = 0x0010,   /* !< Replace all slashes with forward slashes. */
-        PF_SlashBack    = 0x0020,   /* !< Replace all slashes with back slashes. */
-        PF_SlashTrail   = 0x0100,   /* !< Append a slash to the end of the string. */
+        VSParse_SlashSingle  = 0x0001,   /* !< Compress any consecutive slashes into one. */
+        VSParse_SlashDouble  = 0x0002,   /* !< Double any slashes found. */
+        VSParse_SlashEscape  = 0x0004,   /* !< Prefix any slashes with a backslash. */
+        VSParse_SlashOnly    = 0x0010,   /* !< Replace all slashes with forward slashes. */
+        VSParse_SlashBack    = 0x0020,   /* !< Replace all slashes with back slashes. */
+        VSParse_SlashTrail   = 0x0100,   /* !< Append a slash to the end of the string. */
 
-        PF_PathRoot     = 0x001000, /* !< Isolate the root of a path (eg "C:\file.txt" becomes "C:"). */
-        PF_PathOnly     = 0x002000, /* !< Strip a trailing filename, if one is present (eg "C:\dir\file.txt" becomes "C:\dir"). */
-        PF_PathFile     = 0x004000, /* !< Strip a path, leaving only filename or last element (eg "C:\dir\file.txt" becomes "file.txt", and "C:\dir\other" becomes "other"). */
-        PF_PathExt      = 0x008000, /* !< Isolate the file extension, if one is present (eg "C:\dir\file.txt" becomes "txt"). */
-        PF_PathCanon    = 0x010000, /* !< Canonicalize the path (parse any relative tokens, eg "C:\dir\..\file.txt" becomes "C:\file.txt"). */
+        VSParse_PathRoot     = 0x001000, /* !< Isolate the root of a path (eg "C:\file.txt" becomes "C:"). */
+        VSParse_PathOnly     = 0x002000, /* !< Strip a trailing filename, if one is present (eg "C:\dir\file.txt" becomes "C:\dir"). */
+        VSParse_PathFile     = 0x004000, /* !< Strip a path, leaving only filename or last element (eg "C:\dir\file.txt" becomes "file.txt", and "C:\dir\other" becomes "other"). */
+        VSParse_PathExt      = 0x008000, /* !< Isolate the file extension, if one is present (eg "C:\dir\file.txt" becomes "txt"). */
+        VSParse_PathCanon    = 0x010000, /* !< Canonicalize the path (parse any relative tokens, eg "C:\dir\..\file.txt" becomes "C:\file.txt"). */
 
-        PF_SlashFlags   = 0x00000137,
-        PF_PathFlags    = 0x000FF000,
+        VSParse_SlashFlags   = 0x00000137,
+        VSParse_PathFlags    = 0x000FF000,
     };
 
     enum VariableType  : uint32_t
@@ -399,6 +408,18 @@ namespace VoodooShader
         ValType X, Y, Z, W;
     };
 
+    template <typename ValType>
+    struct Rectangle
+    {
+        Vector2<ValType> Min, Max;
+    };
+
+    template <typename ValType>
+    struct Volume
+    {
+        Vector3<ValType> Min, Max;
+    };
+
     typedef Vector1<int8_t>     Byte1;
     typedef Vector2<int8_t>     Byte2;
     typedef Vector3<int8_t>     Byte3;
@@ -431,6 +452,8 @@ namespace VoodooShader
     typedef Vector2<double>     Double2;
     typedef Vector3<double>     Double3;
     typedef Vector4<double>     Double4;
+    typedef Rectangle<uint32_t> Rect;
+    typedef Volume<uint32_t>    Box;
     /**
      * @}
      */
@@ -446,13 +469,12 @@ namespace VoodooShader
      * @defgroup voodoo_interfaces Interfaces
      * @{
      */
-    class IAdapter;
+    class IBinding;
     class ICore;
     class IEffect;
     class IFile;
     class IFileSystem;
     class IHookManager;
-    class IImage;
     class ILogger;
     class IModule;
     class IModuleManager;
@@ -497,13 +519,12 @@ namespace VoodooShader
     void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
     void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
 
-    typedef boost::intrusive_ptr<IAdapter>       IAdapterRef;
+    typedef boost::intrusive_ptr<IBinding>       IBindingRef;
     typedef boost::intrusive_ptr<ICore>          ICoreRef;
     typedef boost::intrusive_ptr<IEffect>        IEffectRef;
     typedef boost::intrusive_ptr<IFile>          IFileRef;
     typedef boost::intrusive_ptr<IFileSystem>    IFileSystemRef;
     typedef boost::intrusive_ptr<IHookManager>   IHookManagerRef;
-    typedef boost::intrusive_ptr<IImage>         IImageRef;
     typedef boost::intrusive_ptr<ILogger>        ILoggerRef;
     typedef boost::intrusive_ptr<IModule>        IModuleRef;
     typedef boost::intrusive_ptr<IModuleManager> IModuleManagerRef;
@@ -659,8 +680,8 @@ namespace VoodooShader
     struct TextureDesc
     {
         UInt3         Size;
-        bool          Mipmaps;
-        bool          RenderTarget;
+        uint32_t      Levels;
+        TextureFlags  Usage;
         TextureFormat Format;
     };
     /**

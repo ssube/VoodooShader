@@ -36,7 +36,7 @@ namespace VoodooShader
         friend class VSCompilerDX9;
 
     public:
-        VSEffectDX9(_Pre_notnull_ IFile * pFile, CompileFlags flags);
+        VSEffectDX9(_Pre_notnuVSLog_ IFile * pFile, CompileFlags flags);
         ~VSEffectDX9();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;

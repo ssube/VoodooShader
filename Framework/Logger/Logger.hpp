@@ -130,9 +130,6 @@ namespace VoodooShader
             mutable uint32_t m_Refs;
             ICore * m_Core;
             
-            std::wfstream m_LogFile;
-            LogLevel m_Filter;
-            LogFlags m_Flags;
         };
     }
     /**

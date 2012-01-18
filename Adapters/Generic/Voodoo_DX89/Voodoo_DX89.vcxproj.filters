@@ -25,9 +25,6 @@
     <ClCompile Include="CVoodoo3DSurface8.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="DX9_Texture.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp">
@@ -64,9 +61,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="CVoodoo3DTexture8.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="DX9_Texture.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

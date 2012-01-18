@@ -25,9 +25,6 @@
     <ClCompile Include="VSCore.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="VSAdapter.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="VSFilesystem.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
@@ -43,27 +40,12 @@
     <ClCompile Include="Format.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="VSParameterDX9.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
-    <ClCompile Include="VSPassDX9.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
-    <ClCompile Include="VSTechniqueDX9.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
-    <ClCompile Include="VSEffectDX9.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="ICore.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IAdapter.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="IFilesystem.hpp">
@@ -108,9 +90,6 @@
     <ClInclude Include="Converter.hpp">
       <Filter>Headers\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="VSAdapter.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
     <ClInclude Include="VSCore.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
@@ -130,9 +109,6 @@
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="IFile.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IImage.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="IModuleManager.hpp">
@@ -168,20 +144,11 @@
     <ClInclude Include="IEffect.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="VSEffectDX9.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
-    <ClInclude Include="VSTechniqueDX9.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
-    <ClInclude Include="VSPassDX9.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
-    <ClInclude Include="VSParameterDX9.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
     <ClInclude Include="Stream.hpp">
       <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="IBinding.hpp">
+      <Filter>Headers\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

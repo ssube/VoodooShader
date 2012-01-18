@@ -161,7 +161,7 @@ namespace VoodooShader
                 HRESULT hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_Frame0, nullptr, D3DTEXF_NONE);
                 if (FAILED(hr))
                 {
-                    logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
+                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                 }
 
                 adapter->SetEffect(testEffect);
@@ -175,7 +175,7 @@ namespace VoodooShader
                         hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_Pass0, nullptr, D3DTEXF_NONE);
                         if (FAILED(hr))
                         {
-                            logger->LogMessage(LL_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
+                            logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                         }
 
                         adapter->SetPass(pass.get());

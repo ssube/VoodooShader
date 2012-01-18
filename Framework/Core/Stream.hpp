@@ -107,15 +107,15 @@ namespace VoodooShader
     template<typename Elem>
     std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const TextureDesc & v)
     {
-        return out << VSTR("TextureDesc(") << v.Format << VSTR(", ") << v.Mipmaps << VSTR(", ") <<
-              v.RenderTarget << VSTR(", ") << v.Size << VSTR(")");
+        return out << VSTR("TextureDesc(") << v.Format << VSTR(", ") << v.Levels << VSTR(", ") <<
+              v.Size << VSTR(", ") << v.Usage << VSTR(")");
     }
 
     template<typename Elem>
     std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const TextureRegion & v)
     {
-        return out << VSTR("TextureRegion(") << v.Format << VSTR(", ") << v.Mipmaps << VSTR(", ") <<
-              v.RenderTarget << VSTR(", ") << v.Size << VSTR(", ") << v.Origin << VSTR(")");
+        return out << VSTR("TextureRegion(") << v.Format << VSTR(", ") << v.Levels << VSTR(", ") <<
+              v.Size << VSTR(", ") << v.Usage << VSTR(", ") << v.Origin << VSTR(")");
     }
 
     template<typename Elem>

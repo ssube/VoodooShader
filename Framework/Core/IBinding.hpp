@@ -27,14 +27,18 @@ namespace VoodooShader
      * @addtogroup voodoo_interfaces
      * @{
      */
+
     /**
-     * @class IResource
+     * @class IBinding
      *
-     * Describes a graphics API-backed resource, managed by the core or adapter.
-     *
-     * @iid     e6f31297-05af-11e1-9e05-005056c00008
+     * Hardware API binding interface. Provides a consistent but abstracted view of the API, hidden from the user and 
+     * handled by the core.
+     * 
+     * @iid e6f31288-05af-11e1-9e05-005056c00008
+     * 
+     * @warning The IBinding interface is
      */
-    VOODOO_INTERFACE(IResource, IObject, ({0x97, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    VOODOO_INTERFACE(IBinding, IObject, ({0x88, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
         /**
@@ -48,35 +52,26 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name Effect Methods
+         * @{
          */
+        VOODOO_METHOD_(IEffect *, CreateEffect)(CONST String & source, CompileFlags flags) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST String & filename, CompileFlags flags) PURE;
         /**
-         * Returns the name of the object, as defined by the object and resource type. This may be texture
-         * name or filename, shader filename, technique name, pass name, etc.
+         * @}
+         * @name Parameter Methods
+         * @{
          */
-        VOODOO_METHOD_(String, GetName)() CONST PURE;
+        VOODOO_METHOD_(IParameter *, CreateParameter)(CONST String & name, ParameterDesc desc) PURE;
         /**
-         * Returns a resource property, an API-defined variant stored in the resource.
-         *
-         * @param propid    The Uuid of the tag to get.
-         * @param pValue    The to be filled.
-         * 
-         * @note This is equivalent to IDirect3DResource*::GetPrivateData.
+         * @}
+         * @name Texture Methods
+         * @{
          */
-        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD_(ITexture *, CreateTexture)(CONST String & name, TextureDesc desc) PURE;
+        VOODOO_METHOD_(ITexture *, LoadTexture)(CONST String & filename) PURE;
         /**
-         * Sets a resource property.
-         * 
-         * @param propid    The Uuid of the tag to set.
-         * @param pValue    The value to store in the tag.
-         * 
-         * @note In some cases, the resource may need to reply with an updated value. If so, it will return
-         *      @a VSFOK_PROPERTYCHANGED and update @a pValue with the new data.
-         *      
-         * @note This is equivalent to IDirect3DResource*::SetPrivateData.
+         * @}
          */
-        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue) PURE;
     };
-    /**
-     * @}
-     */
 }

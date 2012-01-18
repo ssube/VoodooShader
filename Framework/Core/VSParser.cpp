@@ -66,7 +66,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
+    VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -78,15 +78,15 @@ namespace VoodooShader
         {
             if (refid == IID_IObject)
             {
-                *ppOut = static_cast<const IObject*>(this);
+                *ppOut = static_cast<IObject*>(this);
             }
             else if (refid == IID_IParser)
             {
-                *ppOut = static_cast<const IParser*>(this);
+                *ppOut = static_cast<IParser*>(this);
             }
             else if (refid == CLSID_VSParser)
             {
-                *ppOut = static_cast<const VSParser*>(this);
+                *ppOut = static_cast<VSParser*>(this);
             }
             else
             {
@@ -123,7 +123,7 @@ namespace VoodooShader
         {
             Format msg(VSTR("Adding variable '%1%' with value '%2%'."));
             msg << name << value;
-            logger->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, msg);
+            logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
         }
 
         String finalname = this->Parse(name);        
@@ -141,7 +141,7 @@ namespace VoodooShader
                 {
                     Format msg(VSTR("Unable to add duplicate variable '%1%' (system variable already exists)."));
                     msg << finalname;
-                    logger->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, msg);
+                    logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, msg);
                 }
             }
             else
@@ -161,10 +161,10 @@ namespace VoodooShader
         {
             Format msg(VSTR("Removing variable '%1%'."));
             msg << name;
-            m_Core->GetLogger()->LogMessage(LL_CoreDebug, VOODOO_CORE_NAME, msg);
+            m_Core->GetLogger()->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
         }
 
-        String finalname = this->Parse(name, PF_None);
+        String finalname = this->Parse(name, VSParse_None);
         VariableMap::iterator varIter = m_Variables.find(finalname);
 
         if (varIter != m_Variables.end() && varIter->second.second != VT_System)
@@ -191,7 +191,7 @@ namespace VoodooShader
         {
             logger->LogMessage
             (
-                LL_CoreDebug, VOODOO_CORE_NAME, 
+                VSLog_CoreDebug, VOODOO_CORE_NAME, 
                 Format(VSTR("Parsing string '%1%' (%2%).")) << input << flags
             );
         }
@@ -307,7 +307,7 @@ namespace VoodooShader
 
                         if (logger)
                         {
-                            logger->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, 
+                            logger->LogMessage(VSLog_CoreInfo, VOODOO_CORE_NAME, 
                                 Format("Variable local flags of %1% found, merged %2% with original %3%, flags set to %4%.") << newFlags << merge << flags << localFlags);
                         }
                     } catch (std::exception & exc)
@@ -330,7 +330,7 @@ namespace VoodooShader
                 newvalue = this->ParseStringRaw(newvalue, localFlags, ++depth, state);
 
                 varname = varname.Substr(0, statepos);
-                varname = this->ParseStringRaw(varname, PF_None, ++depth, state);
+                varname = this->ParseStringRaw(varname, VSParse_None, ++depth, state);
 
                 state[varname] = newvalue;
 
@@ -343,7 +343,7 @@ namespace VoodooShader
             }
 
             // Properly format the variable name
-            varname = this->ParseStringRaw(varname, PF_None, ++depth, state).ToLower();
+            varname = this->ParseStringRaw(varname, VSParse_None, ++depth, state).ToLower();
 
             // Lookup and replace the variable
             bool foundvar = true;
@@ -397,30 +397,30 @@ namespace VoodooShader
         }
 
         // Handle slash replacement
-        if (flags == PF_None)
+        if (flags == VSParse_None)
         {
             return iteration;
         }
 
-        if (flags & PF_SlashFlags)
+        if (flags & VSParse_SlashFlags)
         {
-            bool singleslash = (flags & PF_SlashSingle) == PF_SlashSingle;
-            bool doubleslash = (flags & PF_SlashDouble) == PF_SlashDouble;
+            bool singleslash = (flags & VSParse_SlashSingle) == VSParse_SlashSingle;
+            bool doubleslash = (flags & VSParse_SlashDouble) == VSParse_SlashDouble;
             bool prevslash = false;
             bool slashrewrite = false;
             char slashchar = VSTR(' ');
 
-            if (flags & PF_SlashTrail)
+            if (flags & VSParse_SlashTrail)
             {
                 iteration += VSTR("\\");
             }
 
-            if (flags & PF_SlashOnly)
+            if (flags & VSParse_SlashOnly)
             {
                 slashrewrite = true;
                 slashchar = VSTR('/');
             }
-            else if (flags & PF_SlashBack)
+            else if (flags & VSParse_SlashBack)
             {
                 slashrewrite = true;
                 slashchar = VSTR('\\');
@@ -463,9 +463,9 @@ namespace VoodooShader
             iteration = output.str();
         }
 
-        if (flags & PF_PathFlags)
+        if (flags & VSParse_PathFlags)
         {
-            if (flags & PF_PathCanon)
+            if (flags & VSParse_PathCanon)
             {
                 LPWSTR buffer = new TCHAR[MAX_PATH];
                 if (PathCanonicalize(buffer, iteration.GetData()) == TRUE)
@@ -475,7 +475,7 @@ namespace VoodooShader
                 delete[] buffer;
             }
 
-            if (flags & PF_PathRoot)
+            if (flags & VSParse_PathRoot)
             {
                 LPWSTR buffer = new TCHAR[MAX_PATH];
                 CopyMemory(buffer, iteration.GetData(), iteration.GetLength());
@@ -487,7 +487,7 @@ namespace VoodooShader
 
                 delete[] buffer;
             }
-            else if (flags & PF_PathOnly)
+            else if (flags & VSParse_PathOnly)
             {
                 LPWSTR buffer = new TCHAR[iteration.GetLength()];
                 CopyMemory(buffer, iteration.GetData(), iteration.GetLength());
@@ -499,11 +499,11 @@ namespace VoodooShader
 
                 delete[] buffer;
             }
-            else if (flags & PF_PathFile)
+            else if (flags & VSParse_PathFile)
             {
                 iteration = PathFindFileName(iteration.GetData());
             }
-            else if (flags & PF_PathExt)
+            else if (flags & VSParse_PathExt)
             {
                 iteration = PathFindExtension(iteration.GetData());
             }
@@ -513,7 +513,7 @@ namespace VoodooShader
         {
             logger->LogMessage
             (
-                LL_CoreDebug, VOODOO_CORE_NAME,
+                VSLog_CoreDebug, VOODOO_CORE_NAME,
                 Format(VSTR("Returning string '%1%' from parser.")) << iteration
             );
         }

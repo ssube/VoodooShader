@@ -48,7 +48,7 @@
     { \
         if (logger)\
         {\
-            logger->LogMessage(LL_Debug | LL_Critical | LL_System, VSTR("Extended Debug"), \
+            logger->LogMessage(VSLog_Debug | VSLog_Critical | VSLog_System, VSTR("Extended Debug"), \
                 Format("Entered function %1% in %2% (line %3%).") << __FUNCTION__ << __FILE__ << __LINE__); \
         }\
     }

@@ -156,144 +156,43 @@ namespace VoodooShader
 
         VoodooResult VSXmlLogger::Open(_In_ const String & filename, _In_ const bool append)
         {
-            if (this->m_LogFile.is_open())
-            {
-                this->Close();
-            }
-
-            unsigned int flags = ios_base::out;
-
-            if (append)
-            {
-                flags |= ios_base::app;
-            }
-            else
-            {
-                flags |= ios_base::trunc;
-            }
-
-            this->m_LogFile.open(filename.GetData(), flags);
-
-            if (this->m_LogFile.is_open())
-            {
-#ifdef _DEBUG
-                this->SetFlags(LF_Flush);
-#endif
-
-                wstringstream logMsg;
-
-                logMsg << VSTR("Voodoo Shader Log") << endl;
-                logMsg << VSTR("Log opened on ") << String::Date() << VSTR(" at ") << String::Time() << VSTR(" (") << 
-                    String::Ticks() << VSTR(")") << endl;
-
-#ifdef _DEBUG
-                std::wcout << logMsg.str();
-#endif
-                m_LogFile << logMsg.str();
-
-                return VSF_OK;
-            }
-            else
-            {
-                return VSFERR_INVALIDCALL;
-            }
         }
 
         VoodooResult VSXmlLogger::Open(_In_ IFile *const pFile, _In_ const bool append)
         {
-            return this->Open(pFile->GetPath(), append);
         }
 
         bool VSXmlLogger::IsOpen() const
         {
-            return m_LogFile.is_open();
         }
 
         VoodooResult VSXmlLogger::Close()
         {
-            if (this->IsOpen())
-            {
-                this->m_LogFile.close();
-                return VSF_OK;
-            }
-            else
-            {
-                return VSFERR_INVALIDCALL;
-            }
         }
 
         void VSXmlLogger::Flush()
         {
-            if (this->IsOpen())
-            {
-                this->m_LogFile.flush();
-            }
         }
 
         void VSXmlLogger::SetFlags(const LogFlags flags)
         {
-            m_Flags = flags;
         }
 
         LogFlags VSXmlLogger::GetFlags() const
         {
-            return m_Flags;
         }
 
         void VSXmlLogger::SetFilter(const uint32_t level)
         {
-            m_Filter = (LogLevel)level;
         }
 
         LogLevel VSXmlLogger::GetFilter() const
         {
-            return m_Filter;
         }
 
         VoodooResult VSXmlLogger::LogMessage(const uint32_t level, const String & source, const String & msg)
         {
-            if (!this->IsOpen()) return false;
 
-            uint32_t reqMask = LL_System | LL_Critical | LL_Warning | LL_Error;
-            if ((level & (reqMask | m_Filter)) == 0) return false;
-
-            try
-            {
-                // Format the message in memory to prevent partial messages from being dumped
-                std::wstringstream logMsg;
-                logMsg << hex << showbase << level << dec << noshowbase << VSTR(", ") << GetTickCount() << VSTR(", ") << 
-                    source << VSTR(", ") << msg << endl;
-
-#ifdef _DEBUG
-                if (level & (LL_ModWarning | LL_ModError))
-                {
-                    OutputDebugString(logMsg.str().c_str());
-#   ifdef VOODOO_DEBUG_CONSOLE
-                    cout << logMsg.str();
-#   endif
-                    VOODOO_DEBUG_BREAK;
-                }
-#endif
-                m_LogFile << logMsg.str();
-
-#ifndef _DEBUG
-                if (m_Flags & LF_Flush)
-#endif
-                {
-                    m_LogFile << flush;
-                }
-
-                return true;
-            }
-            catch (const std::exception & exc)
-            {
-#ifdef _DEBUG
-                OutputDebugStringA(exc.what());
-#else
-                UNREFERENCED_PARAMETER(exc);
-#endif
-                return false;
-            }
         }
     }
 }

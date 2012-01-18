@@ -25,7 +25,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSParameterDX9
     DeclareDebugCache();
 
-    VSParameterDX9::VSParameterDX9(_Pre_notnull_ IEffect * const pEffect, _In_ LPD3DXEFFECT pDXEffect = nullptr, _In_ D3DXHANDLE pParamHandle = nullptr) :
+    VSParameterDX9::VSParameterDX9(_Pre_notnuVSLog_ IEffect * const pEffect, _In_ LPD3DXEFFECT pDXEffect = nullptr, _In_ D3DXHANDLE pParamHandle = nullptr) :
         m_Refs(0), m_Effect(pEffect), m_DXEffect(pDXEffect), m_DXHandle(pParamHandle)
     {
         if (!pEffect)
@@ -200,7 +200,7 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
-        if (m_Desc.Type != PT_Bool) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_Bool) return VSFERR_INVALIDCALL;
 
         if (m_DXEffect && m_DXHandle)
         {
@@ -225,7 +225,7 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
-        if (m_Desc.Type != PT_Float) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_Float) return VSFERR_INVALIDCALL;
 
         if (m_DXEffect && m_DXHandle)
         {
@@ -250,7 +250,7 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
-        if (m_Desc.Type != PT_Int) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
 
         if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->GetInt(m_DXHandle, &m_VInt)))
         {
@@ -267,7 +267,7 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
-        if (m_Desc.Type != PT_String) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_String) return VSFERR_INVALIDCALL;
 
         if (m_DXEffect && m_DXHandle)
         {
@@ -292,7 +292,7 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!ppVal) return VSFERR_INVALIDPARAMS;
-        if (m_Desc.Type < PT_Texture || m_Desc.Type > PT_TextureCube) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type < VSPT_Texture || m_Desc.Type > VSPT_TextureCube) return VSFERR_INVALIDCALL;
 
         (*ppVal) = m_Texture.get();
 
@@ -304,7 +304,7 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!pVal) return VSFERR_INVALIDPARAMS;
-        if (m_Desc.Type != PT_Float && m_Desc.Type != PT_Bool && m_Desc.Type != PT_Int) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_Float && m_Desc.Type != VSPT_Bool && m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
 
         if (m_DXEffect && m_DXHandle)
         {
@@ -331,7 +331,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (m_Desc.Type != PT_Bool) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_Bool) return VSFERR_INVALIDCALL;
 
         m_VBool = val;
 
@@ -353,7 +353,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (m_Desc.Type != PT_Float) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_Float) return VSFERR_INVALIDCALL;
 
         m_VFloat.X = val;
 
@@ -375,7 +375,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (m_Desc.Type != PT_Int) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
 
         m_VInt = val;
 
@@ -397,7 +397,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (m_Desc.Type != PT_String) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_String) return VSFERR_INVALIDCALL;
 
         m_VString = val;
 
@@ -423,7 +423,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (m_Desc.Type < PT_Texture || m_Desc.Type > PT_TextureCube) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type < VSPT_Texture || m_Desc.Type > VSPT_TextureCube) return VSFERR_INVALIDCALL;
 
         m_Texture = pVal;
 
@@ -445,7 +445,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        if (m_Desc.Type != PT_Float) return VSFERR_INVALIDCALL;
+        if (m_Desc.Type != VSPT_Float) return VSFERR_INVALIDCALL;
 
         m_VFloat = val;
 
@@ -512,7 +512,7 @@ namespace VoodooShader
     void VOODOO_METHODTYPE VSParameterDX9::Link()
     {
         // Handle textures 
-        if (m_Desc.Type >= PT_Texture && m_Desc.Type <= PT_TextureCube)
+        if (m_Desc.Type >= VSPT_Texture && m_Desc.Type <= VSPT_TextureCube)
         {
             this->LinkNewTexture();
 
@@ -530,7 +530,7 @@ namespace VoodooShader
                 }
                 else
                 {
-                    m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, Format("Texture parameter %1% has no source texture annotation.") << m_Name);
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, Format("Texture parameter %1% has no source texture annotation.") << m_Name);
                 }
             }
         }
@@ -550,7 +550,7 @@ namespace VoodooShader
             }
             else
             {
-                m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                     Format("Unable to get source annotation for parameter %1%.") << m_Name);
             }
         }
@@ -558,7 +558,7 @@ namespace VoodooShader
 
     void VOODOO_METHODTYPE VSParameterDX9::LinkNewTexture()
     {
-        if (m_Desc.Type < PT_Texture || m_Desc.Type > PT_TextureCube)
+        if (m_Desc.Type < VSPT_Texture || m_Desc.Type > VSPT_TextureCube)
         {
             return;
         }
@@ -582,9 +582,10 @@ namespace VoodooShader
         D3DXHANDLE mipA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texmip");
         D3DXHANDLE rttA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texrtt");
         D3DXHANDLE fmtA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texfmt");
+        D3DXHANDLE srcA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texsrc");
         if (!nameA || !dimA || !fmtA)
         {
-            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+            m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                 Format("Texture parameter %1% has texture create flag set but is missing required parameters.") << m_Name);
             return;
         }
@@ -592,7 +593,7 @@ namespace VoodooShader
         LPCSTR nameStr = NULL;
         if (FAILED(m_DXEffect->GetString(nameA, &nameStr)))
         {
-            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+            m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                 Format("Unable to get texture name from parameter %1%.") << m_Name);
             return;
         }
@@ -600,7 +601,7 @@ namespace VoodooShader
         DECLARE_AND_ZERO(D3DXVECTOR4, dimVec);
         if (FAILED(m_DXEffect->GetVector(dimA, &dimVec)))
         {
-            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+            m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                 Format("Unable to get texture dimensions from parameter %1%.") << m_Name);
             return;
         }
@@ -610,7 +611,7 @@ namespace VoodooShader
         LPCSTR fmtStr = NULL;
         if (FAILED(m_DXEffect->GetString(fmtA, &fmtStr)))
         {
-            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+            m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                 Format("Unable to get texture format from parameter %1%.") << m_Name);
             return;
         }
@@ -618,7 +619,7 @@ namespace VoodooShader
         TextureFormat fmt = Converter::ToTextureFormat(String(fmtStr).GetData());
         if (fmt == TF_Unknown)
         {
-            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+            m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                 Format("Unknown texture format on parameter %1%.") << m_Name);
             return;
         }            
@@ -633,20 +634,65 @@ namespace VoodooShader
 
         TextureDesc desc = {dim, mip, rtt, fmt};
 
-        m_Core->GetLogger()->LogMessage(LL_CoreInfo, VOODOO_CORE_NAME, 
+        m_Core->GetLogger()->LogMessage(VSLog_CoreInfo, VOODOO_CORE_NAME, 
             Format("Creating texture %1% as %2% for parameter %3%.") << nameStr << desc << m_Name);
 
         ITexture * pTex = m_Core->CreateTexture(nameStr, desc);
         if (!pTex)
         {
-            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+            m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                 Format("Unable to create texture for parameter %1%.") << m_Name);
             return;
         }
         else
         {
-            m_Core->GetLogger()->LogMessage(LL_CoreWarning, VOODOO_CORE_NAME, 
+            m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                 Format("Successfully created texture for parameter %1%.") << m_Name);
+        }
+
+        if (srcA)
+        {
+            LPCSTR srcStr = nullptr;
+            if (FAILED(m_DXEffect->GetString(srcA, &srcStr)) || !srcStr)
+            {
+                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                    Format("Unable to get texture source from parameter %1%.") << m_Name);
+                return;
+            }
+
+            IFile * pFile = m_Core->GetFileSystem()->GetFile(srcStr);
+            if (!pFile)
+            {
+                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                    Format("Unable to get find texture file %1%.") << srcStr);
+                return;
+            }
+
+            IImage * pImage = pFile->OpenImage();
+            if (!pImage)
+            {
+                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                    Format("Unable to open texture file %1%.") << srcStr);
+                return;
+            }
+
+            TextureRegion region;
+            ZeroMemory(&region, sizeof(TextureRegion));
+            CopyMemory(&region, &desc, sizeof(TextureDesc));
+
+            D3DXHANDLE oriA = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texori");
+            if (oriA)
+            {
+                D3DXVECTOR4 oriVec;
+                if (SUCCEEDED(m_DXEffect->GetVector(oriA, &oriVec)))
+                {
+                    region.Origin.X = (uint32_t)oriVec.x;
+                    region.Origin.Y = (uint32_t)oriVec.y;
+                    region.Origin.Z = (uint32_t)oriVec.z;
+                }
+            }
+
+            m_Core->GetAdapter()->LoadTexture(pImage, region, pTex);
         }
     }
 }
