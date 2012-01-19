@@ -48,7 +48,7 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         // ICore
-        VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config);
+        VOODOO_METHOD(Init)(_In_ const wchar_t * config);
         VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
         VOODOO_METHOD(Reset)();
 
@@ -58,10 +58,11 @@ namespace VoodooShader
         VOODOO_METHOD_(ILogger *, GetLogger)() CONST;
         VOODOO_METHOD_(IParser *, GetParser)() CONST;
 
-        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile); 
-        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterDesc desc);
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc desc);
-        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterDesc desc) CONST;
+        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * pFile); 
+        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ ParameterDesc desc);
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ TextureDesc desc);
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ IFile * pFile);
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ ParameterDesc desc) CONST;
         VOODOO_METHOD_(ITexture *, GetTexture)(_In_ const String & name) CONST;
         VOODOO_METHOD(RemoveParameter)(_In_ const String & name);
         VOODOO_METHOD(RemoveTexture)(_In_ const String & name);

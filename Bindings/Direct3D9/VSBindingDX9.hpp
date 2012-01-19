@@ -25,7 +25,13 @@ namespace VoodooShader
 {
     namespace Voodoo_D3D9
     {
-        // {382CB920-83DD-4570-875F-F4E0C192A476}
+        /**
+         * @class VSBindingDX9
+         * Provides Direct3D9 bindings for Voodoo Shader, using D3DX and the effect framework. This uses the standard HLSL
+         * compiler with no conversion, supports all texture types, and virtual parameters with ghosting and type-checking.
+         * 
+         * @clsid 382CB920-83DD-4570-875F-F4E0C192A476
+         */
         VOODOO_CLASS(VSBindingDX9, IBinding, ({0x38, 0x2c, 0xb9, 0x20, 0x83, 0xdd, 0x45, 0x70, 0x87, 0x5f, 0xf4, 0xe0, 0xc1, 0x92, 0xa4, 0x76}))
         {
         public:
@@ -49,7 +55,7 @@ namespace VoodooShader
              * @{
              */
             VOODOO_METHOD_(IEffect *, CreateEffect)(CONST String & source);
-            VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST String & filename);
+            VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST IFile * pFile);
             /**
              * @}
              * @name Parameter Methods
@@ -62,12 +68,13 @@ namespace VoodooShader
              * @{
              */
             VOODOO_METHOD_(ITexture *, CreateTexture)(CONST String & name, TextureDesc desc);
-            VOODOO_METHOD_(ITexture *, LoadTexture)(CONST String & filename);
+            VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(CONST String & name, _In_ IFile * pFile);
 
         private:
             mutable uint32_t m_Refs;
             ICore * m_Core;
             LPDIRECT3DDEVICE9 m_Device;
+            bool m_ILUT;
         };
     }
 }

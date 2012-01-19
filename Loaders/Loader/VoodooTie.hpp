@@ -34,7 +34,6 @@
  * @{
  */
 extern VoodooShader::ICore * gVoodooCore;
-extern VoodooShader::IAdapter * gVoodooAdapter;
 
 extern HINSTANCE gLoaderHandle;
 

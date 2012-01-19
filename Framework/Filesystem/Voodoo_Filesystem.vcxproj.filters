@@ -35,9 +35,6 @@
     <ClCompile Include="WImage.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="WFileImpl.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Filesystem.rc">

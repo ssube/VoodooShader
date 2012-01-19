@@ -68,7 +68,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTextureDX9::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
+        VoodooResult VOODOO_METHODTYPE VSTextureDX9::QueryInterface(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut)
         {
             if (!ppOut)
             {
@@ -78,15 +78,15 @@ namespace VoodooShader
             {
                 if (refid == IID_IObject)
                 {
-                    *ppOut = static_cast<const IObject*>(this);
+                    *ppOut = static_cast<IObject*>(this);
                 }
                 else if (refid == IID_ITexture)
                 {
-                    *ppOut = static_cast<const ITexture*>(this);
+                    *ppOut = static_cast<ITexture*>(this);
                 }
                 else if (refid == CLSID_VSTextureDX9)
                 {
-                    *ppOut = static_cast<const VSTextureDX9*>(this);
+                    *ppOut = static_cast<VSTextureDX9*>(this);
                 }
                 else
                 {

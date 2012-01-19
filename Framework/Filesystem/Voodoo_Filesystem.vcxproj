@@ -73,7 +73,6 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WFileImpl.cpp" />
     <ClCompile Include="WFileSystem.cpp" />
     <ClCompile Include="WFile.cpp" />
     <ClCompile Include="WImage.cpp" />

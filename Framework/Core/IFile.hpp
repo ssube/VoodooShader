@@ -58,10 +58,6 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(String, GetPath)() CONST PURE;
         /**
-         * Attempt to load the image as a texture, if the image is a valid format.
-         */
-        VOODOO_METHOD_(ITexture *, LoadTexture)() CONST PURE;
-        /**
          * Open the file with the given access mode.
          *
          * @param mode Desired access mode.

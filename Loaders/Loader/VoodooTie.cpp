@@ -27,7 +27,6 @@
 #include <string>
 
 VoodooShader::ICore * gVoodooCore = nullptr;
-VoodooShader::IAdapter * gVoodooAdapter = nullptr;
 HINSTANCE gLoaderHandle = nullptr;
 
 const VoodooShader::Version moduleVersion = VOODOO_VERSION_STRUCT(LOADER);
@@ -118,7 +117,7 @@ bool WINAPI LoadVoodoo()
     {
         gVoodooCore->AddRef();
 
-        if (!gVoodooCore->Initialize(hook->Config))
+        if (!gVoodooCore->Init(hook->Config))
         {
             ErrorMessage(0x2009, L"Unable to initialize Voodoo Shader core.");
             gVoodooCore->Release();

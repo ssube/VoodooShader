@@ -100,7 +100,7 @@ namespace VoodooShader
 #endif
     }
 
-    VOODOO_METHODDEF(VSCore::Initialize)(_In_ CONST wchar_t * CONST config)
+    VOODOO_METHODDEF(VSCore::Init)(_In_ CONST wchar_t * config)
     {
         if (config)
         {
@@ -338,7 +338,8 @@ namespace VoodooShader
         {
             if (m_Logger)
             {
-                m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, Format(VSTR("Exception during Core creation: %1%")) << exc.strwhat());
+                m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                    Format(VSTR("Exception during Core creation: %1%")) << exc.strwhat());
             } else {
                 GlobalLog(VSTR("Unlogged exception during core creation: %s"), exc.what());
             }
@@ -349,7 +350,8 @@ namespace VoodooShader
         {
             if (m_Logger)
             {
-                m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, Format(VSTR("Error during Core creation: %1%")) << exc.what());
+                m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                    Format(VSTR("Error during Core creation: %1%")) << exc.what());
             }
 
             return VSF_FAIL;
@@ -517,7 +519,7 @@ namespace VoodooShader
 
         try
         {
-            effect = m_Binding->CreateEffectFromFile(pFile->GetPath());
+            effect = m_Binding->CreateEffectFromFile(pFile);
             m_Logger->LogMessage
             (
                 VSLog_CoreDebug, VOODOO_CORE_NAME, 
@@ -549,7 +551,8 @@ namespace VoodooShader
 
         if (paramEntry != m_Parameters.end())
         {
-            m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, VSTR("Trying to create a parameter with a duplicate name."));
+            m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                VSTR("Trying to create a parameter with a duplicate name."));
             return nullptr;
         }
         else
@@ -589,12 +592,39 @@ namespace VoodooShader
 
         if (textureEntry != m_Textures.end())
         {
-            m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, Format(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
-            return nullptr;
+            m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                Format(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
+            return textureEntry->second.get();
         }
         else
         {
             ITexture * texture = m_Binding->CreateTexture(name, pDesc);
+
+            m_Textures[name] = texture;
+
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Created texture %1%.")) << name);
+
+            return texture;
+        }
+    }
+
+    ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(_In_ const String & name, _In_ IFile * pFile)
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
+        if (!pFile) return nullptr;
+
+        TextureMap::iterator textureEntry = m_Textures.find(name);
+
+        if (textureEntry != m_Textures.end())
+        {
+            m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                Format(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
+            return textureEntry->second.get();
+        }
+        else
+        {
+            ITexture * texture = m_Binding->CreateTextureFromFile(name, pFile);
 
             m_Textures[name] = texture;
 
@@ -612,7 +642,8 @@ namespace VoodooShader
 
         if (paramIter == m_Parameters.end())
         {
-            m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, Format(VSTR("Unable to find parameter %1%.")) << name);
+            m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                Format(VSTR("Unable to find parameter %1%.")) << name);
             return nullptr;
         }
 

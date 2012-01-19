@@ -27,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_DX89", "Adapters\Generic\Voodoo_DX89\Voodoo_DX89.vcxproj", "{758A3040-38D6-4573-8C1B-74B35ECCAA6E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{9BC48304-CACF-47DE-B667-9A6CC6B56B25} = {9BC48304-CACF-47DE-B667-9A6CC6B56B25}
 		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
 	EndProjectSection
 EndProject
@@ -64,6 +65,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Loaders", "Loaders", "{B139D769-4776-43F5-8781-57414C65622A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_HookStub", "Loaders\HookStub\Voodoo_HookStub.vcxproj", "{B91FB76A-9A30-4341-A843-63CD4B5325AE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooUI", "Utilities\VoodooUI\VoodooUI.csproj", "{855DF76D-A0CB-4723-A2B9-85B82EF1CADE}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -77,29 +81,53 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooTest_OpenGL", "Tests\Scenarios\VoodooTest_OpenGL\VoodooTest_OpenGL.vcxproj", "{16385453-ABDD-487B-B407-89A0406A2B44}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VoodooTest_DX9", "Tests\Scenarios\VoodooTest_DX9\VoodooTest_DX9.vcxproj", "{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoodooLogViewer", "Utilities\VoodooLogViewer\VoodooLogViewer.csproj", "{7A71999B-09CF-4494-BD03-AFDCA6AF977D}"
 	ProjectSection(ProjectDependencies) = postProject
-		{455FAD6F-58B6-41FF-AA04-6DB9168A234C} = {455FAD6F-58B6-41FF-AA04-6DB9168A234C}
+		{9BC48304-CACF-47DE-B667-9A6CC6B56B25} = {9BC48304-CACF-47DE-B667-9A6CC6B56B25}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrdinalStub_D3D8", "Loaders\OrdinalStub_D3D8\OrdinalStub_D3D8.vcxproj", "{A31F62C0-2AA1-4B89-82D1-1DEADDC448D7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrdinalStub_D3D9", "Loaders\OrdinalStub_D3D9\OrdinalStub_D3D9.vcxproj", "{57888F27-9731-4374-84C0-5AAA45F02251}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrdinalStub_D3D10", "Loaders\OrdinalStub_D3D10\OrdinalStub_D3D10.vcxproj", "{A4B1A15A-8254-4CB0-97CA-63887A6B457B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrdinalStub_DInput", "Loaders\OrdinalStub_DInput\OrdinalStub_DInput.vcxproj", "{77915AE5-9816-4B4F-8C04-F56D043F5CF8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrdinalStub_DInput8", "Loaders\OrdinalStub_DInput8\OrdinalStub_DInput8.vcxproj", "{CB432F7C-61CD-4C8B-93E1-5D4185B8EA9D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OrdinalStub_DSound", "Loaders\OrdinalStub_DSound\OrdinalStub_DSound.vcxproj", "{2926C432-2331-44EE-A57B-CC79577FADB0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6234D300-FD30-4A04-A3A2-4739C5D9B95F} = {6234D300-FD30-4A04-A3A2-4739C5D9B95F}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordinal Stubs", "Ordinal Stubs", "{D2126EFA-F09F-41ED-A414-5B1CD881D073}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bindings", "Bindings", "{A4D75E8C-2A20-4F6A-BC61-2A5B199531F0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_D3D9", "Bindings\Direct3D9\Direct3D9.vcxproj", "{9BC48304-CACF-47DE-B667-9A6CC6B56B25}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E169ADFE-FC85-4B18-B5B6-6BCFFC167247}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\Sean\Documents\VoodooShader.vsd = C:\Users\Sean\Documents\VoodooShader.vsd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -261,18 +289,6 @@ Global
 		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|Win32.ActiveCfg = Release|Win32
 		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|Win32.Build.0 = Release|Win32
 		{DB31D5E1-9054-42E7-81A2-AD8FBBFEC443}.Release|x86.ActiveCfg = Release|Win32
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Debug|Win32.ActiveCfg = Debug|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Debug|x86.ActiveCfg = Debug|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Debug|x86.Build.0 = Debug|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Release|Any CPU.ActiveCfg = Release|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Release|Mixed Platforms.Build.0 = Release|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Release|Win32.ActiveCfg = Release|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Release|x86.ActiveCfg = Release|x86
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D}.Release|x86.Build.0 = Release|x86
 		{A31F62C0-2AA1-4B89-82D1-1DEADDC448D7}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{A31F62C0-2AA1-4B89-82D1-1DEADDC448D7}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{A31F62C0-2AA1-4B89-82D1-1DEADDC448D7}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -365,7 +381,6 @@ Global
 		{855DF76D-A0CB-4723-A2B9-85B82EF1CADE} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
 		{455FAD6F-58B6-41FF-AA04-6DB9168A234C} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
 		{81E84B93-71DB-448A-B478-274AE1B484B2} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
-		{7A71999B-09CF-4494-BD03-AFDCA6AF977D} = {183B55E4-BBC4-476F-B2B5-9FE4EF9DD99F}
 		{817469ED-FCBA-4C43-A6B9-EE19FB4685D1} = {6F835D16-DF88-4950-A9AA-422CBEB3F3CF}
 		{32835D9A-A1C1-48F9-8588-C10837E18EF4} = {6F835D16-DF88-4950-A9AA-422CBEB3F3CF}
 		{98903591-D205-49ED-AE60-44BDD620D16E} = {817469ED-FCBA-4C43-A6B9-EE19FB4685D1}

@@ -33,18 +33,23 @@ namespace VoodooShader
             friend class VSCompilerDX9;
 
         public:
-            VSEffectDX9(_Pre_notnull_ IFile * pFile);
+            VSEffectDX9(_In_ ICore * pCore, LPD3DXEFFECT pEffect);
             ~VSEffectDX9();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut);
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetName)() CONST;
             VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
             VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+
+            VOODOO_METHOD(SetEffect)(_Out_ uint32_t * pPassCount, bool restore = true);
+            VOODOO_METHOD(ResetEffect)();
+            VOODOO_METHOD(SetPass)(_In_ const uint32_t passIndex, ShaderStage stages = VSStage_All);
+            VOODOO_METHOD(ResetPass)();
 
             VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST;
             VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;

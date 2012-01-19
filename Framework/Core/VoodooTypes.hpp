@@ -120,7 +120,7 @@ namespace VoodooShader
 
     enum TextureFlags : uint32_t
     {
-        VSTexFlag_Unknown   = 0x00,
+        VSTexFlag_None      = 0x00,
         VSTexFlag_Target    = 0x01,
         VSTexFlag_Dynamic   = 0x02,
         VSTexFlag_MipMaps   = 0x04,
@@ -493,7 +493,7 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef const Version * (VOODOO_CALLTYPE * ModuleVersionFunc)();
+        typedef const Version * (VOODOO_CALLTYPE * ModuleInitFunc)();
         typedef const uint32_t  (VOODOO_CALLTYPE * ModuleCountFunc)();
         typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(const uint32_t, Uuid *);
         typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(const uint32_t, ICore *);

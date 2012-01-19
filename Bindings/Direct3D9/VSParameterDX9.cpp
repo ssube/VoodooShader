@@ -20,6 +20,8 @@
 
 #include "VSParameterDX9.hpp"
 
+#include "D3D9_Version.hpp"
+
 namespace VoodooShader
 {
     namespace Voodoo_D3D9
@@ -453,12 +455,11 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_D3D9_NAME, Format("Unable to bind texture %1% to parameter %2%.") << pVal << this);
                     return VSFERR_INVALIDCALL;
                 }
-                else
-                {
-                    m_Core->GetLogger()->LogMessage(VSLog_ModDebug, VOODOO_D3D9_NAME, Format("Bound texture %1% to parameter %2%.") << pVal << this);
-                    return VSF_OK;
-                }
+
+                m_Core->GetLogger()->LogMessage(VSLog_ModDebug, VOODOO_D3D9_NAME, Format("Bound texture %1% to parameter %2%.") << pVal << this);
             }
+
+            return VSF_OK;
         }
 
         VOODOO_METHODDEF(VSParameterDX9::SetVector)(Float4 val)
@@ -646,11 +647,11 @@ namespace VoodooShader
 
             BOOL mipB = FALSE;
             m_DXEffect->GetBool(mipA, &mipB);
-            bool mip = (mipB == TRUE);
+            uint32_t mip = (mipB == TRUE) ? 0 : 1;
 
             BOOL rttB = TRUE;
             m_DXEffect->GetBool(rttA, &rttB);
-            bool rtt = (rttB == TRUE);
+            TextureFlags rtt = (rttB == TRUE) ? VSTexFlag_Target : VSTexFlag_None;
 
             TextureDesc desc = {dim, mip, rtt, fmt};
 
@@ -688,8 +689,8 @@ namespace VoodooShader
                     return;
                 }
 
-                ITexture * pTex = pFile->LoadTexture();
-                if (!pTex)
+                ITexture * pSrcTex = pFile->LoadTexture();
+                if (!pSrcTex)
                 {
                     m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                         Format("Unable to open texture file %1%.") << srcStr);

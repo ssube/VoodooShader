@@ -35,14 +35,14 @@ namespace VoodooShader
         {
             VSModule * module = new VSModule(pCore, hmodule);
 
-            module->m_ModuleVersion = reinterpret_cast<Functions::ModuleVersionFunc>(GetProcAddress(hmodule, "ModuleVersion"));
+            module->m_ModuleInit = reinterpret_cast<Functions::ModuleInitFunc>(GetProcAddress(hmodule, "ModuleInit"));
             module->m_ClassCount = reinterpret_cast<Functions::ModuleCountFunc>(GetProcAddress(hmodule, "ClassCount"));
             module->m_ClassInfo = reinterpret_cast<Functions::ModuleInfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
             module->m_ClassCreate = reinterpret_cast<Functions::ModuleCreateFunc>(GetProcAddress(hmodule, "ClassCreate"));
 
             if
             (
-                module->m_ModuleVersion == nullptr ||
+                module->m_ModuleInit == nullptr ||
                 module->m_ClassCount == nullptr ||
                 module->m_ClassInfo == nullptr ||
                 module->m_ClassCreate == nullptr
@@ -146,7 +146,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        return m_ModuleVersion();
+        return m_ModuleInit();
     }
 
     uint32_t VOODOO_METHODTYPE VSModule::ClassCount() CONST
@@ -168,12 +168,5 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return m_ClassCreate(number, pCore);
-    }
-
-    HMODULE VOODOO_METHODTYPE VSModule::GetHandle() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
-        return m_Handle;
     }
 }

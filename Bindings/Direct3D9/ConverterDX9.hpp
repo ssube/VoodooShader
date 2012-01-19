@@ -19,13 +19,13 @@
  */
 #pragma once
 
-#include "VoodooFramework.hpp"
+#include "Voodoo_D3D9.hpp"
 
 namespace VoodooShader
 {
     namespace Voodoo_D3D9
     {
-        class VOODOO_API_DX9 ConverterDX9
+        class ConverterDX9
         {
         public:
             static inline D3DFORMAT ToD3DFormat(TextureFormat tf)

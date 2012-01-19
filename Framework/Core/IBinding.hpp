@@ -62,7 +62,7 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(IEffect *, CreateEffect)(CONST String & source) PURE;
-        VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST String & filename) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST IFile * pFile) PURE;
         /**
          * @}
          * @name Parameter Methods
@@ -75,7 +75,7 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(ITexture *, CreateTexture)(CONST String & name, TextureDesc desc) PURE;
-        VOODOO_METHOD_(ITexture *, LoadTexture)(CONST String & filename) PURE;
+        VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(CONST String & name, _In_ IFile * pFile) PURE;
         /**
          * @}
          */

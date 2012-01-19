@@ -30,57 +30,15 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSEffectDX9
         DeclareDebugCache();
 
-        VSEffectDX9::VSEffectDX9(IFile * pFile) :
-            m_Refs(0) 
+        VSEffectDX9::VSEffectDX9(ICore * pCore, LPD3DXEFFECT pEffect) :
+            m_Refs(0), m_Core(pCore), m_DXEffect(pEffect)
         {
-            if (!pFile)
-            {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to create effect without file."), nullptr);
-            }
-
-            m_Core = pFile->GetCore();
-
             // Cache core objects
             ILoggerRef  logger  = m_Core->GetLogger();
 
             if (!logger)
             {
                 Throw(VOODOO_CORE_NAME, VSTR("Unable to create effect without logger."), m_Core);
-            }
-
-            // Get the D3D9 device from the adapter
-            IDirect3DDevice9 * device = nullptr;
-            Variant deviceVar;
-            ZeroMemory(&deviceVar, sizeof(Variant));
-
-            if (SUCCEEDED(adapter->GetProperty(PropIds::D3D9Device, &deviceVar)) && deviceVar.Type == UT_PVoid && deviceVar.VPVoid)
-            {
-                device = (IDirect3DDevice9*)deviceVar.VPVoid;
-                device->AddRef();
-            }
-            else
-            {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to retrieve device from adapter."), m_Core);
-            }
-
-            // Build the flags
-            DWORD d3dxflags = 0;
-            if ((flags & CF_AvoidFlow) > 0)     d3dxflags |= D3DXSHADER_AVOID_FLOW_CONTROL;
-            if ((flags & CF_PreferFlow) > 0)    d3dxflags |= D3DXSHADER_PREFER_FLOW_CONTROL;
-            if ((flags & CF_Debug) > 0)         d3dxflags |= D3DXSHADER_DEBUG;
-            if ((flags & CF_NoOpt) > 0)         d3dxflags |= D3DXSHADER_SKIPOPTIMIZATION;
-
-            // Output/buffer
-            LPD3DXBUFFER errors = NULL;
-
-            HRESULT hr = D3DXCreateEffectFromFile(device, pFile->GetPath().GetData(), NULL, NULL, d3dxflags, NULL, &m_DXEffect, &errors);
-            if (FAILED(hr))
-            {
-                logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format("Error compiling effect from file '%1%'. Errors:\n%2%") << 
-                    pFile->GetPath() << (LPCSTR)errors->GetBufferPointer());
-
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to compile effect."), m_Core);
             }
 
             // Get desc
@@ -170,7 +128,7 @@ namespace VoodooShader
             }
         }
 
-        VOODOO_METHODDEF(VSEffectDX9::QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ CONST IObject ** ppOut)
+        VOODOO_METHODDEF(VSEffectDX9::QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
             if (!ppOut)
@@ -181,15 +139,15 @@ namespace VoodooShader
             {
                 if (refid == IID_IObject)
                 {
-                    *ppOut = static_cast<const IObject*>(this);
+                    *ppOut = static_cast<IObject*>(this);
                 }
                 else if (refid == IID_IEffect)
                 {
-                    *ppOut = static_cast<const IEffect*>(this);
+                    *ppOut = static_cast<IEffect*>(this);
                 }
                 else if (refid == CLSID_VSEffectDX9)
                 {
-                    *ppOut = static_cast<const VSEffectDX9*>(this);
+                    *ppOut = static_cast<VSEffectDX9*>(this);
                 }
                 else
                 {
@@ -252,6 +210,56 @@ namespace VoodooShader
 
             m_Properties[propid] = (*pValue);
             return VSF_OK;
+        }
+
+        VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetEffect(uint32_t * pPasses, bool restore)
+        {
+            if (SUCCEEDED(m_DXEffect->Begin(pPasses, restore ? 0 : D3DXFX_DONOTSAVESTATE)))
+            {
+                return VSF_OK;
+            }
+            else
+            {
+                return VSF_FAIL;
+            }
+        }
+
+        VOODOO_METHODDEF(VSEffectDX9::ResetEffect)()
+        {
+            if (SUCCEEDED(m_DXEffect->End()))
+            {
+                return VSF_OK;
+            }
+            else
+            {
+                return VSF_FAIL;
+            }
+        }
+
+        VOODOO_METHODDEF(VSEffectDX9::SetPass)(_In_ const uint32_t passIndex, ShaderStage stages)
+        {
+            UNREFERENCED_PARAMETER(stages);
+
+            if (SUCCEEDED(m_DXEffect->BeginPass(passIndex)))
+            {
+                return VSF_OK;
+            }
+            else
+            {
+                return VSF_FAIL;
+            }
+        }
+
+        VOODOO_METHODDEF(VSEffectDX9::ResetPass)()
+        {
+            if (SUCCEEDED(m_DXEffect->EndPass()))
+            {
+                return VSF_OK;
+            }
+            else
+            {
+                return VSF_FAIL;
+            }
         }
 
         uint32_t VOODOO_METHODTYPE VSEffectDX9::GetTechniqueCount() CONST

@@ -45,14 +45,12 @@ namespace VoodooShader
         VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST;
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST;
 
-        VOODOO_METHOD_(HMODULE, GetHandle)() CONST;
-
     private:
         mutable uint32_t m_Refs;
         ICore * m_Core;
 
         HMODULE m_Handle;
-        Functions::ModuleVersionFunc m_ModuleVersion;
+        Functions::ModuleInitFunc m_ModuleInit;
         Functions::ModuleCountFunc m_ClassCount;
         Functions::ModuleInfoFunc m_ClassInfo;
         Functions::ModuleCreateFunc m_ClassCreate;

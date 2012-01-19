@@ -110,15 +110,15 @@ namespace VoodooShader
             {
                 if (refid == IID_IObject)
                 {
-                    *ppOut = static_cast<const IObject*>(this);
+                    *ppOut = static_cast<IObject*>(this);
                 }
                 else if (refid == IID_ITechnique)
                 {
-                    *ppOut = static_cast<const ITechnique*>(this);
+                    *ppOut = static_cast<ITechnique*>(this);
                 }
                 else if (refid == CLSID_VSTechniqueDX9)
                 {
-                    *ppOut = static_cast<const VSTechniqueDX9*>(this);
+                    *ppOut = static_cast<VSTechniqueDX9*>(this);
                 }
                 else
                 {

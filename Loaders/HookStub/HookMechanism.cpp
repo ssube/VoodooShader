@@ -20,14 +20,12 @@
 
 #include "HookMechanism.hpp"
 
-#include "Support.inl"
-
+// Globals
+VoodooShader::ICore * gVoodooCore = nullptr;
 HINSTANCE gHookLoader = nullptr;
 unsigned int gLoadOnce = 1;
-HMODULE gFullLoader = nullptr;
-HHOOK gSystemHook = nullptr;
-
-BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
+HHOOK gSystemHook = nullptr;
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
     UNREFERENCED_PARAMETER(lpvReserved);
 
@@ -41,7 +39,7 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
     return TRUE;
 }
 
-LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lParam)
+LRESULT CALLBACK GlobalHookCb(int nCode, WPARAM wParam, LPARAM lParam)
 {
     if (nCode < 0)
     {
@@ -62,9 +60,11 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
 
                 if (hook)
                 {
-                    GlobalLog(TEXT("Hook matched for module %s.\n"), moduleName, hook->Target);
+                    GlobalLog(TEXT("Hook target %s matched for module %s.\n"), hook->Target, moduleName);
 
-                    LoadFullLoader();
+                    LoadVoodoo(hook);
+
+                    delete hook;
                 }
             }
         }
@@ -124,35 +124,64 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
     }
 }
 
-bool WINAPI LoadFullLoader()
-{
-    int result = 0;
-    TCHAR binPath[MAX_PATH];
+bool WINAPI LoadVoodoo(HHOOKDEF pHook)
+{    if (gVoodooCore) return true;
 
-    GetVoodooBinPath(binPath);
-    PathCombine(binPath, binPath, TEXT("Voodoo_Loader.dll"));
+    GlobalLog(TEXT("Loading Voodoo Shader framework.\n"));
 
-    gFullLoader = LoadLibraryEx(binPath, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-
-    if (gFullLoader)
+    // Get the target
+    HMODULE targetModule = GetModuleHandle(nullptr);
+    if (targetModule == nullptr)
     {
-        GlobalLog(TEXT("Loaded full loader module from %s.\n"), binPath);
+        ErrorMessage(0x2003, TEXT("Unable to retrieve target module."));
+        return false;
+    }
 
-        FARPROC hookFunc = GetProcAddress(gFullLoader, "InstallKnownHooks");
-        if (hookFunc)
-        {
-            result = hookFunc();
-            GlobalLog(TEXT("Installed %d known local hooks.\n"), result);
-        }
-        else
-        {
-            ErrorMessage(0x1006, TEXT("Unable to launch Voodoo loader."));
-        }
+    TCHAR targetName[MAX_PATH];
+    GetModuleFileName(targetModule, targetName, MAX_PATH);
+
+    TCHAR corePath[MAX_PATH];
+    GetVoodooBinPath(corePath);
+    PathCombine(corePath, corePath, TEXT("Voodoo_Core.dll"));
+
+    HMODULE coreLibrary = LoadLibraryEx(corePath, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
+
+    if (!coreLibrary)
+    {
+        ErrorMessage(0x2006, L"Voodoo Loader: Unable to load core DLL.");
+        return false;
+    } else {
+        GlobalLog(TEXT("Loaded core from %s.\n"), corePath);
+    }
+
+    VoodooShader::Functions::CoreCreateFunc createFunc = 
+        (VoodooShader::Functions::CoreCreateFunc)GetProcAddress(coreLibrary, "CreateCore");
+
+    if (createFunc == nullptr)
+    {
+        ErrorMessage(0x2007, L"Voodoo Loader: Unable to find core create function.");
+        return false;
+    }
+
+    gVoodooCore = createFunc(0);
+    
+    if (!gVoodooCore)
+    {
+        ErrorMessage(0x2008, L"Unable to create Voodoo Shader core.");
     }
     else
     {
-        ErrorMessage(0x1005, TEXT("Unable to load Voodoo loader."));
+        gVoodooCore->AddRef();
+
+        if (FAILED(gVoodooCore->Init(pHook->Config)))
+        {
+            ErrorMessage(0x2009, L"Unable to initialize Voodoo Shader core.");
+            gVoodooCore->Release();
+            gVoodooCore = nullptr;
+        } else {
+            GlobalLog(TEXT("Initialized Voodoo Shader, passing logging to core.\n"), corePath);
+        }
     }
 
-    return result > 0;
+    return (gVoodooCore != nullptr);
 }

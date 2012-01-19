@@ -108,38 +108,158 @@ namespace VoodooShader
         }
 
         VoodooResult VSWFile::Open(FileOpenMode mode)
-        {
-            return VSWFileImpl::Open(m_Core, m_Path, m_File, mode);
-        }
+        {            std::ios_base::openmode access = 0;
 
-        IImage * VSWFile::OpenImage() const
-        {
-            return VSWImage::Load(m_Core, m_Path);
+            if (mode & FO_Read)
+            {
+                access |= std::ios_base::in;
+            }
+
+            if (mode & FO_Write)
+            {
+                access |= std::ios_base::out;
+            }
+
+            if (mode & FO_Ate)
+            {
+                access |= std::ios_base::ate;
+            }
+
+            if (mode & FO_Append)
+            {
+                access |= std::ios_base::app;
+            }
+
+            if (mode & FO_Truncate)
+            {
+                access |= std::ios_base::trunc;
+            }
+
+            if (access == 0)
+            {
+                m_Core->GetLogger()->LogMessage
+                (
+                    VSLog_ModWarning, VOODOO_FILESYSTEM_NAME,
+                    Format(VSTR("Attempted to open file '%1%' with unknown mode (%2%).")) << m_Path << mode
+                );
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            access |= std::ios_base::binary;
+
+            m_Core->GetLogger()->LogMessage
+            (
+                VSLog_ModDebug, VOODOO_FILESYSTEM_NAME,
+                Format(VSTR("Opening file %1% with mode %2% (underlying %3%).")) << m_Path << mode << access
+            );
+
+            m_File.open(m_Path.GetData(), access);
+
+            if (!m_File.is_open())
+            {
+                m_Core->GetLogger()->LogMessage
+                (
+                    VSLog_ModWarning, VOODOO_FILESYSTEM_NAME, 
+                    Format(VSTR("Unable to open file '%1%'.")) << m_Path
+                );
+                return VSFERR_FILENOTFOUND;
+            }
+            else
+            {
+                return VSF_OK;
+            }
         }
 
         VoodooResult VSWFile::Close()
-        {
-            return VSWFileImpl::Close(m_File);
+        {            if (m_File.is_open())
+            {
+                m_File.close();
+            }
+
+            return VSF_OK;
         }
 
         VoodooResult VSWFile::Seek(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset)
-        {
-            return VSWFileImpl::Seek(m_File, stream, mode, offset);
+        {            std::ios_base::seekdir dir;
+
+            if (mode == VSSeek_Begin) {dir = std::ios_base::beg;}
+            else if (mode == VSSeek_Current) {dir = std::ios_base::cur;}
+            else if (mode == VSSeek_End) {dir = std::ios_base::end;}
+            else { return false; }
+
+            if (stream == VSStream_Get)
+            {
+                m_File.seekg(offset, dir);
+            }
+            else if (stream == VSStream_Put)
+            {
+                m_File.seekp(offset, dir);
+            }
+
+            if (m_File.fail())
+            {
+                return VSFERR_INVALIDCALL;
+            }
+            else
+            {
+                return VSF_OK;
+            }
         }
 
         int32_t VSWFile::Tell(_In_ StreamType stream)
-        {
-            return VSWFileImpl::Tell(m_File, stream);
+        {            if (stream == VSStream_Get)
+            {
+                return (int32_t)m_File.tellg();
+            }
+            else if (stream == VSStream_Put)
+            {
+                return (int32_t)m_File.tellp();
+            }
+            else
+            {
+                return -1;
+            }
         }
 
-        int VSWFile::Read(_In_ int count, _In_opt_bytecount_(count) void *buffer)
-        {
-            return VSWFileImpl::Read(m_Core, m_File, count, buffer);
+        int VSWFile::Read(_In_ int count, _In_opt_bytecount_(count) void * pBuffer)
+        {            UNREFERENCED_PARAMETER(m_Core);
+
+            if (!m_File.is_open())
+            {
+                return -1;
+            }
+
+            m_File.read((char*)pBuffer, count);
+            int32_t ret = (int32_t)m_File.gcount();
+
+            if (m_File.bad())
+            {
+                return -1;
+            }
+            else
+            {
+                return ret;
+            }
         }
 
-        int32_t VSWFile::Write(_In_ const int32_t count, _In_opt_bytecount_(count) void * buffer)
-        {
-            return VSWFileImpl::Write(m_Core, m_File, count, buffer);
+        int32_t VSWFile::Write(_In_ const int32_t count, _In_opt_bytecount_(count) void * pBuffer)
+        {            UNREFERENCED_PARAMETER(m_Core);
+
+            if (!m_File.is_open())
+            {
+                return -1;
+            }
+
+            m_File.write((char*)pBuffer, count);
+
+            if (m_File.bad())
+            {
+                return -1;
+            }
+            else
+            {
+                return count;
+            }
         }
     }
 }

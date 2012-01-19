@@ -129,7 +129,6 @@ namespace VoodooShader
             VOODOO_METHOD_(int32_t, Tell)(_In_ StreamType stream);
             VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
             VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
-            VOODOO_METHOD_(IImage *, OpenImage)() CONST;
 
         private:
             mutable uint32_t m_Refs;
@@ -137,76 +136,6 @@ namespace VoodooShader
             String m_Path;
 
             std::fstream m_File;
-        };
-
-        /**
-         * @class VSWImage
-         *
-         * Provides image loading, using the DevIL library. This class provides internal loading and conversion, and can
-         * manage 1-3 dimensional images (regular textures and volumes).
-         *
-         * @par ClassId
-         *      e6f312b2-05af-11e1-9e05-005056c00008
-         *
-         * @todo Provide layer, cubemap and animation handling.
-         * @todo Provide image saving.
-         */
-        VOODOO_CLASS(VSWImage, IImage, ({0xB2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
-        {
-        public:
-            static VSWImage * Load(ICore * pCore, const String & name);
-            VSWImage(ICore *core, const String & path, unsigned int image);
-            ~VSWImage();
-
-            VOODOO_METHOD_(uint32_t, AddRef)() CONST;
-            VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
-            VOODOO_METHOD_(String, ToString)() CONST;
-            VOODOO_METHOD_(ICore *, GetCore)() CONST;
-
-            VOODOO_METHOD_(String, GetPath)() CONST;
-            VOODOO_METHOD(Open)(_In_ FileOpenMode mode);
-            VOODOO_METHOD(Close)();
-            VOODOO_METHOD(Seek)(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset);
-            VOODOO_METHOD_(int32_t, Tell)(_In_ StreamType stream);
-            VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
-            VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
-            /**
-             * Effectively acts as a nop, returning this.
-             *
-             * @return This object.
-             */
-            VOODOO_METHOD_(IImage *, OpenImage)() CONST;
-            VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
-            /**
-             * Retrieves a portion of the texture data from the image.
-             *
-             * @param desc The region and format to be returned.
-             * @param size The size of the buffer
-             * @param pBuffer The memory for the return data to be placed in. Must already be allocated, or nullptr.
-             * @return The number of bytes retrieved (or, if @p buffer is nullptr, the number that would be retrieved).
-             *
-             * @warning Due to limitations in this library (or DevIL, not sure which), the only texture formats this
-             *      function can convert into are @ref VSFmtRGB8, @ref VSFmtRGBA8, @ref VSFmtRGBA16F and @ref VSFmtRGBA32F. Others
-             *      are not supported and will cause this function to throw.
-             *
-             * @note This can convert data between most formats, so the format given in @p desc will be the returned format.
-             *      This makes calculating the buffer size relatively easy.
-             *
-             * @warning If this function converts formats or copies a large region, it will be slow. Avoid calling often.
-             */
-            VOODOO_METHOD_(int32_t, GetData)(_In_ const TextureRegion desc, _In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) CONST;
-
-        private:
-            mutable uint32_t m_Refs;
-            ICore * m_Core;
-            String m_Path;
-
-            std::fstream m_File;
-
-            IParser * m_Parser;
-            unsigned int m_Image;
-            TextureDesc m_Desc;
         };
     }
     /**

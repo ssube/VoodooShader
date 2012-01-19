@@ -19,8 +19,11 @@
  */
 #pragma once
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+// Voodoo Core
+#define VOODOO_NO_BOOST
+#define VOODOO_NO_PUGIXML
+#include "VoodooFramework.hpp"
+#include "Support.inl"
 
 LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lParam);
 
@@ -31,4 +34,4 @@ HHOOK WINAPI InstallGlobalHook();
 void WINAPI RemoveGlobalHook();
 
 /* Run the full load process */
-bool WINAPI LoadFullLoader();
+bool WINAPI LoadVoodoo(_In_ HHOOKDEF pHook);
