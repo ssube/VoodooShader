@@ -61,6 +61,19 @@ namespace VoodooShader
          */
         _Check_return_ VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config) PURE;
         /**
+         * Binds the core to a particular compiler profile. This loads and initializes the compiler, attaching it to this
+         * core until the core is reset or destroyed. Compiler profiles interface the Voodoo Shader core with a given
+         * hardware API, version, or profile.
+         * 
+         * @param   profile The compiler to use.
+         * @param   count   The number of parameters passed.
+         * @param   pParams Parameters for the binding.
+         * 
+         * @note The number and contents of @a pParams are compiler-defined. Most standard compilers take a single 
+         *      parameter, with the device or context to be used.
+         */
+        _Check_return_ VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
+        /**
          * Cleans up all modules and objects. Invalidates all objects created by this core. This method
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this
          * core may be reinitialized.
@@ -120,7 +133,7 @@ namespace VoodooShader
          * @param   pFile   The file to load and compile. May be an absolute or relative filename.
          * @param   ppArgs  Optional flags to the compiler, usually optimization or API hints.
          */
-        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile, const CompileFlags flags = CF_Default) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile) PURE;
         /**
          * Creates a global virtual parameter. This parameter exists in the core, but is not a part of any effect.
          *

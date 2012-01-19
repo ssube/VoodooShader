@@ -88,7 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DX9_Adapter.hpp" />
-    <ClInclude Include="DX9_Converter.hpp" />
     <ClInclude Include="DX9_Module.hpp" />
     <ClInclude Include="DX9_Version.hpp" />
     <ClInclude Include="DX8_ThinHeader.hpp" />

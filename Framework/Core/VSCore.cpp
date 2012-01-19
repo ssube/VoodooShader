@@ -56,7 +56,7 @@ namespace VoodooShader
     }
 
     VSCore::VSCore(uint32_t version) :
-        m_Refs(0), m_Version(version), m_DefaultFlags(CF_Default), m_ConfigFile(nullptr)
+        m_Refs(0), m_Version(version), m_ConfigFile(nullptr)
     {
 #if defined(VOODOO_DEBUG_MEMORY)
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRT0DBG_LEAK_CHECK_DF);
@@ -356,6 +356,48 @@ namespace VoodooShader
         }
     }
 
+    VOODOO_METHODDEF(VSCore::Bind)(CompilerProfile profile, uint32_t count, Variant * pParams)
+    {
+        IModule * compiler = nullptr;
+
+        if (profile == VSProfile_D3D9)
+        {
+            // Load D3D9 compiler
+            if (FAILED(m_ModuleManager->LoadFile(VSTR("$(binpath)\\Voodoo_D3D9.dll"))))
+            {
+                return VSFERR_INVALIDCALL;
+            }
+
+            compiler = m_ModuleManager->GetModule(VSTR("Voodoo_D3D9"));
+            if (!compiler)
+            {
+                return VSF_FAIL;
+            }
+        }
+        else
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+
+        IObject * pCompObj = compiler->CreateClass(0, this);
+        if (!pCompObj)
+        {
+            return VSF_FAIL;
+        }
+
+        IBinding * pBinding = nullptr;
+        if (FAILED(pCompObj->QueryInterface(IID_IBinding, (IObject**)&pBinding)) || !pBinding)
+        {
+            pBinding->Release();
+            return VSF_FAIL;
+        }
+
+        m_Binding = pBinding;
+        pBinding->Release();
+
+        return m_Binding->Initialize(count, pParams);
+    }
+
     VOODOO_METHODDEF(VSCore::Reset)()
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
@@ -434,6 +476,13 @@ namespace VoodooShader
         return m_Parser.get();
     }
 
+    IFileSystem * VOODOO_METHODTYPE VSCore::GetFileSystem() CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
+        return m_FileSystem.get();
+    }
+
     IHookManager * VOODOO_METHODTYPE VSCore::GetHookManager() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
@@ -455,7 +504,7 @@ namespace VoodooShader
         return m_ConfigFile;
     }
 
-    IEffect * VOODOO_METHODTYPE VSCore::CreateEffect(_In_ IFile * pFile, const CompileFlags flags)
+    IEffect * VOODOO_METHODTYPE VSCore::CreateEffect(_In_ IFile * pFile)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -468,7 +517,7 @@ namespace VoodooShader
 
         try
         {
-            effect = m_Binding->CreateEffectFromFile(pFile->GetPath(), flags);
+            effect = m_Binding->CreateEffectFromFile(pFile->GetPath());
             m_Logger->LogMessage
             (
                 VSLog_CoreDebug, VOODOO_CORE_NAME, 

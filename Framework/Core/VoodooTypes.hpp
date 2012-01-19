@@ -70,21 +70,21 @@ namespace VoodooShader
 
     enum ParameterType : uint32_t
     {
-        VSPT_Unknown      = 0x00,     /* !< Unknown parameter category. */
-        VSPT_Bool         = 0x01,
-        VSPT_Int          = 0x02,
-        VSPT_Float        = 0x03,     /* !< float vector parameter (may have 1 to 4 components). */
-        VSPT_String       = 0x04,
-        VSPT_Texture      = 0x05,
-        VSPT_Texture1D    = 0x06,
-        VSPT_Texture2D    = 0x07,
-        VSPT_Texture3D    = 0x08,
-        VSPT_TextureCube  = 0x09,
-        VSPT_Sampler      = 0x0A,
-        VSPT_Sampler1D    = 0x0B,     /* !< Sampler parameter (may sample 1D to 3D textures). */
-        VSPT_Sampler2D    = 0x0C,
-        VSPT_Sampler3D    = 0x0D,
-        VSPT_SamplerCube  = 0x0E,
+        VSPT_Unknown        = 0x00,     /* !< Unknown parameter category. */
+        VSPT_Bool           = 0x01,
+        VSPT_Int            = 0x02,
+        VSPT_Float          = 0x03,     /* !< float vector parameter (may have 1 to 4 components). */
+        VSPT_String         = 0x04,
+        VSPT_Texture        = 0x05,
+        VSPT_Texture1D      = 0x06,
+        VSPT_Texture2D      = 0x07,
+        VSPT_Texture3D      = 0x08,
+        VSPT_TextureCube    = 0x09,
+        VSPT_Sampler        = 0x0A,
+        VSPT_Sampler1D      = 0x0B,     /* !< Sampler parameter (may sample 1D to 3D textures). */
+        VSPT_Sampler2D      = 0x0C,
+        VSPT_Sampler3D      = 0x0D,
+        VSPT_SamplerCube    = 0x0E,
     };
 
     enum ShaderStage : uint32_t
@@ -100,40 +100,31 @@ namespace VoodooShader
     };
 
     /**
-     * Various hints and flags to the shader compiler. This should be used to hint various modules to use a particular
-     * compilation method or API.
+     * Target compiler profiles. These control the compiler used for Voodoo Shader resources.
      * 
-     * Some bits of this enum are reserved for various purposes:
-     *  @li @a 0x000F: Compilation event (immediate, delay, etc).
-     *  @li @a 0x0FF0: Debug and optimization settings.
-     *  @li @a 0xF000: Target API settings.
+     * @note Various portions of this enum are reserved or have a special purpose:
+     *  @li @a 0x00FF: Version within the API. Typically this matches the version the API itself reports.
+     *  @li @a 0x7FF0: Major API or vendor. The unset API is reserved for internal Voodoo Shader profiles.
+     *  @li @a 0x8000: Debug flag, where the API provides a debug version.
      */
-    enum CompileFlags : uint32_t
+    enum CompilerProfile : uint32_t
     {
-        CF_Default      = 0x0000,   /* !< Compile with the core's default flags. */
-        CF_DelayCompile = 0x0001,   /* !< Prevents automatic compiling of shaders and programs. This can be used to set many
-                                          defines or uniforms without compilation overhead, but requires IProgram::Compile()
-                                          be called before use. */
-        CF_AvoidFlow    = 0x0010,   /* !< Hints the compiler to avoid flow-control instructions. */
-        CF_PreferFlow   = 0x0020,   /* !< Hints the compiler to prefer flow-control instructions. */
-        CF_Debug        = 0x0040,   /* !< Insert debug information during compilation. Always on in debug builds. */
-        CF_NoOpt        = 0x0080,   /* !< Disables all optimizations. Useful for extended debugging. */
-        CF_OptLevel0    = 0x0100,   /* !< Lowest optimization level. Quickly produces slow code. */
-        CF_OptLevel1    = 0x0200,   /* !< Low optimization level. */
-        CF_OptLevel2    = 0x0400,   /* !< Medium optimization level. The default. */
-        CF_OptLevel3    = 0x0800,   /* !< Highest optimization level. Slowly produces fast code. */
-        CF_DirectX9     = 0x1000,
-        CF_DirectX10    = 0x2000,
-        CF_DirectX11    = 0x4000,
-        CF_OpenGL       = 0x8000,
+        VSProfile_None      = 0x0000,   /* !< Compile with the core's default flags. */
+        VSProfile_Refr      = 0x0010,
+        VSProfile_D3D9      = 0x0100,
+        VSProfile_D3D10     = 0x0190,
+        VSProfile_D3D11     = 0x01A0,
+        VSProfile_OpenGL3   = 0x0230,
+        VSProfile_OpenGL4   = 0x0240,
     };
 
     enum TextureFlags : uint32_t
     {
-        VSUse_Unknown   = 0x00,
-        VSUse_Target    = 0x01,
-        VSUse_AutoMip   = 0x02,
-        VSUse_Dynamic   = 0x04,
+        VSTexFlag_Unknown   = 0x00,
+        VSTexFlag_Target    = 0x01,
+        VSTexFlag_Dynamic   = 0x02,
+        VSTexFlag_MipMaps   = 0x04,
+        VSTexFlag_AutoMip   = 0x08,
     };
 
     /**
@@ -141,9 +132,9 @@ namespace VoodooShader
      */
     enum StreamType : uint32_t
     {
-        ST_Unknown      = 0x00,
-        ST_Get          = 0x01,
-        ST_Put          = 0x02
+        VSStream_Unknown    = 0x00,
+        VSStream_Get        = 0x01,
+        VSStream_Put        = 0x02
     };
 
     /**
@@ -151,10 +142,10 @@ namespace VoodooShader
      */
     enum SeekMode : uint32_t
     {
-        SM_Unknown      = 0x00,
-        SM_Begin        = 0x01,     /* !< Seek relative to the beginning of the file (an absolute offset). */
-        SM_Current      = 0x02,     /* !< Seek relative to the current position (forward or back). */
-        SM_End          = 0x03      /* !< Seek relative to the end of the file. */
+        VSSeek_Unknown      = 0x00,
+        VSSeek_Begin        = 0x01,     /* !< Seek relative to the beginning of the file (an absolute offset). */
+        VSSeek_Current      = 0x02,     /* !< Seek relative to the current position (forward or back). */
+        VSSeek_End          = 0x03      /* !< Seek relative to the end of the file. */
     };
 
     /**

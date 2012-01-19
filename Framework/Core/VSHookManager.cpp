@@ -20,6 +20,11 @@
 
 #include "VSHookManager.hpp"
 
+#pragma warning(push)
+#pragma warning(disable: 4005)
+#include <ntstatus.h>
+#pragma warning(pop)
+
 namespace VoodooShader
 {
     #define VOODOO_DEBUG_TYPE VSHookManager

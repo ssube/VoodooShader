@@ -19,57 +19,55 @@
  */
 #pragma once
 
-#include "VoodooFramework.hpp"
-
-#ifdef _DEBUG
-#define D3D_DEBUG_INFO
-#endif
-#include <d3dx9effect.h>
+#include "Voodoo_D3D9.hpp"
 
 namespace VoodooShader
 {
-    /**
-     * @clsid e6f312a4-05af-11e1-9e05-005056c00008
-     */
-    VOODOO_CLASS(VSEffectDX9, IEffect, ({0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    namespace Voodoo_D3D9
     {
-        friend class VSCompilerDX9;
+        /**
+         * @clsid e6f312a4-05af-11e1-9e05-005056c00008
+         */
+        VOODOO_CLASS(VSEffectDX9, IEffect, ({0xA4, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+        {
+            friend class VSCompilerDX9;
 
-    public:
-        VSEffectDX9(_Pre_notnuVSLog_ IFile * pFile, CompileFlags flags);
-        ~VSEffectDX9();
+        public:
+            VSEffectDX9(_Pre_notnull_ IFile * pFile);
+            ~VSEffectDX9();
 
-        VOODOO_METHOD_(uint32_t, AddRef)() CONST;
-        VOODOO_METHOD_(uint32_t, Release)() CONST;
-        VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST;
-        VOODOO_METHOD_(String, ToString)() CONST;
-        VOODOO_METHOD_(ICore *, GetCore)() CONST;
+            VOODOO_METHOD_(uint32_t, AddRef)() CONST;
+            VOODOO_METHOD_(uint32_t, Release)() CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut) CONST;
+            VOODOO_METHOD_(String, ToString)() CONST;
+            VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+            VOODOO_METHOD_(String, GetName)() CONST;
+            VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
-        VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST;
-        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
-        VOODOO_METHOD_(IParameter *, GetParameterByName)(const String & name) CONST;
+            VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST;
+            VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
+            VOODOO_METHOD_(IParameter *, GetParameterByName)(const String & name) CONST;
 
-        VOODOO_METHOD_(uint32_t, GetTechniqueCount)() CONST;
-        VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
-        VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(const String & name) CONST;
-        VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;
-        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique);
+            VOODOO_METHOD_(uint32_t, GetTechniqueCount)() CONST;
+            VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
+            VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(const String & name) CONST;
+            VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;
+            VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique);
 
-    private:
-        mutable uint32_t m_Refs;
-        ICore * m_Core;
-        String m_Name;
+        private:
+            mutable uint32_t m_Refs;
+            ICore * m_Core;
+            String m_Name;
 
-        PropertyMap m_Properties;
+            PropertyMap m_Properties;
 
-        ITechniqueRef m_DefaultTechnique;
-        TechniqueVector m_Techniques;
-        ParameterVector m_Parameters;
+            ITechniqueRef m_DefaultTechnique;
+            TechniqueVector m_Techniques;
+            ParameterVector m_Parameters;
 
-        LPD3DXEFFECT m_DXEffect;
-    };
+            LPD3DXEFFECT m_DXEffect;
+        };
+    }
 }

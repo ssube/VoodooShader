@@ -33,6 +33,18 @@
     <ClInclude Include="VSEffectDX9.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Voodoo_D3D9.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D9_Version.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VSBindingDX9.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConverterDX9.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_D3D9.rc">
@@ -58,6 +70,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VSEffectDX9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Voodoo_D3D9.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VSBindingDX9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

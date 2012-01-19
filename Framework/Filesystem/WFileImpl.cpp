@@ -114,16 +114,16 @@ namespace VoodooShader
         {
             std::ios_base::seekdir dir;
 
-            if (mode == SM_Begin) {dir = std::ios_base::beg;}
-            else if (mode == SM_Current) {dir = std::ios_base::cur;}
-            else if (mode == SM_End) {dir = std::ios_base::end;}
+            if (mode == VSSeek_Begin) {dir = std::ios_base::beg;}
+            else if (mode == VSSeek_Current) {dir = std::ios_base::cur;}
+            else if (mode == VSSeek_End) {dir = std::ios_base::end;}
             else { return false; }
 
-            if (stream == ST_Get)
+            if (stream == VSStream_Get)
             {
                 m_File.seekg(offset, dir);
             }
-            else if (stream == ST_Put)
+            else if (stream == VSStream_Put)
             {
                 m_File.seekp(offset, dir);
             }
@@ -140,11 +140,11 @@ namespace VoodooShader
 
         int32_t VSWFileImpl::Tell(_In_ std::fstream & m_File, _In_ StreamType stream)
         {
-            if (stream == ST_Get)
+            if (stream == VSStream_Get)
             {
                 return (int32_t)m_File.tellg();
             }
-            else if (stream == ST_Put)
+            else if (stream == VSStream_Put)
             {
                 return (int32_t)m_File.tellp();
             }

@@ -23,34 +23,34 @@
 
 namespace VoodooShader
 {
-    namespace VoodooDX9
+    namespace Voodoo_D3D9
     {
-        class VOODOO_API_DX9 DX9_Converter
+        class VOODOO_API_DX9 ConverterDX9
         {
         public:
             static inline D3DFORMAT ToD3DFormat(TextureFormat tf)
             {
                 switch (tf)
                 {
-                case VSFmtRGB5:
+                case VSFmt_RGB5:
                     return D3DFMT_X1R5G5B5;
-                case VSFmtRGB5A1:
+                case VSFmt_RGB5A1:
                     return D3DFMT_A1R5G5B5;
-                case VSFmtRGB8:
+                case VSFmt_RGB8:
                     return D3DFMT_X8R8G8B8;
-                case VSFmtRGBA8:
+                case VSFmt_RGBA8:
                     return D3DFMT_A8R8G8B8;
-                case VSFmtRGB10A2:
+                case VSFmt_RGB10A2:
                     return D3DFMT_A2B10G10R10;
-                case VSFmtRGBA16F:
+                case VSFmt_RGBA16F:
                     return D3DFMT_A16B16G16R16F;
-                case VSFmtRGBA32F:
+                case VSFmt_RGBA32F:
                     return D3DFMT_A32B32G32R32F;
-                case VSFmtD16:
+                case VSFmt_D16:
                     return D3DFMT_D16;
-                case VSFmtD32:
+                case VSFmt_D32:
                     return D3DFMT_D32;
-                case VSFmtUnknown:
+                case VSFmt_Unknown:
                 default:
                     return D3DFMT_UNKNOWN;
                 }
@@ -61,26 +61,26 @@ namespace VoodooShader
                 switch (tf)
                 {
                 case D3DFMT_X1R5G5B5:
-                    return VSFmtRGB5;
+                    return VSFmt_RGB5;
                 case D3DFMT_A1R5G5B5:
-                    return VSFmtRGB5A1;
+                    return VSFmt_RGB5A1;
                 case D3DFMT_X8R8G8B8:
-                    return VSFmtRGB8;
+                    return VSFmt_RGB8;
                 case D3DFMT_A8R8G8B8:
-                    return VSFmtRGBA8;
+                    return VSFmt_RGBA8;
                 case D3DFMT_A2B10G10R10:
-                    return VSFmtRGB10A2;
+                    return VSFmt_RGB10A2;
                 case D3DFMT_A16B16G16R16F:
-                    return VSFmtRGBA16F;
+                    return VSFmt_RGBA16F;
                 case D3DFMT_A32B32G32R32F:
-                    return VSFmtRGBA32F;
+                    return VSFmt_RGBA32F;
                 case D3DFMT_D16:
-                    return VSFmtD16;
+                    return VSFmt_D16;
                 case D3DFMT_D32:
-                    return VSFmtD32;
+                    return VSFmt_D32;
                 case D3DFMT_UNKNOWN:
                 default:
-                    return VSFmtUnknown;
+                    return VSFmt_Unknown;
                 }
             }
         };

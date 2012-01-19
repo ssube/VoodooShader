@@ -38,6 +38,8 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
+        VOODOO_METHOD_(IModule *, GetModule)(_In_ CONST String & name) CONST;
+        VOODOO_METHOD_(IModule *, GetModule)(_In_ CONST Uuid libid) CONST;
         VOODOO_METHOD_(bool, IsLoaded)(_In_ const String & name) CONST;
         VOODOO_METHOD_(bool, IsLoaded)(_In_ const Uuid & libid) CONST;
         VOODOO_METHOD(LoadPath)(_In_ const String & path, _In_ const String & filter);

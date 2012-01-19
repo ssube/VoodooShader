@@ -169,4 +169,11 @@ namespace VoodooShader
 
         return m_ClassCreate(number, pCore);
     }
+
+    HMODULE VOODOO_METHODTYPE VSModule::GetHandle() CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
+        return m_Handle;
+    }
 }

@@ -54,6 +54,18 @@ namespace VoodooShader
          * @{
          */
         /**
+         * Gets a loaded module.
+         * 
+         * @param   name  The module name, as reported by the plugin API.
+         */
+        VOODOO_METHOD_(IModule *, GetModule)(_In_ CONST String & name) CONST PURE;
+        /**
+         * Gets a loaded module.
+         * 
+         * @param   libid  The module LibId, as reported by the plugin API.
+         */
+        VOODOO_METHOD_(IModule *, GetModule)(_In_ CONST Uuid libid) CONST PURE;
+        /**
          * Tests if the module with the given name is currently loaded.
          * 
          * @param name The module name to check.

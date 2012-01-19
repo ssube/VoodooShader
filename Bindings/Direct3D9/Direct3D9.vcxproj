@@ -17,7 +17,11 @@
     <ResourceCompile Include="Voodoo_D3D9.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="D3D9_Version.hpp" />
+    <ClInclude Include="ConverterDX9.hpp" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Voodoo_D3D9.hpp" />
+    <ClInclude Include="VSBindingDX9.hpp" />
     <ClInclude Include="VSEffectDX9.hpp" />
     <ClInclude Include="VSParameterDX9.hpp" />
     <ClInclude Include="VSPassDX9.hpp" />
@@ -25,6 +29,8 @@
     <ClInclude Include="VSTextureDX9.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Voodoo_D3D9.cpp" />
+    <ClCompile Include="VSBindingDX9.cpp" />
     <ClCompile Include="VSEffectDX9.cpp" />
     <ClCompile Include="VSParameterDX9.cpp" />
     <ClCompile Include="VSPassDX9.cpp" />

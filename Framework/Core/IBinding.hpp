@@ -52,11 +52,17 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
+         * @name IBinding Methods
+         * @{
+         */
+        VOODOO_METHOD(Initialize)(uint32_t count, _In_count_(count) Variant * pParams) PURE;
+        /**
+         * @}
          * @name Effect Methods
          * @{
          */
-        VOODOO_METHOD_(IEffect *, CreateEffect)(CONST String & source, CompileFlags flags) PURE;
-        VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST String & filename, CompileFlags flags) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffect)(CONST String & source) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST String & filename) PURE;
         /**
          * @}
          * @name Parameter Methods

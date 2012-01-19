@@ -49,6 +49,7 @@ namespace VoodooShader
 
         // ICore
         VOODOO_METHOD(Initialize)(_In_ const wchar_t * const config);
+        VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
         VOODOO_METHOD(Reset)();
 
         VOODOO_METHOD_(XmlDocument, GetConfig)() CONST;
@@ -57,7 +58,7 @@ namespace VoodooShader
         VOODOO_METHOD_(ILogger *, GetLogger)() CONST;
         VOODOO_METHOD_(IParser *, GetParser)() CONST;
 
-        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile, const CompileFlags flags); 
+        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * const pFile); 
         VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ const ParameterDesc desc);
         VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ const TextureDesc desc);
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ const ParameterDesc desc) CONST;
@@ -68,8 +69,6 @@ namespace VoodooShader
     private:
         mutable uint32_t m_Refs;
         uint32_t m_Version;
-
-        CompileFlags m_DefaultFlags;
 
         /** Config file. */
         XmlDocument m_ConfigFile;

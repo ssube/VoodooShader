@@ -106,6 +106,37 @@ namespace VoodooShader
         return m_Core;
     }
 
+    IModule * VOODOO_METHODTYPE VSModuleManager::GetModule(_In_ CONST String & name) CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
+        StrongNameMap::const_iterator module = m_ModuleNames.find(name);
+        if (module != m_ModuleNames.end())
+        {
+            Uuid libid = module->second;
+            return this->GetModule(libid);
+        }
+        else
+        {
+            return nullptr;
+        }
+    }
+
+    IModule * VOODOO_METHODTYPE VSModuleManager::GetModule(_In_ CONST Uuid libid) CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
+        ModuleMap::const_iterator module = m_Modules.find(libid);
+        if (module != m_Modules.end())
+        {
+            return module->second.get();
+        }
+        else
+        {
+            return nullptr;
+        }
+    }
+
     bool VOODOO_METHODTYPE VSModuleManager::IsLoaded(_In_ const String & name) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());

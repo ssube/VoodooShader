@@ -54,7 +54,7 @@
       <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);d3dx9.lib;shell32.lib;shlwapi.lib;pugixml_d.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);shell32.lib;shlwapi.lib;easyhook32.lib;pugixml_d.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
       <EntryPointSymbol>
@@ -70,7 +70,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);d3dx9.lib;shell32.lib;shlwapi.lib;pugixml.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);shell32.lib;shlwapi.lib;easyhook32.lib;pugixml.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
     </Link>

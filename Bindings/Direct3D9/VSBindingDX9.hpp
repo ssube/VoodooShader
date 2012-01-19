@@ -25,40 +25,49 @@ namespace VoodooShader
 {
     namespace Voodoo_D3D9
     {
-        /**
-         * @clsid e6f312a5-05af-11e1-9e05-005056c00008
-         */
-        VOODOO_CLASS(VSTechniqueDX9, ITechnique, ({0xA5, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+        // {382CB920-83DD-4570-875F-F4E0C192A476}
+        VOODOO_CLASS(VSBindingDX9, IBinding, ({0x38, 0x2c, 0xb9, 0x20, 0x83, 0xdd, 0x45, 0x70, 0x87, 0x5f, 0xf4, 0xe0, 0xc1, 0x92, 0xa4, 0x76}))
         {
         public:
-            VSTechniqueDX9(_In_ VSEffectDX9 * pEffect, _In_ LPD3DXEFFECT pDXEffect, _In_ D3DXHANDLE pTechHandle);
-            ~VSTechniqueDX9();
+            VSBindingDX9(_In_ ICore * pCore);
+            ~VSBindingDX9();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut);
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
-
-            VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
-
-            VOODOO_METHOD_(uint32_t, GetPassCount)() CONST;
-            VOODOO_METHOD_(IPass *, GetPass)(_In_ const uint32_t index) CONST;
-            VOODOO_METHOD_(IEffect *, GetEffect)() CONST;
+            /**
+             * @}
+             * @name IBinding Methods
+             * @{
+             */
+            VOODOO_METHOD(Initialize)(uint32_t count, _In_count_(count) Variant * pParams);
+            /**
+             * @}
+             * @name Effect Methods
+             * @{
+             */
+            VOODOO_METHOD_(IEffect *, CreateEffect)(CONST String & source);
+            VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST String & filename);
+            /**
+             * @}
+             * @name Parameter Methods
+             * @{
+             */
+            VOODOO_METHOD_(IParameter *, CreateParameter)(CONST String & name, ParameterDesc desc);
+            /**
+             * @}
+             * @name Texture Methods
+             * @{
+             */
+            VOODOO_METHOD_(ITexture *, CreateTexture)(CONST String & name, TextureDesc desc);
+            VOODOO_METHOD_(ITexture *, LoadTexture)(CONST String & filename);
 
         private:
             mutable uint32_t m_Refs;
             ICore * m_Core;
-            String m_Name;
-
-            VSEffectDX9 * m_Effect;
-            PropertyMap m_Properties;
-            PassVector m_Passes;
-
-            LPD3DXEFFECT m_DXEffect;
-            D3DXHANDLE m_DXHandle;
+            LPDIRECT3DDEVICE9 m_Device;
         };
     }
 }

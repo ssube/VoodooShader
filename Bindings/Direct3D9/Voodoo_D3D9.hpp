@@ -1,0 +1,48 @@
+/*
+ * This file is part of the Voodoo Shader Framework.
+ *
+ * Copyright (c) 2010-2012 by Sean Sube
+ *
+ * The Voodoo Shader Framework is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser
+ * General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+ * any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with this program; if not, write to
+ * the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 US
+ *
+ * Support and more information may be found at
+ *   http://www.voodooshader.com
+ * or by contacting the lead developer at
+ *   peachykeen@voodooshader.com
+ */
+#pragma once
+
+#define VOODOO_IMPORT
+#define VOODOO_NO_PUGIXML
+#include "VoodooFramework.hpp"
+
+#ifdef _DEBUG
+#define D3D_DEBUG_INFO
+#endif
+#include <d3d9.h>
+#include <d3dx9effect.h>
+
+namespace VoodooShader
+{
+    namespace Voodoo_D3D9
+    {
+        class VSCompilerDX9;
+        class VSEffectDX9;
+        class VSParameterDX9;
+        class VSPassDX9;
+        class VSTechniqueDX9;
+        class VSTextureDX9;
+
+        const Version * VOODOO_CALLTYPE API_ModuleVersion();
+        const uint32_t  VOODOO_CALLTYPE API_ClassCount();
+        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
+        IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
+    }
+}

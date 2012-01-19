@@ -24,191 +24,194 @@
 
 namespace VoodooShader
 {
-    #define VOODOO_DEBUG_TYPE VSTechniqueDX9
-    DeclareDebugCache();
-
-    VSTechniqueDX9::VSTechniqueDX9(VSEffectDX9 * pEffect, LPD3DXEFFECT pDXEffect, D3DXHANDLE pTechHandle) :
-        m_Refs(0), m_Effect(pEffect), m_DXEffect(pDXEffect), m_DXHandle(pTechHandle)
+    namespace Voodoo_D3D9
     {
-        if (!m_Effect)
+        #define VOODOO_DEBUG_TYPE VSTechniqueDX9
+        DeclareDebugCache();
+
+        VSTechniqueDX9::VSTechniqueDX9(VSEffectDX9 * pEffect, LPD3DXEFFECT pDXEffect, D3DXHANDLE pTechHandle) :
+            m_Refs(0), m_Effect(pEffect), m_DXEffect(pDXEffect), m_DXHandle(pTechHandle)
         {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no effect."), nullptr);
-        }
-
-        m_Core = m_Effect->GetCore();
-
-        if (!m_DXEffect)
-        {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware effect."), nullptr);
-        }
-        else if (!m_DXHandle)
-        {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware handle."), nullptr);
-        }
-
-        D3DXTECHNIQUE_DESC desc;
-        ZeroMemory(&desc, sizeof(D3DXTECHNIQUE_DESC));
-        if (FAILED(pDXEffect->GetTechniqueDesc(pTechHandle, &desc)))
-        {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to get technique description."), m_Core);
-        }
-
-        m_Name = desc.Name;
-
-        if (FAILED(m_DXEffect->ValidateTechnique(m_DXHandle)))
-        {
-            Throw(VOODOO_CORE_NAME, VSTR("Unable to validate technique."), m_Core);
-        }
-
-        for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)
-        {
-            D3DXHANDLE passHandle = m_DXEffect->GetPass(m_DXHandle, passIndex);
-            VSPassDX9 * pass = new VSPassDX9(this, m_DXEffect, passHandle, passIndex);
-            m_Passes.push_back(pass);
-        }
-
-        AddThisToDebugCache();
-    }
-
-    VSTechniqueDX9::~VSTechniqueDX9()
-    {
-        RemoveThisFromDebugCache();
-
-        m_Passes.clear();
-    }
-
-    uint32_t VOODOO_METHODTYPE VSTechniqueDX9::AddRef() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return SAFE_INCREMENT(m_Refs);
-    }
-
-    uint32_t VOODOO_METHODTYPE VSTechniqueDX9::Release() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        if (SAFE_DECREMENT(m_Refs) == 0)
-        {
-            delete this;
-            return 0;
-        }
-        else
-        {
-            return m_Refs;
-        }
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ const IObject ** ppOut) CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        if (!ppOut)
-        {
-            return VSFERR_INVALIDPARAMS;
-        }
-        else
-        {
-            if (refid == IID_IObject)
+            if (!m_Effect)
             {
-                *ppOut = static_cast<const IObject*>(this);
+                Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no effect."), nullptr);
             }
-            else if (refid == IID_ITechnique)
+
+            m_Core = m_Effect->GetCore();
+
+            if (!m_DXEffect)
             {
-                *ppOut = static_cast<const ITechnique*>(this);
+                Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware effect."), nullptr);
             }
-            else if (refid == CLSID_VSTechniqueDX9)
+            else if (!m_DXHandle)
             {
-                *ppOut = static_cast<const VSTechniqueDX9*>(this);
+                Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware handle."), nullptr);
+            }
+
+            D3DXTECHNIQUE_DESC desc;
+            ZeroMemory(&desc, sizeof(D3DXTECHNIQUE_DESC));
+            if (FAILED(pDXEffect->GetTechniqueDesc(pTechHandle, &desc)))
+            {
+                Throw(VOODOO_CORE_NAME, VSTR("Unable to get technique description."), m_Core);
+            }
+
+            m_Name = desc.Name;
+
+            if (FAILED(m_DXEffect->ValidateTechnique(m_DXHandle)))
+            {
+                Throw(VOODOO_CORE_NAME, VSTR("Unable to validate technique."), m_Core);
+            }
+
+            for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)
+            {
+                D3DXHANDLE passHandle = m_DXEffect->GetPass(m_DXHandle, passIndex);
+                VSPassDX9 * pass = new VSPassDX9(this, m_DXEffect, passHandle, passIndex);
+                m_Passes.push_back(pass);
+            }
+
+            AddThisToDebugCache();
+        }
+
+        VSTechniqueDX9::~VSTechniqueDX9()
+        {
+            RemoveThisFromDebugCache();
+
+            m_Passes.clear();
+        }
+
+        uint32_t VOODOO_METHODTYPE VSTechniqueDX9::AddRef() CONST
+        {
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            return SAFE_INCREMENT(m_Refs);
+        }
+
+        uint32_t VOODOO_METHODTYPE VSTechniqueDX9::Release() CONST
+        {
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            if (SAFE_DECREMENT(m_Refs) == 0)
+            {
+                delete this;
+                return 0;
             }
             else
             {
-                *ppOut = nullptr;
-                return VSFERR_INVALIDUUID;
+                return m_Refs;
             }
-
-            (*ppOut)->AddRef();
-            return VSF_OK;
         }
-    }
 
-    String VOODOO_METHODTYPE VSTechniqueDX9::ToString() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return Format(VSTR("VSTechnique(%1%)")) << m_Name;
-    }
-
-    ICore * VOODOO_METHODTYPE VSTechniqueDX9::GetCore() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_Core;
-    }
-
-    String VOODOO_METHODTYPE VSTechniqueDX9::GetName() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_Name;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
-    {
-        if (!pValue) VSFERR_INVALIDPARAMS;
-
-        if (propid == PropIds::D3DX9Handle)
+        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::QueryInterface(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut)
         {
-            pValue->Type = UT_PVoid;
-            pValue->VPVoid = (PVOID)m_DXHandle;
-            return VSF_OK;
-        } 
-        else if (propid == PropIds::D3DX9Effect)
-        {
-            pValue->Type = UT_PVoid;
-            pValue->VPVoid = (PVOID)m_DXEffect;
-            return VSF_OK;
-        }
-        else
-        {
-            PropertyMap::const_iterator property = m_Properties.find(propid);
-            if (property != m_Properties.end())
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            if (!ppOut)
             {
-                CopyMemory(pValue, &property->second, sizeof(Variant));
+                return VSFERR_INVALIDPARAMS;
+            }
+            else
+            {
+                if (refid == IID_IObject)
+                {
+                    *ppOut = static_cast<const IObject*>(this);
+                }
+                else if (refid == IID_ITechnique)
+                {
+                    *ppOut = static_cast<const ITechnique*>(this);
+                }
+                else if (refid == CLSID_VSTechniqueDX9)
+                {
+                    *ppOut = static_cast<const VSTechniqueDX9*>(this);
+                }
+                else
+                {
+                    *ppOut = nullptr;
+                    return VSFERR_INVALIDUUID;
+                }
+
+                (*ppOut)->AddRef();
                 return VSF_OK;
             }
         }
 
-        return VSFERR_INVALIDCALL;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::SetProperty(const Uuid propid, _In_ Variant * pValue)
-    {
-        if (propid == PropIds::D3DX9Handle || propid == PropIds::D3DX9Effect)
+        String VOODOO_METHODTYPE VSTechniqueDX9::ToString() CONST
         {
-            return VSFERR_INVALIDPARAMS;
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            return Format(VSTR("VSTechnique(%1%)")) << m_Name;
         }
 
-        m_Properties[propid] = (*pValue);
-        return VSF_OK;
-    }
-
-    IPass * VOODOO_METHODTYPE VSTechniqueDX9::GetPass(const uint32_t index) CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        if (index < m_Passes.size())
+        ICore * VOODOO_METHODTYPE VSTechniqueDX9::GetCore() CONST
         {
-            return m_Passes[index].get();
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            return m_Core;
         }
-        else
+
+        String VOODOO_METHODTYPE VSTechniqueDX9::GetName() CONST
         {
-            return nullptr;
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            return m_Name;
         }
-    }
 
-    uint32_t VOODOO_METHODTYPE VSTechniqueDX9::GetPassCount() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_Passes.size();
-    }
+        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
+        {
+            if (!pValue) VSFERR_INVALIDPARAMS;
 
-    IEffect * VOODOO_METHODTYPE VSTechniqueDX9::GetEffect() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        return m_Effect;
+            if (propid == PropIds::D3DX9Handle)
+            {
+                pValue->Type = UT_PVoid;
+                pValue->VPVoid = (PVOID)m_DXHandle;
+                return VSF_OK;
+            } 
+            else if (propid == PropIds::D3DX9Effect)
+            {
+                pValue->Type = UT_PVoid;
+                pValue->VPVoid = (PVOID)m_DXEffect;
+                return VSF_OK;
+            }
+            else
+            {
+                PropertyMap::const_iterator property = m_Properties.find(propid);
+                if (property != m_Properties.end())
+                {
+                    CopyMemory(pValue, &property->second, sizeof(Variant));
+                    return VSF_OK;
+                }
+            }
+
+            return VSFERR_INVALIDCALL;
+        }
+
+        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::SetProperty(const Uuid propid, _In_ Variant * pValue)
+        {
+            if (propid == PropIds::D3DX9Handle || propid == PropIds::D3DX9Effect)
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            m_Properties[propid] = (*pValue);
+            return VSF_OK;
+        }
+
+        IPass * VOODOO_METHODTYPE VSTechniqueDX9::GetPass(const uint32_t index) CONST
+        {
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            if (index < m_Passes.size())
+            {
+                return m_Passes[index].get();
+            }
+            else
+            {
+                return nullptr;
+            }
+        }
+
+        uint32_t VOODOO_METHODTYPE VSTechniqueDX9::GetPassCount() CONST
+        {
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            return m_Passes.size();
+        }
+
+        IEffect * VOODOO_METHODTYPE VSTechniqueDX9::GetEffect() CONST
+        {
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            return m_Effect;
+        }
     }
 }
