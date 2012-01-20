@@ -21,9 +21,6 @@
     <ClInclude Include="VoodooGL.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Frost_Adapter.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Frost_Module.hpp">
       <Filter>Headers</Filter>
     </ClInclude>

@@ -49,7 +49,7 @@ namespace VoodooShader
     static const wchar_t * name_VSHookManager = VSTR("VSHookManager");
     static const wchar_t * name_VSLogger = VSTR("VSLogger");
 
-    const Version * VOODOO_CALLTYPE API_ModuleVersion()
+    const Version * VOODOO_CALLTYPE API_PluginInit()
     {
         return &coreVersion;
     }

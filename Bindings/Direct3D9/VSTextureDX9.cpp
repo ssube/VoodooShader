@@ -174,6 +174,57 @@ namespace VoodooShader
                 }
                 m_Desc.Format = ConverterDX9::ToTextureFormat(desc.Format);
             }
+        }        VOODOO_METHODDEF(VSTextureDX9::StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, CONST Rect dest)
+        {
+            if (!pSource) return VSFERR_INVALIDPARAMS;
+
+            VSTextureDX9 * pOther = nullptr;
+            if (FAILED(pSource->QueryInterface(CLSID_VSTextureDX9, (IObject**)&pOther)) || !pOther)
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            if (!pOther->m_Texture)
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            LPDIRECT3DDEVICE9 pDevice = nullptr;
+            if (FAILED(m_Texture->GetDevice(&pDevice)) || !pDevice)
+            {
+                return VSFERR_APIERROR;
+            }
+
+            RECT src = {source.Min.X, source.Min.Y, source.Max.X, source.Max.Y};
+            RECT dst = {dest.Min.X, dest.Min.Y, dest.Max.X, dest.Max.Y};
+
+            if (SUCCEEDED(pDevice->StretchRect(pOther->m_Surface, &src, m_Surface, &dst, D3DTEXF_NONE)))
+            {
+                return VSF_OK;
+            }
+
+            if (FAILED(m_Texture->AddDirtyRect(&dst)))
+            {
+                return VSFERR_APIERROR;
+            }
+
+            if (SUCCEEDED(pDevice->UpdateTexture(pOther->m_Texture, m_Texture)))
+            {
+                return VSF_OK;
+            }
+            else
+            {
+                return VSFERR_APIERROR;
+            }
+        }
+
+        VOODOO_METHODDEF(VSTextureDX9::CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, CONST UInt3 dest)
+        {
+            UNREFERENCED_PARAMETER(pSource);
+            UNREFERENCED_PARAMETER(source);
+            UNREFERENCED_PARAMETER(dest);
+
+            return VSFERR_NOTIMPLEMENTED;
         }
     }
 }

@@ -47,21 +47,10 @@ namespace VoodooShader
     {
         typedef std::list<String> StringList;
 
-        const Version * VOODOO_CALLTYPE API_ModuleVersion();
+        const Version * VOODOO_CALLTYPE API_PluginInit();
         const uint32_t  VOODOO_CALLTYPE API_ClassCount();
         const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
         IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
-
-        class VSWFileImpl
-        {
-        public:
-            static VoodooResult Open(_In_ ICore * m_Core, _In_ String & m_Path, _In_ std::fstream & m_File, _In_ FileOpenMode mode);
-            static VoodooResult Close(_In_ std::fstream & m_File);
-            static VoodooResult Seek(_In_ std::fstream & m_File, _In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset);
-            static int32_t Tell(_In_ std::fstream & m_File, _In_ StreamType stream);
-            static int32_t Read(_In_ ICore * m_Core, _In_ std::fstream & m_File, _In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
-            static int32_t Write(_In_ ICore * m_Core, _In_ std::fstream & m_File, _In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
-        };
 
         /**
          * class VSWFileSystem
@@ -81,7 +70,7 @@ namespace VoodooShader
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid clsid, _Deref_out_opt_ IObject ** ppOut);
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
@@ -118,7 +107,7 @@ namespace VoodooShader
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
             VOODOO_METHOD_(uint32_t, Release)() CONST;
-            VOODOO_METHOD(QueryInterface)(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) CONST;
+            VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid clsid, _Deref_out_opt_ IObject ** ppOut);
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 

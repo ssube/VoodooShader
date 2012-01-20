@@ -48,7 +48,7 @@ namespace VoodooShader
              * @name IBinding Methods
              * @{
              */
-            VOODOO_METHOD(Initialize)(uint32_t count, _In_count_(count) Variant * pParams);
+            VOODOO_METHOD(Init)(uint32_t count, _In_count_(count) Variant * pParams);
             /**
              * @}
              * @name Effect Methods
@@ -73,6 +73,7 @@ namespace VoodooShader
         private:
             mutable uint32_t m_Refs;
             ICore * m_Core;
+
             LPDIRECT3DDEVICE9 m_Device;
             bool m_ILUT;
         };

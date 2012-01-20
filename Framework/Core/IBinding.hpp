@@ -55,7 +55,7 @@ namespace VoodooShader
          * @name IBinding Methods
          * @{
          */
-        VOODOO_METHOD(Initialize)(uint32_t count, _In_count_(count) Variant * pParams) PURE;
+        VOODOO_METHOD(Init)(uint32_t count, _In_count_(count) Variant * pParams) PURE;
         /**
          * @}
          * @name Effect Methods

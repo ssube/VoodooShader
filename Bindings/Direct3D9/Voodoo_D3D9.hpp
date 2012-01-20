@@ -40,7 +40,7 @@ namespace VoodooShader
         class VSTechniqueDX9;
         class VSTextureDX9;
 
-        const Version * VOODOO_CALLTYPE API_ModuleVersion();
+        const Version * VOODOO_CALLTYPE API_PluginInit();
         const uint32_t  VOODOO_CALLTYPE API_ClassCount();
         const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
         IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);

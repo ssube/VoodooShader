@@ -689,7 +689,7 @@ namespace VoodooShader
                     return;
                 }
 
-                ITexture * pSrcTex = pFile->LoadTexture();
+                ITexture * pSrcTex = m_Core->CreateTexture(nameStr, pFile);
                 if (!pSrcTex)
                 {
                     m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 

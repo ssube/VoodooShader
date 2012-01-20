@@ -22,7 +22,6 @@
 // CVoodoo3D8
 #include "CVoodoo3DDevice8.hpp"
 // Voodoo DX89
-#include "DX9_Adapter.hpp"
 #include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 // Voodoo Core

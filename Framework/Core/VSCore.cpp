@@ -397,7 +397,7 @@ namespace VoodooShader
         m_Binding = pBinding;
         pBinding->Release();
 
-        return m_Binding->Initialize(count, pParams);
+        return m_Binding->Init(count, pParams);
     }
 
     VOODOO_METHODDEF(VSCore::Reset)()

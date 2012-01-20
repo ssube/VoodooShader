@@ -60,7 +60,7 @@ SETUP(OGLCore)
     gpCore = CreateCore(0);
     WIN_ASSERT_NOT_NULL(gpCore, L"OGLCore::Setup: gpCore is nullptr.");
     gpCore->AddRef();
-    gpCore->Initialize(L"D:\\Code\\VoodooShader\\Tests\\Resources\\OpenGL.xmlconfig");
+    gpCore->Init(L"D:\\Code\\VoodooShader\\Tests\\Resources\\OpenGL.xmlconfig");
 }
 
 TEARDOWN(OGLCore)

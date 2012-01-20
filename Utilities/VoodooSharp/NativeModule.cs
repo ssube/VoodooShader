@@ -38,7 +38,7 @@ namespace VoodooSharp
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ModuleVersion
+    public struct VersionInfo
     {
         public Guid LibID;
         public Int32 Major;
@@ -53,7 +53,7 @@ namespace VoodooSharp
     };
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-    delegate IntPtr NativeModule_ModuleVersionFunc();
+    delegate IntPtr NativeModule_PluginInitFunc();
 
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     delegate UInt32 NativeModule_ModuleCountFunc();
@@ -65,11 +65,11 @@ namespace VoodooSharp
     {
         private IntPtr m_Module;
 
-        private NativeModule_ModuleVersionFunc m_ModuleVersionFunc;
+        private NativeModule_PluginInitFunc m_PluginInitFunc;
         private NativeModule_ModuleCountFunc m_ModuleCountFunc;
         private NativeModule_ModuleInfoFunc m_ModuleInfoFunc;
 
-        private ModuleVersion m_Version;
+        private VersionInfo m_Version;
         private UInt32 m_Count;
         private  Dictionary<UInt32, ClassInfo> m_Classes;
 
@@ -96,8 +96,8 @@ namespace VoodooSharp
                 throw new Exception("Unable to load " + filename);
             }
 
-            IntPtr fptr = GetProcAddress(m_Module, "ModuleVersion");
-            m_ModuleVersionFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_ModuleVersionFunc)) as NativeModule_ModuleVersionFunc;
+            IntPtr fptr = GetProcAddress(m_Module, "PluginInit");
+            m_PluginInitFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_PluginInitFunc)) as NativeModule_PluginInitFunc;
 
             fptr = GetProcAddress(m_Module, "ClassCount");
             m_ModuleCountFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_ModuleCountFunc)) as NativeModule_ModuleCountFunc;
@@ -105,13 +105,13 @@ namespace VoodooSharp
             fptr = GetProcAddress(m_Module, "ClassInfo");
             m_ModuleInfoFunc = Marshal.GetDelegateForFunctionPointer(fptr, typeof(NativeModule_ModuleInfoFunc)) as NativeModule_ModuleInfoFunc;
 
-            if (m_ModuleVersionFunc == null || m_ModuleCountFunc == null || m_ModuleInfoFunc == null)
+            if (m_ModuleInfoFunc == null || m_ModuleCountFunc == null || m_ModuleInfoFunc == null)
             {
                 throw new Exception("Not a native Voodoo module.");
             }
 
-            IntPtr versionptr = m_ModuleVersionFunc();
-            m_Version = (ModuleVersion)Marshal.PtrToStructure(versionptr, typeof(ModuleVersion));
+            IntPtr versionptr = m_PluginInitFunc();
+            m_Version = (VersionInfo)Marshal.PtrToStructure(versionptr, typeof(VersionInfo));
 
             m_Count = m_ModuleCountFunc();
 
@@ -137,7 +137,7 @@ namespace VoodooSharp
             }
         }
 
-        public ModuleVersion Version
+        public VersionInfo Version
         {
             get
             {

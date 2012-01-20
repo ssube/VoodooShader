@@ -61,7 +61,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VSWFile::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
+        VoodooResult VSWFile::QueryInterface(_In_ CONST Uuid clsid, _Deref_out_opt_ IObject ** ppOut)
         {
             if (!ppOut)
             {
@@ -71,15 +71,15 @@ namespace VoodooShader
             {
                 if (clsid == IID_IObject)
                 {
-                    *ppOut = static_cast<const IObject*>(this);
+                    *ppOut = static_cast<IObject*>(this);
                 }
                 else if (clsid == IID_IFile)
                 {
-                    *ppOut = static_cast<const IFile*>(this);
+                    *ppOut = static_cast<IFile*>(this);
                 }
                 else if (clsid == CLSID_VSWFile)
                 {
-                    *ppOut = static_cast<const VSWFile*>(this);
+                    *ppOut = static_cast<VSWFile*>(this);
                 }
                 else
                 {

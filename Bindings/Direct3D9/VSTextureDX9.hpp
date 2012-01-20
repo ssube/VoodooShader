@@ -45,7 +45,8 @@ namespace VoodooShader
             VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
             VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
-            VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
+            VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;            VOODOO_METHOD(StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, CONST Rect dest);
+            VOODOO_METHOD(CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, CONST UInt3 dest);
 
         private:
             void GetTexDesc();

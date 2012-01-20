@@ -40,7 +40,7 @@ namespace VoodooShader
     class VSParameterDX9;
 
     /* Plugin exports. */
-    const Version * VOODOO_CALLTYPE API_ModuleVersion();
+    const Version * VOODOO_CALLTYPE API_PluginInit();
     const uint32_t  VOODOO_CALLTYPE API_ClassCount();
     const wchar_t * VOODOO_CALLTYPE API_ClassInfo(const uint32_t index, _Out_ Uuid * pUuid);
     IObject *       VOODOO_CALLTYPE API_ClassCreate(const uint32_t index, _Pre_notnull_ ICore * pCore);

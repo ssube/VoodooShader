@@ -493,11 +493,11 @@ namespace VoodooShader
      */
     namespace Functions
     {
-        typedef const Version * (VOODOO_CALLTYPE * ModuleInitFunc)();
-        typedef const uint32_t  (VOODOO_CALLTYPE * ModuleCountFunc)();
-        typedef const wchar_t * (VOODOO_CALLTYPE * ModuleInfoFunc)(const uint32_t, Uuid *);
-        typedef IObject *       (VOODOO_CALLTYPE * ModuleCreateFunc)(const uint32_t, ICore *);
         typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)(uint32_t);
+        typedef const Version * (VOODOO_CALLTYPE * PluginInitFunc)(ICore *);
+        typedef const uint32_t  (VOODOO_CALLTYPE * ClassCountFunc)();
+        typedef const wchar_t * (VOODOO_CALLTYPE * ClassInfoFunc)(const uint32_t, Uuid *);
+        typedef IObject *       (VOODOO_CALLTYPE * ClassCreateFunc)(const uint32_t, ICore *);
         typedef VoodooResult    (VOODOO_CALLTYPE * CallbackFunc)();
     }
     /**
@@ -622,35 +622,35 @@ namespace VoodooShader
     inline Variant CreateVariant()                      { DECLARE_VARIANT(var); return var; }
     inline Variant CreateVariant(const UnionType t)     { DECLARE_VARIANT(var); var.Type = t; return var; }
     inline Variant CreateVariant(const bool & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, Bool, 0); var.VBool = v; return var; }
-    inline Variant CreateVariant(const int8_t & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int8, v);         return var; }
+    inline Variant CreateVariant(const Byte1 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int8, v.X);       return var; }
     inline Variant CreateVariant(const Byte2 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int8, v.X, v.Y);  return var; }
     inline Variant CreateVariant(const Byte3 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int8, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Byte4 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int8, v.X, v.Y, v.Z, v.W); return var; }
-    inline Variant CreateVariant(const uint8_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt8, v);         return var; }
+    inline Variant CreateVariant(const UByte1 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt8, v.X);       return var; }
     inline Variant CreateVariant(const UByte2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt8, v.X, v.Y); return var; }
     inline Variant CreateVariant(const UByte3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt8, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const UByte4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt8, v.X, v.Y, v.Z, v.W); return var; }
-    inline Variant CreateVariant(const int16_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int16, v);         return var; }
+    inline Variant CreateVariant(const Short1 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int16, v.X);       return var; }
     inline Variant CreateVariant(const Short2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int16, v.X, v.Y);  return var; }
     inline Variant CreateVariant(const Short3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int16, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Short4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int16, v.X, v.Y, v.Z, v.W); return var; }
-    inline Variant CreateVariant(const uint16_t & v)    { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt16, v);        return var; }
+    inline Variant CreateVariant(const UShort1 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt16, v.X);      return var; }
     inline Variant CreateVariant(const UShort2 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt16, v.X, v.Y); return var; }
     inline Variant CreateVariant(const UShort3 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt16, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const UShort4 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt16, v.X, v.Y, v.Z, v.W); return var; }
-    inline Variant CreateVariant(const int32_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int32, v);         return var; }
+    inline Variant CreateVariant(const Int1 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int32, v.X);       return var; }
     inline Variant CreateVariant(const Int2 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int32, v.X, v.Y);  return var; }
     inline Variant CreateVariant(const Int3 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int32, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Int4 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int32, v.X, v.Y, v.Z, v.W); return var; }
-    inline Variant CreateVariant(const uint32_t & v)    { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt32, v);        return var; }
+    inline Variant CreateVariant(const UInt1 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt32, v.X);      return var; }
     inline Variant CreateVariant(const UInt2 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt32, v.X, v.Y); return var; }
     inline Variant CreateVariant(const UInt3 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt32, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const UInt4 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt32, v.X, v.Y, v.Z, v.W); return var; }
-    inline Variant CreateVariant(const float & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Float, v);         return var; }
+    inline Variant CreateVariant(const Float1 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Float, v.X);       return var; }
     inline Variant CreateVariant(const Float2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Float, v.X, v.Y);  return var; }
     inline Variant CreateVariant(const Float3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Float, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Float4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Float, v.X, v.Y, v.Z, v.W); return var; }
-    inline Variant CreateVariant(const double & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Double, v);        return var; }
+    inline Variant CreateVariant(const Double1 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Double, v.X);      return var; }
     inline Variant CreateVariant(const Double2 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Double, v.X, v.Y); return var; }
     inline Variant CreateVariant(const Double3 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Double, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Double4 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Double, v.X, v.Y, v.Z, v.W); return var; }

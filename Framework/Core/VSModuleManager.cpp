@@ -248,7 +248,7 @@ namespace VoodooShader
         }
 
         // Register classes from module
-        const Version * moduleversion = module->ModuleVersion();
+        const Version * moduleversion = module->PluginInit();
 
         if (!moduleversion)
         {
@@ -272,7 +272,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << *module->ModuleVersion());
+            logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << *module->PluginInit());
         }
 
         int classCount = module->ClassCount();

@@ -180,7 +180,7 @@ namespace VoodooShader
             }
             else if (propid == PropIds::D3DX9PassId)
             {
-                (*pValue) = CreateVariant(m_DXPassId);
+                (*pValue) = CreateVariant(uint32_t(m_DXPassId));
                 return VSF_OK;
             }
             else

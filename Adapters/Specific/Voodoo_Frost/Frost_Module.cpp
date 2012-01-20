@@ -36,7 +36,7 @@ namespace VoodooShader
 {
     namespace VoodooFrost
     {
-        const Version * VOODOO_CALLTYPE API_ModuleVersion(void)
+        const Version * VOODOO_CALLTYPE API_PluginInit(void)
         {
             static const Version moduleVersion = VOODOO_VERSION_STRUCT(FROST);
 

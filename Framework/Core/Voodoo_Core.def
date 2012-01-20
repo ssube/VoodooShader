@@ -3,7 +3,7 @@ LIBRARY
 EXPORTS
 CreateCore=CreateCore
 
-ModuleVersion=API_ModuleVersion
+PluginInit=API_PluginInit
 ClassCount=API_ClassCount
 ClassInfo=API_ClassInfo
 ClassCreate=API_ClassCreate

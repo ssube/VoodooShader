@@ -45,7 +45,7 @@ SETUP(DefaultCore)
     
     gpCore = CreateCore(0);
     gpCore->AddRef();
-    gpCore->Initialize(VSTR("D:\\Code\\VoodooShader\\Tests\\Resources\\default.xmlconfig"));
+    gpCore->Init(VSTR("D:\\Code\\VoodooShader\\Tests\\Resources\\default.xmlconfig"));
     WIN_ASSERT_NOT_NULL(gpCore, L"DefaultCore::Setup: gpCore is nullptr.");
 }
 
@@ -72,13 +72,6 @@ BEGIN_TESTF(Core_GetFileSystem, DefaultCore)
 {
     IFileSystem* pFilesystem = gpCore->GetFileSystem();
     WIN_ASSERT_NOT_NULL(pFilesystem, L"Core_GetFileSystem: filesystem is nullptr.");
-}
-END_TESTF;
-
-BEGIN_TESTF(Core_GetAdapter, DefaultCore)
-{
-    IAdapter* pAdapter = gpCore->GetAdapter();
-    WIN_ASSERT_NOT_NULL(pAdapter, L"Core_GetAdapter: adapter is nullptr.");
 }
 END_TESTF;
 

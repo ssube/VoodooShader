@@ -115,7 +115,7 @@ namespace VoodooShader
             return m_Core;
         }
 
-        VOODOO_METHODDEF(VSBindingDX9::Initialize)(uint32_t count, _In_count_(count) Variant * pParams)
+        VOODOO_METHODDEF(VSBindingDX9::Init)(uint32_t count, _In_count_(count) Variant * pParams)
         {
             if (count == 0 || !pParams)
             {

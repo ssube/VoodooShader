@@ -18,7 +18,7 @@ DirectInputCreateW = VSDirectInputCreateW
 
 DirectSoundCreate8 = VSDirectSoundCreate8
 
-ModuleVersion=API_ModuleVersion
+PluginInit=API_PluginInit
 ClassCount=API_ClassCount
 ClassInfo=API_ClassInfo
 ClassCreate=API_ClassCreate

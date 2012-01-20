@@ -23,7 +23,6 @@
 // CVoodoo3D9
 #include "CVoodoo3DDevice9.hpp"
 // Voodoo DX89
-#include "DX9_Adapter.hpp"
 #include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 // Voodoo Core
@@ -210,7 +209,9 @@ namespace VoodooShader
             );
 
             if (SUCCEEDED(hr))
-            {
+            {                VoodooShader::Variant params[2] = {CreateVariant(m_SdkVersion), CreateVariant(realDevice)};
+                gpVoodooCore->Bind(VSProfile_D3D9, 2, params);
+
                 // Return our device
                 *ppReturnedDeviceInterface = new CVoodoo3DDevice9(this, realDevice);
 
@@ -231,7 +232,7 @@ namespace VoodooShader
                 bufferTextureDesc.Size.X = pPP->BackBufferWidth;
                 bufferTextureDesc.Size.Y = pPP->BackBufferHeight;
                 bufferTextureDesc.Size.Z = 0;
-                bufferTextureDesc.Format = VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(pPP->BackBufferFormat);
+                bufferTextureDesc.Format = VoodooShader::VoodooDX9::ConverterDX9::ToTextureFormat(pPP->BackBufferFormat);
                 bufferTextureDesc.Mipmaps = true;
                 bufferTextureDesc.RenderTarget = true;
 
@@ -273,7 +274,7 @@ namespace VoodooShader
                     IFile * shaderFile = gpVoodooCore->GetFileSystem()->GetFile(L"test.fx");
                     if (shaderFile)
                     {
-                        testEffect = gpVoodooCore->CreateEffect(shaderFile, CF_DirectX9);
+                        testEffect = gpVoodooCore->CreateEffect(shaderFile);
                         if (lpparam_rcpres)
                         {
                             Float4 rcpres_val = {1.0f / pPP->BackBufferWidth, 1.0f / pPP->BackBufferHeight, 0, 0};

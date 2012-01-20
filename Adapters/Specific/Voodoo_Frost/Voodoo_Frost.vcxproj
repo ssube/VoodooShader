@@ -81,7 +81,6 @@
     <ClCompile Include="VoodooGL.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Frost_Adapter.hpp" />
     <ClInclude Include="Frost_Module.hpp" />
     <ClInclude Include="Frost_Texture.hpp" />
     <ClInclude Include="Frost_Version.hpp" />

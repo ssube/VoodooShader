@@ -20,7 +20,6 @@
 
 #include "CVoodoo3DDevice9.hpp"
 
-#include "DX9_Adapter.hpp"
 #include "DX9_Version.hpp"
 
 namespace VoodooShader

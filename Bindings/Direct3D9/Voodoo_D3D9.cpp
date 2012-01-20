@@ -30,7 +30,7 @@ namespace VoodooShader
         static const wchar_t * name_VSCompilerDX9 = L"VSBindingDX9";
         static const Uuid clsid_VSCompilerDX9 = CLSID_VSBindingDX9;
 
-        const Version * VOODOO_CALLTYPE API_ModuleVersion()
+        const Version * VOODOO_CALLTYPE API_PluginInit()
         {
             return &moduleVersion;
         }

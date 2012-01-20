@@ -37,7 +37,7 @@ extern VoodooShader::ICore * gVoodooCore;
 
 extern HINSTANCE gLoaderHandle;
 
-const VoodooShader::Version *   VOODOO_CALLTYPE API_ModuleVersion();
+const VoodooShader::Version *   VOODOO_CALLTYPE API_PluginInit();
 const uint32_t                  VOODOO_CALLTYPE API_ClassCount();
 const wchar_t *                 VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * pUuid);
 VoodooShader::IObject *         VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);

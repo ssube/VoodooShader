@@ -31,7 +31,7 @@ HINSTANCE gLoaderHandle = nullptr;
 
 const VoodooShader::Version moduleVersion = VOODOO_VERSION_STRUCT(LOADER);
 
-const VoodooShader::Version * VOODOO_CALLTYPE API_ModuleVersion()
+const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit()
 {
     return &moduleVersion;
 }

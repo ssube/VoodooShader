@@ -42,7 +42,7 @@ namespace VoodooShader
         static const wchar_t * name_VSWFileSystem = VSTR("VSWFileSystem");
         static const Uuid clsid_VSWFileSystem = CLSID_VSWFileSystem;
 
-        const Version * VOODOO_CALLTYPE API_ModuleVersion()
+        const Version * VOODOO_CALLTYPE API_PluginInit()
         {
             return &version;
         }
@@ -144,42 +144,34 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VSWFileSystem::QueryInterface(_In_ Uuid clsid, _Deref_out_opt_ const IObject ** ppOut) const
+        VoodooResult VSWFileSystem::QueryInterface(_In_ CONST Uuid clsid, _Deref_out_opt_ IObject ** ppOut)
         {
             if (!ppOut)
             {
-                if (clsid.is_nil())
-                {
-                    clsid = CLSID_VSWFileSystem;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return VSFERR_INVALIDPARAMS;
             }
             else
             {
                 if (clsid == IID_IObject)
                 {
-                    *ppOut = static_cast<const IObject*>(this);
+                    *ppOut = static_cast<IObject*>(this);
                 }
                 else if (clsid == IID_IFileSystem)
                 {
-                    *ppOut = static_cast<const IFileSystem*>(this);
+                    *ppOut = static_cast<IFileSystem*>(this);
                 }
                 else if (clsid == CLSID_VSWFileSystem)
                 {
-                    *ppOut = static_cast<const VSWFileSystem*>(this);
+                    *ppOut = static_cast<VSWFileSystem*>(this);
                 }
                 else
                 {
                     *ppOut = nullptr;
-                    return false;
+                    return VSFERR_INVALIDUUID;
                 }
 
-                reinterpret_cast<const IObject*>(*ppOut)->AddRef();
-                return true;
+                (*ppOut)->AddRef();
+                return VSF_OK;
             }
         }
 
