@@ -42,8 +42,10 @@ namespace VoodooShader
         static const wchar_t * name_VSWFileSystem = VSTR("VSWFileSystem");
         static const Uuid clsid_VSWFileSystem = CLSID_VSWFileSystem;
 
-        const Version * VOODOO_CALLTYPE API_PluginInit()
+        const Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore)
         {
+            UNREFERENCED_PARAMETER(pCore);
+
             return &version;
         }
 

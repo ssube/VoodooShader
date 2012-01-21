@@ -75,15 +75,16 @@ namespace VoodooShader
          * Binds this effect to the hardware, capturing state and downloading parameters as needed. The currently active
          * technique will be used.
          * 
-         * @param   restore     If true, the effect will save hardware states, reset the device to defaults, and later 
-         *                      restore the original states when the effect is unbound.
+         * @param   clean       If true, the device state will be saved, reset to its initial state, the effect bound, then
+         *                      the device state reset in IEffect::Reset(). Otherwise, only states changed by the effect
+         *                      will be saved and reset.
          * @returns             The technique that has been bound, typically the default technique, or nullptr on failure.
          * 
          * @note Passes from an effect must not be used in IAdapter::SetPass until the effect has been set. When desired
          *      passes have been used and reset, the effect must be reset. Failing to reset the effect may cause unwanted
          *      states for future draw calls.
          */
-        VOODOO_METHOD_(ITechnique *, Bind)(bool restore = true) PURE;
+        VOODOO_METHOD_(ITechnique *, Bind)(bool clean = true) PURE;
         /**
          * Reset this effect, unbinding it from hardware and resetting states if needed.
          */

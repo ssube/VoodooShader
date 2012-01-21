@@ -32,12 +32,22 @@ namespace VoodooShader
 {
     namespace Voodoo_D3D9
     {
+        VSTextureDX9::VSTextureDX9(VSBindingDX9 * pBinding) :
+            m_Refs(0), m_Binding(pBinding)
+        {
+
+        }
+
         VSTextureDX9::VSTextureDX9(VSBindingDX9 * pBinding, String name, IDirect3DTexture9 * pTexture) :
-            m_Refs(0), m_Core(pBinding->m_Core), m_Name(name), m_DXTexture(pTexture), m_DXSurface(nullptr), 
+            m_Refs(0), m_Binding(pBinding), m_Name(name), m_DXTexture(pTexture), m_DXSurface(nullptr), 
             m_BoundSourceSlot(VOODOO_TEXTURE_INVALID), m_BoundTargetSlot(VOODOO_TEXTURE_INVALID)
         {
-            if (!pBinding) Throw(VOODOO_D3D9_NAME, "Unable to create texture with no binding.", nullptr);
+            if (!m_Binding) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture with no binding."), nullptr);
 
+            m_Core = m_Binding->m_Core;
+            if (!m_Core) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture from binding with no core."), nullptr);
+            if (!m_DXTexture) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture with no hardware texture."), m_Core);
+            
             if (pTexture)
             {
                 m_DXTexture->AddRef();
@@ -158,14 +168,16 @@ namespace VoodooShader
                 {
                     return VSFERR_INVALIDPARAMS;
                 }
-                else if (m_Binding->m_BoundSourceTexture[index] != this)
+                else if (m_Binding->m_BoundSourceTexture[index] != this || m_BoundSourceSlot != VOODOO_TEXTURE_INVALID)
                 {
                     return VSFERR_INVALIDCALL;
                 }
 
+                m_Binding->m_Device->GetTexture(index, &m_ReplacedSource);
                 if (SUCCEEDED(m_Binding->m_Device->SetTexture(index, m_DXTexture)))
                 {
                     m_Binding->m_BoundSourceTexture[index] = this;
+                    m_BoundSourceSlot = index;
                     return VSF_OK;
                 }
                 else
@@ -178,14 +190,16 @@ namespace VoodooShader
                 if (index >= 4)
                 {                    return VSFERR_INVALIDPARAMS;
                 }
-                else if (m_Binding->m_BoundTargetTexture[index] != this)
+                else if (m_Binding->m_BoundTargetTexture[index] != this || m_BoundTargetSlot != VOODOO_TEXTURE_INVALID)
                 {
                     return VSFERR_INVALIDCALL;
                 }
 
+                m_Binding->m_Device->GetRenderTarget(index, &m_ReplacedTarget);
                 if (SUCCEEDED(m_Binding->m_Device->SetRenderTarget(index, m_DXSurface)))
                 {
                     m_Binding->m_BoundTargetTexture[index] = this;
+                    m_BoundTargetSlot = index;
                     return VSF_OK;
                 }
                 else
@@ -199,9 +213,51 @@ namespace VoodooShader
             }
         }
 
-        VOODOO_METHODDEF(VSTextureDX9::Reset)()
+        VOODOO_METHODDEF(VSTextureDX9::Reset)(TextureMode mode)
         {
+            if (mode == VSTexMode_Source)
+            {
+                if (m_BoundSourceSlot == VOODOO_TEXTURE_INVALID || 
+                    m_BoundSourceSlot >= 8 ||
+                    m_Binding->m_BoundSourceTexture[m_BoundSourceSlot] != this)
+                {
+                    return VSFERR_INVALIDCALL;
+                }
 
+                if (SUCCEEDED(m_Binding->m_Device->SetTexture(m_BoundSourceSlot, m_ReplacedSource)))
+                {
+                    m_BoundSourceSlot = VOODOO_TEXTURE_INVALID;
+                    m_ReplacedSource = nullptr;
+                    return VSF_OK;
+                }
+                else
+                {
+                    return VSF_FAIL;
+                }
+            }
+            else if (mode == VSTexMode_Target)
+            {                if (m_BoundTargetSlot == VOODOO_TEXTURE_INVALID || 
+                    m_BoundTargetSlot >= 4 ||
+                    m_Binding->m_BoundTargetTexture[m_BoundTargetSlot] != this)
+                {
+                    return VSFERR_INVALIDCALL;
+                }
+
+                if (SUCCEEDED(m_Binding->m_Device->SetRenderTarget(m_BoundTargetSlot, m_ReplacedTarget)))
+                {
+                    m_BoundTargetSlot = VOODOO_TEXTURE_INVALID;
+                    m_ReplacedTarget = nullptr;
+                    return VSF_OK;
+                }
+                else
+                {
+                    return VSF_FAIL;
+                }
+            }
+            else
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
         }
 
         TextureDesc VOODOO_METHODTYPE VSTextureDX9::GetDesc() CONST

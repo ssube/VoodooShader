@@ -22,7 +22,6 @@
 // CVoodoo3D8
 #include "CVoodoo3DDevice8.hpp"
 // Voodoo DX89
-#include "DX9_Converter.hpp"
 #include "DX9_Version.hpp"
 // Voodoo Core
 #include "Format.hpp"
@@ -54,7 +53,6 @@ namespace VoodooShader
         ULONG STDMETHODCALLTYPE CVoodoo3D8::Release()
         {
             ULONG refCount = m_RealObject->Release();
-            InterlockedCompareExchange(&gObjectLock, 0, 1);
 
             if (refCount == 0)
             {
@@ -181,7 +179,7 @@ namespace VoodooShader
 #ifdef _DEBUG
             const wchar_t * textureType = VoodooShader::Converter::ToString
             (
-                VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(mpPP.BackBufferFormat)
+                VSFmt_RGBA8 //VoodooShader::VoodooDX9::DX9_Converter::ToTextureFormat(mpPP.BackBufferFormat)
             );
 
             gpVoodooLogger->LogMessage
@@ -211,68 +209,7 @@ namespace VoodooShader
             else
             {
                 // Succeeded, create a fake device and go from there
-                *ppReturnedDeviceInterface = new CVoodoo3DDevice8(pRealDevice);
-
-                HRESULT hrt = pRealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_LEFT, &backbufferSurf);
-
-                if (SUCCEEDED(hrt))
-                {
-                    gpVoodooLogger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
-                }
-                else
-                {
-                    gpVoodooLogger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
-                }
-
-                TextureDesc backbufferDesc;
-                ZeroMemory(&backbufferDesc, sizeof(TextureDesc));
-                backbufferDesc.Size.X = mpPP.BackBufferWidth;
-                backbufferDesc.Size.Y = mpPP.BackBufferHeight;
-                backbufferDesc.Size.Z = 0;
-                backbufferDesc.Mipmaps = true;
-                backbufferDesc.RenderTarget = true;
-                backbufferDesc.Format = VoodooShader::VSFmtRGB8;
-
-                texture_Frame0 = gpVoodooCore->CreateTexture(L":frame0", backbufferDesc);
-
-                if (texture_Frame0)
-                {
-                    Variant texvar = CreateVariant();
-                    if (SUCCEEDED(texture_Frame0->GetProperty(PropIds::D3D9Surface, &texvar)))
-                    {
-                        surface_Frame0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                        gpVoodooLogger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
-                    }
-                    else
-                    {
-                        gpVoodooLogger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
-                    }
-                }
-
-                texture_Pass0 = gpVoodooCore->CreateTexture(VSTR(":pass0"), backbufferDesc);
-                if (texture_Pass0)
-                {
-                    Variant texvar =  CreateVariant();
-                    if (SUCCEEDED(texture_Pass0->GetProperty(PropIds::D3D9Surface, &texvar)))
-                    {
-                        surface_Pass0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                        gpVoodooLogger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
-                    }
-                    else
-                    {
-                        gpVoodooLogger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
-                    }
-                }
-
-                try
-                {
-                    IFileRef shaderfile = gpVoodooCore->GetFileSystem()->GetFile(L"test.fx");
-                    testEffect = gpVoodooCore->CreateEffect(shaderfile.get(), CF_DirectX9);
-                }
-                catch (std::exception & exc)
-                {
-                    gpVoodooLogger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %S") << exc.what());
-                }
+                *ppReturnedDeviceInterface = new CVoodoo3DDevice8(this, pRealDevice);
 
                 return hr;
             }
@@ -414,6 +351,22 @@ namespace VoodooShader
             }
 
             gpVoodooLogger->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, Format("Finished caching caps."));
+
+            return D3D_OK;
+        }
+
+        IDirect3D9 * STDMETHODCALLTYPE CVoodoo3D8::VSGetRealObject()
+        {
+            return m_RealObject;
+        }
+
+        HRESULT STDMETHODCALLTYPE CVoodoo3D8::VSSetRealObject(IDirect3D9 * pObj)
+        {
+            if (m_RealObject == pObj) return D3D_OK;
+
+            if (m_RealObject) m_RealObject->Release();
+            m_RealObject = pObj;
+            if (m_RealObject) m_RealObject->AddRef();
 
             return D3D_OK;
         }

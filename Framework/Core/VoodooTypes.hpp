@@ -521,6 +521,7 @@ namespace VoodooShader
         typedef const uint32_t  (VOODOO_CALLTYPE * ClassCountFunc)();
         typedef const wchar_t * (VOODOO_CALLTYPE * ClassInfoFunc)(const uint32_t, Uuid *);
         typedef IObject *       (VOODOO_CALLTYPE * ClassCreateFunc)(const uint32_t, ICore *);
+        typedef VoodooResult    (VOODOO_CALLTYPE * CallbackFunc)(ICore *);
     }
     /**
      * @}

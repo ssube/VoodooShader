@@ -19,6 +19,10 @@
  */
 #pragma once
 
+// Voodoo DX9
+#include "CVoodoo3D8.hpp"
+#include "CVoodoo3D9.hpp"
+// System
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
@@ -27,5 +31,5 @@ HMODULE WINAPI VSLoadLibraryW(_In_ LPCWSTR lpFileName);
 HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags);
 HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags);
 
-LPVOID WINAPI VSDirect3DCreate8(UINT SDKVersion);
-LPVOID WINAPI VSDirect3DCreate9(UINT SDKVersion);
+IDirect3D8 * WINAPI VSDirect3DCreate8(UINT SDKVersion);
+IDirect3D9 * WINAPI VSDirect3DCreate9(UINT SDKVersion);

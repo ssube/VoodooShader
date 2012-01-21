@@ -35,9 +35,6 @@
 
 extern VoodooShader::IEffect * testEffect;
 
-extern IDirect3DVertexBuffer9 * gpFSQuadVerts;
-extern IDirect3DSurface9 *backbufferSurf;
-
 extern IDirect3DSurface9 *surface_Frame0;
 extern VoodooShader::ITexture* texture_Frame0;
 extern IDirect3DSurface9 *surface_Pass0;

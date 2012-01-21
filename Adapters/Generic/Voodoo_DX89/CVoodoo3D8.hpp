@@ -79,7 +79,8 @@ namespace VoodooShader
             /**
              * Voodoo Shader-specific function to fill the caps when created.
              */
-            STDMETHOD(VSCacheCaps)(IDirect3D8 * pObject);
+            STDMETHOD(VSCacheCaps)(IDirect3D8 * pObject);            STDMETHOD_(IDirect3D9 *, VSGetRealObject)();
+            STDMETHOD(VSSetRealObject)(IDirect3D9 * pObj);
 
         private:
             UINT m_SdkVersion;

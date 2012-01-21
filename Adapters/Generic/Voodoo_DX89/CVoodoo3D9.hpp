@@ -101,6 +101,9 @@ namespace VoodooShader
                 IDirect3DDevice9 **ppReturnedDeviceInterface
             );
 
+            STDMETHOD_(IDirect3D9 *, VSGetRealObject)();
+            STDMETHOD(VSSetRealObject)(IDirect3D9 * pObj);
+
         private:
             UINT m_SdkVersion;
             IDirect3D9 * m_RealObject;

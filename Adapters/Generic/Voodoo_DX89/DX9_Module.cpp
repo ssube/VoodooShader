@@ -24,6 +24,7 @@
 #include "DX9_Version.hpp"
 // Voodoo Utility
 #include "Support.inl"
+// 
 
 struct ModuleHook
 {
@@ -50,8 +51,6 @@ ModuleHook hookList[] =
 
 VoodooShader::ICoreRef gpVoodooCore = nullptr;
 VoodooShader::ILoggerRef gpVoodooLogger = nullptr;
-
-volatile LONG gObjectLock = 0;
 
 const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(VoodooShader::ICore * pCore)
 {

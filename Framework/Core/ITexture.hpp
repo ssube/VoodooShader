@@ -91,9 +91,11 @@ namespace VoodooShader
         /**
          * Unbinds this texture from the render target, reseting the texture previously bound to that source or target.
          * 
+         * @param   mode    The binding mode to reset. Since textures can be bound as source and target simultaneously, it
+         *                  is possible to reset them seperately.
          * @note This must only be called after ITexture::Bind, and will reset the value displaced by that call.
          */
-        VOODOO_METHOD(Reset)();
+        VOODOO_METHOD(Reset)(TextureMode mode);
         /**
          * Copies a 1 or 2D region of texture data from another texture. 
          * 

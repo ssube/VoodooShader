@@ -32,27 +32,16 @@ namespace VoodooShader
 {
     namespace VoodooDX8
     {
-        CVoodoo3DDevice8::CVoodoo3DDevice8(IDirect3DDevice9 *realDevice) :
-            m_RealDevice(realDevice)
+        CVoodoo3DDevice8::CVoodoo3DDevice8(CVoodoo3D8 * pObject, IDirect3DDevice9 * pRealDevice) :
+            m_Object(pObject), m_RealDevice(pRealDevice)
         {
             VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p") << realDevice << this);
-
-            IAdapterRef adapter = gpVoodooCore->GetAdapter();
-            Variant device8Var = CreateVariant(this);
-            Variant device9Var = CreateVariant(realDevice);
-            adapter->SetProperty(PropIds::D3D8Device, &device8Var);
-            adapter->SetProperty(PropIds::D3D9Device, &device9Var);
         }
 
         CVoodoo3DDevice8::~CVoodoo3DDevice8()
         {
-            IAdapterRef adapter = gpVoodooCore->GetAdapter();
-            Variant deviceVar = CreateVariant(VSUT_PVoid);
-            adapter->SetProperty(PropIds::D3D8Device, &deviceVar);
-            deviceVar = CreateVariant(VSUT_PVoid);
-            adapter->SetProperty(PropIds::D3D9Device, &deviceVar);
-
             m_RealDevice = nullptr;
+            m_Object = nullptr;
         }
 
         // IUnknown methods
@@ -159,7 +148,7 @@ namespace VoodooShader
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::GetDirect3D(IDirect3D8 **ppD3D8)
         {
-            (*ppD3D8) = (IDirect3D8 *)m_RealObject;
+            (*ppD3D8) = (IDirect3D8 *)m_Object;
 
             VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::GetDirect3D(%p) == D3D_OK") << *ppD3D8);
 
@@ -268,38 +257,6 @@ namespace VoodooShader
             CONST RGNDATA *pDirtyRegion
         )
         {
-            if (gpVoodooCore && testEffect)
-            {
-                IAdapterRef adapter = gpVoodooCore->GetAdapter();
-
-                HRESULT hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_Frame0, nullptr, D3DTEXF_NONE);
-                if (FAILED(hr))
-                {
-                    gpVoodooLogger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to frame texture.");
-                }
-
-                adapter->SetEffect(testEffect);
-                VoodooShader::ITechniqueRef tech = testEffect->GetDefaultTechnique();
-                uint32_t passCount = tech->GetPassCount();
-                for (uint32_t i = 0; i < passCount; ++i)
-                {
-                    VoodooShader::IPassRef pass = tech->GetPass(i);
-                    if (pass)
-                    {
-                        hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_Pass0, nullptr, D3DTEXF_NONE);
-                        if (FAILED(hr))
-                        {
-                            gpVoodooLogger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to pass texture.");
-                        }
-
-                        adapter->SetPass(pass.get());
-                        adapter->DrawGeometry(0, 2, gpFSQuadVerts, (VertexFlags)(VF_Buffer|VF_Transformed));
-                        adapter->ResetPass();
-                    }
-                }
-                adapter->ResetEffect();
-            }
-
             HRESULT hr = m_RealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
 
             VOODOO_API_LOG
@@ -1398,6 +1355,22 @@ namespace VoodooShader
             VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::DeletePatch(%d) == %d") << Handle << hr);
 
             return hr;
+        }
+
+        IDirect3DDevice9 * STDMETHODCALLTYPE CVoodoo3DDevice8::VSGetRealDevice()
+        {
+            return m_RealDevice;
+        }
+
+        HRESULT STDMETHODCALLTYPE CVoodoo3DDevice8::VSSetRealDevice(IDirect3DDevice9 * pDev)
+        {
+            if (m_RealDevice == pDev) return D3D_OK;
+
+            if (m_RealDevice) m_RealDevice->Release();
+            m_RealDevice = pDev;
+            if (m_RealDevice) m_RealDevice->AddRef();
+
+            return D3D_OK;
         }
     }
 }

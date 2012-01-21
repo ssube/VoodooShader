@@ -30,7 +30,7 @@ namespace VoodooShader
             public IDirect3DDevice9
         {
         public:
-            CVoodoo3DDevice9(IDirect3D9 * pVoodooObject, IDirect3DDevice9 * pRealDevice);
+            CVoodoo3DDevice9(CVoodoo3D9 * pObject, IDirect3DDevice9 * pRealDevice);
             ~CVoodoo3DDevice9();
 
             /* IUnknown methods */
@@ -311,13 +311,20 @@ namespace VoodooShader
             STDMETHOD(DeletePatch)(THIS_ UINT Handle);
             STDMETHOD(CreateQuery)(THIS_ D3DQUERYTYPE Type, IDirect3DQuery9 **ppQuery);
 
-            STDMETHOD(SetupDevice)();
+            STDMETHOD_(IDirect3DDevice9 *, VSGetRealDevice)();
+            STDMETHOD(VSSetRealDevice)(IDirect3DDevice9 * pDev);
+
+            STDMETHOD(VSSetupDevice)();
+            STDMETHOD(VSDrawFSQuad)();
 
         private:
+            CVoodoo3D9 * m_Object;
             IDirect3DDevice9 * m_RealDevice;
-            IDirect3D9 * m_ParentObj;
 
-
+            IDirect3DVertexDeclaration9 * m_VertDecl;
+            IDirect3DVertexDeclaration9 * m_VertDeclT;
+            IDirect3DVertexBuffer9 * m_FSQuadVerts;
+            IDirect3DSurface9 * m_BackBuffer;
         };
     }
 }

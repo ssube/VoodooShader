@@ -24,7 +24,8 @@
 VoodooShader::ICore * gVoodooCore = nullptr;
 HINSTANCE gHookLoader = nullptr;
 unsigned int gLoadOnce = 1;
-HHOOK gSystemHook = nullptr;
+HHOOK gSystemHook = nullptr;
+
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
     UNREFERENCED_PARAMETER(lpvReserved);
@@ -125,7 +126,8 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
 }
 
 bool WINAPI LoadVoodoo(HHOOKDEF pHook)
-{    if (gVoodooCore) return true;
+{
+    if (gVoodooCore) return true;
 
     GlobalLog(TEXT("Loading Voodoo Shader framework.\n"));
 

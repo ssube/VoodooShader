@@ -226,21 +226,17 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        ITechnique * VOODOO_METHODTYPE VSEffectDX9::Bind(bool restore)
+        ITechnique * VOODOO_METHODTYPE VSEffectDX9::Bind(bool clean)
         {
             if (m_Binding->m_BoundEffect != this) return nullptr;
 
-            if (restore)
-            {
-                m_Binding->PushState();
-                m_Binding->ResetState();
-            }
-
             UINT passes = 0;
             DWORD flags = 0;
-            if (restore)
+            if (clean)
             {
-                flags = D3DXFX_DONOTSAVESTATE;
+                flags = D3DXFX_DONOTSAVESTATE;
+                m_Binding->PushState();
+                m_Binding->ResetState();
             }
 
             if (SUCCEEDED(m_DXEffect->Begin(&passes, flags)))
@@ -250,7 +246,7 @@ namespace VoodooShader
             }
             else
             {
-                if (restore) m_Binding->PopState();
+                if (clean) m_Binding->PopState();
 
                 return nullptr;
             }

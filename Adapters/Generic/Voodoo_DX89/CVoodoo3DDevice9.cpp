@@ -26,19 +26,14 @@ namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        CVoodoo3DDevice9::CVoodoo3DDevice9(IDirect3D9 * pVoodooObject, IDirect3DDevice9 * pRealDevice) :
-            m_RealDevice(pRealDevice), m_ParentObj(pVoodooObject)
+        CVoodoo3DDevice9::CVoodoo3DDevice9(CVoodoo3D9 * pObject, IDirect3DDevice9 * pRealDevice) :
+            m_Object(pObject), m_RealDevice(pRealDevice) 
         {
-            IAdapterRef adapter = gpVoodooCore->GetAdapter();
-            Variant deviceVar = CreateVariant(this);
-            adapter->SetProperty(PropIds::D3D9Device, &deviceVar);
         };
 
         CVoodoo3DDevice9::~CVoodoo3DDevice9()
         {
-            IAdapterRef adapter = gpVoodooCore->GetAdapter();
-            Variant deviceVar = CreateVariant(VSUT_PVoid);
-            adapter->SetProperty(PropIds::D3D9Device, &deviceVar);
+            m_RealDevice = nullptr;            m_Object = nullptr;
         }
 
         /* IUnknown methods */
@@ -82,12 +77,12 @@ namespace VoodooShader
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::GetDirect3D(THIS_ IDirect3D9 **ppD3D9)
         {
-
             // Let the device validate the incoming pointer for us
-            HRESULT hr = m_RealDevice->GetDirect3D(ppD3D9);
-            if (SUCCEEDED(hr)) *ppD3D9 = m_ParentObj;
+            if (!ppD3D9) return D3DERR_INVALIDCALL;
 
-            return hr;
+            *ppD3D9 = (IDirect3D9*)m_Object;
+
+            return D3D_OK;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::GetDeviceCaps(THIS_ D3DCAPS9 * pCaps)
@@ -155,34 +150,35 @@ namespace VoodooShader
             if (gpVoodooCore && testEffect)
             {
                 ILoggerRef logger = gpVoodooCore->GetLogger();
-                IAdapterRef adapter = gpVoodooCore->GetAdapter();
 
-                HRESULT hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_Frame0, nullptr, D3DTEXF_NONE);
+                HRESULT hr = m_RealDevice->StretchRect(m_BackBuffer, nullptr, surface_Frame0, nullptr, D3DTEXF_NONE);
                 if (FAILED(hr))
                 {
                     logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                 }
 
-                adapter->SetEffect(testEffect);
-                VoodooShader::ITechniqueRef tech = testEffect->GetDefaultTechnique();
-                uint32_t passCount = tech->GetPassCount();
-                for (uint32_t i = 0; i < passCount; ++i)
+                VoodooShader::ITechniqueRef tech = testEffect->Bind();
+                if (tech)
                 {
-                    VoodooShader::IPassRef pass = tech->GetPass(i);
-                    if (pass)
+                    uint32_t passCount = tech->GetPassCount();
+                    for (uint32_t i = 0; i < passCount; ++i)
                     {
-                        hr = m_RealDevice->StretchRect(backbufferSurf, nullptr, surface_Pass0, nullptr, D3DTEXF_NONE);
-                        if (FAILED(hr))
+                        VoodooShader::IPassRef pass = tech->GetPass(i);
+                        if (pass)
                         {
-                            logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
-                        }
+                            hr = m_RealDevice->StretchRect(m_BackBuffer, nullptr, surface_Pass0, nullptr, D3DTEXF_NONE);
+                            if (FAILED(hr))
+                            {
+                                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
+                            }
 
-                        adapter->SetPass(pass.get());
-                        adapter->DrawGeometry(0, 2, gpFSQuadVerts, (VertexFlags)(VF_Buffer|VF_Transformed));
-                        adapter->ResetPass();
+                            pass->Bind();
+                            this->VSDrawFSQuad();
+                            pass->Reset();
+                        }
                     }
+                    testEffect->Reset();
                 }
-                adapter->ResetEffect();
             }
 
             return m_RealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
@@ -818,7 +814,7 @@ namespace VoodooShader
         {
             return m_RealDevice->CreateQuery(Type, ppQuery);
         }
-        HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::SetupDevice()
+        HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::VSSetupDevice()
         {
             if (m_VertDecl) m_VertDecl->Release();
             if (m_VertDeclT) m_VertDeclT->Release();
@@ -851,7 +847,7 @@ namespace VoodooShader
                 D3DDECL_END()
             };
 
-            errors = m_RealDevice->CreateVertexDeclaration(vertDeclElems, &m_VertDecl);
+            HRESULT errors = m_RealDevice->CreateVertexDeclaration(vertDeclElems, &m_VertDecl);
 
             if (!SUCCEEDED(errors))
             {
@@ -900,7 +896,7 @@ namespace VoodooShader
 
             errors = m_RealDevice->CreateVertexBuffer
             (
-                sizeof(fsVertData), D3DUSAGE_WRITEONLY, NULL, D3DPOOL_DEFAULT, &gpFSQuadVerts, NULL
+                sizeof(fsVertData), D3DUSAGE_WRITEONLY, NULL, D3DPOOL_DEFAULT, &m_FSQuadVerts, NULL
             );
 
             if (FAILED(errors))
@@ -909,19 +905,133 @@ namespace VoodooShader
             }
 
             VertexDesc * pVertices = nullptr;
-            errors = gpFSQuadVerts->Lock(0, 0, (void**)&pVertices, 0);
+            errors = m_FSQuadVerts->Lock(0, 0, (void**)&pVertices, 0);
 
-            if (FAILED(errors))
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
+            if (SUCCEEDED(errors))
+            {                memcpy(pVertices, fsVertData, sizeof(fsVertData));
+                m_FSQuadVerts->Unlock();
             }
             else
             {
-                memcpy(pVertices, fsVertData, sizeof(fsVertData));
-                gpFSQuadVerts->Unlock();
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
+            }
+            HRESULT hrt = m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer);
+
+            if (SUCCEEDED(hrt))
+            {
+                logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
+            }
+            else
+            {
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
             }
 
-            return true;
+            D3DSURFACE_DESC bbDesc;
+            ZeroMemory(&bbDesc, sizeof(bbDesc));
+            if (FAILED(m_BackBuffer->GetDesc(&bbDesc)))
+            {
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to get backbuffer description.");
+            }
+
+            TextureDesc bufferTextureDesc;
+            bufferTextureDesc.Size.X = bbDesc.Width;
+            bufferTextureDesc.Size.Y = bbDesc.Height;
+            bufferTextureDesc.Size.Z = 0;
+            bufferTextureDesc.Levels = 0;
+            bufferTextureDesc.Usage = VSTexFlag_Target;
+            bufferTextureDesc.Format = VSFmt_RGBA8; //VoodooShader::VoodooDX9::ConverterDX9::ToTextureFormat(pPP->BackBufferFormat);
+
+            texture_Frame0 = gpVoodooCore->CreateTexture(L":frame0", bufferTextureDesc);
+            if (texture_Frame0)
+            {
+                Variant texvar = CreateVariant();
+                if (SUCCEEDED(texture_Frame0->GetProperty(PropIds::D3D9Surface, &texvar)))
+                {
+                    surface_Frame0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
+                    logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
+                }
+                else
+                {
+                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
+                }
+            }
+
+            texture_Pass0 = gpVoodooCore->CreateTexture(L":pass0", bufferTextureDesc);
+            if (texture_Pass0)
+            {
+                Variant texvar = CreateVariant();
+                if (SUCCEEDED(texture_Pass0->GetProperty(PropIds::D3D9Surface, &texvar)))
+                {
+                    surface_Pass0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
+                    logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
+                }
+                else
+                {
+                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
+                }
+            }
+
+            ParameterDesc rcpres_desc = {VSPT_Float, 1, 2, 0};
+            IParameter * lpparam_rcpres = gpVoodooCore->CreateParameter(L"rcpres", rcpres_desc);
+
+            try
+            {
+                IFile * shaderFile = gpVoodooCore->GetFileSystem()->GetFile(L"test.fx");
+                if (shaderFile)
+                {
+                    testEffect = gpVoodooCore->CreateEffect(shaderFile);
+                }
+            }
+            catch (std::exception & exc)
+            {
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %1%") << exc.what());
+            }
+
+            if (lpparam_rcpres)
+            {
+                Float4 rcpres_val = {1.0f / bbDesc.Width, 1.0f / bbDesc.Height, 0, 0};
+                lpparam_rcpres->SetVector(rcpres_val);
+            }
+
+            return D3D_OK;
+        }
+
+        HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::VSDrawFSQuad()
+        {
+            HRESULT hr;
+
+            // Set the necessary states
+            hr = m_RealDevice->SetRenderState(D3DRS_CLIPPING, FALSE);
+            hr = m_RealDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+            hr = m_RealDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
+            hr = m_RealDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+            m_RealDevice->SetVertexDeclaration(m_VertDeclT);
+            m_RealDevice->SetStreamSource(0, m_FSQuadVerts, 0, sizeof(VertexDesc));
+            hr = m_RealDevice->BeginScene();
+            if (SUCCEEDED(hr))
+            {
+                m_RealDevice->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 2);
+                m_RealDevice->EndScene();
+            }
+
+            return D3D_OK;
+        }
+
+        IDirect3DDevice9 * STDMETHODCALLTYPE CVoodoo3DDevice9::VSGetRealDevice()
+        {
+            return m_RealDevice;
+        }
+
+        HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::VSSetRealDevice(IDirect3DDevice9 * pDev)
+        {
+            if (m_RealDevice == pDev) return D3D_OK;
+
+            if (m_RealDevice) m_RealDevice->Release();
+            m_RealDevice = pDev;
+            if (m_RealDevice) m_RealDevice->AddRef();
+
+            return D3D_OK;        
         }
     }
 }

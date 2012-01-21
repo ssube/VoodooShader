@@ -67,8 +67,8 @@ namespace VoodooShader
                 D3DXHANDLE passHandle = m_DXEffect->GetPass(m_DXHandle, passIndex);
                 VSPassDX9 * pass = new VSPassDX9(this, passIndex);
                 m_Passes.push_back(pass);
-                // Get the targets                char targetName[] = "vs_target0\0";
-                uint32_t targetIndex = 0;
+                // Get the targets
+                uint32_t targetIndex = 0;                char targetName[] = "vs_target0";
                 while (targetIndex < 4)
                 {
                     char targetIndexChar = '0' + char(targetIndex);

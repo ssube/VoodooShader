@@ -71,8 +71,10 @@ namespace VoodooShader
          * 
          * @note The number and contents of @a pParams are compiler-defined. Most standard compilers take a single 
          *      parameter, with the device or context to be used.
+         *
+         * @pre ICore::Init()
          */
-        _Check_return_ VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
+        _Check_return_ VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams) PURE;
         /**
          * Cleans up all modules and objects. Invalidates all objects created by this core. This method
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this
@@ -81,9 +83,30 @@ namespace VoodooShader
          * @return          Success of the destroy operation.
          *
          * @warning If this method fails, this core is in an undefined state and must be destroyed; calling any method but
-         *      AddRef or Release is undefined. All resources created by this core are immediately considered invalid.
+         *      AddRef or Release is undefined. All resources created by this core are immediately considered invalid.         *
+         * @pre ICore::Init()
          */
         _Check_return_ VOODOO_METHOD(Reset)() PURE;
+        /**
+         * @}
+         * @name Callback Methods
+         * @{
+         */
+        /**
+         * Registers a callback with this core for a particular event. This allows plugins to subscribe to various core
+         * events, such as init finalization, reset, and so on. Not all of the events are directly triggered by the core,
+         * this acts as a centralized event processor for the entire framework.
+         *
+         * @param   event   The Uuid of the event to subscribe to. 
+         * @param   func    The callback function for the event.
+         *
+         * @warning It is not possible to type-check function pointers across module boundaries. <b>It is left to the plugin
+         *      to handle parameter types and make sure they meet the event's parameters. Failure to do so can crash the 
+         *      the process.</b> Because of this, it is possible for users to disable event handling in the config.
+         */
+        VOODOO_METHOD(RegisterCallback)(Uuid event, Functions::CallbackFunc func) PURE;
+        VOODOO_METHOD(RemoveCallback)(Uuid event, Functions::CallbackFunc func) PURE;
+        //VOODOO_METHOD(
         /**
          * @}
          * @name Core Field Methods

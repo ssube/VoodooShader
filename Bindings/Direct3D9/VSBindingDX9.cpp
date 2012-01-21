@@ -130,7 +130,7 @@ namespace VoodooShader
             m_Device = reinterpret_cast<LPDIRECT3DDEVICE9>(pParams[0].VPVoid);
             m_Device->AddRef();
             HRESULT errors = m_Device->CreateStateBlock(D3DSBT_ALL, &m_InitialState);
-            assert(errors);
+            assert(SUCCEEDED(errors));
 
             return VSF_OK;
         }
@@ -261,8 +261,28 @@ namespace VoodooShader
                 return nullptr;
             }
 
-            ITexture * pTexture = new VSTextureDX9(this, VSTR("null"), nullptr);
+            ITexture * pTexture = new VSTextureDX9(this);
             return pTexture;
+        }
+        VOODOO_METHODDEF_(void, VSBindingDX9::ResetState)()
+        {
+            m_InitialState->Apply();
+        }
+
+        VOODOO_METHODDEF_(void, VSBindingDX9::PushState)()
+        {
+            LPDIRECT3DSTATEBLOCK9 newBlock = nullptr;
+            m_Device->CreateStateBlock(D3DSBT_ALL, &newBlock);
+            newBlock->AddRef();
+            m_StateStack.push(newBlock);
+        }
+
+        VOODOO_METHODDEF_(void, VSBindingDX9::PopState)()
+        {
+            LPDIRECT3DSTATEBLOCK9 oldBlock = m_StateStack.top();
+            oldBlock->Apply();
+            m_StateStack.pop();
+            oldBlock->Release();
         }
     }
 }

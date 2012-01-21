@@ -550,7 +550,7 @@ namespace VoodooShader
                 if (texAnnot)
                 {
                     LPCSTR texName = nullptr;
-                    if (SUCCEEDED(m_Effect->m_Effect->m_DXEffect->GetString(texAnnot, &texName)))
+                    if (SUCCEEDED(m_Effect->m_DXEffect->GetString(texAnnot, &texName)))
                     {
                         m_Texture = m_Core->GetTexture(texName);
                         if (m_Texture)

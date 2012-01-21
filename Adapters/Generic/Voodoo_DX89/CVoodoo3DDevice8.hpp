@@ -45,7 +45,7 @@ namespace VoodooShader
             /**
              * The default, public constructor for CVoodoo3D objects.
              */
-            CVoodoo3DDevice8(IDirect3DDevice9 *realDevice);
+            CVoodoo3DDevice8(CVoodoo3D8 * pObject, IDirect3DDevice9 * pRealDevice);
             ~CVoodoo3DDevice8();
 
             /*** IUnknown methods ***/
@@ -194,14 +194,16 @@ namespace VoodooShader
             STDMETHOD(DrawTriPatch)(UINT Handle,CONST float* pNumSegs,CONST D3DTRIPATCH_INFO* pTriPatchInfo);
             STDMETHOD(DeletePatch)(UINT Handle);
 
+            STDMETHOD_(IDirect3DDevice9 *, VSGetRealDevice)();
+            STDMETHOD(VSSetRealDevice)(IDirect3DDevice9 * pDev);
+
         private:
             /**
              * A pointer to the true underlying IDirect3DDevice9 object wrapped by this
              * CVoodoo3D8 interface.
              */
             IDirect3DDevice9 * m_RealDevice;
-
-            IDirect3D9 * m_RealObject;
+            CVoodoo3D8 * m_Object;
 
             std::set<DWORD> m_VertexShaders;
             std::set<DWORD> m_PixelShaders;

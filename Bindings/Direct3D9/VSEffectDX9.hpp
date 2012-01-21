@@ -47,7 +47,7 @@ namespace VoodooShader
             VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
             VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
-            VOODOO_METHOD_(ITechnique *, Bind)(bool restore = true);
+            VOODOO_METHOD_(ITechnique *, Bind)(bool clear = true);
             VOODOO_METHOD(Reset)();
 
             VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST;

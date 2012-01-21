@@ -20,16 +20,12 @@
 #pragma once
 
 #include "DX9_Exports.hpp"
-// Voodoo DX9
-#include "CVoodoo3D8.hpp"
-#include "CVoodoo3D9.hpp"
 // Voodoo Support
 #include "Support.inl"
 // Global Types 
-typedef IDirect3D8 (WINAPI * Type_Direct3DCreate8)(UINT);
-typedef IDirect3D9 (WINAPI * Type_Direct3DCreate9)(UINT);
+typedef IDirect3D8 * (WINAPI * Type_Direct3DCreate8)(UINT);
+typedef IDirect3D9 * (WINAPI * Type_Direct3DCreate9)(UINT);
 // Globals
-UINT gSingleExport;
 HMODULE gModule_D3D8;
 HMODULE gModule_D3D9;
 Type_Direct3DCreate8 gFunc_Direct3DCreate8;
@@ -121,55 +117,62 @@ HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWOR
 }
 
 
-IDirect3D8 WINAPI VSDirect3DCreate8(UINT sdkVersion)
+IDirect3D8 * WINAPI VSDirect3DCreate8(UINT sdkVersion)
 {
     if (!gFunc_Direct3DCreate8)
     {
         gFunc_Direct3DCreate8 = (Type_Direct3DCreate8)FindFunction(TEXT("d3d8.dll"), true, "Direct3DCreate8", &gModule_D3D8);
     }
 
-    IDirect3D8 pD3D8 = gFunc_Direct3DCreate8(sdkVersion);
+    IDirect3D8 * pD3D8 = gFunc_Direct3DCreate8(sdkVersion);
     
     if (!pD3D8)
     {
         return pD3D8;
     }
 
-    if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
+    volatile static UINT SingleD3D8 = 0;
+    if (InterlockedCompareExchange(&SingleD3D8, 1, 0) == 0)
     {
         GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
 
-        VoodooShader::VoodooDX8::CVoodoo3D8 * pV3D8 = new VoodooShader::VoodooDX8::CVoodoo3D8(sdkVersion, pD3D8);
+        VoodooShader::VoodooDX8::CVoodoo3D8 * pV3D8 = new VoodooShader::VoodooDX8::CVoodoo3D8(sdkVersion, nullptr);
+        pV3D8->VSCacheCaps(pD3D8);
+        pD3D8->Release();
+
+        IDirect3D9 * pD3D9 = VSDirect3DCreate9(D3D_SDK_VERSION);
+        pV3D8->VSSetRealObject(pD3D9);
         pD3D8 = pV3D8;
 
-        gSingleExport = false;
+        SingleD3D8 = 0;
     }
 
     return pD3D8;
 }
 
-IDirect3D9 WINAPI VSDirect3DCreate9(UINT sdkVersion)
+IDirect3D9 * WINAPI VSDirect3DCreate9(UINT sdkVersion)
 {
     if (!gFunc_Direct3DCreate9)
     {
         gFunc_Direct3DCreate9 = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), true, "Direct3DCreate9", &gModule_D3D9);
     }
 
-    IDirect3D9 pD3D9 = gFunc_Direct3DCreate9(sdkVersion);
+    IDirect3D9 * pD3D9 = gFunc_Direct3DCreate9(sdkVersion);
 
     if (!pD3D9)
     {
         return pD3D9;
     }
         
-    if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
+    volatile static UINT SingleD3D9 = 0;
+    if (InterlockedCompareExchange(&SingleD3D9, 1, 0) == 0)
     {
         GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
 
         VoodooShader::VoodooDX9::CVoodoo3D9 * pV3D9 = new VoodooShader::VoodooDX9::CVoodoo3D9(sdkVersion, pD3D9);
         pD3D9 = pV3D9;
 
-        gSingleExport = false;
+        SingleD3D9 = 0;
     }
 
     return pD3D9;
