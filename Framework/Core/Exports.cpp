@@ -18,14 +18,12 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "VoodooInternal.hpp"
-
+#include "VoodooFramework.hpp"
+// Voodoo Core
 #include "VSCore.hpp"
 #include "VSFileSystem.hpp"
 #include "VSHookManager.hpp"
 #include "VSLogger.hpp"
-
-#include "VoodooVersion.hpp"
 
 EXTERN_C BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
 {

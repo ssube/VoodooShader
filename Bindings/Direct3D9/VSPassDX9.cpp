@@ -19,7 +19,10 @@
  */
 
 #include "VSPassDX9.hpp"
+// Voodoo D3D9
 #include "VSTechniqueDX9.hpp"
+#include "VSEffectDX9.hpp"
+#include "VSBindingDX9.hpp"
 
 namespace VoodooShader
 {
@@ -28,8 +31,8 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSPassDX9
         DeclareDebugCache();
 
-        VSPassDX9::VSPassDX9(VSTechniqueDX9 * pTechnique, LPD3DXEFFECT pDXEffect, D3DXHANDLE pPassHandle, UINT passId) :
-            m_Refs(0), m_Technique(pTechnique), m_DXEffect(pDXEffect), m_DXHandle(pPassHandle), m_DXPassId(passId)
+        VSPassDX9::VSPassDX9(VSTechniqueDX9 * pTechnique, UINT passId) :
+            m_Refs(0), m_Technique(pTechnique),  m_DXPassId(passId)
         {
             if (!m_Technique)
             {
@@ -38,52 +41,12 @@ namespace VoodooShader
 
             m_Core = m_Technique->GetCore();
 
-            if (!m_DXEffect) 
-            {
-                Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no hardware effect."), m_Core);
-            }
-            else if (!m_DXHandle)
-            {
-                Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no hardware handle."), m_Core);
-            }
-
-            m_DXEffect->AddRef();
-
-            // Get the targets
-            char targetIndex = '0';
-            char targetName[] = "target0";
-            while (targetIndex < '4')
-            {
-                targetName[6] = targetIndex;
-
-                D3DXHANDLE annotation = m_DXEffect->GetAnnotationByName(m_DXHandle, targetName);
-                if (!annotation)
-                {
-                    break;
-                }
-
-                LPCSTR annotationValue = NULL;
-                if (FAILED(m_DXEffect->GetString(annotation, &annotationValue)) || !annotationValue)
-                {
-                    break;
-                }
-
-                m_Targets.push_back(m_Core->GetTexture(annotationValue));
-
-                ++targetIndex;
-            }
-
             AddThisToDebugCache();
         }
 
         VSPassDX9::~VSPassDX9()
         {
             RemoveThisFromDebugCache();
-
-            if (m_DXEffect)
-            {
-                m_DXEffect->Release();
-            }
         }
 
         uint32_t VOODOO_METHODTYPE VSPassDX9::AddRef() CONST
@@ -168,17 +131,7 @@ namespace VoodooShader
 
             if (!pValue) VSFERR_INVALIDPARAMS;
 
-            if (propid == PropIds::D3DX9Handle)
-            {
-                (*pValue) = CreateVariant(m_DXHandle);
-                return VSF_OK;
-            } 
-            else if (propid == PropIds::D3DX9Effect)
-            {
-                (*pValue) = CreateVariant(m_DXEffect);
-                return VSF_OK;
-            }
-            else if (propid == PropIds::D3DX9PassId)
+            if (propid == PropIds::D3DX9PassId)
             {
                 (*pValue) = CreateVariant(uint32_t(m_DXPassId));
                 return VSF_OK;
@@ -209,11 +162,56 @@ namespace VoodooShader
             return VSF_OK;
         }
 
+        VOODOO_METHODDEF(VSPassDX9::Bind)()
+        {
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+            
+            boost::intrusive_ptr<VSEffectDX9> effect = m_Technique->m_Effect;
+            if (effect != effect->m_Binding->m_BoundEffect)
+            {
+                return VSFERR_INVALIDCALL;
+            }
+            else if (effect->m_Binding->m_BoundPass)
+            {
+                return VSFERR_INVALIDCALL;
+            }
+
+            if (SUCCEEDED(effect->m_DXEffect->BeginPass(m_DXPassId)))
+            {
+                effect->m_Binding->m_BoundPass = this;
+                return VSF_OK;
+            }
+            else
+            {
+                return VSF_FAIL;
+            }
+        }
+
+        VOODOO_METHODDEF(VSPassDX9::Reset)()
+        {            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
+            boost::intrusive_ptr<VSEffectDX9> effect = m_Technique->m_Effect;
+            if (effect->m_Binding->m_BoundPass != this)
+            {
+                return VSFERR_INVALIDCALL;
+            }
+
+            if (SUCCEEDED(effect->m_DXEffect->EndPass()))
+            {
+                effect->m_Binding->m_BoundPass = nullptr;
+                return VSF_OK;
+            }
+            else
+            {
+                return VSF_FAIL;
+            }
+        }
+
         ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(const uint32_t index) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            if (index < m_Targets.size())
+            if (index < 4)
             {
                 return m_Targets[index].get();
             }
@@ -227,7 +225,7 @@ namespace VoodooShader
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            if (index < m_Targets.size())
+            if (index < 4)
             {
                 m_Targets[index] = pTarget;
                 return VSF_OK;
@@ -242,23 +240,10 @@ namespace VoodooShader
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            if (!pShader) return VSFERR_INVALIDPARAMS;
-            ZeroMemory(pShader, sizeof(Variant));
+            UNREFERENCED_PARAMETER(stage);
+            UNREFERENCED_PARAMETER(pShader);
 
-            switch (stage)
-            {
-            case VSStage_Vertex:
-                pShader->Type = UT_PVoid;
-                pShader->VPVoid = m_VertexShader;
-                return VSF_OK;
-            case VSStage_Pixel:
-                pShader->Type = UT_PVoid;
-                pShader->VPVoid = m_PixelShader;
-                return VSF_OK;
-            case VSStage_Unknown:
-            default:
-                return VSFERR_INVALIDPARAMS;
-            }
+            return VSFERR_NOTIMPLEMENTED;
         }
 
         ITechnique * VOODOO_METHODTYPE VSPassDX9::GetTechnique() CONST

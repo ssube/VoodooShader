@@ -31,8 +31,8 @@ namespace VoodooShader
         VOODOO_CLASS(VSParameterDX9, IParameter, ({0xA1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
         {
         public:
-            VSParameterDX9(_Pre_notnull_ IEffect * const pEffect, _In_ LPD3DXEFFECT pDXEffect, _In_ D3DXHANDLE pParamHandle);
-            VSParameterDX9(_In_ ICore * pCore, const String & name, ParameterDesc desc);
+            VSParameterDX9(_Pre_notnull_ VSEffectDX9 * pEffect, _In_ D3DXHANDLE pParamHandle);
+            VSParameterDX9(_In_ VSBindingDX9 * pBinding, const String & name, ParameterDesc desc);
             ~VSParameterDX9();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -74,13 +74,13 @@ namespace VoodooShader
             ICore * m_Core;
             String m_Name;
 
-            IEffect * m_Effect;
+            VSEffectDX9 * m_Effect;
+            VSBindingDX9 * m_Binding;
             PropertyMap m_Properties;
 
             ParameterDesc m_Desc;
             ParameterList m_Attached;
 
-            LPD3DXEFFECT m_DXEffect;
             D3DXHANDLE m_DXHandle;
 
             // Value cache types

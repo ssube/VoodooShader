@@ -30,16 +30,14 @@ namespace VoodooShader
     /**
      * @class IPass
      *
-     * Each pass contains a single set of programs, each operating on a different stage of the render pipeline.
+     * Each pass contains a single set of shaders, each operating on a different stage of the render pipeline. Passes are
+     * provided by the binding.
      *
-     * @note    A pass may contain programs for each stage. Valid stages vary by underlying API and version. In OpenGL 2.0,
-     *          DirectX 9, and earlier APIs, stages may be left to the fixed-function pipeline by not specifying any program
-     *          to be used. Later APIs require the vertex and pixel shaders to be specified in each pass.
+     * @note A pass may contain programs for each stage, but stages used vary by binding. Some bindings may require programs
+     *      be provided for some stages (typically vertex and pixel), and may ignore other stages. See the binding's 
+     *      documentation for details.
      *
-     * @warning Some adapters may require programs to be provided for certain stages.
-     *
-     * @restag  None.
-     * @iid     e6f31293-05af-11e1-9e05-005056c00008
+     * @iid e6f31293-05af-11e1-9e05-005056c00008
      */
     VOODOO_INTERFACE(IPass, IResource, ({0x93, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
@@ -65,28 +63,44 @@ namespace VoodooShader
          * @}
          * @name IPass Methods
          * @{
+         */        /**
+         * Binds a pass from the active technique to the hardware, settings states as needed. The shaders to be bound
+         * depend on the binding and flags given.
+         *
+         * @note Each call to SetPass must have a corresponding call to ResetPass. Passes must not be bound unless their
+         *      parent effect is bound, doing so may cause errors or undefined behavior.
+         *      
+         * @note This call will bind texture sources needed by the pass and targets given in the pass. However, the adapter 
+         *      may override those by binding @a after binding the pass. Using IPass::SetTarget() is prefered, but manual
+         *      binding is allowed. It may cause unexpected results, depending on the effect in use.
          */
+        VOODOO_METHOD(Bind)() PURE;
+        /**
+         * Resets the state of the adapter and unbinds the pass. This may trigger state reset or texture copying, so it is
+         * required for proper shader handling.
+         */
+        VOODOO_METHOD(Reset)() PURE;
         /**
          * Retrieve a the target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
          *
-         * @param index     The target index.
-         * @return          The target texture.
+         * @param   index       The target index.
+         * @return              The target texture.
          */
         VOODOO_METHOD_(ITexture *, GetTarget)(const uint32_t index) CONST PURE;
         /**
          * Set a target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
          *
-         * @param index     The target index.
-         * @param pTarget   The target texture.
+         * @param   index       The target index.
+         * @param   pTarget     The target texture.
          */
         VOODOO_METHOD(SetTarget)(const uint32_t index, ITexture * pTarget) PURE;
         /**
          * Retrieve a specific shader stage from this pass.
          *
-         * @param stage     The stage to retrieve.
-         * @param pValue    A Variant to be filled with the shader.
+         * @param   stage       The stage to retrieve.
+         * @param   pValue      A Variant to be filled with the shader.
          */
         VOODOO_METHOD(GetShader)(const ShaderStage stage, _In_ Variant * pValue) CONST PURE;
         /**

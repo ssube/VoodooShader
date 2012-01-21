@@ -19,6 +19,8 @@
  */
 #pragma once
 
+#include <d3d9.h>
+
 // DX8 enum values
 #define D3DTSS_ADDRESSU     13
 #define D3DTSS_ADDRESSV     14
@@ -48,9 +50,6 @@ interface IDirect3DTexture8;
 interface IDirect3DVertexBuffer8;
 interface IDirect3DVolume8;
 interface IDirect3DVolumeTexture8;
-
-// Object creation functions
-typedef IDirect3D8 * (*D3DProc8) (UINT);
 
 #pragma pack(4)
 

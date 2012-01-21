@@ -19,7 +19,6 @@
  */
 
 #include "Frost_Module.hpp"
-#include "Frost_Adapter.hpp"
 
 VoodooShader::ICore * gpVoodooCore = nullptr;
 VoodooShader::IEffect * gpTestEffect;

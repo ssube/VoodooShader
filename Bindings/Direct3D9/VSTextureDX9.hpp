@@ -32,7 +32,7 @@ namespace VoodooShader
         VOODOO_CLASS(VSTextureDX9, ITexture, ({0xC2, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
         {
         public:
-            VSTextureDX9(_In_ ICore * pCore, _In_ String name, _In_ IDirect3DTexture9 * pTexture);
+            VSTextureDX9(_In_ VSBindingDX9 * pBinding, _In_ String name, _In_ IDirect3DTexture9 * pTexture);
             ~VSTextureDX9();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -45,7 +45,11 @@ namespace VoodooShader
             VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
             VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
 
-            VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;            VOODOO_METHOD(StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, CONST Rect dest);
+            VOODOO_METHOD(Bind)(TextureMode mode, uint32_t index);
+            VOODOO_METHOD(Reset)();
+
+            VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
+            VOODOO_METHOD(StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, CONST Rect dest);
             VOODOO_METHOD(CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, CONST UInt3 dest);
 
         private:
@@ -55,8 +59,14 @@ namespace VoodooShader
             ICore * m_Core;
             String m_Name;
 
-            IDirect3DTexture9 * m_Texture;
-            IDirect3DSurface9 * m_Surface;
+            VSBindingDX9 * m_Binding;
+            PropertyMap m_Properties;
+
+            uint32_t m_BoundSourceSlot;
+            uint32_t m_BoundTargetSlot;
+
+            IDirect3DTexture9 * m_DXTexture;
+            IDirect3DSurface9 * m_DXSurface;
             TextureDesc m_Desc;
         };
     }

@@ -19,30 +19,13 @@
  */
 #pragma once
 
-#define VOODOO_IMPORT
-#define VOODOO_NO_PUGIXML
-#include "VoodooFramework.hpp"
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 
-#ifdef _DEBUG
-#define D3D_DEBUG_INFO
-#endif
-#include <d3d9.h>
-#include <d3dx9effect.h>
+HMODULE WINAPI VSLoadLibraryA(_In_ LPCSTR lpFileName);
+HMODULE WINAPI VSLoadLibraryW(_In_ LPCWSTR lpFileName);
+HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags);
+HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags);
 
-namespace VoodooShader
-{
-    namespace Voodoo_D3D9
-    {
-        class VSBindingDX9;
-        class VSEffectDX9;
-        class VSParameterDX9;
-        class VSPassDX9;
-        class VSTechniqueDX9;
-        class VSTextureDX9;
-
-        const Version * VOODOO_CALLTYPE API_PluginInit();
-        const uint32_t  VOODOO_CALLTYPE API_ClassCount();
-        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
-        IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
-    }
-}
+LPVOID WINAPI VSDirect3DCreate8(UINT SDKVersion);
+LPVOID WINAPI VSDirect3DCreate9(UINT SDKVersion);

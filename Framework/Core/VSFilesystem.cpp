@@ -105,10 +105,11 @@ namespace VoodooShader
         return m_Core;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSFileSystem::AddPath(_In_ const String & dir)
+    VoodooResult VOODOO_METHODTYPE VSFileSystem::AddPath(_In_ const String & dir, PathType type)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(dir);
+        UNREFERENCED_PARAMETER(type);
 
         return VSFERR_INVALIDCALL;
     }

@@ -117,18 +117,30 @@ namespace VoodooShader
 
         VOODOO_METHODDEF(VSBindingDX9::Init)(uint32_t count, _In_count_(count) Variant * pParams)
         {
-            if (count == 0 || !pParams)
+            if (count != 1 || !pParams)
             {
                 return VSFERR_INVALIDPARAMS;
             }
 
-            if (pParams[0].Type != UT_PVoid || !pParams[0].VPVoid)
+            if (pParams[0].Type != VSUT_PVoid || !pParams[0].VPVoid)
             {
                 return VSFERR_INVALIDPARAMS;
             }
 
             m_Device = reinterpret_cast<LPDIRECT3DDEVICE9>(pParams[0].VPVoid);
-            m_Device->AddRef();
+            m_Device->AddRef();
+            HRESULT errors = m_Device->CreateStateBlock(D3DSBT_ALL, &m_InitialState);
+            assert(errors);
+
+            return VSF_OK;
+        }
+
+        VOODOO_METHODDEF(VSBindingDX9::Reset)()
+        {
+            if (!m_Device) return VSFERR_INVALIDCALL;
+
+            m_Device->Release();
+            m_Device = nullptr;
 
             return VSF_OK;
         }
@@ -155,7 +167,7 @@ namespace VoodooShader
                 return nullptr;
             }
 
-            IEffect * pEffect = new VSEffectDX9(m_Core, effect);
+            IEffect * pEffect = new VSEffectDX9(this, effect);
             return pEffect;
         }
 
@@ -181,13 +193,13 @@ namespace VoodooShader
                 return nullptr;
             }
 
-            IEffect * pEffect = new VSEffectDX9(m_Core, effect);
+            IEffect * pEffect = new VSEffectDX9(this, effect);
             return pEffect;
         }
 
         VOODOO_METHODDEF_(IParameter *, VSBindingDX9::CreateParameter)(CONST String & name, ParameterDesc desc)
         {
-            IParameter * pParam = new VSParameterDX9(m_Core, name, desc);
+            IParameter * pParam = new VSParameterDX9(this, name, desc);
             return pParam;
         }
 
@@ -219,7 +231,7 @@ namespace VoodooShader
                 return nullptr;
             }
 
-            ITexture * pTexture = new VSTextureDX9(m_Core, name, texture);
+            ITexture * pTexture = new VSTextureDX9(this, name, texture);
             return pTexture;
         }
 
@@ -238,7 +250,18 @@ namespace VoodooShader
                 return nullptr;
             }
 
-            ITexture * pTexture = new VSTextureDX9(m_Core, name, texture);
+            ITexture * pTexture = new VSTextureDX9(this, name, texture);
+            return pTexture;
+        }
+
+        VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateNullTexture)()
+        {
+            if (!m_Device)
+            {
+                return nullptr;
+            }
+
+            ITexture * pTexture = new VSTextureDX9(this, VSTR("null"), nullptr);
             return pTexture;
         }
     }

@@ -20,6 +20,8 @@
 #pragma once
 
 #include "Voodoo_D3D9.hpp"
+// System
+#include <stack>
 
 namespace VoodooShader
 {
@@ -34,6 +36,12 @@ namespace VoodooShader
          */
         VOODOO_CLASS(VSBindingDX9, IBinding, ({0x38, 0x2c, 0xb9, 0x20, 0x83, 0xdd, 0x45, 0x70, 0x87, 0x5f, 0xf4, 0xe0, 0xc1, 0x92, 0xa4, 0x76}))
         {
+            friend class VSEffectDX9;
+            friend class VSParameterDX9;
+            friend class VSPassDX9;
+            friend class VSTechniqueDX9;
+            friend class VSTextureDX9;
+
         public:
             VSBindingDX9(_In_ ICore * pCore);
             ~VSBindingDX9();
@@ -49,6 +57,7 @@ namespace VoodooShader
              * @{
              */
             VOODOO_METHOD(Init)(uint32_t count, _In_count_(count) Variant * pParams);
+            VOODOO_METHOD(Reset)();
             /**
              * @}
              * @name Effect Methods
@@ -69,13 +78,28 @@ namespace VoodooShader
              */
             VOODOO_METHOD_(ITexture *, CreateTexture)(CONST String & name, TextureDesc desc);
             VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(CONST String & name, _In_ IFile * pFile);
+            VOODOO_METHOD_(ITexture *, CreateNullTexture)();
+
+            // Non-interface methods
+            VOODOO_METHOD_(void, ResetState)();
+            VOODOO_METHOD_(void, PushState)();
+            VOODOO_METHOD_(void, PopState)();
 
         private:
             mutable uint32_t m_Refs;
             ICore * m_Core;
 
-            LPDIRECT3DDEVICE9 m_Device;
             bool m_ILUT;
+
+            LPDIRECT3DDEVICE9 m_Device;
+            LPDIRECT3DSTATEBLOCK9 m_InitialState;
+            std::stack<LPDIRECT3DSTATEBLOCK9> m_StateStack;
+
+            // Internal state tracking
+            IEffectRef m_BoundEffect;
+            IPassRef m_BoundPass;
+            ITextureRef m_BoundSourceTexture[8];
+            ITextureRef m_BoundTargetTexture[4];
         };
     }
 }

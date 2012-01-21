@@ -125,54 +125,54 @@ namespace VoodooShader
 
         switch (v.Type)
         {
-        case UT_None:
+        case VSUT_None:
             break;
-        case UT_Bool:
+        case VSUT_Bool:
             out << v.VBool;
             break;
-        case UT_Int8:
+        case VSUT_Int8:
             out << v.VInt8;
             break;
-        case UT_UInt8:
+        case VSUT_UInt8:
             out << v.VUInt8;
             break;
-        case UT_Int16:
+        case VSUT_Int16:
             out << v.VInt16;
             break;
-        case UT_UInt16:
+        case VSUT_UInt16:
             out << v.VUInt16;
             break;
-        case UT_Int32:
+        case VSUT_Int32:
             out << v.VInt32;
             break;
-        case UT_UInt32:
+        case VSUT_UInt32:
             out << v.VUInt32;
             break;
-        case UT_Float:
+        case VSUT_Float:
             out << v.VFloat;
             break;
-        case UT_Double:
+        case VSUT_Double:
             out << v.VDouble;
             break;
-        case UT_Uuid:
+        case VSUT_Uuid:
             if (v.VPUuid)
             {
                 out << (*v.VPUuid);
             }
             break;
-        case UT_String:
+        case VSUT_String:
             if (v.VPString)
             {
                 out << v.VPString->GetData();
             }
             break;
-        case UT_IObject:
+        case VSUT_IObject:
             out << VSTR(", ") << v.VPIObject;
             break;
-        case UT_PVoid:
+        case VSUT_PVoid:
             out << VSTR(", ") << v.VPVoid;
             break;
-        case UT_Unknown:
+        case VSUT_Unknown:
         default:
             break;
         }

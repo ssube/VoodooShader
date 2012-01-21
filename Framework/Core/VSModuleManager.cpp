@@ -19,10 +19,10 @@
  */
 
 #include "VSModuleManager.hpp"
-
+// Voodoo Core
 #include "VSModule.hpp"
-
-#include "shlwapi.h"
+// System
+#include <shlwapi.h>
 
 namespace VoodooShader
 {

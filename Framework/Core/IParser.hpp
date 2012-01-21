@@ -58,7 +58,7 @@ namespace VoodooShader
          * @param value The variable's value (may contain variables, they will be resolved when this variable is used).
          * @param type Flags for this of variable.
          */
-        VOODOO_METHOD_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal) PURE;
+        VOODOO_METHOD_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VSVar_Normal) PURE;
         /**
          * Removes a variable from the internal dictionary.
          *

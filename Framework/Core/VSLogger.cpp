@@ -19,7 +19,7 @@
  */
 
 #include "VSLogger.hpp"
-
+// System
 #include <sstream>
 #include <ios>
 
@@ -29,7 +29,7 @@ namespace VoodooShader
     DeclareDebugCache();
 
     VSLogger::VSLogger(ICore * pCore) :
-        m_Refs(0), m_Core(pCore), m_Filter(VSLog_Default), m_Flags(LF_Unknown)
+        m_Refs(0), m_Core(pCore), m_Filter(VSLog_Default), m_Flags(VSLogFlag_Unknown)
     { 
         AddThisToDebugCache();
     }
@@ -130,7 +130,7 @@ namespace VoodooShader
         if (this->m_LogFile.is_open())
         {
 #ifdef _DEBUG
-            this->SetFlags(LF_Flush);
+            this->SetFlags(VSLogFlag_Flush);
 #endif
 
             std::wstringstream logMsg;
@@ -252,7 +252,7 @@ namespace VoodooShader
             m_LogFile << logMsg.str();
 
 #ifndef _DEBUG
-            if (m_Flags & LF_Flush)
+            if (m_Flags & VSLogFlag_Flush)
 #endif
             {
                 m_LogFile << std::flush;

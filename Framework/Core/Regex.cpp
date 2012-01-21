@@ -19,12 +19,12 @@
  */
 
 #include "VoodooFramework.hpp"
-
+// Boost
 #pragma warning(push)
 #pragma warning(disable: 6334 6011)
 #include <boost/regex.hpp>
 #pragma warning(pop)
-
+// System
 #include <string>
 
 namespace VoodooShader

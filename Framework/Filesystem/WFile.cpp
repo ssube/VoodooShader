@@ -108,29 +108,30 @@ namespace VoodooShader
         }
 
         VoodooResult VSWFile::Open(FileOpenMode mode)
-        {            std::ios_base::openmode access = 0;
+        {
+            std::ios_base::openmode access = 0;
 
-            if (mode & FO_Read)
+            if (mode & VSOpen_Read)
             {
                 access |= std::ios_base::in;
             }
 
-            if (mode & FO_Write)
+            if (mode & VSOpen_Write)
             {
                 access |= std::ios_base::out;
             }
 
-            if (mode & FO_Ate)
+            if (mode & VSOpen_End)
             {
                 access |= std::ios_base::ate;
             }
 
-            if (mode & FO_Append)
+            if (mode & VSOpen_Append)
             {
                 access |= std::ios_base::app;
             }
 
-            if (mode & FO_Truncate)
+            if (mode & VSOpen_Truncate)
             {
                 access |= std::ios_base::trunc;
             }
@@ -171,7 +172,8 @@ namespace VoodooShader
         }
 
         VoodooResult VSWFile::Close()
-        {            if (m_File.is_open())
+        {
+            if (m_File.is_open())
             {
                 m_File.close();
             }
@@ -180,7 +182,8 @@ namespace VoodooShader
         }
 
         VoodooResult VSWFile::Seek(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset)
-        {            std::ios_base::seekdir dir;
+        {
+            std::ios_base::seekdir dir;
 
             if (mode == VSSeek_Begin) {dir = std::ios_base::beg;}
             else if (mode == VSSeek_Current) {dir = std::ios_base::cur;}
@@ -207,7 +210,8 @@ namespace VoodooShader
         }
 
         int32_t VSWFile::Tell(_In_ StreamType stream)
-        {            if (stream == VSStream_Get)
+        {
+            if (stream == VSStream_Get)
             {
                 return (int32_t)m_File.tellg();
             }
@@ -222,7 +226,8 @@ namespace VoodooShader
         }
 
         int VSWFile::Read(_In_ int count, _In_opt_bytecount_(count) void * pBuffer)
-        {            UNREFERENCED_PARAMETER(m_Core);
+        {
+            UNREFERENCED_PARAMETER(m_Core);
 
             if (!m_File.is_open())
             {
@@ -243,7 +248,8 @@ namespace VoodooShader
         }
 
         int32_t VSWFile::Write(_In_ const int32_t count, _In_opt_bytecount_(count) void * pBuffer)
-        {            UNREFERENCED_PARAMETER(m_Core);
+        {
+            UNREFERENCED_PARAMETER(m_Core);
 
             if (!m_File.is_open())
             {

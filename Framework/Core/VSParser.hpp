@@ -19,7 +19,7 @@
  */
 #pragma once
 
-#include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
 
 namespace VoodooShader
 {
@@ -38,7 +38,7 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VT_Normal);
+        VOODOO_METHOD_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VSVar_Normal);
         VOODOO_METHOD_(void, Remove)(_In_ const String & name);
         VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = VSParse_None) CONST;
 

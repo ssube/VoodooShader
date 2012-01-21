@@ -19,7 +19,7 @@
  */
 #pragma once
 
-#include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
 
 namespace VoodooShader
 {
@@ -48,8 +48,8 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD(AddPath)(_In_ const String & dir);
-        VOODOO_METHOD(RemovePath)(_In_ const String & dir);
+        VOODOO_METHOD(AddPath)(_In_ const String & path, PathType type);
+        VOODOO_METHOD(RemovePath)(_In_ const String & path);
         VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, const GetFileMode mode) CONST;
 
     private:

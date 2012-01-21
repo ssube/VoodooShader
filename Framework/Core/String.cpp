@@ -26,7 +26,7 @@
 #pragma warning(disable: 6246)
 #include <boost/uuid/uuid_io.hpp>
 #pragma warning(pop)
-// STL
+// System
 #include <string>
 #include <sstream>
 #include <iomanip>

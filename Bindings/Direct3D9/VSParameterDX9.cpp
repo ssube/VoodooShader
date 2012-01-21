@@ -19,7 +19,9 @@
  */
 
 #include "VSParameterDX9.hpp"
-
+// Voodoo D3D9
+#include "VSBindingDX9.hpp"
+#include "VSEffectDX9.hpp"
 #include "D3D9_Version.hpp"
 
 namespace VoodooShader
@@ -29,17 +31,18 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSParameterDX9
         DeclareDebugCache();
 
-        VSParameterDX9::VSParameterDX9(IEffect * const pEffect, LPD3DXEFFECT pDXEffect = nullptr, D3DXHANDLE pParamHandle = nullptr) :
-            m_Refs(0), m_Effect(pEffect), m_DXEffect(pDXEffect), m_DXHandle(pParamHandle)
+        VSParameterDX9::VSParameterDX9(VSEffectDX9 * pEffect, D3DXHANDLE pParamHandle) :
+            m_Refs(0), m_Effect(pEffect), m_DXHandle(pParamHandle)
         {
-            if (!pEffect)
+            if (!m_Effect)
             {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter with no effect."), nullptr);
+                Throw(VOODOO_CORE_NAME, VSTR("Unable to create effect parameter with no effect."), nullptr);
             }
 
-            m_Core = m_Effect->GetCore();
+            m_Core = m_Effect->m_Core;
+            m_Binding = m_Effect->m_Binding;
 
-            if (!m_DXEffect)
+            if (!m_Effect->m_DXEffect)
             {
                 Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter with no hardware effect."), m_Core);
             }
@@ -50,7 +53,7 @@ namespace VoodooShader
 
             D3DXPARAMETER_DESC desc;
             ZeroMemory(&desc, sizeof(D3DXPARAMETER_DESC));
-            if (FAILED(m_DXEffect->GetParameterDesc(m_DXHandle, &desc)))
+            if (FAILED(m_Effect->m_DXEffect->GetParameterDesc(m_DXHandle, &desc)))
             {
                 Throw(VOODOO_CORE_NAME, VSTR("Unable to retrieve parameter description."), m_Core);
             }
@@ -64,9 +67,15 @@ namespace VoodooShader
             AddThisToDebugCache();
         }
 
-        VSParameterDX9::VSParameterDX9(ICore * pCore, const String & name, ParameterDesc desc) :
-            m_Refs(0), m_Core(pCore), m_Effect(nullptr), m_Name(name), m_Desc(desc), m_DXEffect(nullptr), m_DXHandle(nullptr)
+        VSParameterDX9::VSParameterDX9(VSBindingDX9 * pBinding, const String & name, ParameterDesc desc) :
+            m_Refs(0), m_Binding(pBinding), m_Effect(nullptr), m_Name(name), m_Desc(desc), m_DXHandle(nullptr)
         {
+            if (!m_Binding)
+            {                Throw(VOODOO_CORE_NAME, VSTR("Unable to create virtual parameter with no binding."), nullptr);
+            }
+
+            m_Core = m_Binding->m_Core;
+
             AddThisToDebugCache();
         }
 
@@ -156,14 +165,14 @@ namespace VoodooShader
 
             if (propid == PropIds::D3DX9Handle)
             {
-                pValue->Type = UT_PVoid;
+                pValue->Type = VSUT_PVoid;
                 pValue->VPVoid = (PVOID)m_DXHandle;
                 return VSF_OK;
             } 
             else if (propid == PropIds::D3DX9Effect)
             {
-                pValue->Type = UT_PVoid;
-                pValue->VPVoid = (PVOID)m_DXEffect;
+                pValue->Type = VSUT_PVoid;
+                pValue->VPVoid = (PVOID)m_Effect->m_DXEffect;
                 return VSF_OK;
             }
             else
@@ -206,10 +215,10 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_Bool) return VSFERR_INVALIDCALL;
 
-            if (m_DXEffect && m_DXHandle)
+            if (m_Effect->m_DXEffect && m_DXHandle)
             {
                 BOOL rv = 0;
-                if (SUCCEEDED(m_DXEffect->GetBool(m_DXHandle, &rv)))
+                if (SUCCEEDED(m_Effect->m_DXEffect->GetBool(m_DXHandle, &rv)))
                 {
                     m_VBool = (rv != 0);
                 }
@@ -231,10 +240,10 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_Float) return VSFERR_INVALIDCALL;
 
-            if (m_DXEffect && m_DXHandle)
+            if (m_Effect->m_DXEffect && m_DXHandle)
             {
                 float tVal;
-                if (SUCCEEDED(m_DXEffect->GetFloat(m_DXHandle, &tVal)))
+                if (SUCCEEDED(m_Effect->m_DXEffect->GetFloat(m_DXHandle, &tVal)))
                 {
                     m_VFloat.X = tVal;
                 }
@@ -256,7 +265,7 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
 
-            if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->GetInt(m_DXHandle, &m_VInt)))
+            if (m_Effect->m_DXEffect && m_DXHandle && FAILED(m_Effect->m_DXEffect->GetInt(m_DXHandle, &m_VInt)))
             {
                 return VSFERR_APIERROR;
             }
@@ -273,10 +282,10 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_String) return VSFERR_INVALIDCALL;
 
-            if (m_DXEffect && m_DXHandle)
+            if (m_Effect->m_DXEffect && m_DXHandle)
             {
                 LPCSTR rv = nullptr;
-                if (SUCCEEDED(m_DXEffect->GetString(m_DXHandle, &rv)) && rv)
+                if (SUCCEEDED(m_Effect->m_DXEffect->GetString(m_DXHandle, &rv)) && rv)
                 {
                     m_VString = String(rv);
                 }
@@ -310,10 +319,10 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_Float && m_Desc.Type != VSPT_Bool && m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
 
-            if (m_DXEffect && m_DXHandle)
+            if (m_Effect->m_DXEffect && m_DXHandle)
             {
                 D3DXVECTOR4 rv;
-                if (SUCCEEDED(m_DXEffect->GetVector(m_DXHandle, &rv)))
+                if (SUCCEEDED(m_Effect->m_DXEffect->GetVector(m_DXHandle, &rv)))
                 {
                     m_VFloat.X = rv.x;
                     m_VFloat.Y = rv.y;
@@ -345,7 +354,7 @@ namespace VoodooShader
                 (*child)->SetBool(val);
             }
 
-            if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->SetBool(m_DXHandle, val)))
+            if (m_Effect->m_DXEffect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetBool(m_DXHandle, val)))
             {
                 return VSFERR_APIERROR;
             }
@@ -367,7 +376,7 @@ namespace VoodooShader
                 (*child)->SetFloat(val);
             }
 
-            if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->SetFloat(m_DXHandle, val)))
+            if (m_Effect->m_DXEffect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetFloat(m_DXHandle, val)))
             {
                 return VSFERR_APIERROR;
             }
@@ -389,7 +398,7 @@ namespace VoodooShader
                 (*child)->SetInt(val);
             }
 
-            if (m_DXEffect && m_DXHandle && FAILED(m_DXEffect->SetInt(m_DXHandle, val)))
+            if (m_Effect->m_DXEffect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetInt(m_DXHandle, val)))
             {
                 return VSFERR_APIERROR;
             }
@@ -411,10 +420,10 @@ namespace VoodooShader
                 (*child)->SetString(val);
             }
 
-            if (m_DXEffect && m_DXHandle)
+            if (m_Effect->m_DXEffect && m_DXHandle)
             {
                 std::string vstr = val.ToStringA();
-                if (FAILED(m_DXEffect->SetString(m_DXHandle, vstr.c_str())))
+                if (FAILED(m_Effect->m_DXEffect->SetString(m_DXHandle, vstr.c_str())))
                 {
                     return VSFERR_APIERROR;
                 }
@@ -437,7 +446,7 @@ namespace VoodooShader
                 (*child)->SetTexture(pVal);
             }
 
-            if (m_DXEffect && m_DXHandle)
+            if (m_Effect->m_DXEffect && m_DXHandle)
             {
                 Variant propVar = CreateVariant();
                 if (FAILED(pVal->GetProperty(PropIds::D3D9Texture, &propVar)))
@@ -448,7 +457,7 @@ namespace VoodooShader
 
                 LPDIRECT3DTEXTURE9 pDXTexture = reinterpret_cast<LPDIRECT3DTEXTURE9>(propVar.VPVoid);
 
-                HRESULT hr = m_DXEffect->SetTexture(m_DXHandle, pDXTexture);
+                HRESULT hr = m_Effect->m_DXEffect->SetTexture(m_DXHandle, pDXTexture);
 
                 if (FAILED(hr))
                 {
@@ -476,7 +485,7 @@ namespace VoodooShader
                 (*child)->SetVector(val);
             }
 
-            if (m_DXEffect && m_DXHandle)
+            if (m_Effect->m_DXEffect && m_DXHandle)
             {
                 D3DXVECTOR4 sv;
                 sv.x = val.X;
@@ -484,7 +493,7 @@ namespace VoodooShader
                 sv.z = val.Z;
                 sv.w = val.W;
 
-                if (FAILED(m_DXEffect->SetVector(m_DXHandle, &sv)))
+                if (FAILED(m_Effect->m_DXEffect->SetVector(m_DXHandle, &sv)))
                 {
                     return VSFERR_APIERROR;
                 }
@@ -497,7 +506,7 @@ namespace VoodooShader
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            return (m_DXEffect && m_DXHandle);
+            return (m_Effect->m_DXEffect && m_DXHandle);
         }
 
         VoodooResult VOODOO_METHODTYPE VSParameterDX9::AttachParameter(IParameter * const pParam)
@@ -537,11 +546,11 @@ namespace VoodooShader
             {
                 this->LinkNewTexture();
 
-                D3DXHANDLE texAnnot = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texture");
+                D3DXHANDLE texAnnot = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texture");
                 if (texAnnot)
                 {
                     LPCSTR texName = nullptr;
-                    if (SUCCEEDED(m_DXEffect->GetString(texAnnot, &texName)))
+                    if (SUCCEEDED(m_Effect->m_Effect->m_DXEffect->GetString(texAnnot, &texName)))
                     {
                         m_Texture = m_Core->GetTexture(texName);
                         if (m_Texture)
@@ -557,11 +566,11 @@ namespace VoodooShader
             }
 
             // Handle linkage
-            D3DXHANDLE sourceAnnot = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_source");
+            D3DXHANDLE sourceAnnot = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_source");
             if (sourceAnnot)
             {
                 LPCSTR sourceName = NULL;
-                if (SUCCEEDED(m_DXEffect->GetString(sourceAnnot, &sourceName)))
+                if (SUCCEEDED(m_Effect->m_DXEffect->GetString(sourceAnnot, &sourceName)))
                 {
                     IParameter * sourceParam = m_Core->GetParameter(sourceName, m_Desc);
                     if (sourceParam)
@@ -584,7 +593,7 @@ namespace VoodooShader
                 return;
             }
 
-            D3DXHANDLE newA = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texcreate");
+            D3DXHANDLE newA = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texcreate");
             if (!newA)
             {
                 return;
@@ -592,18 +601,18 @@ namespace VoodooShader
             else
             {
                 BOOL newFlag = FALSE;
-                if (FAILED(m_DXEffect->GetBool(newA, &newFlag)) || newFlag != TRUE)
+                if (FAILED(m_Effect->m_DXEffect->GetBool(newA, &newFlag)) || newFlag != TRUE)
                 {
                     return;
                 }
             }
 
-            D3DXHANDLE nameA = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texture");
-            D3DXHANDLE dimA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texdim");
-            D3DXHANDLE mipA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texmip");
-            D3DXHANDLE rttA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texrtt");
-            D3DXHANDLE fmtA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texfmt");
-            D3DXHANDLE srcA  = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texsrc");
+            D3DXHANDLE nameA = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texture");
+            D3DXHANDLE dimA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texdim");
+            D3DXHANDLE mipA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texmip");
+            D3DXHANDLE rttA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texrtt");
+            D3DXHANDLE fmtA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texfmt");
+            D3DXHANDLE srcA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texsrc");
             if (!nameA || !dimA || !fmtA)
             {
                 m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
@@ -612,7 +621,7 @@ namespace VoodooShader
             }
 
             LPCSTR nameStr = NULL;
-            if (FAILED(m_DXEffect->GetString(nameA, &nameStr)))
+            if (FAILED(m_Effect->m_DXEffect->GetString(nameA, &nameStr)))
             {
                 m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                     Format("Unable to get texture name from parameter %1%.") << m_Name);
@@ -620,7 +629,7 @@ namespace VoodooShader
             }
 
             DECLARE_AND_ZERO(D3DXVECTOR4, dimVec);
-            if (FAILED(m_DXEffect->GetVector(dimA, &dimVec)))
+            if (FAILED(m_Effect->m_DXEffect->GetVector(dimA, &dimVec)))
             {
                 m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                     Format("Unable to get texture dimensions from parameter %1%.") << m_Name);
@@ -630,7 +639,7 @@ namespace VoodooShader
             UInt3 dim = {(uint32_t)dimVec.x, (uint32_t)dimVec.y, (uint32_t)dimVec.z};
 
             LPCSTR fmtStr = NULL;
-            if (FAILED(m_DXEffect->GetString(fmtA, &fmtStr)))
+            if (FAILED(m_Effect->m_DXEffect->GetString(fmtA, &fmtStr)))
             {
                 m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                     Format("Unable to get texture format from parameter %1%.") << m_Name);
@@ -646,11 +655,11 @@ namespace VoodooShader
             }            
 
             BOOL mipB = FALSE;
-            m_DXEffect->GetBool(mipA, &mipB);
+            m_Effect->m_DXEffect->GetBool(mipA, &mipB);
             uint32_t mip = (mipB == TRUE) ? 0 : 1;
 
             BOOL rttB = TRUE;
-            m_DXEffect->GetBool(rttA, &rttB);
+            m_Effect->m_DXEffect->GetBool(rttA, &rttB);
             TextureFlags rtt = (rttB == TRUE) ? VSTexFlag_Target : VSTexFlag_None;
 
             TextureDesc desc = {dim, mip, rtt, fmt};
@@ -674,7 +683,7 @@ namespace VoodooShader
             if (srcA)
             {
                 LPCSTR srcStr = nullptr;
-                if (FAILED(m_DXEffect->GetString(srcA, &srcStr)) || !srcStr)
+                if (FAILED(m_Effect->m_DXEffect->GetString(srcA, &srcStr)) || !srcStr)
                 {
                     m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
                         Format("Unable to get texture source from parameter %1%.") << m_Name);
@@ -689,7 +698,7 @@ namespace VoodooShader
                     return;
                 }
 
-                ITexture * pSrcTex = m_Core->CreateTexture(nameStr, pFile);
+                ITexture * pSrcTex = m_Core->LoadTexture(nameStr, pFile);
                 if (!pSrcTex)
                 {
                     m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
@@ -701,11 +710,11 @@ namespace VoodooShader
                 ZeroMemory(&region, sizeof(TextureRegion));
                 CopyMemory(&region, &desc, sizeof(TextureDesc));
 
-                D3DXHANDLE oriA = m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texori");
+                D3DXHANDLE oriA = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texori");
                 if (oriA)
                 {
                     D3DXVECTOR4 oriVec;
-                    if (SUCCEEDED(m_DXEffect->GetVector(oriA, &oriVec)))
+                    if (SUCCEEDED(m_Effect->m_DXEffect->GetVector(oriA, &oriVec)))
                     {
                         region.Origin.X = (uint32_t)oriVec.x;
                         region.Origin.Y = (uint32_t)oriVec.y;

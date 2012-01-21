@@ -19,9 +19,8 @@
  */
 
 #include "VSParser.hpp"
-
-#include "shlwapi.h"
-
+// System
+#include <shlwapi.h>
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -135,7 +134,7 @@ namespace VoodooShader
         }
         else
         {
-            if (varIter->second.second == VT_System)
+            if (varIter->second.second == VSVar_System)
             {
                 if (logger)
                 {
@@ -167,7 +166,7 @@ namespace VoodooShader
         String finalname = this->Parse(name, VSParse_None);
         VariableMap::iterator varIter = m_Variables.find(finalname);
 
-        if (varIter != m_Variables.end() && varIter->second.second != VT_System)
+        if (varIter != m_Variables.end() && varIter->second.second != VSVar_System)
         {
             m_Variables.erase(varIter);
         }

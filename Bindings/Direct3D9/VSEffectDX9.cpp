@@ -19,9 +19,11 @@
  */
 
 #include "VSEffectDX9.hpp"
-
+// Voodoo D3D9
+#include "VSBindingDX9.hpp"
 #include "VSParameterDX9.hpp"
 #include "VSTechniqueDX9.hpp"
+#include "D3D9_Version.hpp"
 
 namespace VoodooShader
 {
@@ -30,11 +32,22 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSEffectDX9
         DeclareDebugCache();
 
-        VSEffectDX9::VSEffectDX9(ICore * pCore, LPD3DXEFFECT pEffect) :
-            m_Refs(0), m_Core(pCore), m_DXEffect(pEffect)
+        VSEffectDX9::VSEffectDX9(VSBindingDX9 * pBinding, LPD3DXEFFECT pEffect) :
+            m_Refs(0), m_Binding(pBinding), m_DXEffect(pEffect)
         {
+            if (!m_Binding)
+            {
+                Throw(VOODOO_D3D9_NAME, VSTR("Unable to create effect with no binding."), nullptr);
+            }
+
+            m_Core = m_Binding->m_Core;
+            if (!m_Core)
+            {
+                Throw(VOODOO_D3D9_NAME, VSTR("Unable to create effect from binding with no core."), nullptr);
+            }
+
             // Cache core objects
-            ILoggerRef  logger  = m_Core->GetLogger();
+            ILoggerRef logger  = m_Core->GetLogger();
 
             if (!logger)
             {
@@ -58,7 +71,7 @@ namespace VoodooShader
                     break;
                 }
 
-                boost::intrusive_ptr<VSParameterDX9> parameter = new VSParameterDX9(this, m_DXEffect, paramHandle);
+                boost::intrusive_ptr<VSParameterDX9> parameter = new VSParameterDX9(this, paramHandle);
                 m_Parameters.push_back(parameter);
 
                 parameter->Link();
@@ -163,7 +176,7 @@ namespace VoodooShader
         String VOODOO_METHODTYPE VSEffectDX9::ToString() CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-            return Format(VSTR("VSEffectDX9(%1%)")) << m_Name;
+            return VSTR("VSEffectDX9()");
         }
 
         ICore * VOODOO_METHODTYPE VSEffectDX9::GetCore() CONST
@@ -175,7 +188,8 @@ namespace VoodooShader
         String VOODOO_METHODTYPE VSEffectDX9::GetName() CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-            return m_Name;
+            //return m_DXEffect->m_Name;
+            return VSTR("Unnamed");
         }
 
         VoodooResult VOODOO_METHODTYPE VSEffectDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
@@ -184,7 +198,7 @@ namespace VoodooShader
 
             if (propid == PropIds::D3DX9Effect)
             {
-                pValue->Type = UT_PVoid;
+                pValue->Type = VSUT_PVoid;
                 pValue->VPVoid = (PVOID)m_DXEffect;
                 return VSF_OK;
             }
@@ -212,48 +226,44 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetEffect(uint32_t * pPasses, bool restore)
+        ITechnique * VOODOO_METHODTYPE VSEffectDX9::Bind(bool restore)
         {
-            if (SUCCEEDED(m_DXEffect->Begin(pPasses, restore ? 0 : D3DXFX_DONOTSAVESTATE)))
+            if (m_Binding->m_BoundEffect != this) return nullptr;
+
+            if (restore)
             {
-                return VSF_OK;
+                m_Binding->PushState();
+                m_Binding->ResetState();
+            }
+
+            UINT passes = 0;
+            DWORD flags = 0;
+            if (restore)
+            {
+                flags = D3DXFX_DONOTSAVESTATE;
+            }
+
+            if (SUCCEEDED(m_DXEffect->Begin(&passes, flags)))
+            {
+                m_Binding->m_BoundEffect = this;
+                return m_DefaultTechnique.get();
             }
             else
             {
-                return VSF_FAIL;
+                if (restore) m_Binding->PopState();
+
+                return nullptr;
             }
         }
 
-        VOODOO_METHODDEF(VSEffectDX9::ResetEffect)()
+        VOODOO_METHODDEF(VSEffectDX9::Reset)()
         {
+            if (m_Binding->m_BoundEffect != this) return VSFERR_INVALIDCALL;
+
             if (SUCCEEDED(m_DXEffect->End()))
             {
-                return VSF_OK;
-            }
-            else
-            {
-                return VSF_FAIL;
-            }
-        }
-
-        VOODOO_METHODDEF(VSEffectDX9::SetPass)(_In_ const uint32_t passIndex, ShaderStage stages)
-        {
-            UNREFERENCED_PARAMETER(stages);
-
-            if (SUCCEEDED(m_DXEffect->BeginPass(passIndex)))
-            {
-                return VSF_OK;
-            }
-            else
-            {
-                return VSF_FAIL;
-            }
-        }
-
-        VOODOO_METHODDEF(VSEffectDX9::ResetPass)()
-        {
-            if (SUCCEEDED(m_DXEffect->EndPass()))
-            {
+                m_Binding->PopState();
+                m_Binding->m_BoundEffect = nullptr;
                 return VSF_OK;
             }
             else

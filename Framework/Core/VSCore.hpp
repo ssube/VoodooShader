@@ -19,7 +19,7 @@
  */
 #pragma once
 
-#include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
 
 namespace VoodooShader
 {
@@ -61,7 +61,7 @@ namespace VoodooShader
         VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * pFile); 
         VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ ParameterDesc desc);
         VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ TextureDesc desc);
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ IFile * pFile);
+        VOODOO_METHOD_(ITexture *, LoadTexture)(_In_ const String & name, _In_ IFile * pFile);
         VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ ParameterDesc desc) CONST;
         VOODOO_METHOD_(ITexture *, GetTexture)(_In_ const String & name) CONST;
         VOODOO_METHOD(RemoveParameter)(_In_ const String & name);

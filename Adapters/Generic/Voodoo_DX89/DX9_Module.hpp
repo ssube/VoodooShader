@@ -23,24 +23,6 @@
 #define VOODOO_NO_PUGIXML
 #include "VoodooFramework.hpp"
 
-#if defined(_DEBUG)
-#   define D3D_DEBUG_INFO
-#endif
-#include "D3D9.h"
-#include "D3DX9Shader.h"
-
-#ifndef VOODOO_IMPORT_DX9
-#   define VOODOO_API_DX9 __declspec(dllexport)
-#else
-#   define VOODOO_API_DX9 __declspec(dllimport)
-#endif
-
-#ifdef VOODOO_DX89_DEBUG3D8
-#   define VOODOO_API_LOG(...) gpVoodooLogger->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, __VA_ARGS__)
-#else
-#   define VOODOO_API_LOG(...)
-#endif
-
 namespace VoodooShader
 {
     namespace VoodooDX8
@@ -53,8 +35,6 @@ namespace VoodooShader
 
     namespace VoodooDX9
     {
-        class DX9Adapter;
-
         class CVoodoo3D9;
         class CVoodoo3DDevice9;
     }
@@ -63,38 +43,10 @@ namespace VoodooShader
 extern VoodooShader::ICoreRef gpVoodooCore;
 extern VoodooShader::ILoggerRef gpVoodooLogger;
 
-extern VoodooShader::IEffect * testEffect;
-
-extern IDirect3DVertexBuffer9 * gpFSQuadVerts;
-extern IDirect3DSurface9 *backbufferSurf;
-
-extern IDirect3DSurface9 *surface_Frame0;
-extern VoodooShader::ITexture* texture_Frame0;
-extern IDirect3DSurface9 *surface_Pass0;
-extern VoodooShader::ITexture* texture_Pass0;
-extern IDirect3DSurface9 * surface_Scratch;
-extern VoodooShader::ITexture* texture_Scratch;
-
-extern volatile LONG gObjectLock;
-
-typedef IDirect3D9 * (__stdcall * D3DFunc9) (UINT);
-
-const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit();
+const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(_In_ VoodooShader::ICore * pCore);
 const uint32_t VOODOO_CALLTYPE API_ClassCount();
 const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid);
-VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
-struct ModuleHook
-{
-    bool Installed;
-    TCHAR * Name;
-    const char * Symbol;
-    void * Func;
-};
+VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
+
 bool WINAPI InstallDllHook(LPTSTR name, LPCSTR symbol, LPVOID pDest);
 int WINAPI InstallKnownHooks();
-bool WINAPI InstallSystemHooks();
-HMODULE WINAPI VSLoadLibraryA(_In_ LPCSTR lpFileName);
-HMODULE WINAPI VSLoadLibraryW(_In_ LPCWSTR lpFileName);
-HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags);
-HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags);
-LPVOID WINAPI VSDirect3DCreate9(UINT SDKVersion);

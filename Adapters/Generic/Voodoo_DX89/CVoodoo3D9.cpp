@@ -209,7 +209,8 @@ namespace VoodooShader
             );
 
             if (SUCCEEDED(hr))
-            {                VoodooShader::Variant params[2] = {CreateVariant(m_SdkVersion), CreateVariant(realDevice)};
+            {
+                VoodooShader::Variant params[2] = {CreateVariant(m_SdkVersion), CreateVariant(realDevice)};
                 gpVoodooCore->Bind(VSProfile_D3D9, 2, params);
 
                 // Return our device

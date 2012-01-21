@@ -173,7 +173,7 @@ namespace VoodooShader
          *
          * @pre ICore::Bind must be called successfully before use.
          */
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ IFile * pFile) PURE;
+        VOODOO_METHOD_(ITexture *, LoadTexture)(_In_ CONST String & name, _In_ IFile * pFile) PURE;
         /**
          * Retrieve a parameter by name.
          *

@@ -37,7 +37,7 @@ namespace VoodooShader
         CVoodoo3DDevice9::~CVoodoo3DDevice9()
         {
             IAdapterRef adapter = gpVoodooCore->GetAdapter();
-            Variant deviceVar = CreateVariant(UT_PVoid);
+            Variant deviceVar = CreateVariant(VSUT_PVoid);
             adapter->SetProperty(PropIds::D3D9Device, &deviceVar);
         }
 
@@ -817,6 +817,111 @@ namespace VoodooShader
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::CreateQuery(THIS_ D3DQUERYTYPE Type, IDirect3DQuery9 **ppQuery)
         {
             return m_RealDevice->CreateQuery(Type, ppQuery);
+        }
+        HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::SetupDevice()
+        {
+            if (m_VertDecl) m_VertDecl->Release();
+            if (m_VertDeclT) m_VertDeclT->Release();
+
+            ILoggerRef logger = gpVoodooCore->GetLogger();            Variant deviceVar = CreateVariant(this);            VoodooResult vr = gpVoodooCore->Bind(VSProfile_D3D9, 1, &deviceVar);            assert(SUCCEEDED(vr));
+
+            // Setup profiles
+            const char * bestVertStr = D3DXGetVertexShaderProfile(m_RealDevice);
+            const char * bestFragStr = D3DXGetPixelShaderProfile(m_RealDevice);
+
+            if (!bestVertStr || !bestFragStr)
+            {
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Error detecting latest shader profiles."));
+                return VSF_FAIL;
+            }
+
+            logger->LogMessage
+            (
+                VSLog_ModInfo, VOODOO_DX89_NAME,
+                Format("Detected latest profiles as %1% and %2%.") << bestVertStr << bestFragStr
+            );
+
+            // Create vertex declaration
+            D3DVERTEXELEMENT9 vertDeclElems[] =
+            {
+                { 0,  0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+                { 0, 16, D3DDECLTYPE_UBYTE4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+                { 0, 20, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+                { 0, 36, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+                D3DDECL_END()
+            };
+
+            errors = m_RealDevice->CreateVertexDeclaration(vertDeclElems, &m_VertDecl);
+
+            if (!SUCCEEDED(errors))
+            {
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to create standard vertex declaration."));
+            }
+
+            vertDeclElems[0].Usage = D3DDECLUSAGE_POSITIONT;
+
+            errors = m_RealDevice->CreateVertexDeclaration(vertDeclElems, &m_VertDeclT);
+
+            if (!SUCCEEDED(errors))
+            {
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to create transformed vertex declaration."));
+            }
+
+            // Get params
+            D3DVIEWPORT9 viewport;
+
+            m_RealDevice->GetViewport(&viewport);
+
+            logger->LogMessage
+            (
+                VSLog_ModInfo, VOODOO_DX89_NAME, 
+                Format("Prepping for %1% by %2% target.") << (uint32_t)viewport.Width << (uint32_t)viewport.Height
+            );
+
+            // Get buffers
+            if (!SUCCEEDED(m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
+
+            // Create fullscreen vbuffer
+            float ft = -0.5f;
+            float fb = viewport.Height - ft;
+            float fl = -0.5f;
+            float fr = viewport.Width - ft;
+
+            VertexDesc fsVertData[6] =
+            {
+            //    POSITION              COLOR                  TEXCOORD[0]               TEXCOORD[1]
+                {{fl, fb, 0.5f, 1.0f}, {255, 255,   0,   0}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{fl, ft, 0.5f, 1.0f}, {255,   0, 255,   0}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{fr, ft, 0.5f, 1.0f}, {255,   0,   0, 255}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{fl, fb, 0.5f, 1.0f}, {255, 255,   0, 255}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{fr, ft, 0.5f, 1.0f}, {255,   0,   0, 255}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+                {{fr, fb, 0.5f, 1.0f}, {255, 255,   0, 255}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
+            };
+
+            errors = m_RealDevice->CreateVertexBuffer
+            (
+                sizeof(fsVertData), D3DUSAGE_WRITEONLY, NULL, D3DPOOL_DEFAULT, &gpFSQuadVerts, NULL
+            );
+
+            if (FAILED(errors))
+            {
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
+            }
+
+            VertexDesc * pVertices = nullptr;
+            errors = gpFSQuadVerts->Lock(0, 0, (void**)&pVertices, 0);
+
+            if (FAILED(errors))
+            {
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
+            }
+            else
+            {
+                memcpy(pVertices, fsVertData, sizeof(fsVertData));
+                gpFSQuadVerts->Unlock();
+            }
+
+            return true;
         }
     }
 }

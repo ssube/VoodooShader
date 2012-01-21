@@ -75,35 +75,19 @@ namespace VoodooShader
          * Binds this effect to the hardware, capturing state and downloading parameters as needed. The currently active
          * technique will be used.
          * 
-         * @param   pPassCount  A uint32_t to be filled with the number of passes needed to render the full effect.
          * @param   restore     If true, the effect will save hardware states, reset the device to defaults, and later 
          *                      restore the original states when the effect is unbound.
+         * @returns             The technique that has been bound, typically the default technique, or nullptr on failure.
          * 
          * @note Passes from an effect must not be used in IAdapter::SetPass until the effect has been set. When desired
          *      passes have been used and reset, the effect must be reset. Failing to reset the effect may cause unwanted
          *      states for future draw calls.
          */
-        VOODOO_METHOD(SetEffect)(_Out_ uint32_t * pPassCount, bool restore = true) PURE;
+        VOODOO_METHOD_(ITechnique *, Bind)(bool restore = true) PURE;
         /**
          * Reset this effect, unbinding it from hardware and resetting states if needed.
          */
-        VOODOO_METHOD(ResetEffect)() PURE;
-        /**
-         * Binds a pass from the active technique to the hardware, settings states as needed. The shaders to be bound
-         * depend on the API and flags given.
-         *
-         * @param   passIndex   The index of the pass to set.
-         * @param   stages      A mask limiting which shader stages to use. This can be used to disable vertex shaders for
-         *                      post-processing or other effects.
-         *
-         * @note Each call to SetPass must have a corresponding call to ResetPass.
-         */
-        VOODOO_METHOD(SetPass)(_In_ const uint32_t passIndex, ShaderStage stages = VSStage_All) PURE;
-        /**
-         * Resets the state of the adapter and unbinds the pass. This may trigger state reset or texture copying, so it is
-         * required for proper shader handling.
-         */
-        VOODOO_METHOD(ResetPass)() PURE;
+        VOODOO_METHOD(Reset)() PURE;
         /**
          * @}
          * @name Parameter Methods

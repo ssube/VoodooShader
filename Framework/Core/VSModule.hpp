@@ -19,7 +19,7 @@
  */
 #pragma once
 
-#include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
 
 namespace VoodooShader
 {

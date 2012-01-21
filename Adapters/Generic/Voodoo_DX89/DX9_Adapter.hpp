@@ -19,30 +19,28 @@
  */
 #pragma once
 
-#define VOODOO_IMPORT
-#define VOODOO_NO_PUGIXML
-#include "VoodooFramework.hpp"
+#include "DX9_Module.hpp"
 
-#ifdef _DEBUG
-#define D3D_DEBUG_INFO
+#if defined(_DEBUG)
+#   define D3D_DEBUG_INFO
 #endif
-#include <d3d9.h>
-#include <d3dx9effect.h>
+#include "D3D9.h"
+#include "D3DX9Shader.h"
 
-namespace VoodooShader
-{
-    namespace Voodoo_D3D9
-    {
-        class VSBindingDX9;
-        class VSEffectDX9;
-        class VSParameterDX9;
-        class VSPassDX9;
-        class VSTechniqueDX9;
-        class VSTextureDX9;
+#ifdef VOODOO_DX89_DEBUG3D8
+#   define VOODOO_API_LOG(...) gpVoodooLogger->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, __VA_ARGS__)
+#else
+#   define VOODOO_API_LOG(...)
+#endif
 
-        const Version * VOODOO_CALLTYPE API_PluginInit();
-        const uint32_t  VOODOO_CALLTYPE API_ClassCount();
-        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
-        IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
-    }
-}
+extern VoodooShader::IEffect * testEffect;
+
+extern IDirect3DVertexBuffer9 * gpFSQuadVerts;
+extern IDirect3DSurface9 *backbufferSurf;
+
+extern IDirect3DSurface9 *surface_Frame0;
+extern VoodooShader::ITexture* texture_Frame0;
+extern IDirect3DSurface9 *surface_Pass0;
+extern VoodooShader::ITexture* texture_Pass0;
+extern IDirect3DSurface9 * surface_Scratch;
+extern VoodooShader::ITexture* texture_Scratch;

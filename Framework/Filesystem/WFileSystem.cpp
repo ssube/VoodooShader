@@ -92,13 +92,13 @@ namespace VoodooShader
             {
                 PathCombine(cvar, cvar, VSTR("My Games"));
                 PathAddBackslash(cvar);
-                parser->Add(VSTR("games"), cvar, VT_System);
+                parser->Add(VSTR("games"), cvar, VSVar_System);
             }
 
             if (SHGetFolderPath(nullptr, CSIDL_SYSTEM, nullptr, SHGFP_TYPE_CURRENT, cvar) == S_OK)
             {
                 PathAddBackslash(cvar);
-                parser->Add(VSTR("system"), cvar, VT_System);
+                parser->Add(VSTR("system"), cvar, VSVar_System);
             }
 
             // Init DevIL
@@ -185,8 +185,10 @@ namespace VoodooShader
             return m_Core;
         }
 
-        VoodooResult VSWFileSystem::AddPath(const String & name)
+        VoodooResult VSWFileSystem::AddPath(const String & name, PathType type)
         {
+            if (type != VSPath_Directory) return VSFERR_INVALIDPARAMS;
+
             uint32_t count = name.Split(VSTR(";"), 0, nullptr);
 
             std::vector<String> paths(count);
@@ -265,7 +267,7 @@ namespace VoodooShader
                 Format(VSTR("Unable to find file '%1%'.")) << name.GetData()
             );
 
-            if ((mode & FF_CreateOnly) == FF_CreateOnly)
+            if ((mode & VSSearch_Create) == VSSearch_Create)
             {
                 String fullname = m_Core->GetParser()->Parse(*m_Directories.begin(), VSParse_SlashTrail) + filename;
 

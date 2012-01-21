@@ -57,16 +57,17 @@ namespace VoodooShader
         /**
          * Adds a directory to this file system's search path.
          *
-         * @param path The path to add (may include variables, will be parsed, may be absolute or relative).
+         * @param   path    The path to add (may include variables, will be parsed, may be absolute or relative).
+         * @param   type    The type of the path, used to control the loading process and search handler.
          *
-         * @note This does not check for duplicates, so care should be taken not to add the same directory repeatedly.
+         * @note This does not check for duplicates, so care should be taken not to add the same path repeatedly.
          *     Directory search order is important for file priority.
          *
          * @note This function uses Parser::ParseString() for all paths. Variables are evaluated when the path is added.
          * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This
          *      combined with parser environment access allows regular-form environment vars to be added to the file system.
          */
-        VOODOO_METHOD(AddPath)(_In_ const String & path) PURE;
+        VOODOO_METHOD(AddPath)(_In_ const String & path, PathType type = VSPath_Directory) PURE;
         /**
          * Removes a directory from the search path, following the same rules as adding (adding a string then removing the
          * same string will always work).
@@ -93,7 +94,7 @@ namespace VoodooShader
          * @param mode The file mode to use.
          * @return The file, if found or created (depending on mode).
          */
-        VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode = FF_OpenOnly) CONST PURE;
+        VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode = VSSearch_Exists) CONST PURE;
         /**
          * @}
          */

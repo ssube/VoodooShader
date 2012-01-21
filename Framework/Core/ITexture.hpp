@@ -30,12 +30,16 @@ namespace VoodooShader
     /**
      * @class ITexture
      *
-     * Contains a hardware texture, for use with Voodoo shaders and effects. These textures may usually be bound to
-     * parameters and shaders can sample pixels within them to create the on-screen images. Textures may be used to
-     * represent various other surfaces, including render targets or even the backbuffer.
+     * Contains a hardware texture, for use with Voodoo effects. These textures are usually bound to parameters and shaders 
+     * can sample pixels from or draw to them to create the desired effects. Textures may also represent a depth texture,
+     * with slightly different handling, or a null texture with no data storage. Textures may be created by calling
+     * ICore::CreateTexture() or ICore::LoadTexture(), depending on the source. Textures are provided by the binding.
      *
-     * @restag  A UT_PVoid to the underlying texture object.
      * @iid     e6f31296-05af-11e1-9e05-005056c00008
+     * 
+     * @note Textures have ITexture::StretchRect and ITexture::CopyVolume for transferring data. There is no specific method 
+     *      for 1D textures, ITexture::StretchRect() should be used in this case, and the @a Y component set to 1 (other
+     *      values will cause undefined behavior).
      */
     VOODOO_INTERFACE(ITexture, IResource, ({0x96, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
@@ -67,13 +71,44 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(TextureDesc, GetDesc)() CONST PURE;
         /**
+         * Binds this texture to a render-target on underlying API. This can only be done with textures that were created
+         * with VSTexFlag_Target, other textures @a must fail regardless of API support.
+         * 
+         * @param   mode    The binding mode for this texture, whether it will be used as a source or target.
+         * @param   index   The index to be bound to.
+         * 
+         * @note Every call to ITexture::Bind should have a corresponding call to ITexture::Reset.
+         * 
+         * @warning Binding a texture as both source and target is typically not possible <em>with the hardware API</em>. To
+         *      allow this in most circumstances, Voodoo Shader may do some indirection within the binding. This is very
+         *      likely to have a performance penalty, so it should be avoided.
+         *      
+         * @note If @a mode is VSTexMode_Target, @a index may be VOODOO_TEXTURE_DEPTH. This will bind the texture to the
+         *      depth buffer. For this to work, the texture must be a depth format (VSFmt_D16, VSFmt_D24, VSFmt_D24S8,
+         *      VSFmt_D32, or VSFmt_DMax). In some cases, these textures may also be bound as VSTexMode_Source.
+         */
+        VOODOO_METHOD(Bind)(TextureMode mode, uint32_t index);
+        /**
+         * Unbinds this texture from the render target, reseting the texture previously bound to that source or target.
+         * 
+         * @note This must only be called after ITexture::Bind, and will reset the value displaced by that call.
+         */
+        VOODOO_METHOD(Reset)();
+        /**
          * Copies a 1 or 2D region of texture data from another texture. 
          * 
          * @param   pSource The texture to copy from. This must be the same format with the same mipmap flags.
          * @param   source  The source rectangle.
          * @param   dest    The destination rectangle.
          * 
-         * @note This method does not do any stretching of the texture data.
+         * @note This method may do any stretching of the texture data. However, stretching may limit the possible allowed
+         *      sources and destinations. 
+         * 
+         * @note If @a pSource has more dimensions than this texture, any more than this texture has must be disregarded.
+         *      For example, if @a pSource is 3D and this is 2D, only the first "slice" will be copied. If @a pSource has
+         *      fewer dimensions, the copy must fail. If any other behavior is needed, some form of render-to-texture should
+         *      be used.
+         * 
          * @warning Under some APIs, this call may require extra handling to copy from render target textures to others; 
          *      this may result in a notable performance hit. Because of this, avoid copying from render target textures.
          */
@@ -86,6 +121,9 @@ namespace VoodooShader
          * @param   dest    The destination point.
          * 
          * @note This method does not do any stretching of the texture data.
+         * 
+         * @note @a pSource must have the same format and dimensions as this texture. If @a pSource has other dimensions, 
+         *      this call must fail.
          */
         VOODOO_METHOD(CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, CONST UInt3 dest);
         /**

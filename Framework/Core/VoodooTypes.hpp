@@ -46,26 +46,35 @@ namespace VoodooShader
      * @defgroup voodoo_enums Enums
      * @{
      *
-     * Texture formats for use by @ref VoodooShader::ITexture "Textures", describing the layout and size of the texture
+     * Texture formats for use by @ref VoodooShader::ITexture "textures", describing the layout and size of the texture
      * data. These may not be implemented by the underlying graphics API exactly as they are indicated here, but the
-     * available components and sizes are guaranteed to be equal to or greater than the indicated values. Further
-     * information on texture formats and depth may be found on the @ref voodoo_textures_formats "texture formats chart".
+     * available components and sizes are guaranteed to be equal to or greater than the indicated values (with the exception
+     * of VSFmt_Null and VSFmt_DMax, which have no and variable precision). Further information on texture formats may be 
+     * found on the @ref voodoo_textures_formats "texture formats chart".
+     * 
+     * Many bindings restrict the use of depth textures as inputs to effects. The listed formats are @a mostly compatible
+     * for use as such, but this is still very hardware-dependent. See @ref voodoo_textures_depth for details.
      */
     enum TextureFormat : uint32_t
     {
-        VSFmt_Unknown      = 0x0000,    /* !< Unknown texture format. */
+        VSFmt_Unknown       = 0x0000,   /* !< Unknown texture format. */
+        // Null texture format
+        VSFmt_Null          = 0x0001,   /* !< Has no data and takes no space. */
         // General texture formats
-        VSFmt_RGB5         = 0x0101,    /* !< 5 bit RGB (1 bit X in D3D, may be R5G6B5 in OGL) */
-        VSFmt_RGB5A1       = 0x0102,    /* !< 5 bit RGB, 1 bit alpha */
-        VSFmt_RGB8         = 0x0103,    /* !< 8 bit RGB (8 bit X in D3D). Most common backbuffer format, common texture format. */
-        VSFmt_RGBA8        = 0x0104,    /* !< 8 bit RGBA. Common texture format. */
-        VSFmt_RGB10A2      = 0x0105,    /* !< 10 bit RGB, 2 bit A */
+        VSFmt_RGB5          = 0x0101,   /* !< 5 bit RGB (1 bit X in D3D, may be R5G6B5 in OGL) */
+        VSFmt_RGB5A1        = 0x0102,   /* !< 5 bit RGB, 1 bit alpha */
+        VSFmt_RGB8          = 0x0103,   /* !< 8 bit RGB (8 bit X in D3D). Most common backbuffer format, common texture format. */
+        VSFmt_RGBA8         = 0x0104,   /* !< 8 bit RGBA. Common texture format. */
+        VSFmt_RGB10A2       = 0x0105,   /* !< 10 bit RGB, 2 bit A */
         // Float texture formats
-        VSFmt_RGBA16F      = 0x0201,    /* !< Half-precision RGBA. HDR format. */
-        VSFmt_RGBA32F      = 0x0202,    /* !< Full-precision RGBA (float/single). HDR format. */
+        VSFmt_RGBA16F       = 0x0201,   /* !< Half-precision RGBA. HDR format. */
+        VSFmt_RGBA32F       = 0x0202,   /* !< Full-precision RGBA (float/single). HDR format. */
         // Depth texture formats
-        VSFmt_D16          = 0x0401,    /* !< Half-precision depth (Z-buffer, see @ref depthbuffers for more info) */
-        VSFmt_D32          = 0x0402,    /* !< Full-precision depth (Z-buffer, see @ref depthbuffers for more info) */
+        VSFmt_D16           = 0x0401,   /* !< Half-precision depth, with no stencil buffer. */
+        VSFmt_D24           = 0x0402,   /* !< Partial precision depth buffer, with no stencil buffer. */
+        VSFmt_D24S8         = 0x0403,   /* !< 24-bit precision depth buffer, with stencil buffer. */
+        VSFmt_D32           = 0x0404,   /* !< Full-precision depth, with no stencil buffer. */
+        VSFmt_DMax          = 0x0405,   /* !< Unspecified precision depth buffer, with no stencil buffer. */
     };
 
     enum ParameterType : uint32_t
@@ -111,11 +120,18 @@ namespace VoodooShader
     {
         VSProfile_None      = 0x0000,   /* !< Compile with the core's default flags. */
         VSProfile_Refr      = 0x0010,
-        VSProfile_D3D9      = 0x0100,
-        VSProfile_D3D10     = 0x0190,
-        VSProfile_D3D11     = 0x01A0,
+        VSProfile_D3D9      = 0x0190,
+        VSProfile_D3D10     = 0x01A0,
+        VSProfile_D3D10_1   = 0x01A1,
+        VSProfile_D3D11     = 0x01B0,
+        VSProfile_D3D11_1   = 0x01B1,
+        VSProfile_OpenGL2   = 0x0220,
         VSProfile_OpenGL3   = 0x0230,
         VSProfile_OpenGL4   = 0x0240,
+    };
+    enum TextureMode : uint32_t
+    {        VSTexMode_Target    = 0x00,     /* !< The texture is bound as a target, to be rendered to. This imposes many restrictions on the texture, see @ref voodoo_textures_target. */
+        VSTexMode_Source    = 0x01,     /* !< The texture is bound as a source, for sampling operations. This is typically handled automatically by the pass. */
     };
 
     enum TextureFlags : uint32_t
@@ -153,10 +169,9 @@ namespace VoodooShader
      */
     enum GetFileMode : uint32_t
     {
-        FF_Unknown      = 0x00,
-        FF_CreateOnly   = 0x01,     /* !< Create the file in the first possible directory, or fail if it already exists. */
-        FF_OpenOnly     = 0x02,     /* !< Open the file, or fail if it does not exist. */
-        FF_AlwaysOpen   = 0x03,     /* !< Open the file if it exists, or create it if it does not. */
+        VSSearch_Open       = 0x00,     /* !< Open the file if it exists, or create it if it does not. */
+        VSSearch_Create     = 0x01,     /* !< Create the file in the first possible directory, or fail if it already exists. */
+        VSSearch_Exists     = 0x02,     /* !< Open the file, or fail if it does not exist. */
     };
 
     /**
@@ -164,13 +179,20 @@ namespace VoodooShader
      */
     enum FileOpenMode : uint32_t
     {
-        FO_Unknown      = 0x00,
-        FO_Read         = 0x01,     /* !< Read-only access. */
-        FO_Write        = 0x02,     /* !< Write-only access. */
-        FO_ReadWrite    = 0x03,     /* !< Read/write access. */
-        FO_Ate          = 0x10,     /* !< Set position to the end of the file (if not set, position defaults to the beginning). */
-        FO_Append       = 0x20,     /* !< Write operations are performed at the end of the file. Not compatible with FM_Read. */
-        FO_Truncate     = 0x40,     /* !< If the file existed, all contents are erased. Not compatible with FM_CreateOnly. */
+        VSOpen_Unknown      = 0x00,
+        VSOpen_Read         = 0x01,     /* !< Read-only access. */
+        VSOpen_Write        = 0x02,     /* !< Write-only access. */
+        VSOpen_ReadWrite    = VSOpen_Read | VSOpen_Write, /* !< Read/write access. */
+        VSOpen_Binary       = 0x10,     /* !< Open the file in binary mode. This guarantees the data will not be modified by the system when read (ie, normalizing line breaks). */
+        VSOpen_End          = 0x10,     /* !< Set position to the end of the file (if not set, position defaults to the beginning). */
+        VSOpen_Append       = 0x20,     /* !< Write operations are performed at the end of the file. Not compatible with VSOpen_Read. */
+        VSOpen_Truncate     = 0x40,     /* !< If the file is not empty, all contents are erased. */
+    };
+
+    enum PathType : uint32_t
+    {
+        VSPath_Directory    = 0x00,
+        VSPath_Archive      = 0x01,
     };
 
     /**
@@ -227,65 +249,61 @@ namespace VoodooShader
 
     enum LogFlags  : uint32_t
     {
-        LF_Unknown      = 0x00,
-        LF_Flush        = 0x01      /* !< Log will be flushed to disk after every message. */
+        VSLogFlag_Unknown   = 0x00,
+        VSLogFlag_Flush     = 0x01,     /* !< Log will be flushed to disk after every message. */
     };
 
     /**
      * String parsing flags. These modify the behavior of the string parser.
+     * 
+     * Slash flags are handled before path flags. Path flags use system API calls to perform their processing, and are
+     * dependent on system behavior. More flags will be added when logic, functions and operators are added to variables.
      */
     enum ParseFlags : uint32_t
     {
-        VSParse_None         = 0x00,
+        VSParse_None        = 0x00,
 
-        VSParse_SlashSingle  = 0x0001,   /* !< Compress any consecutive slashes into one. */
-        VSParse_SlashDouble  = 0x0002,   /* !< Double any slashes found. */
-        VSParse_SlashEscape  = 0x0004,   /* !< Prefix any slashes with a backslash. */
-        VSParse_SlashOnly    = 0x0010,   /* !< Replace all slashes with forward slashes. */
-        VSParse_SlashBack    = 0x0020,   /* !< Replace all slashes with back slashes. */
-        VSParse_SlashTrail   = 0x0100,   /* !< Append a slash to the end of the string. */
+        VSParse_SlashSingle = 0x0001,   /* !< Compress any consecutive slashes into one. */
+        VSParse_SlashDouble = 0x0002,   /* !< Double any slashes found. */
+        VSParse_SlashEscape = 0x0004,   /* !< Prefix any slashes with a backslash. This occurs after all other slash flags. */
+        VSParse_SlashOnly   = 0x0010,   /* !< Replace all slashes with forward slashes. */
+        VSParse_SlashBack   = 0x0020,   /* !< Replace all slashes with back slashes. */
+        VSParse_SlashTrail  = 0x0100,   /* !< Append a slash to the end of the string. This occurs before all other slash flags. */
 
-        VSParse_PathRoot     = 0x001000, /* !< Isolate the root of a path (eg "C:\file.txt" becomes "C:"). */
-        VSParse_PathOnly     = 0x002000, /* !< Strip a trailing filename, if one is present (eg "C:\dir\file.txt" becomes "C:\dir"). */
-        VSParse_PathFile     = 0x004000, /* !< Strip a path, leaving only filename or last element (eg "C:\dir\file.txt" becomes "file.txt", and "C:\dir\other" becomes "other"). */
-        VSParse_PathExt      = 0x008000, /* !< Isolate the file extension, if one is present (eg "C:\dir\file.txt" becomes "txt"). */
-        VSParse_PathCanon    = 0x010000, /* !< Canonicalize the path (parse any relative tokens, eg "C:\dir\..\file.txt" becomes "C:\file.txt"). */
+        VSParse_PathRoot    = 0x001000, /* !< Isolate the root of a path (eg "C:\file.txt" becomes "C:"). */
+        VSParse_PathOnly    = 0x002000, /* !< Strip a trailing filename, if one is present (eg "C:\dir\file.txt" becomes "C:\dir"). */
+        VSParse_PathFile    = 0x004000, /* !< Strip a path, leaving only filename or last element (eg "C:\dir\file.txt" becomes "file.txt", and "C:\dir\other" becomes "other"). */
+        VSParse_PathExt     = 0x008000, /* !< Isolate the file extension, if one is present (eg "C:\dir\file.txt" becomes "txt"). */
+        VSParse_PathCanon   = 0x010000, /* !< Canonicalize the path (replace any relative tokens, eg "C:\dir\..\file.txt" becomes "C:\file.txt"). */
 
-        VSParse_SlashFlags   = 0x00000137,
-        VSParse_PathFlags    = 0x000FF000,
+        VSParse_SlashFlags  = 0x00000137,
+        VSParse_PathFlags   = 0x000FF000,
     };
 
     enum VariableType  : uint32_t
     {
-        VT_Normal       = 0x00,
-        VT_State        = 0x01,
-        VT_System       = 0x10
+        VSVar_Normal        = 0x00,
+        VSVar_State         = 0x01,
+        VSVar_System        = 0x10
     };
 
     enum UnionType : uint32_t
     {
-        UT_Unknown      = 0x00,
-        UT_None         = 0x01,
-        UT_Bool         = 0x02,
-        UT_Int8         = 0x03,
-        UT_UInt8        = 0x04,
-        UT_Int16        = 0x05,
-        UT_UInt16       = 0x06,
-        UT_Int32        = 0x07,
-        UT_UInt32       = 0x08,
-        UT_Float        = 0x09,
-        UT_Double       = 0x0A,
-        UT_Uuid         = 0x0B,
-        UT_String       = 0x0C,
-        UT_IObject      = 0x0D,
-        UT_PVoid        = 0x0F,
-    };
-
-    enum VertexFlags : uint32_t
-    {
-        VF_None         = 0x00,
-        VF_Transformed  = 0x01,
-        VF_Buffer       = 0x02,
+        VSUT_Unknown        = 0x00,
+        VSUT_None           = 0x01,
+        VSUT_Bool           = 0x02,
+        VSUT_Int8           = 0x03,
+        VSUT_UInt8          = 0x04,
+        VSUT_Int16          = 0x05,
+        VSUT_UInt16         = 0x06,
+        VSUT_Int32          = 0x07,
+        VSUT_UInt32         = 0x08,
+        VSUT_Float          = 0x09,
+        VSUT_Double         = 0x0A,
+        VSUT_Uuid           = 0x0B,
+        VSUT_String         = 0x0C,
+        VSUT_IObject        = 0x0D,
+        VSUT_PVoid          = 0x0F,
     };
 #pragma warning(pop)
     /**
@@ -344,7 +362,6 @@ namespace VoodooShader
      * Standard return type for Voodoo Shader functions, indicating various levels of success or failure.
      */
     typedef int32_t VoodooResult;
-
 #define VSUCCESS(vr) (((VoodooResult)(vr)) >= 0)
 #define VFAILURE(vr) (((VoodooResult)(vr)) <  0)
     /**
@@ -368,7 +385,13 @@ namespace VoodooShader
 #define VSFERR_CONFLICTING      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1009)
 #define VSFERR_INVALIDUUID      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100A)
 #define VSFERR_PROPERTYNOTFOUND MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100B)
-#define VSFERR_APIERROR         MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100C)
+#define VSFERR_APIERROR         MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100C)    /**
+     * @{
+     * @defgroup voodoo_types_textures Special Texture Slots
+     * @{
+     */
+#define VOODOO_TEXTURE_INVALID   uint32_t(-1)
+#define VOODOO_TEXTURE_DEPTH     uint32_t(-2)
     /**
      * @}
      * @}
@@ -498,7 +521,6 @@ namespace VoodooShader
         typedef const uint32_t  (VOODOO_CALLTYPE * ClassCountFunc)();
         typedef const wchar_t * (VOODOO_CALLTYPE * ClassInfoFunc)(const uint32_t, Uuid *);
         typedef IObject *       (VOODOO_CALLTYPE * ClassCreateFunc)(const uint32_t, ICore *);
-        typedef VoodooResult    (VOODOO_CALLTYPE * CallbackFunc)();
     }
     /**
      * @}
@@ -509,7 +531,6 @@ namespace VoodooShader
 #if !defined(VOODOO_NO_BOOST)
     void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
     void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
-
     typedef boost::intrusive_ptr<IBinding>       IBindingRef;
     typedef boost::intrusive_ptr<ICore>          ICoreRef;
     typedef boost::intrusive_ptr<IEffect>        IEffectRef;
@@ -613,43 +634,50 @@ namespace VoodooShader
      */
 #define DECLARE_AND_ZERO(type, name)                type name; ZeroMemory(&name, sizeof(type))
 #define DECLARE_VARIANT(name)                       DECLARE_AND_ZERO(Variant, name)
-#define INITIALIZE_VARIANTC(name, type, comp)       name.Type = UT_##type; name.Components = comp
+#define INITIALIZE_VARIANTC(name, type, comp)       name.Type = VSUT_##type; name.Components = comp
 #define INITIALIZE_VARIANT1(name, type, x)          INITIALIZE_VARIANTC(name, type, 1); name.V##type.X = x
 #define INITIALIZE_VARIANT2(name, type, x, y)       INITIALIZE_VARIANTC(name, type, 2); name.V##type.X = x; name.V##type.Y = y
 #define INITIALIZE_VARIANT3(name, type, x, y, z)    INITIALIZE_VARIANTC(name, type, 3); name.V##type.X = x; name.V##type.Y = y; name.V##type.Z = z
 #define INITIALIZE_VARIANT4(name, type, x, y, z, w) INITIALIZE_VARIANTC(name, type, 4); name.V##type.X = x; name.V##type.Y = y; name.V##type.Z = z; name.V##type.W = w
-
     inline Variant CreateVariant()                      { DECLARE_VARIANT(var); return var; }
     inline Variant CreateVariant(const UnionType t)     { DECLARE_VARIANT(var); var.Type = t; return var; }
     inline Variant CreateVariant(const bool & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANTC(var, Bool, 0); var.VBool = v; return var; }
-    inline Variant CreateVariant(const Byte1 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int8, v.X);       return var; }
-    inline Variant CreateVariant(const Byte2 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int8, v.X, v.Y);  return var; }
+    inline Variant CreateVariant(const int8_t & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int8, v);          return var; }
+    inline Variant CreateVariant(const Byte1 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int8, v.X);        return var; }
+    inline Variant CreateVariant(const Byte2 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int8, v.X, v.Y);   return var; }
     inline Variant CreateVariant(const Byte3 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int8, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Byte4 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int8, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const uint8_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt8, v);         return var; }
     inline Variant CreateVariant(const UByte1 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt8, v.X);       return var; }
-    inline Variant CreateVariant(const UByte2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt8, v.X, v.Y); return var; }
+    inline Variant CreateVariant(const UByte2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt8, v.X, v.Y);  return var; }
     inline Variant CreateVariant(const UByte3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt8, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const UByte4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt8, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const int16_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int16, v);         return var; }
     inline Variant CreateVariant(const Short1 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int16, v.X);       return var; }
     inline Variant CreateVariant(const Short2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int16, v.X, v.Y);  return var; }
     inline Variant CreateVariant(const Short3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int16, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Short4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int16, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const uint16_t & v)    { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt16, v);        return var; }
     inline Variant CreateVariant(const UShort1 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt16, v.X);      return var; }
     inline Variant CreateVariant(const UShort2 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt16, v.X, v.Y); return var; }
     inline Variant CreateVariant(const UShort3 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt16, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const UShort4 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt16, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const int32_t & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int32, v);         return var; }
     inline Variant CreateVariant(const Int1 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Int32, v.X);       return var; }
     inline Variant CreateVariant(const Int2 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Int32, v.X, v.Y);  return var; }
     inline Variant CreateVariant(const Int3 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Int32, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Int4 & v)        { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Int32, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const uint32_t & v)    { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt32, v);        return var; }
     inline Variant CreateVariant(const UInt1 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, UInt32, v.X);      return var; }
     inline Variant CreateVariant(const UInt2 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, UInt32, v.X, v.Y); return var; }
     inline Variant CreateVariant(const UInt3 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, UInt32, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const UInt4 & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, UInt32, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const float & v)       { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Float, v);         return var; }
     inline Variant CreateVariant(const Float1 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Float, v.X);       return var; }
     inline Variant CreateVariant(const Float2 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Float, v.X, v.Y);  return var; }
     inline Variant CreateVariant(const Float3 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Float, v.X, v.Y, v.Z); return var; }
     inline Variant CreateVariant(const Float4 & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT4(var, Float, v.X, v.Y, v.Z, v.W); return var; }
+    inline Variant CreateVariant(const double & v)      { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Double, v);        return var; }
     inline Variant CreateVariant(const Double1 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT1(var, Double, v.X);      return var; }
     inline Variant CreateVariant(const Double2 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT2(var, Double, v.X, v.Y); return var; }
     inline Variant CreateVariant(const Double3 & v)     { DECLARE_VARIANT(var); INITIALIZE_VARIANT3(var, Double, v.X, v.Y, v.Z); return var; }

@@ -65,8 +65,31 @@ namespace VoodooShader
             for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)
             {
                 D3DXHANDLE passHandle = m_DXEffect->GetPass(m_DXHandle, passIndex);
-                VSPassDX9 * pass = new VSPassDX9(this, m_DXEffect, passHandle, passIndex);
-                m_Passes.push_back(pass);
+                VSPassDX9 * pass = new VSPassDX9(this, passIndex);
+                m_Passes.push_back(pass);
+                // Get the targets                char targetName[] = "vs_target0\0";
+                uint32_t targetIndex = 0;
+                while (targetIndex < 4)
+                {
+                    char targetIndexChar = '0' + char(targetIndex);
+                    targetName[9] = targetIndexChar;
+
+                    D3DXHANDLE annotation = m_DXEffect->GetAnnotationByName(passHandle, targetName);
+                    if (!annotation)
+                    {
+                        break;
+                    }
+
+                    LPCSTR annotationValue = NULL;
+                    if (FAILED(m_DXEffect->GetString(annotation, &annotationValue)) || !annotationValue)
+                    {
+                        break;
+                    }
+
+                    pass->SetTarget(targetIndex, m_Core->GetTexture(annotationValue));
+
+                    ++targetIndex;
+                }
             }
 
             AddThisToDebugCache();
@@ -155,13 +178,13 @@ namespace VoodooShader
 
             if (propid == PropIds::D3DX9Handle)
             {
-                pValue->Type = UT_PVoid;
+                pValue->Type = VSUT_PVoid;
                 pValue->VPVoid = (PVOID)m_DXHandle;
                 return VSF_OK;
             } 
             else if (propid == PropIds::D3DX9Effect)
             {
-                pValue->Type = UT_PVoid;
+                pValue->Type = VSUT_PVoid;
                 pValue->VPVoid = (PVOID)m_DXEffect;
                 return VSF_OK;
             }

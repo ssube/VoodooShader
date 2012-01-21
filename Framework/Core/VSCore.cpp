@@ -19,12 +19,12 @@
  */
 
 #include "VSCore.hpp"
-
+// Voodoo Core
 #include "VSModuleManager.hpp"
 #include "VSParser.hpp"
-
+// Voodoo Utility
 #include "Support.inl"
-
+// System
 #include "shellapi.h"
 
 namespace VoodooShader
@@ -104,11 +104,11 @@ namespace VoodooShader
     {
         if (config)
         {
-            m_Parser->Add(VSTR("config"), config, VT_System);
+            m_Parser->Add(VSTR("config"), config, VSVar_System);
         }
         else
         {
-            m_Parser->Add(VSTR("config"), VSTR("VoodooShader.xml"), VT_System);
+            m_Parser->Add(VSTR("config"), VSTR("VoodooShader.xml"), VSVar_System);
         }
 
         // Load variables, built-in first
@@ -117,45 +117,45 @@ namespace VoodooShader
 
             // Global path
             GetVoodooPath(buffer);
-            m_Parser->Add(VSTR("path"), buffer, VT_System);
+            m_Parser->Add(VSTR("path"), buffer, VSVar_System);
 
             // Bin prefix
             GetVoodooBinPrefix(buffer);
-            m_Parser->Add(VSTR("prefix"), buffer, VT_System);
+            m_Parser->Add(VSTR("prefix"), buffer, VSVar_System);
 
             // Framework bin path
             GetVoodooBinPath(buffer);
-            m_Parser->Add(VSTR("binpath"), buffer, VT_System);
+            m_Parser->Add(VSTR("binpath"), buffer, VSVar_System);
 
             // Target
             HMODULE pTarget = GetModuleHandle(NULL);
             GetModuleFileName(pTarget, buffer, MAX_PATH);
-            m_Parser->Add(VSTR("target"), buffer, VT_System);
+            m_Parser->Add(VSTR("target"), buffer, VSVar_System);
 
             // Local path
             PathRemoveFileSpec(buffer);
             PathAddBackslash(buffer);
-            m_Parser->Add(VSTR("local"), buffer, VT_System);
+            m_Parser->Add(VSTR("local"), buffer, VSVar_System);
 
             // Startup path
             GetCurrentDirectory(MAX_PATH, buffer);
             PathAddBackslash(buffer);
-            m_Parser->Add(VSTR("startup"), buffer, VT_System);
+            m_Parser->Add(VSTR("startup"), buffer, VSVar_System);
 
             GetModuleFileName(gCoreHandle, buffer, MAX_PATH);
-            m_Parser->Add(VSTR("core"), buffer, VT_System);
+            m_Parser->Add(VSTR("core"), buffer, VSVar_System);
         }
 
         // Command line processing
         LPWSTR cmdline = GetCommandLine();
-        m_Parser->Add(VSTR("args"), cmdline, VT_System);
+        m_Parser->Add(VSTR("args"), cmdline, VSVar_System);
 
         int cmdargc = 0;
         LPWSTR * cmdargv = CommandLineToArgvW(cmdline, &cmdargc);
-        m_Parser->Add(VSTR("argc"), Format(VSTR("%d")) << cmdargc, VT_System);
+        m_Parser->Add(VSTR("argc"), Format(VSTR("%d")) << cmdargc, VSVar_System);
         for (int i = 0; i < cmdargc; ++i)
         {
-            m_Parser->Add(Format(VSTR("argv_%d")) << i, cmdargv[i], VT_System);
+            m_Parser->Add(Format(VSTR("argv_%d")) << i, cmdargv[i], VSVar_System);
         }
 
         // Load the config
@@ -608,7 +608,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(_In_ const String & name, _In_ IFile * pFile)
+    ITexture * VOODOO_METHODTYPE VSCore::LoadTexture(_In_ const String & name, _In_ IFile * pFile)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 

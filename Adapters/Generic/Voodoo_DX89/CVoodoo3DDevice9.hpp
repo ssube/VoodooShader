@@ -19,7 +19,8 @@
  */
 #pragma once
 
-#include "DX9_Module.hpp"
+// Voodoo DX89
+#include "DX9_Adapter.hpp"
 
 namespace VoodooShader
 {
@@ -310,9 +311,13 @@ namespace VoodooShader
             STDMETHOD(DeletePatch)(THIS_ UINT Handle);
             STDMETHOD(CreateQuery)(THIS_ D3DQUERYTYPE Type, IDirect3DQuery9 **ppQuery);
 
+            STDMETHOD(SetupDevice)();
+
         private:
             IDirect3DDevice9 * m_RealDevice;
             IDirect3D9 * m_ParentObj;
+
+
         };
     }
 }

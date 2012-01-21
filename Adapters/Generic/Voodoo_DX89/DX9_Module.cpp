@@ -19,28 +19,27 @@
  */
 
 #include "DX9_Module.hpp"
-
+// Voodoo DX89
+#include "DX9_Exports.hpp"
 #include "DX9_Version.hpp"
+// Voodoo Utility
+#include "Support.inl"
 
-VoodooShader::ICoreRef gpVoodooCore = nullptr;
-VoodooShader::ILoggerRef gpVoodooLogger = nullptr;
+struct ModuleHook
+{
+    bool Installed;
+    TCHAR * Name;
+    const char * Symbol;
+    void * Func;
+};
 
-VoodooShader::IEffect * testEffect = nullptr;
-
-IDirect3DVertexBuffer9 * gpFSQuadVerts = nullptr;
-IDirect3DSurface9 *backbufferSurf = nullptr;
-
-IDirect3DSurface9 *surface_Frame0 = nullptr;
-VoodooShader::ITexture* texture_Frame0 = nullptr;
-IDirect3DSurface9 *surface_Pass0 = nullptr;
-VoodooShader::ITexture* texture_Pass0 = nullptr;
-IDirect3DSurface9 * surface_Scratch = nullptr;
-VoodooShader::ITexture* texture_Scratch = nullptr;
-
-volatile LONG gObjectLock = 0;
 ModuleHook hookList[] =
 {
-    { false, L"d3d9.dll",      "Direct3DCreate9",      &VSDirect3DCreate9 },
+    { false, L"kernel32.dll",   "LoadLibraryA",         &VSLoadLibraryA },
+    { false, L"kernel32.dll",   "LoadLibraryW",         &VSLoadLibraryW },
+    { false, L"kernel32.dll",   "LoadLibraryExA",       &VSLoadLibraryExA },
+    { false, L"kernel32.dll",   "LoadLibraryExW",       &VSLoadLibraryExW },
+    { false, L"d3d9.dll",       "Direct3DCreate9",      &VSDirect3DCreate9 },
     //{ false, L"d3d9.dll",      "Direct3DCreate9Ex",    &VSDirect3DCreate9Ex },
     //{ false, L"dinput8.dll",   "DirectInput8Create",   &VSDirectInput8Create },
     //{ false, L"dinput.dll",    "DirectInputCreateA",   &VSDirectInputCreateA },
@@ -48,15 +47,18 @@ ModuleHook hookList[] =
     //{ false, L"dsound8.dll",   "DirectSoundCreate8",   &VSDirectSoundCreate8 },
     //{ false, nullptr,          nullptr,                nullptr }
 };
+
+VoodooShader::ICoreRef gpVoodooCore = nullptr;
+VoodooShader::ILoggerRef gpVoodooLogger = nullptr;
+
+volatile LONG gObjectLock = 0;
+
 const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(VoodooShader::ICore * pCore)
 {
     if (!pCore) return nullptr;
     gpVoodooCore = pCore;
 
-    InstallDllHook(TEXT("kernel32.dll"), "LoadLibraryA", &VSLoadLibraryA);
-    InstallDllHook(TEXT("kernel32.dll"), "LoadLibraryW", &VSLoadLibraryW);
-    InstallDllHook(TEXT("kernel32.dll"), "LoadLibraryExA", &VSLoadLibraryExA);
-    InstallDllHook(TEXT("kernel32.dll"), "LoadLibraryExW", &VSLoadLibraryExW);
+    InstallKnownHooks();
 
     static const VoodooShader::Version dx9version = VOODOO_VERSION_STRUCT(DX89);
     return &dx9version;
@@ -69,11 +71,16 @@ const uint32_t VOODOO_CALLTYPE API_ClassCount()
 
 const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid)
 {
+    UNREFERENCED_PARAMETER(index);
+    UNREFERENCED_PARAMETER(refid);
+
     return nullptr;
 }
 
 VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore)
-{
+{    UNREFERENCED_PARAMETER(index);
+    UNREFERENCED_PARAMETER(pCore);
+
     return nullptr;
 }
 
@@ -99,7 +106,8 @@ bool WINAPI InstallDllHook(LPTSTR name, LPCSTR symbol, LPVOID pDest)
 }
 
 int WINAPI InstallKnownHooks()
-{    int success = 0;
+{
+    int success = 0;
     int hookCount = sizeof(hookList) / sizeof(hookList[0]);
 
     for (int i = 0; i < hookCount; ++i)
@@ -112,114 +120,4 @@ int WINAPI InstallKnownHooks()
     }
 
     return success;
-}
-
-HMODULE WINAPI VSLoadLibraryA(_In_ LPCSTR lpFileName)
-{
-    HMODULE retval = LoadLibraryA(lpFileName);
-
-#ifdef _DEBUG
-    FILE * pf = GetVoodooGlobalLog();
-    if (pf)
-    {
-        _ftprintf(pf, TEXT("DETOUR: VSLoadLibraryA(%S)\n"), lpFileName);
-        fclose(pf);
-    }
-#endif
-
-    if (retval)
-    {
-        InstallKnownHooks();
-    }
-
-    return retval;
-}
-
-HMODULE WINAPI VSLoadLibraryW(_In_ LPCWSTR lpFileName)
-{
-    HMODULE retval = LoadLibraryW(lpFileName);
-
-#ifdef _DEBUG
-    FILE * pf = GetVoodooGlobalLog();
-    if (pf)
-    {
-        _ftprintf(pf, TEXT("DETOUR: VSLoadLibraryW(%s)\n"), lpFileName);
-        fclose(pf);
-    }
-#endif
-
-    if (retval)
-    {
-        InstallKnownHooks();
-    }
-
-    return retval;
-}
-
-HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags)
-{
-    HMODULE retval = LoadLibraryExA(lpFileName, hFile, dwFlags);
-
-#ifdef _DEBUG
-    FILE * pf = GetVoodooGlobalLog();
-    if (pf)
-    {
-        _ftprintf(pf, TEXT("DETOUR: VSLoadLibraryExA(%S, %p, %d)\n"), lpFileName, hFile, dwFlags);
-        fclose(pf);
-    }
-#endif
-
-    if (retval)
-    {
-        InstallKnownHooks();
-    }
-
-    return retval;
-}
-
-HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWORD dwFlags)
-{
-    HMODULE retval = LoadLibraryExW(lpFileName, hFile, dwFlags);
-
-#ifdef _DEBUG
-    FILE * pf = GetVoodooGlobalLog();
-    if (pf)
-    {
-        _ftprintf(pf, TEXT("DETOUR: VSLoadLibraryExW(%s, %p, %d)\n"), lpFileName, hFile, dwFlags);
-        fclose(pf);
-    }
-#endif
-
-    if (retval)
-    {
-        InstallKnownHooks();
-    }
-
-    return retval;
-}
-
-LPVOID WINAPI VSDirect3DCreate9(UINT sdkVersion)
-{
-    VOODOO_DEBUGBREAK;
-
-    if (!gFunc_Direct3DCreate9)
-    {
-        gFunc_Direct3DCreate9 = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), true, "Direct3DCreate9", &gModule_D3D9);
-    }
-
-    LPVOID pD3D9 = gFunc_Direct3DCreate9(sdkVersion);
-
-    if (!pD3D9)
-    {
-        return pD3D9;
-    }
-        
-    if (InterlockedCompareExchange(&gSingleExport, 1, 0) == 0)
-    {
-        GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
-
-        gSingleExport = false;
-    }
-
-    return pD3D9;
 }

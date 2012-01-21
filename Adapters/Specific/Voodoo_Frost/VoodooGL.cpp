@@ -19,8 +19,6 @@
  */
 
 #include "VoodooGL.hpp"
-// Voodoo Frost
-#include "Frost_Adapter.hpp"
 // Voodoo Core
 #include "Format.hpp"
 // WinAPI

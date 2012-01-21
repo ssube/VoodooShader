@@ -47,9 +47,9 @@ namespace VoodooShader
         CVoodoo3DDevice8::~CVoodoo3DDevice8()
         {
             IAdapterRef adapter = gpVoodooCore->GetAdapter();
-            Variant deviceVar = CreateVariant(UT_PVoid);
+            Variant deviceVar = CreateVariant(VSUT_PVoid);
             adapter->SetProperty(PropIds::D3D8Device, &deviceVar);
-            deviceVar = CreateVariant(UT_PVoid);
+            deviceVar = CreateVariant(VSUT_PVoid);
             adapter->SetProperty(PropIds::D3D9Device, &deviceVar);
 
             m_RealDevice = nullptr;

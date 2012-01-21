@@ -78,6 +78,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DX9_Adapter.cpp" />
+    <ClCompile Include="DX9_Exports.cpp" />
     <ClCompile Include="DX9_Module.cpp" />
     <ClCompile Include="CVoodoo3D8.cpp" />
     <ClCompile Include="CVoodoo3D9.cpp" />
@@ -87,6 +88,8 @@
     <ClCompile Include="CVoodoo3DSurface8.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DX9_Adapter.hpp" />
+    <ClInclude Include="DX9_Exports.hpp" />
     <ClInclude Include="DX9_Module.hpp" />
     <ClInclude Include="DX9_Version.hpp" />
     <ClInclude Include="DX8_ThinHeader.hpp" />

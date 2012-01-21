@@ -18,7 +18,6 @@
  *   peachykeen@voodooshader.com
  */
 
-#include "Frost_Adapter.hpp"
 // Voodoo Frost
 #include "Frost_Texture.hpp"
 #include "VoodooGL.hpp"

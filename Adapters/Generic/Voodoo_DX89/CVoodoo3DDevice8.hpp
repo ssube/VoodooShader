@@ -19,10 +19,10 @@
  */
 #pragma once
 
-#include "DX9_Module.hpp"
-
+// Voodoo DX89
+#include "DX9_Adapter.hpp"
 #include "DX8_ThinHeader.hpp"
-
+// System
 #include <set>
 
 namespace VoodooShader

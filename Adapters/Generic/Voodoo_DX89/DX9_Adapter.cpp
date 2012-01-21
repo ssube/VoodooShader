@@ -18,9 +18,8 @@
  *   peachykeen@voodooshader.com
  */
 
-// Voodoo DX9 Adapter
-#include "DX9_Converter.hpp"
-#include "DX9_Texture.hpp"
+// Voodoo DX89
+#include "DX9_Adapter.hpp"
 #include "DX9_Version.hpp"
 // CVoodoo3D
 #include "CVoodoo3D8.hpp"
@@ -30,154 +29,22 @@
 #include "Format.hpp"
 #include "Support.inl"
 
+VoodooShader::IEffect * testEffect = nullptr;
+
+IDirect3DVertexBuffer9 * gpFSQuadVerts = nullptr;
+IDirect3DSurface9 *backbufferSurf = nullptr;
+
+IDirect3DSurface9 *surface_Frame0 = nullptr;
+VoodooShader::ITexture* texture_Frame0 = nullptr;
+IDirect3DSurface9 *surface_Pass0 = nullptr;
+VoodooShader::ITexture* texture_Pass0 = nullptr;
+IDirect3DSurface9 * surface_Scratch = nullptr;
+VoodooShader::ITexture* texture_Scratch = nullptr;
+
 namespace VoodooShader
 {
     namespace VoodooDX9
     {
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetEffect(_In_ IEffect * const pEffect)
-        {
-            if (!pEffect)
-            {
-                return VSFERR_INVALIDPARAMS;
-            }
-            else if (m_BoundEffect)
-            {
-                return VSFERR_INVALIDCALL;
-            }
-
-            Variant effectVar = CreateVariant();
-            if (FAILED(pEffect->GetProperty(PropIds::D3DX9Effect, &effectVar)) || effectVar.Type != UT_PVoid)
-            {
-                return VSFERR_INVALIDPARAMS;
-            }
-
-            LPD3DXEFFECT pDXEffect = reinterpret_cast<LPD3DXEFFECT>(effectVar.VPVoid);
-
-            if (!pDXEffect)
-            {
-                return VSFERR_INVALIDPARAMS;
-            }
-
-            UINT dxPass = 0;
-            if (FAILED(pDXEffect->Begin(&dxPass, 0)))
-            {
-                return VSF_FAIL;
-            }
-
-            m_BoundDXEffect = pDXEffect;
-            m_BoundDXEffect->AddRef();
-            m_BoundEffect = pEffect;
-
-            return VSF_OK;
-        }
-
-        IEffect * VOODOO_METHODTYPE DX9Adapter::GetEffect() CONST
-        {
-            return m_BoundEffect.get();
-        }
-
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::ResetEffect()
-        {
-            if (!m_BoundEffect || !m_BoundDXEffect)
-            {
-                return VSFERR_INVALIDCALL;
-            }
-
-            HRESULT hr = m_BoundDXEffect->End();
-            if (FAILED(hr))
-            {
-                return VSF_FAIL;
-            }
-
-            m_BoundDXEffect->Release();
-            m_BoundEffect = nullptr;
-
-            return VSF_OK;
-        }
-
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetPass(_In_ IPass * const pPass)
-        {
-            ILoggerRef logger = m_Core->GetLogger();
-
-            if (!pPass)
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to set null pass."));
-                return false;
-            }
-            else if (m_BoundPass)
-            {
-                logger->LogMessage(VSLog_ModWarning, VOODOO_DX89_NAME, VSTR("Setting pass without resetting previously bound pass."));
-                return VSFERR_INVALIDCALL;
-            }
-            else if (!m_BoundEffect)
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to set pass with no effect set."));
-                return VSFERR_INVALIDCALL;
-            }
-            else if (pPass->GetTechnique() != m_BoundEffect->GetDefaultTechnique())
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to set pass, not from default technique of current effect."));
-                return VSFERR_INVALIDPARAMS;
-            }
-
-            Variant propvar = CreateVariant();
-            if (FAILED(pPass->GetProperty(PropIds::D3DX9PassId, &propvar)) || propvar.Type != UT_UInt32)
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to get hardware handle from pass %1%.") << pPass);
-                return VSFERR_INVALIDPARAMS;
-            }
-            m_BoundDXPassId = propvar.VUInt32.X;
-
-            m_RealDevice->CreateStateBlock(D3DSBT_ALL, &m_PassState);
-            m_CleanState->Apply();
-
-            HRESULT hr = m_BoundDXEffect->BeginPass(m_BoundDXPassId);
-            if (FAILED(hr))
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Unable to set pass %1% in hardware.") << pPass);
-                return VSF_FAIL;
-            }
-
-            // Bind render targets
-            for (uint32_t i = 0; i < 4; ++i)
-            {
-                ITexture * pTarget = pPass->GetTarget(i);
-                this->SetTarget(i, pTarget);
-            }
-
-            m_BoundPass = pPass;
-
-            return VSF_OK;
-        }
-
-        IPass * VOODOO_METHODTYPE DX9Adapter::GetPass() CONST
-        {
-            return m_BoundPass.get();
-        }
-
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::ResetPass()
-        {
-            ILoggerRef logger = m_Core->GetLogger();
-
-            if (!m_BoundPass || !m_BoundEffect)
-            {
-                return VSFOK_REDUNDANT;
-            }
-
-            HRESULT hr = m_BoundDXEffect->EndPass();
-            if (FAILED(hr))
-            {
-                return VSF_FAIL;
-            }
-
-            m_BoundPass = nullptr;
-
-            m_PassState->Apply();
-            m_PassState->Release();
-
-            return VSF_OK;
-        }
-
         VoodooResult DX9Adapter::SetTarget(const uint32_t index, _In_opt_ ITexture * pTarget)
         {
             ILoggerRef logger = m_Core->GetLogger();
@@ -281,108 +148,6 @@ namespace VoodooShader
             }
         }
 
-        ITexture * VOODOO_METHODTYPE DX9Adapter::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
-        {
-            IDirect3DTexture9 * tex = nullptr;
-            D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pDesc.Format);
-
-            HRESULT hr = m_RealDevice->CreateTexture
-            (
-                pDesc.Size.X,
-                pDesc.Size.Y,
-                pDesc.Mipmaps ? 0 : 1,
-                pDesc.RenderTarget ? D3DUSAGE_RENDERTARGET : 0,
-                fmt,
-                D3DPOOL_DEFAULT,
-                &tex,
-                nullptr
-            );
-
-            if (SUCCEEDED(hr))
-            {
-                ITexture * pTex = new DX9Texture(m_Core, name, tex);
-                return pTex;
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Error creating texture %1%: %2%") << name << hr);
-                return nullptr;
-            }
-        }
-
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::LoadTexture(_In_ IImage * const pFile, _In_ const TextureRegion pRegion, _Inout_ ITexture * const pTexture)
-        {
-            if (!pFile | !pTexture) return VSFERR_INVALIDPARAMS;
-
-            TextureDesc texDesc = pTexture->GetDesc();
-            TextureDesc fileDesc = pFile->GetDesc();
-
-            if (texDesc.Format != pRegion.Format || fileDesc.Format != pRegion.Format) return VSFERR_INVALIDPARAMS;
-
-            D3DFORMAT fmt = DX9_Converter::ToD3DFormat(pRegion.Format);
-            if (fmt == D3DFMT_UNKNOWN) return VSFERR_INVALIDPARAMS;
-
-            // Should succeed, take references
-            IImageRef image = pFile;
-            ITextureRef texture = pTexture;
-
-            // Create a trash texture in system memory
-            Variant destSurfVar = CreateVariant();
-            if (FAILED(texture->GetProperty(PropIds::D3D9Surface, &destSurfVar)) || destSurfVar.Type != UT_PVoid)
-            {
-                return VSFERR_INVALIDPARAMS;
-            }
-
-            LPDIRECT3DSURFACE9 pDestSurf = reinterpret_cast<LPDIRECT3DSURFACE9>(destSurfVar.VPVoid);
-
-            if (!pDestSurf)
-            {
-                return VSFERR_INVALIDPARAMS;
-            }
-
-            pDestSurf->AddRef();
-
-            IDirect3DSurface9 * pTempSurf = nullptr;
-            HRESULT hr = m_RealDevice->CreateOffscreenPlainSurface(pRegion.Size.X, pRegion.Size.Y, fmt, D3DPOOL_SYSTEMMEM, &pTempSurf, nullptr);
-            if (FAILED(hr))
-            {
-                return VSFERR_APIERROR;
-            }
-
-            uint32_t bufferSize = pFile->GetData(pRegion, 0, nullptr);
-            std::vector<char> buffer(bufferSize);
-            pFile->GetData(pRegion, bufferSize, &buffer[0]);
-
-            RECT rect;
-            ZeroMemory(&rect, sizeof(RECT));
-
-            rect.left = pRegion.Origin.X;
-            rect.top = pRegion.Origin.Y;
-            rect.right = pRegion.Size.X;
-            rect.bottom = pRegion.Size.Y;
-
-            D3DLOCKED_RECT lockRect;
-            hr = pTempSurf->LockRect(&lockRect, &rect, D3DLOCK_DISCARD);
-
-            for (uint32_t row = 0; row < pRegion.Size.Y; ++row)
-            {
-                char * dstBits = (char*)lockRect.pBits;
-                dstBits += (lockRect.Pitch * row);
-
-                char * srcBits = &buffer[0];
-                srcBits += (lockRect.Pitch * row);
-
-                memcpy(dstBits, srcBits, lockRect.Pitch);
-            }
-
-            hr = pTempSurf->UnlockRect();
-
-            POINT o = {pRegion.Origin.X, pRegion.Origin.Y};
-            hr = m_RealDevice->UpdateSurface(pTempSurf, &rect, pDestSurf, &o);
-
-            return false;
-        }
-
         VoodooResult VOODOO_METHODTYPE DX9Adapter::DrawGeometry
         (
             _In_ const uint32_t offset,
@@ -452,117 +217,4 @@ namespace VoodooShader
             return true;
         }
 
-        VoodooResult VOODOO_METHODTYPE DX9Adapter::SetupDevice()
-        {
-            if (!m_RealDevice)
-            {
-                return VSFERR_INVALIDCALL;
-            }
-            
-            if (m_VertDecl) m_VertDecl->Release();
-            if (m_VertDeclT) m_VertDeclT->Release();
-
-            HRESULT errors = m_RealDevice->CreateStateBlock(D3DSBT_ALL, &m_CleanState);
-
-            ILoggerRef logger = m_Core->GetLogger();
-
-            // Setup profiles
-            const char * bestVertStr = D3DXGetVertexShaderProfile(m_RealDevice);
-            const char * bestFragStr = D3DXGetPixelShaderProfile(m_RealDevice);
-
-            if (!bestVertStr || !bestFragStr)
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Error detecting latest shader profiles."));
-                return VSF_FAIL;
-            }
-
-            logger->LogMessage
-            (
-                VSLog_ModInfo, VOODOO_DX89_NAME,
-                Format("Detected latest profiles as %1% and %2%.") << bestVertStr << bestFragStr
-            );
-
-            // Create vertex declaration
-            D3DVERTEXELEMENT9 vertDeclElems[] =
-            {
-                { 0,  0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-                { 0, 16, D3DDECLTYPE_UBYTE4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
-                { 0, 20, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
-                { 0, 36, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
-                D3DDECL_END()
-            };
-
-            errors = m_RealDevice->CreateVertexDeclaration(vertDeclElems, &m_VertDecl);
-
-            if (!SUCCEEDED(errors))
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to create standard vertex declaration."));
-            }
-
-            vertDeclElems[0].Usage = D3DDECLUSAGE_POSITIONT;
-
-            errors = m_RealDevice->CreateVertexDeclaration(vertDeclElems, &m_VertDeclT);
-
-            if (!SUCCEEDED(errors))
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to create transformed vertex declaration."));
-            }
-
-            // Get params
-            D3DVIEWPORT9 viewport;
-
-            m_RealDevice->GetViewport(&viewport);
-
-            logger->LogMessage
-            (
-                VSLog_ModInfo, VOODOO_DX89_NAME, 
-                Format("Prepping for %1% by %2% target.") << (uint32_t)viewport.Width << (uint32_t)viewport.Height
-            );
-
-            // Get buffers
-            if (!SUCCEEDED(m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
-
-            // Create fullscreen vbuffer
-            float ft = -0.5f;
-            float fb = viewport.Height - ft;
-            float fl = -0.5f;
-            float fr = viewport.Width - ft;
-
-            VertexDesc fsVertData[6] =
-            {
-            //    POSITION              COLOR                  TEXCOORD[0]               TEXCOORD[1]
-                {{fl, fb, 0.5f, 1.0f}, {255, 255,   0,   0}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{fl, ft, 0.5f, 1.0f}, {255,   0, 255,   0}, {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{fr, ft, 0.5f, 1.0f}, {255,   0,   0, 255}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{fl, fb, 0.5f, 1.0f}, {255, 255,   0, 255}, {{0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{fr, ft, 0.5f, 1.0f}, {255,   0,   0, 255}, {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-                {{fr, fb, 0.5f, 1.0f}, {255, 255,   0, 255}, {{1.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}},
-            };
-
-            errors = m_RealDevice->CreateVertexBuffer
-            (
-                sizeof(fsVertData), D3DUSAGE_WRITEONLY, NULL, D3DPOOL_DEFAULT, &gpFSQuadVerts, NULL
-            );
-
-            if (FAILED(errors))
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
-            }
-
-            VertexDesc * pVertices = nullptr;
-            errors = gpFSQuadVerts->Lock(0, 0, (void**)&pVertices, 0);
-
-            if (FAILED(errors))
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
-            }
-            else
-            {
-                memcpy(pVertices, fsVertData, sizeof(fsVertData));
-                gpFSQuadVerts->Unlock();
-            }
-
-            return true;
-        }
-    }
 }

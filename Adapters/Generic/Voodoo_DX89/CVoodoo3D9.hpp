@@ -19,7 +19,7 @@
  */
 #pragma once
 
-#include "DX9_Module.hpp"
+#include "DX9_Adapter.hpp"
 
 namespace VoodooShader
 {

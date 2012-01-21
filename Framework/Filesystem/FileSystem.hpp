@@ -74,7 +74,7 @@ namespace VoodooShader
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-            VOODOO_METHOD(AddPath)(_In_ const String & path);
+            VOODOO_METHOD(AddPath)(_In_ const String & path, PathType type = VSPath_Directory);
             VOODOO_METHOD(RemovePath)(_In_ const String & path);
             VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode) CONST;
 
