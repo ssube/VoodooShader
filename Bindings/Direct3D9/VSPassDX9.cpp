@@ -188,7 +188,8 @@ namespace VoodooShader
         }
 
         VOODOO_METHODDEF(VSPassDX9::Reset)()
-        {            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        {
+            VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
             boost::intrusive_ptr<VSEffectDX9> effect = m_Technique->m_Effect;
             if (effect->m_Binding->m_BoundPass != this)

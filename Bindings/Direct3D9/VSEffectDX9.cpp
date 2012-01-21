@@ -234,7 +234,8 @@ namespace VoodooShader
             DWORD flags = 0;
             if (clean)
             {
-                flags = D3DXFX_DONOTSAVESTATE;
+                flags = D3DXFX_DONOTSAVESTATE;
+
                 m_Binding->PushState();
                 m_Binding->ResetState();
             }

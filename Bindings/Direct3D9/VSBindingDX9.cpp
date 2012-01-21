@@ -128,7 +128,8 @@ namespace VoodooShader
             }
 
             m_Device = reinterpret_cast<LPDIRECT3DDEVICE9>(pParams[0].VPVoid);
-            m_Device->AddRef();
+            m_Device->AddRef();
+
             HRESULT errors = m_Device->CreateStateBlock(D3DSBT_ALL, &m_InitialState);
             assert(SUCCEEDED(errors));
 
@@ -263,7 +264,8 @@ namespace VoodooShader
 
             ITexture * pTexture = new VSTextureDX9(this);
             return pTexture;
-        }
+        }
+
         VOODOO_METHODDEF_(void, VSBindingDX9::ResetState)()
         {
             m_InitialState->Apply();

@@ -83,7 +83,8 @@ namespace VoodooShader
          * @return          Success of the destroy operation.
          *
          * @warning If this method fails, this core is in an undefined state and must be destroyed; calling any method but
-         *      AddRef or Release is undefined. All resources created by this core are immediately considered invalid.         *
+         *      AddRef or Release is undefined. All resources created by this core are immediately considered invalid.
+         *
          * @pre ICore::Init()
          */
         _Check_return_ VOODOO_METHOD(Reset)() PURE;

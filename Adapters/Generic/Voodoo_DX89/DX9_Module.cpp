@@ -77,7 +77,8 @@ const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ V
 }
 
 VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore)
-{    UNREFERENCED_PARAMETER(index);
+{
+    UNREFERENCED_PARAMETER(index);
     UNREFERENCED_PARAMETER(pCore);
 
     return nullptr;

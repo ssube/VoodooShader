@@ -39,7 +39,8 @@ namespace VoodooShader
       * type is transformed (geometry, vertex, pixel, etc). The two most common stages, vertex and pixel, work with
       * existing data and transform it. Both have been supported since OpenGL 1.4 and DirectX 8 in some form, and almost all
       * systems today support both. Given Voodoo Shader's focus, it is safe to assume both stages are supported (the exact 
-      * level of support may vary, however).      *
+      * level of support may vary, however).
+      *
       * The vertex shader handles each vertex, transforming them into view space and sometimes calculating lighting or
       * surface normals.
       *

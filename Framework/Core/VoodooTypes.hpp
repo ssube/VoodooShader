@@ -128,9 +128,11 @@ namespace VoodooShader
         VSProfile_OpenGL2   = 0x0220,
         VSProfile_OpenGL3   = 0x0230,
         VSProfile_OpenGL4   = 0x0240,
-    };
+    };
+
     enum TextureMode : uint32_t
-    {        VSTexMode_Target    = 0x00,     /* !< The texture is bound as a target, to be rendered to. This imposes many restrictions on the texture, see @ref voodoo_textures_target. */
+    {
+        VSTexMode_Target    = 0x00,     /* !< The texture is bound as a target, to be rendered to. This imposes many restrictions on the texture, see @ref voodoo_textures_target. */
         VSTexMode_Source    = 0x01,     /* !< The texture is bound as a source, for sampling operations. This is typically handled automatically by the pass. */
     };
 
@@ -385,7 +387,8 @@ namespace VoodooShader
 #define VSFERR_CONFLICTING      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x1009)
 #define VSFERR_INVALIDUUID      MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100A)
 #define VSFERR_PROPERTYNOTFOUND MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100B)
-#define VSFERR_APIERROR         MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100C)    /**
+#define VSFERR_APIERROR         MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100C)
+    /**
      * @{
      * @defgroup voodoo_types_textures Special Texture Slots
      * @{

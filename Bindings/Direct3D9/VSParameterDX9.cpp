@@ -71,7 +71,8 @@ namespace VoodooShader
             m_Refs(0), m_Binding(pBinding), m_Effect(nullptr), m_Name(name), m_Desc(desc), m_DXHandle(nullptr)
         {
             if (!m_Binding)
-            {                Throw(VOODOO_CORE_NAME, VSTR("Unable to create virtual parameter with no binding."), nullptr);
+            {
+                Throw(VOODOO_CORE_NAME, VSTR("Unable to create virtual parameter with no binding."), nullptr);
             }
 
             m_Core = m_Binding->m_Core;

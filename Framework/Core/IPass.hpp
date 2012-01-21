@@ -63,7 +63,8 @@ namespace VoodooShader
          * @}
          * @name IPass Methods
          * @{
-         */        /**
+         */
+        /**
          * Binds a pass from the active technique to the hardware, settings states as needed. The shaders to be bound
          * depend on the binding and flags given.
          *
