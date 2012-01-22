@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Enums</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -59,7 +59,7 @@
 <div class="ingroups"><a class="el" href="group__voodoo__types.html">Voodoo Shader Types</a></div></div><!--header-->
 <div class="contents">
 
-<p>Texture formats for use by <a class="el" href="class_voodoo_shader_1_1_i_texture.html">Textures</a>, describing the layout and size of the texture data.  
+<p>Texture formats for use by <a class="el" href="class_voodoo_shader_1_1_i_texture.html">textures</a>, describing the layout and size of the texture data.  
 <a href="#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for Enums:</div>
@@ -75,311 +75,382 @@
 <tr><td colspan="2"><h2><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#gac41ef674639cfb37461c1426a0d7669f">VoodooShader::TextureFormat</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d">VoodooShader::TF_Unknown</a> =  0x0, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fad60b3b5adca3d7bfcfa7aee9ac476e75">VoodooShader::VSFmt_Unknown</a> =  0x0000, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa5505137ff9248cb5c7fdd951a65e4b4c">VoodooShader::TF_RGB5</a> =  0x101, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa7fbac34ea6c675857e66f5fff7170270">VoodooShader::VSFmt_Null</a> =  0x0001, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669faae82e0f94f4f50a0e3ff770eb1888ce5">VoodooShader::TF_RGB5A1</a> =  0x102, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669faf7f85c0c7773579b84e124b72f9e4bd4">VoodooShader::VSFmt_RGB5A1</a> =  0x0102, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fac1b6e1b557d9e1dbcc89eccaee9f5202">VoodooShader::TF_RGB8</a> =  0x103, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669faf4a016dee009303d55b2cdc3d77056c3">VoodooShader::VSFmt_RGB8</a> =  0x0103, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa92dc956ba9db9012612e53baf3a341a5">VoodooShader::TF_RGBA8</a> =  0x104, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fafa9da8381e2400dfe9da40e3b37b8755">VoodooShader::VSFmt_RGBA8</a> =  0x0104, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fac7d1cb69e646a88e40f9485bd78c41d5">VoodooShader::TF_RGB10A2</a> =  0x105, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa591499c40fad74c452a8f4bd3219b2ba">VoodooShader::VSFmt_RGB10A2</a> =  0x0105, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669faaee75e702ccb0eccdfe2a6bc2a144f80">VoodooShader::TF_RGBA16F</a> =  0x201, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa594b9b82fc4dbc9a56677589e0248dca">VoodooShader::VSFmt_RGBA16F</a> =  0x0201, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa4b7fc08dfa228fc2a361188e1dba25b7">VoodooShader::TF_RGBA32F</a> =  0x202, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa07f23e5fb4855333e99a8e5fa20e95f6">VoodooShader::VSFmt_RGBA32F</a> =  0x0202, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa148285a8681d68a12b15a6e60c192220">VoodooShader::TF_D16</a> =  0x401, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669faefa0c656875f08abd03392fd06989e86">VoodooShader::VSFmt_D16</a> =  0x0401, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fad0414e285b3c5b13e7cb082bb02a127e">VoodooShader::TF_D32</a> =  0x402
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa146230048fdb145c13bc0c85ec02dd00">VoodooShader::VSFmt_D24</a> =  0x0402, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa3537586877d876793764a70e759bd93e">VoodooShader::VSFmt_D24S8</a> =  0x0403, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fac99f122d28479d894bddb230622a3fdd">VoodooShader::VSFmt_D32</a> =  0x0404, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggac41ef674639cfb37461c1426a0d7669fa30535302317f6ce55182f749810c5e3e">VoodooShader::VSFmt_DMax</a> =  0x0405
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#gab90c3dbfe5ca792323089af903d1134a">VoodooShader::ParameterType</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa478c80ba236ad1222147d0c45e2faf85">VoodooShader::PT_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aaa9f3f41c420411a5a7b844d077263d73">VoodooShader::VSPT_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aad4913e102af5954426cf9bed6ebdf808">VoodooShader::PT_Float1</a> =  0x11, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aaeefbe9f6d84a11d74fa3234fccd15b4e">VoodooShader::VSPT_Bool</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa7ad02e8e755e8126dd596c2d104172af">VoodooShader::PT_Float2</a> =  0x12, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aaf662817babff32a53039ed2dd71040ab">VoodooShader::VSPT_Int</a> =  0x02, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aaf2ecf58f4f7a4f7519245e728e1da1dc">VoodooShader::PT_Float3</a> =  0x13, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa3f88be9755c2372fb2c17faf6e774ee8">VoodooShader::VSPT_Float</a> =  0x03, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa9c6eb130d4a2e9fd233a015ee83aa639">VoodooShader::PT_Float4</a> =  0x14, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aad7b8faa752423b38b87a8f3ed804be36">VoodooShader::VSPT_String</a> =  0x04, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aaf3afbedf997a256472f8c7982d4c32af">VoodooShader::PT_Float1x1</a> =  0x11, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aaebb0b4aff311f477b3fb3d4f3052612c">VoodooShader::VSPT_Texture</a> =  0x05, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa79940ac8df954d7460974c7968f589aa">VoodooShader::PT_Float1x2</a> =  0x12, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa8fa6ea88a97fe2407397318e110896a4">VoodooShader::VSPT_Texture1D</a> =  0x06, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa0547a689b39a61bc01f7be22a04a7206">VoodooShader::PT_Float1x3</a> =  0x13, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aaa0494351ba659c58f7c88ff59d075d47">VoodooShader::VSPT_Texture2D</a> =  0x07, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aaf664726ed1a3cf2e747ce8b33190fadb">VoodooShader::PT_Float1x4</a> =  0x14, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aadf7255762d05ec952b1c21d89d4e77b2">VoodooShader::VSPT_Texture3D</a> =  0x08, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa5e0c7c6e3dfd73258ea723e16e33e3f5">VoodooShader::PT_Float2x1</a> =  0x21, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa39bae132dadb07dc2c4732ba839da49f">VoodooShader::VSPT_TextureCube</a> =  0x09, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aabdc0deb24524e49ac94e91a3179db60b">VoodooShader::PT_Float2x2</a> =  0x22, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa01aa31565ddaa674077754512170bdf2">VoodooShader::VSPT_Sampler</a> =  0x0A, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa4f864c2863273ec5d64acdc089e24ae9">VoodooShader::PT_Float2x3</a> =  0x23, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa0f75a502c55648d07d9abc2a0ca6e1b0">VoodooShader::VSPT_Sampler1D</a> =  0x0B, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa6dcfe89316b32c0bf7a0a723e09243bc">VoodooShader::PT_Float2x4</a> =  0x24, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aadf70e672627e6822234bdc81e2a7ed90">VoodooShader::VSPT_Sampler2D</a> =  0x0C, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa64f868c0daef33b8f33ae0c06862a82f">VoodooShader::PT_Float3x1</a> =  0x31, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa73560a00588ff9e008e5c853551b357d">VoodooShader::VSPT_Sampler3D</a> =  0x0D, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aae21634d7633582e9d84b2ac34af5e6fb">VoodooShader::PT_Float3x2</a> =  0x32, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa30119bb4c754eadb461518b15f533409">VoodooShader::PT_Float3x3</a> =  0x33, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa8db164e98cdc0f71cf6ab6ae4c7143ff">VoodooShader::PT_Float3x4</a> =  0x34, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aac9830790cc6c527c7dca2a0a88b1dc38">VoodooShader::PT_Float4x1</a> =  0x41, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa8116222e3f6b660849a141eb3913de5d">VoodooShader::PT_Float4x2</a> =  0x42, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa7e75a08b10e6d7bedb9ceb767c7f0083">VoodooShader::PT_Float4x3</a> =  0x43, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aadc9f57ad1dc0e0799c2f84a429bd602d">VoodooShader::PT_Float4x4</a> =  0x44, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aad588d8095ead5ba1389b3d030d9eb3e3">VoodooShader::PT_Sampler1D</a> =  0x101, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa9a2cd67c0d1d466c4002816b4b09e5ba">VoodooShader::PT_Sampler2D</a> =  0x102, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa2fd1e92f95f6139b1a0d3f05296c7b54">VoodooShader::PT_Sampler3D</a> =  0x103, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aad3936cface3c7fb40a77ead405901dfb">VoodooShader::PT_Struct</a> =  0x1000
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggab90c3dbfe5ca792323089af903d1134aa25b16c171bd9f9b49cd07036383e8f37">VoodooShader::VSPT_SamplerCube</a> =  0x0E
 <br/>
  }</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameter types valid for <a class="el" href="class_voodoo_shader_1_1_i_parameter.html">VoodooShader::IParameter</a>.  <a href="group__voodoo__enums.html#gab90c3dbfe5ca792323089af903d1134a">More...</a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga56d7d146822e8830cf490e2b9292b12d">VoodooShader::ParameterCategory</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga56d7d146822e8830cf490e2b9292b12da20050f59bca9f6bbb2375e8c80839907">VoodooShader::PC_Unknown</a> =  0x00, 
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#gad118ba426eca4623476da31d851d79a5">VoodooShader::ShaderStage</a> { <br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggad118ba426eca4623476da31d851d79a5abccb6e7efe3115a368326a6cb9cf9be6">VoodooShader::VSStage_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga56d7d146822e8830cf490e2b9292b12da7552e2ec0a665e7a5824a3fccc8b73a9">VoodooShader::PC_Float</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggad118ba426eca4623476da31d851d79a5a07a78c9d9a41c4248ce69bff7aac9e1e">VoodooShader::VSStage_Vertex</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga56d7d146822e8830cf490e2b9292b12da8368cf22ecf2f293378b66fc8319596a">VoodooShader::PC_Sampler</a> =  0x02, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggad118ba426eca4623476da31d851d79a5a3bd423d552deeb37a2526ceb4f600d60">VoodooShader::VSStage_Hull</a> =  0x02, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga56d7d146822e8830cf490e2b9292b12da1644aac0c06bcb3a945fee923b8420b7">VoodooShader::PC_Struct</a> =  0x04
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggad118ba426eca4623476da31d851d79a5a35568311bedc156cfce3221703ec6737">VoodooShader::VSStage_Pixel</a> =  0x04, 
 <br/>
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga0aaa128fef0ad63eafc60e11da58cb82">VoodooShader::ProgramStage</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0aaa128fef0ad63eafc60e11da58cb82a401673474986286cb61828e1175c57f6">VoodooShader::PS_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggad118ba426eca4623476da31d851d79a5af3fbe548423b6a023f6196355b6042d5">VoodooShader::VSStage_Domain</a> =  0x08, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0aaa128fef0ad63eafc60e11da58cb82a7ef01fdef45878127db52390f5c065c4">VoodooShader::PS_Vertex</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggad118ba426eca4623476da31d851d79a5a489616224e7a016c18ae61e351401d64">VoodooShader::VSStage_Geometry</a> =  0x10, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0aaa128fef0ad63eafc60e11da58cb82a827533162c80c0a93a669102da7e14ec">VoodooShader::PS_Fragment</a> =  0x02, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggad118ba426eca4623476da31d851d79a5a6bd844e4eafe6959120610bfca4142a2">VoodooShader::VSStage_Compute</a> =  0x20, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0aaa128fef0ad63eafc60e11da58cb82ac2e592b1a4218468f6c5624f89a18cef">VoodooShader::PS_Geometry</a> =  0x03, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0aaa128fef0ad63eafc60e11da58cb82a7eeff6ab667a2af5b89731c68c936a4c">VoodooShader::PS_Domain</a> =  0x04, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0aaa128fef0ad63eafc60e11da58cb82a9449138a5cd26365e03474631118ff6e">VoodooShader::PS_Hull</a> =  0x05
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggad118ba426eca4623476da31d851d79a5a10996dc8084786b8d74befb2c4ca6fb5">VoodooShader::VSStage_All</a> =  0x3F
 <br/>
  }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga557f6a3f9454eb519cd10323d082df55">VoodooShader::TextureStage</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga557f6a3f9454eb519cd10323d082df55ade049cfe16d56b339e64eea74511e9a6">VoodooShader::TS_Unknown</a> =  0x00, 
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#gade8044a18110e6838de3c03b94df4627">VoodooShader::CompilerProfile</a> { <br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627aaafbe3b904623665ae8c94e2f2268d65">VoodooShader::VSProfile_None</a> =  0x0000, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga557f6a3f9454eb519cd10323d082df55a1b49ece2d7812eef7b95ae26b0488cff">VoodooShader::TS_Shader</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627af5bae5c03afb10e5cd05e75d44e3c68f">VoodooShader::VSProfile_Refr</a> =  0x0010, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce">VoodooShader::TS_Pass</a> =  0x02
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627af1d6d9bd5b5957fa6df6d8456ffba966">VoodooShader::VSProfile_D3D9</a> =  0x0190, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627a737b1cf625983151d12743e5d51e58f1">VoodooShader::VSProfile_D3D10</a> =  0x01A0, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627a2fa3264e1b0b3d835a6e6cae7d7e7e4b">VoodooShader::VSProfile_D3D10_1</a> =  0x01A1, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627a22bde918d286f16fc32cf13a7e9d9c79">VoodooShader::VSProfile_D3D11</a> =  0x01B0, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627ab3e93922af6189f661a1a6e596a69c82">VoodooShader::VSProfile_D3D11_1</a> =  0x01B1, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627ace2351489727260d2e559f2f0125dd88">VoodooShader::VSProfile_OpenGL2</a> =  0x0220, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627a4b8b1c3da089db8588358198ef29612e">VoodooShader::VSProfile_OpenGL3</a> =  0x0230, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggade8044a18110e6838de3c03b94df4627a3f43600594ef18af1276b4b0f16f1081">VoodooShader::VSProfile_OpenGL4</a> =  0x0240
+<br/>
+ }</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Target compiler profiles.  <a href="group__voodoo__enums.html#gade8044a18110e6838de3c03b94df4627">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga4fcf8515621d3022976cf8d802a0fc19">VoodooShader::TextureMode</a> { <br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga4fcf8515621d3022976cf8d802a0fc19a56fddd737253fa7b2203aba4965e391d">VoodooShader::VSTexMode_Target</a> =  0x00, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga4fcf8515621d3022976cf8d802a0fc19ab73c352bd08f7db3c463a564c5e4fa89">VoodooShader::VSTexMode_Source</a> =  0x01
+<br/>
+ }</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga317a41685b788d755f609a74da1215d7">VoodooShader::TextureFlags</a> { <br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga317a41685b788d755f609a74da1215d7ab276b1eac89312f30c6e817468f558c7">VoodooShader::VSTexFlag_None</a> =  0x00, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga317a41685b788d755f609a74da1215d7a127c50892276664c5721c81c9d0ce757">VoodooShader::VSTexFlag_Target</a> =  0x01, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga317a41685b788d755f609a74da1215d7a7b64231c09ff7d4ed851452cff6d9aef">VoodooShader::VSTexFlag_Dynamic</a> =  0x02, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga317a41685b788d755f609a74da1215d7a7f62cf1c649d90d0bc09c82d8e29f7ac">VoodooShader::VSTexFlag_MipMaps</a> =  0x04, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga317a41685b788d755f609a74da1215d7a14b1ebd16bc0fa9d016e0115b6b3f757">VoodooShader::VSTexFlag_AutoMip</a> =  0x08
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465">VoodooShader::StreamType</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga30d2b0a9546b7da2d60804ab53d65465a23da4f3bfed92bfffec54c87ad4bb1b9">VoodooShader::ST_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga30d2b0a9546b7da2d60804ab53d65465a64fc6ab5945bd5778b1c02277698c3eb">VoodooShader::VSStream_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga30d2b0a9546b7da2d60804ab53d65465ac8c870a36301314e7afdadd48abc095c">VoodooShader::ST_Get</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga30d2b0a9546b7da2d60804ab53d65465acf19bf3a7cb6829dfcd95bec736fd700">VoodooShader::VSStream_Get</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga30d2b0a9546b7da2d60804ab53d65465aceba9e204c8cd745660989856760eae3">VoodooShader::ST_Put</a> =  0x02
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga30d2b0a9546b7da2d60804ab53d65465a426a5709c23ec2b56f8b5128737a9c62">VoodooShader::VSStream_Put</a> =  0x02
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">File stream type for seek and get operations.  <a href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga68a5aa1e8d5ddc2a43a629cd036264db">VoodooShader::SeekMode</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga68a5aa1e8d5ddc2a43a629cd036264dba9fcd7bb60c41c7db6fb6f874ebce28e1">VoodooShader::SM_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga68a5aa1e8d5ddc2a43a629cd036264dbafbd9b7c259c4cde16c2c7b9e8852db0c">VoodooShader::VSSeek_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga68a5aa1e8d5ddc2a43a629cd036264dba12bae89e4539476ec97e98cbe6e070bf">VoodooShader::SM_Begin</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga68a5aa1e8d5ddc2a43a629cd036264dba960e97cb212037e2b267ec2e2e3534da">VoodooShader::VSSeek_Begin</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga68a5aa1e8d5ddc2a43a629cd036264dba1f5475733b2dddd525f5e4d3f95ba25e">VoodooShader::SM_Current</a> =  0x02, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga68a5aa1e8d5ddc2a43a629cd036264dba52cf2bfa76c851ba0ef2fe9d797aaf5d">VoodooShader::VSSeek_Current</a> =  0x02, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga68a5aa1e8d5ddc2a43a629cd036264dbab27fd0a092990ab6ad0616a85f8b551d">VoodooShader::SM_End</a> =  0x03
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga68a5aa1e8d5ddc2a43a629cd036264dba194765d01f8608ec90ff3e419f987f27">VoodooShader::VSSeek_End</a> =  0x03
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">File seek offset modes.  <a href="group__voodoo__enums.html#ga68a5aa1e8d5ddc2a43a629cd036264db">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga3e5dcf65468c74a45648090d2f82bfb5">VoodooShader::GetFileMode</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5a8535ea5dd210e2a04a0d02e95e393b93">VoodooShader::FF_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5a2670f510828d0b1c40093588f0c69c89">VoodooShader::VSSearch_Open</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5ae1b907db0f319a062fdccce062e81838">VoodooShader::FF_CreateOnly</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5aa342af4937f2555a5bee4846399e401d">VoodooShader::VSSearch_Create</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5a0886900fcac2f26e7b15915a890fa05c">VoodooShader::FF_OpenOnly</a> =  0x02, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5a26f4b449fa01e4cd2864a1a1b3357c13">VoodooShader::FF_AlwaysOpen</a> =  0x03
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5ac37ac99491822a5a0f2411711505c062">VoodooShader::VSSearch_Exists</a> =  0x02
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">File find modes.  <a href="group__voodoo__enums.html#ga3e5dcf65468c74a45648090d2f82bfb5">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga980f04b17b862a238d6c9c7854b862b6">VoodooShader::FileOpenMode</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a5c2be190fc93b22c73f59aed8ea53393">VoodooShader::FO_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a818066c910968a4658e07ff9020c7be2">VoodooShader::VSOpen_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a038fd4dc8be58c0a03b96ad56ff28f9f">VoodooShader::FO_Read</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6aaf0befa91d9a8306ee27ba56df5c5aab">VoodooShader::VSOpen_Read</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6aadc1af690c85db573f56af6e94c12c94">VoodooShader::FO_Write</a> =  0x02, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a26b3f3b46f1af847bbe0b65a7c2afb57">VoodooShader::VSOpen_Write</a> =  0x02, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a792f0a7f459faf966b8db451ba027ab2">VoodooShader::FO_ReadWrite</a> =  0x03, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6af3b4e39c214583d2b981c6adff2d2d92">VoodooShader::VSOpen_ReadWrite</a> =  VSOpen_Read | VSOpen_Write, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6ae91e7da22a25f8cbf8d0b95c0da85b07">VoodooShader::FO_Ate</a> =  0x10, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a0600cb2c6b2e724eefc2cf8c0ea81867">VoodooShader::VSOpen_Binary</a> =  0x10, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a1af36747e1cce2da302913cd55a3bb6f">VoodooShader::FO_Append</a> =  0x20, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6ace48c9bf06ea31ecf8d39049090e1f21">VoodooShader::VSOpen_End</a> =  0x10, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6ab07c442a39c5204064be709823e26f6d">VoodooShader::FO_Truncate</a> =  0x40
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a616550042371295b30118019c256805d">VoodooShader::VSOpen_Append</a> =  0x20, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga980f04b17b862a238d6c9c7854b862b6a696e3d02c28e77885d791e64858e34b0">VoodooShader::VSOpen_Truncate</a> =  0x40
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">File open access modes.  <a href="group__voodoo__enums.html#ga980f04b17b862a238d6c9c7854b862b6">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga40c5d206fa0918e553eef996ef9dc3eb">VoodooShader::PathType</a> { <br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga40c5d206fa0918e553eef996ef9dc3eba020da8d3cda2f9a746531072e0ec41e3">VoodooShader::VSPath_Directory</a> =  0x00, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga40c5d206fa0918e553eef996ef9dc3ebae4cbf92ca3dc376c82179494d730f9a5">VoodooShader::VSPath_Archive</a> =  0x01
+<br/>
+ }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga3b6fdd898a776b73fcdb7fef61ee96da">VoodooShader::LogLevel</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa838f450aaaec6ffbfc01d7d706b9277a">VoodooShader::LL_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa6f6bb651ac63dbd9f40fe05f93956137">VoodooShader::VSLog_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd">VoodooShader::LL_Debug</a> =  0x0001, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daab0c328d11c5edf503bcbd4e41cc15e91">VoodooShader::VSLog_Debug</a> =  0x0001, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa78a935f62fca37891ebc6a65a42a47af">VoodooShader::LL_Info</a> =  0x0002, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa90aa720578373038c4c6af2e3ce99850">VoodooShader::VSLog_Info</a> =  0x0002, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89">VoodooShader::LL_Warning</a> =  0x0004, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3073ffdced1043000c8f515f3f3292a0">VoodooShader::VSLog_Warning</a> =  0x0004, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26">VoodooShader::LL_Error</a> =  0x0008, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa6605f851b640bc53427db7986f3cb28e">VoodooShader::VSLog_Error</a> =  0x0008, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa6d96557a3bebf071ba17a3333f64a17e">VoodooShader::LL_External</a> =  0x0100, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daadf1f896250130f9752740cc250966eb5">VoodooShader::VSLog_External</a> =  0x0100, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa07991c7097b225cb334b5de3c159c443">VoodooShader::LL_Module</a> =  0x0200, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaa29ec2553f025586afe661596d4e29f1">VoodooShader::VSLog_Module</a> =  0x0200, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daae1151ce9c532926ae973d700f1a05868">VoodooShader::LL_Core</a> =  0x0400, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3469ccc97611581070078c1a9c7e1866">VoodooShader::VSLog_Binding</a> =  0x0400, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa5f0b9a3a8a25e78bc5c54b7d523db2f2">VoodooShader::LL_System</a> =  0x0800, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa6a0951c80608a368d33f2ae214e44321">VoodooShader::VSLog_Core</a> =  0x0800, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa2d135594b1bc22f49b4cc4c57717b8f8">VoodooShader::LL_Critical</a> =  0x010000, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaba542baac880b6a403c39fe601af9483">VoodooShader::VSLog_Critical</a> =  0x010000, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa729e2bfe189b1f23e496e2d1db8a37c9">VoodooShader::LL_Exception</a> =  LL_Debug | LL_Critical, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa71a9c4cd7d236847712be03372c89316">VoodooShader::VSLog_Exception</a> =  VSLog_Debug | VSLog_Critical, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3826992e71b54ed294189f5f3f2cd3ad">VoodooShader::LL_Notice</a> =  LL_Info | LL_Critical, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaec746e13e327c09bcd6026ee18f05a1f">VoodooShader::VSLog_Notice</a> =  VSLog_Info | VSLog_Critical, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8">VoodooShader::LL_CoreDebug</a> =  LL_Core | LL_Debug, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa460eda7f2d0c00742f5191e80460b97e">VoodooShader::VSLog_CoreDebug</a> =  VSLog_Core | VSLog_Debug, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29">VoodooShader::LL_CoreException</a> =  LL_Core | LL_Exception, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa2dd4b9537f44953cfd90e7f2466027c7">VoodooShader::VSLog_CoreException</a> =  VSLog_Core | VSLog_Exception, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daac49f2cfafbe8c7b0b8c05bcb5eb4c5aa">VoodooShader::LL_CoreInfo</a> =  LL_Core | LL_Info, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daab8a74caa6d8d1bc2149057ec1e2cd796">VoodooShader::VSLog_CoreInfo</a> =  VSLog_Core | VSLog_Info, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa58405973e929398713a45862416704ba">VoodooShader::LL_CoreNotice</a> =  LL_Core | LL_Notice, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaeae9add0715f6054916a564a7d2eebb7">VoodooShader::VSLog_CoreNotice</a> =  VSLog_Core | VSLog_Notice, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa70cfa23511c6055d9853fa1f9841be56">VoodooShader::LL_CoreWarning</a> =  LL_Core | LL_Warning, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa344f84cb45ea39d247ecbf3140e858b1">VoodooShader::VSLog_CoreWarning</a> =  VSLog_Core | VSLog_Warning, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b">VoodooShader::LL_CoreError</a> =  LL_Core | LL_Error, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa0ddd113cd4a62aa776c9c8c545a78284">VoodooShader::VSLog_CoreError</a> =  VSLog_Core | VSLog_Error, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa47192e0f574a9432c57d2b6aecc32e4d">VoodooShader::LL_ModDebug</a> =  LL_Module | LL_Debug, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa5f82e9faaa67c35576271974f023504b">VoodooShader::VSLog_BindDebug</a> =  VSLog_Binding | VSLog_Debug, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daab0778573c6cc7361cf73b5774d933b77">VoodooShader::LL_ModException</a> =  LL_Module | LL_Exception, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa218149b1deb630d70a943f7232845612">VoodooShader::VSLog_BindException</a> =  VSLog_Binding | VSLog_Exception, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaf38b6ab75c151a62d89e452a44bae6eb">VoodooShader::LL_ModInfo</a> =  LL_Module | LL_Info, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa78dde8892cfd57be1cffbef5207d0123">VoodooShader::VSLog_BindInfo</a> =  VSLog_Binding | VSLog_Info, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaf13b71ff287651e37fb5813f08396a05">VoodooShader::LL_ModNotice</a> =  LL_Module | LL_Notice, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa5770dec03d34dc5a6ac5b7b499913bd1">VoodooShader::VSLog_BindNotice</a> =  VSLog_Binding | VSLog_Notice, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daae07f0e1c1476142c9813a514f42896ad">VoodooShader::LL_ModWarning</a> =  LL_Module | LL_Warning, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa1e5aac3ebb03a89b7505fce0c5dda3ba">VoodooShader::VSLog_BindWarning</a> =  VSLog_Binding | VSLog_Warning, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaef03d704b2d0827db6fce054ccc76e5c">VoodooShader::LL_ModError</a> =  LL_Module | LL_Error, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa27a81ab7226b073b6f6d1141140b1099">VoodooShader::VSLog_BindError</a> =  VSLog_Binding | VSLog_Error, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daab6c5487eabf7bd65f36a4d0302610751">VoodooShader::LL_Severity</a> =  LL_Debug | LL_Info | LL_Warning | LL_Error, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa4a98900e6eb6656b4d77f4f94044ea67">VoodooShader::VSLog_ModDebug</a> =  VSLog_Module | VSLog_Debug, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa30bc9ce0498e2be3af8c891d0f75e8fe">VoodooShader::LL_Flags</a> =  LL_Critical, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaf455c2009920aeb42af811cf8d1206df">VoodooShader::VSLog_ModException</a> =  VSLog_Module | VSLog_Exception, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaf2a01460c9f479f78c32224847988fcf">VoodooShader::LL_Origin</a> =  LL_External | LL_Module | LL_Core | LL_System, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa8dc3fad90d7c9793df1970872523781c">VoodooShader::VSLog_ModInfo</a> =  VSLog_Module | VSLog_Info, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3147c212abd33ae7e3276c390af23514">VoodooShader::LL_Default</a> =  LL_Info | LL_Warning | LL_Module | LL_Core | LL_System, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa5064999c23d6284b70a3842d4af596d5">VoodooShader::VSLog_ModNotice</a> =  VSLog_Module | VSLog_Notice, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa834480aaf13f8b6e44beff5fbca7f7e4">VoodooShader::LL_All</a> =  LL_Severity | LL_Origin | LL_Flags
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daab02020b74a0bc740e2013b622d21ca52">VoodooShader::VSLog_ModWarning</a> =  VSLog_Module | VSLog_Warning, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa05ec0b7adcf2e1e0abbceebc6cf2fe72">VoodooShader::VSLog_ModError</a> =  VSLog_Module | VSLog_Error, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa6a701880c6df8266a2de1549d8c54e0d">VoodooShader::VSLog_Severity</a> =  VSLog_Debug | VSLog_Info | VSLog_Warning | VSLog_Error, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3768f72844fc63d64f8fb0e34c3d903f">VoodooShader::VSLog_Flags</a> =  VSLog_Critical, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa96d99789ff81cadad48fa937a2f91ea8">VoodooShader::VSLog_Origin</a> =  VSLog_External | VSLog_Module | VSLog_Core | VSLog_Binding, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daada7fa9f1019bf67212acfe487213c698">VoodooShader::VSLog_Default</a> =  VSLog_Info | VSLog_Warning | VSLog_Module | VSLog_Core | VSLog_Binding, 
+<br/>
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa13170093c5f65cd75d46b7598e494af9">VoodooShader::VSLog_All</a> =  VSLog_Severity | VSLog_Origin | VSLog_Flags
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Log message levels.  <a href="group__voodoo__enums.html#ga3b6fdd898a776b73fcdb7fef61ee96da">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#gaf35c8fe857d014d7345ef8c2266c79dc">VoodooShader::LogFlags</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggaf35c8fe857d014d7345ef8c2266c79dcaea01e65182c757527cf31d15643ec214">VoodooShader::LF_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggaf35c8fe857d014d7345ef8c2266c79dcae12f12c4a9bff52b81e07ee1960030f9">VoodooShader::VSLogFlag_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggaf35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a">VoodooShader::LF_Flush</a> =  0x01
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggaf35c8fe857d014d7345ef8c2266c79dca2d1c7c5d45369e20fb8034607a2cb45f">VoodooShader::VSLogFlag_Flush</a> =  0x01
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga97ffa79fd7512cffa1f0bce04ec778ce">VoodooShader::ParseFlags</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">VoodooShader::PF_None</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea95baef5550fecc08d076a2ceb3c88b76">VoodooShader::VSParse_None</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb">VoodooShader::PF_SlashSingle</a> =  0x0001, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceabf2d4b9ab2a12075f66e884f6442b2ce">VoodooShader::VSParse_SlashSingle</a> =  0x0001, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cead47b2072407d71f047b8cae324372813">VoodooShader::PF_SlashDouble</a> =  0x0002, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea5034312abeec2d15fffd37b802ba32b1">VoodooShader::VSParse_SlashDouble</a> =  0x0002, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea2d2eb87e859a72307ba69883002f7839">VoodooShader::PF_SlashEscape</a> =  0x0004, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceaca0175dc76fddf5537b20360b4416bdc">VoodooShader::VSParse_SlashEscape</a> =  0x0004, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea0f69e857efd4a92bca1e94d2de537073">VoodooShader::PF_SlashOnly</a> =  0x0010, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea6d37bbc1215b243e292fef248911da40">VoodooShader::VSParse_SlashOnly</a> =  0x0010, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea15832efb070341111685bf18f35e584b">VoodooShader::PF_SlashBack</a> =  0x0020, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea1c601bc9d9a981641d569802e66c2a3f">VoodooShader::VSParse_SlashBack</a> =  0x0020, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea51bf6e2e467f5901dfca1a77c163cf3a">VoodooShader::PF_SlashTrail</a> =  0x0100, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea1f294e2970c425e384fc1da5276be8e0">VoodooShader::VSParse_SlashTrail</a> =  0x0100, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cead2979a8fddbaadcb49d4cdcc394af8d7">VoodooShader::PF_PathRoot</a> =  0x001000, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea4356ce7418a7a4b798b282e0d74deaa2">VoodooShader::VSParse_PathRoot</a> =  0x001000, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceaa038c9b013d068094fc78a49e721ec53">VoodooShader::PF_PathOnly</a> =  0x002000, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceaceb188f7d5c2beb349a6c5f882b81769">VoodooShader::VSParse_PathOnly</a> =  0x002000, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceae50d0d85d903e4643cc3ab6217ca3ef4">VoodooShader::PF_PathFile</a> =  0x004000, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea50b3de3ceb09f80bca318cbe33edb92f">VoodooShader::VSParse_PathFile</a> =  0x004000, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea7e7b535ca42e5becf896e0a5d5e84d7d">VoodooShader::PF_PathExt</a> =  0x008000, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cead7bcaa85d4b416ecd887226103d84fb6">VoodooShader::VSParse_PathExt</a> =  0x008000, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7">VoodooShader::PF_PathCanon</a> =  0x010000, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea9aee0d9fbf622dbe05eaad458a816c5c">VoodooShader::VSParse_PathCanon</a> =  0x010000, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea6957dd0a1b95da8e812981e32093aff2">VoodooShader::PF_SlashFlags</a> =  0x0000013F, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceaa2aa00d522eaa4f013e81552105e0de8">VoodooShader::VSParse_SlashFlags</a> =  0x00000137, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea25b0f723039b4e3c96771a68ece3a791">VoodooShader::PF_PathFlags</a> =  0x000FF000
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea9aff8d77677afe11ff8175a55356e1d3">VoodooShader::VSParse_PathFlags</a> =  0x000FF000
 <br/>
  }</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">String parsing flags.  <a href="group__voodoo__enums.html#ga97ffa79fd7512cffa1f0bce04ec778ce">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga0bdd161a02834f059ef7c545a757e83c">VoodooShader::VariableType</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VoodooShader::VT_Normal</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83ca1ffa17fb01d90abed853d3319c92acb1">VoodooShader::VSVar_Normal</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83ca98c13e4930cb75a7e732757fa0e72018">VoodooShader::VT_State</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83ca983d1f7eeb1e51f17281b79daf8f9d71">VoodooShader::VSVar_State</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080">VoodooShader::VT_System</a> =  0x10
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83cacf4de196a147288c036272a1b1a49aa8">VoodooShader::VSVar_System</a> =  0x10
 <br/>
  }</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#ga2453ad76d4f673b6a3016377f007c151">VoodooShader::UnionType</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a6b798469f5bf4813cb28e035cdc9fdfb">VoodooShader::UT_Unknown</a> =  0x00, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a1162dd4701a5403d261dd4d10a3ece8b">VoodooShader::VSUT_Unknown</a> =  0x00, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6">VoodooShader::UT_None</a> =  0x01, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151ae398ced6ebf09671fe322bdecbfe21d4">VoodooShader::VSUT_None</a> =  0x01, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a45db36583894626403cfbb73dca0d2c9">VoodooShader::UT_Bool</a> =  0x02, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a3911062177b3ea32569ef867fea36d8c">VoodooShader::VSUT_Bool</a> =  0x02, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a3e626f891b0d589b76f73fca69245a70">VoodooShader::UT_Int8</a> =  0x03, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a9e1d164cf49c9b78ef2f354f8f54df01">VoodooShader::VSUT_Int8</a> =  0x03, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151af52eadd997c590eb5a26d816377ed99b">VoodooShader::UT_UInt8</a> =  0x04, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a0f0e5c08879c0069cb8a53a4809dcdc9">VoodooShader::VSUT_UInt8</a> =  0x04, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a7d47a41bfdde9c5ede3a48458754f182">VoodooShader::UT_Int16</a> =  0x05, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151abd57917ee26bdf361334594970cf1c0a">VoodooShader::VSUT_Int16</a> =  0x05, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a23f6a2a0f49b684102bafbc0b9e57107">VoodooShader::UT_UInt16</a> =  0x06, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a746d95b404888be1a14f5eac2cdf7a39">VoodooShader::VSUT_UInt16</a> =  0x06, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151aaad28e35d48efa3bd3b4296dfd525b12">VoodooShader::UT_Int32</a> =  0x07, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a3527745b8f75b8e04ff61b421419a6ec">VoodooShader::VSUT_Int32</a> =  0x07, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151ab13ec0daf2702ee5ca89023e834c36b8">VoodooShader::UT_UInt32</a> =  0x08, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a719be317e9b06b72beb6c460cfea4592">VoodooShader::VSUT_UInt32</a> =  0x08, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151aa48f4e751daec87ccd981d1f4948244c">VoodooShader::UT_Float</a> =  0x09, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a7a0b6af761c486844f16f8ba32a1d540">VoodooShader::VSUT_Float</a> =  0x09, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a07824be3c29358d637eaee261634353e">VoodooShader::UT_Double</a> =  0x0A, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a499a08b35bf5ac892f593593ae0cfcf1">VoodooShader::VSUT_Double</a> =  0x0A, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a82e30c5976865ca806c2a7e0090db544">VoodooShader::UT_Uuid</a> =  0x0B, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a9c565dfae42bccf6bc4add30ae4297e7">VoodooShader::VSUT_Uuid</a> =  0x0B, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a2260f1147d1f93bbd095711d1fb3ca61">VoodooShader::UT_String</a> =  0x0C, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a20a9d786a57e8b12b8af78e17821261a">VoodooShader::VSUT_String</a> =  0x0C, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a254c6c137d63f077af38019dbced07a9">VoodooShader::UT_IObject</a> =  0x0D, 
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a322dcd8e7ead777d84cf9a8dbdb0ab20">VoodooShader::VSUT_IObject</a> =  0x0D, 
 <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a000f2a36acde6524ab963f65c841cc7c">VoodooShader::UT_PVoid</a> =  0x0E
-<br/>
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__enums.html#gacdb884b8b87f5f32b2990a019dbd6f89">VoodooShader::VertexFlags</a> { <br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggacdb884b8b87f5f32b2990a019dbd6f89a9212898cd2fd57e6c9e065ab630fa480">VoodooShader::VF_None</a> =  0x00, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggacdb884b8b87f5f32b2990a019dbd6f89a3612089a43a2cbaeb4102ad75e59a56b">VoodooShader::VF_Transformed</a> =  0x01, 
-<br/>
-&#160;&#160;<a class="el" href="group__voodoo__enums.html#ggacdb884b8b87f5f32b2990a019dbd6f89a88e3e1a9078f1be38c21791b13d8dabd">VoodooShader::VF_Buffer</a> =  0x02
+&#160;&#160;<a class="el" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a00327f3f46f1c29fbd418bd25757a7ef">VoodooShader::VSUT_PVoid</a> =  0x0F
 <br/>
  }</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<p>Texture formats for use by <a class="el" href="class_voodoo_shader_1_1_i_texture.html">Textures</a>, describing the layout and size of the texture data. </p>
-<p>These may not be implemented by the underlying graphics API exactly as they are indicated here, but the available components and sizes are guaranteed to be equal to or greater than the indicated values. Further information on texture formats and depth may be found on the <a class="el" href="voodoo_textures.html#voodoo_textures_formats">texture formats chart</a>. </p>
+<p>Texture formats for use by <a class="el" href="class_voodoo_shader_1_1_i_texture.html">textures</a>, describing the layout and size of the texture data. </p>
+<p>These may not be implemented by the underlying graphics API exactly as they are indicated here, but the available components and sizes are guaranteed to be equal to or greater than the indicated values (with the exception of VSFmt_Null and VSFmt_DMax, which have no and variable precision). Further information on texture formats may be found on the <a class="el" href="voodoo_textures.html#voodoo_textures_formats">texture formats chart</a>.</p>
+<p>Many bindings restrict the use of depth textures as inputs to effects. The listed formats are <em>mostly</em> compatible for use as such, but this is still very hardware-dependent. See <a class="el" href="voodoo_textures.html#voodoo_textures_depth">Depth Buffers</a> for details. </p>
 <hr/><h2>Enumeration Type Documentation</h2>
+<a class="anchor" id="gade8044a18110e6838de3c03b94df4627"></a><!-- doxytag: member="VoodooShader::CompilerProfile" ref="gade8044a18110e6838de3c03b94df4627" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#gade8044a18110e6838de3c03b94df4627">VoodooShader::CompilerProfile</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Target compiler profiles. </p>
+<p>These control the compiler used for Voodoo Shader resources.</p>
+<dl class="note"><dt><b>Note:</b></dt><dd>Various portions of this enum are reserved or have a special purpose: <ul>
+<li><em>0x00FF</em>: <a class="el" href="struct_voodoo_shader_1_1_version.html">Version</a> within the API. Typically this matches the version the API itself reports. </li>
+<li><em>0x7FF0</em>: Major API or vendor. The unset API is reserved for internal Voodoo Shader profiles. </li>
+<li><em>0x8000</em>: Debug flag, where the API provides a debug version. </li>
+</ul>
+</dd></dl>
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627aaafbe3b904623665ae8c94e2f2268d65"></a><!-- doxytag: member="VSProfile_None" ref="ggade8044a18110e6838de3c03b94df4627aaafbe3b904623665ae8c94e2f2268d65" args="" -->VSProfile_None</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627af5bae5c03afb10e5cd05e75d44e3c68f"></a><!-- doxytag: member="VSProfile_Refr" ref="ggade8044a18110e6838de3c03b94df4627af5bae5c03afb10e5cd05e75d44e3c68f" args="" -->VSProfile_Refr</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627af1d6d9bd5b5957fa6df6d8456ffba966"></a><!-- doxytag: member="VSProfile_D3D9" ref="ggade8044a18110e6838de3c03b94df4627af1d6d9bd5b5957fa6df6d8456ffba966" args="" -->VSProfile_D3D9</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627a737b1cf625983151d12743e5d51e58f1"></a><!-- doxytag: member="VSProfile_D3D10" ref="ggade8044a18110e6838de3c03b94df4627a737b1cf625983151d12743e5d51e58f1" args="" -->VSProfile_D3D10</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627a2fa3264e1b0b3d835a6e6cae7d7e7e4b"></a><!-- doxytag: member="VSProfile_D3D10_1" ref="ggade8044a18110e6838de3c03b94df4627a2fa3264e1b0b3d835a6e6cae7d7e7e4b" args="" -->VSProfile_D3D10_1</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627a22bde918d286f16fc32cf13a7e9d9c79"></a><!-- doxytag: member="VSProfile_D3D11" ref="ggade8044a18110e6838de3c03b94df4627a22bde918d286f16fc32cf13a7e9d9c79" args="" -->VSProfile_D3D11</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627ab3e93922af6189f661a1a6e596a69c82"></a><!-- doxytag: member="VSProfile_D3D11_1" ref="ggade8044a18110e6838de3c03b94df4627ab3e93922af6189f661a1a6e596a69c82" args="" -->VSProfile_D3D11_1</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627ace2351489727260d2e559f2f0125dd88"></a><!-- doxytag: member="VSProfile_OpenGL2" ref="ggade8044a18110e6838de3c03b94df4627ace2351489727260d2e559f2f0125dd88" args="" -->VSProfile_OpenGL2</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627a4b8b1c3da089db8588358198ef29612e"></a><!-- doxytag: member="VSProfile_OpenGL3" ref="ggade8044a18110e6838de3c03b94df4627a4b8b1c3da089db8588358198ef29612e" args="" -->VSProfile_OpenGL3</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggade8044a18110e6838de3c03b94df4627a3f43600594ef18af1276b4b0f16f1081"></a><!-- doxytag: member="VSProfile_OpenGL4" ref="ggade8044a18110e6838de3c03b94df4627a3f43600594ef18af1276b4b0f16f1081" args="" -->VSProfile_OpenGL4</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00118">118</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ga980f04b17b862a238d6c9c7854b862b6"></a><!-- doxytag: member="VoodooShader::FileOpenMode" ref="ga980f04b17b862a238d6c9c7854b862b6" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -393,25 +464,27 @@ Enumerations</h2></td></tr>
 
 <p>File open access modes. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a5c2be190fc93b22c73f59aed8ea53393"></a><!-- doxytag: member="FO_Unknown" ref="gga980f04b17b862a238d6c9c7854b862b6a5c2be190fc93b22c73f59aed8ea53393" args="" -->FO_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a818066c910968a4658e07ff9020c7be2"></a><!-- doxytag: member="VSOpen_Unknown" ref="gga980f04b17b862a238d6c9c7854b862b6a818066c910968a4658e07ff9020c7be2" args="" -->VSOpen_Unknown</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a038fd4dc8be58c0a03b96ad56ff28f9f"></a><!-- doxytag: member="FO_Read" ref="gga980f04b17b862a238d6c9c7854b862b6a038fd4dc8be58c0a03b96ad56ff28f9f" args="" -->FO_Read</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6aaf0befa91d9a8306ee27ba56df5c5aab"></a><!-- doxytag: member="VSOpen_Read" ref="gga980f04b17b862a238d6c9c7854b862b6aaf0befa91d9a8306ee27ba56df5c5aab" args="" -->VSOpen_Read</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6aadc1af690c85db573f56af6e94c12c94"></a><!-- doxytag: member="FO_Write" ref="gga980f04b17b862a238d6c9c7854b862b6aadc1af690c85db573f56af6e94c12c94" args="" -->FO_Write</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a26b3f3b46f1af847bbe0b65a7c2afb57"></a><!-- doxytag: member="VSOpen_Write" ref="gga980f04b17b862a238d6c9c7854b862b6a26b3f3b46f1af847bbe0b65a7c2afb57" args="" -->VSOpen_Write</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a792f0a7f459faf966b8db451ba027ab2"></a><!-- doxytag: member="FO_ReadWrite" ref="gga980f04b17b862a238d6c9c7854b862b6a792f0a7f459faf966b8db451ba027ab2" args="" -->FO_ReadWrite</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6af3b4e39c214583d2b981c6adff2d2d92"></a><!-- doxytag: member="VSOpen_ReadWrite" ref="gga980f04b17b862a238d6c9c7854b862b6af3b4e39c214583d2b981c6adff2d2d92" args="" -->VSOpen_ReadWrite</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6ae91e7da22a25f8cbf8d0b95c0da85b07"></a><!-- doxytag: member="FO_Ate" ref="gga980f04b17b862a238d6c9c7854b862b6ae91e7da22a25f8cbf8d0b95c0da85b07" args="" -->FO_Ate</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a0600cb2c6b2e724eefc2cf8c0ea81867"></a><!-- doxytag: member="VSOpen_Binary" ref="gga980f04b17b862a238d6c9c7854b862b6a0600cb2c6b2e724eefc2cf8c0ea81867" args="" -->VSOpen_Binary</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a1af36747e1cce2da302913cd55a3bb6f"></a><!-- doxytag: member="FO_Append" ref="gga980f04b17b862a238d6c9c7854b862b6a1af36747e1cce2da302913cd55a3bb6f" args="" -->FO_Append</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6ace48c9bf06ea31ecf8d39049090e1f21"></a><!-- doxytag: member="VSOpen_End" ref="gga980f04b17b862a238d6c9c7854b862b6ace48c9bf06ea31ecf8d39049090e1f21" args="" -->VSOpen_End</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6ab07c442a39c5204064be709823e26f6d"></a><!-- doxytag: member="FO_Truncate" ref="gga980f04b17b862a238d6c9c7854b862b6ab07c442a39c5204064be709823e26f6d" args="" -->FO_Truncate</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a616550042371295b30118019c256805d"></a><!-- doxytag: member="VSOpen_Append" ref="gga980f04b17b862a238d6c9c7854b862b6a616550042371295b30118019c256805d" args="" -->VSOpen_Append</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga980f04b17b862a238d6c9c7854b862b6a696e3d02c28e77885d791e64858e34b0"></a><!-- doxytag: member="VSOpen_Truncate" ref="gga980f04b17b862a238d6c9c7854b862b6a696e3d02c28e77885d791e64858e34b0" args="" -->VSOpen_Truncate</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00171">171</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00181">181</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -428,19 +501,17 @@ Enumerations</h2></td></tr>
 
 <p>File find modes. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga3e5dcf65468c74a45648090d2f82bfb5a8535ea5dd210e2a04a0d02e95e393b93"></a><!-- doxytag: member="FF_Unknown" ref="gga3e5dcf65468c74a45648090d2f82bfb5a8535ea5dd210e2a04a0d02e95e393b93" args="" -->FF_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3e5dcf65468c74a45648090d2f82bfb5a2670f510828d0b1c40093588f0c69c89"></a><!-- doxytag: member="VSSearch_Open" ref="gga3e5dcf65468c74a45648090d2f82bfb5a2670f510828d0b1c40093588f0c69c89" args="" -->VSSearch_Open</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3e5dcf65468c74a45648090d2f82bfb5ae1b907db0f319a062fdccce062e81838"></a><!-- doxytag: member="FF_CreateOnly" ref="gga3e5dcf65468c74a45648090d2f82bfb5ae1b907db0f319a062fdccce062e81838" args="" -->FF_CreateOnly</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3e5dcf65468c74a45648090d2f82bfb5aa342af4937f2555a5bee4846399e401d"></a><!-- doxytag: member="VSSearch_Create" ref="gga3e5dcf65468c74a45648090d2f82bfb5aa342af4937f2555a5bee4846399e401d" args="" -->VSSearch_Create</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3e5dcf65468c74a45648090d2f82bfb5a0886900fcac2f26e7b15915a890fa05c"></a><!-- doxytag: member="FF_OpenOnly" ref="gga3e5dcf65468c74a45648090d2f82bfb5a0886900fcac2f26e7b15915a890fa05c" args="" -->FF_OpenOnly</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3e5dcf65468c74a45648090d2f82bfb5a26f4b449fa01e4cd2864a1a1b3357c13"></a><!-- doxytag: member="FF_AlwaysOpen" ref="gga3e5dcf65468c74a45648090d2f82bfb5a26f4b449fa01e4cd2864a1a1b3357c13" args="" -->FF_AlwaysOpen</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3e5dcf65468c74a45648090d2f82bfb5ac37ac99491822a5a0f2411711505c062"></a><!-- doxytag: member="VSSearch_Exists" ref="gga3e5dcf65468c74a45648090d2f82bfb5ac37ac99491822a5a0f2411711505c062" args="" -->VSSearch_Exists</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00160">160</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00171">171</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -455,15 +526,15 @@ Enumerations</h2></td></tr>
 </div>
 <div class="memdoc">
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="ggaf35c8fe857d014d7345ef8c2266c79dcaea01e65182c757527cf31d15643ec214"></a><!-- doxytag: member="LF_Unknown" ref="ggaf35c8fe857d014d7345ef8c2266c79dcaea01e65182c757527cf31d15643ec214" args="" -->LF_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggaf35c8fe857d014d7345ef8c2266c79dcae12f12c4a9bff52b81e07ee1960030f9"></a><!-- doxytag: member="VSLogFlag_Unknown" ref="ggaf35c8fe857d014d7345ef8c2266c79dcae12f12c4a9bff52b81e07ee1960030f9" args="" -->VSLogFlag_Unknown</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggaf35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a"></a><!-- doxytag: member="LF_Flush" ref="ggaf35c8fe857d014d7345ef8c2266c79dcadd274aec934ff467ea7b5c743399909a" args="" -->LF_Flush</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggaf35c8fe857d014d7345ef8c2266c79dca2d1c7c5d45369e20fb8034607a2cb45f"></a><!-- doxytag: member="VSLogFlag_Flush" ref="ggaf35c8fe857d014d7345ef8c2266c79dca2d1c7c5d45369e20fb8034607a2cb45f" args="" -->VSLogFlag_Flush</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00234">234</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00257">257</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -481,101 +552,86 @@ Enumerations</h2></td></tr>
 <p>Log message levels. </p>
 <p>These are set up to quickly filter messages based on severity and source. Each message must have a severity and source bit set, which the logger tests against its internal filter, like so:</p>
 <div class="fragment"><pre class="fragment"> <a class="code" href="group__voodoo__enums.html#ga3b6fdd898a776b73fcdb7fef61ee96da" title="Log message levels.">LogLevel</a> maskedLevel = level &amp; storedLevel;
- <span class="keywordflow">if</span> ( (maskedLevel &amp; <a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaf2a01460c9f479f78c32224847988fcf">LL_Origin</a>) &amp;&amp; (maskedLevel &amp; <a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daab6c5487eabf7bd65f36a4d0302610751">LL_Severity</a>) )
+ <span class="keywordflow">if</span> ( (maskedLevel &amp; <a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa96d99789ff81cadad48fa937a2f91ea8">VSLog_Origin</a>) &amp;&amp; (maskedLevel &amp; <a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa6a701880c6df8266a2de1549d8c54e0d">VSLog_Severity</a>) )
  {
      <span class="comment">// Log message</span>
  }
 </pre></div> <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa838f450aaaec6ffbfc01d7d706b9277a"></a><!-- doxytag: member="LL_Unknown" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa838f450aaaec6ffbfc01d7d706b9277a" args="" -->LL_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa6f6bb651ac63dbd9f40fe05f93956137"></a><!-- doxytag: member="VSLog_Unknown" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa6f6bb651ac63dbd9f40fe05f93956137" args="" -->VSLog_Unknown</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd"></a><!-- doxytag: member="LL_Debug" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa0dd57ae647b41ed3e18f7f4ec8b33ccd" args="" -->LL_Debug</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daab0c328d11c5edf503bcbd4e41cc15e91"></a><!-- doxytag: member="VSLog_Debug" ref="gga3b6fdd898a776b73fcdb7fef61ee96daab0c328d11c5edf503bcbd4e41cc15e91" args="" -->VSLog_Debug</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa78a935f62fca37891ebc6a65a42a47af"></a><!-- doxytag: member="LL_Info" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa78a935f62fca37891ebc6a65a42a47af" args="" -->LL_Info</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa90aa720578373038c4c6af2e3ce99850"></a><!-- doxytag: member="VSLog_Info" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa90aa720578373038c4c6af2e3ce99850" args="" -->VSLog_Info</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89"></a><!-- doxytag: member="LL_Warning" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaa25c38b31c2d0e7e3e1954c75a561e89" args="" -->LL_Warning</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa3073ffdced1043000c8f515f3f3292a0"></a><!-- doxytag: member="VSLog_Warning" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa3073ffdced1043000c8f515f3f3292a0" args="" -->VSLog_Warning</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26"></a><!-- doxytag: member="LL_Error" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaba7e6b4964f7d02b974c7d0f411bdf26" args="" -->LL_Error</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa6605f851b640bc53427db7986f3cb28e"></a><!-- doxytag: member="VSLog_Error" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa6605f851b640bc53427db7986f3cb28e" args="" -->VSLog_Error</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa6d96557a3bebf071ba17a3333f64a17e"></a><!-- doxytag: member="LL_External" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa6d96557a3bebf071ba17a3333f64a17e" args="" -->LL_External</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daadf1f896250130f9752740cc250966eb5"></a><!-- doxytag: member="VSLog_External" ref="gga3b6fdd898a776b73fcdb7fef61ee96daadf1f896250130f9752740cc250966eb5" args="" -->VSLog_External</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa07991c7097b225cb334b5de3c159c443"></a><!-- doxytag: member="LL_Module" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa07991c7097b225cb334b5de3c159c443" args="" -->LL_Module</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaa29ec2553f025586afe661596d4e29f1"></a><!-- doxytag: member="VSLog_Module" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaa29ec2553f025586afe661596d4e29f1" args="" -->VSLog_Module</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daae1151ce9c532926ae973d700f1a05868"></a><!-- doxytag: member="LL_Core" ref="gga3b6fdd898a776b73fcdb7fef61ee96daae1151ce9c532926ae973d700f1a05868" args="" -->LL_Core</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa3469ccc97611581070078c1a9c7e1866"></a><!-- doxytag: member="VSLog_Binding" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa3469ccc97611581070078c1a9c7e1866" args="" -->VSLog_Binding</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa5f0b9a3a8a25e78bc5c54b7d523db2f2"></a><!-- doxytag: member="LL_System" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa5f0b9a3a8a25e78bc5c54b7d523db2f2" args="" -->LL_System</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa6a0951c80608a368d33f2ae214e44321"></a><!-- doxytag: member="VSLog_Core" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa6a0951c80608a368d33f2ae214e44321" args="" -->VSLog_Core</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa2d135594b1bc22f49b4cc4c57717b8f8"></a><!-- doxytag: member="LL_Critical" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa2d135594b1bc22f49b4cc4c57717b8f8" args="" -->LL_Critical</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaba542baac880b6a403c39fe601af9483"></a><!-- doxytag: member="VSLog_Critical" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaba542baac880b6a403c39fe601af9483" args="" -->VSLog_Critical</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa729e2bfe189b1f23e496e2d1db8a37c9"></a><!-- doxytag: member="LL_Exception" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa729e2bfe189b1f23e496e2d1db8a37c9" args="" -->LL_Exception</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa71a9c4cd7d236847712be03372c89316"></a><!-- doxytag: member="VSLog_Exception" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa71a9c4cd7d236847712be03372c89316" args="" -->VSLog_Exception</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa3826992e71b54ed294189f5f3f2cd3ad"></a><!-- doxytag: member="LL_Notice" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa3826992e71b54ed294189f5f3f2cd3ad" args="" -->LL_Notice</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaec746e13e327c09bcd6026ee18f05a1f"></a><!-- doxytag: member="VSLog_Notice" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaec746e13e327c09bcd6026ee18f05a1f" args="" -->VSLog_Notice</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8"></a><!-- doxytag: member="LL_CoreDebug" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa6de8f5e5091e63eac05776ecae8ea8d8" args="" -->LL_CoreDebug</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa460eda7f2d0c00742f5191e80460b97e"></a><!-- doxytag: member="VSLog_CoreDebug" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa460eda7f2d0c00742f5191e80460b97e" args="" -->VSLog_CoreDebug</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29"></a><!-- doxytag: member="LL_CoreException" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29" args="" -->LL_CoreException</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa2dd4b9537f44953cfd90e7f2466027c7"></a><!-- doxytag: member="VSLog_CoreException" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa2dd4b9537f44953cfd90e7f2466027c7" args="" -->VSLog_CoreException</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daac49f2cfafbe8c7b0b8c05bcb5eb4c5aa"></a><!-- doxytag: member="LL_CoreInfo" ref="gga3b6fdd898a776b73fcdb7fef61ee96daac49f2cfafbe8c7b0b8c05bcb5eb4c5aa" args="" -->LL_CoreInfo</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daab8a74caa6d8d1bc2149057ec1e2cd796"></a><!-- doxytag: member="VSLog_CoreInfo" ref="gga3b6fdd898a776b73fcdb7fef61ee96daab8a74caa6d8d1bc2149057ec1e2cd796" args="" -->VSLog_CoreInfo</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa58405973e929398713a45862416704ba"></a><!-- doxytag: member="LL_CoreNotice" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa58405973e929398713a45862416704ba" args="" -->LL_CoreNotice</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaeae9add0715f6054916a564a7d2eebb7"></a><!-- doxytag: member="VSLog_CoreNotice" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaeae9add0715f6054916a564a7d2eebb7" args="" -->VSLog_CoreNotice</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa70cfa23511c6055d9853fa1f9841be56"></a><!-- doxytag: member="LL_CoreWarning" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa70cfa23511c6055d9853fa1f9841be56" args="" -->LL_CoreWarning</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa344f84cb45ea39d247ecbf3140e858b1"></a><!-- doxytag: member="VSLog_CoreWarning" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa344f84cb45ea39d247ecbf3140e858b1" args="" -->VSLog_CoreWarning</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b"></a><!-- doxytag: member="LL_CoreError" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa46e945003d830733dce90b89d2aa9e0b" args="" -->LL_CoreError</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa0ddd113cd4a62aa776c9c8c545a78284"></a><!-- doxytag: member="VSLog_CoreError" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa0ddd113cd4a62aa776c9c8c545a78284" args="" -->VSLog_CoreError</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa47192e0f574a9432c57d2b6aecc32e4d"></a><!-- doxytag: member="LL_ModDebug" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa47192e0f574a9432c57d2b6aecc32e4d" args="" -->LL_ModDebug</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa5f82e9faaa67c35576271974f023504b"></a><!-- doxytag: member="VSLog_BindDebug" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa5f82e9faaa67c35576271974f023504b" args="" -->VSLog_BindDebug</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daab0778573c6cc7361cf73b5774d933b77"></a><!-- doxytag: member="LL_ModException" ref="gga3b6fdd898a776b73fcdb7fef61ee96daab0778573c6cc7361cf73b5774d933b77" args="" -->LL_ModException</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa218149b1deb630d70a943f7232845612"></a><!-- doxytag: member="VSLog_BindException" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa218149b1deb630d70a943f7232845612" args="" -->VSLog_BindException</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaf38b6ab75c151a62d89e452a44bae6eb"></a><!-- doxytag: member="LL_ModInfo" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaf38b6ab75c151a62d89e452a44bae6eb" args="" -->LL_ModInfo</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa78dde8892cfd57be1cffbef5207d0123"></a><!-- doxytag: member="VSLog_BindInfo" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa78dde8892cfd57be1cffbef5207d0123" args="" -->VSLog_BindInfo</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaf13b71ff287651e37fb5813f08396a05"></a><!-- doxytag: member="LL_ModNotice" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaf13b71ff287651e37fb5813f08396a05" args="" -->LL_ModNotice</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa5770dec03d34dc5a6ac5b7b499913bd1"></a><!-- doxytag: member="VSLog_BindNotice" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa5770dec03d34dc5a6ac5b7b499913bd1" args="" -->VSLog_BindNotice</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daae07f0e1c1476142c9813a514f42896ad"></a><!-- doxytag: member="LL_ModWarning" ref="gga3b6fdd898a776b73fcdb7fef61ee96daae07f0e1c1476142c9813a514f42896ad" args="" -->LL_ModWarning</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa1e5aac3ebb03a89b7505fce0c5dda3ba"></a><!-- doxytag: member="VSLog_BindWarning" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa1e5aac3ebb03a89b7505fce0c5dda3ba" args="" -->VSLog_BindWarning</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaef03d704b2d0827db6fce054ccc76e5c"></a><!-- doxytag: member="LL_ModError" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaef03d704b2d0827db6fce054ccc76e5c" args="" -->LL_ModError</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa27a81ab7226b073b6f6d1141140b1099"></a><!-- doxytag: member="VSLog_BindError" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa27a81ab7226b073b6f6d1141140b1099" args="" -->VSLog_BindError</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daab6c5487eabf7bd65f36a4d0302610751"></a><!-- doxytag: member="LL_Severity" ref="gga3b6fdd898a776b73fcdb7fef61ee96daab6c5487eabf7bd65f36a4d0302610751" args="" -->LL_Severity</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa4a98900e6eb6656b4d77f4f94044ea67"></a><!-- doxytag: member="VSLog_ModDebug" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa4a98900e6eb6656b4d77f4f94044ea67" args="" -->VSLog_ModDebug</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa30bc9ce0498e2be3af8c891d0f75e8fe"></a><!-- doxytag: member="LL_Flags" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa30bc9ce0498e2be3af8c891d0f75e8fe" args="" -->LL_Flags</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaf455c2009920aeb42af811cf8d1206df"></a><!-- doxytag: member="VSLog_ModException" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaf455c2009920aeb42af811cf8d1206df" args="" -->VSLog_ModException</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daaf2a01460c9f479f78c32224847988fcf"></a><!-- doxytag: member="LL_Origin" ref="gga3b6fdd898a776b73fcdb7fef61ee96daaf2a01460c9f479f78c32224847988fcf" args="" -->LL_Origin</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa8dc3fad90d7c9793df1970872523781c"></a><!-- doxytag: member="VSLog_ModInfo" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa8dc3fad90d7c9793df1970872523781c" args="" -->VSLog_ModInfo</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa3147c212abd33ae7e3276c390af23514"></a><!-- doxytag: member="LL_Default" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa3147c212abd33ae7e3276c390af23514" args="" -->LL_Default</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa5064999c23d6284b70a3842d4af596d5"></a><!-- doxytag: member="VSLog_ModNotice" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa5064999c23d6284b70a3842d4af596d5" args="" -->VSLog_ModNotice</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa834480aaf13f8b6e44beff5fbca7f7e4"></a><!-- doxytag: member="LL_All" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa834480aaf13f8b6e44beff5fbca7f7e4" args="" -->LL_All</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daab02020b74a0bc740e2013b622d21ca52"></a><!-- doxytag: member="VSLog_ModWarning" ref="gga3b6fdd898a776b73fcdb7fef61ee96daab02020b74a0bc740e2013b622d21ca52" args="" -->VSLog_ModWarning</em>&nbsp;</td><td>
 </td></tr>
-</table>
-</dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00194">194</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ga56d7d146822e8830cf490e2b9292b12d"></a><!-- doxytag: member="VoodooShader::ParameterCategory" ref="ga56d7d146822e8830cf490e2b9292b12d" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#ga56d7d146822e8830cf490e2b9292b12d">VoodooShader::ParameterCategory</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga56d7d146822e8830cf490e2b9292b12da20050f59bca9f6bbb2375e8c80839907"></a><!-- doxytag: member="PC_Unknown" ref="gga56d7d146822e8830cf490e2b9292b12da20050f59bca9f6bbb2375e8c80839907" args="" -->PC_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa05ec0b7adcf2e1e0abbceebc6cf2fe72"></a><!-- doxytag: member="VSLog_ModError" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa05ec0b7adcf2e1e0abbceebc6cf2fe72" args="" -->VSLog_ModError</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga56d7d146822e8830cf490e2b9292b12da7552e2ec0a665e7a5824a3fccc8b73a9"></a><!-- doxytag: member="PC_Float" ref="gga56d7d146822e8830cf490e2b9292b12da7552e2ec0a665e7a5824a3fccc8b73a9" args="" -->PC_Float</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa6a701880c6df8266a2de1549d8c54e0d"></a><!-- doxytag: member="VSLog_Severity" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa6a701880c6df8266a2de1549d8c54e0d" args="" -->VSLog_Severity</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga56d7d146822e8830cf490e2b9292b12da8368cf22ecf2f293378b66fc8319596a"></a><!-- doxytag: member="PC_Sampler" ref="gga56d7d146822e8830cf490e2b9292b12da8368cf22ecf2f293378b66fc8319596a" args="" -->PC_Sampler</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa3768f72844fc63d64f8fb0e34c3d903f"></a><!-- doxytag: member="VSLog_Flags" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa3768f72844fc63d64f8fb0e34c3d903f" args="" -->VSLog_Flags</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga56d7d146822e8830cf490e2b9292b12da1644aac0c06bcb3a945fee923b8420b7"></a><!-- doxytag: member="PC_Struct" ref="gga56d7d146822e8830cf490e2b9292b12da1644aac0c06bcb3a945fee923b8420b7" args="" -->PC_Struct</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa96d99789ff81cadad48fa937a2f91ea8"></a><!-- doxytag: member="VSLog_Origin" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa96d99789ff81cadad48fa937a2f91ea8" args="" -->VSLog_Origin</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daada7fa9f1019bf67212acfe487213c698"></a><!-- doxytag: member="VSLog_Default" ref="gga3b6fdd898a776b73fcdb7fef61ee96daada7fa9f1019bf67212acfe487213c698" args="" -->VSLog_Default</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga3b6fdd898a776b73fcdb7fef61ee96daa13170093c5f65cd75d46b7598e494af9"></a><!-- doxytag: member="VSLog_All" ref="gga3b6fdd898a776b73fcdb7fef61ee96daa13170093c5f65cd75d46b7598e494af9" args="" -->VSLog_All</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00111">111</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00211">211</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -589,59 +645,36 @@ Enumerations</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>Parameter types valid for <a class="el" href="class_voodoo_shader_1_1_i_parameter.html">VoodooShader::IParameter</a>. </p>
-<p>These types are available across hardware, exposing most common shader language types. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa478c80ba236ad1222147d0c45e2faf85"></a><!-- doxytag: member="PT_Unknown" ref="ggab90c3dbfe5ca792323089af903d1134aa478c80ba236ad1222147d0c45e2faf85" args="" -->PT_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aaa9f3f41c420411a5a7b844d077263d73"></a><!-- doxytag: member="VSPT_Unknown" ref="ggab90c3dbfe5ca792323089af903d1134aaa9f3f41c420411a5a7b844d077263d73" args="" -->VSPT_Unknown</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aad4913e102af5954426cf9bed6ebdf808"></a><!-- doxytag: member="PT_Float1" ref="ggab90c3dbfe5ca792323089af903d1134aad4913e102af5954426cf9bed6ebdf808" args="" -->PT_Float1</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aaeefbe9f6d84a11d74fa3234fccd15b4e"></a><!-- doxytag: member="VSPT_Bool" ref="ggab90c3dbfe5ca792323089af903d1134aaeefbe9f6d84a11d74fa3234fccd15b4e" args="" -->VSPT_Bool</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa7ad02e8e755e8126dd596c2d104172af"></a><!-- doxytag: member="PT_Float2" ref="ggab90c3dbfe5ca792323089af903d1134aa7ad02e8e755e8126dd596c2d104172af" args="" -->PT_Float2</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aaf662817babff32a53039ed2dd71040ab"></a><!-- doxytag: member="VSPT_Int" ref="ggab90c3dbfe5ca792323089af903d1134aaf662817babff32a53039ed2dd71040ab" args="" -->VSPT_Int</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aaf2ecf58f4f7a4f7519245e728e1da1dc"></a><!-- doxytag: member="PT_Float3" ref="ggab90c3dbfe5ca792323089af903d1134aaf2ecf58f4f7a4f7519245e728e1da1dc" args="" -->PT_Float3</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa3f88be9755c2372fb2c17faf6e774ee8"></a><!-- doxytag: member="VSPT_Float" ref="ggab90c3dbfe5ca792323089af903d1134aa3f88be9755c2372fb2c17faf6e774ee8" args="" -->VSPT_Float</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa9c6eb130d4a2e9fd233a015ee83aa639"></a><!-- doxytag: member="PT_Float4" ref="ggab90c3dbfe5ca792323089af903d1134aa9c6eb130d4a2e9fd233a015ee83aa639" args="" -->PT_Float4</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aad7b8faa752423b38b87a8f3ed804be36"></a><!-- doxytag: member="VSPT_String" ref="ggab90c3dbfe5ca792323089af903d1134aad7b8faa752423b38b87a8f3ed804be36" args="" -->VSPT_String</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aaf3afbedf997a256472f8c7982d4c32af"></a><!-- doxytag: member="PT_Float1x1" ref="ggab90c3dbfe5ca792323089af903d1134aaf3afbedf997a256472f8c7982d4c32af" args="" -->PT_Float1x1</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aaebb0b4aff311f477b3fb3d4f3052612c"></a><!-- doxytag: member="VSPT_Texture" ref="ggab90c3dbfe5ca792323089af903d1134aaebb0b4aff311f477b3fb3d4f3052612c" args="" -->VSPT_Texture</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa79940ac8df954d7460974c7968f589aa"></a><!-- doxytag: member="PT_Float1x2" ref="ggab90c3dbfe5ca792323089af903d1134aa79940ac8df954d7460974c7968f589aa" args="" -->PT_Float1x2</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa8fa6ea88a97fe2407397318e110896a4"></a><!-- doxytag: member="VSPT_Texture1D" ref="ggab90c3dbfe5ca792323089af903d1134aa8fa6ea88a97fe2407397318e110896a4" args="" -->VSPT_Texture1D</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa0547a689b39a61bc01f7be22a04a7206"></a><!-- doxytag: member="PT_Float1x3" ref="ggab90c3dbfe5ca792323089af903d1134aa0547a689b39a61bc01f7be22a04a7206" args="" -->PT_Float1x3</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aaa0494351ba659c58f7c88ff59d075d47"></a><!-- doxytag: member="VSPT_Texture2D" ref="ggab90c3dbfe5ca792323089af903d1134aaa0494351ba659c58f7c88ff59d075d47" args="" -->VSPT_Texture2D</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aaf664726ed1a3cf2e747ce8b33190fadb"></a><!-- doxytag: member="PT_Float1x4" ref="ggab90c3dbfe5ca792323089af903d1134aaf664726ed1a3cf2e747ce8b33190fadb" args="" -->PT_Float1x4</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aadf7255762d05ec952b1c21d89d4e77b2"></a><!-- doxytag: member="VSPT_Texture3D" ref="ggab90c3dbfe5ca792323089af903d1134aadf7255762d05ec952b1c21d89d4e77b2" args="" -->VSPT_Texture3D</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa5e0c7c6e3dfd73258ea723e16e33e3f5"></a><!-- doxytag: member="PT_Float2x1" ref="ggab90c3dbfe5ca792323089af903d1134aa5e0c7c6e3dfd73258ea723e16e33e3f5" args="" -->PT_Float2x1</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa39bae132dadb07dc2c4732ba839da49f"></a><!-- doxytag: member="VSPT_TextureCube" ref="ggab90c3dbfe5ca792323089af903d1134aa39bae132dadb07dc2c4732ba839da49f" args="" -->VSPT_TextureCube</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aabdc0deb24524e49ac94e91a3179db60b"></a><!-- doxytag: member="PT_Float2x2" ref="ggab90c3dbfe5ca792323089af903d1134aabdc0deb24524e49ac94e91a3179db60b" args="" -->PT_Float2x2</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa01aa31565ddaa674077754512170bdf2"></a><!-- doxytag: member="VSPT_Sampler" ref="ggab90c3dbfe5ca792323089af903d1134aa01aa31565ddaa674077754512170bdf2" args="" -->VSPT_Sampler</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa4f864c2863273ec5d64acdc089e24ae9"></a><!-- doxytag: member="PT_Float2x3" ref="ggab90c3dbfe5ca792323089af903d1134aa4f864c2863273ec5d64acdc089e24ae9" args="" -->PT_Float2x3</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa0f75a502c55648d07d9abc2a0ca6e1b0"></a><!-- doxytag: member="VSPT_Sampler1D" ref="ggab90c3dbfe5ca792323089af903d1134aa0f75a502c55648d07d9abc2a0ca6e1b0" args="" -->VSPT_Sampler1D</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa6dcfe89316b32c0bf7a0a723e09243bc"></a><!-- doxytag: member="PT_Float2x4" ref="ggab90c3dbfe5ca792323089af903d1134aa6dcfe89316b32c0bf7a0a723e09243bc" args="" -->PT_Float2x4</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aadf70e672627e6822234bdc81e2a7ed90"></a><!-- doxytag: member="VSPT_Sampler2D" ref="ggab90c3dbfe5ca792323089af903d1134aadf70e672627e6822234bdc81e2a7ed90" args="" -->VSPT_Sampler2D</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa64f868c0daef33b8f33ae0c06862a82f"></a><!-- doxytag: member="PT_Float3x1" ref="ggab90c3dbfe5ca792323089af903d1134aa64f868c0daef33b8f33ae0c06862a82f" args="" -->PT_Float3x1</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa73560a00588ff9e008e5c853551b357d"></a><!-- doxytag: member="VSPT_Sampler3D" ref="ggab90c3dbfe5ca792323089af903d1134aa73560a00588ff9e008e5c853551b357d" args="" -->VSPT_Sampler3D</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aae21634d7633582e9d84b2ac34af5e6fb"></a><!-- doxytag: member="PT_Float3x2" ref="ggab90c3dbfe5ca792323089af903d1134aae21634d7633582e9d84b2ac34af5e6fb" args="" -->PT_Float3x2</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa30119bb4c754eadb461518b15f533409"></a><!-- doxytag: member="PT_Float3x3" ref="ggab90c3dbfe5ca792323089af903d1134aa30119bb4c754eadb461518b15f533409" args="" -->PT_Float3x3</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa8db164e98cdc0f71cf6ab6ae4c7143ff"></a><!-- doxytag: member="PT_Float3x4" ref="ggab90c3dbfe5ca792323089af903d1134aa8db164e98cdc0f71cf6ab6ae4c7143ff" args="" -->PT_Float3x4</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aac9830790cc6c527c7dca2a0a88b1dc38"></a><!-- doxytag: member="PT_Float4x1" ref="ggab90c3dbfe5ca792323089af903d1134aac9830790cc6c527c7dca2a0a88b1dc38" args="" -->PT_Float4x1</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa8116222e3f6b660849a141eb3913de5d"></a><!-- doxytag: member="PT_Float4x2" ref="ggab90c3dbfe5ca792323089af903d1134aa8116222e3f6b660849a141eb3913de5d" args="" -->PT_Float4x2</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa7e75a08b10e6d7bedb9ceb767c7f0083"></a><!-- doxytag: member="PT_Float4x3" ref="ggab90c3dbfe5ca792323089af903d1134aa7e75a08b10e6d7bedb9ceb767c7f0083" args="" -->PT_Float4x3</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aadc9f57ad1dc0e0799c2f84a429bd602d"></a><!-- doxytag: member="PT_Float4x4" ref="ggab90c3dbfe5ca792323089af903d1134aadc9f57ad1dc0e0799c2f84a429bd602d" args="" -->PT_Float4x4</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aad588d8095ead5ba1389b3d030d9eb3e3"></a><!-- doxytag: member="PT_Sampler1D" ref="ggab90c3dbfe5ca792323089af903d1134aad588d8095ead5ba1389b3d030d9eb3e3" args="" -->PT_Sampler1D</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa9a2cd67c0d1d466c4002816b4b09e5ba"></a><!-- doxytag: member="PT_Sampler2D" ref="ggab90c3dbfe5ca792323089af903d1134aa9a2cd67c0d1d466c4002816b4b09e5ba" args="" -->PT_Sampler2D</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa2fd1e92f95f6139b1a0d3f05296c7b54"></a><!-- doxytag: member="PT_Sampler3D" ref="ggab90c3dbfe5ca792323089af903d1134aa2fd1e92f95f6139b1a0d3f05296c7b54" args="" -->PT_Sampler3D</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aad3936cface3c7fb40a77ead405901dfb"></a><!-- doxytag: member="PT_Struct" ref="ggab90c3dbfe5ca792323089af903d1134aad3936cface3c7fb40a77ead405901dfb" args="" -->PT_Struct</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggab90c3dbfe5ca792323089af903d1134aa25b16c171bd9f9b49cd07036383e8f37"></a><!-- doxytag: member="VSPT_SamplerCube" ref="ggab90c3dbfe5ca792323089af903d1134aa25b16c171bd9f9b49cd07036383e8f37" args="" -->VSPT_SamplerCube</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
@@ -663,72 +696,65 @@ Enumerations</h2></td></tr>
 <div class="memdoc">
 
 <p><a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> parsing flags. </p>
-<p>These modify the behavior of the string parser. </p>
+<p>These modify the behavior of the string parser.</p>
+<p>Slash flags are handled before path flags. Path flags use system API calls to perform their processing, and are dependent on system behavior. More flags will be added when logic, functions and operators are added to variables. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91"></a><!-- doxytag: member="PF_None" ref="gga97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91" args="" -->PF_None</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea95baef5550fecc08d076a2ceb3c88b76"></a><!-- doxytag: member="VSParse_None" ref="gga97ffa79fd7512cffa1f0bce04ec778cea95baef5550fecc08d076a2ceb3c88b76" args="" -->VSParse_None</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb"></a><!-- doxytag: member="PF_SlashSingle" ref="gga97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb" args="" -->PF_SlashSingle</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778ceabf2d4b9ab2a12075f66e884f6442b2ce"></a><!-- doxytag: member="VSParse_SlashSingle" ref="gga97ffa79fd7512cffa1f0bce04ec778ceabf2d4b9ab2a12075f66e884f6442b2ce" args="" -->VSParse_SlashSingle</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cead47b2072407d71f047b8cae324372813"></a><!-- doxytag: member="PF_SlashDouble" ref="gga97ffa79fd7512cffa1f0bce04ec778cead47b2072407d71f047b8cae324372813" args="" -->PF_SlashDouble</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea5034312abeec2d15fffd37b802ba32b1"></a><!-- doxytag: member="VSParse_SlashDouble" ref="gga97ffa79fd7512cffa1f0bce04ec778cea5034312abeec2d15fffd37b802ba32b1" args="" -->VSParse_SlashDouble</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea2d2eb87e859a72307ba69883002f7839"></a><!-- doxytag: member="PF_SlashEscape" ref="gga97ffa79fd7512cffa1f0bce04ec778cea2d2eb87e859a72307ba69883002f7839" args="" -->PF_SlashEscape</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778ceaca0175dc76fddf5537b20360b4416bdc"></a><!-- doxytag: member="VSParse_SlashEscape" ref="gga97ffa79fd7512cffa1f0bce04ec778ceaca0175dc76fddf5537b20360b4416bdc" args="" -->VSParse_SlashEscape</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea0f69e857efd4a92bca1e94d2de537073"></a><!-- doxytag: member="PF_SlashOnly" ref="gga97ffa79fd7512cffa1f0bce04ec778cea0f69e857efd4a92bca1e94d2de537073" args="" -->PF_SlashOnly</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea6d37bbc1215b243e292fef248911da40"></a><!-- doxytag: member="VSParse_SlashOnly" ref="gga97ffa79fd7512cffa1f0bce04ec778cea6d37bbc1215b243e292fef248911da40" args="" -->VSParse_SlashOnly</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea15832efb070341111685bf18f35e584b"></a><!-- doxytag: member="PF_SlashBack" ref="gga97ffa79fd7512cffa1f0bce04ec778cea15832efb070341111685bf18f35e584b" args="" -->PF_SlashBack</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea1c601bc9d9a981641d569802e66c2a3f"></a><!-- doxytag: member="VSParse_SlashBack" ref="gga97ffa79fd7512cffa1f0bce04ec778cea1c601bc9d9a981641d569802e66c2a3f" args="" -->VSParse_SlashBack</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea51bf6e2e467f5901dfca1a77c163cf3a"></a><!-- doxytag: member="PF_SlashTrail" ref="gga97ffa79fd7512cffa1f0bce04ec778cea51bf6e2e467f5901dfca1a77c163cf3a" args="" -->PF_SlashTrail</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea1f294e2970c425e384fc1da5276be8e0"></a><!-- doxytag: member="VSParse_SlashTrail" ref="gga97ffa79fd7512cffa1f0bce04ec778cea1f294e2970c425e384fc1da5276be8e0" args="" -->VSParse_SlashTrail</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cead2979a8fddbaadcb49d4cdcc394af8d7"></a><!-- doxytag: member="PF_PathRoot" ref="gga97ffa79fd7512cffa1f0bce04ec778cead2979a8fddbaadcb49d4cdcc394af8d7" args="" -->PF_PathRoot</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea4356ce7418a7a4b798b282e0d74deaa2"></a><!-- doxytag: member="VSParse_PathRoot" ref="gga97ffa79fd7512cffa1f0bce04ec778cea4356ce7418a7a4b798b282e0d74deaa2" args="" -->VSParse_PathRoot</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778ceaa038c9b013d068094fc78a49e721ec53"></a><!-- doxytag: member="PF_PathOnly" ref="gga97ffa79fd7512cffa1f0bce04ec778ceaa038c9b013d068094fc78a49e721ec53" args="" -->PF_PathOnly</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778ceaceb188f7d5c2beb349a6c5f882b81769"></a><!-- doxytag: member="VSParse_PathOnly" ref="gga97ffa79fd7512cffa1f0bce04ec778ceaceb188f7d5c2beb349a6c5f882b81769" args="" -->VSParse_PathOnly</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778ceae50d0d85d903e4643cc3ab6217ca3ef4"></a><!-- doxytag: member="PF_PathFile" ref="gga97ffa79fd7512cffa1f0bce04ec778ceae50d0d85d903e4643cc3ab6217ca3ef4" args="" -->PF_PathFile</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea50b3de3ceb09f80bca318cbe33edb92f"></a><!-- doxytag: member="VSParse_PathFile" ref="gga97ffa79fd7512cffa1f0bce04ec778cea50b3de3ceb09f80bca318cbe33edb92f" args="" -->VSParse_PathFile</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea7e7b535ca42e5becf896e0a5d5e84d7d"></a><!-- doxytag: member="PF_PathExt" ref="gga97ffa79fd7512cffa1f0bce04ec778cea7e7b535ca42e5becf896e0a5d5e84d7d" args="" -->PF_PathExt</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cead7bcaa85d4b416ecd887226103d84fb6"></a><!-- doxytag: member="VSParse_PathExt" ref="gga97ffa79fd7512cffa1f0bce04ec778cead7bcaa85d4b416ecd887226103d84fb6" args="" -->VSParse_PathExt</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7"></a><!-- doxytag: member="PF_PathCanon" ref="gga97ffa79fd7512cffa1f0bce04ec778ceac57ec8128a18acd5c51774e228695ac7" args="" -->PF_PathCanon</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea9aee0d9fbf622dbe05eaad458a816c5c"></a><!-- doxytag: member="VSParse_PathCanon" ref="gga97ffa79fd7512cffa1f0bce04ec778cea9aee0d9fbf622dbe05eaad458a816c5c" args="" -->VSParse_PathCanon</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea6957dd0a1b95da8e812981e32093aff2"></a><!-- doxytag: member="PF_SlashFlags" ref="gga97ffa79fd7512cffa1f0bce04ec778cea6957dd0a1b95da8e812981e32093aff2" args="" -->PF_SlashFlags</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778ceaa2aa00d522eaa4f013e81552105e0de8"></a><!-- doxytag: member="VSParse_SlashFlags" ref="gga97ffa79fd7512cffa1f0bce04ec778ceaa2aa00d522eaa4f013e81552105e0de8" args="" -->VSParse_SlashFlags</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea25b0f723039b4e3c96771a68ece3a791"></a><!-- doxytag: member="PF_PathFlags" ref="gga97ffa79fd7512cffa1f0bce04ec778cea25b0f723039b4e3c96771a68ece3a791" args="" -->PF_PathFlags</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga97ffa79fd7512cffa1f0bce04ec778cea9aff8d77677afe11ff8175a55356e1d3"></a><!-- doxytag: member="VSParse_PathFlags" ref="gga97ffa79fd7512cffa1f0bce04ec778cea9aff8d77677afe11ff8175a55356e1d3" args="" -->VSParse_PathFlags</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00243">243</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00269">269</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga0aaa128fef0ad63eafc60e11da58cb82"></a><!-- doxytag: member="VoodooShader::ProgramStage" ref="ga0aaa128fef0ad63eafc60e11da58cb82" args="" -->
+<a class="anchor" id="ga40c5d206fa0918e553eef996ef9dc3eb"></a><!-- doxytag: member="VoodooShader::PathType" ref="ga40c5d206fa0918e553eef996ef9dc3eb" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#ga0aaa128fef0ad63eafc60e11da58cb82">VoodooShader::ProgramStage</a></td>
+          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#ga40c5d206fa0918e553eef996ef9dc3eb">VoodooShader::PathType</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga0aaa128fef0ad63eafc60e11da58cb82a401673474986286cb61828e1175c57f6"></a><!-- doxytag: member="PS_Unknown" ref="gga0aaa128fef0ad63eafc60e11da58cb82a401673474986286cb61828e1175c57f6" args="" -->PS_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga40c5d206fa0918e553eef996ef9dc3eba020da8d3cda2f9a746531072e0ec41e3"></a><!-- doxytag: member="VSPath_Directory" ref="gga40c5d206fa0918e553eef996ef9dc3eba020da8d3cda2f9a746531072e0ec41e3" args="" -->VSPath_Directory</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga0aaa128fef0ad63eafc60e11da58cb82a7ef01fdef45878127db52390f5c065c4"></a><!-- doxytag: member="PS_Vertex" ref="gga0aaa128fef0ad63eafc60e11da58cb82a7ef01fdef45878127db52390f5c065c4" args="" -->PS_Vertex</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga0aaa128fef0ad63eafc60e11da58cb82a827533162c80c0a93a669102da7e14ec"></a><!-- doxytag: member="PS_Fragment" ref="gga0aaa128fef0ad63eafc60e11da58cb82a827533162c80c0a93a669102da7e14ec" args="" -->PS_Fragment</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga0aaa128fef0ad63eafc60e11da58cb82ac2e592b1a4218468f6c5624f89a18cef"></a><!-- doxytag: member="PS_Geometry" ref="gga0aaa128fef0ad63eafc60e11da58cb82ac2e592b1a4218468f6c5624f89a18cef" args="" -->PS_Geometry</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga0aaa128fef0ad63eafc60e11da58cb82a7eeff6ab667a2af5b89731c68c936a4c"></a><!-- doxytag: member="PS_Domain" ref="gga0aaa128fef0ad63eafc60e11da58cb82a7eeff6ab667a2af5b89731c68c936a4c" args="" -->PS_Domain</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga0aaa128fef0ad63eafc60e11da58cb82a9449138a5cd26365e03474631118ff6e"></a><!-- doxytag: member="PS_Hull" ref="gga0aaa128fef0ad63eafc60e11da58cb82a9449138a5cd26365e03474631118ff6e" args="" -->PS_Hull</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga40c5d206fa0918e553eef996ef9dc3ebae4cbf92ca3dc376c82179494d730f9a5"></a><!-- doxytag: member="VSPath_Archive" ref="gga40c5d206fa0918e553eef996ef9dc3ebae4cbf92ca3dc376c82179494d730f9a5" args="" -->VSPath_Archive</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00119">119</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00193">193</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -745,19 +771,54 @@ Enumerations</h2></td></tr>
 
 <p>File seek offset modes. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga68a5aa1e8d5ddc2a43a629cd036264dba9fcd7bb60c41c7db6fb6f874ebce28e1"></a><!-- doxytag: member="SM_Unknown" ref="gga68a5aa1e8d5ddc2a43a629cd036264dba9fcd7bb60c41c7db6fb6f874ebce28e1" args="" -->SM_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga68a5aa1e8d5ddc2a43a629cd036264dbafbd9b7c259c4cde16c2c7b9e8852db0c"></a><!-- doxytag: member="VSSeek_Unknown" ref="gga68a5aa1e8d5ddc2a43a629cd036264dbafbd9b7c259c4cde16c2c7b9e8852db0c" args="" -->VSSeek_Unknown</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga68a5aa1e8d5ddc2a43a629cd036264dba12bae89e4539476ec97e98cbe6e070bf"></a><!-- doxytag: member="SM_Begin" ref="gga68a5aa1e8d5ddc2a43a629cd036264dba12bae89e4539476ec97e98cbe6e070bf" args="" -->SM_Begin</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga68a5aa1e8d5ddc2a43a629cd036264dba960e97cb212037e2b267ec2e2e3534da"></a><!-- doxytag: member="VSSeek_Begin" ref="gga68a5aa1e8d5ddc2a43a629cd036264dba960e97cb212037e2b267ec2e2e3534da" args="" -->VSSeek_Begin</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga68a5aa1e8d5ddc2a43a629cd036264dba1f5475733b2dddd525f5e4d3f95ba25e"></a><!-- doxytag: member="SM_Current" ref="gga68a5aa1e8d5ddc2a43a629cd036264dba1f5475733b2dddd525f5e4d3f95ba25e" args="" -->SM_Current</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga68a5aa1e8d5ddc2a43a629cd036264dba52cf2bfa76c851ba0ef2fe9d797aaf5d"></a><!-- doxytag: member="VSSeek_Current" ref="gga68a5aa1e8d5ddc2a43a629cd036264dba52cf2bfa76c851ba0ef2fe9d797aaf5d" args="" -->VSSeek_Current</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga68a5aa1e8d5ddc2a43a629cd036264dbab27fd0a092990ab6ad0616a85f8b551d"></a><!-- doxytag: member="SM_End" ref="gga68a5aa1e8d5ddc2a43a629cd036264dbab27fd0a092990ab6ad0616a85f8b551d" args="" -->SM_End</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga68a5aa1e8d5ddc2a43a629cd036264dba194765d01f8608ec90ff3e419f987f27"></a><!-- doxytag: member="VSSeek_End" ref="gga68a5aa1e8d5ddc2a43a629cd036264dba194765d01f8608ec90ff3e419f987f27" args="" -->VSSeek_End</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00149">149</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00160">160</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="gad118ba426eca4623476da31d851d79a5"></a><!-- doxytag: member="VoodooShader::ShaderStage" ref="gad118ba426eca4623476da31d851d79a5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#gad118ba426eca4623476da31d851d79a5">VoodooShader::ShaderStage</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="ggad118ba426eca4623476da31d851d79a5abccb6e7efe3115a368326a6cb9cf9be6"></a><!-- doxytag: member="VSStage_Unknown" ref="ggad118ba426eca4623476da31d851d79a5abccb6e7efe3115a368326a6cb9cf9be6" args="" -->VSStage_Unknown</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggad118ba426eca4623476da31d851d79a5a07a78c9d9a41c4248ce69bff7aac9e1e"></a><!-- doxytag: member="VSStage_Vertex" ref="ggad118ba426eca4623476da31d851d79a5a07a78c9d9a41c4248ce69bff7aac9e1e" args="" -->VSStage_Vertex</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggad118ba426eca4623476da31d851d79a5a3bd423d552deeb37a2526ceb4f600d60"></a><!-- doxytag: member="VSStage_Hull" ref="ggad118ba426eca4623476da31d851d79a5a3bd423d552deeb37a2526ceb4f600d60" args="" -->VSStage_Hull</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggad118ba426eca4623476da31d851d79a5a35568311bedc156cfce3221703ec6737"></a><!-- doxytag: member="VSStage_Pixel" ref="ggad118ba426eca4623476da31d851d79a5a35568311bedc156cfce3221703ec6737" args="" -->VSStage_Pixel</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggad118ba426eca4623476da31d851d79a5af3fbe548423b6a023f6196355b6042d5"></a><!-- doxytag: member="VSStage_Domain" ref="ggad118ba426eca4623476da31d851d79a5af3fbe548423b6a023f6196355b6042d5" args="" -->VSStage_Domain</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggad118ba426eca4623476da31d851d79a5a489616224e7a016c18ae61e351401d64"></a><!-- doxytag: member="VSStage_Geometry" ref="ggad118ba426eca4623476da31d851d79a5a489616224e7a016c18ae61e351401d64" args="" -->VSStage_Geometry</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggad118ba426eca4623476da31d851d79a5a6bd844e4eafe6959120610bfca4142a2"></a><!-- doxytag: member="VSStage_Compute" ref="ggad118ba426eca4623476da31d851d79a5a6bd844e4eafe6959120610bfca4142a2" args="" -->VSStage_Compute</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggad118ba426eca4623476da31d851d79a5a10996dc8084786b8d74befb2c4ca6fb5"></a><!-- doxytag: member="VSStage_All" ref="ggad118ba426eca4623476da31d851d79a5a10996dc8084786b8d74befb2c4ca6fb5" args="" -->VSStage_All</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00098">98</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -774,17 +835,46 @@ Enumerations</h2></td></tr>
 
 <p>File stream type for seek and get operations. </p>
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga30d2b0a9546b7da2d60804ab53d65465a23da4f3bfed92bfffec54c87ad4bb1b9"></a><!-- doxytag: member="ST_Unknown" ref="gga30d2b0a9546b7da2d60804ab53d65465a23da4f3bfed92bfffec54c87ad4bb1b9" args="" -->ST_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga30d2b0a9546b7da2d60804ab53d65465a64fc6ab5945bd5778b1c02277698c3eb"></a><!-- doxytag: member="VSStream_Unknown" ref="gga30d2b0a9546b7da2d60804ab53d65465a64fc6ab5945bd5778b1c02277698c3eb" args="" -->VSStream_Unknown</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga30d2b0a9546b7da2d60804ab53d65465ac8c870a36301314e7afdadd48abc095c"></a><!-- doxytag: member="ST_Get" ref="gga30d2b0a9546b7da2d60804ab53d65465ac8c870a36301314e7afdadd48abc095c" args="" -->ST_Get</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga30d2b0a9546b7da2d60804ab53d65465acf19bf3a7cb6829dfcd95bec736fd700"></a><!-- doxytag: member="VSStream_Get" ref="gga30d2b0a9546b7da2d60804ab53d65465acf19bf3a7cb6829dfcd95bec736fd700" args="" -->VSStream_Get</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga30d2b0a9546b7da2d60804ab53d65465aceba9e204c8cd745660989856760eae3"></a><!-- doxytag: member="ST_Put" ref="gga30d2b0a9546b7da2d60804ab53d65465aceba9e204c8cd745660989856760eae3" args="" -->ST_Put</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga30d2b0a9546b7da2d60804ab53d65465a426a5709c23ec2b56f8b5128737a9c62"></a><!-- doxytag: member="VSStream_Put" ref="gga30d2b0a9546b7da2d60804ab53d65465a426a5709c23ec2b56f8b5128737a9c62" args="" -->VSStream_Put</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00139">139</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00150">150</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga317a41685b788d755f609a74da1215d7"></a><!-- doxytag: member="VoodooShader::TextureFlags" ref="ga317a41685b788d755f609a74da1215d7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#ga317a41685b788d755f609a74da1215d7">VoodooShader::TextureFlags</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="gga317a41685b788d755f609a74da1215d7ab276b1eac89312f30c6e817468f558c7"></a><!-- doxytag: member="VSTexFlag_None" ref="gga317a41685b788d755f609a74da1215d7ab276b1eac89312f30c6e817468f558c7" args="" -->VSTexFlag_None</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga317a41685b788d755f609a74da1215d7a127c50892276664c5721c81c9d0ce757"></a><!-- doxytag: member="VSTexFlag_Target" ref="gga317a41685b788d755f609a74da1215d7a127c50892276664c5721c81c9d0ce757" args="" -->VSTexFlag_Target</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga317a41685b788d755f609a74da1215d7a7b64231c09ff7d4ed851452cff6d9aef"></a><!-- doxytag: member="VSTexFlag_Dynamic" ref="gga317a41685b788d755f609a74da1215d7a7b64231c09ff7d4ed851452cff6d9aef" args="" -->VSTexFlag_Dynamic</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga317a41685b788d755f609a74da1215d7a7f62cf1c649d90d0bc09c82d8e29f7ac"></a><!-- doxytag: member="VSTexFlag_MipMaps" ref="gga317a41685b788d755f609a74da1215d7a7f62cf1c649d90d0bc09c82d8e29f7ac" args="" -->VSTexFlag_MipMaps</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="gga317a41685b788d755f609a74da1215d7a14b1ebd16bc0fa9d016e0115b6b3f757"></a><!-- doxytag: member="VSTexFlag_AutoMip" ref="gga317a41685b788d755f609a74da1215d7a14b1ebd16bc0fa9d016e0115b6b3f757" args="" -->VSTexFlag_AutoMip</em>&nbsp;</td><td>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00138">138</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -799,25 +889,31 @@ Enumerations</h2></td></tr>
 </div>
 <div class="memdoc">
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d"></a><!-- doxytag: member="TF_Unknown" ref="ggac41ef674639cfb37461c1426a0d7669fa85e13c0e05a10536b5ca3d32bfbf134d" args="" -->TF_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fad60b3b5adca3d7bfcfa7aee9ac476e75"></a><!-- doxytag: member="VSFmt_Unknown" ref="ggac41ef674639cfb37461c1426a0d7669fad60b3b5adca3d7bfcfa7aee9ac476e75" args="" -->VSFmt_Unknown</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa5505137ff9248cb5c7fdd951a65e4b4c"></a><!-- doxytag: member="TF_RGB5" ref="ggac41ef674639cfb37461c1426a0d7669fa5505137ff9248cb5c7fdd951a65e4b4c" args="" -->TF_RGB5</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa7fbac34ea6c675857e66f5fff7170270"></a><!-- doxytag: member="VSFmt_Null" ref="ggac41ef674639cfb37461c1426a0d7669fa7fbac34ea6c675857e66f5fff7170270" args="" -->VSFmt_Null</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669faae82e0f94f4f50a0e3ff770eb1888ce5"></a><!-- doxytag: member="TF_RGB5A1" ref="ggac41ef674639cfb37461c1426a0d7669faae82e0f94f4f50a0e3ff770eb1888ce5" args="" -->TF_RGB5A1</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669faf7f85c0c7773579b84e124b72f9e4bd4"></a><!-- doxytag: member="VSFmt_RGB5A1" ref="ggac41ef674639cfb37461c1426a0d7669faf7f85c0c7773579b84e124b72f9e4bd4" args="" -->VSFmt_RGB5A1</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fac1b6e1b557d9e1dbcc89eccaee9f5202"></a><!-- doxytag: member="TF_RGB8" ref="ggac41ef674639cfb37461c1426a0d7669fac1b6e1b557d9e1dbcc89eccaee9f5202" args="" -->TF_RGB8</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669faf4a016dee009303d55b2cdc3d77056c3"></a><!-- doxytag: member="VSFmt_RGB8" ref="ggac41ef674639cfb37461c1426a0d7669faf4a016dee009303d55b2cdc3d77056c3" args="" -->VSFmt_RGB8</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa92dc956ba9db9012612e53baf3a341a5"></a><!-- doxytag: member="TF_RGBA8" ref="ggac41ef674639cfb37461c1426a0d7669fa92dc956ba9db9012612e53baf3a341a5" args="" -->TF_RGBA8</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fafa9da8381e2400dfe9da40e3b37b8755"></a><!-- doxytag: member="VSFmt_RGBA8" ref="ggac41ef674639cfb37461c1426a0d7669fafa9da8381e2400dfe9da40e3b37b8755" args="" -->VSFmt_RGBA8</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fac7d1cb69e646a88e40f9485bd78c41d5"></a><!-- doxytag: member="TF_RGB10A2" ref="ggac41ef674639cfb37461c1426a0d7669fac7d1cb69e646a88e40f9485bd78c41d5" args="" -->TF_RGB10A2</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa591499c40fad74c452a8f4bd3219b2ba"></a><!-- doxytag: member="VSFmt_RGB10A2" ref="ggac41ef674639cfb37461c1426a0d7669fa591499c40fad74c452a8f4bd3219b2ba" args="" -->VSFmt_RGB10A2</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669faaee75e702ccb0eccdfe2a6bc2a144f80"></a><!-- doxytag: member="TF_RGBA16F" ref="ggac41ef674639cfb37461c1426a0d7669faaee75e702ccb0eccdfe2a6bc2a144f80" args="" -->TF_RGBA16F</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa594b9b82fc4dbc9a56677589e0248dca"></a><!-- doxytag: member="VSFmt_RGBA16F" ref="ggac41ef674639cfb37461c1426a0d7669fa594b9b82fc4dbc9a56677589e0248dca" args="" -->VSFmt_RGBA16F</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa4b7fc08dfa228fc2a361188e1dba25b7"></a><!-- doxytag: member="TF_RGBA32F" ref="ggac41ef674639cfb37461c1426a0d7669fa4b7fc08dfa228fc2a361188e1dba25b7" args="" -->TF_RGBA32F</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa07f23e5fb4855333e99a8e5fa20e95f6"></a><!-- doxytag: member="VSFmt_RGBA32F" ref="ggac41ef674639cfb37461c1426a0d7669fa07f23e5fb4855333e99a8e5fa20e95f6" args="" -->VSFmt_RGBA32F</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa148285a8681d68a12b15a6e60c192220"></a><!-- doxytag: member="TF_D16" ref="ggac41ef674639cfb37461c1426a0d7669fa148285a8681d68a12b15a6e60c192220" args="" -->TF_D16</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669faefa0c656875f08abd03392fd06989e86"></a><!-- doxytag: member="VSFmt_D16" ref="ggac41ef674639cfb37461c1426a0d7669faefa0c656875f08abd03392fd06989e86" args="" -->VSFmt_D16</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fad0414e285b3c5b13e7cb082bb02a127e"></a><!-- doxytag: member="TF_D32" ref="ggac41ef674639cfb37461c1426a0d7669fad0414e285b3c5b13e7cb082bb02a127e" args="" -->TF_D32</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa146230048fdb145c13bc0c85ec02dd00"></a><!-- doxytag: member="VSFmt_D24" ref="ggac41ef674639cfb37461c1426a0d7669fa146230048fdb145c13bc0c85ec02dd00" args="" -->VSFmt_D24</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa3537586877d876793764a70e759bd93e"></a><!-- doxytag: member="VSFmt_D24S8" ref="ggac41ef674639cfb37461c1426a0d7669fa3537586877d876793764a70e759bd93e" args="" -->VSFmt_D24S8</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fac99f122d28479d894bddb230622a3fdd"></a><!-- doxytag: member="VSFmt_D32" ref="ggac41ef674639cfb37461c1426a0d7669fac99f122d28479d894bddb230622a3fdd" args="" -->VSFmt_D32</em>&nbsp;</td><td>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="ggac41ef674639cfb37461c1426a0d7669fa30535302317f6ce55182f749810c5e3e"></a><!-- doxytag: member="VSFmt_DMax" ref="ggac41ef674639cfb37461c1426a0d7669fa30535302317f6ce55182f749810c5e3e" args="" -->VSFmt_DMax</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
@@ -827,28 +923,26 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga557f6a3f9454eb519cd10323d082df55"></a><!-- doxytag: member="VoodooShader::TextureStage" ref="ga557f6a3f9454eb519cd10323d082df55" args="" -->
+<a class="anchor" id="ga4fcf8515621d3022976cf8d802a0fc19"></a><!-- doxytag: member="VoodooShader::TextureMode" ref="ga4fcf8515621d3022976cf8d802a0fc19" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#ga557f6a3f9454eb519cd10323d082df55">VoodooShader::TextureStage</a></td>
+          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#ga4fcf8515621d3022976cf8d802a0fc19">VoodooShader::TextureMode</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga557f6a3f9454eb519cd10323d082df55ade049cfe16d56b339e64eea74511e9a6"></a><!-- doxytag: member="TS_Unknown" ref="gga557f6a3f9454eb519cd10323d082df55ade049cfe16d56b339e64eea74511e9a6" args="" -->TS_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga4fcf8515621d3022976cf8d802a0fc19a56fddd737253fa7b2203aba4965e391d"></a><!-- doxytag: member="VSTexMode_Target" ref="gga4fcf8515621d3022976cf8d802a0fc19a56fddd737253fa7b2203aba4965e391d" args="" -->VSTexMode_Target</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga557f6a3f9454eb519cd10323d082df55a1b49ece2d7812eef7b95ae26b0488cff"></a><!-- doxytag: member="TS_Shader" ref="gga557f6a3f9454eb519cd10323d082df55a1b49ece2d7812eef7b95ae26b0488cff" args="" -->TS_Shader</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce"></a><!-- doxytag: member="TS_Pass" ref="gga557f6a3f9454eb519cd10323d082df55ace31af68276d51480248cc254b1025ce" args="" -->TS_Pass</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga4fcf8515621d3022976cf8d802a0fc19ab73c352bd08f7db3c463a564c5e4fa89"></a><!-- doxytag: member="VSTexMode_Source" ref="gga4fcf8515621d3022976cf8d802a0fc19ab73c352bd08f7db3c463a564c5e4fa89" args="" -->VSTexMode_Source</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00129">129</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00132">132</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -863,41 +957,41 @@ Enumerations</h2></td></tr>
 </div>
 <div class="memdoc">
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a6b798469f5bf4813cb28e035cdc9fdfb"></a><!-- doxytag: member="UT_Unknown" ref="gga2453ad76d4f673b6a3016377f007c151a6b798469f5bf4813cb28e035cdc9fdfb" args="" -->UT_Unknown</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a1162dd4701a5403d261dd4d10a3ece8b"></a><!-- doxytag: member="VSUT_Unknown" ref="gga2453ad76d4f673b6a3016377f007c151a1162dd4701a5403d261dd4d10a3ece8b" args="" -->VSUT_Unknown</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6"></a><!-- doxytag: member="UT_None" ref="gga2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6" args="" -->UT_None</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151ae398ced6ebf09671fe322bdecbfe21d4"></a><!-- doxytag: member="VSUT_None" ref="gga2453ad76d4f673b6a3016377f007c151ae398ced6ebf09671fe322bdecbfe21d4" args="" -->VSUT_None</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a45db36583894626403cfbb73dca0d2c9"></a><!-- doxytag: member="UT_Bool" ref="gga2453ad76d4f673b6a3016377f007c151a45db36583894626403cfbb73dca0d2c9" args="" -->UT_Bool</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a3911062177b3ea32569ef867fea36d8c"></a><!-- doxytag: member="VSUT_Bool" ref="gga2453ad76d4f673b6a3016377f007c151a3911062177b3ea32569ef867fea36d8c" args="" -->VSUT_Bool</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a3e626f891b0d589b76f73fca69245a70"></a><!-- doxytag: member="UT_Int8" ref="gga2453ad76d4f673b6a3016377f007c151a3e626f891b0d589b76f73fca69245a70" args="" -->UT_Int8</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a9e1d164cf49c9b78ef2f354f8f54df01"></a><!-- doxytag: member="VSUT_Int8" ref="gga2453ad76d4f673b6a3016377f007c151a9e1d164cf49c9b78ef2f354f8f54df01" args="" -->VSUT_Int8</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151af52eadd997c590eb5a26d816377ed99b"></a><!-- doxytag: member="UT_UInt8" ref="gga2453ad76d4f673b6a3016377f007c151af52eadd997c590eb5a26d816377ed99b" args="" -->UT_UInt8</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a0f0e5c08879c0069cb8a53a4809dcdc9"></a><!-- doxytag: member="VSUT_UInt8" ref="gga2453ad76d4f673b6a3016377f007c151a0f0e5c08879c0069cb8a53a4809dcdc9" args="" -->VSUT_UInt8</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a7d47a41bfdde9c5ede3a48458754f182"></a><!-- doxytag: member="UT_Int16" ref="gga2453ad76d4f673b6a3016377f007c151a7d47a41bfdde9c5ede3a48458754f182" args="" -->UT_Int16</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151abd57917ee26bdf361334594970cf1c0a"></a><!-- doxytag: member="VSUT_Int16" ref="gga2453ad76d4f673b6a3016377f007c151abd57917ee26bdf361334594970cf1c0a" args="" -->VSUT_Int16</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a23f6a2a0f49b684102bafbc0b9e57107"></a><!-- doxytag: member="UT_UInt16" ref="gga2453ad76d4f673b6a3016377f007c151a23f6a2a0f49b684102bafbc0b9e57107" args="" -->UT_UInt16</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a746d95b404888be1a14f5eac2cdf7a39"></a><!-- doxytag: member="VSUT_UInt16" ref="gga2453ad76d4f673b6a3016377f007c151a746d95b404888be1a14f5eac2cdf7a39" args="" -->VSUT_UInt16</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151aaad28e35d48efa3bd3b4296dfd525b12"></a><!-- doxytag: member="UT_Int32" ref="gga2453ad76d4f673b6a3016377f007c151aaad28e35d48efa3bd3b4296dfd525b12" args="" -->UT_Int32</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a3527745b8f75b8e04ff61b421419a6ec"></a><!-- doxytag: member="VSUT_Int32" ref="gga2453ad76d4f673b6a3016377f007c151a3527745b8f75b8e04ff61b421419a6ec" args="" -->VSUT_Int32</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151ab13ec0daf2702ee5ca89023e834c36b8"></a><!-- doxytag: member="UT_UInt32" ref="gga2453ad76d4f673b6a3016377f007c151ab13ec0daf2702ee5ca89023e834c36b8" args="" -->UT_UInt32</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a719be317e9b06b72beb6c460cfea4592"></a><!-- doxytag: member="VSUT_UInt32" ref="gga2453ad76d4f673b6a3016377f007c151a719be317e9b06b72beb6c460cfea4592" args="" -->VSUT_UInt32</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151aa48f4e751daec87ccd981d1f4948244c"></a><!-- doxytag: member="UT_Float" ref="gga2453ad76d4f673b6a3016377f007c151aa48f4e751daec87ccd981d1f4948244c" args="" -->UT_Float</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a7a0b6af761c486844f16f8ba32a1d540"></a><!-- doxytag: member="VSUT_Float" ref="gga2453ad76d4f673b6a3016377f007c151a7a0b6af761c486844f16f8ba32a1d540" args="" -->VSUT_Float</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a07824be3c29358d637eaee261634353e"></a><!-- doxytag: member="UT_Double" ref="gga2453ad76d4f673b6a3016377f007c151a07824be3c29358d637eaee261634353e" args="" -->UT_Double</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a499a08b35bf5ac892f593593ae0cfcf1"></a><!-- doxytag: member="VSUT_Double" ref="gga2453ad76d4f673b6a3016377f007c151a499a08b35bf5ac892f593593ae0cfcf1" args="" -->VSUT_Double</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a82e30c5976865ca806c2a7e0090db544"></a><!-- doxytag: member="UT_Uuid" ref="gga2453ad76d4f673b6a3016377f007c151a82e30c5976865ca806c2a7e0090db544" args="" -->UT_Uuid</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a9c565dfae42bccf6bc4add30ae4297e7"></a><!-- doxytag: member="VSUT_Uuid" ref="gga2453ad76d4f673b6a3016377f007c151a9c565dfae42bccf6bc4add30ae4297e7" args="" -->VSUT_Uuid</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a2260f1147d1f93bbd095711d1fb3ca61"></a><!-- doxytag: member="UT_String" ref="gga2453ad76d4f673b6a3016377f007c151a2260f1147d1f93bbd095711d1fb3ca61" args="" -->UT_String</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a20a9d786a57e8b12b8af78e17821261a"></a><!-- doxytag: member="VSUT_String" ref="gga2453ad76d4f673b6a3016377f007c151a20a9d786a57e8b12b8af78e17821261a" args="" -->VSUT_String</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a254c6c137d63f077af38019dbced07a9"></a><!-- doxytag: member="UT_IObject" ref="gga2453ad76d4f673b6a3016377f007c151a254c6c137d63f077af38019dbced07a9" args="" -->UT_IObject</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a322dcd8e7ead777d84cf9a8dbdb0ab20"></a><!-- doxytag: member="VSUT_IObject" ref="gga2453ad76d4f673b6a3016377f007c151a322dcd8e7ead777d84cf9a8dbdb0ab20" args="" -->VSUT_IObject</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a000f2a36acde6524ab963f65c841cc7c"></a><!-- doxytag: member="UT_PVoid" ref="gga2453ad76d4f673b6a3016377f007c151a000f2a36acde6524ab963f65c841cc7c" args="" -->UT_PVoid</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga2453ad76d4f673b6a3016377f007c151a00327f3f46f1c29fbd418bd25757a7ef"></a><!-- doxytag: member="VSUT_PVoid" ref="gga2453ad76d4f673b6a3016377f007c151a00327f3f46f1c29fbd418bd25757a7ef" args="" -->VSUT_PVoid</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00271">271</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00297">297</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -912,36 +1006,11 @@ Enumerations</h2></td></tr>
 </div>
 <div class="memdoc">
 <dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="gga0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2"></a><!-- doxytag: member="VT_Normal" ref="gga0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2" args="" -->VT_Normal</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga0bdd161a02834f059ef7c545a757e83ca1ffa17fb01d90abed853d3319c92acb1"></a><!-- doxytag: member="VSVar_Normal" ref="gga0bdd161a02834f059ef7c545a757e83ca1ffa17fb01d90abed853d3319c92acb1" args="" -->VSVar_Normal</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga0bdd161a02834f059ef7c545a757e83ca98c13e4930cb75a7e732757fa0e72018"></a><!-- doxytag: member="VT_State" ref="gga0bdd161a02834f059ef7c545a757e83ca98c13e4930cb75a7e732757fa0e72018" args="" -->VT_State</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga0bdd161a02834f059ef7c545a757e83ca983d1f7eeb1e51f17281b79daf8f9d71"></a><!-- doxytag: member="VSVar_State" ref="gga0bdd161a02834f059ef7c545a757e83ca983d1f7eeb1e51f17281b79daf8f9d71" args="" -->VSVar_State</em>&nbsp;</td><td>
 </td></tr>
-<tr><td valign="top"><em><a class="anchor" id="gga0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080"></a><!-- doxytag: member="VT_System" ref="gga0bdd161a02834f059ef7c545a757e83ca2bec3b4958bea0e3f0612e4556247080" args="" -->VT_System</em>&nbsp;</td><td>
-</td></tr>
-</table>
-</dd>
-</dl>
-
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00264">264</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="gacdb884b8b87f5f32b2990a019dbd6f89"></a><!-- doxytag: member="VoodooShader::VertexFlags" ref="gacdb884b8b87f5f32b2990a019dbd6f89" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="group__voodoo__enums.html#gacdb884b8b87f5f32b2990a019dbd6f89">VoodooShader::VertexFlags</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="ggacdb884b8b87f5f32b2990a019dbd6f89a9212898cd2fd57e6c9e065ab630fa480"></a><!-- doxytag: member="VF_None" ref="ggacdb884b8b87f5f32b2990a019dbd6f89a9212898cd2fd57e6c9e065ab630fa480" args="" -->VF_None</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggacdb884b8b87f5f32b2990a019dbd6f89a3612089a43a2cbaeb4102ad75e59a56b"></a><!-- doxytag: member="VF_Transformed" ref="ggacdb884b8b87f5f32b2990a019dbd6f89a3612089a43a2cbaeb4102ad75e59a56b" args="" -->VF_Transformed</em>&nbsp;</td><td>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="ggacdb884b8b87f5f32b2990a019dbd6f89a88e3e1a9078f1be38c21791b13d8dabd"></a><!-- doxytag: member="VF_Buffer" ref="ggacdb884b8b87f5f32b2990a019dbd6f89a88e3e1a9078f1be38c21791b13d8dabd" args="" -->VF_Buffer</em>&nbsp;</td><td>
+<tr><td valign="top"><em><a class="anchor" id="gga0bdd161a02834f059ef7c545a757e83cacf4de196a147288c036272a1b1a49aa8"></a><!-- doxytag: member="VSVar_System" ref="gga0bdd161a02834f059ef7c545a757e83cacf4de196a147288c036272a1b1a49aa8" args="" -->VSVar_System</em>&nbsp;</td><td>
 </td></tr>
 </table>
 </dd>
@@ -955,7 +1024,7 @@ Enumerations</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

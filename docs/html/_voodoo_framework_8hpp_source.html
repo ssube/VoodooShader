@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Framework/Core/VoodooFramework.hpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -153,48 +153,56 @@
 <a name="l00083"></a><a class="code" href="group__voodoo__macros__decl.html#ga5e73ef0ad4e5614cea6c0c7514ccafaf">00083</a> <span class="preprocessor">#define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALLTYPE</span>
 <a name="l00084"></a>00084 <span class="preprocessor"></span>
 <a name="l00085"></a><a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f">00085</a> <span class="preprocessor">#define VOODOO_METHOD_(type, name)  virtual DECLSPEC_NOTHROW type VOODOO_METHODTYPE name</span>
-<a name="l00086"></a><a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e">00086</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_METHOD(name)         VOODOO_METHOD_(bool, name)</span>
-<a name="l00087"></a>00087 <span class="preprocessor"></span>
-<a name="l00088"></a><a class="code" href="group__voodoo__macros__decl.html#gadcd19a6db969ade073c33d0ef63125bd">00088</a> <span class="preprocessor">#define VOODOO_INTERFACE_(iname, uuid)       DEFINE_IID(iname) = VOODOO_STRIP##uuid; \</span>
-<a name="l00089"></a>00089 <span class="preprocessor">    class DECLSPEC_NOVTABLE iname</span>
-<a name="l00090"></a><a class="code" href="group__voodoo__macros__decl.html#ga4da6a669c83c1bfc5b3be471ea6a83b9">00090</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_INTERFACE(iname, ibase, uuid) DEFINE_IID(iname) = VOODOO_STRIP##uuid; \</span>
-<a name="l00091"></a>00091 <span class="preprocessor">    class DECLSPEC_NOVTABLE iname : public ibase</span>
-<a name="l00092"></a><a class="code" href="group__voodoo__macros__decl.html#ga58d5926d4e28ae4cd7db81a5e7fbe2c7">00092</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CLASS(cname, ibase, uuid)     DEFINE_CLSID(cname) = VOODOO_STRIP##uuid; \</span>
-<a name="l00093"></a>00093 <span class="preprocessor">    class cname : public ibase</span>
-<a name="l00094"></a>00094 <span class="preprocessor"></span>
-<a name="l00095"></a>00095 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_debug_8hpp.html">VoodooDebug.hpp</a>&quot;</span>
-<a name="l00096"></a>00096 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_types_8hpp.html">VoodooTypes.hpp</a>&quot;</span>
-<a name="l00097"></a>00097 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_version_8hpp.html">VoodooVersion.hpp</a>&quot;</span>
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099 <span class="preprocessor">#include &quot;<a class="code" href="_converter_8hpp.html">Converter.hpp</a>&quot;</span>
-<a name="l00100"></a>00100 <span class="preprocessor">#include &quot;<a class="code" href="_exception_8hpp.html">Exception.hpp</a>&quot;</span>
-<a name="l00101"></a>00101 <span class="preprocessor">#include &quot;<a class="code" href="_format_8hpp.html">Format.hpp</a>&quot;</span>
-<a name="l00102"></a>00102 <span class="preprocessor">#include &quot;<a class="code" href="_regex_8hpp.html">Regex.hpp</a>&quot;</span>
-<a name="l00103"></a>00103 <span class="preprocessor">#include &quot;<a class="code" href="_string_8hpp.html">String.hpp</a>&quot;</span>
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105 <span class="preprocessor">#include &quot;<a class="code" href="_i_object_8hpp.html">IObject.hpp</a>&quot;</span>
-<a name="l00106"></a>00106 <span class="preprocessor">#include &quot;<a class="code" href="_i_adapter_8hpp.html">IAdapter.hpp</a>&quot;</span>
-<a name="l00107"></a>00107 <span class="preprocessor">#include &quot;<a class="code" href="_i_core_8hpp.html">ICore.hpp</a>&quot;</span>
-<a name="l00108"></a>00108 <span class="preprocessor">#include &quot;<a class="code" href="_i_file_8hpp.html">IFile.hpp</a>&quot;</span>
-<a name="l00109"></a>00109 <span class="preprocessor">#include &quot;<a class="code" href="_i_filesystem_8hpp.html">IFilesystem.hpp</a>&quot;</span>
-<a name="l00110"></a>00110 <span class="preprocessor">#include &quot;<a class="code" href="_i_hook_manager_8hpp.html">IHookManager.hpp</a>&quot;</span>
-<a name="l00111"></a>00111 <span class="preprocessor">#include &quot;<a class="code" href="_i_image_8hpp.html">IImage.hpp</a>&quot;</span>
-<a name="l00112"></a>00112 <span class="preprocessor">#include &quot;<a class="code" href="_i_logger_8hpp.html">ILogger.hpp</a>&quot;</span>
-<a name="l00113"></a>00113 <span class="preprocessor">#include &quot;<a class="code" href="_i_module_8hpp.html">IModule.hpp</a>&quot;</span>
-<a name="l00114"></a>00114 <span class="preprocessor">#include &quot;<a class="code" href="_i_module_manager_8hpp.html">IModuleManager.hpp</a>&quot;</span>
-<a name="l00115"></a>00115 <span class="preprocessor">#include &quot;<a class="code" href="_i_parser_8hpp.html">IParser.hpp</a>&quot;</span>
-<a name="l00116"></a>00116 
-<a name="l00117"></a>00117 <span class="preprocessor">#include &quot;<a class="code" href="_i_resource_8hpp.html">IResource.hpp</a>&quot;</span>
-<a name="l00118"></a>00118 <span class="preprocessor">#include &quot;<a class="code" href="_i_parameter_8hpp.html">IParameter.hpp</a>&quot;</span>
-<a name="l00119"></a>00119 <span class="preprocessor">#include &quot;<a class="code" href="_i_pass_8hpp.html">IPass.hpp</a>&quot;</span>
-<a name="l00120"></a>00120 <span class="preprocessor">#include &quot;<a class="code" href="_i_shader_8hpp.html">IShader.hpp</a>&quot;</span>
+<a name="l00086"></a><a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e">00086</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_METHOD(name)         VOODOO_METHOD_(VoodooResult, name)</span>
+<a name="l00087"></a><a class="code" href="_voodoo_framework_8hpp.html#aaed5d8391f048dbd447f82ed8a6aabf4">00087</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_METHODDEF_(type, name) type VOODOO_METHODTYPE name</span>
+<a name="l00088"></a><a class="code" href="_voodoo_framework_8hpp.html#a51e5c9b17f3ed89ae11a7f83ba5e3556">00088</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_METHODDEF(name)      VOODOO_METHODDEF_(VoodooResult, name)</span>
+<a name="l00089"></a>00089 <span class="preprocessor"></span>
+<a name="l00090"></a><a class="code" href="group__voodoo__macros__decl.html#gadcd19a6db969ade073c33d0ef63125bd">00090</a> <span class="preprocessor">#define VOODOO_INTERFACE_(iname, uuid)       DEFINE_IID(iname) = VOODOO_STRIP##uuid; \</span>
+<a name="l00091"></a>00091 <span class="preprocessor">    class DECLSPEC_NOVTABLE iname</span>
+<a name="l00092"></a><a class="code" href="group__voodoo__macros__decl.html#ga4da6a669c83c1bfc5b3be471ea6a83b9">00092</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_INTERFACE(iname, ibase, uuid) DEFINE_IID(iname) = VOODOO_STRIP##uuid; \</span>
+<a name="l00093"></a>00093 <span class="preprocessor">    class DECLSPEC_NOVTABLE iname : public ibase</span>
+<a name="l00094"></a><a class="code" href="group__voodoo__macros__decl.html#ga58d5926d4e28ae4cd7db81a5e7fbe2c7">00094</a> <span class="preprocessor"></span><span class="preprocessor">#define VOODOO_CLASS(cname, ibase, uuid)     DEFINE_CLSID(cname) = VOODOO_STRIP##uuid; \</span>
+<a name="l00095"></a>00095 <span class="preprocessor">    class cname : public ibase</span>
+<a name="l00096"></a>00096 <span class="preprocessor"></span>
+<a name="l00097"></a>00097 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_debug_8hpp.html">VoodooDebug.hpp</a>&quot;</span>
+<a name="l00098"></a>00098 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_types_8hpp.html">VoodooTypes.hpp</a>&quot;</span>
+<a name="l00099"></a>00099 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_version_8hpp.html">VoodooVersion.hpp</a>&quot;</span>
+<a name="l00100"></a>00100 
+<a name="l00101"></a>00101 <span class="preprocessor">#include &quot;<a class="code" href="_converter_8hpp.html">Converter.hpp</a>&quot;</span>
+<a name="l00102"></a>00102 <span class="preprocessor">#include &quot;<a class="code" href="_exception_8hpp.html">Exception.hpp</a>&quot;</span>
+<a name="l00103"></a>00103 <span class="preprocessor">#include &quot;<a class="code" href="_string_format_8hpp.html">StringFormat.hpp</a>&quot;</span>
+<a name="l00104"></a>00104 <span class="preprocessor">#include &quot;<a class="code" href="_regex_8hpp.html">Regex.hpp</a>&quot;</span>
+<a name="l00105"></a>00105 <span class="preprocessor">#include &quot;<a class="code" href="_string_8hpp.html">String.hpp</a>&quot;</span>
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 <span class="preprocessor">#include &quot;<a class="code" href="_i_object_8hpp.html">IObject.hpp</a>&quot;</span>
+<a name="l00108"></a>00108 <span class="preprocessor">#include &quot;<a class="code" href="_i_binding_8hpp.html">IBinding.hpp</a>&quot;</span>
+<a name="l00109"></a>00109 <span class="preprocessor">#include &quot;<a class="code" href="_i_core_8hpp.html">ICore.hpp</a>&quot;</span>
+<a name="l00110"></a>00110 <span class="preprocessor">#include &quot;<a class="code" href="_i_file_8hpp.html">IFile.hpp</a>&quot;</span>
+<a name="l00111"></a>00111 <span class="preprocessor">#include &quot;<a class="code" href="_i_filesystem_8hpp.html">IFileSystem.hpp</a>&quot;</span>
+<a name="l00112"></a>00112 <span class="preprocessor">#include &quot;<a class="code" href="_i_hook_manager_8hpp.html">IHookManager.hpp</a>&quot;</span>
+<a name="l00113"></a>00113 <span class="preprocessor">#include &quot;<a class="code" href="_i_logger_8hpp.html">ILogger.hpp</a>&quot;</span>
+<a name="l00114"></a>00114 <span class="preprocessor">#include &quot;<a class="code" href="_i_module_8hpp.html">IModule.hpp</a>&quot;</span>
+<a name="l00115"></a>00115 <span class="preprocessor">#include &quot;<a class="code" href="_i_module_manager_8hpp.html">IModuleManager.hpp</a>&quot;</span>
+<a name="l00116"></a>00116 <span class="preprocessor">#include &quot;<a class="code" href="_i_parser_8hpp.html">IParser.hpp</a>&quot;</span>
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118 <span class="preprocessor">#include &quot;<a class="code" href="_i_resource_8hpp.html">IResource.hpp</a>&quot;</span>
+<a name="l00119"></a>00119 <span class="preprocessor">#include &quot;<a class="code" href="_i_effect_8hpp.html">IEffect.hpp</a>&quot;</span>
+<a name="l00120"></a>00120 <span class="preprocessor">#include &quot;<a class="code" href="_i_pass_8hpp.html">IPass.hpp</a>&quot;</span>
 <a name="l00121"></a>00121 <span class="preprocessor">#include &quot;<a class="code" href="_i_technique_8hpp.html">ITechnique.hpp</a>&quot;</span>
-<a name="l00122"></a>00122 <span class="preprocessor">#include &quot;<a class="code" href="_i_texture_8hpp.html">ITexture.hpp</a>&quot;</span>
+<a name="l00122"></a>00122 <span class="preprocessor">#include &quot;<a class="code" href="_i_parameter_8hpp.html">IParameter.hpp</a>&quot;</span>
+<a name="l00123"></a>00123 <span class="preprocessor">#include &quot;<a class="code" href="_i_texture_8hpp.html">ITexture.hpp</a>&quot;</span>
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125 <span class="preprocessor">#if defined(VOODOO_EXPORT) || defined(VOODOO_STATIC_IMPORT)</span>
+<a name="l00126"></a>00126 <span class="preprocessor"></span><span class="keyword">namespace </span>VoodooShader
+<a name="l00127"></a>00127 {
+<a name="l00134"></a>00134     _Check_return_ ICore * <a class="code" href="group__voodoo__macros__decl.html#ga0a3e5af0f45bff54944fe1b49baaba37" title="Declares the standard Voodoo Shader function calling convention.">VOODOO_CALLTYPE</a> <a class="code" href="namespace_voodoo_shader.html#a7dd9c2e3f32f0bd4c853d4d20567dfac">CreateCore</a>(uint32_t <a class="code" href="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a1272967ffd9fe464f6b9e817b45a1e28">version</a>);
+<a name="l00135"></a>00135 }
+<a name="l00136"></a>00136 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

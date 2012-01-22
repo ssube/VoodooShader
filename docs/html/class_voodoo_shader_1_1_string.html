@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: VoodooShader::String Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -147,8 +147,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits the string into tokens based on the delimeters given.  <a href="#a259522c26971d470b46b6d0460e6135f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#af9af06ecc5a9918b1372afd094c0d039">ToUuid</a> (<a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> *pUuid) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to a Uuid.  <a href="#af9af06ecc5a9918b1372afd094c0d039"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a128f49140f98be5b27b45fa8845ce2c4">ToCharStr</a> (int32_t size, _Inout_opt_count_(size) char *const pBuffer) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to a character array.  <a href="#a128f49140f98be5b27b45fa8845ce2c4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#adcb897e35607dea309f78d22875a8069">ToChars</a> (int32_t size, _Inout_opt_count_(size) char *pBuffer) const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to convert this <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> to a character array.  <a href="#adcb897e35607dea309f78d22875a8069"></a><br/></td></tr>
 <tr><td colspan="2"><div class="groupHeader">String Partial Copy</div></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a405623c7147f5bce84f0a1c19c5817d3">Left</a> (uint32_t count) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_string.html#a332b0443c09f2da134bf574bb75de17a">Right</a> (uint32_t count) const </td></tr>
@@ -244,7 +244,7 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><p>Voodoo internal string class, providing constant and compiler-safe string passing between various modules. </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>If built with Unicode, wchar_t must be a wide character meeting the size and behavior of Visual Studio's wchar_t. Otherwise, it must be a character meeting the size and behavior of the standard 8-bit ASCII char. When it becomes possible, proper C++11 UTF character types will be used. </dd></dl>
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00039">39</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00040">40</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a799f5322d9efc12a1ee8515305cc2944"></a><!-- doxytag: member="VoodooShader::String::String" ref="a799f5322d9efc12a1ee8515305cc2944" args="()" -->
 <div class="memitem">
@@ -1268,7 +1268,7 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
 <p>Definition at line <a class="el" href="_string_8cpp_source.html#l00756">756</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
@@ -1369,7 +1369,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00408">408</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00420">420</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1388,7 +1388,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00412">412</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00424">424</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1407,7 +1407,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00377">377</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00389">389</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1426,7 +1426,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00383">383</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00395">395</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1445,7 +1445,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00389">389</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00401">401</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1464,7 +1464,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00362">362</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00374">374</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1483,7 +1483,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00367">367</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00379">379</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1502,7 +1502,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00372">372</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00384">384</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1559,7 +1559,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00420">420</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00432">432</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1578,7 +1578,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00424">424</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00436">436</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1597,7 +1597,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00347">347</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00359">359</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1616,7 +1616,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00352">352</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00364">364</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1635,7 +1635,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00357">357</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00369">369</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1654,7 +1654,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00400">400</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00412">412</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1673,7 +1673,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00404">404</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00416">416</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1730,7 +1730,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00428">428</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00440">440</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1749,7 +1749,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00432">432</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00444">444</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -1775,7 +1775,7 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
 <p>Definition at line <a class="el" href="_string_8cpp_source.html#l00763">763</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
@@ -2254,7 +2254,7 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>Error checking on pos. </dd></dl>
 
 <p>Definition at line <a class="el" href="_string_8cpp_source.html#l00770">770</a> of file <a class="el" href="_string_8cpp_source.html">String.cpp</a>.</p>
 
@@ -2474,12 +2474,12 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a128f49140f98be5b27b45fa8845ce2c4"></a><!-- doxytag: member="VoodooShader::String::ToCharStr" ref="a128f49140f98be5b27b45fa8845ce2c4" args="(int32_t size, _Inout_opt_count_(size) char *const pBuffer) const " -->
+<a class="anchor" id="adcb897e35607dea309f78d22875a8069"></a><!-- doxytag: member="VoodooShader::String::ToChars" ref="adcb897e35607dea309f78d22875a8069" args="(int32_t size, _Inout_opt_count_(size) char *pBuffer) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int32_t <a class="el" href="class_voodoo_shader_1_1_string.html#a128f49140f98be5b27b45fa8845ce2c4">VoodooShader::String::ToCharStr</a> </td>
+          <td class="memname">int32_t <a class="el" href="class_voodoo_shader_1_1_string.html#adcb897e35607dea309f78d22875a8069">VoodooShader::String::ToChars</a> </td>
           <td>(</td>
           <td class="paramtype">int32_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -2487,7 +2487,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_Inout_opt_count_(size) char *const&#160;</td>
+          <td class="paramtype">_Inout_opt_count_(size) char *&#160;</td>
           <td class="paramname"><em>pBuffer</em>&#160;</td>
         </tr>
         <tr>
@@ -2647,7 +2647,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00454">454</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00466">466</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -2664,7 +2664,7 @@ Private Attributes</h2></td></tr>
 
 <p>Character positions indicating beyond the end of the string or not found. </p>
 
-<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00442">442</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_string_8hpp_source.html#l00454">454</a> of file <a class="el" href="_string_8hpp_source.html">String.hpp</a>.</p>
 
 </div>
 </div>
@@ -2676,7 +2676,7 @@ Private Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

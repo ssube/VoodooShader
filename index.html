@@ -6,7 +6,7 @@
     <meta name="author" content="Sean Sube" />
     <meta name="description" content="Voodoo Shader is a comprehensive graphics framework for powering shaders in multiple programs, during development or after release. Voodoo uses plugins and a shared core to support many games and other applications and is compatible with Direct3D and OpenGL." />
     <meta name="keywords" content="shader, shaders, voodoo, gem, frost, sigil, shard, storm, direct3d, opengl, post processing, graphics, morrowind, oblivion, skyrim, neverwinter nights, mge, obge, nwshader, enbseries" />
-    <title>Voodoo Shader Framework - Universal Graphics Extender</title>
+    <title>Voodoo Shader - Unified Graphics Extender</title>
     <link rel="stylesheet" href="css/voodoo.css" type="text/css" media="all" />
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -20,9 +20,9 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/jquery.lightbox-0.5.js"></script>
-    <link rel="stylesheet" href="css/jquery.lightbox-0.5.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
   </head>
   <body>
   <div id="container"> 
@@ -55,41 +55,43 @@
 
         <div id="imagelist">
         <ul>
-        <li><a href="screenshots/ui.jpg" rel="lightbox" title="Voodoo Shader UI"><img src="screenshots/thumb/ui.jpg" alt="Voodoo UI" /></a></li>
-        <li><a href="screenshots/skyrim-1.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-1.jpg" alt="Skyrim" /></a></li>
-        <li><a href="screenshots/skyrim-2.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-2.jpg" alt="Skyrim" /></a></li>
-        <li><a href="screenshots/skyrim-3.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-3.jpg" alt="Skyrim" /></a></li>
-        <li><a href="screenshots/morrowind-1.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-1.jpg" alt="Morrowind" /></a></li>
-        <li><a href="screenshots/morrowind-2.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-2.jpg" alt="Morrowind" /></a></li>
-        <li><a href="screenshots/morrowind-3.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-3.jpg" alt="Morrowind" /></a></li>
-        <li><a href="screenshots/nwn2-1.jpg" rel="lightbox" title="Neverwinter Nights 2 - Test Pattern"><img src="screenshots/thumb/nwn2-1.jpg" alt="Neverwinter Nights 2" /></a></li>
-        <li><a href="screenshots/nwn2-2.jpg" rel="lightbox" title="Neverwinter Nights 2 - Test Pattern"><img src="screenshots/thumb/nwn2-2.jpg" alt="Neverwinter Nights 2" /></a></li>
-        <li><a href="screenshots/oblivion-1.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-1.jpg" alt="Oblivion" /></a></li>
-        <li><a href="screenshots/oblivion-2.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-2.jpg" alt="Oblivion" /></a></li>
-        <li><a href="screenshots/oblivion-3.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-3.jpg" alt="Oblivion" /></a></li>
-        <li><a href="screenshots/fallout3-1.jpg" rel="lightbox" title="Fallout 3 - Test Pattern"><img src="screenshots/thumb/fallout3-1.jpg" alt="Fallout 3" /></a></li>
-        <li><a href="screenshots/gothic3-1.jpg" rel="lightbox" title="Gothic 3 - Test Pattern"><img src="screenshots/thumb/gothic3-1.jpg" alt="Gothic 3" /></a></li>
-        <li><a href="screenshots/gothic3-2.jpg" rel="lightbox" title="Gothic 3 - Test Pattern"><img src="screenshots/thumb/gothic3-2.jpg" alt="Gothic 3" /></a></li>
+        <li><a class="box" href="screenshots/ui.jpg" rel="lightbox" title="Voodoo Shader UI"><img src="screenshots/thumb/ui.jpg" alt="Voodoo UI" /></a></li>
+        <li><a class="box" href="screenshots/skyrim-1.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-1.jpg" alt="Skyrim" /></a></li>
+        <li><a class="box" href="screenshots/skyrim-2.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-2.jpg" alt="Skyrim" /></a></li>
+        <li><a class="box" href="screenshots/skyrim-3.jpg" rel="lightbox" title="Skyrim - Test Pattern"><img src="screenshots/thumb/skyrim-3.jpg" alt="Skyrim" /></a></li>
+        <li><a class="box" href="screenshots/morrowind-1.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-1.jpg" alt="Morrowind" /></a></li>
+        <li><a class="box" href="screenshots/morrowind-2.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-2.jpg" alt="Morrowind" /></a></li>
+        <li><a class="box" href="screenshots/morrowind-3.jpg" rel="lightbox" title="Morrowind - Test Pattern"><img src="screenshots/thumb/morrowind-3.jpg" alt="Morrowind" /></a></li>
+        <li><a class="box" href="screenshots/nwn2-1.jpg" rel="lightbox" title="Neverwinter Nights 2 - Test Pattern"><img src="screenshots/thumb/nwn2-1.jpg" alt="Neverwinter Nights 2" /></a></li>
+        <li><a class="box" href="screenshots/nwn2-2.jpg" rel="lightbox" title="Neverwinter Nights 2 - Test Pattern"><img src="screenshots/thumb/nwn2-2.jpg" alt="Neverwinter Nights 2" /></a></li>
+        <li><a class="box" href="screenshots/oblivion-1.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-1.jpg" alt="Oblivion" /></a></li>
+        <li><a class="box" href="screenshots/oblivion-2.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-2.jpg" alt="Oblivion" /></a></li>
+        <li><a class="box" href="screenshots/oblivion-3.jpg" rel="lightbox" title="Oblivion - Test Pattern"><img src="screenshots/thumb/oblivion-3.jpg" alt="Oblivion" /></a></li>
+        <li><a class="box" href="screenshots/fallout3-1.jpg" rel="lightbox" title="Fallout 3 - Test Pattern"><img src="screenshots/thumb/fallout3-1.jpg" alt="Fallout 3" /></a></li>
+        <li><a class="box" href="screenshots/gothic3-1.jpg" rel="lightbox" title="Gothic 3 - Test Pattern"><img src="screenshots/thumb/gothic3-1.jpg" alt="Gothic 3" /></a></li>
+        <li><a class="box" href="screenshots/gothic3-2.jpg" rel="lightbox" title="Gothic 3 - Test Pattern"><img src="screenshots/thumb/gothic3-2.jpg" alt="Gothic 3" /></a></li>
         </ul> 
         <script type="text/javascript">
-            $('a[@rel*=lightbox]').lightBox();
+            $('a.box').fancybox({'padding':'4', 'overlayColor': '#000', 'titlePosition':'over' });
         </script>
         </div>
 
-        <p>Right now, Voodoo Shader is in alpha testing. It works but is not complete. A public alpha test is being set up; 
-        the process will be simple: download the UI and demo package, then make sure Voodoo Shader runs properly. If you are 
-        able to help test, please get in touch (info below).</p>
+        <p>Right now, Voodoo Shader is in alpha testing. It works but is not complete. Public alpha testing recently began; 
+        the process is be simple: download the UI then make sure Voodoo Shader runs properly in a game or two. If you are 
+        able to help test, please read the 
+        <a href="https://github.com/peachykeen/VoodooShader/wiki/Voodoo-Test-Instructions">testing instructions</a> or get
+        in touch.</p>
 
         <p>For more information about Voodoo Shader, <a href="https://github.com/peachykeen/VoodooShader/wiki/FAQ">the FAQ page</a>
         has details for a variety of common questions. If you are interested in more specific information, have comments, want to
         help test or develop, please <a href="mailto:peachykeen@voodooshader.com">send an email</a>, 
         <a href="http://mibbit.com/?channel=%23voodoo,%23morrowind&amp;server=irc.chatspike.net">drop by the chat</a>, or
-        <a href="https://github.com/peachykeen/VoodooShader/issues">check the tracker</a> for information (or create a new entry). Even more
-        info is available through navbar at the top of this page, including the <a href="http://wiki.voodooshader.com">wiki</a>, 
+        <a href="https://github.com/peachykeen/VoodooShader/issues">check the tracker</a> for information. Even more info is
+        available through links at the top of this page, including the <a href="http://wiki.voodooshader.com">wiki</a>, 
         <a href="http://blog.voodooshader.com">blog</a> and <a href="https://github.com/peachykeen/VoodooShader">project site</a>.</p>
     </div>
     <div id="footer" align="center">
-        <p>Copyright &copy; 2010-2011 by Sean Sube, All Rights Reserved.</p>
+        <p>Copyright &copy; 2010-2012 by Sean Sube, All Rights Reserved.</p>
     </div>
     </div>
   </body>

@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Framework/Core/Converter.hpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -93,34 +93,22 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="keyword">namespace </span>VoodooShader
 <a name="l00025"></a>00025 {
-<a name="l00031"></a><a class="code" href="class_voodoo_shader_1_1_converter.html">00031</a>     <span class="keyword">class </span><a class="code" href="group__voodoo__macros__decl.html#ga64a3622e4b9bb13e6e7a451bfaa84a48" title="Declares the DLL visibility type for functions.">VOODOO_API</a> <a class="code" href="class_voodoo_shader_1_1_converter.html" title="Conversion helper class for Voodoo and Cg types.">Converter</a>
+<a name="l00031"></a><a class="code" href="class_voodoo_shader_1_1_converter.html">00031</a>     <span class="keyword">class </span><a class="code" href="group__voodoo__macros__decl.html#ga64a3622e4b9bb13e6e7a451bfaa84a48" title="Declares the DLL visibility type for functions.">VOODOO_API</a> <a class="code" href="class_voodoo_shader_1_1_converter.html" title="Conversion helper class for Voodoo.">Converter</a>
 <a name="l00032"></a>00032     {
 <a name="l00033"></a>00033     <span class="keyword">public</span>:
-<a name="l00034"></a>00034 <span class="preprocessor">#ifndef VOODOO_NO_CG</span>
-<a name="l00035"></a>00035 <span class="preprocessor"></span>
-<a name="l00043"></a>00043         <span class="keyword">static</span> CGtype ToCGType(_In_ <a class="code" href="group__voodoo__enums.html#gab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type);
+<a name="l00034"></a>00034         <span class="keyword">static</span> <a class="code" href="group__voodoo__enums.html#gac41ef674639cfb37461c1426a0d7669f">TextureFormat</a> ToTextureFormat(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * format);
+<a name="l00035"></a>00035 
+<a name="l00043"></a>00043         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * ToString(_In_ <a class="code" href="group__voodoo__enums.html#gac41ef674639cfb37461c1426a0d7669f">TextureFormat</a> format);
 <a name="l00044"></a>00044 
-<a name="l00053"></a>00053         <span class="keyword">static</span> <a class="code" href="group__voodoo__enums.html#gab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> ToParameterType(_In_ CGtype type);
-<a name="l00054"></a>00054 <span class="preprocessor">#endif</span>
-<a name="l00055"></a>00055 <span class="preprocessor"></span>
-<a name="l00056"></a>00056         <span class="keyword">static</span> <a class="code" href="group__voodoo__enums.html#ga56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a> ToParameterCategory(_In_ <a class="code" href="group__voodoo__enums.html#gab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type);
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058         <span class="keyword">static</span> <a class="code" href="group__voodoo__enums.html#gac41ef674639cfb37461c1426a0d7669f">TextureFormat</a> ToTextureFormat(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * format);
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060         <span class="keyword">static</span> <span class="keywordtype">int</span> ToComponents(_In_ <a class="code" href="group__voodoo__enums.html#gab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> Type);
-<a name="l00061"></a>00061 
-<a name="l00069"></a>00069         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * ToString(_In_ <a class="code" href="group__voodoo__enums.html#gac41ef674639cfb37461c1426a0d7669f">TextureFormat</a> format);
-<a name="l00070"></a>00070 
-<a name="l00078"></a>00078         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * ToString(_In_ <a class="code" href="group__voodoo__enums.html#gab90c3dbfe5ca792323089af903d1134a" title="Parameter types valid for VoodooShader::IParameter.">ParameterType</a> type);
-<a name="l00079"></a>00079 
-<a name="l00087"></a>00087         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * ToString(_In_ <a class="code" href="group__voodoo__enums.html#ga56d7d146822e8830cf490e2b9292b12d">ParameterCategory</a> category);
-<a name="l00088"></a>00088     };
-<a name="l00089"></a>00089 }
+<a name="l00052"></a>00052         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * ToString(_In_ <a class="code" href="group__voodoo__enums.html#gab90c3dbfe5ca792323089af903d1134a">ParameterType</a> type);
+<a name="l00053"></a>00053         <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * ToString(<a class="code" href="group__voodoo__enums.html#gad118ba426eca4623476da31d851d79a5">ShaderStage</a> stage);
+<a name="l00054"></a>00054     };
+<a name="l00055"></a>00055 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

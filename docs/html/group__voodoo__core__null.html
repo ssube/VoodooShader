@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Null Implementations</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -62,14 +62,11 @@
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html">VoodooShader::VSAdapter</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html">VoodooShader::VSFileSystem</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html">VoodooShader::VSHookManager</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_logger.html">VoodooShader::VSLogger</a></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#gada167b759468c4c18906493bbfa7a452">VoodooShader::CLSID_VSAdapter</a> = {0x9A, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Voodoo Shader null adapter implementation.  <a href="#gada167b759468c4c18906493bbfa7a452"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga3d89f32e4a60fb1a015c99bfc4538203">VoodooShader::CLSID_VSFileSystem</a> = {0x9C, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Voodoo Shader null file system implementation.  <a href="#ga3d89f32e4a60fb1a015c99bfc4538203"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__core__null.html#ga7c948212c3d1566d96cac701ad95f430">VoodooShader::CLSID_VSHookManager</a> = {0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
@@ -78,25 +75,6 @@ Variables</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Voodoo Shader null logger implementation.  <a href="#ga2d7b113233ee4385e0c32010b36433c7"></a><br/></td></tr>
 </table>
 <hr/><h2>Variable Documentation</h2>
-<a class="anchor" id="gada167b759468c4c18906493bbfa7a452"></a><!-- doxytag: member="VoodooShader::CLSID_VSAdapter" ref="gada167b759468c4c18906493bbfa7a452" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">EXTERN_C const Uuid <a class="el" href="group__voodoo__core__null.html#gada167b759468c4c18906493bbfa7a452">VoodooShader::CLSID_VSAdapter</a> = {0x9A, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Voodoo Shader null adapter implementation. </p>
-<p>Requires no graphics API and does not call core methods, simply returning true or nullptr for methods. Does not perform logging or parameter validation.</p>
-<dl class="user"><dt><b>CLSID:</b></dt><dd>e6f3129a-05af-11e1-9e05-005056c00008 </dd></dl>
-
-<p>Definition at line <a class="el" href="_v_s_adapter_8hpp_source.html#l00038">38</a> of file <a class="el" href="_v_s_adapter_8hpp_source.html">VSAdapter.hpp</a>.</p>
-
-</div>
-</div>
 <a class="anchor" id="ga3d89f32e4a60fb1a015c99bfc4538203"></a><!-- doxytag: member="VoodooShader::CLSID_VSFileSystem" ref="ga3d89f32e4a60fb1a015c99bfc4538203" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -109,7 +87,7 @@ Variables</h2></td></tr>
 <div class="memdoc">
 
 <p>Voodoo Shader null file system implementation. </p>
-<p>Returns true/nullptr as needed. <em>Does not have associated <a class="el" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> or <a class="el" href="class_voodoo_shader_1_1_i_image.html" title="Provides abstraction to an image for specialized access.">IImage</a> implementations, as they will never be returned.</em></p>
+<p>Returns true/nullptr as needed. <em>Does not have associated <a class="el" href="class_voodoo_shader_1_1_i_file.html" title="Provides abstraction to a single file, for basic access.">IFile</a> or IImage implementations, as they will never be returned.</em></p>
 <dl class="user"><dt><b>CLSID:</b></dt><dd>e6f3129c-05af-11e1-9e05-005056c00008 </dd></dl>
 
 <p>Definition at line <a class="el" href="_v_s_filesystem_8hpp_source.html#l00039">39</a> of file <a class="el" href="_v_s_filesystem_8hpp_source.html">VSFilesystem.hpp</a>.</p>
@@ -131,7 +109,7 @@ Variables</h2></td></tr>
 <p>Returns true or nullptr for methods as necessary, does not install any hooks. Does not perform logging or parameter validation.</p>
 <dl class="user"><dt><b>CLSID:</b></dt><dd>e6f3129d-05af-11e1-9e05-005056c00008 </dd></dl>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00039">39</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00041">41</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -150,7 +128,7 @@ Variables</h2></td></tr>
 <p>Does not format or log messages or access any files.</p>
 <dl class="user"><dt><b>CLSID:</b></dt><dd>e6f3129e-05af-11e1-9e05-005056c00008 </dd></dl>
 
-<p>Definition at line <a class="el" href="_v_s_logger_8hpp_source.html#l00037">37</a> of file <a class="el" href="_v_s_logger_8hpp_source.html">VSLogger.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_logger_8hpp_source.html#l00039">39</a> of file <a class="el" href="_v_s_logger_8hpp_source.html">VSLogger.hpp</a>.</p>
 
 </div>
 </div>
@@ -158,7 +136,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

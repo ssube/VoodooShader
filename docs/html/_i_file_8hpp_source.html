@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Framework/Core/IFile.hpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -98,24 +98,23 @@
 <a name="l00040"></a>00040     <span class="keyword">public</span>:
 <a name="l00045"></a>00045         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST PURE;
 <a name="l00046"></a>00046         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(uint32_t, Release)() CONST PURE;
-<a name="l00047"></a>00047         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST PURE;
+<a name="l00047"></a>00047         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(QueryInterface)(_In_ CONST <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> refid, _Deref_out_opt_ IObject ** ppOut) PURE;
 <a name="l00048"></a>00048         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(String, ToString)() CONST PURE;
 <a name="l00049"></a>00049         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(ICore *, GetCore)() CONST PURE;
 <a name="l00059"></a>00059         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(String, GetPath)() CONST PURE;
-<a name="l00067"></a>00067         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(IImage *, OpenImage)() CONST PURE;
-<a name="l00074"></a>00074         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(Open)(_In_ <a class="code" href="group__voodoo__enums.html#ga980f04b17b862a238d6c9c7854b862b6" title="File open access modes.">FileOpenMode</a> mode) PURE;
-<a name="l00080"></a>00080         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(Close)() PURE;
-<a name="l00095"></a>00095         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(Seek)(_In_ <a class="code" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="group__voodoo__enums.html#ga68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset) PURE;
-<a name="l00102"></a>00102         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(int32_t, Tell)(_In_ <a class="code" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream) PURE;
-<a name="l00114"></a>00114         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(int32_t, Read)(_In_ <span class="keyword">const</span> int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
-<a name="l00125"></a>00125         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) <span class="keywordtype">void</span> * const pBuffer) PURE;
-<a name="l00129"></a>00129     };
-<a name="l00133"></a>00133 }
+<a name="l00066"></a>00066         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(Open)(_In_ <a class="code" href="group__voodoo__enums.html#ga980f04b17b862a238d6c9c7854b862b6" title="File open access modes.">FileOpenMode</a> mode) PURE;
+<a name="l00072"></a>00072         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(Close)() PURE;
+<a name="l00087"></a>00087         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(Seek)(_In_ <a class="code" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream, _In_ <a class="code" href="group__voodoo__enums.html#ga68a5aa1e8d5ddc2a43a629cd036264db" title="File seek offset modes.">SeekMode</a> mode, _In_ int32_t offset) PURE;
+<a name="l00094"></a>00094         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(int32_t, Tell)(_In_ <a class="code" href="group__voodoo__enums.html#ga30d2b0a9546b7da2d60804ab53d65465" title="File stream type for seek and get operations.">StreamType</a> stream) PURE;
+<a name="l00106"></a>00106         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(int32_t, Read)(_In_ <span class="keyword">const</span> int32_t size, _In_opt_count_(size) void * pBuffer) PURE;
+<a name="l00117"></a>00117         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) <span class="keywordtype">void</span> * pBuffer) PURE;
+<a name="l00121"></a>00121     };
+<a name="l00125"></a>00125 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

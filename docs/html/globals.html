@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: File Members</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -73,8 +73,10 @@
       <li><a href="#index_f"><span>f</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
+      <li><a href="#index_i"><span>i</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
       <li><a href="#index_m"><span>m</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
@@ -101,6 +103,12 @@
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>DECLARE_AND_ZERO
+: <a class="el" href="group__voodoo__variant__decl.html#gadaa5a0255bfa25aad41f951ed0cb0d28">VoodooTypes.hpp</a>
+</li>
+<li>DECLARE_VARIANT
+: <a class="el" href="group__voodoo__variant__decl.html#ga60cef80e2b1fd5e23579a0bf444cbd9c">VoodooTypes.hpp</a>
+</li>
 <li>DeclareDebugCache
 : <a class="el" href="group__voodoo__macros__debug__mem.html#ga420584c8ed7d1eb2c93c28380a1bd2ce">VoodooDebug.hpp</a>
 </li>
@@ -118,6 +126,9 @@
 </li>
 <li>DllMain()
 : <a class="el" href="_exports_8cpp.html#a90aed131dbe798fabc1e727228142b2e">Exports.cpp</a>
+</li>
+<li>DONOTHING
+: <a class="el" href="_converter_8cpp.html#ab8b175955509e2d922e76e86496676c2">Converter.cpp</a>
 </li>
 </ul>
 
@@ -168,6 +179,25 @@
 </ul>
 
 
+<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>INITIALIZE_VARIANT1
+: <a class="el" href="group__voodoo__variant__decl.html#ga2e4d12b9ad4fad8a07add6fa5867bf6f">VoodooTypes.hpp</a>
+</li>
+<li>INITIALIZE_VARIANT2
+: <a class="el" href="group__voodoo__variant__decl.html#gae796d6b441e948841d95f0e34aee26be">VoodooTypes.hpp</a>
+</li>
+<li>INITIALIZE_VARIANT3
+: <a class="el" href="group__voodoo__variant__decl.html#ga1f41566112b74e454b903672f7d9f7d7">VoodooTypes.hpp</a>
+</li>
+<li>INITIALIZE_VARIANT4
+: <a class="el" href="group__voodoo__variant__decl.html#ga1004475c963827dc56a42187bc56a501">VoodooTypes.hpp</a>
+</li>
+<li>INITIALIZE_VARIANTC
+: <a class="el" href="group__voodoo__variant__decl.html#ga52e42b1de9de57769e5d2b1165bc1b02">VoodooTypes.hpp</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
 <li>LoadSystemLibrary()
 : <a class="el" href="_support_8inl.html#a9388a5b6af06d1e2bc9af80a10ad5f0e">Support.inl</a>
@@ -178,6 +208,13 @@
 <h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
 <li>MatchHook()
 : <a class="el" href="_support_8inl.html#aa3247342a9d19e02b7267e549405d3f1">Support.inl</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
+<li>PREFIX
+: <a class="el" href="_converter_8cpp.html#add51b53e8b628f95078327028dccb20c">Converter.cpp</a>
 </li>
 </ul>
 
@@ -213,6 +250,9 @@
 <li>vdelete
 : <a class="el" href="group__voodoo__macros__debug__mem.html#ga8306d3ac588f21d9e459d1f9ba870eec">VoodooDebug.hpp</a>
 </li>
+<li>VFAILURE
+: <a class="el" href="group__voodoo__types.html#gab1e93dcb8d30ad81af99bb121f3e52e2">VoodooTypes.hpp</a>
+</li>
 <li>vnew
 : <a class="el" href="group__voodoo__macros__debug__mem.html#ga1ac8e0b2eb357569585c0aa53faeea6e">VoodooDebug.hpp</a>
 </li>
@@ -221,33 +261,6 @@
 </li>
 <li>VOODOO_CALLTYPE
 : <a class="el" href="group__voodoo__macros__decl.html#ga0a3e5af0f45bff54944fe1b49baaba37">VoodooFramework.hpp</a>
-</li>
-<li>VOODOO_CG_AUTHOR
-: <a class="el" href="_voodoo_version_8hpp.html#a85ec9295a1c4c9c04048066779e33e91">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_CG_LIBID
-: <a class="el" href="_voodoo_version_8hpp.html#a0b55580e6327ed4e131454e8c0e668d6">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_CG_NAME
-: <a class="el" href="_voodoo_version_8hpp.html#a18c51df73ac22d0b5b08dc0b2d4ae18b">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_CG_PRETTYNAME
-: <a class="el" href="_voodoo_version_8hpp.html#ab64124bbd849e454fb7301524ee7c2bf">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_CG_VERSION_BUILD
-: <a class="el" href="_voodoo_version_8hpp.html#ad805680173f3cbd4a75d2468a0161938">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_CG_VERSION_ID
-: <a class="el" href="_voodoo_version_8hpp.html#a4aabc38aa4052a651698bcf47a139b2b">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_CG_VERSION_MAJOR
-: <a class="el" href="_voodoo_version_8hpp.html#a70561a91b7f4495ec7217895d395a274">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_CG_VERSION_MINOR
-: <a class="el" href="_voodoo_version_8hpp.html#a24331ba6ffa35ae0ba3a1391cf4b2195">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_CG_VERSION_PATCH
-: <a class="el" href="_voodoo_version_8hpp.html#a1bc3b7710a34291734ccde6646c1d46e">VoodooVersion.hpp</a>
 </li>
 <li>VOODOO_CHECK_IMPL
 : <a class="el" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VoodooDebug.hpp</a>
@@ -295,18 +308,13 @@
 : <a class="el" href="group__voodoo__macros__version.html#ga9894d381878ba8fb6fca36577842a16f">VoodooVersion.hpp</a>
 </li>
 <li>VOODOO_DEBUG_TYPE
-: <a class="el" href="_v_s_hook_manager_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSHookManager.cpp</a>
+: <a class="el" href="_v_s_core_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSCore.cpp</a>
+, <a class="el" href="_v_s_filesystem_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSFilesystem.cpp</a>
+, <a class="el" href="_v_s_hook_manager_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSHookManager.cpp</a>
 , <a class="el" href="_v_s_logger_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSLogger.cpp</a>
 , <a class="el" href="_v_s_module_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSModule.cpp</a>
 , <a class="el" href="_v_s_module_manager_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSModuleManager.cpp</a>
-, <a class="el" href="_v_s_parameter_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSParameter.cpp</a>
 , <a class="el" href="_v_s_parser_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSParser.cpp</a>
-, <a class="el" href="_v_s_pass_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSPass.cpp</a>
-, <a class="el" href="_v_s_shader_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSShader.cpp</a>
-, <a class="el" href="_v_s_technique_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSTechnique.cpp</a>
-, <a class="el" href="_v_s_adapter_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSAdapter.cpp</a>
-, <a class="el" href="_v_s_core_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSCore.cpp</a>
-, <a class="el" href="_v_s_filesystem_8cpp.html#ad296213f98e2c7f4bfa0d1a84be8ad50">VSFilesystem.cpp</a>
 </li>
 <li>VOODOO_FILESYSTEM_AUTHOR
 : <a class="el" href="group__voodoo__module__wfilesystem.html#ga2f84bf06835ede40be262d0cf2fb5296">Filesystem_Version.hpp</a>
@@ -397,8 +405,8 @@
 </li>
 <li>VOODOO_IMPORT
 : <a class="el" href="_file_system_8hpp.html#a31aa5b186d9930592013d83372996923">FileSystem.hpp</a>
-, <a class="el" href="_logger_8hpp.html#a31aa5b186d9930592013d83372996923">Logger.hpp</a>
 , <a class="el" href="_hook_manager_8hpp.html#a31aa5b186d9930592013d83372996923">HookManager.hpp</a>
+, <a class="el" href="_logger_8hpp.html#a31aa5b186d9930592013d83372996923">Logger.hpp</a>
 </li>
 <li>VOODOO_INTERFACE
 : <a class="el" href="group__voodoo__macros__decl.html#ga4da6a669c83c1bfc5b3be471ea6a83b9">VoodooFramework.hpp</a>
@@ -439,13 +447,14 @@
 <li>VOODOO_METHOD_
 : <a class="el" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f">VoodooFramework.hpp</a>
 </li>
+<li>VOODOO_METHODDEF
+: <a class="el" href="_voodoo_framework_8hpp.html#a51e5c9b17f3ed89ae11a7f83ba5e3556">VoodooFramework.hpp</a>
+</li>
+<li>VOODOO_METHODDEF_
+: <a class="el" href="_voodoo_framework_8hpp.html#aaed5d8391f048dbd447f82ed8a6aabf4">VoodooFramework.hpp</a>
+</li>
 <li>VOODOO_METHODTYPE
 : <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VoodooFramework.hpp</a>
-</li>
-<li>VOODOO_NO_CG
-: <a class="el" href="_logger_8hpp.html#a13772837aa4287effbfcabf4163c16e0">Logger.hpp</a>
-, <a class="el" href="_file_system_8hpp.html#a13772837aa4287effbfcabf4163c16e0">FileSystem.hpp</a>
-, <a class="el" href="_hook_manager_8hpp.html#a13772837aa4287effbfcabf4163c16e0">HookManager.hpp</a>
 </li>
 <li>VOODOO_NO_PUGIXML
 : <a class="el" href="_hook_manager_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9">HookManager.hpp</a>
@@ -490,35 +499,14 @@
 <li>VOODOO_STRIP
 : <a class="el" href="group__voodoo__macros__decl.html#ga25c2b3c9cf67b76c8b3f7cb3137f652f">VoodooFramework.hpp</a>
 </li>
+<li>VOODOO_TEXTURE_DEPTH
+: <a class="el" href="group__voodoo__types__textures.html#gac5c02b69cbf93091b4778b65c6dbfbc6">VoodooTypes.hpp</a>
+</li>
+<li>VOODOO_TEXTURE_INVALID
+: <a class="el" href="group__voodoo__types__textures.html#ga592a93c06fc9ad4c23c4f1b5afc4ef63">VoodooTypes.hpp</a>
+</li>
 <li>VOODOO_TOSTRING
 : <a class="el" href="group__voodoo__macros.html#ga6b0d38a2117b6360385950d50d766308">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_AUTHOR
-: <a class="el" href="_voodoo_version_8hpp.html#a61105715e99dea904258ed0b11961793">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_LIBID
-: <a class="el" href="_voodoo_version_8hpp.html#a1d0e3b227cbe965960679856a5f36796">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_NAME
-: <a class="el" href="_voodoo_version_8hpp.html#a7e82fbd3ed1a079167317e3004c2f965">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_PRETTYNAME
-: <a class="el" href="_voodoo_version_8hpp.html#ac2a871c721c36bee7ae5415439ce5f02">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_VERSION_BUILD
-: <a class="el" href="_voodoo_version_8hpp.html#a85ee327c2406d1b87a7c9f5d9f309b1f">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_VERSION_ID
-: <a class="el" href="_voodoo_version_8hpp.html#a05f8d69fccff2296938d0a8f7b8da300">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_VERSION_MAJOR
-: <a class="el" href="_voodoo_version_8hpp.html#aebe91fc02d8db1e9fb8b3e90231c5192">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_VERSION_MINOR
-: <a class="el" href="_voodoo_version_8hpp.html#a64467844a30043d5acc356b3e2cf4e44">VoodooVersion.hpp</a>
-</li>
-<li>VOODOO_VC_VERSION_PATCH
-: <a class="el" href="_voodoo_version_8hpp.html#ae82cfe6941e30c243fa9e3d8ccca8b8b">VoodooVersion.hpp</a>
 </li>
 <li>VOODOO_VERSION_CHAIN
 : <a class="el" href="group__voodoo__macros__version.html#ga17abb145c34d260217bccd48e4bcc663">VoodooVersion.hpp</a>
@@ -526,8 +514,59 @@
 <li>VOODOO_VERSION_STRUCT
 : <a class="el" href="group__voodoo__macros__version.html#ga07ae3aef73f79429c09dbbd66ad9ad43">VoodooVersion.hpp</a>
 </li>
+<li>VSF_FAIL
+: <a class="el" href="group__voodoo__types__codes.html#ga8cb3f444eafbf19a649221d1f0525e88">VoodooTypes.hpp</a>
+</li>
+<li>VSF_OK
+: <a class="el" href="group__voodoo__types__codes.html#ga1e2edce1678d8e28e0cc7d49c7d42ad3">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_APIERROR
+: <a class="el" href="group__voodoo__types__codes.html#ga03921b236d01b252605aa3f6e35e7a36">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_COMPILEFAILED
+: <a class="el" href="group__voodoo__types__codes.html#ga4bc48af27323fb79a84a14526aa69966">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_CONFLICTING
+: <a class="el" href="group__voodoo__types__codes.html#gac80d7ce46627c07f69a31faeff127b02">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_FILENOTFOUND
+: <a class="el" href="group__voodoo__types__codes.html#ga70085a10cffbe35316521778e4849b7c">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_INVALIDCALL
+: <a class="el" href="group__voodoo__types__codes.html#gab6224ca92bf53981eeb0ec0c5e798089">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_INVALIDPARAMS
+: <a class="el" href="group__voodoo__types__codes.html#ga7b155c8e47b751d99be277c07d4cf230">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_INVALIDPROFILE
+: <a class="el" href="group__voodoo__types__codes.html#gaf239d6946e14c34e8549b4bcb5fc2ceb">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_INVALIDPROPERTY
+: <a class="el" href="group__voodoo__types__codes.html#ga8cc1e5a39e25bb882ce18a3517fc614e">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_INVALIDUUID
+: <a class="el" href="group__voodoo__types__codes.html#gae15e346d95168dadb4d78ffd605bc228">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_INVALIDXML
+: <a class="el" href="group__voodoo__types__codes.html#gac9f5906cc88d521728d0d972862fb360">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_NOTIMPLEMENTED
+: <a class="el" href="group__voodoo__types__codes.html#gae2b75d2cc9f83a8798ccd96880478628">VoodooTypes.hpp</a>
+</li>
+<li>VSFERR_PROPERTYNOTFOUND
+: <a class="el" href="group__voodoo__types__codes.html#gabf4a78a34b2e6b57f3bdcf3e29f858aa">VoodooTypes.hpp</a>
+</li>
+<li>VSFOK_PROPERTYCHANGED
+: <a class="el" href="group__voodoo__types__codes.html#ga27d9487a1d0bcee6a8f212b79a694f44">VoodooTypes.hpp</a>
+</li>
+<li>VSFOK_REDUNDANT
+: <a class="el" href="group__voodoo__types__codes.html#gac0ca251d31c5f6d9264b5f7a760e0fcd">VoodooTypes.hpp</a>
+</li>
 <li>VSTR
 : <a class="el" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VoodooVersion.hpp</a>
+</li>
+<li>VSUCCESS
+: <a class="el" href="group__voodoo__types.html#ga377e034dd7d3adf47442fe9368e8a45d">VoodooTypes.hpp</a>
 </li>
 </ul>
 
@@ -542,7 +581,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

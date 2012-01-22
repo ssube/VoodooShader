@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: VoodooShader::IModuleManager Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -103,30 +103,34 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#abc8d3f0b228d7f3fe2e68b4a2498171f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a323bec354aa6f4e46b4d63ab33e9560c">Release</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a323bec354aa6f4e46b4d63ab33e9560c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a767dbdd7fa680799ecab32c96390edb1">QueryInterface</a> (<a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a767dbdd7fa680799ecab32c96390edb1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ad6f878deaf3a4395547b94d289c35b41">QueryInterface</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> refid, <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> **ppOut)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#ad6f878deaf3a4395547b94d289c35b41"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ab0066beca60ff32f0fced281d882f284">ToString</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#ab0066beca60ff32f0fced281d882f284"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a7cd1e70b1b3adfc9f894328f6c73e726">GetCore</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a7cd1e70b1b3adfc9f894328f6c73e726"></a><br/></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Module Methods</div></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a4df9e4bb3f7c87f4438138127fb13a75">GetModule</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a loaded module.  <a href="#a4df9e4bb3f7c87f4438138127fb13a75"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#aa5bc9fe1d8626a0ac9e114d61509ddfe">GetModule</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> libid) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a loaded module.  <a href="#aa5bc9fe1d8626a0ac9e114d61509ddfe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#af35da07f712d2048680188cbbb10e90e">IsLoaded</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests if the module with the given name is currently loaded.  <a href="#af35da07f712d2048680188cbbb10e90e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a6dc69f001061eb67ee85d079dd2a613d">IsLoaded</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;libid) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests if the module with the given Uuid is currently loaded.  <a href="#a6dc69f001061eb67ee85d079dd2a613d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ae94f81e7e6e567bb0dd1edbb752af715">LoadPath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filter)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a set of modules from a given path.  <a href="#ae94f81e7e6e567bb0dd1edbb752af715"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a9df7418e31bf5edaa1f2a3c8c5ad0e0f">LoadFile</a> (const <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *pFile)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a single module, from an already-existing file.  <a href="#a9df7418e31bf5edaa1f2a3c8c5ad0e0f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a678ae77e642385d068317b8a05b7b6d9">LoadFile</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filename)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a single module, using an absolute or relative filename.  <a href="#a678ae77e642385d068317b8a05b7b6d9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#acf3195297eddb4d25f636ba97a90ffbd">LoadPath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filter)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a set of modules from a given path.  <a href="#acf3195297eddb4d25f636ba97a90ffbd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ad660c54f96612ddc01572aa2378abe2e">LoadFile</a> (const <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *pFile)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a single module, from an already-existing file.  <a href="#ad660c54f96612ddc01572aa2378abe2e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a3777490507c322c45e1ed942821c9e2e">LoadFile</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filename)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a single module, using an absolute or relative filename.  <a href="#a3777490507c322c45e1ed942821c9e2e"></a><br/></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Class Methods</div></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a292f2b82decb20eae397c94379389b7d">ClassExists</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests to see if a class exists in the list provided by all loaded modules.  <a href="#a292f2b82decb20eae397c94379389b7d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ab4c137a2bdbfb8d1bc07d9a77cc03051">ClassExists</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> clsid) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests to see if a class exists in the list provided by all loaded modules.  <a href="#ab4c137a2bdbfb8d1bc07d9a77cc03051"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a15ce72109eecefa106019c13ca32ed9e">ClassExists</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests to see if a class exists in the list provided by all loaded modules.  <a href="#a15ce72109eecefa106019c13ca32ed9e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a4ccb2e1429c829615f123b3fb258a42f">CreateObject</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new instance of the given class, using specific class Uuid.  <a href="#a4ccb2e1429c829615f123b3fb258a42f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a2e70241eb66eed8f0fe6b315a918d757">CreateObject</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> clsid) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new instance of the given class, using specific class Uuid.  <a href="#a2e70241eb66eed8f0fe6b315a918d757"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a2dff6a4abb7a85809045c40b2a52e6e8">CreateObject</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new instance of the given class, using a class name or Uuid in string form.  <a href="#a2dff6a4abb7a85809045c40b2a52e6e8"></a><br/></td></tr>
 </table>
@@ -160,14 +164,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a292f2b82decb20eae397c94379389b7d"></a><!-- doxytag: member="VoodooShader::IModuleManager::ClassExists" ref="a292f2b82decb20eae397c94379389b7d" args="(const Uuid &amp;clsid) const =0" -->
+<a class="anchor" id="ab4c137a2bdbfb8d1bc07d9a77cc03051"></a><!-- doxytag: member="VoodooShader::IModuleManager::ClassExists" ref="ab4c137a2bdbfb8d1bc07d9a77cc03051" args="(const Uuid clsid) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a292f2b82decb20eae397c94379389b7d">VoodooShader::IModuleManager::ClassExists</a> </td>
+          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ab4c137a2bdbfb8d1bc07d9a77cc03051">VoodooShader::IModuleManager::ClassExists</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td>
           <td class="paramname"><em>clsid</em></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
         </tr>
@@ -184,7 +188,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Existence of the class. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#aa5fb3a2249fbbfab3ad7236d934ec6bb">VoodooShader::VSModuleManager</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#ac007663dba37d7ac0fd28d58bfe4a59a">VoodooShader::VSModuleManager</a>.</p>
 
 </div>
 </div>
@@ -193,7 +197,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a292f2b82decb20eae397c94379389b7d">VoodooShader::IModuleManager::ClassExists</a> </td>
+          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ab4c137a2bdbfb8d1bc07d9a77cc03051">VoodooShader::IModuleManager::ClassExists</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -217,14 +221,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4ccb2e1429c829615f123b3fb258a42f"></a><!-- doxytag: member="VoodooShader::IModuleManager::CreateObject" ref="a4ccb2e1429c829615f123b3fb258a42f" args="(const Uuid &amp;clsid) const =0" -->
+<a class="anchor" id="a2e70241eb66eed8f0fe6b315a918d757"></a><!-- doxytag: member="VoodooShader::IModuleManager::CreateObject" ref="a2e70241eb66eed8f0fe6b315a918d757" args="(const Uuid clsid) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>* <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a4ccb2e1429c829615f123b3fb258a42f">VoodooShader::IModuleManager::CreateObject</a> </td>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>* <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a2e70241eb66eed8f0fe6b315a918d757">VoodooShader::IModuleManager::CreateObject</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td>
           <td class="paramname"><em>clsid</em></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
         </tr>
@@ -242,7 +246,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>New object or nullptr if the class wasn't found or couldn't be created. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a46e3236445f8b9bb1c5aa43a764ddaa5">VoodooShader::VSModuleManager</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#aae6aea9947b5e12f378ef0de23d73581">VoodooShader::VSModuleManager</a>.</p>
 
 </div>
 </div>
@@ -251,7 +255,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>* <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a4ccb2e1429c829615f123b3fb258a42f">VoodooShader::IModuleManager::CreateObject</a> </td>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a>* <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a2e70241eb66eed8f0fe6b315a918d757">VoodooShader::IModuleManager::CreateObject</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -296,6 +300,60 @@ Public Member Functions</h2></td></tr>
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#ac04f1b9452f6e8269b77b12df8fa1bc9">VoodooShader::IObject</a>.</p>
 
 <p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#ac1c8851e226ae9e88408d4070f5780e5">VoodooShader::VSModuleManager</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4df9e4bb3f7c87f4438138127fb13a75"></a><!-- doxytag: member="VoodooShader::IModuleManager::GetModule" ref="a4df9e4bb3f7c87f4438138127fb13a75" args="(const String &amp;name) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a>* <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a4df9e4bb3f7c87f4438138127fb13a75">VoodooShader::IModuleManager::GetModule</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets a loaded module. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The module name, as reported by the plugin API. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a3bd4c4b3b6ab188823695d763bcfbc06">VoodooShader::VSModuleManager</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa5bc9fe1d8626a0ac9e114d61509ddfe"></a><!-- doxytag: member="VoodooShader::IModuleManager::GetModule" ref="aa5bc9fe1d8626a0ac9e114d61509ddfe" args="(const Uuid libid) const =0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_module.html">IModule</a>* <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a4df9e4bb3f7c87f4438138127fb13a75">VoodooShader::IModuleManager::GetModule</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td>
+          <td class="paramname"><em>libid</em></td><td>)</td>
+          <td> const<code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets a loaded module. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">libid</td><td>The module LibId, as reported by the plugin API. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a32880e7f0cb09b5a245fb8466b431eff">VoodooShader::VSModuleManager</a>.</p>
 
 </div>
 </div>
@@ -353,12 +411,12 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9df7418e31bf5edaa1f2a3c8c5ad0e0f"></a><!-- doxytag: member="VoodooShader::IModuleManager::LoadFile" ref="a9df7418e31bf5edaa1f2a3c8c5ad0e0f" args="(const IFile *pFile)=0" -->
+<a class="anchor" id="ad660c54f96612ddc01572aa2378abe2e"></a><!-- doxytag: member="VoodooShader::IModuleManager::LoadFile" ref="ad660c54f96612ddc01572aa2378abe2e" args="(const IFile *pFile)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a9df7418e31bf5edaa1f2a3c8c5ad0e0f">VoodooShader::IModuleManager::LoadFile</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ad660c54f96612ddc01572aa2378abe2e">VoodooShader::IModuleManager::LoadFile</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *&#160;</td>
           <td class="paramname"><em>pFile</em></td><td>)</td>
@@ -377,16 +435,16 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>This always uses the module's directory in the search path for required DLLs. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a31f13272581799665d60e0d1c9bc0e65">VoodooShader::VSModuleManager</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a7ed03846eb5cce0351f7a661bba7f6b7">VoodooShader::VSModuleManager</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a678ae77e642385d068317b8a05b7b6d9"></a><!-- doxytag: member="VoodooShader::IModuleManager::LoadFile" ref="a678ae77e642385d068317b8a05b7b6d9" args="(const String &amp;filename)=0" -->
+<a class="anchor" id="a3777490507c322c45e1ed942821c9e2e"></a><!-- doxytag: member="VoodooShader::IModuleManager::LoadFile" ref="a3777490507c322c45e1ed942821c9e2e" args="(const String &amp;filename)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a9df7418e31bf5edaa1f2a3c8c5ad0e0f">VoodooShader::IModuleManager::LoadFile</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ad660c54f96612ddc01572aa2378abe2e">VoodooShader::IModuleManager::LoadFile</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>filename</em></td><td>)</td>
@@ -419,16 +477,16 @@ The module's directory is used in the search path for required DLLs. The search 
 </ul>
 </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a45142240e31a2fe401dafbbdc620488f">VoodooShader::VSModuleManager</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a59d38c80d772165926b59a7a540544d2">VoodooShader::VSModuleManager</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae94f81e7e6e567bb0dd1edbb752af715"></a><!-- doxytag: member="VoodooShader::IModuleManager::LoadPath" ref="ae94f81e7e6e567bb0dd1edbb752af715" args="(const String &amp;path, const String &amp;filter)=0" -->
+<a class="anchor" id="acf3195297eddb4d25f636ba97a90ffbd"></a><!-- doxytag: member="VoodooShader::IModuleManager::LoadPath" ref="acf3195297eddb4d25f636ba97a90ffbd" args="(const String &amp;path, const String &amp;filter)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ae94f81e7e6e567bb0dd1edbb752af715">VoodooShader::IModuleManager::LoadPath</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#acf3195297eddb4d25f636ba97a90ffbd">VoodooShader::IModuleManager::LoadPath</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>path</em>, </td>
@@ -458,30 +516,30 @@ The module's directory is used in the search path for required DLLs. The search 
 </dl>
 <dl class="note"><dt><b>Note:</b></dt><dd>Only loads files whose filename matches the filter (standard regex match). </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#ae591ec0e9de0b6ca8028c50079972f37">VoodooShader::VSModuleManager</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a899ce1ba792e8805ddf228c60cfa453d">VoodooShader::VSModuleManager</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a767dbdd7fa680799ecab32c96390edb1"></a><!-- doxytag: member="VoodooShader::IModuleManager::QueryInterface" ref="a767dbdd7fa680799ecab32c96390edb1" args="(Uuid &amp;clsid, const void **ppOut) const =0" -->
+<a class="anchor" id="ad6f878deaf3a4395547b94d289c35b41"></a><!-- doxytag: member="VoodooShader::IModuleManager::QueryInterface" ref="ad6f878deaf3a4395547b94d289c35b41" args="(const Uuid refid, IObject **ppOut)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#a767dbdd7fa680799ecab32c96390edb1">VoodooShader::IModuleManager::QueryInterface</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_module_manager.html#ad6f878deaf3a4395547b94d289c35b41">VoodooShader::IModuleManager::QueryInterface</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
+          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td>
+          <td class="paramname"><em>refid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const void **&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> **&#160;</td>
           <td class="paramname"><em>ppOut</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
+          <td></td><td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -490,19 +548,15 @@ The module's directory is used in the search path for required DLLs. The search 
 <p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">refid</td><td>IID of the interface desired. </td></tr>
     <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
-<dd>
-If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a24b2f4989b0a5ef2b05df7b8af1e8cfd">VoodooShader::IObject</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a63b6c4587242c7486a07eb4233beda0f">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#a3b03a52ef73ad7b8ef2816bf353e4a3c">VoodooShader::VSModuleManager</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_module_manager.html#ad7458d10ddc44c817f1aec1a4edeeb7d">VoodooShader::VSModuleManager</a>.</p>
 
 </div>
 </div>
@@ -545,7 +599,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <div class="memdoc">
 
 <p>Get a string identifying this object. </p>
-<p>This must follow the form given in <a class="el" href="voodoo_spec_module.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
+<p>This must follow the form given in <a class="el" href="voodoo_spec_plugin.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The identifier. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a29869a5e16e29398ae21bb925bc9633c">VoodooShader::IObject</a>.</p>
@@ -561,7 +615,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

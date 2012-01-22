@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Declaration Macros</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -91,7 +91,7 @@ Defines</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares the full set of qualifiers and visibility modifiers for publicly-visible function.  <a href="#ga5e73ef0ad4e5614cea6c0c7514ccafaf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(type, name)&#160;&#160;&#160;virtual DECLSPEC_NOTHROW type <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> name</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares a method with full qualifiers, named <em>name</em> and with a return type of <em>type</em>.  <a href="#ga2429390c4ff6a5f21db177976b9b9e8f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(name)&#160;&#160;&#160;<a class="el" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(bool, name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e">VOODOO_METHOD</a>(name)&#160;&#160;&#160;<a class="el" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(VoodooResult, name)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares a method with full qualifiers, named <em>name</em> and with the default return type of bool.  <a href="#ga7078cec5070b544c069e44bdb066393e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__macros__decl.html#gadcd19a6db969ade073c33d0ef63125bd">VOODOO_INTERFACE_</a>(iname, uuid)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Declares an interface-type Uuid for <em>iname</em> with the value given in <em>uuid</em> and an interface named <em>iname</em>.  <a href="#gadcd19a6db969ade073c33d0ef63125bd"></a><br/></td></tr>
@@ -258,7 +258,7 @@ Defines</h2></td></tr>
 </pre></div>
 <p>Declares a class-type Uuid for <em>cname</em> with the value given in <em>uuid</em> and a class named <em>cname</em>, inheriting from <em>ibase</em>. </p>
 
-<p>Definition at line <a class="el" href="_voodoo_framework_8hpp_source.html#l00092">92</a> of file <a class="el" href="_voodoo_framework_8hpp_source.html">VoodooFramework.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_framework_8hpp_source.html#l00094">94</a> of file <a class="el" href="_voodoo_framework_8hpp_source.html">VoodooFramework.hpp</a>.</p>
 
 </div>
 </div>
@@ -297,7 +297,7 @@ Defines</h2></td></tr>
 </pre></div>
 <p>Declares an interface-type Uuid for <em>iname</em> with the value given in <em>uuid</em> and an interface named <em>iname</em>, inheriting from <em>ibase</em>. </p>
 
-<p>Definition at line <a class="el" href="_voodoo_framework_8hpp_source.html#l00090">90</a> of file <a class="el" href="_voodoo_framework_8hpp_source.html">VoodooFramework.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_framework_8hpp_source.html#l00092">92</a> of file <a class="el" href="_voodoo_framework_8hpp_source.html">VoodooFramework.hpp</a>.</p>
 
 </div>
 </div>
@@ -330,7 +330,7 @@ Defines</h2></td></tr>
 </pre></div>
 <p>Declares an interface-type Uuid for <em>iname</em> with the value given in <em>uuid</em> and an interface named <em>iname</em>. </p>
 
-<p>Definition at line <a class="el" href="_voodoo_framework_8hpp_source.html#l00088">88</a> of file <a class="el" href="_voodoo_framework_8hpp_source.html">VoodooFramework.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_framework_8hpp_source.html#l00090">90</a> of file <a class="el" href="_voodoo_framework_8hpp_source.html">VoodooFramework.hpp</a>.</p>
 
 </div>
 </div>
@@ -343,7 +343,7 @@ Defines</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">name</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(bool, name)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f">VOODOO_METHOD_</a>(VoodooResult, name)</td>
         </tr>
       </table>
 </div>
@@ -448,7 +448,7 @@ Defines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

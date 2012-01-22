@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Adapter Specifications</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -57,47 +57,46 @@
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The adapter serves as a binding between an unknown (by the core library) graphics API and the Voodoo Shader Framework.</p>
-<p>The adapter is responsible for handling any interaction between the two, performing translation as necessary, and generally polishing the details. In many senses, adapters are regular classes provided by modules and they must follow the <a class="el" href="voodoo_spec_module.html">Voodoo Shader Module Specifications</a> as any other module. However, adapter classes must fit a very specific set of behavior rules and perform exactly as expected by the core, and only one adapter object is created at a time.</p>
-<p>Adapter modules are free to provide other classes, in support of or unrelated to, the adapter itself. The adapter must provide at least one implementation each of <a class="el" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a> and <a class="el" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo shaders and effects.">ITexture</a>.</p>
+<p>The adapter is responsible for handling any interaction between the two, performing translation as necessary, and generally polishing the details. In many senses, adapters are regular classes provided by modules and they must follow the <a class="el" href="voodoo_spec_plugin.html">Voodoo Shader Plugin Specifications</a> as any other module. However, adapter classes must fit a very specific set of behavior rules and perform exactly as expected by the core, and only one adapter object is created at a time.</p>
+<p>Adapter modules are free to provide other classes, in support of or unrelated to, the adapter itself. The adapter must provide at least one implementation each of IAdapter and <a class="el" href="class_voodoo_shader_1_1_i_texture.html" title="Contains a hardware texture, for use with Voodoo effects.">ITexture</a>.</p>
 <p>It is recommended that the adapter name be of the form <code>[Name]Adapter</code> and each supporting class use <code>[Name]classname</code>, to easily identify them. If the adapter or module is part of the framework, the name scheme extends to the module's name (<code>Voodoo/[Name]</code>) and filename (<code>Voodoo_[Name].dll</code>). Each framework adapter is given a short one word name related to its game in some manner.</p>
-<p>For further details on the behavior required of adapters, please refer to the <a class="el" href="class_voodoo_shader_1_1_i_adapter.html" title="Graphics adapter class, responsible for interfacing the Voodoo core with a given graphics API...">IAdapter</a> interface documentation.</p>
-<h2><a class="anchor" id="voodoo_spec_adapter_cg"></a>
-Cg Context</h2>
-<dl class="attention"><dt><b>Attention:</b></dt><dd>Due to varying needs between adapters regarding the management, and destruction, of the Cg context, <a class="el" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework.">ICore</a> now exposes methods to get and set the active context and no longer creates a context of its own. This allows more flexibility within adapters, but is a breaking change. Adapters compiled for earlier versions will find themselves without a context at all. </dd></dl>
-<dl class="since"><dt><b>Since:</b></dt><dd>0.2.0</dd></dl>
-<p>This can avoid some crashes with certain adapters due to context lifespan, and allows adapters to handle cleanup. If at all possible, the Cg context should be created in the adapter's constructor and destroyed in the adapter's destructor, but this is left up to the discretion of the adapter. The core releases and invalidates all objects when the core is reset and all Cg-derived resources are released when the context is set to null.</p>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>Adapters must not create any shaders or parameters until they have provided the core with a valid context. Errors will be returned if this is attempted. To fully support Voodoo Shader features, adapter's must not directly use the context where the core provides methods to handle a particular feature.</dd></dl>
+<p>For further details on the behavior required of adapters, please refer to the IAdapter interface documentation.</p>
+<h2><a class="anchor" id="voodoo_spec_adapter_context"></a>
+Adapter Context</h2>
+<p>Due to varying needs between adapters regarding the management, and destruction, of hardware render contexts, the core will query the adapter for the context or device when necessary and only hold a reference for the duration of the call needing the context. The type of context to be retrieved depends on the core's default compile flags, or explicit flags if given in the call. </p>
+<dl class="since"><dt><b>Since:</b></dt><dd>0.5.6</dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Adapters must not create any shaders or parameters if they cannot provide the core with a valid context. Errors will be returned if this is attempted. To fully support Voodoo Shader features, adapters should not directly use the context where the core provides methods to handle a particular feature.</dd></dl>
 <h2><a class="anchor" id="voodoo_spec_adapter_caps"></a>
 Capabilities</h2>
 <p>Voodoo Shader provides a mechanism for shaders to verify the hardware has certain capabilities, for the shader in general or a particular technique. If the hardware does not meet these caps, as reported by the adapter, the shader will fail to load or the technique fail to validate. Adapters must provide accurate values for all given caps, and may provide more.</p>
 <p>Capabilities are validated as a minimum and true is considered greater than false, thus a target requirement of 4 will succeed with 4 or more, and a flow control requirement of false will succeed on true or false.</p>
 <p>Most instruction and type errors, including instruction count, will cause the shader or technique to fail during compilation or validation. These caps are primarily for requirements not fatal in the compiler.</p>
-<h3><a class="anchor" id="voodoo_graphics_shaders_caps_textures"></a>
+<h3><a class="anchor" id="voodoo_graphics_effects_caps_textures"></a>
 CapsTextures</h3>
 <p>Reports the maximum number of textures which may be bound at a time. </p>
 <dl class="user"><dt><b>Type</b></dt><dd>uint/UT_UInt32 </dd></dl>
 <dl class="user"><dt><b>Value</b></dt><dd>Typically 8, may be lower for especially old hardware.</dd></dl>
-<h3><a class="anchor" id="voodoo_graphics_shaders_caps_targets"></a>
+<h3><a class="anchor" id="voodoo_graphics_effects_caps_targets"></a>
 CapsTargets</h3>
 <p>Reports the maximum number of render targets which may be bound at a time. </p>
 <dl class="user"><dt><b>Type</b></dt><dd>uint/UT_UInt32 </dd></dl>
 <dl class="user"><dt><b>Value</b></dt><dd>Typically 4, may be lower for old hardware.</dd></dl>
-<h3><a class="anchor" id="voodoo_graphics_shaders_caps_lights"></a>
+<h3><a class="anchor" id="voodoo_graphics_effects_caps_lights"></a>
 CapsLights</h3>
 <p>Reports the maximum number of hardware lights available. </p>
 <dl class="user"><dt><b>Type</b></dt><dd>uint/UT_UInt32 </dd></dl>
 <dl class="user"><dt><b>Value</b></dt><dd>Typically 8, may be lower for especially old hardware.</dd></dl>
-<h3><a class="anchor" id="voodoo_graphics_shaders_caps_instructions"></a>
+<h3><a class="anchor" id="voodoo_graphics_effects_caps_instructions"></a>
 CapsInstructions</h3>
 <p>Reports the maximum number of instructions that may be run in a single program. The first pair are vertex, the second pixel; the first value of each pair is arithmetic instructions, the second is texture. If vertex textures are not available, the second value will be 0, otherwise it will represent. </p>
 <dl class="user"><dt><b>Type</b></dt><dd>uint4/UT_UInt32[4] </dd></dl>
 <dl class="user"><dt><b>Value</b></dt><dd>The first pair will typically be 65536/0 for VS2.0 and earlier, 65536/4 for VS3.0 or better. The second pair will typically be 8/4 for PS1.0-1.3, 6/8 per phase for PS1.4, 32/64 for PS2.0, 512/512 for PS2.0x, 65536/65536 for 3.0, and unlimited for 4.0 and better.</dd></dl>
-<h3><a class="anchor" id="voodoo_graphics_shaders_caps_registers"></a>
+<h3><a class="anchor" id="voodoo_graphics_effects_caps_registers"></a>
 CapsRegisterCount</h3>
 <p>Reports how many registers are available, and what varieties. The first pair of values are vertex, the second are pixel; the first value in each pair is temporary registers, the second is static. </p>
 <dl class="user"><dt><b>Type</b></dt><dd>uint4/UT_UInt32[4] </dd></dl>
 <dl class="user"><dt><b>Value</b></dt><dd>Typically 12/96/2/8 for SM1.1-1.4, 12/256/12/32 for SM2.0, 32/256/32/224 for SM3.0, and 4096/16x4096/4096/16x4096 for SM4.0 and better.</dd></dl>
-<h3><a class="anchor" id="voodoo_graphics_shaders_caps_flowcontrol"></a>
+<h3><a class="anchor" id="voodoo_graphics_effects_caps_flowcontrol"></a>
 CapsFlowControl</h3>
 <p>Reports whether flow control is available, and what varieties. The first pair of values are vertex, the second are pixel; the first value in each pair is static flow control, second is dynamic. </p>
 <dl class="user"><dt><b>Type</b></dt><dd>bool4/UT_Bool[4] </dd></dl>
@@ -106,7 +105,7 @@ CapsFlowControl</h3>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

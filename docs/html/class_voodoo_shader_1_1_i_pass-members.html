@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Member List</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -72,21 +72,24 @@
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#aeaa03ad70db57b9c41dd42486faf4c7c">AddRef</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#af29a3a74d7ef98fa3a11739bf5c4b1e6">GetCgPass</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a5e82033e7d3d2a03dbc692ae2859e6f7">Bind</a>()=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#ab17d69445693f74222b08f02803ca770">GetCore</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#ae069851b79c1aa17fc717c32f6582d4b">GetName</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a9539b6bc7eb39e0e19125383b3782fde">GetProgram</a>(const ProgramStage stage) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a180b95c0b148572b8e89d97416d3da0c">GetTarget</a>(uint32_t index) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a60b1bf9559a52ab117ed6702cca2fbe5">GetName</a>() const </td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a969f11bf23deefd5d484cbc864d84813">GetProperty</a>(const Uuid propid, Variant *pValue) const </td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#ac8d316c443fd79ccdff89a1a61fe18f7">GetShader</a>(const ShaderStage stage, Variant *pValue) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a977cd55bdc2b0d3edc670e3eb5c4334e">GetTarget</a>(const uint32_t index) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a3360cb1e1f836ef906b128aa96e8ec4d">GetTechnique</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a7a17e1b6830c201d0ca31eebaea7833a">QueryInterface</a>(Uuid &amp;clsid, const void **ppOut) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a9278a60c0fe44136fcf7b5c0eda7f8b0">QueryInterface</a>(const Uuid refid, IObject **ppOut)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#adaef9fb2de20ad470de0f73ae140a371">Release</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a8c2df738a93efa7d4754ca6794f765a3">SetTarget</a>(uint32_t index, ITexture *pTarget)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#ab5d16136e978da067a118ba21c73d7b2">Reset</a>()=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a53edbd225d3ee50b9f4a2f21df1e85d2">SetProperty</a>(const Uuid propid, Variant *pValue)</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#ab2bd1a26568ae90e8381b2a966d31870">SetTarget</a>(const uint32_t index, ITexture *pTarget)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html#a56ab42fd6d763ec6fd2a4fd764be4a2a">ToString</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_pass.html">VoodooShader::IPass</a></td><td><code> [pure virtual]</code></td></tr>
 </table></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

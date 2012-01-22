@@ -90,264 +90,99 @@
 <a name="l00020"></a>00020 <span class="preprocessor">#pragma once</span>
 <a name="l00021"></a>00021 <span class="preprocessor"></span>
 <a name="l00022"></a>00022 <span class="preprocessor">#include &quot;<a class="code" href="_voodoo_framework_8hpp.html" title="This file is the public-facing include for the Voodoo Shader core.">VoodooFramework.hpp</a>&quot;</span>
-<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_string_8hpp.html">String.hpp</a>&quot;</span>
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025 <span class="keyword">namespace </span>VoodooShader
-<a name="l00026"></a>00026 {
-<a name="l00032"></a><a class="code" href="class_voodoo_shader_1_1_format.html">00032</a>     <span class="keyword">class </span><a class="code" href="group__voodoo__macros__decl.html#ga64a3622e4b9bb13e6e7a451bfaa84a48" title="Declares the DLL visibility type for functions.">VOODOO_API</a> <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a>
-<a name="l00033"></a>00033     {
-<a name="l00034"></a>00034         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_format_1_1_format_impl.html">FormatImpl</a>;
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036     <span class="keyword">public</span>:
-<a name="l00037"></a>00037         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt);
-<a name="l00038"></a>00038         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; fmt);
-<a name="l00039"></a>00039         ~<a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a>();
-<a name="l00040"></a>00040         
-<a name="l00041"></a>00041         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> ToString() <span class="keyword">const</span>;
-<a name="l00042"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a90b6fa168310e2adf1bb07c3aafc7914">00042</a>         operator String()<span class="keyword"> const</span>
-<a name="l00043"></a>00043 <span class="keyword">        </span>{
-<a name="l00044"></a>00044             <span class="keywordflow">return</span> this-&gt;ToString();
-<a name="l00045"></a>00045         }
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">bool</span> val);
-<a name="l00048"></a>00048         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">char</span> val);
-<a name="l00049"></a>00049         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> val);
-<a name="l00050"></a>00050         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">short</span> val);
-<a name="l00051"></a>00051         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> val);
-<a name="l00052"></a>00052         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">int</span> val);
-<a name="l00053"></a>00053         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> val);
-<a name="l00054"></a>00054         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">long</span> val);
-<a name="l00055"></a>00055         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> val);
-<a name="l00056"></a>00056         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">float</span> val);
-<a name="l00057"></a>00057         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">double</span> val);
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">wchar_t</span> val);
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_exception.html" title="Generic exception class for Voodoo applications.">Exception</a> &amp; val);
-<a name="l00062"></a>00062         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; val);
-<a name="l00063"></a>00063         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_regex.html" title="Voodoo internal regex class, providing constant and compiler-safe regex handling between modules...">Regex</a> &amp; val);
-<a name="l00064"></a>00064         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; val);
-<a name="l00065"></a>00065 
-<a name="l00066"></a>00066         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> &amp; val);
-<a name="l00067"></a>00067         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> &amp; val);
-<a name="l00068"></a>00068         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; val);
-<a name="l00069"></a>00069         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> &amp; val);
-<a name="l00070"></a>00070         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html">Version</a> &amp; val);
-<a name="l00071"></a>00071 
-<a name="l00072"></a>00072         <span class="comment">// Pointer overloads</span>
-<a name="l00073"></a>00073         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> * val);
-<a name="l00074"></a>00074         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * val);
-<a name="l00075"></a>00075         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * val);
-<a name="l00076"></a>00076         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * val);
+<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="_stream_8hpp.html">Stream.hpp</a>&quot;</span>
+<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;<a class="code" href="_string_8hpp.html">String.hpp</a>&quot;</span>
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026 <span class="keyword">namespace </span>VoodooShader
+<a name="l00027"></a>00027 {
+<a name="l00033"></a><a class="code" href="class_voodoo_shader_1_1_format.html">00033</a>     <span class="keyword">class </span><a class="code" href="group__voodoo__macros__decl.html#ga64a3622e4b9bb13e6e7a451bfaa84a48" title="Declares the DLL visibility type for functions.">VOODOO_API</a> <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a>
+<a name="l00034"></a>00034     {
+<a name="l00035"></a>00035         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_format_1_1_format_impl.html">FormatImpl</a>;
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037     <span class="keyword">public</span>:
+<a name="l00038"></a>00038         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fmt);
+<a name="l00039"></a>00039         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; fmt);
+<a name="l00040"></a>00040         ~<a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a>();
+<a name="l00041"></a>00041         
+<a name="l00042"></a>00042         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> ToString() <span class="keyword">const</span>;
+<a name="l00043"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a90b6fa168310e2adf1bb07c3aafc7914">00043</a>         operator String()<span class="keyword"> const</span>
+<a name="l00044"></a>00044 <span class="keyword">        </span>{
+<a name="l00045"></a>00045             <span class="keywordflow">return</span> this-&gt;ToString();
+<a name="l00046"></a>00046         }
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">bool</span> val);
+<a name="l00049"></a>00049         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">char</span> val);
+<a name="l00050"></a>00050         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> val);
+<a name="l00051"></a>00051         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">short</span> val);
+<a name="l00052"></a>00052         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> val);
+<a name="l00053"></a>00053         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">int</span> val);
+<a name="l00054"></a>00054         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> val);
+<a name="l00055"></a>00055         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">long</span> val);
+<a name="l00056"></a>00056         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> val);
+<a name="l00057"></a>00057         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">float</span> val);
+<a name="l00058"></a>00058         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">double</span> val);
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keywordtype">wchar_t</span> val);
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062 <span class="preprocessor">#if defined(_STRING)</span>
+<a name="l00063"></a>00063 <span class="preprocessor"></span>        <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(std::string val)
+<a name="l00064"></a>00064         {
+<a name="l00065"></a>00065             <span class="keywordflow">return</span> this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(val.c_str());
+<a name="l00066"></a>00066         }
+<a name="l00067"></a>00067         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(std::wstring val)
+<a name="l00068"></a>00068         {
+<a name="l00069"></a>00069             <span class="keywordflow">return</span> this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(val.c_str());
+<a name="l00070"></a>00070         }
+<a name="l00071"></a>00071 <span class="preprocessor">#endif</span>
+<a name="l00072"></a>00072 <span class="preprocessor"></span>
+<a name="l00073"></a>00073         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> Exception &amp; val);
+<a name="l00074"></a>00074         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> Format &amp; val);
+<a name="l00075"></a>00075         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> Regex &amp; val);
+<a name="l00076"></a>00076         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> String &amp; val);
 <a name="l00077"></a>00077 
-<a name="l00078"></a>00078         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
-<a name="l00079"></a><a class="code" href="class_voodoo_shader_1_1_format.html#afcb8e9d9bc0978ae6f76f14c47c0ad21">00079</a>         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; operator&lt;&lt;(const Vector1&lt;T&gt; &amp; val)
-<a name="l00080"></a>00080         {
-<a name="l00081"></a>00081             this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;[&quot;</span>)) &lt;&lt; val.X &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;]&quot;</span>);
-<a name="l00082"></a>00082         }
-<a name="l00083"></a>00083         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
-<a name="l00084"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a6158fe6b7b900361de60ad50bd560853">00084</a>         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; operator&lt;&lt;(const Vector2&lt;T&gt; &amp; val)
-<a name="l00085"></a>00085         {
-<a name="l00086"></a>00086             this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;[&quot;</span>)) &lt;&lt; val.X &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Y &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;]&quot;</span>);
-<a name="l00087"></a>00087         }
-<a name="l00088"></a>00088         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
-<a name="l00089"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a04c26db7b6b73a8766be97d7f5c48b63">00089</a>         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; operator&lt;&lt;(const Vector3&lt;T&gt; &amp; val)
-<a name="l00090"></a>00090         {
-<a name="l00091"></a>00091             this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;[&quot;</span>)) &lt;&lt; val.X &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Y &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Z &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;]&quot;</span>);
-<a name="l00092"></a>00092         }
-<a name="l00093"></a>00093         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
-<a name="l00094"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a11733008b14245f0cdc444b776ec5f0b">00094</a>         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; operator&lt;&lt;(const Vector4&lt;T&gt; &amp; val)
-<a name="l00095"></a>00095         {
-<a name="l00096"></a>00096             this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;[&quot;</span>)) &lt;&lt; val.X &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Y &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Z &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.W &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;]&quot;</span>);
-<a name="l00097"></a>00097         }
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099     <span class="keyword">private</span>:
-<a name="l00100"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a1957ea5b8c4216c19ca2876c9f4b9dbc">00100</a>         <a class="code" href="class_voodoo_shader_1_1_format_1_1_format_impl.html">FormatImpl</a> * <a class="code" href="class_voodoo_shader_1_1_format.html#a1957ea5b8c4216c19ca2876c9f4b9dbc">m_Impl</a>;
-<a name="l00101"></a>00101     };
-<a name="l00107"></a>00107 <span class="preprocessor">#if !defined(VOODOO_NO_STDLIB)</span>
-<a name="l00108"></a>00108 <span class="preprocessor"></span>    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00109"></a><a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">00109</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; out, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_exception.html" title="Generic exception class for Voodoo applications.">Exception</a> &amp; val)
-<a name="l00110"></a>00110     {
-<a name="l00111"></a>00111         out &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;Exception(&quot;</span>) &lt;&lt; val.what() &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;)&quot;</span>);
-<a name="l00112"></a>00112         <span class="keywordflow">return</span> out;
-<a name="l00113"></a>00113     }
-<a name="l00114"></a>00114 
-<a name="l00115"></a>00115     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00116"></a><a class="code" href="group__voodoo__stdstream.html#gad8743c82945da488ea11d39f69c66d72">00116</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; out, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; val)
-<a name="l00117"></a>00117     {
-<a name="l00118"></a>00118         out &lt;&lt; val.<a class="code" href="class_voodoo_shader_1_1_format.html#afa05db30ce7f5cb2f59f49a5e5d212d4">ToString</a>().<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="Get a pointer to the data of the string, often for use as a LPWSTR.">GetData</a>();
-<a name="l00119"></a>00119         <span class="keywordflow">return</span> out;
-<a name="l00120"></a>00120     }
-<a name="l00121"></a>00121 
-<a name="l00122"></a>00122     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00123"></a><a class="code" href="group__voodoo__stdstream.html#ga0aa16bcb9c444fc108de094fbf6784b1">00123</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; out, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_regex.html" title="Voodoo internal regex class, providing constant and compiler-safe regex handling between modules...">Regex</a> &amp; val)
-<a name="l00124"></a>00124     {
-<a name="l00125"></a>00125         out &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;Regex(&quot;</span>) &lt;&lt; val.GetExpr().GetData() &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;)&quot;</span>);
-<a name="l00126"></a>00126         <span class="keywordflow">return</span> out;
-<a name="l00127"></a>00127     }
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00130"></a><a class="code" href="group__voodoo__stdstream.html#ga402d2230bac5239a41149863a2d20051">00130</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; out, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; val)
-<a name="l00131"></a>00131     {
-<a name="l00132"></a>00132         out &lt;&lt; val.<a class="code" href="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13" title="Get a pointer to the data of the string, often for use as a LPWSTR.">GetData</a>();
-<a name="l00133"></a>00133         <span class="keywordflow">return</span> out;
-<a name="l00134"></a>00134     }
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem, <span class="keyword">typename</span> VecElem&gt;
-<a name="l00137"></a><a class="code" href="group__voodoo__stdstream.html#gae038fe85dcad0e6918d74262ab93ce20">00137</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; out, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_vector1.html">Vector1&lt;VecElem&gt;</a> &amp; val)
-<a name="l00138"></a>00138     {
-<a name="l00139"></a>00139         out &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; val.<a class="code" href="struct_voodoo_shader_1_1_vector1.html#af17cacb2c0a28ca311bd6c484e8bfca1">X</a> &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;
-<a name="l00140"></a>00140         <span class="keywordflow">return</span> out;
-<a name="l00141"></a>00141     }
-<a name="l00142"></a>00142 
-<a name="l00143"></a>00143     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem, <span class="keyword">typename</span> VecElem&gt;
-<a name="l00144"></a><a class="code" href="group__voodoo__stdstream.html#gab611ddf8f1557ceeac0cfe0ffa1d4fc0">00144</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; out, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_vector2.html">Vector2&lt;VecElem&gt;</a> &amp; val)
-<a name="l00145"></a>00145     {
-<a name="l00146"></a>00146         out &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; val.<a class="code" href="struct_voodoo_shader_1_1_vector2.html#a470bd61b97131676e45094a93135fddc">X</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; val.Y &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;
-<a name="l00147"></a>00147         <span class="keywordflow">return</span> out;
-<a name="l00148"></a>00148     }
-<a name="l00149"></a>00149 
-<a name="l00150"></a>00150     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem, <span class="keyword">typename</span> VecElem&gt;
-<a name="l00151"></a><a class="code" href="group__voodoo__stdstream.html#ga1df459be86102971d24267aabb374813">00151</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; out, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_vector3.html">Vector3&lt;VecElem&gt;</a> &amp; val)
-<a name="l00152"></a>00152     {
-<a name="l00153"></a>00153         out &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; val.<a class="code" href="struct_voodoo_shader_1_1_vector3.html#a21be166e919bbd6b0ebf2ac9e2ebb952">X</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; val.Y &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; val.Z &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;
-<a name="l00154"></a>00154         <span class="keywordflow">return</span> out;
-<a name="l00155"></a>00155     }        
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem, <span class="keyword">typename</span> VecElem&gt;
-<a name="l00158"></a><a class="code" href="group__voodoo__stdstream.html#gae60f616a932f012154261bffaa93b61b">00158</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; out, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_vector4.html">Vector4&lt;VecElem&gt;</a> &amp; val)
-<a name="l00159"></a>00159     {
-<a name="l00160"></a>00160         out &lt;&lt; <span class="stringliteral">&quot;[&quot;</span> &lt;&lt; val.<a class="code" href="struct_voodoo_shader_1_1_vector4.html#aa5787c5add3019ca9f22d4bba6982473">X</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; val.Y &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; val.Z &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; val.W &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;
-<a name="l00161"></a>00161         <span class="keywordflow">return</span> out;
-<a name="l00162"></a>00162     }
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00165"></a><a class="code" href="group__voodoo__stdstream.html#ga5117ddc9b1c333d6a0ea0161645abcc6">00165</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; os, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_desc.html" title="Describes a texture, including size and format.">TextureDesc</a> &amp; v)
-<a name="l00166"></a>00166     {
-<a name="l00167"></a>00167         os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;TextureDesc(Format: &quot;</span>) &lt;&lt; v.Format &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Mipmaps: &quot;</span>) &lt;&lt; v.Mipmaps &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; RenderTarget: &quot;</span>) &lt;&lt;
-<a name="l00168"></a>00168               v.RenderTarget &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Size: &quot;</span>) &lt;&lt; v.Size &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;)&quot;</span>);
-<a name="l00169"></a>00169         <span class="keywordflow">return</span> os;
-<a name="l00170"></a>00170     }
-<a name="l00171"></a>00171 
-<a name="l00172"></a>00172     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00173"></a><a class="code" href="group__voodoo__stdstream.html#gad5a648bf290da427138a637fa46adecb">00173</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; os, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_texture_region.html" title="Describes a portion of a texture.">TextureRegion</a> &amp; v)
-<a name="l00174"></a>00174     {
-<a name="l00175"></a>00175         os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;TextureRegion(Format: &quot;</span>) &lt;&lt; v.Format &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Mipmaps: &quot;</span>) &lt;&lt; v.Mipmaps &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; RenderTarget: &quot;</span>) &lt;&lt;
-<a name="l00176"></a>00176               v.RenderTarget &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Size: &quot;</span>) &lt;&lt; v.Size &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Origin: &quot;</span>) &lt;&lt; v.Origin &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;)&quot;</span>);
-<a name="l00177"></a>00177         <span class="keywordflow">return</span> os;
-<a name="l00178"></a>00178     }
-<a name="l00179"></a>00179 
-<a name="l00180"></a>00180     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00181"></a><a class="code" href="group__voodoo__stdstream.html#gacd87907c5d155d3807e7d9e1343fd9b1">00181</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; os, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_variant.html" title="Property variant type.">Variant</a> &amp; v)
-<a name="l00182"></a>00182     {
-<a name="l00183"></a>00183         os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;Variant(&quot;</span>) &lt;&lt; v.Type &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; &quot;</span>) &lt;&lt; v.Components;
-<a name="l00184"></a>00184 
-<a name="l00185"></a>00185         <span class="keywordflow">if</span> (v.Type == <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6">UT_None</a>)
-<a name="l00186"></a>00186         {
-<a name="l00187"></a>00187             <span class="keywordflow">return</span> os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;)&quot;</span>);
-<a name="l00188"></a>00188         }
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190         <span class="keywordflow">switch</span> (v.Type)
-<a name="l00191"></a>00191         {
-<a name="l00192"></a>00192         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a1618f6bf85324224f6840da0b1cb30e6">UT_None</a>:
-<a name="l00193"></a>00193             <span class="keywordflow">break</span>;
-<a name="l00194"></a>00194         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a45db36583894626403cfbb73dca0d2c9">UT_Bool</a>:
-<a name="l00195"></a>00195             os &lt;&lt; v.VBool;
-<a name="l00196"></a>00196             <span class="keywordflow">break</span>;
-<a name="l00197"></a>00197         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a3e626f891b0d589b76f73fca69245a70">UT_Int8</a>:
-<a name="l00198"></a>00198             os &lt;&lt; v.VInt8;
-<a name="l00199"></a>00199             <span class="keywordflow">break</span>;
-<a name="l00200"></a>00200         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151af52eadd997c590eb5a26d816377ed99b">UT_UInt8</a>:
-<a name="l00201"></a>00201             os &lt;&lt; v.VUInt8;
-<a name="l00202"></a>00202             <span class="keywordflow">break</span>;
-<a name="l00203"></a>00203         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a7d47a41bfdde9c5ede3a48458754f182">UT_Int16</a>:
-<a name="l00204"></a>00204             os &lt;&lt; v.VInt16;
-<a name="l00205"></a>00205             <span class="keywordflow">break</span>;
-<a name="l00206"></a>00206         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a23f6a2a0f49b684102bafbc0b9e57107">UT_UInt16</a>:
-<a name="l00207"></a>00207             os &lt;&lt; v.VUInt16;
-<a name="l00208"></a>00208             <span class="keywordflow">break</span>;
-<a name="l00209"></a>00209         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151aaad28e35d48efa3bd3b4296dfd525b12">UT_Int32</a>:
-<a name="l00210"></a>00210             os &lt;&lt; v.VInt32;
-<a name="l00211"></a>00211             <span class="keywordflow">break</span>;
-<a name="l00212"></a>00212         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151ab13ec0daf2702ee5ca89023e834c36b8">UT_UInt32</a>:
-<a name="l00213"></a>00213             os &lt;&lt; v.VUInt32;
-<a name="l00214"></a>00214             <span class="keywordflow">break</span>;
-<a name="l00215"></a>00215         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151aa48f4e751daec87ccd981d1f4948244c">UT_Float</a>:
-<a name="l00216"></a>00216             os &lt;&lt; v.VFloat;
-<a name="l00217"></a>00217             <span class="keywordflow">break</span>;
-<a name="l00218"></a>00218         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a07824be3c29358d637eaee261634353e">UT_Double</a>:
-<a name="l00219"></a>00219             os &lt;&lt; v.VDouble;
-<a name="l00220"></a>00220             <span class="keywordflow">break</span>;
-<a name="l00221"></a>00221         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a82e30c5976865ca806c2a7e0090db544">UT_Uuid</a>:
-<a name="l00222"></a>00222             <span class="keywordflow">if</span> (v.VUuid)
-<a name="l00223"></a>00223             {
-<a name="l00224"></a>00224                 <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> t = (*v.VUuid);
-<a name="l00225"></a>00225                 os &lt;&lt; t;
-<a name="l00226"></a>00226             }
-<a name="l00227"></a>00227             <span class="keywordflow">else</span>
-<a name="l00228"></a>00228             {
-<a name="l00229"></a>00229                 os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;(null)&quot;</span>);
-<a name="l00230"></a>00230             }
-<a name="l00231"></a>00231             <span class="keywordflow">break</span>;
-<a name="l00232"></a>00232         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a2260f1147d1f93bbd095711d1fb3ca61">UT_String</a>:
-<a name="l00233"></a>00233             <span class="keywordflow">if</span> (v.VString)
-<a name="l00234"></a>00234             {
-<a name="l00235"></a>00235                 os &lt;&lt; v.VString-&gt;GetData();
-<a name="l00236"></a>00236             }
-<a name="l00237"></a>00237             <span class="keywordflow">else</span>
-<a name="l00238"></a>00238             {
-<a name="l00239"></a>00239                 os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;(null)&quot;</span>);
-<a name="l00240"></a>00240             }
-<a name="l00241"></a>00241             <span class="keywordflow">break</span>;
-<a name="l00242"></a>00242         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a254c6c137d63f077af38019dbced07a9">UT_IObject</a>:
-<a name="l00243"></a>00243             os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; &quot;</span>) &lt;&lt; v.VIObject;
-<a name="l00244"></a>00244             <span class="keywordflow">break</span>;
-<a name="l00245"></a>00245         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a000f2a36acde6524ab963f65c841cc7c">UT_PVoid</a>:
-<a name="l00246"></a>00246             os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; &quot;</span>) &lt;&lt; v.VPVoid;
-<a name="l00247"></a>00247             <span class="keywordflow">break</span>;
-<a name="l00248"></a>00248         <span class="keywordflow">case</span> <a class="code" href="group__voodoo__enums.html#gga2453ad76d4f673b6a3016377f007c151a6b798469f5bf4813cb28e035cdc9fdfb">UT_Unknown</a>:
-<a name="l00249"></a>00249         <span class="keywordflow">default</span>:
-<a name="l00250"></a>00250             os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; (unknown)&quot;</span>);
-<a name="l00251"></a>00251             <span class="keywordflow">break</span>;
-<a name="l00252"></a>00252         }
-<a name="l00253"></a>00253 
-<a name="l00254"></a>00254         <span class="keywordflow">return</span> os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;)&quot;</span>);
-<a name="l00255"></a>00255     }
-<a name="l00256"></a>00256 
-<a name="l00257"></a>00257     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00258"></a><a class="code" href="group__voodoo__stdstream.html#ga1905d13b9116eac126698c896ed906fd">00258</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; os, <span class="keyword">const</span> <a class="code" href="struct_voodoo_shader_1_1_version.html">Version</a> &amp; v)
-<a name="l00259"></a>00259     {
-<a name="l00260"></a>00260         os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;Version(LibId: &quot;</span>) &lt;&lt; v.LibId &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Major: &quot;</span>) &lt;&lt; v.Major &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Minor: &quot;</span>) &lt;&lt; v.Minor &lt;&lt; 
-<a name="l00261"></a>00261               <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Patch: &quot;</span>) &lt;&lt; v.Patch &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Build: &quot;</span>) &lt;&lt; v.Build &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Debug: &quot;</span>) &lt;&lt; v.Debug;
-<a name="l00262"></a>00262 
-<a name="l00263"></a>00263         <span class="keywordflow">if</span> (v.Name)  { os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; Name: &quot;</span>)  &lt;&lt; v.Name;  };
-<a name="l00264"></a>00264         <span class="keywordflow">if</span> (v.RevId) { os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;; RevId: &quot;</span>) &lt;&lt; v.RevId; };
-<a name="l00265"></a>00265 
-<a name="l00266"></a>00266         os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;)&quot;</span>);
-<a name="l00267"></a>00267         <span class="keywordflow">return</span> os;
-<a name="l00268"></a>00268     }
-<a name="l00269"></a>00269 
-<a name="l00270"></a>00270     <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Elem&gt;
-<a name="l00271"></a><a class="code" href="group__voodoo__stdstream.html#gaf9f22363f63f6d17cdf4963305e05981">00271</a>     std::basic_ostream&lt;Elem&gt; &amp; operator&lt;&lt;(std::basic_ostream&lt;Elem&gt; &amp; os, <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit.">IObject</a> * v)
-<a name="l00272"></a>00272     {
-<a name="l00273"></a>00273         <span class="keywordflow">if</span> (v)
-<a name="l00274"></a>00274         {
-<a name="l00275"></a>00275             os &lt;&lt; v-&gt;<a class="code" href="class_voodoo_shader_1_1_i_object.html#a29869a5e16e29398ae21bb925bc9633c" title="Get a string identifying this object.">ToString</a>();
-<a name="l00276"></a>00276         }
-<a name="l00277"></a>00277         <span class="keywordflow">else</span>
-<a name="l00278"></a>00278         {
-<a name="l00279"></a>00279             os &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;IObject(null)&quot;</span>);
-<a name="l00280"></a>00280         }
-<a name="l00281"></a>00281         <span class="keywordflow">return</span> os;
-<a name="l00282"></a>00282     }
-<a name="l00283"></a>00283 <span class="preprocessor">#endif</span>
-<a name="l00284"></a>00284 <span class="preprocessor"></span>
-<a name="l00287"></a>00287 }
+<a name="l00078"></a>00078         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> ParameterDesc &amp; val);
+<a name="l00079"></a>00079         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> TextureDesc &amp; val);
+<a name="l00080"></a>00080         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> TextureRegion &amp; val);
+<a name="l00081"></a>00081         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; val);
+<a name="l00082"></a>00082         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> Variant &amp; val);
+<a name="l00083"></a>00083         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> Version &amp; val);
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085         <span class="comment">// Pointer overloads</span>
+<a name="l00086"></a>00086         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> * val);
+<a name="l00087"></a>00087         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * val);
+<a name="l00088"></a>00088         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * val);
+<a name="l00089"></a>00089         Format &amp; <a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<span class="keyword">const</span> IObject * val);
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
+<a name="l00092"></a><a class="code" href="class_voodoo_shader_1_1_format.html#afcb8e9d9bc0978ae6f76f14c47c0ad21">00092</a>         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; operator&lt;&lt;(const Vector1&lt;T&gt; &amp; val)
+<a name="l00093"></a>00093         {
+<a name="l00094"></a>00094             this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;[&quot;</span>)) &lt;&lt; val.X &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;]&quot;</span>);
+<a name="l00095"></a>00095         }
+<a name="l00096"></a>00096         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
+<a name="l00097"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a6158fe6b7b900361de60ad50bd560853">00097</a>         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; operator&lt;&lt;(const Vector2&lt;T&gt; &amp; val)
+<a name="l00098"></a>00098         {
+<a name="l00099"></a>00099             this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;[&quot;</span>)) &lt;&lt; val.X &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Y &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;]&quot;</span>);
+<a name="l00100"></a>00100         }
+<a name="l00101"></a>00101         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
+<a name="l00102"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a04c26db7b6b73a8766be97d7f5c48b63">00102</a>         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; operator&lt;&lt;(const Vector3&lt;T&gt; &amp; val)
+<a name="l00103"></a>00103         {
+<a name="l00104"></a>00104             this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;[&quot;</span>)) &lt;&lt; val.X &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Y &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Z &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;]&quot;</span>);
+<a name="l00105"></a>00105         }
+<a name="l00106"></a>00106         <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
+<a name="l00107"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a11733008b14245f0cdc444b776ec5f0b">00107</a>         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> &amp; operator&lt;&lt;(const Vector4&lt;T&gt; &amp; val)
+<a name="l00108"></a>00108         {
+<a name="l00109"></a>00109             this-&gt;<a class="code" href="group__voodoo__stdstream.html#ga3288c3daa448842191eb68bf5413689e">operator&lt;&lt;</a>(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;[&quot;</span>)) &lt;&lt; val.X &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Y &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.Z &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;, &quot;</span>) &lt;&lt; val.W &lt;&lt; <a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;]&quot;</span>);
+<a name="l00110"></a>00110         }
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112     <span class="keyword">private</span>:
+<a name="l00113"></a><a class="code" href="class_voodoo_shader_1_1_format.html#a1957ea5b8c4216c19ca2876c9f4b9dbc">00113</a>         <a class="code" href="class_voodoo_shader_1_1_format_1_1_format_impl.html">FormatImpl</a> * <a class="code" href="class_voodoo_shader_1_1_format.html#a1957ea5b8c4216c19ca2876c9f4b9dbc">m_Impl</a>;
+<a name="l00114"></a>00114     };
+<a name="l00115"></a>00115 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 10:03:21 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

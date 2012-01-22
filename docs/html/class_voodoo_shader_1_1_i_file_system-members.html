@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Member List</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,19 +71,19 @@
 </div><!--header-->
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a>, including all inherited members.<table>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a6c87a93af54f338d4037544461ac39d1">AddPath</a>(const String &amp;path)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a19b955b695ddd1441173158713641657">AddPath</a>(const String &amp;path, PathType type=VSPath_Directory)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a1b3d6b7fd50b9314057d4b2bca337384">AddRef</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a359432c2c186611f53c2ac3dc70c5589">GetCore</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a39318c5088c9def47eb036547b140932">GetFile</a>(const String &amp;name, const GetFileMode mode=FF_OpenOnly) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a379b573b9837077f9684e83e2dd89de5">QueryInterface</a>(Uuid &amp;clsid, const void **ppOut) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#aedde92fc7c6f5117c1b54c87bace02f7">GetFile</a>(const String &amp;name, const GetFileMode mode=VSSearch_Exists) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#aee4ac05fdb0c1efbad14c2eff6ff976e">QueryInterface</a>(const Uuid refid, IObject **ppOut)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a5e3e49b5f6f921328ab1e24624453d64">Release</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a444e8092295bad976a4113e04498485e">RemovePath</a>(const String &amp;path)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a40611752101bd6fcdfe984665e60508e">RemovePath</a>(const String &amp;path)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a2e9d241c2120d06ac3fcb660748cd117">ToString</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_file_system.html">VoodooShader::IFileSystem</a></td><td><code> [pure virtual]</code></td></tr>
 </table></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Class Members - Functions</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -63,18 +63,19 @@
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
       <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
     <ul class="tablist">
       <li><a href="functions_func.html#index_a"><span>a</span></a></li>
+      <li><a href="functions_func_0x62.html#index_b"><span>b</span></a></li>
       <li><a href="functions_func_0x63.html#index_c"><span>c</span></a></li>
       <li><a href="functions_func_0x64.html#index_d"><span>d</span></a></li>
       <li><a href="functions_func_0x65.html#index_e"><span>e</span></a></li>
       <li><a href="functions_func_0x66.html#index_f"><span>f</span></a></li>
       <li><a href="functions_func_0x67.html#index_g"><span>g</span></a></li>
-      <li><a href="functions_func_0x68.html#index_h"><span>h</span></a></li>
       <li><a href="functions_func_0x69.html#index_i"><span>i</span></a></li>
       <li><a href="functions_func_0x6c.html#index_l"><span>l</span></a></li>
       <li><a href="functions_func_0x6d.html#index_m"><span>m</span></a></li>
@@ -84,7 +85,6 @@
       <li><a href="functions_func_0x72.html#index_r"><span>r</span></a></li>
       <li class="current"><a href="functions_func_0x73.html#index_s"><span>s</span></a></li>
       <li><a href="functions_func_0x74.html#index_t"><span>t</span></a></li>
-      <li><a href="functions_func_0x75.html#index_u"><span>u</span></a></li>
       <li><a href="functions_func_0x76.html#index_v"><span>v</span></a></li>
       <li><a href="functions_func_0x77.html#index_w"><span>w</span></a></li>
       <li><a href="functions_func_0x7e.html#index_0x7e"><span>~</span></a></li>
@@ -96,23 +96,16 @@
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
 <li>Seek()
-: <a class="el" href="class_voodoo_shader_1_1_i_file.html#aa365bd22a1b63181ed7639820c3683d4">VoodooShader::IFile</a>
-, <a class="el" href="class_voodoo_shader_1_1_i_image.html#a88f9f6ead3cf3ce8a49f5694069ebb22">VoodooShader::IImage</a>
-, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a469e578a536277db222c1dbf63f77362">VoodooShader::VoodooWFS::VSWFileImpl</a>
+: <a class="el" href="class_voodoo_shader_1_1_i_file.html#a9b6e9d93b774ceafe99fb623352d7f68">VoodooShader::IFile</a>
 </li>
 <li>SetAt()
 : <a class="el" href="class_voodoo_shader_1_1_string.html#a9deb5ea3a4522d0f63543b1b9090585e">VoodooShader::String</a>
 </li>
-<li>SetCgContext()
-: <a class="el" href="class_voodoo_shader_1_1_i_core.html#ab85c046cc9902edf5e5d8fe07b9907b9">VoodooShader::ICore</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#ac2a046a01607d95260b9ef30eb69aa62">VoodooShader::VSCore</a>
-</li>
-<li>SetData()
-: <a class="el" href="class_voodoo_shader_1_1_i_texture.html#acf20b12660fbb8ae4484670e93c03d74">VoodooShader::ITexture</a>
+<li>SetBool()
+: <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a188376e92550f58d4fda9ce0de35dcf9">VoodooShader::IParameter</a>
 </li>
 <li>SetDefaultTechnique()
-: <a class="el" href="class_voodoo_shader_1_1_i_shader.html#adce277de38f7803ed38c84af6cab45bc">VoodooShader::IShader</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#ad9d1de5fece469343c34e54c2d049621">VoodooShader::VSShader</a>
+: <a class="el" href="class_voodoo_shader_1_1_i_effect.html#a7c64a5a3f6e9af7fbeee68df31ca401f">VoodooShader::IEffect</a>
 </li>
 <li>SetExpr()
 : <a class="el" href="class_voodoo_shader_1_1_regex.html#aef2ecd204ac773064788c585c31f0b89">VoodooShader::Regex</a>
@@ -125,46 +118,52 @@
 : <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a55681df40b536bff31de040d08201655">VoodooShader::ILogger</a>
 , <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a8a31f88acef712fae12acac1b35d350d">VoodooShader::VSLogger</a>
 </li>
-<li>SetPass()
-: <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a4f99c11800078d65d06dd64ea8c162bb">VoodooShader::VSAdapter</a>
-, <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a2cae6a47b1abb997e756df86755411f6">VoodooShader::IAdapter</a>
+<li>SetFloat()
+: <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a77c2542ee098413b94c325e561cf4b35">VoodooShader::IParameter</a>
+</li>
+<li>SetInt()
+: <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a5c90bb1ffc99f809d4fbb0adcfb8e9c3">VoodooShader::IParameter</a>
 </li>
 <li>SetProperty()
-: <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a03b6b986508ffbf38d39e792774dbb34">VoodooShader::IAdapter</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#a8d9856aecd6301b37611170ef279fc46">VoodooShader::VSAdapter</a>
+: <a class="el" href="class_voodoo_shader_1_1_i_technique.html#ab9ec434900c3d5f6ff3e44045f9f69d7">VoodooShader::ITechnique</a>
+, <a class="el" href="class_voodoo_shader_1_1_i_texture.html#a7b3ead2aa555e0051426c3e49a1b07a0">VoodooShader::ITexture</a>
+, <a class="el" href="class_voodoo_shader_1_1_i_effect.html#a31049843dec53a0e5d0e9d869ceca95d">VoodooShader::IEffect</a>
+, <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#ae6c28eae0541fe8e9c89b47c223b116e">VoodooShader::IParameter</a>
+, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a53edbd225d3ee50b9f4a2f21df1e85d2">VoodooShader::IPass</a>
+, <a class="el" href="class_voodoo_shader_1_1_i_resource.html#ad5e55c7cf8017c6f9aab7cb65b051c28">VoodooShader::IResource</a>
 </li>
-<li>SetScalar()
-: <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a9ab5b6498ecfc15175262c5c517831ab">VoodooShader::IParameter</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#a19321515c0758f11b605c2b5e159e5d4">VoodooShader::VSParameter</a>
-</li>
-<li>SetStageTexture()
-: <a class="el" href="class_voodoo_shader_1_1_i_core.html#a37e7e6c1639f88cf6f60df66ba11b090">VoodooShader::ICore</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_core.html#a0be04b4dc6775ee024220428fbfd15a0">VoodooShader::VSCore</a>
+<li>SetString()
+: <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a454f77f6c9c716629571f0a9c8462aab">VoodooShader::IParameter</a>
 </li>
 <li>SetTarget()
-: <a class="el" href="class_voodoo_shader_1_1_i_adapter.html#a4bb845db9ba362ced25c6dfc7652bd55">VoodooShader::IAdapter</a>
-, <a class="el" href="class_voodoo_shader_1_1_i_pass.html#a8c2df738a93efa7d4754ca6794f765a3">VoodooShader::IPass</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_adapter.html#ac14ab60be5ffe82ba253e53f4352b5a8">VoodooShader::VSAdapter</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_pass.html#a2b5bbb88e912614e4271b740319e75c8">VoodooShader::VSPass</a>
+: <a class="el" href="class_voodoo_shader_1_1_i_pass.html#ab2bd1a26568ae90e8381b2a966d31870">VoodooShader::IPass</a>
 </li>
 <li>SetTexture()
-: <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a6ec8b09663a42742e1dd71323def6353">VoodooShader::IParameter</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_parameter.html#aa2fba42b88464688bdc9321973c9fc04">VoodooShader::VSParameter</a>
+: <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a34a98e95b2ae5e3da01fb992efde1134">VoodooShader::IParameter</a>
 </li>
-<li>SetupTechniques()
-: <a class="el" href="class_voodoo_shader_1_1_v_s_shader.html#a84f428096f38dba9663c2f8643f98876">VoodooShader::VSShader</a>
+<li>SetVector()
+: <a class="el" href="class_voodoo_shader_1_1_i_parameter.html#a7783231a95a597fc68f77bfa972c776c">VoodooShader::IParameter</a>
 </li>
 <li>Split()
 : <a class="el" href="class_voodoo_shader_1_1_string.html#a259522c26971d470b46b6d0460e6135f">VoodooShader::String</a>
 </li>
 <li>StartsWith()
-: <a class="el" href="class_voodoo_shader_1_1_string.html#acf90d9193cfcd15e52bf5247c3b8845c">VoodooShader::String</a>
+: <a class="el" href="class_voodoo_shader_1_1_string.html#a401c79742b120d9bcdfb6596a11788d4">VoodooShader::String</a>
+</li>
+<li>StreamState()
+: <a class="el" href="class_voodoo_shader_1_1_stream_state.html#aa12ec3d88977552371b50dffa596129a">VoodooShader::StreamState</a>
+</li>
+<li>StretchRect()
+: <a class="el" href="class_voodoo_shader_1_1_i_texture.html#ab1308d1e14ada4a5d3b14facdaa652f7">VoodooShader::ITexture</a>
 </li>
 <li>String()
-: <a class="el" href="class_voodoo_shader_1_1_string.html#a41d75af786ac3002c7db56e14e362849">VoodooShader::String</a>
+: <a class="el" href="class_voodoo_shader_1_1_string.html#aff869d971d4cdabfe961b0562a0bc0aa">VoodooShader::String</a>
+</li>
+<li>StringFormat()
+: <a class="el" href="class_voodoo_shader_1_1_string_format.html#ac7a7cda1de5a5434b451c5d6149c8a34">VoodooShader::StringFormat</a>
 </li>
 <li>StringImpl()
-: <a class="el" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#a73f9b5765afe65417c07f60e6be28be8">VoodooShader::String::StringImpl</a>
+: <a class="el" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#a6f8d191ec88f841495e468e1659e2aed">VoodooShader::String::StringImpl</a>
 </li>
 <li>strwhat()
 : <a class="el" href="class_voodoo_shader_1_1_exception.html#a2e960ec2bfab4956dc49bfeab2dcc140">VoodooShader::Exception</a>
@@ -177,7 +176,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://tempuri.org/XMLSchema.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/XMLSchema.xsd"
+    xmlns:mstns="http://tempuri.org/XMLSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <xs:element name="VoodooShader" type="Shader" />
+    <xs:complexType name="Shader">
+        <xs:sequence>
+            <xs:element name="Title" type="xs:string" minOccurs="0" />
+            <xs:element name="Author" type="xs:string" minOccurs="0" />
+            <xs:element name="Version" type="xs:string" minOccurs="0" />
+            <xs:element name="Description" type="xs:string" minOccurs="0" />
+            <xs:element name="Define" type="NamedString" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Sampler" type="Linked" minOccurs="0" maxOccurs="unbounded" />
+            <xs:choice>
+                <xs:element name="Source" type="xs:string" />
+                <xs:element name="External">
+                    <xs:complexType>
+                        <xs:attribute name="file" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:element name="Technique" type="Technique" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Technique">
+        <xs:sequence>
+            <xs:element name="Pass" type="Pass" />
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="Pass">
+        <xs:sequence>
+            <xs:element name="Uniform" type="Parameter" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Target" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="Vertex" type="Program" minOccurs="0" maxOccurs="1" />
+            <xs:element name="Pixel" type="Program" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="Program">
+        <xs:attribute name="profile" type="ProfileId" />
+        <xs:attribute name="function" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="Linked">
+        <xs:attribute name="link" type="xs:string" use="optional" />
+    </xs:complexType>
+    <xs:complexType name="Parameter">
+        <xs:complexContent>
+            <xs:extension base="Linked">
+                <xs:attribute name="name" type="xs:string" />
+                <xs:attribute name="type" type="TypeId" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:simpleType name="TypeId">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(sampler(1|2|3)d|(int|float)[1-4](x[1-4])?)(\[[1-9]+[0-9]*\])?" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ProfileId">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(ps_(1_[1-4]|2_0|3_0|4_[0-1]|5_0)|vs_(1_1|2_0|3_0|4_[0-1]|5_0)|gs_(4_[0-1]|5_0)|ds_5_0|hs_5_0|cs_5_0|glsl(12)?|arb)" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="NamedString">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

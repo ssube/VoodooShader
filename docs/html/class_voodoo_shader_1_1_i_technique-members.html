@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Member List</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -72,20 +72,21 @@
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a0b831f10ce73797119f188e502bb6dfd">AddRef</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a25e3834c0ca5c125319de18387663898">GetCgTechnique</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a0a8f6aa58601631886f2815625d11dc9">GetCore</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a2841d4f71e321a0392bbb9e99a2d88cf">GetName</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#aa48f10daaf2a630775cfaa3cf115742d">GetEffect</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a559535d9ad8eebed6c8ef1961ef7237a">GetName</a>() const </td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#aa40939814b3360fd66673c61b5171daf">GetPass</a>(const uint32_t index) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a901383d6a6ef7046b148650ed86a83f8">GetPassCount</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#af4693dc9c36d1b3be0ceee592d6cd0ad">GetShader</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a47dd2a7beb77603ae4da092d6165b009">QueryInterface</a>(Uuid &amp;clsid, const void **ppOut) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#af678c79550e97b5d14e52fde5a5fc366">GetProperty</a>(const Uuid propid, Variant *pValue) const </td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#aa310520934e79c088538052aa7810ca8">QueryInterface</a>(const Uuid refid, IObject **ppOut)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a71439fc3a60c11fae30e2f8025c91a8c">Release</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#ab9ec434900c3d5f6ff3e44045f9f69d7">SetProperty</a>(const Uuid propid, Variant *pValue)</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html#a4e05d505299f2d5a6217f2de0a591767">ToString</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_technique.html">VoodooShader::ITechnique</a></td><td><code> [pure virtual]</code></td></tr>
 </table></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

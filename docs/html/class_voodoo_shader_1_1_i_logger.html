@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: VoodooShader::ILogger Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -103,23 +103,23 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a1576bf63255ce98d21b172bd47a5805b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#aa032cd6fe212a71a36240d7ca43d36c2">Release</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#aa032cd6fe212a71a36240d7ca43d36c2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a20618af0e9b7786bb309ad409628c792">QueryInterface</a> (<a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a20618af0e9b7786bb309ad409628c792"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a95940073c09b620d5cb61be4e01948b6">QueryInterface</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> refid, <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> **ppOut)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a95940073c09b620d5cb61be4e01948b6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#ace127bad7cdc5b29e7f0842914a517bc">ToString</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#ace127bad7cdc5b29e7f0842914a517bc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a23a6d15a31e1607cb7f7241b708275ff">GetCore</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#a23a6d15a31e1607cb7f7241b708275ff"></a><br/></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Status Methods</div></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a7ff4b2ef9fbbbf0691a6b081e841ae51">Open</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filename, const bool append)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file for use by this logger.  <a href="#a7ff4b2ef9fbbbf0691a6b081e841ae51"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a325af6d8151608d1adb82fe4585641b8">Open</a> (<a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const pFile, const bool append)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file for use by this logger.  <a href="#a325af6d8151608d1adb82fe4585641b8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a6e198f83829d81b49f94561efd7d6e4c">Open</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;filename, const bool append)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file for use by this logger.  <a href="#a6e198f83829d81b49f94561efd7d6e4c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a1f617ad4095a83801a81d7431e4b7169">Open</a> (<a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *pFile, const bool append)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens a file for use by this logger.  <a href="#a1f617ad4095a83801a81d7431e4b7169"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a13858a2a0c4557b2e6d281dba2c76355">IsOpen</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if this logger has an open file.  <a href="#a13858a2a0c4557b2e6d281dba2c76355"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a262271f0930996737cd0a04b639c131c">Close</a> ()=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the log file, if one is open.  <a href="#a262271f0930996737cd0a04b639c131c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a79d2062d180fd9e796a76343c823557b">Flush</a> ()=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Immediately writes all pending data to disk.  <a href="#a79d2062d180fd9e796a76343c823557b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a5d0f553dc499237348ceac5b840318d2">Close</a> ()=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the log file, if one is open.  <a href="#a5d0f553dc499237348ceac5b840318d2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#ab94a439e72ccac7a37183a011eac3a8d">Flush</a> ()=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Immediately writes all pending data to disk.  <a href="#ab94a439e72ccac7a37183a011eac3a8d"></a><br/></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Field Methods</div></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a604ad5cd5c36f83baca5148895a2fb0a">SetFilter</a> (const uint32_t level)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default minimum message level.  <a href="#a604ad5cd5c36f83baca5148895a2fb0a"></a><br/></td></tr>
@@ -130,8 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__enums.html#gaf35c8fe857d014d7345ef8c2266c79dc">LogFlags</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a14d9fc2271836b957bc38f0f9ad2710d">GetFlags</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current log flags.  <a href="#a14d9fc2271836b957bc38f0f9ad2710d"></a><br/></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Logging Methods</div></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a8be4566b41fdf5e7ed3731161b53fcbb">LogMessage</a> (const uint32_t level, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;source, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;msg)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a pre-formatted message.  <a href="#a8be4566b41fdf5e7ed3731161b53fcbb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_logger.html#a3052455f1fd8452006a5b300c5cb483a">LogMessage</a> (const uint32_t level, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;source, const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;msg)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a pre-formatted message.  <a href="#a3052455f1fd8452006a5b300c5cb483a"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Provides structured and formatted logging for module listing and level-filtered messages. </p>
@@ -163,12 +163,12 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a262271f0930996737cd0a04b639c131c"></a><!-- doxytag: member="VoodooShader::ILogger::Close" ref="a262271f0930996737cd0a04b639c131c" args="()=0" -->
+<a class="anchor" id="a5d0f553dc499237348ceac5b840318d2"></a><!-- doxytag: member="VoodooShader::ILogger::Close" ref="a5d0f553dc499237348ceac5b840318d2" args="()=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a262271f0930996737cd0a04b639c131c">VoodooShader::ILogger::Close</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a5d0f553dc499237348ceac5b840318d2">VoodooShader::ILogger::Close</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [pure virtual]</code></td>
@@ -179,16 +179,16 @@ Public Member Functions</h2></td></tr>
 
 <p>Closes the log file, if one is open. </p>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#ad023f4e217dd5caa3c572735a8d5811d">VoodooShader::VSLogger</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a07b693344c96d95dba70c57a321f4d6f">VoodooShader::VSLogger</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a79d2062d180fd9e796a76343c823557b"></a><!-- doxytag: member="VoodooShader::ILogger::Flush" ref="a79d2062d180fd9e796a76343c823557b" args="()=0" -->
+<a class="anchor" id="ab94a439e72ccac7a37183a011eac3a8d"></a><!-- doxytag: member="VoodooShader::ILogger::Flush" ref="ab94a439e72ccac7a37183a011eac3a8d" args="()=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a79d2062d180fd9e796a76343c823557b">VoodooShader::ILogger::Flush</a> </td>
+          <td class="memname">virtual void <a class="el" href="class_voodoo_shader_1_1_i_logger.html#ab94a439e72ccac7a37183a011eac3a8d">VoodooShader::ILogger::Flush</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [pure virtual]</code></td>
@@ -201,7 +201,7 @@ Public Member Functions</h2></td></tr>
 <dl class="note"><dt><b>Note:</b></dt><dd>This is useful for catchable errors which may have fatal consequences (<a class="el" href="class_voodoo_shader_1_1_exception.html" title="Generic exception class for Voodoo applications.">Exception</a> calls this in case the exception is uncaught).</dd></dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This may not (probably will not) be any good in case of a segfault or other crash. If you need complete debug logging, call Logger::SetBufferSize(int32_t) with a buffer size of 0 and all logged messages <em>should</em> make it to disk, even during fatal crashes. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#adbecdb82fc7204b8438be40ece7fa172">VoodooShader::VSLogger</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a5e9843910cd6fe3e211747b212d2fc27">VoodooShader::VSLogger</a>.</p>
 
 </div>
 </div>
@@ -290,12 +290,12 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8be4566b41fdf5e7ed3731161b53fcbb"></a><!-- doxytag: member="VoodooShader::ILogger::LogMessage" ref="a8be4566b41fdf5e7ed3731161b53fcbb" args="(const uint32_t level, const String &amp;source, const String &amp;msg)=0" -->
+<a class="anchor" id="a3052455f1fd8452006a5b300c5cb483a"></a><!-- doxytag: member="VoodooShader::ILogger::LogMessage" ref="a3052455f1fd8452006a5b300c5cb483a" args="(const uint32_t level, const String &amp;source, const String &amp;msg)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a8be4566b41fdf5e7ed3731161b53fcbb">VoodooShader::ILogger::LogMessage</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a3052455f1fd8452006a5b300c5cb483a">VoodooShader::ILogger::LogMessage</a> </td>
           <td>(</td>
           <td class="paramtype">const uint32_t&#160;</td>
           <td class="paramname"><em>level</em>, </td>
@@ -330,19 +330,19 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>When formatting log messages that do not need reused, it may be cleaner to do it inline: <div class="fragment"><pre class="fragment"> pLogger-&gt;LogMessage(<a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa07991c7097b225cb334b5de3c159c443">LL_Module</a> | <a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa78a935f62fca37891ebc6a65a42a47af">LL_Info</a>, MODULE_NAME, Format(<span class="stringliteral">&quot;Hello %1%.&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;World&quot;</span>);
-</pre></div> This uses the <a class="el" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> class and implicit casts to <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> after the last argument is inserted. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>When formatting log messages that do not need reused, it may be cleaner to do it inline: <div class="fragment"><pre class="fragment"> pLogger-&gt;LogMessage(<a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daaa29ec2553f025586afe661596d4e29f1">VSLog_Module</a> | <a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa90aa720578373038c4c6af2e3ce99850">VSLog_Info</a>, MODULE_NAME, Format(<span class="stringliteral">&quot;Hello %1%.&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;World&quot;</span>);
+</pre></div> This uses the Format class and implicit casts to <a class="el" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> after the last argument is inserted. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#aee8517f96e04306090b41933a47cc1e2">VoodooShader::VSLogger</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a99da1736e81b6776bede591689b624c4">VoodooShader::VSLogger</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a7ff4b2ef9fbbbf0691a6b081e841ae51"></a><!-- doxytag: member="VoodooShader::ILogger::Open" ref="a7ff4b2ef9fbbbf0691a6b081e841ae51" args="(const String &amp;filename, const bool append)=0" -->
+<a class="anchor" id="a6e198f83829d81b49f94561efd7d6e4c"></a><!-- doxytag: member="VoodooShader::ILogger::Open" ref="a6e198f83829d81b49f94561efd7d6e4c" args="(const String &amp;filename, const bool append)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a7ff4b2ef9fbbbf0691a6b081e841ae51">VoodooShader::ILogger::Open</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a6e198f83829d81b49f94561efd7d6e4c">VoodooShader::ILogger::Open</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>filename</em>, </td>
@@ -372,18 +372,18 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the open operation. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a48fe68dbd47e5ace6e7a2710c146072d">VoodooShader::VSLogger</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a579946ca562f6cf3cb65ffa63c5711f5">VoodooShader::VSLogger</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a325af6d8151608d1adb82fe4585641b8"></a><!-- doxytag: member="VoodooShader::ILogger::Open" ref="a325af6d8151608d1adb82fe4585641b8" args="(IFile *const pFile, const bool append)=0" -->
+<a class="anchor" id="a1f617ad4095a83801a81d7431e4b7169"></a><!-- doxytag: member="VoodooShader::ILogger::Open" ref="a1f617ad4095a83801a81d7431e4b7169" args="(IFile *pFile, const bool append)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a7ff4b2ef9fbbbf0691a6b081e841ae51">VoodooShader::ILogger::Open</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a6e198f83829d81b49f94561efd7d6e4c">VoodooShader::ILogger::Open</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *const&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *&#160;</td>
           <td class="paramname"><em>pFile</em>, </td>
         </tr>
         <tr>
@@ -411,30 +411,30 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the open operation. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a7113715d28d135b84f6808050a3623bd">VoodooShader::VSLogger</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#afd132f9ab22901890a69be74ea772e79">VoodooShader::VSLogger</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a20618af0e9b7786bb309ad409628c792"></a><!-- doxytag: member="VoodooShader::ILogger::QueryInterface" ref="a20618af0e9b7786bb309ad409628c792" args="(Uuid &amp;clsid, const void **ppOut) const =0" -->
+<a class="anchor" id="a95940073c09b620d5cb61be4e01948b6"></a><!-- doxytag: member="VoodooShader::ILogger::QueryInterface" ref="a95940073c09b620d5cb61be4e01948b6" args="(const Uuid refid, IObject **ppOut)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a20618af0e9b7786bb309ad409628c792">VoodooShader::ILogger::QueryInterface</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a95940073c09b620d5cb61be4e01948b6">VoodooShader::ILogger::QueryInterface</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
+          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td>
+          <td class="paramname"><em>refid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const void **&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> **&#160;</td>
           <td class="paramname"><em>ppOut</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
+          <td></td><td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -443,19 +443,15 @@ Public Member Functions</h2></td></tr>
 <p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">refid</td><td>IID of the interface desired. </td></tr>
     <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
-<dd>
-If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a24b2f4989b0a5ef2b05df7b8af1e8cfd">VoodooShader::IObject</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a63b6c4587242c7486a07eb4233beda0f">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#abfaf856f1597de56179ce47028bef653">VoodooShader::VSLogger</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a379820538166571f7b174ccac1810455">VoodooShader::VSLogger</a>.</p>
 
 </div>
 </div>
@@ -553,7 +549,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <div class="memdoc">
 
 <p>Get a string identifying this object. </p>
-<p>This must follow the form given in <a class="el" href="voodoo_spec_module.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
+<p>This must follow the form given in <a class="el" href="voodoo_spec_plugin.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The identifier. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a29869a5e16e29398ae21bb925bc9633c">VoodooShader::IObject</a>.</p>
@@ -569,7 +565,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

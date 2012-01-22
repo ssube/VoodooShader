@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Tutorials</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,7 +71,7 @@
  HMODULE core = LoadLibraryEx(path, NULL, LOAD_WITH_ALTERED_SEARCH_PATHS);
  assert(core);
  
- <a class="code" href="namespace_voodoo_shader_1_1_functions.html#acad482879b2d5d3514b2a934491de2e3">CoreCreateFunc</a> create = (<a class="code" href="namespace_voodoo_shader_1_1_functions.html#acad482879b2d5d3514b2a934491de2e3">CoreCreateFunc</a>)GetProcAddress(core, <span class="stringliteral">&quot;CreateCore&quot;</span>);
+ <a class="code" href="group__voodoo__types.html#gacad482879b2d5d3514b2a934491de2e3">CoreCreateFunc</a> create = (<a class="code" href="group__voodoo__types.html#gacad482879b2d5d3514b2a934491de2e3">CoreCreateFunc</a>)GetProcAddress(core, <span class="stringliteral">&quot;CreateCore&quot;</span>);
  assert(create);
 
  ICore * pCore = create(<a class="code" href="group__voodoo__macros.html#ga52c6a8e70ab75842559c062432b7205a" title="Current core version.">VOODOO_SDK_VERSION</a>);
@@ -85,7 +85,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

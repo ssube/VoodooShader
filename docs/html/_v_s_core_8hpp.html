@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Framework/Core/VSCore.hpp File Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -67,13 +67,14 @@
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">VSCore.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="_voodoo_framework_8hpp_source.html">VoodooFramework.hpp</a>&quot;</code><br/>
+<div class="textblock"><code>#include &quot;<a class="el" href="_voodoo_internal_8hpp_source.html">VoodooInternal.hpp</a>&quot;</code><br/>
+<code>#include &lt;map&gt;</code><br/>
+<code>#include &lt;set&gt;</code><br/>
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for VSCore.hpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -81,7 +82,7 @@
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="_v_s_core_8hpp__incl.png" border="0" usemap="#_framework_2_core_2_v_s_core_8hpp" alt=""/></div>
 <map name="_framework_2_core_2_v_s_core_8hpp" id="_framework_2_core_2_v_s_core_8hpp">
-<area shape="rect" id="node3" href="_voodoo_framework_8hpp.html" title="This file is the public&#45;facing include for the Voodoo Shader core." alt="" coords="1793,80,1948,107"/><area shape="rect" id="node7" href="_voodoo_debug_8hpp.html" title="VoodooDebug.hpp" alt="" coords="296,155,424,181"/><area shape="rect" id="node9" href="_voodoo_types_8hpp.html" title="VoodooTypes.hpp" alt="" coords="449,155,575,181"/><area shape="rect" id="node27" href="_voodoo_version_8hpp.html" title="VoodooVersion.hpp" alt="" coords="599,155,733,181"/><area shape="rect" id="node31" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="759,155,860,181"/><area shape="rect" id="node34" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="885,155,989,181"/><area shape="rect" id="node37" href="_string_8hpp.html" title="String.hpp" alt="" coords="999,229,1080,256"/><area shape="rect" id="node42" href="_format_8hpp.html" title="Format.hpp" alt="" coords="1089,155,1177,181"/><area shape="rect" id="node46" href="_regex_8hpp.html" title="Regex.hpp" alt="" coords="1202,155,1285,181"/><area shape="rect" id="node51" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="1311,155,1399,181"/><area shape="rect" id="node54" href="_i_adapter_8hpp.html" title="IAdapter.hpp" alt="" coords="1423,155,1517,181"/><area shape="rect" id="node57" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="1543,155,1620,181"/><area shape="rect" id="node60" href="_i_file_8hpp.html" title="IFile.hpp" alt="" coords="1645,155,1715,181"/><area shape="rect" id="node63" href="_i_filesystem_8hpp.html" title="IFilesystem.hpp" alt="" coords="1740,155,1855,181"/><area shape="rect" id="node66" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="1879,155,2009,181"/><area shape="rect" id="node69" href="_i_image_8hpp.html" title="IImage.hpp" alt="" coords="2033,155,2119,181"/><area shape="rect" id="node72" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="2143,155,2232,181"/><area shape="rect" id="node75" href="_i_module_8hpp.html" title="IModule.hpp" alt="" coords="2257,155,2348,181"/><area shape="rect" id="node78" href="_i_module_manager_8hpp.html" title="IModuleManager.hpp" alt="" coords="2373,155,2515,181"/><area shape="rect" id="node81" href="_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="2540,155,2628,181"/><area shape="rect" id="node84" href="_i_resource_8hpp.html" title="IResource.hpp" alt="" coords="2653,155,2757,181"/><area shape="rect" id="node87" href="_i_parameter_8hpp.html" title="IParameter.hpp" alt="" coords="2782,155,2892,181"/><area shape="rect" id="node90" href="_i_pass_8hpp.html" title="IPass.hpp" alt="" coords="2917,155,2997,181"/><area shape="rect" id="node93" href="_i_shader_8hpp.html" title="IShader.hpp" alt="" coords="3021,155,3112,181"/><area shape="rect" id="node96" href="_i_technique_8hpp.html" title="ITechnique.hpp" alt="" coords="3136,155,3245,181"/><area shape="rect" id="node99" href="_i_texture_8hpp.html" title="ITexture.hpp" alt="" coords="3269,155,3363,181"/><area shape="rect" id="node29" href="_build_version_8hpp.html" title="BuildVersion.hpp" alt="" coords="848,229,968,256"/></map>
+<area shape="rect" id="node3" href="_voodoo_internal_8hpp.html" title="VoodooInternal.hpp" alt="" coords="1033,80,1167,107"/><area shape="rect" id="node5" href="_voodoo_framework_8hpp.html" title="This file is the public&#45;facing include for the Voodoo Shader core." alt="" coords="1889,155,2044,181"/><area shape="rect" id="node9" href="_voodoo_debug_8hpp.html" title="VoodooDebug.hpp" alt="" coords="272,229,400,256"/><area shape="rect" id="node11" href="_voodoo_types_8hpp.html" title="VoodooTypes.hpp" alt="" coords="425,229,551,256"/><area shape="rect" id="node27" href="_voodoo_version_8hpp.html" title="VoodooVersion.hpp" alt="" coords="1198,229,1332,256"/><area shape="rect" id="node31" href="_converter_8hpp.html" title="Converter.hpp" alt="" coords="1357,229,1459,256"/><area shape="rect" id="node34" href="_exception_8hpp.html" title="Exception.hpp" alt="" coords="762,229,867,256"/><area shape="rect" id="node37" href="_string_8hpp.html" title="String.hpp" alt="" coords="775,379,856,405"/><area shape="rect" id="node43" href="_string_format_8hpp.html" title="StringFormat.hpp" alt="" coords="892,229,1015,256"/><area shape="rect" id="node51" href="_regex_8hpp.html" title="Regex.hpp" alt="" coords="1090,229,1173,256"/><area shape="rect" id="node56" href="_i_object_8hpp.html" title="IObject.hpp" alt="" coords="1483,229,1571,256"/><area shape="rect" id="node59" href="_i_binding_8hpp.html" title="IBinding.hpp" alt="" coords="1595,229,1688,256"/><area shape="rect" id="node62" href="_i_core_8hpp.html" title="ICore.hpp" alt="" coords="1712,229,1789,256"/><area shape="rect" id="node65" href="_i_file_8hpp.html" title="IFile.hpp" alt="" coords="1814,229,1884,256"/><area shape="rect" id="node68" href="_i_filesystem_8hpp.html" title="IFileSystem.hpp" alt="" coords="1909,229,2024,256"/><area shape="rect" id="node71" href="_i_hook_manager_8hpp.html" title="IHookManager.hpp" alt="" coords="2049,229,2180,256"/><area shape="rect" id="node74" href="_i_logger_8hpp.html" title="ILogger.hpp" alt="" coords="2205,229,2293,256"/><area shape="rect" id="node77" href="_i_module_8hpp.html" title="IModule.hpp" alt="" coords="2318,229,2409,256"/><area shape="rect" id="node80" href="_i_module_manager_8hpp.html" title="IModuleManager.hpp" alt="" coords="2434,229,2576,256"/><area shape="rect" id="node83" href="_i_parser_8hpp.html" title="IParser.hpp" alt="" coords="2601,229,2689,256"/><area shape="rect" id="node86" href="_i_resource_8hpp.html" title="IResource.hpp" alt="" coords="2714,229,2819,256"/><area shape="rect" id="node89" href="_i_effect_8hpp.html" title="IEffect.hpp" alt="" coords="2844,229,2927,256"/><area shape="rect" id="node92" href="_i_pass_8hpp.html" title="IPass.hpp" alt="" coords="2951,229,3031,256"/><area shape="rect" id="node95" href="_i_technique_8hpp.html" title="ITechnique.hpp" alt="" coords="3055,229,3164,256"/><area shape="rect" id="node98" href="_i_parameter_8hpp.html" title="IParameter.hpp" alt="" coords="3189,229,3299,256"/><area shape="rect" id="node101" href="_i_texture_8hpp.html" title="ITexture.hpp" alt="" coords="3324,229,3417,256"/><area shape="rect" id="node29" href="_build_version_8hpp.html" title="BuildVersion.hpp" alt="" coords="1205,304,1325,331"/><area shape="rect" id="node46" href="_stream_8hpp.html" title="Stream.hpp" alt="" coords="909,304,997,331"/></map>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
@@ -101,10 +102,6 @@ Classes</h2></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html">VoodooShader</a></td></tr>
-<tr><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a3462403cf46011b17870e0dd8b464232">VoodooShader::Voodoo_CgErrorHandler_Func</a> (CGcontext pContext, CGerror error, void *pCore)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-member function provided to Cg as an error handling callback.  <a href="#a3462403cf46011b17870e0dd8b464232"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">EXTERN_C const Uuid&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_voodoo_shader.html#a6652e64c0b89642758fcf645575cf44e">VoodooShader::CLSID_VSCore</a> = {0x9B, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}</td></tr>
@@ -114,7 +111,7 @@ Variables</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Framework/Core/String.hpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -93,225 +93,234 @@
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024 <span class="preprocessor">#if !defined(VOODOO_NO_STDLIB)</span>
 <a name="l00025"></a>00025 <span class="preprocessor"></span><span class="preprocessor">#   include &lt;string&gt;</span>
-<a name="l00026"></a>00026 <span class="preprocessor">#endif</span>
-<a name="l00027"></a>00027 <span class="preprocessor"></span>
-<a name="l00028"></a>00028 <span class="keyword">namespace </span>VoodooShader
-<a name="l00029"></a>00029 {
-<a name="l00039"></a><a class="code" href="class_voodoo_shader_1_1_string.html">00039</a>     <span class="keyword">class </span><a class="code" href="group__voodoo__macros__decl.html#ga64a3622e4b9bb13e6e7a451bfaa84a48" title="Declares the DLL visibility type for functions.">VOODOO_API</a> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>
-<a name="l00040"></a>00040     {
-<a name="l00041"></a>00041         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a>;
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043     <span class="keyword">public</span>:
-<a name="l00051"></a>00051         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>();
-<a name="l00056"></a>00056         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">char</span> ch);
-<a name="l00061"></a>00061         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_z_ <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
-<a name="l00067"></a>00067         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">char</span> ch);
-<a name="l00073"></a>00073         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
-<a name="l00078"></a>00078         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00083"></a>00083         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00089"></a>00089         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00095"></a>00095         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00101"></a>00101         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str);
-<a name="l00109"></a>00109         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; uuid);
-<a name="l00110"></a>00110 <span class="preprocessor">#if defined(_VECTOR_)</span>
-<a name="l00111"></a>00111 <span class="preprocessor"></span>
-<a name="l00115"></a>00115         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> std::vector&lt;char&gt; &amp; vec) :
-<a name="l00116"></a>00116             m_Impl(<span class="keyword">nullptr</span>)
-<a name="l00117"></a>00117         {
-<a name="l00118"></a>00118             this-&gt;CInit(0, &amp;vec[0]);
-<a name="l00119"></a>00119         }
-<a name="l00124"></a>00124         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> std::vector&lt;wchar_t&gt; &amp; vec) :
-<a name="l00125"></a>00125             m_Impl(<span class="keyword">nullptr</span>)
-<a name="l00126"></a>00126         {
-<a name="l00127"></a>00127             this-&gt;WInit(0, &amp;vec[0]);
-<a name="l00128"></a>00128         }
-<a name="l00129"></a>00129 <span class="preprocessor">#endif</span>
-<a name="l00130"></a>00130 <span class="preprocessor"></span><span class="preprocessor">#if defined(_STRING_)</span>
-<a name="l00131"></a>00131 <span class="preprocessor"></span>
-<a name="l00135"></a>00135         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> std::string &amp; str) :
-<a name="l00136"></a>00136             m_Impl(<span class="keyword">nullptr</span>)
-<a name="l00137"></a>00137         {
-<a name="l00138"></a>00138             this-&gt;CInit(0, str.c_str());
-<a name="l00139"></a>00139         }
-<a name="l00144"></a>00144         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> std::wstring &amp; str) :
-<a name="l00145"></a>00145             m_Impl(<span class="keyword">nullptr</span>)
-<a name="l00146"></a>00146         {
-<a name="l00147"></a>00147             this-&gt;WInit(0, str.c_str());
-<a name="l00148"></a>00148         };
-<a name="l00149"></a>00149 <span class="preprocessor">#endif</span>
-<a name="l00150"></a>00150 <span class="preprocessor"></span>
-<a name="l00160"></a>00160         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Time(time_t * pTime = <span class="keyword">nullptr</span>);
-<a name="l00166"></a>00166         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Date(time_t * pTime = <span class="keyword">nullptr</span>);
-<a name="l00171"></a>00171         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Ticks();
-<a name="l00175"></a>00175         ~<a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>();
-<a name="l00180"></a>00180         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00181"></a>00181         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00182"></a>00182         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00183"></a>00183         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00184"></a>00184         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str);
-<a name="l00185"></a>00185         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00186"></a>00186         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00187"></a>00187         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00188"></a>00188         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00189"></a>00189         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str);
-<a name="l00190"></a>00190         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Clear();
-<a name="l00191"></a>00191         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00192"></a>00192         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
-<a name="l00193"></a>00193         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00194"></a>00194         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00195"></a>00195         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str);
-<a name="l00196"></a>00196         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Truncate(_In_ uint32_t size);
-<a name="l00202"></a>00202         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> ToLower() <span class="keyword">const</span>;
-<a name="l00203"></a>00203         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> ToUpper() <span class="keyword">const</span>;
-<a name="l00216"></a>00216         uint32_t Split
-<a name="l00217"></a>00217         (
-<a name="l00218"></a>00218             _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; delims, 
-<a name="l00219"></a>00219             _In_ <span class="keyword">const</span> uint32_t count, 
-<a name="l00220"></a>00220             _In_opt_count_(count) <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> * pStrings, 
-<a name="l00221"></a>00221             _In_ <span class="keywordtype">bool</span> stripEmpty = <span class="keyword">false</span>
-<a name="l00222"></a>00222         ) <span class="keyword">const</span>;
-<a name="l00237"></a>00237         <span class="keywordtype">bool</span> ToUuid(_Out_ <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid) <span class="keyword">const</span>;
-<a name="l00247"></a>00247         int32_t ToCharStr(_In_ int32_t size, _Inout_opt_count_(size) <span class="keywordtype">char</span> * <span class="keyword">const</span> pBuffer) <span class="keyword">const</span>;
-<a name="l00248"></a>00248 <span class="preprocessor">#if defined(_STRING_)</span>
-<a name="l00249"></a>00249 <span class="preprocessor"></span>
-<a name="l00254"></a>00254         std::wstring ToString()<span class="keyword"> const</span>
-<a name="l00255"></a>00255 <span class="keyword">        </span>{
-<a name="l00256"></a>00256             <span class="keywordflow">return</span> std::wstring(this-&gt;GetData());
-<a name="l00257"></a>00257         };
-<a name="l00258"></a>00258 <span class="preprocessor">#endif</span>
-<a name="l00259"></a>00259 <span class="preprocessor"></span>
-<a name="l00264"></a>00264         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Left(_In_ uint32_t count) <span class="keyword">const</span>;
-<a name="l00265"></a>00265         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Right(_In_ uint32_t count) <span class="keyword">const</span>;
-<a name="l00266"></a>00266         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Substr(_In_ uint32_t start, _In_ uint32_t count = <a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28" title="Character positions indicating beyond the end of the string or not found.">String::Npos</a>) <span class="keyword">const</span>;
-<a name="l00272"></a>00272         <span class="keywordtype">bool</span> Compare(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00273"></a>00273         <span class="keywordtype">bool</span> Compare(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00274"></a>00274         <span class="keywordtype">bool</span> Compare(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00275"></a>00275         <span class="keywordtype">bool</span> Contains(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00276"></a>00276         <span class="keywordtype">bool</span> Contains(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00277"></a>00277         <span class="keywordtype">bool</span> Contains(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00278"></a>00278         <span class="keywordtype">bool</span> StartsWith(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00279"></a>00279         <span class="keywordtype">bool</span> StartsWith(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00280"></a>00280         <span class="keywordtype">bool</span> StartsWith(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00281"></a>00281         <span class="keywordtype">bool</span> EndsWith(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00282"></a>00282         <span class="keywordtype">bool</span> EndsWith(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00283"></a>00283         <span class="keywordtype">bool</span> EndsWith(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00289"></a>00289         uint32_t Find(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00290"></a>00290         uint32_t Find(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00291"></a>00291         uint32_t Find(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00292"></a>00292         uint32_t ReverseFind(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00293"></a>00293         uint32_t ReverseFind(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00294"></a>00294         uint32_t ReverseFind(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
-<a name="l00295"></a>00295         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Replace(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> fch, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> rch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00296"></a>00296         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Replace(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, _In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * rstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00297"></a>00297         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Replace(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; fstr, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; rstr, _In_ <span class="keywordtype">bool</span> caseSensitive = <span class="keyword">true</span>);
-<a name="l00298"></a>00298         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Remove(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> fch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00299"></a>00299         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Remove(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00300"></a>00300         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Remove(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; fstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
-<a name="l00309"></a>00309         uint32_t GetLength() <span class="keyword">const</span>;
-<a name="l00313"></a>00313         <span class="keywordtype">bool</span> IsEmpty() <span class="keyword">const</span>;
-<a name="l00319"></a>00319         <span class="keywordtype">void</span> Reserve(uint32_t size);
-<a name="l00324"></a>00324         <span class="keywordtype">wchar_t</span> GetAt(_In_ uint32_t pos) <span class="keyword">const</span>;
-<a name="l00330"></a>00330         <span class="keywordtype">void</span> SetAt(_In_ uint32_t pos, _In_ <span class="keywordtype">wchar_t</span> data);
-<a name="l00335"></a>00335         <span class="keywordtype">wchar_t</span> &amp; operator[](_In_ uint32_t pos);
-<a name="l00341"></a>00341         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * GetData() <span class="keyword">const</span>;
-<a name="l00347"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a77dfd43d6c21f08fcaee3e7407ff6b08">00347</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator=(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
-<a name="l00348"></a>00348         {
-<a name="l00349"></a>00349             this-&gt;Assign(ch);
-<a name="l00350"></a>00350             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00351"></a>00351         };
-<a name="l00352"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a311b7d76e49703207a0e52a87b6df901">00352</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
-<a name="l00353"></a>00353         {
-<a name="l00354"></a>00354             this-&gt;Assign(str);
-<a name="l00355"></a>00355             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00356"></a>00356         };
-<a name="l00357"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a7d23508a66d721c07f5a0f2a0b551973">00357</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)
-<a name="l00358"></a>00358         {
-<a name="l00359"></a>00359             this-&gt;Assign(str);
-<a name="l00360"></a>00360             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00361"></a>00361         };
-<a name="l00362"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ae66d9f2b26b6df43519e58cd78137c65">00362</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator+=(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
-<a name="l00363"></a>00363         {
-<a name="l00364"></a>00364             this-&gt;Append(ch);
-<a name="l00365"></a>00365             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00366"></a>00366         };
-<a name="l00367"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ae1ea5578aa57e041dd9ed462c90cb3b6">00367</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator+=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
-<a name="l00368"></a>00368         {
-<a name="l00369"></a>00369             this-&gt;Append(str);
-<a name="l00370"></a>00370             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00371"></a>00371         };
-<a name="l00372"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a769cbf06bd70053af3eb2f9c6c05f2ee">00372</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator+=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)
-<a name="l00373"></a>00373         {
-<a name="l00374"></a>00374             this-&gt;Append(str);
-<a name="l00375"></a>00375             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
-<a name="l00376"></a>00376         };
-<a name="l00377"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a9e71bfbe83f797e5c15d39444fd4c5b0">00377</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> operator+(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)<span class="keyword"> const</span>
-<a name="l00378"></a>00378 <span class="keyword">        </span>{
-<a name="l00379"></a>00379             <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> c = (*this);
-<a name="l00380"></a>00380             c += ch;
-<a name="l00381"></a>00381             <span class="keywordflow">return</span> c;
-<a name="l00382"></a>00382         };
-<a name="l00383"></a><a class="code" href="class_voodoo_shader_1_1_string.html#acbd59455f74a737d9ec5b274fd19b638">00383</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> operator+(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00384"></a>00384 <span class="keyword">        </span>{
-<a name="l00385"></a>00385             <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> c = (*this);
-<a name="l00386"></a>00386             c += str;
-<a name="l00387"></a>00387             <span class="keywordflow">return</span> c;
+<a name="l00026"></a>00026 <span class="preprocessor">#   include &lt;vector&gt;</span>
+<a name="l00027"></a>00027 <span class="preprocessor">#endif</span>
+<a name="l00028"></a>00028 <span class="preprocessor"></span>
+<a name="l00029"></a>00029 <span class="keyword">namespace </span>VoodooShader
+<a name="l00030"></a>00030 {
+<a name="l00040"></a><a class="code" href="class_voodoo_shader_1_1_string.html">00040</a>     <span class="keyword">class </span><a class="code" href="group__voodoo__macros__decl.html#ga64a3622e4b9bb13e6e7a451bfaa84a48" title="Declares the DLL visibility type for functions.">VOODOO_API</a> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>
+<a name="l00041"></a>00041     {
+<a name="l00042"></a>00042         <span class="keyword">class </span><a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a>;
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044     <span class="keyword">public</span>:
+<a name="l00052"></a>00052         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>();
+<a name="l00057"></a>00057         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">char</span> ch);
+<a name="l00062"></a>00062         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_z_ <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
+<a name="l00068"></a>00068         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">char</span> ch);
+<a name="l00074"></a>00074         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
+<a name="l00079"></a>00079         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00084"></a>00084         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00090"></a>00090         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00096"></a>00096         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00102"></a>00102         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str);
+<a name="l00110"></a>00110         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; uuid);
+<a name="l00111"></a>00111 <span class="preprocessor">#if defined(_VECTOR_)</span>
+<a name="l00112"></a>00112 <span class="preprocessor"></span>
+<a name="l00116"></a>00116         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> std::vector&lt;char&gt; &amp; vec) :
+<a name="l00117"></a>00117             m_Impl(<span class="keyword">nullptr</span>)
+<a name="l00118"></a>00118         {
+<a name="l00119"></a>00119             this-&gt;CInit(0, &amp;vec[0]);
+<a name="l00120"></a>00120         }
+<a name="l00125"></a>00125         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> std::vector&lt;wchar_t&gt; &amp; vec) :
+<a name="l00126"></a>00126             m_Impl(<span class="keyword">nullptr</span>)
+<a name="l00127"></a>00127         {
+<a name="l00128"></a>00128             this-&gt;WInit(0, &amp;vec[0]);
+<a name="l00129"></a>00129         }
+<a name="l00130"></a>00130 <span class="preprocessor">#endif</span>
+<a name="l00131"></a>00131 <span class="preprocessor"></span><span class="preprocessor">#if defined(_STRING_)</span>
+<a name="l00132"></a>00132 <span class="preprocessor"></span>
+<a name="l00136"></a>00136         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> std::string &amp; str) :
+<a name="l00137"></a>00137             m_Impl(<span class="keyword">nullptr</span>)
+<a name="l00138"></a>00138         {
+<a name="l00139"></a>00139             this-&gt;CInit(0, str.c_str());
+<a name="l00140"></a>00140         }
+<a name="l00145"></a>00145         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>(_In_ <span class="keyword">const</span> std::wstring &amp; str) :
+<a name="l00146"></a>00146             m_Impl(<span class="keyword">nullptr</span>)
+<a name="l00147"></a>00147         {
+<a name="l00148"></a>00148             this-&gt;WInit(0, str.c_str());
+<a name="l00149"></a>00149         };
+<a name="l00150"></a>00150 <span class="preprocessor">#endif</span>
+<a name="l00151"></a>00151 <span class="preprocessor"></span>
+<a name="l00161"></a>00161         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Time(time_t * pTime = <span class="keyword">nullptr</span>);
+<a name="l00167"></a>00167         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Date(time_t * pTime = <span class="keyword">nullptr</span>);
+<a name="l00172"></a>00172         <span class="keyword">static</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Ticks();
+<a name="l00176"></a>00176         ~<a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a>();
+<a name="l00181"></a>00181         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00182"></a>00182         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00183"></a>00183         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00184"></a>00184         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00185"></a>00185         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Append(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str);
+<a name="l00186"></a>00186         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00187"></a>00187         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00188"></a>00188         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00189"></a>00189         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00190"></a>00190         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Assign(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str);
+<a name="l00191"></a>00191         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Clear();
+<a name="l00192"></a>00192         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00193"></a>00193         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> uint32_t size, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch);
+<a name="l00194"></a>00194         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00195"></a>00195         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00196"></a>00196         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Prepend(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str);
+<a name="l00197"></a>00197         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Truncate(_In_ uint32_t size);
+<a name="l00203"></a>00203         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> ToLower() <span class="keyword">const</span>;
+<a name="l00204"></a>00204         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> ToUpper() <span class="keyword">const</span>;
+<a name="l00217"></a>00217         uint32_t Split
+<a name="l00218"></a>00218         (
+<a name="l00219"></a>00219             _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; delims, 
+<a name="l00220"></a>00220             _In_ <span class="keyword">const</span> uint32_t count, 
+<a name="l00221"></a>00221             _In_opt_count_(count) <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> * pStrings, 
+<a name="l00222"></a>00222             _In_ <span class="keywordtype">bool</span> stripEmpty = <span class="keyword">false</span>
+<a name="l00223"></a>00223         ) <span class="keyword">const</span>;
+<a name="l00238"></a>00238         <span class="keywordtype">bool</span> ToUuid(_Out_ <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> * pUuid) <span class="keyword">const</span>;
+<a name="l00248"></a>00248         int32_t ToChars(_In_ int32_t size, _Inout_opt_count_(size) <span class="keywordtype">char</span> * pBuffer) <span class="keyword">const</span>;
+<a name="l00249"></a>00249 <span class="preprocessor">#if defined(_STRING_)</span>
+<a name="l00250"></a>00250 <span class="preprocessor"></span>
+<a name="l00255"></a>00255         std::wstring ToString()<span class="keyword"> const</span>
+<a name="l00256"></a>00256 <span class="keyword">        </span>{
+<a name="l00257"></a>00257             <span class="keywordflow">return</span> std::wstring(this-&gt;GetData());
+<a name="l00258"></a>00258         };
+<a name="l00259"></a>00259 
+<a name="l00263"></a>00263         std::string ToStringA()<span class="keyword"> const</span>
+<a name="l00264"></a>00264 <span class="keyword">        </span>{
+<a name="l00265"></a>00265             uint32_t len = this-&gt;ToChars(0, <span class="keyword">nullptr</span>);
+<a name="l00266"></a>00266             std::vector&lt;char&gt; buffer(len);
+<a name="l00267"></a>00267             this-&gt;ToChars(len, &amp;buffer[0]);
+<a name="l00268"></a>00268             <span class="keywordflow">return</span> std::string(buffer.begin(), buffer.end());
+<a name="l00269"></a>00269         }
+<a name="l00270"></a>00270 <span class="preprocessor">#endif</span>
+<a name="l00271"></a>00271 <span class="preprocessor"></span>
+<a name="l00276"></a>00276         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Left(_In_ uint32_t count) <span class="keyword">const</span>;
+<a name="l00277"></a>00277         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Right(_In_ uint32_t count) <span class="keyword">const</span>;
+<a name="l00278"></a>00278         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> Substr(_In_ uint32_t start, _In_ uint32_t count = <a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28" title="Character positions indicating beyond the end of the string or not found.">String::Npos</a>) <span class="keyword">const</span>;
+<a name="l00284"></a>00284         <span class="keywordtype">bool</span> Compare(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00285"></a>00285         <span class="keywordtype">bool</span> Compare(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00286"></a>00286         <span class="keywordtype">bool</span> Compare(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00287"></a>00287         <span class="keywordtype">bool</span> Contains(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00288"></a>00288         <span class="keywordtype">bool</span> Contains(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00289"></a>00289         <span class="keywordtype">bool</span> Contains(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00290"></a>00290         <span class="keywordtype">bool</span> StartsWith(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00291"></a>00291         <span class="keywordtype">bool</span> StartsWith(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00292"></a>00292         <span class="keywordtype">bool</span> StartsWith(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00293"></a>00293         <span class="keywordtype">bool</span> EndsWith(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00294"></a>00294         <span class="keywordtype">bool</span> EndsWith(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00295"></a>00295         <span class="keywordtype">bool</span> EndsWith(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00301"></a>00301         uint32_t Find(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00302"></a>00302         uint32_t Find(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00303"></a>00303         uint32_t Find(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00304"></a>00304         uint32_t ReverseFind(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00305"></a>00305         uint32_t ReverseFind(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00306"></a>00306         uint32_t ReverseFind(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>) <span class="keyword">const</span>;
+<a name="l00307"></a>00307         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Replace(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> fch, _In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> rch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00308"></a>00308         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Replace(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, _In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * rstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00309"></a>00309         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Replace(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; fstr, _In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; rstr, _In_ <span class="keywordtype">bool</span> caseSensitive = <span class="keyword">true</span>);
+<a name="l00310"></a>00310         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Remove(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> fch, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00311"></a>00311         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Remove(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * fstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00312"></a>00312         <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; Remove(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; fstr, _In_ <span class="keywordtype">bool</span> useCase = <span class="keyword">true</span>);
+<a name="l00321"></a>00321         uint32_t GetLength() <span class="keyword">const</span>;
+<a name="l00325"></a>00325         <span class="keywordtype">bool</span> IsEmpty() <span class="keyword">const</span>;
+<a name="l00331"></a>00331         <span class="keywordtype">void</span> Reserve(uint32_t size);
+<a name="l00336"></a>00336         <span class="keywordtype">wchar_t</span> GetAt(_In_ uint32_t pos) <span class="keyword">const</span>;
+<a name="l00342"></a>00342         <span class="keywordtype">void</span> SetAt(_In_ uint32_t pos, _In_ <span class="keywordtype">wchar_t</span> data);
+<a name="l00347"></a>00347         <span class="keywordtype">wchar_t</span> &amp; operator[](_In_ uint32_t pos);
+<a name="l00353"></a>00353         <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * GetData() <span class="keyword">const</span>;
+<a name="l00359"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a77dfd43d6c21f08fcaee3e7407ff6b08">00359</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator=(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
+<a name="l00360"></a>00360         {
+<a name="l00361"></a>00361             this-&gt;Assign(ch);
+<a name="l00362"></a>00362             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00363"></a>00363         };
+<a name="l00364"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a311b7d76e49703207a0e52a87b6df901">00364</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
+<a name="l00365"></a>00365         {
+<a name="l00366"></a>00366             this-&gt;Assign(str);
+<a name="l00367"></a>00367             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00368"></a>00368         };
+<a name="l00369"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a7d23508a66d721c07f5a0f2a0b551973">00369</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)
+<a name="l00370"></a>00370         {
+<a name="l00371"></a>00371             this-&gt;Assign(str);
+<a name="l00372"></a>00372             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00373"></a>00373         };
+<a name="l00374"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ae66d9f2b26b6df43519e58cd78137c65">00374</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator+=(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)
+<a name="l00375"></a>00375         {
+<a name="l00376"></a>00376             this-&gt;Append(ch);
+<a name="l00377"></a>00377             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00378"></a>00378         };
+<a name="l00379"></a><a class="code" href="class_voodoo_shader_1_1_string.html#ae1ea5578aa57e041dd9ed462c90cb3b6">00379</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator+=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)
+<a name="l00380"></a>00380         {
+<a name="l00381"></a>00381             this-&gt;Append(str);
+<a name="l00382"></a>00382             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
+<a name="l00383"></a>00383         };
+<a name="l00384"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a769cbf06bd70053af3eb2f9c6c05f2ee">00384</a>         <span class="keyword">inline</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; operator+=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)
+<a name="l00385"></a>00385         {
+<a name="l00386"></a>00386             this-&gt;Append(str);
+<a name="l00387"></a>00387             <span class="keywordflow">return</span> (*<span class="keyword">this</span>);
 <a name="l00388"></a>00388         };
-<a name="l00389"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a697518bcfa9251bab5e883ad0b0e7a30">00389</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> operator+(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00389"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a9e71bfbe83f797e5c15d39444fd4c5b0">00389</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> operator+(_In_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> ch)<span class="keyword"> const</span>
 <a name="l00390"></a>00390 <span class="keyword">        </span>{
 <a name="l00391"></a>00391             <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> c = (*this);
-<a name="l00392"></a>00392             c += str;
+<a name="l00392"></a>00392             c += ch;
 <a name="l00393"></a>00393             <span class="keywordflow">return</span> c;
 <a name="l00394"></a>00394         };
-<a name="l00400"></a><a class="code" href="class_voodoo_shader_1_1_string.html#af735cb37117e286ce1461818e17226d4">00400</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator==(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00401"></a>00401 <span class="keyword">        </span>{
-<a name="l00402"></a>00402             <span class="keywordflow">return</span> this-&gt;Compare(str);
-<a name="l00403"></a>00403         };
-<a name="l00404"></a><a class="code" href="class_voodoo_shader_1_1_string.html#af209fbe84160357dadda6f2e08912c21">00404</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator==(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
-<a name="l00405"></a>00405 <span class="keyword">        </span>{
-<a name="l00406"></a>00406             <span class="keywordflow">return</span> this-&gt;Compare(str);
-<a name="l00407"></a>00407         };
-<a name="l00408"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a5474f7ebd81546493ac87517a68a627c">00408</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00409"></a>00409 <span class="keyword">        </span>{
-<a name="l00410"></a>00410             <span class="keywordflow">return</span> !(this-&gt;operator==(str));
-<a name="l00411"></a>00411         };
-<a name="l00412"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a1dda4cfb730b81d0be57bfdcc9d033d5">00412</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00395"></a><a class="code" href="class_voodoo_shader_1_1_string.html#acbd59455f74a737d9ec5b274fd19b638">00395</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> operator+(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00396"></a>00396 <span class="keyword">        </span>{
+<a name="l00397"></a>00397             <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> c = (*this);
+<a name="l00398"></a>00398             c += str;
+<a name="l00399"></a>00399             <span class="keywordflow">return</span> c;
+<a name="l00400"></a>00400         };
+<a name="l00401"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a697518bcfa9251bab5e883ad0b0e7a30">00401</a>         <span class="keyword">inline</span> <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> operator+(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00402"></a>00402 <span class="keyword">        </span>{
+<a name="l00403"></a>00403             <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> c = (*this);
+<a name="l00404"></a>00404             c += str;
+<a name="l00405"></a>00405             <span class="keywordflow">return</span> c;
+<a name="l00406"></a>00406         };
+<a name="l00412"></a><a class="code" href="class_voodoo_shader_1_1_string.html#af735cb37117e286ce1461818e17226d4">00412</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator==(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
 <a name="l00413"></a>00413 <span class="keyword">        </span>{
-<a name="l00414"></a>00414             <span class="keywordflow">return</span> !(this-&gt;operator==(str));
+<a name="l00414"></a>00414             <span class="keywordflow">return</span> this-&gt;Compare(str);
 <a name="l00415"></a>00415         };
-<a name="l00416"></a>00416         <span class="keywordtype">bool</span> operator&lt;(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) <span class="keyword">const</span>;
-<a name="l00417"></a>00417         <span class="keywordtype">bool</span> operator&lt;(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str) <span class="keyword">const</span>;
-<a name="l00418"></a>00418         <span class="keywordtype">bool</span> operator&gt;(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) <span class="keyword">const</span>;
-<a name="l00419"></a>00419         <span class="keywordtype">bool</span> operator&gt;(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str) <span class="keyword">const</span>;
-<a name="l00420"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a5f9af256bf83bd05c5de000ef1d8fbcd">00420</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&lt;=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00416"></a><a class="code" href="class_voodoo_shader_1_1_string.html#af209fbe84160357dadda6f2e08912c21">00416</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator==(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00417"></a>00417 <span class="keyword">        </span>{
+<a name="l00418"></a>00418             <span class="keywordflow">return</span> this-&gt;Compare(str);
+<a name="l00419"></a>00419         };
+<a name="l00420"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a5474f7ebd81546493ac87517a68a627c">00420</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
 <a name="l00421"></a>00421 <span class="keyword">        </span>{
-<a name="l00422"></a>00422             <span class="keywordflow">return</span> !(this-&gt;operator&gt;(str));
+<a name="l00422"></a>00422             <span class="keywordflow">return</span> !(this-&gt;operator==(str));
 <a name="l00423"></a>00423         };
-<a name="l00424"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a9aff02f1ab5d259c0e40d1539ff155ab">00424</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&lt;=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00424"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a1dda4cfb730b81d0be57bfdcc9d033d5">00424</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator!=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
 <a name="l00425"></a>00425 <span class="keyword">        </span>{
-<a name="l00426"></a>00426             <span class="keywordflow">return</span> !(this-&gt;operator&gt;(str));
+<a name="l00426"></a>00426             <span class="keywordflow">return</span> !(this-&gt;operator==(str));
 <a name="l00427"></a>00427         };
-<a name="l00428"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a746ebd26146ec9cd09da3d3c7a72dabe">00428</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&gt;=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
-<a name="l00429"></a>00429 <span class="keyword">        </span>{
-<a name="l00430"></a>00430             <span class="keywordflow">return</span> !(this-&gt;operator&lt;(str));
-<a name="l00431"></a>00431         };
-<a name="l00432"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a644af4a4d1ec20e5a0e9a4e3d4183543">00432</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&gt;=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00428"></a>00428         <span class="keywordtype">bool</span> operator&lt;(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) <span class="keyword">const</span>;
+<a name="l00429"></a>00429         <span class="keywordtype">bool</span> operator&lt;(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str) <span class="keyword">const</span>;
+<a name="l00430"></a>00430         <span class="keywordtype">bool</span> operator&gt;(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str) <span class="keyword">const</span>;
+<a name="l00431"></a>00431         <span class="keywordtype">bool</span> operator&gt;(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str) <span class="keyword">const</span>;
+<a name="l00432"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a5f9af256bf83bd05c5de000ef1d8fbcd">00432</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&lt;=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
 <a name="l00433"></a>00433 <span class="keyword">        </span>{
-<a name="l00434"></a>00434             <span class="keywordflow">return</span> !(this-&gt;operator&lt;(str));
+<a name="l00434"></a>00434             <span class="keywordflow">return</span> !(this-&gt;operator&gt;(str));
 <a name="l00435"></a>00435         };
-<a name="l00442"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">00442</a>         <span class="keyword">static</span> <span class="keyword">const</span> uint32_t Npos = (uint32_t)-1;
-<a name="l00443"></a>00443 
-<a name="l00444"></a>00444     <span class="keyword">private</span>:
-<a name="l00448"></a>00448         <span class="keywordtype">void</span> CInit(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
-<a name="l00452"></a>00452         <span class="keywordtype">void</span> WInit(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
-<a name="l00453"></a>00453 
-<a name="l00454"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">00454</a>         <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a> * <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>;
-<a name="l00455"></a>00455     };
-<a name="l00456"></a>00456 }
+<a name="l00436"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a9aff02f1ab5d259c0e40d1539ff155ab">00436</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&lt;=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00437"></a>00437 <span class="keyword">        </span>{
+<a name="l00438"></a>00438             <span class="keywordflow">return</span> !(this-&gt;operator&gt;(str));
+<a name="l00439"></a>00439         };
+<a name="l00440"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a746ebd26146ec9cd09da3d3c7a72dabe">00440</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&gt;=(_In_z_ <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str)<span class="keyword"> const</span>
+<a name="l00441"></a>00441 <span class="keyword">        </span>{
+<a name="l00442"></a>00442             <span class="keywordflow">return</span> !(this-&gt;operator&lt;(str));
+<a name="l00443"></a>00443         };
+<a name="l00444"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a644af4a4d1ec20e5a0e9a4e3d4183543">00444</a>         <span class="keyword">inline</span> <span class="keywordtype">bool</span> operator&gt;=(_In_ <span class="keyword">const</span> <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> &amp; str)<span class="keyword"> const</span>
+<a name="l00445"></a>00445 <span class="keyword">        </span>{
+<a name="l00446"></a>00446             <span class="keywordflow">return</span> !(this-&gt;operator&lt;(str));
+<a name="l00447"></a>00447         };
+<a name="l00454"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28">00454</a>         <span class="keyword">static</span> <span class="keyword">const</span> uint32_t Npos = (uint32_t)-1;
+<a name="l00455"></a>00455 
+<a name="l00456"></a>00456     <span class="keyword">private</span>:
+<a name="l00460"></a>00460         <span class="keywordtype">void</span> CInit(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">char</span> * str);
+<a name="l00464"></a>00464         <span class="keywordtype">void</span> WInit(_In_ <span class="keyword">const</span> uint32_t size, _In_z_count_(size) <span class="keyword">const</span> <span class="keywordtype">wchar_t</span> * str);
+<a name="l00465"></a>00465 
+<a name="l00466"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">00466</a>         <a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html">StringImpl</a> * <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>;
+<a name="l00467"></a>00467     };
+<a name="l00468"></a>00468 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

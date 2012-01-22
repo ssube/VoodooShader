@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Class Members</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -63,6 +63,7 @@
       <li class="current"><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_type.html"><span>Typedefs</span></a></li>
       <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
@@ -101,23 +102,16 @@
 
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
 <li>Open()
-: <a class="el" href="class_voodoo_shader_1_1_i_file.html#a4d4e322e8da0ada346931c376c7163d9">VoodooShader::IFile</a>
-, <a class="el" href="class_voodoo_shader_1_1_i_image.html#a89db22c98599094818e5e7d1972310dc">VoodooShader::IImage</a>
-, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a325af6d8151608d1adb82fe4585641b8">VoodooShader::ILogger</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a48fe68dbd47e5ace6e7a2710c146072d">VoodooShader::VSLogger</a>
-, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a7ff4b2ef9fbbbf0691a6b081e841ae51">VoodooShader::ILogger</a>
-, <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a7113715d28d135b84f6808050a3623bd">VoodooShader::VSLogger</a>
-, <a class="el" href="class_voodoo_shader_1_1_voodoo_w_f_s_1_1_v_s_w_file_impl.html#a82ae78fefde31b1032d98dd0124d283c">VoodooShader::VoodooWFS::VSWFileImpl</a>
-</li>
-<li>OpenImage()
-: <a class="el" href="class_voodoo_shader_1_1_i_file.html#a4511d42e3edfaf473230df7cd3f13306">VoodooShader::IFile</a>
-, <a class="el" href="class_voodoo_shader_1_1_i_image.html#a352a7544af378d44b54c07c159eae20b">VoodooShader::IImage</a>
+: <a class="el" href="class_voodoo_shader_1_1_i_file.html#a9663e30bbbf8c2f8448d39cc0734d5ef">VoodooShader::IFile</a>
+, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a6e198f83829d81b49f94561efd7d6e4c">VoodooShader::ILogger</a>
+, <a class="el" href="class_voodoo_shader_1_1_v_s_logger.html#a579946ca562f6cf3cb65ffa63c5711f5">VoodooShader::VSLogger</a>
+, <a class="el" href="class_voodoo_shader_1_1_i_logger.html#a1f617ad4095a83801a81d7431e4b7169">VoodooShader::ILogger</a>
 </li>
 <li>operator String()
-: <a class="el" href="class_voodoo_shader_1_1_format.html#a90b6fa168310e2adf1bb07c3aafc7914">VoodooShader::Format</a>
+: <a class="el" href="class_voodoo_shader_1_1_string_format.html#a8b15f106bb16d41efd4b6a8ecd2d9e1d">VoodooShader::StringFormat</a>
 </li>
 <li>operator!=()
-: <a class="el" href="class_voodoo_shader_1_1_string.html#a5474f7ebd81546493ac87517a68a627c">VoodooShader::String</a>
+: <a class="el" href="class_voodoo_shader_1_1_string.html#a1dda4cfb730b81d0be57bfdcc9d033d5">VoodooShader::String</a>
 </li>
 <li>operator+()
 : <a class="el" href="class_voodoo_shader_1_1_string.html#a9e71bfbe83f797e5c15d39444fd4c5b0">VoodooShader::String</a>
@@ -126,22 +120,24 @@
 : <a class="el" href="class_voodoo_shader_1_1_string.html#ae66d9f2b26b6df43519e58cd78137c65">VoodooShader::String</a>
 </li>
 <li>operator&lt;()
-: <a class="el" href="class_voodoo_shader_1_1_string.html#ab7e56f40374fcf2a537f259ab9d0d38d">VoodooShader::String</a>
+: <a class="el" href="class_voodoo_shader_1_1_string.html#a4085f778cb189eb3c5547e43d7149b32">VoodooShader::String</a>
 </li>
 <li>operator&lt;&lt;()
-: <a class="el" href="class_voodoo_shader_1_1_format.html#ab01b1857a9c5797722653bd02a7de269">VoodooShader::Format</a>
+: <a class="el" href="class_voodoo_shader_1_1_string_format.html#a147ea653c539ba0d2b35a1cd75f41c19">VoodooShader::StringFormat</a>
 </li>
 <li>operator&lt;=()
 : <a class="el" href="class_voodoo_shader_1_1_string.html#a5f9af256bf83bd05c5de000ef1d8fbcd">VoodooShader::String</a>
 </li>
 <li>operator=()
-: <a class="el" href="class_voodoo_shader_1_1_string.html#a311b7d76e49703207a0e52a87b6df901">VoodooShader::String</a>
+: <a class="el" href="class_voodoo_shader_1_1_string.html#a7d23508a66d721c07f5a0f2a0b551973">VoodooShader::String</a>
+, <a class="el" href="class_voodoo_shader_1_1_stream_state.html#a0ea83f6f69283f8d189923143b691eae">VoodooShader::StreamState</a>
+, <a class="el" href="class_voodoo_shader_1_1_string.html#a77dfd43d6c21f08fcaee3e7407ff6b08">VoodooShader::String</a>
 </li>
 <li>operator==()
-: <a class="el" href="class_voodoo_shader_1_1_string.html#af209fbe84160357dadda6f2e08912c21">VoodooShader::String</a>
+: <a class="el" href="class_voodoo_shader_1_1_string.html#af735cb37117e286ce1461818e17226d4">VoodooShader::String</a>
 </li>
 <li>operator&gt;()
-: <a class="el" href="class_voodoo_shader_1_1_string.html#acc3f0dfcbac66ea3c80a7d67db024c8b">VoodooShader::String</a>
+: <a class="el" href="class_voodoo_shader_1_1_string.html#ac7cfcff10fc590090e067051a1e72317">VoodooShader::String</a>
 </li>
 <li>operator&gt;=()
 : <a class="el" href="class_voodoo_shader_1_1_string.html#a644af4a4d1ec20e5a0e9a4e3d4183543">VoodooShader::String</a>
@@ -150,14 +146,14 @@
 : <a class="el" href="class_voodoo_shader_1_1_string.html#a5fefa5643f6babb1f16b80f4cf9219bf">VoodooShader::String</a>
 </li>
 <li>Origin
-: <a class="el" href="struct_voodoo_shader_1_1_texture_region.html#a3d5028bbfd0d7879ef95ceb96ef3144d">VoodooShader::TextureRegion</a>
+: <a class="el" href="group__voodoo__types.html#ga3d5028bbfd0d7879ef95ceb96ef3144d">VoodooShader::TextureRegion</a>
 </li>
 </ul>
 </div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

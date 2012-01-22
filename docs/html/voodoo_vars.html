@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Variables</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -85,17 +85,17 @@ Variable States &amp; Recursion</h3>
  resourcedir = \resources\
 
  $(localroot)\subdir\file.png = M:\VoodooShader\\subdir\file.png
- $(gempath)\shaders\test.cgfx = M:\VoodooShader\Gem\\shaders\test.cgfx
+ $(gempath)\shaders\test.fx = M:\VoodooShader\Gem\\shaders\test.fx
  $(localroot)\$(resourcedir)\image.dds = M:\VoodooShader\\\resources\\image.dds
 </pre></div></dd></dl>
 <p>Variable names may also contain variables (as mentioned above). The syntax is identical, but the results are slightly more complex.</p>
-<dl class="user"><dt><b>Examples: (with PF_SingleSlash | PF_BackslashOnly)</b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\
+<dl class="user"><dt><b>Examples: (with VSParse_SingleSlash | VSParse_BackslashOnly)</b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\
  adapter = Frost
  Frost_respath = /resources/frost/
 
  $(basepath)/$($(adapter)_respath) = M:\VoodooShader\resources\frost\
 </pre></div></dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a441d18325c9ea9ac5f1a80c8674c2807">IParser::Parse()</a> with the <a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceaa78a4407cdd79e08686c5aaad7be7efb">PF_SlashSingle</a> flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>Repeated consecutive slashes will not cause errors with path parsing, although in some locations they have special meanings. They may cause errors when using the string for other reasons; calling <a class="el" href="class_voodoo_shader_1_1_i_parser.html#a0a5ea71bb0add834ec4de677d0f56b12">IParser::Parse()</a> with the <a class="el" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778ceabf2d4b9ab2a12075f66e884f6442b2ce">VSParse_SlashSingle</a> flag set will attempt to strip these. Finally, state variables and suppression use a variation on the name syntax.</dd></dl>
 <dl class="user"><dt><b>Examples:</b></dt><dd><div class="fragment"><pre class="fragment"> basepath = M:\VoodooShader\
  game.exe = $(adapter:Gem)
  Gem_Adapter = Voodoo_Gem.dll
@@ -115,13 +115,13 @@ System Variables</h2>
 Flags</h2>
 <p>The variable parser provides a small set of flags to control parsing modes.</p>
 <h3><a class="anchor" id="voodoo_vars_flags_slash_single"></a>
-PF_SingleSlash</h3>
+VSParse_SingleSlash</h3>
 <p>Removes repeated slashes, both forward and back. This processes each stage of the string before it is returned up a level, and is typically very reliable (even if variables place new slashes).</p>
 <h3><a class="anchor" id="voodoo_vars_flags_slash_type"></a>
-PF_SlashOnly &amp; PF_BackslashOnly</h3>
+VSParse_SlashOnly &amp; VSParse_BackslashOnly</h3>
 <p>Replaces all slashes with a single type (forward or back). This may be necessary; XPath syntax, for example, uses forward slashes while Windows paths tend to prefer backslashes. These may not be combined.</p>
 <h3><a class="anchor" id="voodoo_vars_flags_case"></a>
-PF_Lowercase &amp; PF_Uppercase</h3>
+VSParse_Lowercase &amp; VSParse_Uppercase</h3>
 <p>Transforms the string into a specific case. All alphabetic characters (a-z and A-Z) will be replaced with the given case.</p>
 <h2><a class="anchor" id="voodoo_vars_error"></a>
 Errors</h2>
@@ -193,7 +193,7 @@ Environment Variables</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

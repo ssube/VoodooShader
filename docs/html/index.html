@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Voodoo Shader Framework</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -56,12 +56,13 @@
 <div class="title">Voodoo Shader Framework </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The Voodoo Shader Framework is a set of support libraries designed to provide extensive shader integration into graphics applications, both before and after development. Voodoo uses a system of core modules and adapters to provide the widest compatibility and best performance possible across a wide range of applications and APIs. Voodoo supports both OpenGL and DirectX, using nVidia's Cg language. In addition, Voodoo provides a second processing step to provide shaders with easy access to other resources, especially textures.</p>
+<div class="textblock"><p>The Voodoo Shader Framework is a set of support libraries designed to provide extensive shader integration into graphics applications, both before and after development. Voodoo uses a system of core modules and adapters to provide the widest compatibility and best performance possible across a wide range of applications and APIs. Voodoo supports both OpenGL and DirectX, using the HLSL shader language and the MojoShader project.</p>
+<p>In addition, Voodoo provides a second processing step to provide shaders with easy access to game resources.</p>
 <p>The Voodoo core and supported shaders remain constant between target applications and adapters, providing a unified set of features and single target for shaders.</p>
 <h2><a class="anchor" id="voodoo_main_shaders"></a>
 Shader Support</h2>
-<p>Voodoo uses nVidia's Cg Toolkit to provide a common, simple shader language and cross-API compiler for widely supported shaders. Voodoo shaders run under both OpenGL and DirectX and can scale over a great variety of hardware, from OpenGL 1.1 to 4.0 and DirectX 8 to 11. Applications using any of the supported APIs are supported within Voodoo, with a near-identical feature set provided across the board.</p>
-<p>In addition to fully supporting the Cg language, Voodoo implements a second, internal linking stage to offer more powerful features such as deferred rendering and material shaders, with or without original application support. Voodoo uses features such as semantics and annotations to provide these features without adding complexity to the language or breaking compatibility with other shader tools. Voodoo provides a set of compiler options to allow shaders to conditionally compile various levels of support. Voodoo fully supports techniques and passes within a shader, as well as various program stages.</p>
+<p>Voodoo uses the HLSL shader language and various compilers and processors to provide a simple-to-use and API-independent shader system with wide support. Voodoo shaders run under both OpenGL and DirectX and can scale over across a great variety of hardware, from OpenGL 1.1 to 4.0 and DirectX 8 to 11. Applications using any of the supported APIs are supported within Voodoo, with a near-identical feature set provided across the board.</p>
+<p>In addition to fully supporting the HLSL language, Voodoo implements a second, internal linking stage to offer more powerful features such as deferred rendering and material shaders, with or without original application support. Voodoo uses features such as semantics and annotations to provide these features without adding complexity to the language or breaking compatibility with other shader tools. Voodoo provides a set of compiler options to allow shaders to conditionally compile various levels of support. Voodoo fully supports techniques and passes within a shader, as well as various program stages.</p>
 <p>Access to hardware textures and render information is provided through application-specific adapters, allowing Voodoo to be tied tightly into a huge number of new and existing programs.</p>
 <h2><a class="anchor" id="voodoo_main_supportlibs"></a>
 Support Libraries</h2>
@@ -82,7 +83,7 @@ Documentation</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

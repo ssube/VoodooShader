@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Quality (Code and Testing)</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -61,7 +61,7 @@
 <p>Third-party code that is used in Voodoo Shader, or adapters that are not part of the official project, do not need to use these rules, but they can rely on Voodoo Shader to follow them. Any bugs, potential bugs, performance bottlenecks, possible points of improvement or generally questionable code encountered in Voodoo should be reported as soon as possible. Please file an issue with as much information as possible in the Voodoo Shader bug tracker.</p>
 <h2><a class="anchor" id="voodoo_quality_code"></a>
 Code Quality</h2>
-<p>To maintain high quality code within Voodoo, a number of systems are used.</p>
+<p>To maintain high code quality within Voodoo Shader, a number of systems are used.</p>
 <p>The simplest, and often most important, is proper use of compiler messages. The framework is compiled with level 4 warnings enabled (the strictest standard level, significantly higher than the default) and warnings-as-errors enabled. These measures guarantee the code has no defects the compiler can locate and conforms to all best-practices the compiler is aware of.</p>
 <p>The second measure, used to discover more complex issues, is full PREfast analysis. All Voodoo framework code is fully annotated with SAL and is submitted to the static analyzer during compilation. Again, any warnings are treated as fatal errors and all rules are enabled. PREfast is capable of catching a number of common errors and using SAL to locate differences between expected and actual behavior.</p>
 <p>In addition to analysis with PREfast, Voodoo framework code is also run through CppCheck for general errors and KWStyle for style evaluation.</p>
@@ -81,7 +81,7 @@ Documentation</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

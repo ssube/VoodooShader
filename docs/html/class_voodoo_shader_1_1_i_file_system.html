@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: VoodooShader::IFileSystem Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -103,8 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#a1b3d6b7fd50b9314057d4b2bca337384"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a5e3e49b5f6f921328ab1e24624453d64">Release</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a5e3e49b5f6f921328ab1e24624453d64"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a379b573b9837077f9684e83e2dd89de5">QueryInterface</a> (<a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a379b573b9837077f9684e83e2dd89de5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#aee4ac05fdb0c1efbad14c2eff6ff976e">QueryInterface</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> refid, <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> **ppOut)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#aee4ac05fdb0c1efbad14c2eff6ff976e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a2e9d241c2120d06ac3fcb660748cd117">ToString</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#a2e9d241c2120d06ac3fcb660748cd117"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a359432c2c186611f53c2ac3dc70c5589">GetCore</a> () const =0</td></tr>
@@ -112,15 +112,15 @@ Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Search Path Methods</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>Add or remove directories from the search path. </p>
 </div></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a6c87a93af54f338d4037544461ac39d1">AddPath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a directory to this file system's search path.  <a href="#a6c87a93af54f338d4037544461ac39d1"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a444e8092295bad976a4113e04498485e">RemovePath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)=0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a directory from the search path, following the same rules as adding (adding a string then removing the same string will always work).  <a href="#a444e8092295bad976a4113e04498485e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a19b955b695ddd1441173158713641657">AddPath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path, <a class="el" href="group__voodoo__enums.html#ga40c5d206fa0918e553eef996ef9dc3eb">PathType</a> type=<a class="el" href="group__voodoo__enums.html#gga40c5d206fa0918e553eef996ef9dc3eba020da8d3cda2f9a746531072e0ec41e3">VSPath_Directory</a>)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a directory to this file system's search path.  <a href="#a19b955b695ddd1441173158713641657"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a40611752101bd6fcdfe984665e60508e">RemovePath</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;path)=0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a directory from the search path, following the same rules as adding (adding a string then removing the same string will always work).  <a href="#a40611752101bd6fcdfe984665e60508e"></a><br/></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Search Methods</div></td></tr>
 <tr><td colspan="2"><div class="groupText"><p>File search methods. </p>
 </div></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a39318c5088c9def47eb036547b140932">GetFile</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, const <a class="el" href="group__voodoo__enums.html#ga3e5dcf65468c74a45648090d2f82bfb5">GetFileMode</a> mode=<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5a0886900fcac2f26e7b15915a890fa05c">FF_OpenOnly</a>) const =0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a relative filename (usually just filename and extension, but may include directories) into an absolute filename by searching the list of resource directories registered with this manager.  <a href="#a39318c5088c9def47eb036547b140932"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_i_file_system.html#aedde92fc7c6f5117c1b54c87bace02f7">GetFile</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, const <a class="el" href="group__voodoo__enums.html#ga3e5dcf65468c74a45648090d2f82bfb5">GetFileMode</a> mode=<a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5ac37ac99491822a5a0f2411711505c062">VSSearch_Exists</a>) const =0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves a relative filename (usually just filename and extension, but may include directories) into an absolute filename by searching the list of resource directories registered with this manager.  <a href="#aedde92fc7c6f5117c1b54c87bace02f7"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Provides abstraction of the local filesystem to allow for files, multiple search directories, archives, and even network access. </p>
@@ -129,16 +129,26 @@ Public Member Functions</h2></td></tr>
 
 <p>Definition at line <a class="el" href="_i_filesystem_8hpp_source.html#l00039">39</a> of file <a class="el" href="_i_filesystem_8hpp_source.html">IFilesystem.hpp</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a6c87a93af54f338d4037544461ac39d1"></a><!-- doxytag: member="VoodooShader::IFileSystem::AddPath" ref="a6c87a93af54f338d4037544461ac39d1" args="(const String &amp;path)=0" -->
+<a class="anchor" id="a19b955b695ddd1441173158713641657"></a><!-- doxytag: member="VoodooShader::IFileSystem::AddPath" ref="a19b955b695ddd1441173158713641657" args="(const String &amp;path, PathType type=VSPath_Directory)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a6c87a93af54f338d4037544461ac39d1">VoodooShader::IFileSystem::AddPath</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a19b955b695ddd1441173158713641657">VoodooShader::IFileSystem::AddPath</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
-          <td><code> [pure virtual]</code></td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__voodoo__enums.html#ga40c5d206fa0918e553eef996ef9dc3eb">PathType</a>&#160;</td>
+          <td class="paramname"><em>type</em> = <code><a class="el" href="group__voodoo__enums.html#gga40c5d206fa0918e553eef996ef9dc3eba020da8d3cda2f9a746531072e0ec41e3">VSPath_Directory</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -147,17 +157,18 @@ Public Member Functions</h2></td></tr>
 <p>Adds a directory to this file system's search path. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>The path to add (may include variables, will be parsed, may be absolute or relative).</td></tr>
+    <tr><td class="paramname">path</td><td>The path to add (may include variables, will be parsed, may be absolute or relative). </td></tr>
+    <tr><td class="paramname">type</td><td>The type of the path, used to control the loading process and search handler.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>This does not check for duplicates, so care should be taken not to add the same directory repeatedly. Directory search order is important for file priority.</dd>
+<dl class="note"><dt><b>Note:</b></dt><dd>This does not check for duplicates, so care should be taken not to add the same path repeatedly. Directory search order is important for file priority.</dd>
 <dd>
 This function uses Parser::ParseString() for all paths. Variables are evaluated when the path is added. </dd>
 <dd>
 This function will split paths at the ';' character, similar to how Windows treats the path variable. This combined with parser environment access allows regular-form environment vars to be added to the file system. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a3e8337cc7f0d920a7da88870764fb6c2">VoodooShader::VSFileSystem</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a958a3332b34d5d9a01ca60138957ee06">VoodooShader::VSFileSystem</a>.</p>
 
 </div>
 </div>
@@ -208,12 +219,12 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 </div>
 </div>
-<a class="anchor" id="a39318c5088c9def47eb036547b140932"></a><!-- doxytag: member="VoodooShader::IFileSystem::GetFile" ref="a39318c5088c9def47eb036547b140932" args="(const String &amp;name, const GetFileMode mode=FF_OpenOnly) const =0" -->
+<a class="anchor" id="aedde92fc7c6f5117c1b54c87bace02f7"></a><!-- doxytag: member="VoodooShader::IFileSystem::GetFile" ref="aedde92fc7c6f5117c1b54c87bace02f7" args="(const String &amp;name, const GetFileMode mode=VSSearch_Exists) const =0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a>* <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a39318c5088c9def47eb036547b140932">VoodooShader::IFileSystem::GetFile</a> </td>
+          <td class="memname">virtual <a class="el" href="class_voodoo_shader_1_1_i_file.html">IFile</a>* <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#aedde92fc7c6f5117c1b54c87bace02f7">VoodooShader::IFileSystem::GetFile</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -222,7 +233,7 @@ This function will split paths at the ';' character, similar to how Windows trea
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="group__voodoo__enums.html#ga3e5dcf65468c74a45648090d2f82bfb5">GetFileMode</a>&#160;</td>
-          <td class="paramname"><em>mode</em> = <code><a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5a0886900fcac2f26e7b15915a890fa05c">FF_OpenOnly</a></code>&#160;</td>
+          <td class="paramname"><em>mode</em> = <code><a class="el" href="group__voodoo__enums.html#gga3e5dcf65468c74a45648090d2f82bfb5ac37ac99491822a5a0f2411711505c062">VSSearch_Exists</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -248,26 +259,26 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 </div>
 </div>
-<a class="anchor" id="a379b573b9837077f9684e83e2dd89de5"></a><!-- doxytag: member="VoodooShader::IFileSystem::QueryInterface" ref="a379b573b9837077f9684e83e2dd89de5" args="(Uuid &amp;clsid, const void **ppOut) const =0" -->
+<a class="anchor" id="aee4ac05fdb0c1efbad14c2eff6ff976e"></a><!-- doxytag: member="VoodooShader::IFileSystem::QueryInterface" ref="aee4ac05fdb0c1efbad14c2eff6ff976e" args="(const Uuid refid, IObject **ppOut)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a379b573b9837077f9684e83e2dd89de5">VoodooShader::IFileSystem::QueryInterface</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#aee4ac05fdb0c1efbad14c2eff6ff976e">VoodooShader::IFileSystem::QueryInterface</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
+          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td>
+          <td class="paramname"><em>refid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const void **&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> **&#160;</td>
           <td class="paramname"><em>ppOut</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const<code> [pure virtual]</code></td>
+          <td></td><td><code> [pure virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -276,19 +287,15 @@ This function will split paths at the ';' character, similar to how Windows trea
 <p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">refid</td><td>IID of the interface desired. </td></tr>
     <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
-<dd>
-If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a24b2f4989b0a5ef2b05df7b8af1e8cfd">VoodooShader::IObject</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a63b6c4587242c7486a07eb4233beda0f">VoodooShader::IObject</a>.</p>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a40d801b849a7ffc5ea0aa165b36cdd41">VoodooShader::VSFileSystem</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a90e0ad24c99e30c98add4d736b04573f">VoodooShader::VSFileSystem</a>.</p>
 
 </div>
 </div>
@@ -316,12 +323,12 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 </div>
 </div>
-<a class="anchor" id="a444e8092295bad976a4113e04498485e"></a><!-- doxytag: member="VoodooShader::IFileSystem::RemovePath" ref="a444e8092295bad976a4113e04498485e" args="(const String &amp;path)=0" -->
+<a class="anchor" id="a40611752101bd6fcdfe984665e60508e"></a><!-- doxytag: member="VoodooShader::IFileSystem::RemovePath" ref="a40611752101bd6fcdfe984665e60508e" args="(const String &amp;path)=0" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual bool <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a444e8092295bad976a4113e04498485e">VoodooShader::IFileSystem::RemovePath</a> </td>
+          <td class="memname">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="class_voodoo_shader_1_1_i_file_system.html#a40611752101bd6fcdfe984665e60508e">VoodooShader::IFileSystem::RemovePath</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
@@ -342,7 +349,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <dd>
 This function will split paths at the ';' character, similar to how Windows treats the path variable. This combined with parser environment access allows regular-form environment vars to be added to the file system. </dd></dl>
 
-<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#a624e60d4171e83078e91fdc22ff399bb">VoodooShader::VSFileSystem</a>.</p>
+<p>Implemented in <a class="el" href="class_voodoo_shader_1_1_v_s_file_system.html#ab499ba2473fe38eb31556bdc54d96938">VoodooShader::VSFileSystem</a>.</p>
 
 </div>
 </div>
@@ -361,7 +368,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 <div class="memdoc">
 
 <p>Get a string identifying this object. </p>
-<p>This must follow the form given in <a class="el" href="voodoo_spec_module.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
+<p>This must follow the form given in <a class="el" href="voodoo_spec_plugin.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The identifier. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_object.html#a29869a5e16e29398ae21bb925bc9633c">VoodooShader::IObject</a>.</p>
@@ -377,7 +384,7 @@ This function will split paths at the ';' character, similar to how Windows trea
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

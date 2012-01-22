@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Collections</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -74,44 +74,45 @@
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; String, String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga45a7409f3b70d8b7ce5fb7ae4481478b">VoodooShader::StringPair</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gaee143c00fbcb3e0013d9ba096d1f028f">VoodooShader::StringMap</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga8f86892f911d1c72f4de04e4d828d598">VoodooShader::StringList</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; String &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga9e336f024cc2b7d3eb40ca0333aa0881">VoodooShader::StringVector</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, <br class="typebreak"/>
-IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gaaf9cb5c85da160eec145fefc6609aa66">VoodooShader::ShaderMap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga3012ad1ee334a66cd8082a443db0ecc0">VoodooShader::ShaderList</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga98874f16488b1253f726f822eb07ea9c">VoodooShader::ShaderVector</a></td></tr>
+EffectRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga66b49e03edc4db97856d3fa9066f6819">VoodooShader::EffectMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; EffectRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga9ddc657fd078ecd29584667a09e60ae8">VoodooShader::EffectList</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; EffectRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga67baa236b625c08eb6468bec29f4dfbe">VoodooShader::EffectVector</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, <br class="typebreak"/>
-ITechniqueRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga984819cc99c92fd91c648e7358796f63">VoodooShader::TechniqueMap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; ITechniqueRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gaba18af925a9f0a9ded13dca91171102b">VoodooShader::TechniqueList</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector<br class="typebreak"/>
-&lt; ITechniqueRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga457707e9bb7d1b92d9b99ff08fd15ce4">VoodooShader::TechniqueVector</a></td></tr>
+TechniqueRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga07f1e5c933ff179024a2d9039ced2585">VoodooShader::TechniqueMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; TechniqueRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga0d15ac796d7b7a8d88b0adfc9f50a56d">VoodooShader::TechniqueList</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; TechniqueRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga3eac3b6403070bab7c01125991d23de7">VoodooShader::TechniqueVector</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, PassRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga251be41ac91372b49ea39e4321c20034">VoodooShader::PassMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; PassRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga908401835d71785f0e490f74a9eb03fb">VoodooShader::PassList</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; PassRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gac90a27ad5eb182a28c6e0e56c89590ab">VoodooShader::PassVector</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, <br class="typebreak"/>
-IPassRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gab03e873d74532a63d9f666e6a8f8e381">VoodooShader::PassMap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; IPassRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga5aa78442e13a2846b27350afc29e0cbb">VoodooShader::PassList</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; IPassRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gaf93e5b11bfe2cbc864bbdb16e01bd1dd">VoodooShader::PassVector</a></td></tr>
+ParameterRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga71b81395d6a6b70b0b8ff4061d2cc82f">VoodooShader::ParameterMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; ParameterRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga9fe8859339077742e3eb47a0076a3bc2">VoodooShader::ParameterList</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; ParameterRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga560924f5c25dafb75e753a6e3c2d9496">VoodooShader::ParameterVector</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, <br class="typebreak"/>
-IParameterRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga5ddcc869f72981d8da7c303308c6b5dd">VoodooShader::ParameterMap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; IParameterRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gaf8b8c43ecd6992e3636a22f710267c9b">VoodooShader::ParameterList</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector<br class="typebreak"/>
-&lt; IParameterRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga2a13abcf582d6435552e9c8326a025c5">VoodooShader::ParameterVector</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, <br class="typebreak"/>
-ITextureRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gacb21c42ffebc3f23354c8491d840f6ce">VoodooShader::TextureMap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; ITextureRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gabdd2b140b3b1291ee7ebddd3efbe37ce">VoodooShader::TextureList</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; ITextureRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gacfda1c6c8c4acaff97a060c223b3bec5">VoodooShader::TextureVector</a></td></tr>
+TextureRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gad8739a742c303fdc5032612f7551a39d">VoodooShader::TextureMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; TextureRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga873606f71609a5c6113cbd831acb6350">VoodooShader::TextureList</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; TextureRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gada9cd48a5cd587657eb7bde89a605576">VoodooShader::TextureVector</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, Variant &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga6ef05198ba63f1d47ecf986b73fac545">VoodooShader::VariantMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::list&lt; Variant &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga09622b438290cafb1687cfe00bc2012e">VoodooShader::VariantList</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; Variant &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga58f90a6cc75729da512fe47362307792">VoodooShader::VariantVector</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; Uuid, Variant &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga5df2ead27853ff629fcb4936c4e569fe">VoodooShader::PropertyMap</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; String, <br class="typebreak"/>
 uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga5607877b8b4d81d665b3f58b5804b4b0">VoodooShader::Variable</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, <br class="typebreak"/>
 Variable &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga2c39f0897ed2a28bdcdbbcd24eae12be">VoodooShader::VariableMap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; Uuid, <br class="typebreak"/>
-IModuleRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga62707a90bfbf79f7ba0a794b70ead979">VoodooShader::ModuleMap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; IModuleRef, <br class="typebreak"/>
-uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga9303cd867e533d54b10a6fa701c66cc9">VoodooShader::ClassSource</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; Uuid, ModuleRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga81bb957a748eb91143a2d8ee4d8c0139">VoodooShader::ModuleMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; ModuleRef, <br class="typebreak"/>
+uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga81a5f96b4b81ea20bee3f58a138df281">VoodooShader::ClassSource</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; Uuid, <br class="typebreak"/>
 ClassSource &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga76dcd54ddf9ac246fa1c57847f01ed93">VoodooShader::ClassMap</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; String, Uuid &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga80c009aa8bdef8b3ef4fafd00ac32836">VoodooShader::StrongNameMap</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; ITextureRef, <br class="typebreak"/>
-IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#ga245635b57ed38aab9c5f2bfdf02e9c13">VoodooShader::MaterialMap</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; TextureRef, <br class="typebreak"/>
+EffectRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__voodoo__collections.html#gadb20e6eb00c00fc21cc30be91210c095">VoodooShader::MaterialMap</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>To provide collections of Voodoo Shader objects, smart pointers are required. </p>
@@ -127,187 +128,202 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00505">505</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00596">596</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga9303cd867e533d54b10a6fa701c66cc9"></a><!-- doxytag: member="VoodooShader::ClassSource" ref="ga9303cd867e533d54b10a6fa701c66cc9" args="" -->
+<a class="anchor" id="ga81a5f96b4b81ea20bee3f58a138df281"></a><!-- doxytag: member="VoodooShader::ClassSource" ref="ga81a5f96b4b81ea20bee3f58a138df281" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::pair&lt;IModuleRef, uint32_t&gt; <a class="el" href="group__voodoo__collections.html#ga9303cd867e533d54b10a6fa701c66cc9">VoodooShader::ClassSource</a></td>
+          <td class="memname">typedef std::pair&lt;ModuleRef, uint32_t&gt; <a class="el" href="group__voodoo__collections.html#ga81a5f96b4b81ea20bee3f58a138df281">VoodooShader::ClassSource</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00504">504</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00595">595</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga245635b57ed38aab9c5f2bfdf02e9c13"></a><!-- doxytag: member="VoodooShader::MaterialMap" ref="ga245635b57ed38aab9c5f2bfdf02e9c13" args="" -->
+<a class="anchor" id="ga9ddc657fd078ecd29584667a09e60ae8"></a><!-- doxytag: member="VoodooShader::EffectList" ref="ga9ddc657fd078ecd29584667a09e60ae8" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;ITextureRef, IShaderRef&gt; <a class="el" href="group__voodoo__collections.html#ga245635b57ed38aab9c5f2bfdf02e9c13">VoodooShader::MaterialMap</a></td>
+          <td class="memname">typedef std::list&lt;EffectRef&gt; <a class="el" href="group__voodoo__collections.html#ga9ddc657fd078ecd29584667a09e60ae8">VoodooShader::EffectList</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00507">507</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00574">574</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga62707a90bfbf79f7ba0a794b70ead979"></a><!-- doxytag: member="VoodooShader::ModuleMap" ref="ga62707a90bfbf79f7ba0a794b70ead979" args="" -->
+<a class="anchor" id="ga66b49e03edc4db97856d3fa9066f6819"></a><!-- doxytag: member="VoodooShader::EffectMap" ref="ga66b49e03edc4db97856d3fa9066f6819" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;Uuid, IModuleRef&gt; <a class="el" href="group__voodoo__collections.html#ga62707a90bfbf79f7ba0a794b70ead979">VoodooShader::ModuleMap</a></td>
+          <td class="memname">typedef std::map&lt;String, EffectRef&gt; <a class="el" href="group__voodoo__collections.html#ga66b49e03edc4db97856d3fa9066f6819">VoodooShader::EffectMap</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00503">503</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00573">573</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gaf8b8c43ecd6992e3636a22f710267c9b"></a><!-- doxytag: member="VoodooShader::ParameterList" ref="gaf8b8c43ecd6992e3636a22f710267c9b" args="" -->
+<a class="anchor" id="ga67baa236b625c08eb6468bec29f4dfbe"></a><!-- doxytag: member="VoodooShader::EffectVector" ref="ga67baa236b625c08eb6468bec29f4dfbe" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::list&lt;IParameterRef&gt; <a class="el" href="group__voodoo__collections.html#gaf8b8c43ecd6992e3636a22f710267c9b">VoodooShader::ParameterList</a></td>
+          <td class="memname">typedef std::vector&lt;EffectRef&gt; <a class="el" href="group__voodoo__collections.html#ga67baa236b625c08eb6468bec29f4dfbe">VoodooShader::EffectVector</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00496">496</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00575">575</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga5ddcc869f72981d8da7c303308c6b5dd"></a><!-- doxytag: member="VoodooShader::ParameterMap" ref="ga5ddcc869f72981d8da7c303308c6b5dd" args="" -->
+<a class="anchor" id="gadb20e6eb00c00fc21cc30be91210c095"></a><!-- doxytag: member="VoodooShader::MaterialMap" ref="gadb20e6eb00c00fc21cc30be91210c095" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;String, IParameterRef&gt; <a class="el" href="group__voodoo__collections.html#ga5ddcc869f72981d8da7c303308c6b5dd">VoodooShader::ParameterMap</a></td>
+          <td class="memname">typedef std::map&lt;TextureRef, EffectRef&gt; <a class="el" href="group__voodoo__collections.html#gadb20e6eb00c00fc21cc30be91210c095">VoodooShader::MaterialMap</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00495">495</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00598">598</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga2a13abcf582d6435552e9c8326a025c5"></a><!-- doxytag: member="VoodooShader::ParameterVector" ref="ga2a13abcf582d6435552e9c8326a025c5" args="" -->
+<a class="anchor" id="ga81bb957a748eb91143a2d8ee4d8c0139"></a><!-- doxytag: member="VoodooShader::ModuleMap" ref="ga81bb957a748eb91143a2d8ee4d8c0139" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;IParameterRef&gt; <a class="el" href="group__voodoo__collections.html#ga2a13abcf582d6435552e9c8326a025c5">VoodooShader::ParameterVector</a></td>
+          <td class="memname">typedef std::map&lt;Uuid, ModuleRef&gt; <a class="el" href="group__voodoo__collections.html#ga81bb957a748eb91143a2d8ee4d8c0139">VoodooShader::ModuleMap</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00497">497</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00594">594</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga5aa78442e13a2846b27350afc29e0cbb"></a><!-- doxytag: member="VoodooShader::PassList" ref="ga5aa78442e13a2846b27350afc29e0cbb" args="" -->
+<a class="anchor" id="ga9fe8859339077742e3eb47a0076a3bc2"></a><!-- doxytag: member="VoodooShader::ParameterList" ref="ga9fe8859339077742e3eb47a0076a3bc2" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::list&lt;IPassRef&gt; <a class="el" href="group__voodoo__collections.html#ga5aa78442e13a2846b27350afc29e0cbb">VoodooShader::PassList</a></td>
+          <td class="memname">typedef std::list&lt;ParameterRef&gt; <a class="el" href="group__voodoo__collections.html#ga9fe8859339077742e3eb47a0076a3bc2">VoodooShader::ParameterList</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00493">493</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00583">583</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gab03e873d74532a63d9f666e6a8f8e381"></a><!-- doxytag: member="VoodooShader::PassMap" ref="gab03e873d74532a63d9f666e6a8f8e381" args="" -->
+<a class="anchor" id="ga71b81395d6a6b70b0b8ff4061d2cc82f"></a><!-- doxytag: member="VoodooShader::ParameterMap" ref="ga71b81395d6a6b70b0b8ff4061d2cc82f" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;String, IPassRef&gt; <a class="el" href="group__voodoo__collections.html#gab03e873d74532a63d9f666e6a8f8e381">VoodooShader::PassMap</a></td>
+          <td class="memname">typedef std::map&lt;String, ParameterRef&gt; <a class="el" href="group__voodoo__collections.html#ga71b81395d6a6b70b0b8ff4061d2cc82f">VoodooShader::ParameterMap</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00492">492</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00582">582</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gaf93e5b11bfe2cbc864bbdb16e01bd1dd"></a><!-- doxytag: member="VoodooShader::PassVector" ref="gaf93e5b11bfe2cbc864bbdb16e01bd1dd" args="" -->
+<a class="anchor" id="ga560924f5c25dafb75e753a6e3c2d9496"></a><!-- doxytag: member="VoodooShader::ParameterVector" ref="ga560924f5c25dafb75e753a6e3c2d9496" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;IPassRef&gt; <a class="el" href="group__voodoo__collections.html#gaf93e5b11bfe2cbc864bbdb16e01bd1dd">VoodooShader::PassVector</a></td>
+          <td class="memname">typedef std::vector&lt;ParameterRef&gt; <a class="el" href="group__voodoo__collections.html#ga560924f5c25dafb75e753a6e3c2d9496">VoodooShader::ParameterVector</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00494">494</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00584">584</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga3012ad1ee334a66cd8082a443db0ecc0"></a><!-- doxytag: member="VoodooShader::ShaderList" ref="ga3012ad1ee334a66cd8082a443db0ecc0" args="" -->
+<a class="anchor" id="ga908401835d71785f0e490f74a9eb03fb"></a><!-- doxytag: member="VoodooShader::PassList" ref="ga908401835d71785f0e490f74a9eb03fb" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::list&lt;IShaderRef&gt; <a class="el" href="group__voodoo__collections.html#ga3012ad1ee334a66cd8082a443db0ecc0">VoodooShader::ShaderList</a></td>
+          <td class="memname">typedef std::list&lt;PassRef&gt; <a class="el" href="group__voodoo__collections.html#ga908401835d71785f0e490f74a9eb03fb">VoodooShader::PassList</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00487">487</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00580">580</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gaaf9cb5c85da160eec145fefc6609aa66"></a><!-- doxytag: member="VoodooShader::ShaderMap" ref="gaaf9cb5c85da160eec145fefc6609aa66" args="" -->
+<a class="anchor" id="ga251be41ac91372b49ea39e4321c20034"></a><!-- doxytag: member="VoodooShader::PassMap" ref="ga251be41ac91372b49ea39e4321c20034" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;String, IShaderRef&gt; <a class="el" href="group__voodoo__collections.html#gaaf9cb5c85da160eec145fefc6609aa66">VoodooShader::ShaderMap</a></td>
+          <td class="memname">typedef std::map&lt;String, PassRef&gt; <a class="el" href="group__voodoo__collections.html#ga251be41ac91372b49ea39e4321c20034">VoodooShader::PassMap</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00486">486</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00579">579</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga98874f16488b1253f726f822eb07ea9c"></a><!-- doxytag: member="VoodooShader::ShaderVector" ref="ga98874f16488b1253f726f822eb07ea9c" args="" -->
+<a class="anchor" id="gac90a27ad5eb182a28c6e0e56c89590ab"></a><!-- doxytag: member="VoodooShader::PassVector" ref="gac90a27ad5eb182a28c6e0e56c89590ab" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;IShaderRef&gt; <a class="el" href="group__voodoo__collections.html#ga98874f16488b1253f726f822eb07ea9c">VoodooShader::ShaderVector</a></td>
+          <td class="memname">typedef std::vector&lt;PassRef&gt; <a class="el" href="group__voodoo__collections.html#gac90a27ad5eb182a28c6e0e56c89590ab">VoodooShader::PassVector</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00488">488</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00581">581</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga5df2ead27853ff629fcb4936c4e569fe"></a><!-- doxytag: member="VoodooShader::PropertyMap" ref="ga5df2ead27853ff629fcb4936c4e569fe" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;Uuid, Variant&gt; <a class="el" href="group__voodoo__collections.html#ga5df2ead27853ff629fcb4936c4e569fe">VoodooShader::PropertyMap</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00591">591</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -322,7 +338,7 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00484">484</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00571">571</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -337,7 +353,22 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00483">483</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00570">570</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga45a7409f3b70d8b7ce5fb7ae4481478b"></a><!-- doxytag: member="VoodooShader::StringPair" ref="ga45a7409f3b70d8b7ce5fb7ae4481478b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::pair&lt;String, String&gt; <a class="el" href="group__voodoo__collections.html#ga45a7409f3b70d8b7ce5fb7ae4481478b">VoodooShader::StringPair</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00569">569</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -352,7 +383,7 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00485">485</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00572">572</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -367,97 +398,97 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00506">506</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00597">597</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gaba18af925a9f0a9ded13dca91171102b"></a><!-- doxytag: member="VoodooShader::TechniqueList" ref="gaba18af925a9f0a9ded13dca91171102b" args="" -->
+<a class="anchor" id="ga0d15ac796d7b7a8d88b0adfc9f50a56d"></a><!-- doxytag: member="VoodooShader::TechniqueList" ref="ga0d15ac796d7b7a8d88b0adfc9f50a56d" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::list&lt;ITechniqueRef&gt; <a class="el" href="group__voodoo__collections.html#gaba18af925a9f0a9ded13dca91171102b">VoodooShader::TechniqueList</a></td>
+          <td class="memname">typedef std::list&lt;TechniqueRef&gt; <a class="el" href="group__voodoo__collections.html#ga0d15ac796d7b7a8d88b0adfc9f50a56d">VoodooShader::TechniqueList</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00490">490</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00577">577</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga984819cc99c92fd91c648e7358796f63"></a><!-- doxytag: member="VoodooShader::TechniqueMap" ref="ga984819cc99c92fd91c648e7358796f63" args="" -->
+<a class="anchor" id="ga07f1e5c933ff179024a2d9039ced2585"></a><!-- doxytag: member="VoodooShader::TechniqueMap" ref="ga07f1e5c933ff179024a2d9039ced2585" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;String, ITechniqueRef&gt; <a class="el" href="group__voodoo__collections.html#ga984819cc99c92fd91c648e7358796f63">VoodooShader::TechniqueMap</a></td>
+          <td class="memname">typedef std::map&lt;String, TechniqueRef&gt; <a class="el" href="group__voodoo__collections.html#ga07f1e5c933ff179024a2d9039ced2585">VoodooShader::TechniqueMap</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00489">489</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00576">576</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ga457707e9bb7d1b92d9b99ff08fd15ce4"></a><!-- doxytag: member="VoodooShader::TechniqueVector" ref="ga457707e9bb7d1b92d9b99ff08fd15ce4" args="" -->
+<a class="anchor" id="ga3eac3b6403070bab7c01125991d23de7"></a><!-- doxytag: member="VoodooShader::TechniqueVector" ref="ga3eac3b6403070bab7c01125991d23de7" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;ITechniqueRef&gt; <a class="el" href="group__voodoo__collections.html#ga457707e9bb7d1b92d9b99ff08fd15ce4">VoodooShader::TechniqueVector</a></td>
+          <td class="memname">typedef std::vector&lt;TechniqueRef&gt; <a class="el" href="group__voodoo__collections.html#ga3eac3b6403070bab7c01125991d23de7">VoodooShader::TechniqueVector</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00491">491</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00578">578</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gabdd2b140b3b1291ee7ebddd3efbe37ce"></a><!-- doxytag: member="VoodooShader::TextureList" ref="gabdd2b140b3b1291ee7ebddd3efbe37ce" args="" -->
+<a class="anchor" id="ga873606f71609a5c6113cbd831acb6350"></a><!-- doxytag: member="VoodooShader::TextureList" ref="ga873606f71609a5c6113cbd831acb6350" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::list&lt;ITextureRef&gt; <a class="el" href="group__voodoo__collections.html#gabdd2b140b3b1291ee7ebddd3efbe37ce">VoodooShader::TextureList</a></td>
+          <td class="memname">typedef std::list&lt;TextureRef&gt; <a class="el" href="group__voodoo__collections.html#ga873606f71609a5c6113cbd831acb6350">VoodooShader::TextureList</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00499">499</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00586">586</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gacb21c42ffebc3f23354c8491d840f6ce"></a><!-- doxytag: member="VoodooShader::TextureMap" ref="gacb21c42ffebc3f23354c8491d840f6ce" args="" -->
+<a class="anchor" id="gad8739a742c303fdc5032612f7551a39d"></a><!-- doxytag: member="VoodooShader::TextureMap" ref="gad8739a742c303fdc5032612f7551a39d" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;String, ITextureRef&gt; <a class="el" href="group__voodoo__collections.html#gacb21c42ffebc3f23354c8491d840f6ce">VoodooShader::TextureMap</a></td>
+          <td class="memname">typedef std::map&lt;String, TextureRef&gt; <a class="el" href="group__voodoo__collections.html#gad8739a742c303fdc5032612f7551a39d">VoodooShader::TextureMap</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00498">498</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00585">585</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="gacfda1c6c8c4acaff97a060c223b3bec5"></a><!-- doxytag: member="VoodooShader::TextureVector" ref="gacfda1c6c8c4acaff97a060c223b3bec5" args="" -->
+<a class="anchor" id="gada9cd48a5cd587657eb7bde89a605576"></a><!-- doxytag: member="VoodooShader::TextureVector" ref="gada9cd48a5cd587657eb7bde89a605576" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;ITextureRef&gt; <a class="el" href="group__voodoo__collections.html#gacfda1c6c8c4acaff97a060c223b3bec5">VoodooShader::TextureVector</a></td>
+          <td class="memname">typedef std::vector&lt;TextureRef&gt; <a class="el" href="group__voodoo__collections.html#gada9cd48a5cd587657eb7bde89a605576">VoodooShader::TextureVector</a></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00500">500</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00587">587</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -472,7 +503,7 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00501">501</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00592">592</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -487,7 +518,52 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00502">502</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00593">593</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga09622b438290cafb1687cfe00bc2012e"></a><!-- doxytag: member="VoodooShader::VariantList" ref="ga09622b438290cafb1687cfe00bc2012e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::list&lt;Variant&gt; <a class="el" href="group__voodoo__collections.html#ga09622b438290cafb1687cfe00bc2012e">VoodooShader::VariantList</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00589">589</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga6ef05198ba63f1d47ecf986b73fac545"></a><!-- doxytag: member="VoodooShader::VariantMap" ref="ga6ef05198ba63f1d47ecf986b73fac545" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;String, Variant&gt; <a class="el" href="group__voodoo__collections.html#ga6ef05198ba63f1d47ecf986b73fac545">VoodooShader::VariantMap</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00588">588</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ga58f90a6cc75729da512fe47362307792"></a><!-- doxytag: member="VoodooShader::VariantVector" ref="ga58f90a6cc75729da512fe47362307792" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::vector&lt;Variant&gt; <a class="el" href="group__voodoo__collections.html#ga58f90a6cc75729da512fe47362307792">VoodooShader::VariantVector</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_voodoo_types_8hpp_source.html#l00590">590</a> of file <a class="el" href="_voodoo_types_8hpp_source.html">VoodooTypes.hpp</a>.</p>
 
 </div>
 </div>
@@ -495,7 +571,7 @@ IShaderRef &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

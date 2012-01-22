@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Framework/Core/Exception.cpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -106,17 +106,17 @@
 <a name="l00036"></a>00036     ) :
 <a name="l00037"></a>00037         m_Core(pCore)
 <a name="l00038"></a>00038     {
-<a name="l00039"></a>00039         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> msg(<a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a>);
+<a name="l00039"></a>00039         <a class="code" href="class_voodoo_shader_1_1_string_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">StringFormat</a> msg(<a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a>);
 <a name="l00040"></a>00040         msg &lt;&lt; file &lt;&lt; <span class="keyword">function</span> &lt;&lt; line &lt;&lt; message;
 <a name="l00041"></a>00041         m_What = msg;
 <a name="l00042"></a>00042 
 <a name="l00043"></a>00043         <span class="keywordflow">if</span> (pCore)
 <a name="l00044"></a>00044         {
-<a name="l00045"></a>00045             <a class="code" href="group__voodoo__references.html#gac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = pCore-&gt;GetLogger();
+<a name="l00045"></a>00045             <a class="code" href="group__voodoo__references.html#gaa6eefbb5a1345c88dbb027ad63ca6c61">LoggerRef</a> logger = pCore-&gt;GetLogger();
 <a name="l00046"></a>00046 
 <a name="l00047"></a>00047             <span class="keywordflow">if</span> (logger)
 <a name="l00048"></a>00048             {
-<a name="l00049"></a>00049                 logger-&gt;LogMessage(<a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29">LL_CoreException</a>, module, msg);
+<a name="l00049"></a>00049                 logger-&gt;LogMessage(<a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa2dd4b9537f44953cfd90e7f2466027c7">VSLog_CoreException</a>, module, msg);
 <a name="l00050"></a>00050             }
 <a name="l00051"></a>00051         }
 <a name="l00052"></a>00052     }
@@ -132,17 +132,17 @@
 <a name="l00062"></a>00062     ) :
 <a name="l00063"></a>00063             m_Core(pCore)
 <a name="l00064"></a>00064     {
-<a name="l00065"></a>00065         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> msg(<a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a>);
+<a name="l00065"></a>00065         <a class="code" href="class_voodoo_shader_1_1_string_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">StringFormat</a> msg(<a class="code" href="namespace_voodoo_shader.html#a180e7a8c5500e68cf5d2e06dd06f96ea">ExceptionLogMsg</a>);
 <a name="l00066"></a>00066         msg &lt;&lt; file &lt;&lt; <span class="keyword">function</span> &lt;&lt; line &lt;&lt; message;
 <a name="l00067"></a>00067         m_What = msg;
 <a name="l00068"></a>00068 
 <a name="l00069"></a>00069         <span class="keywordflow">if</span> (pCore)
 <a name="l00070"></a>00070         {
-<a name="l00071"></a>00071             <a class="code" href="group__voodoo__references.html#gac51e9f58bae9702d8ead43f1d044027f">ILoggerRef</a> logger = pCore-&gt;GetLogger();
+<a name="l00071"></a>00071             <a class="code" href="group__voodoo__references.html#gaa6eefbb5a1345c88dbb027ad63ca6c61">LoggerRef</a> logger = pCore-&gt;GetLogger();
 <a name="l00072"></a>00072 
 <a name="l00073"></a>00073             <span class="keywordflow">if</span> (logger)
 <a name="l00074"></a>00074             {
-<a name="l00075"></a>00075                 logger-&gt;LogMessage(<a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa3d45e029183238fc664ede5ba78b8f29">LL_CoreException</a>, module, msg);
+<a name="l00075"></a>00075                 logger-&gt;LogMessage(<a class="code" href="group__voodoo__enums.html#gga3b6fdd898a776b73fcdb7fef61ee96daa2dd4b9537f44953cfd90e7f2466027c7">VSLog_CoreException</a>, module, msg);
 <a name="l00076"></a>00076             }
 <a name="l00077"></a>00077         }
 <a name="l00078"></a>00078     }
@@ -165,7 +165,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

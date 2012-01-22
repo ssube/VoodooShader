@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Member List</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -72,19 +72,23 @@
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a>, including all inherited members.<table>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a496ee17d71062dbcd5b2614ba9911e7a">AddRef</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#af7be721275efcb007bc07642f1717abc">Bind</a>(TextureMode mode, uint32_t index)</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#aeaa5f5de220d02c350627829a278a192">CopyVolume</a>(ITexture *pSource, const Box source, const UInt3 dest)</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#ac0293f2d5cb6e1c020f9b25023f59731">GetCore</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a5473e04c355953f080fbbff815d3230c">GetData</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a64c199f23403d8166e42a109c2cbe34f">GetDesc</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a049a0df0dfac079da78cd70780383d50">GetName</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a31d0dee2abdbd2751f8f45ea3785c6b0">QueryInterface</a>(Uuid &amp;clsid, const void **ppOut) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a0b7d07404b3ed7e6e6650b016f37a26e">GetName</a>() const </td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a36c969b0f14902190ed4b247ca9beecd">GetProperty</a>(const Uuid propid, Variant *pValue) const </td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a65cb9c681b3b1f04401ff4f0454e31e6">QueryInterface</a>(const Uuid refid, IObject **ppOut)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#aae7f21600bcad1fcf015a16741a06b7f">Release</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#acf20b12660fbb8ae4484670e93c03d74">SetData</a>(void *pData)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a36db18eac2a99b3ad0d9830a6c8c7796">Reset</a>(TextureMode mode)</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a7b3ead2aa555e0051426c3e49a1b07a0">SetProperty</a>(const Uuid propid, Variant *pValue)</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#ab1308d1e14ada4a5d3b14facdaa652f7">StretchRect</a>(ITexture *pSource, const Rect source, const Rect dest)</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html#a4005f744f2c9059b45632e8bb803dbf3">ToString</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_texture.html">VoodooShader::ITexture</a></td><td><code> [pure virtual]</code></td></tr>
 </table></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

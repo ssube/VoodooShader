@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Framework/Core/IParser.hpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -98,12 +98,12 @@
 <a name="l00040"></a>00040     <span class="keyword">public</span>:
 <a name="l00045"></a>00045         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(uint32_t, AddRef)() CONST PURE;
 <a name="l00046"></a>00046         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(uint32_t, Release)() CONST PURE;
-<a name="l00047"></a>00047         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(QueryInterface)(_In_ <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp; clsid, _Deref_out_opt_ <span class="keyword">const</span> <span class="keywordtype">void</span> ** ppOut) CONST PURE;
+<a name="l00047"></a>00047         <a class="code" href="group__voodoo__macros__decl.html#ga7078cec5070b544c069e44bdb066393e" title="Declares a method with full qualifiers, named name and with the default return type of bool...">VOODOO_METHOD</a>(QueryInterface)(_In_ CONST <a class="code" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> refid, _Deref_out_opt_ IObject ** ppOut) PURE;
 <a name="l00048"></a>00048         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(String, ToString)() CONST PURE;
 <a name="l00049"></a>00049         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(ICore *, GetCore)() CONST PURE;
-<a name="l00061"></a>00061         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(<span class="keywordtype">void</span>, Add)(_In_ <span class="keyword">const</span> String &amp; name, _In_ <span class="keyword">const</span> String &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="group__voodoo__enums.html#ga0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83cadfe29ea1eef8ee2cf9939678010501b2">VT_Normal</a>) PURE;
+<a name="l00061"></a>00061         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(<span class="keywordtype">void</span>, Add)(_In_ <span class="keyword">const</span> String &amp; name, _In_ <span class="keyword">const</span> String &amp; value, _In_ <span class="keyword">const</span> <a class="code" href="group__voodoo__enums.html#ga0bdd161a02834f059ef7c545a757e83c">VariableType</a> type = <a class="code" href="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83ca1ffa17fb01d90abed853d3319c92acb1">VSVar_Normal</a>) PURE;
 <a name="l00067"></a>00067         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(<span class="keywordtype">void</span>, Remove)(_In_ <span class="keyword">const</span> String &amp; name) PURE;
-<a name="l00074"></a>00074         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(String, Parse)(_In_ <span class="keyword">const</span> String &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="group__voodoo__enums.html#ga97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cead7a1490ac88779b4c7799ea84f5d6b91">PF_None</a>) CONST PURE;
+<a name="l00074"></a>00074         <a class="code" href="group__voodoo__macros__decl.html#ga2429390c4ff6a5f21db177976b9b9e8f" title="Declares a method with full qualifiers, named name and with a return type of type.">VOODOO_METHOD_</a>(String, Parse)(_In_ <span class="keyword">const</span> String &amp; input, _In_ <span class="keyword">const</span> <a class="code" href="group__voodoo__enums.html#ga97ffa79fd7512cffa1f0bce04ec778ce" title="String parsing flags.">ParseFlags</a> flags = <a class="code" href="group__voodoo__enums.html#gga97ffa79fd7512cffa1f0bce04ec778cea95baef5550fecc08d076a2ceb3c88b76">VSParse_None</a>) CONST PURE;
 <a name="l00075"></a>00075     };
 <a name="l00076"></a>00076 
 <a name="l00280"></a>00280 }
@@ -111,7 +111,7 @@
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

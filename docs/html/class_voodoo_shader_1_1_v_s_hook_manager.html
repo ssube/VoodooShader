@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: VoodooShader::VSHookManager Class Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -68,6 +68,7 @@
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">VoodooShader::VSHookManager Class Reference<div class="ingroups"><a class="el" href="group__voodoo__core__null.html">Null Implementations</a></div></div>  </div>
@@ -91,7 +92,7 @@
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
 <div class="center"><img src="class_voodoo_shader_1_1_v_s_hook_manager__coll__graph.png" border="0" usemap="#_voodoo_shader_1_1_v_s_hook_manager_coll__map" alt="Collaboration graph"/></div>
 <map name="_voodoo_shader_1_1_v_s_hook_manager_coll__map" id="_voodoo_shader_1_1_v_s_hook_manager_coll__map">
-<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function&#45;level hooks, redirecting existing functions and calls int..." alt="" coords="5,83,203,109"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="143,5,299,32"/><area shape="rect" id="node8" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="227,83,372,109"/></map>
+<area shape="rect" id="node2" href="class_voodoo_shader_1_1_i_hook_manager.html" title="Defines the interface for handling function&#45;level hooks, redirecting existing functions and calls int..." alt="" coords="1726,5,1925,32"/><area shape="rect" id="node4" href="class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="1235,36,1391,63"/><area shape="rect" id="node31" href="class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1753,56,1898,83"/><area shape="rect" id="node10" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="1239,156,1388,183"/><area shape="rect" id="node12" href="class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="902,156,1117,183"/><area shape="rect" id="node16" title="STL class." alt="" coords="6,156,175,183"/><area shape="rect" id="node20" title="STL class." alt="" coords="1253,105,1374,132"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="class_voodoo_shader_1_1_v_s_hook_manager-members.html">List of all members.</a></p>
@@ -104,27 +105,50 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a reference to this object.  <a href="#aea1fb5a9bda58e7a7984edde01fbd8b2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a401d0a016344c6ffd7a516701dd02478">Release</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Release a reference from this object.  <a href="#a401d0a016344c6ffd7a516701dd02478"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab044cf623ce1576622f7a884e2c184ea">QueryInterface</a> (<a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;clsid, const void **ppOut) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#ab044cf623ce1576622f7a884e2c184ea"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a626fe9005d86c97c8a9562779066acb7">QueryInterface</a> (const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> refid, <a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> **ppOut)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs type checking internally, then provides a pointer to this object with the desired interface if possible.  <a href="#a626fe9005d86c97c8a9562779066acb7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7c96044488b84178e9cf4c6ebb9bff8b">ToString</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string identifying this object.  <a href="#a7c96044488b84178e9cf4c6ebb9bff8b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#aa32d7675030435cb4a0a0f8e4c9de4c9">GetCore</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the core this object was associated with.  <a href="#aa32d7675030435cb4a0a0f8e4c9de4c9"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#acef31a90a69ab978c687a0400506dc26">Add</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, void *pSrc, void *pDest)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Install a single hook at the specified point.  <a href="#acef31a90a69ab978c687a0400506dc26"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a68afa83936e6ccf86bbd83521c150260">Remove</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a single hook.  <a href="#a68afa83936e6ccf86bbd83521c150260"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2c381ed3f164626663c520ddda10fd18">RemoveAll</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all hooks created by this hook manager.  <a href="#a2c381ed3f164626663c520ddda10fd18"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#abecf8458df48f97e329912242b0c4e4e">Add</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name, void *pSrc, void *pDest)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Install a single hook at the specified point.  <a href="#abecf8458df48f97e329912242b0c4e4e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab918d6a4e085d7f41d8baae2550fc186">Remove</a> (const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;name)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a single hook.  <a href="#ab918d6a4e085d7f41d8baae2550fc186"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a1b80420ad39af51a94fc214eb681fa01">RemoveAll</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes all hooks created by this hook manager.  <a href="#a1b80420ad39af51a94fc214eb681fa01"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, <br class="typebreak"/>
+TRACED_HOOK_HANDLE &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2972b3d3d54b4ed43bdf8a9722c841e1">HookMap</a></td></tr>
 <tr><td colspan="2"><h2><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a7637723233224204491f7bba49999a49">m_Refs</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_i_core.html">ICore</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ad9356d6877ef39c1b8bd69122b96a190">m_Core</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2972b3d3d54b4ed43bdf8a9722c841e1">HookMap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a9e0a6f7a357f9ebd432b6abb12d77b55">m_Hooks</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a3a821e6473647bb9bb137698ae49baac">m_ThreadCount</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned long *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2b7a344d36e5380bd964ff133cef018c">m_ThreadIDs</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00039">39</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
-</div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00041">41</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
+</div><hr/><h2>Member Typedef Documentation</h2>
+<a class="anchor" id="a2972b3d3d54b4ed43bdf8a9722c841e1"></a><!-- doxytag: member="VoodooShader::VSHookManager::HookMap" ref="a2972b3d3d54b4ed43bdf8a9722c841e1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;<a class="el" href="class_voodoo_shader_1_1_string.html">String</a>, TRACED_HOOK_HANDLE&gt; <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2972b3d3d54b4ed43bdf8a9722c841e1">VoodooShader::VSHookManager::HookMap</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00043">43</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2f2c618cac78d3aa27e069c43471f0ff"></a><!-- doxytag: member="VoodooShader::VSHookManager::VSHookManager" ref="a2f2c618cac78d3aa27e069c43471f0ff" args="(ICore *pCore)" -->
 <div class="memitem">
 <div class="memproto">
@@ -140,7 +164,7 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00028">28</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00033">33</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -158,17 +182,17 @@ Private Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00034">34</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00048">48</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="acef31a90a69ab978c687a0400506dc26"></a><!-- doxytag: member="VoodooShader::VSHookManager::Add" ref="acef31a90a69ab978c687a0400506dc26" args="(const String &amp;name, void *pSrc, void *pDest)" -->
+<a class="anchor" id="abecf8458df48f97e329912242b0c4e4e"></a><!-- doxytag: member="VoodooShader::VSHookManager::Add" ref="abecf8458df48f97e329912242b0c4e4e" args="(const String &amp;name, void *pSrc, void *pDest)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#acef31a90a69ab978c687a0400506dc26">VoodooShader::VSHookManager::Add</a> </td>
+          <td class="memname"><a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#abecf8458df48f97e329912242b0c4e4e">VoodooShader::VSHookManager::Add</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -207,9 +231,9 @@ Private Attributes</h2></td></tr>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The success of the hook installation.</dd></dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>The calling convention of pSrc and pDest must be identical, or bad things might happen. This is only a bother with member functions but should be noted for all. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#ab253887294032b478f798c861d2cd70d">VoodooShader::IHookManager</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#ae9f47f5fcc4723f00ee3fd278c18ccbc">VoodooShader::IHookManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00111">111</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00128">128</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -233,7 +257,7 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a5c1458f04aec86e313295143a343deca">VoodooShader::IHookManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00039">39</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -256,30 +280,30 @@ Private Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#ad228e1a9184d6e13db78865fd4fa7947">VoodooShader::IHookManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00105">105</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00121">121</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ab044cf623ce1576622f7a884e2c184ea"></a><!-- doxytag: member="VoodooShader::VSHookManager::QueryInterface" ref="ab044cf623ce1576622f7a884e2c184ea" args="(Uuid &amp;clsid, const void **ppOut) const " -->
+<a class="anchor" id="a626fe9005d86c97c8a9562779066acb7"></a><!-- doxytag: member="VoodooShader::VSHookManager::QueryInterface" ref="a626fe9005d86c97c8a9562779066acb7" args="(const Uuid refid, IObject **ppOut)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab044cf623ce1576622f7a884e2c184ea">VoodooShader::VSHookManager::QueryInterface</a> </td>
+          <td class="memname"><a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a626fe9005d86c97c8a9562779066acb7">VoodooShader::VSHookManager::QueryInterface</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a> &amp;&#160;</td>
-          <td class="paramname"><em>clsid</em>, </td>
+          <td class="paramtype">const <a class="el" href="group__voodoo__classes__conditional.html#gab57c2748ff90ac8bfd490f12ccc43cc5">Uuid</a>&#160;</td>
+          <td class="paramname"><em>refid</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const void **&#160;</td>
+          <td class="paramtype"><a class="el" href="class_voodoo_shader_1_1_i_object.html">IObject</a> **&#160;</td>
           <td class="paramname"><em>ppOut</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const<code> [virtual]</code></td>
+          <td></td><td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -288,19 +312,15 @@ Private Attributes</h2></td></tr>
 <p>Performs type checking internally, then provides a pointer to this object with the desired interface if possible. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">clsid</td><td>The interface Uuid desired. </td></tr>
+    <tr><td class="paramname">refid</td><td>IID of the interface desired. </td></tr>
     <tr><td class="paramname">ppOut</td><td>A pointer to the new interface, passed as <code>void**</code>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Success of the cast or uuid-fill.</dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>If ppOut is nullptr and clsid is a null Uuid , clsid will be filled with the this class' CLSID. </dd>
-<dd>
-If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply check if the Uuid is allowed without performing a cast. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a6f95c53b0880ef095645ea08f5723d31">VoodooShader::IHookManager</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a7463a9496ad21ed388a95405ec77f980">VoodooShader::IHookManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00059">59</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00081">81</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -324,16 +344,16 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#ad954c17d6d39587025beef461ed8be25">VoodooShader::IHookManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00045">45</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00066">66</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a68afa83936e6ccf86bbd83521c150260"></a><!-- doxytag: member="VoodooShader::VSHookManager::Remove" ref="a68afa83936e6ccf86bbd83521c150260" args="(const String &amp;name)" -->
+<a class="anchor" id="ab918d6a4e085d7f41d8baae2550fc186"></a><!-- doxytag: member="VoodooShader::VSHookManager::Remove" ref="ab918d6a4e085d7f41d8baae2550fc186" args="(const String &amp;name)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a68afa83936e6ccf86bbd83521c150260">VoodooShader::VSHookManager::Remove</a> </td>
+          <td class="memname"><a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#ab918d6a4e085d7f41d8baae2550fc186">VoodooShader::VSHookManager::Remove</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="class_voodoo_shader_1_1_string.html">String</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -353,18 +373,18 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the removal operation.</dd></dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd><em>Do not</em>, under any circumstances, remove a hook while execution is passing through the trampoline function. This can cause the process to crash. Until <a class="el" href="namespace_voodoo_shader_1_1_easy_hook.html">EasyHook</a> is replaced, be careful! </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a24bea9f8b02f0e4f5f0012984b5c11fb">VoodooShader::IHookManager</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a8fd3da3cf2fa91d868001ae8d8cae15c">VoodooShader::IHookManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00121">121</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00174">174</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a2c381ed3f164626663c520ddda10fd18"></a><!-- doxytag: member="VoodooShader::VSHookManager::RemoveAll" ref="a2c381ed3f164626663c520ddda10fd18" args="()" -->
+<a class="anchor" id="a1b80420ad39af51a94fc214eb681fa01"></a><!-- doxytag: member="VoodooShader::VSHookManager::RemoveAll" ref="a1b80420ad39af51a94fc214eb681fa01" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2c381ed3f164626663c520ddda10fd18">VoodooShader::VSHookManager::RemoveAll</a> </td>
+          <td class="memname"><a class="el" href="group__voodoo__types.html#ga55c78202cdb91499a486ffec0bdc4e9e">VoodooResult</a> <a class="el" href="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be">VOODOO_METHODTYPE</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a1b80420ad39af51a94fc214eb681fa01">VoodooShader::VSHookManager::RemoveAll</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [virtual]</code></td>
@@ -376,9 +396,9 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <p>Removes all hooks created by this hook manager. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Success of the removal operation. </dd></dl>
 
-<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a87544f0f84e110024faf8a32dffd0cdb">VoodooShader::IHookManager</a>.</p>
+<p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a4cff473760c425e540bae3b63789196a">VoodooShader::IHookManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00129">129</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00218">218</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -397,12 +417,12 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 <div class="memdoc">
 
 <p>Get a string identifying this object. </p>
-<p>This must follow the form given in <a class="el" href="voodoo_spec_module.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
+<p>This must follow the form given in <a class="el" href="voodoo_spec_plugin.html#voodoo_spec_iobject_tostring">IObject::ToString</a>.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The identifier. </dd></dl>
 
 <p>Implements <a class="el" href="class_voodoo_shader_1_1_i_hook_manager.html#a3c9c865341f3279a2dbe9a9f399b2546">VoodooShader::IHookManager</a>.</p>
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00099">99</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8cpp_source.html#l00114">114</a> of file <a class="el" href="_v_s_hook_manager_8cpp_source.html">VSHookManager.cpp</a>.</p>
 
 </div>
 </div>
@@ -418,7 +438,22 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00057">57</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00061">61</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9e0a6f7a357f9ebd432b6abb12d77b55"></a><!-- doxytag: member="VoodooShader::VSHookManager::m_Hooks" ref="a9e0a6f7a357f9ebd432b6abb12d77b55" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2972b3d3d54b4ed43bdf8a9722c841e1">HookMap</a> <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a9e0a6f7a357f9ebd432b6abb12d77b55">VoodooShader::VSHookManager::m_Hooks</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00063">63</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -433,7 +468,37 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00056">56</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00060">60</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3a821e6473647bb9bb137698ae49baac"></a><!-- doxytag: member="VoodooShader::VSHookManager::m_ThreadCount" ref="a3a821e6473647bb9bb137698ae49baac" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a3a821e6473647bb9bb137698ae49baac">VoodooShader::VSHookManager::m_ThreadCount</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00065">65</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2b7a344d36e5380bd964ff133cef018c"></a><!-- doxytag: member="VoodooShader::VSHookManager::m_ThreadIDs" ref="a2b7a344d36e5380bd964ff133cef018c" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long* <a class="el" href="class_voodoo_shader_1_1_v_s_hook_manager.html#a2b7a344d36e5380bd964ff133cef018c">VoodooShader::VSHookManager::m_ThreadIDs</a><code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="_v_s_hook_manager_8hpp_source.html#l00066">66</a> of file <a class="el" href="_v_s_hook_manager_8hpp_source.html">VSHookManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -445,7 +510,7 @@ If ppOut is nullptr and clsid is <em>not</em> a null Uuid, this will simply chec
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:03 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:06 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Member List</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -71,35 +71,35 @@
 </div><!--header-->
 <div class="contents">
 This is the complete list of members for <a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a>, including all inherited members.<table>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#aaf633a589a5572c8103ce35768947f2f">AddEvent</a>(Uuid event, Functions::CallbackFunc func)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a6fe22471eac61572536bf3b38017d753">AddRef</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#ad4f6208c5a06829f20f561eeb71e52a3">CreateParameter</a>(const String &amp;name, const ParameterType type)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a64600b66e9ac1733495636a80594f038">CreateShader</a>(const IFile *const pFile, const char **ppArgs)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#aa01ee05211130857dc88ac798822b951">CreateTexture</a>(const String &amp;name, const TextureDesc desc)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#af6521bfdb13b17ddc6f6285451fae603">GetAdapter</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#af5d95132cb8f8d2c73f3982dc4dbf956">GetCgContext</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#ad07f29075e216bc3da9b006a082a3381">Bind</a>(CompilerProfile profile, uint32_t count, Variant *pParams)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a0e2aa350de7e2531a2ebd9ba0ddedbe3">CallEvent</a>(Uuid event, uint32_t count, Variant *pArgs)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#aa7887b17dc80c2a8c617fec463f2dc54">CreateEffect</a>(IFile *pFile)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a4e9dc6c76e0e42d412fd36f97b4aecc1">CreateParameter</a>(const String &amp;name, ParameterDesc desc)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a9ddcc3ac65b6a7e0977dcfb3a0d06d5e">CreateTexture</a>(const String &amp;name, TextureDesc desc)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#abafb62b21797edd3cb071f70148c83aa">DropEvent</a>(Uuid event, Functions::CallbackFunc func)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#adeb70776a1f058b5b5069dd09ea50535">GetConfig</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a34fbc64f931b918f4a507b71d7e3e99f">GetCore</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#af293ccac94e57dca12e9eb995f93dff5">GetFileSystem</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a958111cce861ddba8b464efb4d1ed0e4">GetHookManager</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3">GetLogger</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a96f9076f4ff9b9512e8d9001f252548f">GetParameter</a>(const String &amp;name, const ParameterType type) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a26e747c9904f59c11082863dfb8bb610">GetParameter</a>(const String &amp;name, ParameterDesc desc) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a0625fa5c3a31a57f07831af4ca62679c">GetParser</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a3d8670b7d4e66222ef78e566c28273ed">GetStageTexture</a>(const TextureStage stage) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a8ff79b85773192eda84c66ccfdc42cf5">GetTexture</a>(const String &amp;name) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a6dfeabefce30329404802b7ef81e947a">Initialize</a>(const wchar_t *const config)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a0a36ba4f69f6e62e44c5dcca23067d6d">QueryInterface</a>(Uuid &amp;clsid, const void **ppOut) const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#aa3228d23a95ebf0065bb679b1c3f516f">Init</a>(const wchar_t *config)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a5417216d929a24ab6e49df55076cf2b0">LoadTexture</a>(const String &amp;name, IFile *pFile)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a49250cf48709b28b5f77e1491f1f1ef8">QueryInterface</a>(const Uuid refid, IObject **ppOut)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a8914e5c32ac0d0976d55bf76a5815524">Release</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a38147069cb00a8a7c0b46c5506327d4b">RemoveParameter</a>(const String &amp;name)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a3723cf03c1ff50aed1b8117e9648640b">RemoveTexture</a>(const String &amp;name)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#ad980fd34f40179caca0087904763b2ee">Reset</a>()=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#ab85c046cc9902edf5e5d8fe07b9907b9">SetCgContext</a>(CGcontext const pContext)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a37e7e6c1639f88cf6f60df66ba11b090">SetStageTexture</a>(const TextureStage stage, ITexture *const pTexture)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a515d36c9a64ae937d19b4033eb2f89ea">RemoveParameter</a>(const String &amp;name)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#aae4b44a127d13552fb36aa9c16315c83">RemoveTexture</a>(const String &amp;name)=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#a87668fc4832580d2887d87e00df60bfa">Reset</a>()=0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="class_voodoo_shader_1_1_i_core.html#afbc161221b57174068778ccd1ae275be">ToString</a>() const =0</td><td><a class="el" href="class_voodoo_shader_1_1_i_core.html">VoodooShader::ICore</a></td><td><code> [pure virtual]</code></td></tr>
 </table></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:02 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:05 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

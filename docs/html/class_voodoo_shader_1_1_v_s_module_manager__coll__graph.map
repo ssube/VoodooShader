@@ -1,9 +1,9 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod..." alt="" coords="1568,5,1779,32"/>
-<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="1225,35,1381,61"/>
-<area shape="rect" id="node39" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1601,56,1746,83"/>
-<area shape="rect" id="node12" title="STL class." alt="" coords="1242,243,1363,269"/>
-<area shape="rect" id="node29" href="$class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="1228,157,1377,184"/>
-<area shape="rect" id="node31" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="902,187,1117,213"/>
-<area shape="rect" id="node35" title="STL class." alt="" coords="6,187,175,213"/>
+<area shape="rect" id="node2" href="$class_voodoo_shader_1_1_i_module_manager.html" title="Provides a framework for loading and unloading modules in core, as well as retrieving symbols and mod..." alt="" coords="1568,8,1779,35"/>
+<area shape="rect" id="node4" href="$class_voodoo_shader_1_1_i_object.html" title="Defines a simple interface all Voodoo objects from dynamic modules must inherit." alt="" coords="1225,5,1381,32"/>
+<area shape="rect" id="node39" href="$class_voodoo_shader_1_1_i_core.html" title="ICore engine class for the Voodoo Shader Framework." alt="" coords="1601,77,1746,104"/>
+<area shape="rect" id="node12" title="STL class." alt="" coords="1242,337,1363,364"/>
+<area shape="rect" id="node23" href="$class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler&#45;safe string passing between various mod..." alt="" coords="1228,427,1377,453"/>
+<area shape="rect" id="node25" href="$class_voodoo_shader_1_1_string_1_1_string_impl.html" title="VoodooShader::String::StringImpl" alt="" coords="902,388,1117,415"/>
+<area shape="rect" id="node29" title="STL class." alt="" coords="6,388,175,415"/>
 </map>

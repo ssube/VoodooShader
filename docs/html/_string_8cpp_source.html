@@ -6,7 +6,7 @@
 <title>Voodoo Shader Framework: Framework/Core/String.cpp Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="voodoo.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -25,7 +25,7 @@
   
   <td style="padding-left: 0.5em;">
    <div id="projectname">Voodoo Shader Framework
-   &#160;<span id="projectnumber">framework-5.5</span>
+   &#160;<span id="projectnumber">framework-5.8</span>
    </div>
    <div id="projectbrief">Comprehensive shader support library</div>
   </td>
@@ -96,7 +96,7 @@
 <a name="l00026"></a>00026 <span class="preprocessor"></span><span class="preprocessor">#pragma warning(disable: 6246)</span>
 <a name="l00027"></a>00027 <span class="preprocessor"></span><span class="preprocessor">#include &lt;boost/uuid/uuid_io.hpp&gt;</span>
 <a name="l00028"></a>00028 <span class="preprocessor">#pragma warning(pop)</span>
-<a name="l00029"></a>00029 <span class="preprocessor"></span><span class="comment">// STL</span>
+<a name="l00029"></a>00029 <span class="preprocessor"></span><span class="comment">// System</span>
 <a name="l00030"></a>00030 <span class="preprocessor">#include &lt;string&gt;</span>
 <a name="l00031"></a>00031 <span class="preprocessor">#include &lt;sstream&gt;</span>
 <a name="l00032"></a>00032 <span class="preprocessor">#include &lt;iomanip&gt;</span>
@@ -262,7 +262,7 @@
 <a name="l00192"></a>00192         }
 <a name="l00193"></a>00193     }
 <a name="l00194"></a>00194 
-<a name="l00195"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a128f49140f98be5b27b45fa8845ce2c4">00195</a>     int32_t <a class="code" href="class_voodoo_shader_1_1_string.html#a128f49140f98be5b27b45fa8845ce2c4" title="Attempts to convert this String to a character array.">String::ToCharStr</a>(int32_t size, <span class="keywordtype">char</span> * <span class="keyword">const</span> pBuffer)<span class="keyword"> const</span>
+<a name="l00195"></a><a class="code" href="class_voodoo_shader_1_1_string.html#adcb897e35607dea309f78d22875a8069">00195</a>     int32_t <a class="code" href="class_voodoo_shader_1_1_string.html#adcb897e35607dea309f78d22875a8069" title="Attempts to convert this String to a character array.">String::ToChars</a>(int32_t size, <span class="keywordtype">char</span> * pBuffer)<span class="keyword"> const</span>
 <a name="l00196"></a>00196 <span class="keyword">    </span>{
 <a name="l00197"></a>00197         <a class="code" href="group__voodoo__macros__debug.html#ga062b5fe23dd8c748165e3512d8132e6f">VOODOO_CHECK_IMPL</a>;
 <a name="l00198"></a>00198         <span class="keywordflow">return</span> WideCharToMultiByte(CP_UTF8, NULL, <a class="code" href="class_voodoo_shader_1_1_string.html#a53f20a189520536fa78718d4add3916e">m_Impl</a>-&gt;<a class="code" href="class_voodoo_shader_1_1_string_1_1_string_impl.html#a7c4faa5ffb901255bfdb00e79b9a060a">m_Str</a>.c_str(), -1, pBuffer, size, NULL, NULL);
@@ -923,17 +923,17 @@
 <a name="l00856"></a>00856 
 <a name="l00857"></a><a class="code" href="class_voodoo_shader_1_1_string.html#a94af264e16d111c18558ef2cb46b248e">00857</a>     <a class="code" href="class_voodoo_shader_1_1_string.html" title="Voodoo internal string class, providing constant and compiler-safe string passing between various mod...">String</a> <a class="code" href="class_voodoo_shader_1_1_string.html#a94af264e16d111c18558ef2cb46b248e" title="Formats the system&#39;s current tick count, with a varying length.">String::Ticks</a>()
 <a name="l00858"></a>00858     {
-<a name="l00859"></a>00859         <a class="code" href="class_voodoo_shader_1_1_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">Format</a> fmt(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;%d&quot;</span>));
+<a name="l00859"></a>00859         <a class="code" href="class_voodoo_shader_1_1_string_format.html" title="Printf-style formatting class with type safety and some extended features, including handling of stan...">StringFormat</a> fmt(<a class="code" href="group__voodoo__macros.html#ga808b14dfee87b12b149106d22957e950">VSTR</a>(<span class="stringliteral">&quot;%d&quot;</span>));
 <a name="l00860"></a>00860         fmt &lt;&lt; (uint32_t)GetTickCount();
 <a name="l00861"></a>00861 
-<a name="l00862"></a>00862         <span class="keywordflow">return</span> fmt.<a class="code" href="class_voodoo_shader_1_1_format.html#afa05db30ce7f5cb2f59f49a5e5d212d4">ToString</a>();
+<a name="l00862"></a>00862         <span class="keywordflow">return</span> fmt.<a class="code" href="class_voodoo_shader_1_1_string_format.html#a86c1100fdbdb70ce6bd7869dba639afe">ToString</a>();
 <a name="l00863"></a>00863     }
 <a name="l00864"></a>00864 }
 </pre></div></div><!-- contents -->
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 7 2012 02:35:01 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 22 2012 15:07:04 for Voodoo Shader Framework by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
