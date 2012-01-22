@@ -27,13 +27,15 @@ namespace VoodooShader
     namespace VoodooDX9
     {
         CVoodoo3DDevice9::CVoodoo3DDevice9(CVoodoo3D9 * pObject, IDirect3DDevice9 * pRealDevice) :
-            m_Object(pObject), m_RealDevice(pRealDevice) 
+            m_Object(pObject), m_RealDevice(pRealDevice),
+            m_VertDecl(nullptr), m_VertDeclT(nullptr), m_FSQuadVerts(nullptr), m_BackBuffer(nullptr)
         {
         };
 
         CVoodoo3DDevice9::~CVoodoo3DDevice9()
         {
-            m_RealDevice = nullptr;            m_Object = nullptr;
+            m_RealDevice = nullptr;
+            m_Object = nullptr;
         }
 
         /* IUnknown methods */
@@ -813,13 +815,18 @@ namespace VoodooShader
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::CreateQuery(THIS_ D3DQUERYTYPE Type, IDirect3DQuery9 **ppQuery)
         {
             return m_RealDevice->CreateQuery(Type, ppQuery);
-        }
+        }
+
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::VSSetupDevice()
         {
             if (m_VertDecl) m_VertDecl->Release();
             if (m_VertDeclT) m_VertDeclT->Release();
 
-            ILoggerRef logger = gpVoodooCore->GetLogger();            Variant deviceVar = CreateVariant(this);            VoodooResult vr = gpVoodooCore->Bind(VSProfile_D3D9, 1, &deviceVar);            assert(SUCCEEDED(vr));
+            ILoggerRef logger = gpVoodooCore->GetLogger();
+
+            Variant deviceVar = CreateVariant(this);
+            VoodooResult vr = gpVoodooCore->Bind(VSProfile_D3D9, 1, &deviceVar);
+            assert(SUCCEEDED(vr));
 
             // Setup profiles
             const char * bestVertStr = D3DXGetVertexShaderProfile(m_RealDevice);
@@ -874,9 +881,6 @@ namespace VoodooShader
                 Format("Prepping for %1% by %2% target.") << (uint32_t)viewport.Width << (uint32_t)viewport.Height
             );
 
-            // Get buffers
-            if (!SUCCEEDED(m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer))) { m_BackBuffer = nullptr; }
-
             // Create fullscreen vbuffer
             float ft = -0.5f;
             float fb = viewport.Height - ft;
@@ -908,13 +912,24 @@ namespace VoodooShader
             errors = m_FSQuadVerts->Lock(0, 0, (void**)&pVertices, 0);
 
             if (SUCCEEDED(errors))
-            {                memcpy(pVertices, fsVertData, sizeof(fsVertData));
+            {
+                memcpy(pVertices, fsVertData, sizeof(fsVertData));
                 m_FSQuadVerts->Unlock();
             }
             else
             {
                 logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
-            }
+            }
+
+            TextureDesc bufferTextureDesc;
+            bufferTextureDesc.Size.X = viewport.Width;
+            bufferTextureDesc.Size.Y = viewport.Height;
+            bufferTextureDesc.Size.Z = 0;
+            bufferTextureDesc.Levels = 0;
+            bufferTextureDesc.Usage = VSTexFlag_Target;
+            bufferTextureDesc.Format = VSFmt_RGBA8; //VoodooShader::VoodooDX9::ConverterDX9::ToTextureFormat(pPP->BackBufferFormat);
+
+            // Get buffer
             HRESULT hrt = m_RealDevice->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_BackBuffer);
 
             if (SUCCEEDED(hrt))
@@ -925,21 +940,6 @@ namespace VoodooShader
             {
                 logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
             }
-
-            D3DSURFACE_DESC bbDesc;
-            ZeroMemory(&bbDesc, sizeof(bbDesc));
-            if (FAILED(m_BackBuffer->GetDesc(&bbDesc)))
-            {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to get backbuffer description.");
-            }
-
-            TextureDesc bufferTextureDesc;
-            bufferTextureDesc.Size.X = bbDesc.Width;
-            bufferTextureDesc.Size.Y = bbDesc.Height;
-            bufferTextureDesc.Size.Z = 0;
-            bufferTextureDesc.Levels = 0;
-            bufferTextureDesc.Usage = VSTexFlag_Target;
-            bufferTextureDesc.Format = VSFmt_RGBA8; //VoodooShader::VoodooDX9::ConverterDX9::ToTextureFormat(pPP->BackBufferFormat);
 
             texture_Frame0 = gpVoodooCore->CreateTexture(L":frame0", bufferTextureDesc);
             if (texture_Frame0)

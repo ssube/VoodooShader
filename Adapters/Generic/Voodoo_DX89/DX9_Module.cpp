@@ -52,12 +52,22 @@ ModuleHook hookList[] =
 VoodooShader::ICoreRef gpVoodooCore = nullptr;
 VoodooShader::ILoggerRef gpVoodooLogger = nullptr;
 
+VoodooShader::VoodooResult VOODOO_CALLTYPE FinalizeEvent(VoodooShader::ICore * pCore, uint32_t count, VoodooShader::Variant * pArgs)
+{
+    UNREFERENCED_PARAMETER(pCore);
+    UNREFERENCED_PARAMETER(count);
+    UNREFERENCED_PARAMETER(pArgs);
+
+    InstallKnownHooks();
+    return VSF_OK;
+}
+
 const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(VoodooShader::ICore * pCore)
 {
     if (!pCore) return nullptr;
     gpVoodooCore = pCore;
 
-    InstallKnownHooks();
+    pCore->AddEvent(VoodooShader::EventIds::Finalize, &FinalizeEvent);
 
     static const VoodooShader::Version dx9version = VOODOO_VERSION_STRUCT(DX89);
     return &dx9version;

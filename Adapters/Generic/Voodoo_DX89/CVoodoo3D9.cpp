@@ -208,14 +208,11 @@ namespace VoodooShader
 
             if (SUCCEEDED(hr))
             {
-                VoodooShader::Variant params[2] = {CreateVariant(m_SdkVersion), CreateVariant(realDevice)};
-                if (FAILED(gpVoodooCore->Bind(VSProfile_D3D9, 2, params)))
-                {
-                    gpVoodooCore->GetLogger()->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to bind D3D9 profile."));
-                }
-
                 // Return our device
-                *ppReturnedDeviceInterface = new CVoodoo3DDevice9(this, realDevice);
+                CVoodoo3DDevice9 * v3d = new CVoodoo3DDevice9(this, realDevice);
+                v3d->VSSetupDevice();
+
+                *ppReturnedDeviceInterface = v3d;
             }
 
             return hr;

@@ -345,6 +345,10 @@ namespace VoodooShader
         DEFINE_UUID(DIADevice)     = {0xa0, 0x4b, 0xa7, 0xfe, 0x46, 0x09, 0x45, 0x9e, 0x8c, 0xc4, 0xdb, 0x2a, 0x05, 0xa5, 0x92, 0x89};
         DEFINE_UUID(DIWDevice)     = {0x21, 0xd7, 0xdd, 0xc7, 0x17, 0xac, 0x45, 0xf7, 0x9e, 0xd3, 0x74, 0x0a, 0x9a, 0x86, 0x67, 0xb5};
     }
+    namespace EventIds
+    {
+        DEFINE_UUID(Finalize)       = {0xc3, 0x15, 0xac, 0xc2, 0x76, 0x82, 0x3d, 0x4e, 0xb4, 0x43, 0x6e, 0xa6, 0xcc, 0x56, 0xb7, 0x31};
+    }
     /**
      * @}
      */
@@ -524,7 +528,7 @@ namespace VoodooShader
         typedef const uint32_t  (VOODOO_CALLTYPE * ClassCountFunc)();
         typedef const wchar_t * (VOODOO_CALLTYPE * ClassInfoFunc)(const uint32_t, Uuid *);
         typedef IObject *       (VOODOO_CALLTYPE * ClassCreateFunc)(const uint32_t, ICore *);
-        typedef VoodooResult    (VOODOO_CALLTYPE * CallbackFunc)(ICore *);
+        typedef VoodooResult    (VOODOO_CALLTYPE * CallbackFunc)(ICore *, uint32_t, Variant *);
     }
     /**
      * @}

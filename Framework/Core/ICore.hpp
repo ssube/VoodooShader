@@ -105,9 +105,9 @@ namespace VoodooShader
          *      to handle parameter types and make sure they meet the event's parameters. Failure to do so can crash the 
          *      the process.</b> Because of this, it is possible for users to disable event handling in the config.
          */
-        VOODOO_METHOD(RegisterCallback)(Uuid event, Functions::CallbackFunc func) PURE;
-        VOODOO_METHOD(RemoveCallback)(Uuid event, Functions::CallbackFunc func) PURE;
-        //VOODOO_METHOD(
+        VOODOO_METHOD(AddEvent)(Uuid event, Functions::CallbackFunc func) PURE;
+        VOODOO_METHOD(DropEvent)(Uuid event, Functions::CallbackFunc func) PURE;
+        VOODOO_METHOD(CallEvent)(Uuid event, uint32_t count, _In_opt_count_(count) Variant * pArgs) PURE;
         /**
          * @}
          * @name Core Field Methods

@@ -259,6 +259,7 @@ namespace VoodooShader
             return VSFERR_INVALIDPARAMS;
         }
 
+        m_Modules[moduleversion->LibId] = module;
         m_ModuleNames[fullname] = moduleversion->LibId;
 
         if (moduleversion->Debug != VOODOO_DEBUG_BOOL && logger)

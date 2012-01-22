@@ -100,6 +100,70 @@ namespace VoodooShader
 #endif
     }
 
+    VOODOO_METHODDEF_(uint32_t, VSCore::AddRef)() CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+        return SAFE_INCREMENT(m_Refs);
+    }
+
+    VOODOO_METHODDEF_(uint32_t, VSCore::Release)() CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+        uint32_t count = SAFE_DECREMENT(m_Refs);
+        if (count == 0)
+        {
+            delete this;
+        }
+        return count;
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSCore::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
+        if (!ppOut)
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+        else
+        {
+            if (refid == IID_IObject)
+            {
+                *ppOut = static_cast<IObject*>(this);
+            }
+            else if (refid == IID_ICore)
+            {
+                *ppOut = static_cast<ICore*>(this);
+            }
+            else if (refid == CLSID_VSCore)
+            {
+                *ppOut = static_cast<VSCore*>(this);
+            }
+            else
+            {
+                *ppOut = nullptr;
+                return VSFERR_INVALIDUUID;
+            }
+
+            (*ppOut)->AddRef();
+            return VSF_OK;
+        }
+    }
+
+    String VOODOO_METHODTYPE VSCore::ToString() CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
+        return Format("VSCore(%1%)") << m_Version;
+    }
+
+    ICore * VOODOO_METHODTYPE VSCore::GetCore() CONST
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
+        return nullptr;
+    }
+
     VOODOO_METHODDEF(VSCore::Init)(_In_ CONST wchar_t * config)
     {
         if (config)
@@ -260,7 +324,7 @@ namespace VoodooShader
             String hookClass = m_Parser->Parse(hookQuery.evaluate_string(globalNode).c_str());
 
             // Make sure a logger was loaded
-            IObject * coreplugin = m_ModuleManager->CreateObject(fsClass);
+            IObject * coreplugin = m_ModuleManager->CreateObject(logClass);
             ILogger * plogger = nullptr;
             if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_ILogger, (IObject**)&plogger)) && plogger)
             {
@@ -291,7 +355,7 @@ namespace VoodooShader
                 logLevel = VSLog_Default;
             }
 
-            bool logAppend = logAppendStr.Compare(VSTR("true"), false) || logAppendStr == VSTR("1");
+            bool logAppend = logAppendStr.Compare(VSTR("true"), false) || logAppendStr.StartsWith("1");
 
             m_Logger->Open(logFile, logAppend);
             m_Logger->SetFilter(logLevel);
@@ -330,6 +394,9 @@ namespace VoodooShader
 
             // ICore done loading
             m_Logger->LogMessage(VSLog_CoreInfo, VOODOO_CORE_NAME, VSTR("Core initialization complete."));
+
+            // Call finalization events
+            this->CallEvent(EventIds::Finalize, 0, nullptr);
 
             // Return
             return VSF_OK;
@@ -407,68 +474,86 @@ namespace VoodooShader
         return VSF_OK;
     }
 
-    VOODOO_METHODDEF_(uint32_t, VSCore::AddRef)() CONST
+    VOODOO_METHODDEF(VSCore::AddEvent)(Uuid event, Functions::CallbackFunc func)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Logger);
-        return SAFE_INCREMENT(m_Refs);
-    }
-
-    VOODOO_METHODDEF_(uint32_t, VSCore::Release)() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Logger);
-        uint32_t count = SAFE_DECREMENT(m_Refs);
-        if (count == 0)
+        try
         {
-            delete this;
-        }
-        return count;
-    }
-
-    VoodooResult VOODOO_METHODTYPE VSCore::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Logger);
-
-        if (!ppOut)
-        {
-            return VSFERR_INVALIDPARAMS;
-        }
-        else
-        {
-            if (refid == IID_IObject)
+            if (m_Events.find(event) == m_Events.end())
             {
-                *ppOut = static_cast<IObject*>(this);
-            }
-            else if (refid == IID_ICore)
-            {
-                *ppOut = static_cast<ICore*>(this);
-            }
-            else if (refid == CLSID_VSCore)
-            {
-                *ppOut = static_cast<VSCore*>(this);
-            }
-            else
-            {
-                *ppOut = nullptr;
-                return VSFERR_INVALIDUUID;
+                EventCallbacks set;
+                m_Events.insert(std::pair<Uuid, EventCallbacks>(event, set));
             }
 
-            (*ppOut)->AddRef();
+            m_Events[event].insert(func);
+
             return VSF_OK;
         }
+        catch (std::exception & exc)
+        {
+            if (m_Logger)
+            {
+                m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                    Format("Unable to register callback %1% for event %2%, exception: %3%") << func << event << exc.what());
+            }
+
+            return VSF_FAIL;
+        }
     }
 
-    String VOODOO_METHODTYPE VSCore::ToString() CONST
+    VOODOO_METHODDEF(VSCore::DropEvent)(Uuid event, Functions::CallbackFunc func)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Logger);
+        try
+        {
+            if (m_Events.find(event) == m_Events.end())
+            {
+                return VSF_OK;
+            }
 
-        return Format("VSCore(%1%)") << m_Version;
+            m_Events[event].erase(func);
+
+            return VSF_OK;
+        }
+        catch (std::exception & exc)
+        {
+            if (m_Logger)
+            {
+                m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                    Format("Unable to register callback %1% for event %2%, exception: %3%") << func << event << exc.what());
+            }
+
+            return VSF_FAIL;
+        }
     }
 
-    ICore * VOODOO_METHODTYPE VSCore::GetCore() CONST
+    VOODOO_METHODDEF(VSCore::CallEvent)(Uuid event, uint32_t count, Variant * pArgs)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Logger);
+        try
+        {
+            std::map<Uuid, EventCallbacks>::iterator eventMapIter = m_Events.find(event);
+            if (eventMapIter == m_Events.end())
+            {
+                return VSFERR_INVALIDPARAMS;
+            }
 
-        return nullptr;
+            EventCallbacks::iterator eventCallIter = eventMapIter->second.begin();
+            while (eventCallIter != eventMapIter->second.end())
+            {
+                (*eventCallIter)(this, count, pArgs);
+                ++eventCallIter;
+            }
+
+            return VSF_OK;
+        }
+        catch (std::exception & exc)
+        {
+            if (m_Logger)
+            {
+                m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                    Format("Unable to call event %1%, exception: %2%") << event << exc.what());
+            }
+
+            return VSF_FAIL;
+        }
     }
 
     IParser * VOODOO_METHODTYPE VSCore::GetParser() CONST
@@ -510,10 +595,8 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        if (!pFile)
-        {
-            return nullptr;
-        }
+        if (!m_Binding) return nullptr;
+        if (!pFile) return nullptr;
 
         IEffect * effect = nullptr;
 
@@ -546,6 +629,8 @@ namespace VoodooShader
     IParameter * VOODOO_METHODTYPE VSCore::CreateParameter(const String & name, const ParameterDesc desc)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
+        if (!m_Binding) return nullptr;
 
         ParameterMap::iterator paramEntry = m_Parameters.find(name);
 
@@ -588,6 +673,8 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
+        if (!m_Binding) return nullptr;
+
         TextureMap::iterator textureEntry = m_Textures.find(name);
 
         if (textureEntry != m_Textures.end())
@@ -611,7 +698,8 @@ namespace VoodooShader
     ITexture * VOODOO_METHODTYPE VSCore::LoadTexture(_In_ const String & name, _In_ IFile * pFile)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
-
+        
+        if (!m_Binding) return nullptr;
         if (!pFile) return nullptr;
 
         TextureMap::iterator textureEntry = m_Textures.find(name);
@@ -638,6 +726,8 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
+        if (!m_Binding) return nullptr;
+
         ParameterMap::const_iterator paramIter = m_Parameters.find(name);
 
         if (paramIter == m_Parameters.end())
@@ -663,6 +753,8 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
+        if (!m_Binding) return nullptr;
+
         TextureMap::const_iterator textureEntry = m_Textures.find(name);
         if (textureEntry != m_Textures.end())
         {
@@ -686,6 +778,8 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
+        if (!m_Binding) return VSFERR_INVALIDCALL;
+
         ParameterMap::iterator parameter = m_Parameters.find(name);
         if (parameter != m_Parameters.end())
         {
@@ -703,6 +797,8 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSCore::RemoveTexture(_In_ const String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
+        if (!m_Binding) return VSFERR_INVALIDCALL;
 
         TextureMap::iterator texture = m_Textures.find(name);
         if (texture != m_Textures.end())

@@ -21,6 +21,9 @@
 
 #include "VoodooInternal.hpp"
 
+#include <map>
+#include <set>
+
 namespace VoodooShader
 {
     /**
@@ -36,6 +39,9 @@ namespace VoodooShader
      */
     VOODOO_CLASS(VSCore, ICore, ({0x9B, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
+        typedef std::set<Functions::CallbackFunc> EventCallbacks;
+        typedef std::map<Uuid, EventCallbacks> EventRegistry;
+
     public:
         VSCore(uint32_t version);
         ~VSCore();
@@ -51,6 +57,10 @@ namespace VoodooShader
         VOODOO_METHOD(Init)(_In_ const wchar_t * config);
         VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
         VOODOO_METHOD(Reset)();
+
+        VOODOO_METHOD(AddEvent)(Uuid event, Functions::CallbackFunc func);
+        VOODOO_METHOD(DropEvent)(Uuid event, Functions::CallbackFunc func);
+        VOODOO_METHOD(CallEvent)(Uuid event, uint32_t count, _In_opt_count_(count) Variant * pArgs);
 
         VOODOO_METHOD_(XmlDocument, GetConfig)() CONST;
         VOODOO_METHOD_(IFileSystem *, GetFileSystem)() CONST;
@@ -106,5 +116,8 @@ namespace VoodooShader
 
         /** Default technique target for shader linker. */
         ITextureRef m_LastShader;
+
+        // Events
+        EventRegistry m_Events;
     };
 }
