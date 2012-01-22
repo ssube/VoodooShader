@@ -86,11 +86,11 @@ namespace VoodooShader
                 {
                     *ppOut = static_cast<IObject*>(this);
                 }
-                else if (refid == IID_ITexture)
+                else if (refid == IID_IBinding)
                 {
                     *ppOut = static_cast<IBinding*>(this);
                 }
-                else if (refid == CLSID_VSTextureDX9)
+                else if (refid == CLSID_VSBindingDX9)
                 {
                     *ppOut = static_cast<VSBindingDX9*>(this);
                 }

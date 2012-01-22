@@ -33,7 +33,8 @@ namespace VoodooShader
     namespace VoodooDX8
     {
         CVoodoo3DDevice8::CVoodoo3DDevice8(CVoodoo3D8 * pObject, IDirect3DDevice9 * pRealDevice) :
-            m_Object(pObject), m_RealDevice(pRealDevice)
+            m_RealDevice(pRealDevice), m_Object(pObject),
+            m_CurrentVertexShader(0), m_CurrentPixelShader(0), m_LastBaseIndex(0)
         {
             VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME, Format("CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p") << realDevice << this);
         }

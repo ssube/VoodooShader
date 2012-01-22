@@ -176,8 +176,7 @@ namespace VoodooShader
         /**
          * Loads and compiles an effect from file, using the current file system and search paths.
          *
-         * @param   pFile   The file to load and compile. May be an absolute or relative filename.
-         * @param   ppArgs  Optional flags to the compiler, usually optimization or API hints.
+         * @param   pFile   The file to load and compile.
          *
          * @pre ICore::Bind must be called successfully before use.
          */

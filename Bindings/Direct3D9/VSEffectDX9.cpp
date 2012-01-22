@@ -86,6 +86,17 @@ namespace VoodooShader
                     break;
                 }
 
+                D3DXTECHNIQUE_DESC techdesc;
+                ZeroMemory(&techdesc, sizeof(D3DXTECHNIQUE_DESC));
+                m_DXEffect->GetTechniqueDesc(techHandle, &techdesc));
+                String techName(techDesc.Name);
+
+                if (FAILED(m_DXEffect->ValidateTechnique(techHandle)))
+                {
+                    logger->LogMessage(VSLog_CoreWarning, VOODOO_D3D9_NAME, 
+                        Format("Failed to validate technique %1%.") << techName);
+                }
+
                 try
                 {
                     VSTechniqueDX9 * technique = new VSTechniqueDX9(this, m_DXEffect, techHandle);
@@ -97,15 +108,8 @@ namespace VoodooShader
                 }
                 catch (Exception & exc)
                 {
-                    D3DXTECHNIQUE_DESC techdesc;
-                    if (SUCCEEDED(m_DXEffect->GetTechniqueDesc(techHandle, &techdesc)) && techdesc.Name)
-                    {
-                        logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%: %2%") << techdesc.Name << exc.strwhat());
-                    }
-                    else
-                    {
-                        logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, Format("Failed to create technique %1%: %2%") << techIndex << exc.strwhat());
-                    }
+                    logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                        Format("Failed to create technique %1%: %2%") << techName << exc.strwhat());
                 }
             } 
 
@@ -228,7 +232,7 @@ namespace VoodooShader
 
         ITechnique * VOODOO_METHODTYPE VSEffectDX9::Bind(bool clean)
         {
-            if (m_Binding->m_BoundEffect != this) return nullptr;
+            if (m_Binding->m_BoundEffect && m_Binding->m_BoundEffect != this) return nullptr;
 
             UINT passes = 0;
             DWORD flags = 0;

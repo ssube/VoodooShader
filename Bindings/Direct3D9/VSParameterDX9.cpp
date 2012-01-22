@@ -42,7 +42,7 @@ namespace VoodooShader
             m_Core = m_Effect->m_Core;
             m_Binding = m_Effect->m_Binding;
 
-            if (!m_Effect->m_DXEffect)
+            if (!m_Effect)
             {
                 Throw(VOODOO_CORE_NAME, VSTR("Unable to create parameter with no hardware effect."), m_Core);
             }
@@ -169,12 +169,6 @@ namespace VoodooShader
                 pValue->Type = VSUT_PVoid;
                 pValue->VPVoid = (PVOID)m_DXHandle;
                 return VSF_OK;
-            } 
-            else if (propid == PropIds::D3DX9Effect)
-            {
-                pValue->Type = VSUT_PVoid;
-                pValue->VPVoid = (PVOID)m_Effect->m_DXEffect;
-                return VSF_OK;
             }
             else
             {
@@ -193,7 +187,7 @@ namespace VoodooShader
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            if (propid == PropIds::D3DX9Handle || propid == PropIds::D3DX9Effect)
+            if (propid == PropIds::D3DX9Handle)
             {
                 return VSFERR_INVALIDPARAMS;
             }
@@ -216,7 +210,7 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_Bool) return VSFERR_INVALIDCALL;
 
-            if (m_Effect->m_DXEffect && m_DXHandle)
+            if (m_Effect && m_DXHandle)
             {
                 BOOL rv = 0;
                 if (SUCCEEDED(m_Effect->m_DXEffect->GetBool(m_DXHandle, &rv)))
@@ -241,7 +235,7 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_Float) return VSFERR_INVALIDCALL;
 
-            if (m_Effect->m_DXEffect && m_DXHandle)
+            if (m_Effect && m_DXHandle)
             {
                 float tVal;
                 if (SUCCEEDED(m_Effect->m_DXEffect->GetFloat(m_DXHandle, &tVal)))
@@ -266,7 +260,7 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
 
-            if (m_Effect->m_DXEffect && m_DXHandle && FAILED(m_Effect->m_DXEffect->GetInt(m_DXHandle, &m_VInt)))
+            if (m_Effect && m_DXHandle && FAILED(m_Effect->m_DXEffect->GetInt(m_DXHandle, &m_VInt)))
             {
                 return VSFERR_APIERROR;
             }
@@ -283,7 +277,7 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_String) return VSFERR_INVALIDCALL;
 
-            if (m_Effect->m_DXEffect && m_DXHandle)
+            if (m_Effect && m_DXHandle)
             {
                 LPCSTR rv = nullptr;
                 if (SUCCEEDED(m_Effect->m_DXEffect->GetString(m_DXHandle, &rv)) && rv)
@@ -320,7 +314,7 @@ namespace VoodooShader
             if (!pVal) return VSFERR_INVALIDPARAMS;
             if (m_Desc.Type != VSPT_Float && m_Desc.Type != VSPT_Bool && m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
 
-            if (m_Effect->m_DXEffect && m_DXHandle)
+            if (m_Effect && m_DXHandle)
             {
                 D3DXVECTOR4 rv;
                 if (SUCCEEDED(m_Effect->m_DXEffect->GetVector(m_DXHandle, &rv)))
@@ -355,7 +349,7 @@ namespace VoodooShader
                 (*child)->SetBool(val);
             }
 
-            if (m_Effect->m_DXEffect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetBool(m_DXHandle, val)))
+            if (m_Effect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetBool(m_DXHandle, val)))
             {
                 return VSFERR_APIERROR;
             }
@@ -377,7 +371,7 @@ namespace VoodooShader
                 (*child)->SetFloat(val);
             }
 
-            if (m_Effect->m_DXEffect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetFloat(m_DXHandle, val)))
+            if (m_Effect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetFloat(m_DXHandle, val)))
             {
                 return VSFERR_APIERROR;
             }
@@ -399,7 +393,7 @@ namespace VoodooShader
                 (*child)->SetInt(val);
             }
 
-            if (m_Effect->m_DXEffect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetInt(m_DXHandle, val)))
+            if (m_Effect && m_DXHandle && FAILED(m_Effect->m_DXEffect->SetInt(m_DXHandle, val)))
             {
                 return VSFERR_APIERROR;
             }
@@ -421,7 +415,7 @@ namespace VoodooShader
                 (*child)->SetString(val);
             }
 
-            if (m_Effect->m_DXEffect && m_DXHandle)
+            if (m_Effect && m_DXHandle)
             {
                 std::string vstr = val.ToStringA();
                 if (FAILED(m_Effect->m_DXEffect->SetString(m_DXHandle, vstr.c_str())))
@@ -447,7 +441,7 @@ namespace VoodooShader
                 (*child)->SetTexture(pVal);
             }
 
-            if (m_Effect->m_DXEffect && m_DXHandle)
+            if (m_Effect && m_DXHandle)
             {
                 Variant propVar = CreateVariant();
                 if (FAILED(pVal->GetProperty(PropIds::D3D9Texture, &propVar)))
@@ -486,7 +480,7 @@ namespace VoodooShader
                 (*child)->SetVector(val);
             }
 
-            if (m_Effect->m_DXEffect && m_DXHandle)
+            if (m_Effect && m_DXHandle)
             {
                 D3DXVECTOR4 sv;
                 sv.x = val.X;
@@ -507,7 +501,7 @@ namespace VoodooShader
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            return (m_Effect->m_DXEffect && m_DXHandle);
+            return (m_Effect && m_DXHandle);
         }
 
         VoodooResult VOODOO_METHODTYPE VSParameterDX9::AttachParameter(IParameter * const pParam)
@@ -561,7 +555,8 @@ namespace VoodooShader
                     }
                     else
                     {
-                        m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, Format("Texture parameter %1% has no source texture annotation.") << m_Name);
+                        m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                            Format("Texture parameter %1% has no source texture annotation.") << m_Name);
                     }
                 }
             }

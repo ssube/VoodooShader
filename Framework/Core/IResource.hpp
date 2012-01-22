@@ -60,7 +60,7 @@ namespace VoodooShader
          * @param propid    The Uuid of the tag to get.
          * @param pValue    The to be filled.
          * 
-         * @note This is equivalent to IDirect3DResource*::GetPrivateData.
+         * @note This is equivalent to IDirect3DResource::GetPrivateData.
          */
         VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST PURE;
         /**
@@ -72,7 +72,7 @@ namespace VoodooShader
          * @note In some cases, the resource may need to reply with an updated value. If so, it will return
          *      @a VSFOK_PROPERTYCHANGED and update @a pValue with the new data.
          *      
-         * @note This is equivalent to IDirect3DResource*::SetPrivateData.
+         * @note This is equivalent to IDirect3DResource::SetPrivateData.
          */
         VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue) PURE;
     };

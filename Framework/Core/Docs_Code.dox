@@ -30,13 +30,13 @@ namespace VoodooShader
       * created and used within Voodoo or adapters. To handle loading these modules, a known interface is required with a 
       * few specific features.
       *
-      * @section voodoo_spec_module_exports Module Exports
+      * @section voodoo_spec_plugin_exports Module Exports
       *
       * Each Voodoo Shader module must export a set of 4 functions. These are used by the core to load and query the 
       * module's version and what classes it provides. All these functions must be exported by name only, with no mangling 
       * or decoration of any kind.
       *
-      * @subsection voodoo_spec_module_exports_version PluginInit
+      * @subsection voodoo_spec_plugin_exports_version PluginInit
       *
       * @code const Version * PluginInit(); @endcode
       *
@@ -44,13 +44,13 @@ namespace VoodooShader
       * VersionDesc struct with the module's name, version and various flags. If the initialization fails, the plugin must
       * return nullptr, and will not be loaded further.
       *
-      * @subsection voodoo_spec_module_exports_count ClassCount
+      * @subsection voodoo_spec_plugin_exports_count ClassCount
       *
       * @code const uint32_t ClassCount(); @endcode
       *
       * Returns the total number of classes publicly exposed by this module.
       *
-      * @subsection voodoo_spec_module_exports_info ClassInfo
+      * @subsection voodoo_spec_plugin_exports_info ClassInfo
       *
       * @code const wchar_t * ClassInfo(const uint32_t index, Uuid  & clsid); @endcode
       *
@@ -62,7 +62,7 @@ namespace VoodooShader
       * nullptr. Class order must be constant throughout the plugin's lifetime and over multiple uses, and the values given
       * in @a ClassInfo and class returned by @a ClassCreate must match.
       *
-      * @subsection voodoo_spec_module_exports_create ClassCreate
+      * @subsection voodoo_spec_plugin_exports_create ClassCreate
       *
       * @code IObject * ClassCreate(const uint32_t index, ICore * pCore); @endcode
       *
@@ -181,7 +181,7 @@ namespace VoodooShader
       *
       * Returns a reference to the object's parent core.
       *
-      * @subsection voodoo_spec_module_throw throw()
+      * @subsection voodoo_spec_plugin_throw throw()
       * <b>Methods and functions in any class or interface derived from IObject shall not throw exceptions or allow them to
       * propogate out from the function.</b> If error reporting is necessary, an error value should be returned and the
       * exception logged. This is a necessary safety precaution, as modules may be created with different compilers or
@@ -191,7 +191,7 @@ namespace VoodooShader
       * potential exception and prevent it from propagating. Constructors may throw, and all calls to <tt>new</tt> should be
       * wrapped in try/catch blocks to handle both exceptions from the ctor and various other exceptions (such as memory).
       *
-      * @section voodoo_spec_module_docs Documentation
+      * @section voodoo_spec_plugin_docs Documentation
       *
       * If possible, module creators should provide full documentation for modules, including class names and interfaces
       * implemented from each.
@@ -205,7 +205,7 @@ namespace VoodooShader
       * The adapter serves as a binding between an unknown (by the core library) graphics API and the Voodoo Shader 
       * Framework. The adapter is responsible for handling any interaction between the two, performing translation as 
       * necessary, and generally polishing the details. In many senses, adapters are regular classes provided by modules and
-      * they must follow the @ref voodoo_spec_module as any other module. However, adapter classes must fit a very specific 
+      * they must follow the @ref voodoo_spec_plugin as any other module. However, adapter classes must fit a very specific 
       * set of behavior rules and perform exactly as expected by the core, and only one adapter object is created at a time.
       *
       * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter itself. The adapter

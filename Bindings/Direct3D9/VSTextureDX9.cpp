@@ -169,7 +169,9 @@ namespace VoodooShader
                 {
                     return VSFERR_INVALIDPARAMS;
                 }
-                else if (m_Binding->m_BoundSourceTexture[index] != this || m_BoundSourceSlot != VOODOO_TEXTURE_INVALID)
+                else if ((m_Binding->m_BoundSourceTexture[index] &&
+                         m_Binding->m_BoundSourceTexture[index] != this) || 
+                         m_BoundSourceSlot != VOODOO_TEXTURE_INVALID)
                 {
                     return VSFERR_INVALIDCALL;
                 }
@@ -192,7 +194,9 @@ namespace VoodooShader
                 {
                     return VSFERR_INVALIDPARAMS;
                 }
-                else if (m_Binding->m_BoundTargetTexture[index] != this || m_BoundTargetSlot != VOODOO_TEXTURE_INVALID)
+                else if ((m_Binding->m_BoundTargetTexture[index] &&
+                        m_Binding->m_BoundTargetTexture[index] != this) || 
+                         m_BoundTargetSlot != VOODOO_TEXTURE_INVALID)
                 {
                     return VSFERR_INVALIDCALL;
                 }

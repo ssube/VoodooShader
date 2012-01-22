@@ -229,7 +229,7 @@ namespace VoodooShader
         
         if (!this->IsOpen()) return false;
 
-        uint32_t reqMask = VSLog_System | VSLog_Critical | VSLog_Warning | VSLog_Error;
+        uint32_t reqMask = VSLog_Critical | VSLog_Error;
         if ((level & (reqMask | m_Filter)) == 0) return false;
 
         try

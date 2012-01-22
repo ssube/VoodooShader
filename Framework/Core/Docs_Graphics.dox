@@ -185,17 +185,20 @@ namespace VoodooShader
       * suffixed with 'F' to store the data as floats (single and double texture formats are available).
       *
       * <table>
-      *     <tr><th>Voodoo Format</th> <th>DirectX Format</th> <th>OpenGL Format</th> <th>RT/Copy/Load<sup>4</sup></th> <th>Bits</th> <th>Channels</th></tr>
-      *     <tr><td>@ref TF_Unknown</td> <td>D3DFMT_UNKNOWN</td> <td>(unknown)</td> <td>None</td></tr>
+      *     <tr><th>Voodoo Format</th> <th>DirectX Format</th> <th>OpenGL Format</th> <th>RT/Copy/Load<sup>6</sup></th> <th>Bits</th> <th>Channels</th></tr>
+      *     <tr><td>@ref VSFmt_Null</td> <td>n/a <sup>1</sup></td> <td>n/a <sup>1</sup></td> <td>Y/N/N</td></tr>
       *     <tr><td>@ref VSFmt_RGB5</td> <td>D3DFMT_X1R5G5B5</td> <td>GL_RGB5</td> <td>Y/Y/N</td> <td>15/16</td> <td>RGB</td></tr>
       *     <tr><td>@ref VSFmt_RGB5A1</td> <td>D3DFMT_A1R5G5B5</td> <td>GL_RGB5_A1</td> <td>Y/Y/N</td> <td>16</td> <td>RGBA</td></tr>
       *     <tr><td>@ref VSFmt_RGB8</td> <td>D3DFMT_X8R8G8B8</td> <td>GL_RGB8</td> <td>Yes</td> <td>24</td> <td>RGB</td></tr>
       *     <tr><td>@ref VSFmt_RGBA8</td> <td>D3DFMT_A8R8G8B8</td> <td>GL_RGBA8</td> <td>Yes</td> <td>32</td> <td>RGBA</td></tr>
       *     <tr><td>@ref VSFmt_RGB10A2</td> <td>D3DFMT_A2R10G10B10</td> <td>GL_RGB10_A2</td> <td>Y/Y/N</td> <td>32</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGBA16F<sup>1</sup></td><td>D3DFMT_A16B16G16R16F</td> <td>GL_RGBA16F</td> <td>N/Y/Y</td> <td>64</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGBA32F<sup>1</sup></td><td>D3DFMT_A32B32G32R32F</td> <td>GL_RGBA32F</td> <td>N/Y/Y</td> <td>128</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_D16</td> <td>D3DFMT_D16F</td> <td>GL_DEPTH_COMPONENT16</td> <td>N/Y-ish<sup>2</sup>/N</td> <td>16</td> <td>R<sup>3</sup></td></tr>
-      *     <tr><td>@ref VSFmt_D32</td> <td>D3DFMT_D32F</td> <td>GL_DEPTH_COMPONENT32</td> <td>N/Y-ish<sup>2</sup>/N</td> <td>32</td> <td>R<sup>3</sup></td></tr>
+      *     <tr><td>@ref VSFmt_RGBA16F<sup>1</sup></td><td>D3DFMT_A16B16G16R16F</td> <td>GL_RGBA16F</td> <td>Yes</td> <td>64</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_RGBA32F<sup>1</sup></td><td>D3DFMT_A32B32G32R32F</td> <td>GL_RGBA32F</td> <td>Yes</td> <td>128</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_D16</td> <td>D3DFMT_D16</td> <td>GL_DEPTH_COMPONENT16</td> <td>Y/Y<sup>2</sup>/N</td> <td>16</td> <td>R<sup>3</sup></td></tr>
+      *     <tr><td>@ref VSFmt_D24</td> <td>D3DFMT_D24X8</td> <td>GL_DEPTH_COMPONENT24</td> <td>Y/Y<sup>2</sup>/N</td> <td>24</td> <td>R<sup>3</sup></td></tr>
+      *     <tr><td>@ref VSFmt_D24S8</td> <td>D3DFMT_D24S8</tr> <td>GL_DEPTH_COMPONENT24S8</td> <td>Y/Y<sup>2</sup>/N</td> <td>32</td> <td>R<sup>4</sup></td></tr>
+      *     <tr><td>@ref VSFmt_D32</td> <td>D3DFMT_D32</td> <td>GL_DEPTH_COMPONENT32</td> <td>Y/Y<sup>2</sup>/N</td> <td>32</td> <td>R<sup>3</sup></td></tr>
+      *     <tr><td>@ref VSFmt_DMax</td> <td>varies <sup>5</sup></td> <td>varies <sup>5</sup></td> <td>Y/Y<sup>2</sup>/N</td> <td>variable</td> <td>R<sup>3</sup></td></tr>
       * </table>
       * <br/>
       * <em><sup>1</sup>:</em> floating-point texture formats (@ref VSFmt_RGBA16F and @ref VSFmt_RGBA32F) may not be supported on
@@ -208,7 +211,15 @@ namespace VoodooShader
       * <em><sup>3</sup>:</em> Depth textures do not map to components in all APIs. The most likely mapping is given, but
       *     access is not guaranteed.
       * <br/>
-      * <em><sup>4</sup>:</em> Texture loading is restricted by the file system library. The values given apply only to
+      * <em><sup>4</sup>:</em> Depth/stencil formats allow access to the depth component only, mapping to one of the regular 
+      *     channels.
+      * <br/>
+      * <em><sup>5</sup>:</em> The @ref VSFmt_DMax format is unique in that it has a varying depth. It is the maximum 
+      *     precision depth buffer which can be used as a source texture on the current platform. The actual format varies
+      *     widely, from D16 to INTZ or even D32, depending on hardware capabilities. When using a depth texture, this is
+      *     typically the desired format. The Voodoo Shader binding will manage all API-specific nonsense for you.
+      *
+      * <em><sup>6</sup>:</em> Texture loading is restricted by the file system library. The values given apply only to
       *     Voodoo/Filesystem, which uses DevIL. Only 8, 16 and 32 bpc formats can be copied into by
       *     IImage::CopyImageData(); DevIL lacks the values to describe packed formats and depth formats are not yet fully
       *     supported in the file system module. The supported formats are more widely supported in other areas of Voodoo,
@@ -217,99 +228,52 @@ namespace VoodooShader
       *
       * @section voodoo_textures_depth Depth Buffers
       *
-      * For an adapter to be considered fully Voodoo compatible, it must supply realtime depth data to a shader-readable
-      * texture. How this is performed is left to the discretion of the adapter, as it varies greatly between old D3D
+      * For a binding to be fully compatible Voodoo Shader, it must supply realtime depth data to a shader-readable
+      * texture. How this is performed is left to the discretion of the binding, as it varies greatly between old D3D
       * versions and OpenGL or newer D3D. This data should be stored such that greater distances are represented by higher
       * values and, if possible, the distance should not be normalized (not bounded by @p (0-1)). When possible, it is
       * recommended that the depth information be stored in a 32-bit floating point component. Depth data must be accessible
       * to shaders from the R channel of the depth texture. At this time, the GBA components of the texture are considered
       * undefined, but reserved for future use. Depending on implementation, they may contain depth data, uninitialized
       * memory, or other data and must not be used. As DirectX 9 does not usually allow @ref VSFmt_D32 textures to be read,
-      * this may require rendering to a second target and using a @ref VSFmt_RGBA32F texture. Two-pass or two-target rendering
-      * can both meet this requirement neatly. Using two passes is slower but more compatible, so this should be made an
-      * option if possible.
+      * the @ref VSFmt_DMax format is provided to hide implementation details from adapters. This format is the greatest
+      * precision depth texture available on the system and able to be used for general purposes. Some implementation of
+      * VSFmt_DMax is available on all supported hardware.
       *
       * @section voodoo_textures_loading Texture Loading
       *
-      * Texture loading is implemented through an IAdapter callback, so Voodoo textures can be created with a variety of
-      * options or using any number of functions. To simplify getting texture data into memory in the first place, the
-      * Voodoo filesystem library includes specialized IImage classes. These use DevIL as the loading library, so support a
-      * ridiculous number of formats. Among the most useful formats are DDS, PNG and TGA, all supporting high resolutions
-      * and transparency. Other formats may not be as suitable; JPEG and BMP for example are very lossy and large,
-      * respectively.
+      * Texture loading is implemented through the binding and DevIL library. A variety of formats are supported, although
+      * unsuitable ones have been removed from the library to save space and prevent their use.
+      *
+      * For most purposes, the @p PNG or @p DDS formats are recommended. Both are capable of transparency, high depth, and
+      * compression. @p PNG is a lossless format while @p DDS is somewhat lossy, although @p DDS provides a greater variety
+      * of bit depths. 
+      *
+      * Some formats, such as @p BMP or @p TGA, are included for legacy purposes. Both formats are commonly used, but not
+      * recommended due to large size and constraints. Notable @a unsupported formats include @p GIF and @p JPEG, both of
+      * which are significantly lossy leading to artifacts when used.
       *
       * @section voodoo_textures_fileformats Supported File Formats
       *
-      * Below is provided a full list of the file formats Voodoo/Filesystem is capable of loading and saving (via DevIL).
-      * This list is taken from the DevIL documentation.
-      *
       * <table>
-      *     <tr><th>Format</th><th>Extension</th><th>Load</th><th>Save<sup>4</sup></th></tr>
-      *     <tr><td>Windows Bitmap<sup>2</sup></td><td>bmp</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Dr. Halo</td><td>cut</td><td>Yes</td></tr>
-      *     <tr><td>Multi-PCX</td><td>dcx</td><td>Yes</td></tr>
-      *     <tr><td>Dicom</td><td>dcm</td><td>Yes</td></tr>
-      *     <tr><td>DirectDraw Surface<sup>3</sup></td><td>dds</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>OpenEXR</td><td>ext</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Flexible Image Transport System</td><td>fits, fit</td><td>Yes</td></tr>
-      *     <tr><td>Heavy Metal: FAKK 2</td><td>ftx</td><td>Yes</td>
-      *     <tr><td>C-style Header<sup>2</sup></td><td>h</td><td></td><td>Yes</td></tr>
+      *     <tr><th>Format</th><th>Extension</th><th>Load</th><th>Save<sup>2</sup></th></tr>
+      *     <tr><td>Windows Bitmap<sup>1</sup></td><td>bmp</td><td>Yes</td><td>Yes</td></tr>
+      *     <tr><td>DirectDraw Surface</td><td>dds</td><td>Yes</td><td>Yes</td></tr>
+      *     <tr><td>C-style Header<sup>1</sup></td><td>h</td><td></td><td>Yes</td></tr>
       *     <tr><td>Radiance High Dynamic</td><td>hdr</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Macintosh Icon</td><td>icns</td><td>Yes</td></tr>
-      *     <tr><td>Windows icon/cursor</td><td>ico, cur</td><td>Yes<sup>1</sup></td></tr>
-      *     <tr><td>Interchange FileFormat</td><td>iff</td><td>Yes</td></tr>
-      *     <tr><td>Infinity Ward Image</td><td>iwi</td><td>Yes</td></tr>
-      *     <tr><td>Graphics Interchange Format</td><td>gif</td><td>Yes<sup>1</sup></td></tr>
-      *     <tr><td>JPEG</td><td>jpg, jpe, jpeg</td><td>Yes<sup>2</sup></td><td>Yes</td></tr>
-      *     <tr><td>JPEG 2000</td><td>jp2</td><td>Yes<sup>2</sup></td><td>Yes</td></tr>
-      *     <tr><td>Interlaced Bitmap</td><td>lbm</td><td>Yes</td></tr>
-      *     <tr><td>Homeworld Texture</td><td>lif</td><td>Yes</td></tr>
-      *     <tr><td>Half-Life Model</td><td>mdl</td><td>Yes</td></tr>
-      *     <tr><td>MPEG-1 Audio Layer 3</td><td>mp3</td><td>Yes</td></tr>
-      *     <tr><td>Palette</td><td>pal</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Kodak PhotoCD</td><td>pcd</td><td>Yes</td></tr>
-      *     <tr><td>ZSoft PCX</td><td>pcx</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Softimage PIC</td><td>pic</td><td>Yes</td></tr>
-      *     <tr><td>Portable Network Graphics<sup>3</sup></td><td>png</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Portable Anymap</td><td>pbm, pgm, pnm</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Alias | Wavefront</td><td>pix</td><td>Yes</td></tr>
+      *     <tr><td>Portable Network Graphics</td><td>png</td><td>Yes</td><td>Yes</td></tr>
       *     <tr><td>Adobe Photoshop</td><td>psd</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Paintshop Pro</td><td>psp</td><td>Yes</td></tr>
-      *     <tr><td>Pixar</td><td>pxr</td><td>Yes</td></tr>
       *     <tr><td>Raw Data</td><td>raw</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Homeworld 2 Texture</td><td>rot</td><td>Yes</td></tr>
-      *     <tr><td>Silicon Graphics</td><td>sgi, bw, rgb, rgba</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Creative Assembly Texture</td><td>texture</td><td>Yes</td></tr>
       *     <tr><td>Truevision Targa</td><td>tga</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Tagged Image Format</td><td>tif</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Gamecube Texture</td><td>tpl</td><td>Yes</td></tr>
-      *     <tr><td>Unreal Texture</td><td>utx</td><td>Yes</td></tr>
-      *     <tr><td>Quake 2 Texture</td><td>wal</td><td>Yes</td></tr>
-      *     <tr><td>Valve Texture Format</td><td>vtf</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>HD Photo</td><td>wdp, hdp</td><td>Yes</td></tr>
-      *     <tr><td>X Pixel Map</td><td>xpm</td><td>Yes</td></tr>
-      *     <tr><td>Doom Graphics</td><td></td><td>Yes</td></tr>
       * </table>
       * <br/>
-      * <em><sup>1</sup>:</em> These formats support animated textures, but animations are not supported within Voodoo. Only
-      *     the first frame will be used.
+      * <em><sup>1</sup>:</em> These formats are not recommended for use, due to poor quality or capabilities.
       * <br />
-      * <em><sup>2</sup>:</em> These formats are not recommended for use, due to poor quality or capabilities.
-      * <br />
-      * <em><sup>3</sup>:</em> These formats are recommended for use and support most or all of the features Voodoo uses.
-      * <br />
-      * <em><sup>4</sup>:</em> @ref voodoo_module_wfilesystem does not yet support saving images. Support for these formats
+      * <em><sup>2</sup>:</em> @ref voodoo_module_wfilesystem does not yet support saving images. Support for these formats
       *     is provided directly by DevIL, including the ability to convert most internal formats.
       *
       * Questions regarding formats and support, as they apply to DevIL, should be directed to the developer of this fine
-      * library. Questions regarding Voodoo's support or use of DevIL, or that of any Voodoo module, should be directed to
-      * Voodoo or module developer(s). Some of these formats (GIF, for example) do not correspond to any internal Voodoo
-      * formats. To use images in these formats, you should load the image, then call IImage::CopyImageData() and provide
-      * the desired format. DevIL will handle conversion internally. This may be slow and so should not be used often, but
-      * provides a way to load almost any format into Voodoo. The above list of formats is quite large, and some formats
-      * are obscure or not well suited for use with Voodoo. However, DevIL supports them and there is no reason to add
-      * artificial limitations to Voodoo when it takes less work to provide a more flexible structure. Thus, these formats
-      * are all supported and may be used as desired. Some of the more unusual formats may have some innate restrictions or
-      * lose data during conversion to Voodoo-supported formats, so take care to properly test any image resources you use.
+      * library. Questions regarding Voodoo Shader's support or use of DevIL, or that of any Voodoo Shader module, should be 
+      * directed to Voodoo Shader or module developer(s).
       */
 }

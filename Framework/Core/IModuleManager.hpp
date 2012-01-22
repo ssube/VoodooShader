@@ -131,7 +131,7 @@ namespace VoodooShader
          * @param clsid The class Uuid.
          * @return Existence of the class.
          */
-        VOODOO_METHOD_(bool, ClassExists)(_In_ const Uuid refid) CONST PURE;
+        VOODOO_METHOD_(bool, ClassExists)(_In_ const Uuid clsid) CONST PURE;
         /**
          * Tests to see if a class exists in the list provided by all loaded modules.
          *
@@ -150,7 +150,7 @@ namespace VoodooShader
          * @param clsid The class Uuid to create.
          * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid refid) CONST PURE;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid clsid) CONST PURE;
         /**
          * Create a new instance of the given class, using a class name or Uuid in string form.
          *
