@@ -116,8 +116,8 @@ namespace VoodooShader
             VOODOO_METHOD(Close)();
             VOODOO_METHOD(Seek)(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset);
             VOODOO_METHOD_(int32_t, Tell)(_In_ StreamType stream);
-            VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
-            VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) void * const pBuffer);
+            VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t count, _In_opt_bytecount_(count) void * pBuffer);
+            VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) void * pBuffer);
 
         private:
             mutable uint32_t m_Refs;

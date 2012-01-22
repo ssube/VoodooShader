@@ -81,7 +81,7 @@ namespace VoodooShader
                 UINT Height,
                 UINT Levels,
                 DWORD Usage,
-                D3DFORMAT Format,
+                D3DFORMAT StringFormat,
                 D3DPOOL Pool,
                 IDirect3DTexture9 **ppTexture,
                 HANDLE * pSharedHandle
@@ -93,7 +93,7 @@ namespace VoodooShader
                 UINT Depth,
                 UINT Levels,
                 DWORD Usage,
-                D3DFORMAT Format,
+                D3DFORMAT StringFormat,
                 D3DPOOL Pool,
                 IDirect3DVolumeTexture9 **ppVolumeTexture,
                 HANDLE * pSharedHandle
@@ -103,7 +103,7 @@ namespace VoodooShader
                 THIS_ UINT EdgeLength,
                 UINT Levels,
                 DWORD Usage,
-                D3DFORMAT Format,
+                D3DFORMAT StringFormat,
                 D3DPOOL Pool,
                 IDirect3DCubeTexture9 **ppCubeTexture,
                 HANDLE * pSharedHandle
@@ -121,7 +121,7 @@ namespace VoodooShader
             (
                 THIS_ UINT Length,
                 DWORD Usage,
-                D3DFORMAT Format,
+                D3DFORMAT StringFormat,
                 D3DPOOL Pool,
                 IDirect3DIndexBuffer9 **ppIndexBuffer,
                 HANDLE * pSharedHandle
@@ -130,7 +130,7 @@ namespace VoodooShader
             (
                 THIS_ UINT Width,
                 UINT Height,
-                D3DFORMAT Format,
+                D3DFORMAT StringFormat,
                 D3DMULTISAMPLE_TYPE MultiSample,
                 DWORD MultisampleQuality,
                 BOOL Lockable,
@@ -141,7 +141,7 @@ namespace VoodooShader
             (
                 THIS_ UINT Width,
                 UINT Height,
-                D3DFORMAT Format,
+                D3DFORMAT StringFormat,
                 D3DMULTISAMPLE_TYPE MultiSample,
                 DWORD MultisampleQuality,
                 BOOL Discard,
@@ -175,7 +175,7 @@ namespace VoodooShader
             (
                 THIS_ UINT Width,
                 UINT Height,
-                D3DFORMAT Format,
+                D3DFORMAT StringFormat,
                 D3DPOOL Pool,
                 IDirect3DSurface9 **ppSurface,
                 HANDLE * pSharedHandle

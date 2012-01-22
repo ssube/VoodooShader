@@ -132,7 +132,7 @@ namespace VoodooShader
          *
          * @note This will validate that the technique belongs to this shader.
          */
-        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique) PURE;
+        VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * pTechnique) PURE;
         /**
          * @}
          */

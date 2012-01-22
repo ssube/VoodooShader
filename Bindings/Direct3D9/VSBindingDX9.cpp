@@ -163,7 +163,7 @@ namespace VoodooShader
             if (FAILED(hr))
             {
                 m_Core->GetLogger()->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format("Error compiling effect from source. Errors:\n%2%") << (LPCSTR)errors->GetBufferPointer());
+                    StringFormat("Error compiling effect from source. Errors:\n%2%") << (LPCSTR)errors->GetBufferPointer());
 
                 return nullptr;
             }
@@ -188,7 +188,7 @@ namespace VoodooShader
             if (FAILED(hr))
             {
                 m_Core->GetLogger()->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format("Error compiling effect from file '%1%'. Errors:\n%2%") << 
+                    StringFormat("Error compiling effect from file '%1%'. Errors:\n%2%") << 
                     pFile->GetPath() << (LPCSTR)errors->GetBufferPointer());
 
                 return nullptr;
@@ -228,7 +228,7 @@ namespace VoodooShader
             if (FAILED(hr))
             {
                 m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
-                    Format("Failed to create texture '%1%'.") << name);
+                    StringFormat("Failed to create texture '%1%'.") << name);
                 return nullptr;
             }
 
@@ -247,7 +247,7 @@ namespace VoodooShader
             //if (ilutD3D9TexFromFile(m_Device, pFile->GetPath().GetData(), &texture) != IL_TRUE)
             //{
             //    m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
-            //        Format("Failed to load texture '%1%' from file '%2%'.") << name << pFile->GetPath());
+            //        StringFormat("Failed to load texture '%1%' from file '%2%'.") << name << pFile->GetPath());
             //    return nullptr;
             //}
 

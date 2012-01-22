@@ -58,7 +58,7 @@ namespace VoodooShader
             VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
             VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(const String & name) CONST;
             VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;
-            VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * const pTechnique);
+            VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * pTechnique);
 
         private:
             mutable uint32_t m_Refs;

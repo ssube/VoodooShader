@@ -159,7 +159,7 @@ namespace VoodooShader
         String VOODOO_METHODTYPE VSTechniqueDX9::ToString() CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-            return Format(VSTR("VSTechnique(%1%)")) << m_Name;
+            return StringFormat(VSTR("VSTechnique(%1%)")) << m_Name;
         }
 
         ICore * VOODOO_METHODTYPE VSTechniqueDX9::GetCore() CONST

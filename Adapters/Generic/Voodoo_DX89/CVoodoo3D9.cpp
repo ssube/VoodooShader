@@ -25,7 +25,7 @@
 // Voodoo DX89
 #include "DX9_Version.hpp"
 // Voodoo Core
-#include "Format.hpp"
+#include "StringFormat.hpp"
 
 namespace VoodooShader
 {

@@ -56,7 +56,7 @@ namespace VoodooShader
     }
 
     template<typename Elem>
-    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Format & val)
+    std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const StringFormat & val)
     {
         return out << val.ToString().GetData();
     }

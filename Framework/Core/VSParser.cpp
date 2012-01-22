@@ -120,7 +120,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            Format msg(VSTR("Adding variable '%1%' with value '%2%'."));
+            StringFormat msg(VSTR("Adding variable '%1%' with value '%2%'."));
             msg << name << value;
             logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
         }
@@ -138,7 +138,7 @@ namespace VoodooShader
             {
                 if (logger)
                 {
-                    Format msg(VSTR("Unable to add duplicate variable '%1%' (system variable already exists)."));
+                    StringFormat msg(VSTR("Unable to add duplicate variable '%1%' (system variable already exists)."));
                     msg << finalname;
                     logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, msg);
                 }
@@ -158,7 +158,7 @@ namespace VoodooShader
 
         if (logger)
         {
-            Format msg(VSTR("Removing variable '%1%'."));
+            StringFormat msg(VSTR("Removing variable '%1%'."));
             msg << name;
             m_Core->GetLogger()->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
         }
@@ -191,7 +191,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 VSLog_CoreDebug, VOODOO_CORE_NAME, 
-                Format(VSTR("Parsing string '%1%' (%2%).")) << input << flags
+                StringFormat(VSTR("Parsing string '%1%' (%2%).")) << input << flags
             );
         }
 
@@ -307,7 +307,7 @@ namespace VoodooShader
                         if (logger)
                         {
                             logger->LogMessage(VSLog_CoreInfo, VOODOO_CORE_NAME, 
-                                Format("Variable local flags of %1% found, merged %2% with original %3%, flags set to %4%.") << newFlags << merge << flags << localFlags);
+                                StringFormat("Variable local flags of %1% found, merged %2% with original %3%, flags set to %4%.") << newFlags << merge << flags << localFlags);
                         }
                     } catch (std::exception & exc)
                     {
@@ -513,7 +513,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 VSLog_CoreDebug, VOODOO_CORE_NAME,
-                Format(VSTR("Returning string '%1%' from parser.")) << iteration
+                StringFormat(VSTR("Returning string '%1%' from parser.")) << iteration
             );
         }
 

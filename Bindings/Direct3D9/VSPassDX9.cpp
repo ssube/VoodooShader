@@ -108,7 +108,7 @@ namespace VoodooShader
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            return Format(VSTR("VSPass(%1%)")) << m_Name;
+            return StringFormat(VSTR("VSPass(%1%)")) << m_Name;
         }
 
         ICore * VOODOO_METHODTYPE VSPassDX9::GetCore() CONST

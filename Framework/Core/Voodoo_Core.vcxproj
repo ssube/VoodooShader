@@ -83,7 +83,7 @@
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Exports.cpp" />
     <ClCompile Include="Regex.cpp" />
-    <ClCompile Include="Format.cpp" />
+    <ClCompile Include="StringFormat.cpp" />
     <ClCompile Include="String.cpp" />
     <ClCompile Include="VSCore.cpp" />
     <ClCompile Include="VSFilesystem.cpp" />
@@ -124,7 +124,7 @@
     <ClInclude Include="Converter.hpp" />
     <ClInclude Include="Exception.hpp" />
     <ClInclude Include="VoodooInternal.hpp" />
-    <ClInclude Include="Format.hpp" />
+    <ClInclude Include="StringFormat.hpp" />
     <ClInclude Include="Regex.hpp" />
     <ClInclude Include="String.hpp" />
     <ClInclude Include="VoodooVersion.hpp" />

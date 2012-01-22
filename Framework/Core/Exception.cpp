@@ -36,7 +36,7 @@ namespace VoodooShader
     ) :
         m_Core(pCore)
     {
-        Format msg(ExceptionLogMsg);
+        StringFormat msg(ExceptionLogMsg);
         msg << file << function << line << message;
         m_What = msg;
 
@@ -62,7 +62,7 @@ namespace VoodooShader
     ) :
             m_Core(pCore)
     {
-        Format msg(ExceptionLogMsg);
+        StringFormat msg(ExceptionLogMsg);
         msg << file << function << line << message;
         m_What = msg;
 

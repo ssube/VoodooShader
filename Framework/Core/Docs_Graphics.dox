@@ -186,30 +186,29 @@ namespace VoodooShader
       *
       * <table>
       *     <tr><th>Voodoo Format</th> <th>DirectX Format</th> <th>OpenGL Format</th> <th>RT/Copy/Load<sup>6</sup></th> <th>Bits</th> <th>Channels</th></tr>
-      *     <tr><td>@ref VSFmt_Null</td> <td>n/a <sup>1</sup></td> <td>n/a <sup>1</sup></td> <td>Y/N/N</td></tr>
-      *     <tr><td>@ref VSFmt_RGB5</td> <td>D3DFMT_X1R5G5B5</td> <td>GL_RGB5</td> <td>Y/Y/N</td> <td>15/16</td> <td>RGB</td></tr>
-      *     <tr><td>@ref VSFmt_RGB5A1</td> <td>D3DFMT_A1R5G5B5</td> <td>GL_RGB5_A1</td> <td>Y/Y/N</td> <td>16</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_Null</td> <td>n/a <sup>1</sup></td> <td>n/a <sup>1</sup></td> <td>Y/N/N</td> <td>0</td> <td>none</td></tr>
+      *     <tr><td>@ref VSFmt_RGB5A1</td> <td>D3DFMT_A1R5G5B5</td> <td>GL_RGB5_A1</td> <td>Yes</td> <td>16</td> <td>RGBA</td></tr>
       *     <tr><td>@ref VSFmt_RGB8</td> <td>D3DFMT_X8R8G8B8</td> <td>GL_RGB8</td> <td>Yes</td> <td>24</td> <td>RGB</td></tr>
       *     <tr><td>@ref VSFmt_RGBA8</td> <td>D3DFMT_A8R8G8B8</td> <td>GL_RGBA8</td> <td>Yes</td> <td>32</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGB10A2</td> <td>D3DFMT_A2R10G10B10</td> <td>GL_RGB10_A2</td> <td>Y/Y/N</td> <td>32</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGBA16F<sup>1</sup></td><td>D3DFMT_A16B16G16R16F</td> <td>GL_RGBA16F</td> <td>Yes</td> <td>64</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGBA32F<sup>1</sup></td><td>D3DFMT_A32B32G32R32F</td> <td>GL_RGBA32F</td> <td>Yes</td> <td>128</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_D16</td> <td>D3DFMT_D16</td> <td>GL_DEPTH_COMPONENT16</td> <td>Y/Y<sup>2</sup>/N</td> <td>16</td> <td>R<sup>3</sup></td></tr>
-      *     <tr><td>@ref VSFmt_D24</td> <td>D3DFMT_D24X8</td> <td>GL_DEPTH_COMPONENT24</td> <td>Y/Y<sup>2</sup>/N</td> <td>24</td> <td>R<sup>3</sup></td></tr>
-      *     <tr><td>@ref VSFmt_D24S8</td> <td>D3DFMT_D24S8</tr> <td>GL_DEPTH_COMPONENT24S8</td> <td>Y/Y<sup>2</sup>/N</td> <td>32</td> <td>R<sup>4</sup></td></tr>
-      *     <tr><td>@ref VSFmt_D32</td> <td>D3DFMT_D32</td> <td>GL_DEPTH_COMPONENT32</td> <td>Y/Y<sup>2</sup>/N</td> <td>32</td> <td>R<sup>3</sup></td></tr>
-      *     <tr><td>@ref VSFmt_DMax</td> <td>varies <sup>5</sup></td> <td>varies <sup>5</sup></td> <td>Y/Y<sup>2</sup>/N</td> <td>variable</td> <td>R<sup>3</sup></td></tr>
+      *     <tr><td>@ref VSFmt_RGB10A2</td> <td>D3DFMT_A2R10G10B10</td> <td>GL_RGB10_A2</td> <td>Yes</td> <td>32</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_RGBA16F<sup>2</sup></td><td>D3DFMT_A16B16G16R16F</td> <td>GL_RGBA16F</td> <td>Yes</td> <td>64</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_RGBA32F<sup>2</sup></td><td>D3DFMT_A32B32G32R32F</td> <td>GL_RGBA32F</td> <td>Yes</td> <td>128</td> <td>RGBA</td></tr>
+      *     <tr><td>@ref VSFmt_D16</td> <td>D3DFMT_D16</td> <td>GL_DEPTH_COMPONENT16</td> <td>Y/Y<sup>3</sup>/N</td> <td>16</td> <td>R</td></tr>
+      *     <tr><td>@ref VSFmt_D24</td> <td>D3DFMT_D24X8</td> <td>GL_DEPTH_COMPONENT24</td> <td>Y/Y<sup>3</sup>/N</td> <td>24</td> <td>R</td></tr>
+      *     <tr><td>@ref VSFmt_D24S8</td> <td>D3DFMT_D24S8</tr> <td>GL_DEPTH_COMPONENT24S8</td> <td>Y/Y<sup>3</sup>/N</td> <td>32</td> <td>R<sup>4</sup></td></tr>
+      *     <tr><td>@ref VSFmt_D32</td> <td>D3DFMT_D32</td> <td>GL_DEPTH_COMPONENT32</td> <td>Y/Y<sup>3</sup>/N</td> <td>32</td> <td>R</td></tr>
+      *     <tr><td>@ref VSFmt_DMax</td> <td>varies <sup>5</sup></td> <td>varies <sup>5</sup></td> <td>Y/Y<sup>3</sup>/N</td> <td>variable</td> <td>R</td></tr>
       * </table>
       * <br/>
-      * <em><sup>1</sup>:</em> floating-point texture formats (@ref VSFmt_RGBA16F and @ref VSFmt_RGBA32F) may not be supported on
-      *     all hardware. Any features requiring these formats should provide an alternate render path for old hardware
-      *     (quality may suffer).
+      * <em><sup>1</sup>:</em> the null format is a special format with no backing texture data, but which can be bound as
+      *     a render-target in any of the color buffers. This is useful when color data may be discarded but depth data must
+      *     be written, as most bindings require at least one render target besides a depth texture.
+      * <em><sup>2</sup>:</em> floating-point texture formats (@ref VSFmt_RGBA16F and @ref VSFmt_RGBA32F) may not be 
+      *     supported on all hardware. Where they are not available, the next-highest precision format will be used, being
+      *     no less than @ref VSFmt_RGBA8.
       * <br/>
-      * <em><sup>2</sup>:</em> Depth textures suffer additional restrictions when used with the DirectX 9 API. See the
+      * <em><sup>3</sup>:</em> Depth textures suffer additional restrictions in some APIs. See the
       *     @ref voodoo_textures_depth "depth buffers" section for more information.
-      * <br/>
-      * <em><sup>3</sup>:</em> Depth textures do not map to components in all APIs. The most likely mapping is given, but
-      *     access is not guaranteed.
       * <br/>
       * <em><sup>4</sup>:</em> Depth/stencil formats allow access to the depth component only, mapping to one of the regular 
       *     channels.
@@ -220,11 +219,7 @@ namespace VoodooShader
       *     typically the desired format. The Voodoo Shader binding will manage all API-specific nonsense for you.
       *
       * <em><sup>6</sup>:</em> Texture loading is restricted by the file system library. The values given apply only to
-      *     Voodoo/Filesystem, which uses DevIL. Only 8, 16 and 32 bpc formats can be copied into by
-      *     IImage::CopyImageData(); DevIL lacks the values to describe packed formats and depth formats are not yet fully
-      *     supported in the file system module. The supported formats are more widely supported in other areas of Voodoo,
-      *     so it is highly recommended you favor these whenever possible. It @e is, however, possible to load images that
-      *     are in other formats and convert them.
+      *     Voodoo_WFilesystem, which uses a custom build of DevIL.
       *
       * @section voodoo_textures_depth Depth Buffers
       *
@@ -238,7 +233,7 @@ namespace VoodooShader
       * memory, or other data and must not be used. As DirectX 9 does not usually allow @ref VSFmt_D32 textures to be read,
       * the @ref VSFmt_DMax format is provided to hide implementation details from adapters. This format is the greatest
       * precision depth texture available on the system and able to be used for general purposes. Some implementation of
-      * VSFmt_DMax is available on all supported hardware.
+      * @ref VSFmt_DMax is available on all supported hardware.
       *
       * @section voodoo_textures_loading Texture Loading
       *

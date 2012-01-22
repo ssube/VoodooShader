@@ -41,7 +41,6 @@ namespace VoodooShader
         }
         else
         {
-            if (_tcsnicmp(formatBody, VSTR("RGB5"),    4) == 0) return VSFmt_RGB5;
             if (_tcsnicmp(formatBody, VSTR("RGB5A1"),  6) == 0) return VSFmt_RGB5A1;
             if (_tcsnicmp(formatBody, VSTR("RGB8"),    4) == 0) return VSFmt_RGB8;
             if (_tcsnicmp(formatBody, VSTR("RGBA8"),   5) == 0) return VSFmt_RGBA8;
@@ -61,7 +60,6 @@ namespace VoodooShader
     {
         switch (tf)
         {
-            CASESTRING(RGB5);
             CASESTRING(RGB5A1);
             CASESTRING(RGB8);
             CASESTRING(RGBA8);
@@ -86,6 +84,10 @@ namespace VoodooShader
             CASESTRING(Int);
             CASESTRING(Float);
             CASESTRING(String);
+            CASESTRING(Texture1D);
+            CASESTRING(Texture2D);
+            CASESTRING(Texture3D);
+            CASESTRING(TextureCube);
             CASESTRING(Sampler1D);
             CASESTRING(Sampler2D);
             CASESTRING(Sampler3D);

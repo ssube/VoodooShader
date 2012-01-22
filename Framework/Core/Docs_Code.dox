@@ -38,27 +38,33 @@ namespace VoodooShader
       *
       * @subsection voodoo_spec_plugin_exports_version PluginInit
       *
-      * @code const Version * PluginInit(); @endcode
+      * @code const Version * PluginInit(ICore * pCore); @endcode
       *
-      * The PluginInit function performs any initialization the plugin needs to do and, if successful, returns a constant 
-      * VersionDesc struct with the module's name, version and various flags. If the initialization fails, the plugin must
-      * return nullptr, and will not be loaded further.
+      * The @p PluginInit function performs any initialization the plugin needs to do and, if successful, returns a constant 
+      * @ref VersionDesc struct with the module's name, version and various flags. If the initialization fails, the plugin 
+      * must return a nullptr, and loading will be aborted and the DLL unloaded from the process.
+      *
+      * To allow plugins to register callbacks, @a pCore is given. @p PluginInit is typically called during the call to
+      * ICore::Init(), so plugins @a must assume the core has not yet been initialized and must not call methods requiring
+      * init to have completed. If the plugin requires initialization using the complete core, it should register a callback
+      * to the @ref EventIds::Finalize event, which will be called at the end of ICore::Init().
       *
       * @subsection voodoo_spec_plugin_exports_count ClassCount
       *
       * @code const uint32_t ClassCount(); @endcode
       *
-      * Returns the total number of classes publicly exposed by this module.
+      * Returns the total number of classes publicly exposed by this module. This may be 0, as adapters commonly do not
+      * expose public classes.
       *
       * @subsection voodoo_spec_plugin_exports_info ClassInfo
       *
-      * @code const wchar_t * ClassInfo(const uint32_t index, Uuid  & clsid); @endcode
+      * @code const wchar_t * ClassInfo(const uint32_t index, Uuid * pClsid); @endcode
       *
-      * Returns the name and CLSID of a class. This is used to register the classes in the core's module manager when
+      * Returns the name and ClsId of a class. This is used to register the classes in the core's module manager when
       * the module is loaded. The return value must be a pointer to the class name or nullptr if the index is invalid, and 
-      * the clsid parameter must be filled with the CLSID or unchanged if the index is invalid. 
+      * the clsid parameter must be filled with the ClsId or unchanged if the index is invalid. 
       *
-      * If @a index is greater than or equal to the value returned by this plugin's @a ClassCount, @a ClassInfo must return 
+      * If @a index is greater than or equal to the value returned by this plugin's @p ClassCount, @p ClassInfo must return 
       * nullptr. Class order must be constant throughout the plugin's lifetime and over multiple uses, and the values given
       * in @a ClassInfo and class returned by @a ClassCreate must match.
       *
@@ -68,12 +74,13 @@ namespace VoodooShader
       *
       * Creates a new instance of the given class, bound to the provided core. 
       *
-      * @note Class constructors @em may throw exceptions, but these must be caught within the create function and must not
-      *     propagate between modules (this can cause crashes). If an error occurs, nullptr must be returned; if the core
-      *     given has a logger attached, the class constructor or create function @em may use that to log error information.
+      * @note Class constructors @em may throw exceptions, but these must be caught within the create function and <em>must 
+      *     not</em> be allowed to propagate between modules (this can cause crashes). If an error occurs, a nullptr must be 
+      *     returned; if the core given has a logger attached, the class constructor or create function @em may use that to 
+      *     log error information.
       *
-      * @note Any class provided by this module that may be created externally must be listed by this function and
-      *     and ClassInfo, using the same index.
+      * @note Any class provided by this module that may be created externally by this function must be listed in ClassInfo
+      *     using the same index.
       *
       * @section voodoo_spec_iobject IObject Interface
       *
@@ -81,32 +88,37 @@ namespace VoodooShader
       * object lifetime management and garbage collection. This is performed in a manner very much like COM, with each 
       * object managing reference count internally.
       *
-      * Every object, except one which implements ICore, must hold a non-incremented reference to its parent. This allows
-      * tracking up without causing circular references. The object may both temporarily increment the reference, when it
-      * needs a short-term guarantee of validity, or pass the reference (where it may be incremented). However, in no other
-      * case may non-incremented references be  used; this can break thread-safety, cause crashes, and undefined behavior.
+      * Every object, except one which implements ICore, must hold a non-incremented reference to its core and may hold a
+      * non-incremented reference to its immediate parent. This allows tracking up without causing circular references. The 
+      * object may both temporarily increment the reference, when it needs a short-term guarantee of validity, or pass the 
+      * reference (where it may be incremented). However, in no other case may non-incremented references be used; this can 
+      * break thread-safety, cause crashes, and undefined behavior.
       *
       * @subsection voodoo_spec_iobject_addref IObject::AddRef
       * @code uint32_t IObject::AddRef() CONST @endcode
       *
       * Increments the internal reference count by 1 and returns the new count, no other effects shall be caused. Any call
-      * to @a AddRef must have a matching call to @a Release; these may be handled by a smart pointer (such as boost's
-      * intrusive_ptr).
+      * to @p AddRef must have a matching call to @p Release; these may be handled by a smart pointer (such as boost's
+      * intrusive_ptr). Calls to this will always be thread-safe.
       *
       * @subsection voodoo_spec_iobject_release IObject::Release
       * @code uint32_t IObject::Release() CONST @endcode
       *
       * Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object must be
       * deleted internally before the function returns (<tt>delete this;</tt>), no other effects shall be caused. This 
-      * guarantees correct memory allocation and deallocation, safe from compiler or module boundaries.
+      * guarantees correct memory allocation and deallocation, safe from compiler or module boundaries. Calls to this will
+      * always be thread-safe.
       *
-      * @note As AddRef and Release require no other effects, it may be necessary to provide initialization and/or reset
-      *     functions, as ICore does. This helps provide more information and safety during the setup and teardown process.
+      * @note As @p AddRef and @p Release require no other effects, it may be necessary to provide initialization and/or 
+      *     reset functions, as ICore does. This helps provide more information and safety during the setup and teardown 
+      *     process.
       *
       * @subsection voodoo_spec_iobject_query IObject::QueryInterface
       * @code VoodooResult IObject::QueryInterface(CONST Uuid refid, IObject ** ppOut) @endcode
       *
-      * Queries the object for a particular interface.
+      * Queries the object for a particular interface. This is used for a variety of purposes, including extended 
+      * polymorphism and object identification. For example, IModule::CreateObject() returns a generic IObject, which can be
+      * safely checked for a desired interface by calling @p QueryInterface, without resorting to dangerous casts.
       *
       * If @a ppOut is a nullptr, the call must fail with invalid parameters (VSFERR_INVALIDPARAMS).
       *
@@ -119,7 +131,7 @@ namespace VoodooShader
       * (VSFERR_INVALIDUUID).
       *
       * All IObject-derived classes must provide interfaces for IObject, their parent interface(s), and their class. Calls
-      * to QueryInterface must be symmetric (if <tt>QI(A)->B</tt> succeeds, then <tt>QI(QI(A)->B)->A</tt> must as well),
+      * to @p QueryInterface must be symmetric (if <tt>QI(A)->B</tt> succeeds, then <tt>QI(QI(A)->B)->A</tt> must as well),
       * transitive (if <tt>QI(QI(A)->B)->C</tt> succeeds, then <tt>QI(A)->C</tt> must as well), and reflexive
       * (<tt>QI(A)->A</tt> must always succeed).
       *
@@ -173,8 +185,7 @@ namespace VoodooShader
       *
       * If no data is provided, the data section inside the parentheses must be empty but the parentheses must be present.
       * If data is provided, it must be in a <tt>(key: value[; ...])</tt> form with all colons, semicolons, quotes and 
-      * parantheses escaped 
-      * escaped.
+      * parantheses escaped (prefixed with a backslash).
       *
       * @subsection voodoo_spec_iobject_getcore IObject::GetCore
       * @code ICore * IObject::GetCore() CONST @endcode

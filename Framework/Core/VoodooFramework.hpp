@@ -100,7 +100,7 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
-#include "Format.hpp"
+#include "StringFormat.hpp"
 #include "Regex.hpp"
 #include "String.hpp"
 

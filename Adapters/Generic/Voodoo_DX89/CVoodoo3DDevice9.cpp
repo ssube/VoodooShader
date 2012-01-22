@@ -841,7 +841,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 VSLog_ModInfo, VOODOO_DX89_NAME,
-                Format("Detected latest profiles as %1% and %2%.") << bestVertStr << bestFragStr
+                StringFormat("Detected latest profiles as %1% and %2%.") << bestVertStr << bestFragStr
             );
 
             // Create vertex declaration
@@ -878,7 +878,7 @@ namespace VoodooShader
             logger->LogMessage
             (
                 VSLog_ModInfo, VOODOO_DX89_NAME, 
-                Format("Prepping for %1% by %2% target.") << (uint32_t)viewport.Width << (uint32_t)viewport.Height
+                StringFormat("Prepping for %1% by %2% target.") << (uint32_t)viewport.Width << (uint32_t)viewport.Height
             );
 
             // Create fullscreen vbuffer
@@ -984,7 +984,7 @@ namespace VoodooShader
             }
             catch (std::exception & exc)
             {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, Format("Error loading shader: %1%") << exc.what());
+                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, StringFormat("Error loading shader: %1%") << exc.what());
             }
 
             if (lpparam_rcpres)

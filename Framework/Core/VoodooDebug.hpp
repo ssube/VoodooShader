@@ -49,7 +49,7 @@
         if (logger)\
         {\
             logger->LogMessage(VSLog_Debug | VSLog_Critical | VSLog_System, VSTR("Extended Debug"), \
-                Format("Entered function %1% in %2% (line %3%).") << __FUNCTION__ << __FILE__ << __LINE__); \
+                StringFormat("Entered function %1% in %2% (line %3%).") << __FUNCTION__ << __FILE__ << __LINE__); \
         }\
     }
 #else

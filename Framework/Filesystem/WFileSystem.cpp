@@ -22,7 +22,7 @@
 
 #include "Filesystem_Version.hpp"
 
-#include "Format.hpp"
+#include "StringFormat.hpp"
 
 #include "Support.inl"
 
@@ -221,7 +221,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 VSLog_ModDebug, VOODOO_FILESYSTEM_NAME, 
-                Format(VSTR("Searching for raw file '%1%'.")) << name.GetData()
+                StringFormat(VSTR("Searching for raw file '%1%'.")) << name.GetData()
             );
 
             String filename = m_Core->GetParser()->Parse(name);
@@ -229,7 +229,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 VSLog_ModDebug, VOODOO_FILESYSTEM_NAME,
-                Format(VSTR("Searching for parsed file '%1%'.")) << filename
+                StringFormat(VSTR("Searching for parsed file '%1%'.")) << filename
             );
 
             StringList::const_iterator curDir = m_Directories.begin();
@@ -242,7 +242,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     VSLog_ModDebug, VOODOO_CORE_NAME,
-                    Format(VSTR("Checking file '%1%'.")) << fullname
+                    StringFormat(VSTR("Checking file '%1%'.")) << fullname
                 );
 
                 HANDLE file = CreateFile(fullname.GetData(), 0, 0, nullptr, OPEN_EXISTING, 0, nullptr);
@@ -254,7 +254,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage
                     (
                         VSLog_ModDebug, VOODOO_CORE_NAME,
-                        Format(VSTR("File '%1%' found in directory '%2%'.")) << name << (*curDir)
+                        StringFormat(VSTR("File '%1%' found in directory '%2%'.")) << name << (*curDir)
                     );
 
                     return new VSWFile(m_Core, fullname);
@@ -266,7 +266,7 @@ namespace VoodooShader
             m_Core->GetLogger()->LogMessage
             (
                 VSLog_ModWarning, VOODOO_CORE_NAME, 
-                Format(VSTR("Unable to find file '%1%'.")) << name.GetData()
+                StringFormat(VSTR("Unable to find file '%1%'.")) << name.GetData()
             );
 
             if ((mode & VSSearch_Create) == VSSearch_Create)
@@ -276,7 +276,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     VSLog_ModInfo, VOODOO_CORE_NAME,
-                    Format(VSTR("Creating file '%1%'.")) << fullname
+                    StringFormat(VSTR("Creating file '%1%'.")) << fullname
                 );
 
                 HANDLE file = CreateFile(fullname.GetData(), 0, 0, nullptr, OPEN_ALWAYS, 0, nullptr);
@@ -288,7 +288,7 @@ namespace VoodooShader
                     m_Core->GetLogger()->LogMessage
                     (
                         VSLog_ModDebug, VOODOO_CORE_NAME,
-                        Format(VSTR("File '%1%' created in directory '%2%'.")) << name << (*curDir)
+                        StringFormat(VSTR("File '%1%' created in directory '%2%'.")) << name << (*curDir)
                     );
 
                     return new VSWFile(m_Core, fullname);

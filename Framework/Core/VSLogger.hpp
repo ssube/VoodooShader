@@ -49,7 +49,7 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         VOODOO_METHOD(Open)(_In_ const String & filename, _In_ const bool append);
-        VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append);
+        VOODOO_METHOD(Open)(_In_ IFile * pFile, _In_ const bool append);
         VOODOO_METHOD_(bool, IsOpen)() CONST;
         VOODOO_METHOD(Close)();
         VOODOO_METHOD_(void, Flush)();

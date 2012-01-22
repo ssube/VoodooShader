@@ -29,7 +29,7 @@
 
 namespace VoodooShader
 {
-    class Format::FormatImpl
+    class StringFormat::FormatImpl
     {
     public:
         FormatImpl() : m_Format() { };
@@ -38,7 +38,7 @@ namespace VoodooShader
         boost::basic_format<wchar_t> m_Format;
     };
 
-    Format::Format(_In_ const wchar_t * fmt) :
+    StringFormat::StringFormat(_In_ const wchar_t * fmt) :
         m_Impl(new FormatImpl(fmt))
     {
         try
@@ -47,21 +47,21 @@ namespace VoodooShader
         } catch (boost::exception & exc)
         {
             UNREFERENCED_PARAMETER(exc);
-            Throw(VOODOO_CORE_NAME, VSTR("Format string error"), nullptr);
+            Throw(VOODOO_CORE_NAME, VSTR("StringFormat string error"), nullptr);
         }
     }
 
-    Format::Format(_In_ const String & fmt) :
+    StringFormat::StringFormat(_In_ const String & fmt) :
         m_Impl(new FormatImpl(fmt.GetData()))
     {
     }
 
-    Format::~Format()
+    StringFormat::~StringFormat()
     {
         delete m_Impl;
     }
 
-    String Format::ToString() const
+    String StringFormat::ToString() const
     {
         VOODOO_CHECK_IMPL;
 
@@ -69,7 +69,7 @@ namespace VoodooShader
         return String(str);
     }
 
-    Format & Format::operator<<(bool val)
+    StringFormat & StringFormat::operator<<(bool val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -77,7 +77,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(char val)
+    StringFormat & StringFormat::operator<<(char val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -85,7 +85,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(unsigned char val)
+    StringFormat & StringFormat::operator<<(unsigned char val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -93,7 +93,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(short val)
+    StringFormat & StringFormat::operator<<(short val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -101,7 +101,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(unsigned short val)
+    StringFormat & StringFormat::operator<<(unsigned short val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -109,7 +109,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(int val)
+    StringFormat & StringFormat::operator<<(int val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -117,7 +117,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(unsigned int val)
+    StringFormat & StringFormat::operator<<(unsigned int val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -125,7 +125,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(long val)
+    StringFormat & StringFormat::operator<<(long val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -133,7 +133,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(unsigned long val)
+    StringFormat & StringFormat::operator<<(unsigned long val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -141,7 +141,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(float val)
+    StringFormat & StringFormat::operator<<(float val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -149,7 +149,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(double val)
+    StringFormat & StringFormat::operator<<(double val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -157,7 +157,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(wchar_t val)
+    StringFormat & StringFormat::operator<<(wchar_t val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -165,7 +165,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const Exception & val)
+    StringFormat & StringFormat::operator<<(const Exception & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -173,7 +173,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const Regex & val)
+    StringFormat & StringFormat::operator<<(const Regex & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -181,7 +181,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const String & val)
+    StringFormat & StringFormat::operator<<(const String & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -189,7 +189,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const ParameterDesc & val)
+    StringFormat & StringFormat::operator<<(const ParameterDesc & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -197,7 +197,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const TextureDesc & val)
+    StringFormat & StringFormat::operator<<(const TextureDesc & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -205,7 +205,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const TextureRegion & val)
+    StringFormat & StringFormat::operator<<(const TextureRegion & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -213,7 +213,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const Uuid & val)
+    StringFormat & StringFormat::operator<<(const Uuid & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -221,7 +221,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const Variant & val)
+    StringFormat & StringFormat::operator<<(const Variant & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -229,7 +229,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const Version & val)
+    StringFormat & StringFormat::operator<<(const Version & val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -237,7 +237,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const void * val)
+    StringFormat & StringFormat::operator<<(const void * val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -245,7 +245,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const char * val)
+    StringFormat & StringFormat::operator<<(const char * val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -253,7 +253,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const wchar_t * val)
+    StringFormat & StringFormat::operator<<(const wchar_t * val)
     {
         VOODOO_CHECK_IMPL;
 
@@ -261,7 +261,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    Format & Format::operator<<(const IObject * val)
+    StringFormat & StringFormat::operator<<(const IObject * val)
     {
         VOODOO_CHECK_IMPL;
 

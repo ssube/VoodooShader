@@ -88,13 +88,13 @@ namespace VoodooShader
 
                 D3DXTECHNIQUE_DESC techdesc;
                 ZeroMemory(&techdesc, sizeof(D3DXTECHNIQUE_DESC));
-                m_DXEffect->GetTechniqueDesc(techHandle, &techdesc));
-                String techName(techDesc.Name);
+                m_DXEffect->GetTechniqueDesc(techHandle, &techdesc);
+                String techName(techdesc.Name);
 
                 if (FAILED(m_DXEffect->ValidateTechnique(techHandle)))
                 {
                     logger->LogMessage(VSLog_CoreWarning, VOODOO_D3D9_NAME, 
-                        Format("Failed to validate technique %1%.") << techName);
+                        StringFormat("Failed to validate technique %1%.") << techName);
                 }
 
                 try
@@ -109,7 +109,7 @@ namespace VoodooShader
                 catch (Exception & exc)
                 {
                     logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                        Format("Failed to create technique %1%: %2%") << techName << exc.strwhat());
+                        StringFormat("Failed to create technique %1%: %2%") << techName << exc.strwhat());
                 }
             } 
 
@@ -323,7 +323,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     VSLog_CoreError, VOODOO_CORE_NAME,
-                    Format(VSTR("Technique %1% cannot be set as default (technique originated from another effect)."))
+                    StringFormat(VSTR("Technique %1% cannot be set as default (technique originated from another effect)."))
                     << pTechnique
                 );
                 return VSFERR_INVALIDPARAMS;

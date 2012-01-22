@@ -25,7 +25,7 @@
 // Voodoo_DX89
 #include "DX9_Version.hpp"
 // Voodoo Framework
-#include "Format.hpp"
+#include "StringFormat.hpp"
 
 namespace VoodooShader
 {
@@ -37,7 +37,7 @@ namespace VoodooShader
             gpVoodooLogger->LogMessage
             (
                 VSLog_ModDebug, VOODOO_DX89_NAME,
-                Format("CVoodoo3DTexture8::CVoodoo3DTexture8(%1%, %2%) == %3%") << pDevice << pTexture << this
+                StringFormat("CVoodoo3DTexture8::CVoodoo3DTexture8(%1%, %2%) == %3%") << pDevice << pTexture << this
             );
         }
 

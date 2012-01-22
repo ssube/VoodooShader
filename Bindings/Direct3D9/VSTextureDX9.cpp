@@ -24,7 +24,7 @@
 #include "ConverterDX9.hpp"
 #include "D3D9_Version.hpp"
 // Voodoo Core
-#include "Format.hpp"
+#include "StringFormat.hpp"
 // DevIL
 #include "IL\ilut.h"
 
@@ -117,7 +117,7 @@ namespace VoodooShader
 
         String VOODOO_METHODTYPE VSTextureDX9::ToString() CONST
         {
-            return Format("VSTextureDX9(%s)") << m_Name;
+            return StringFormat("VSTextureDX9(%s)") << m_Name;
         }
 
         ICore * VOODOO_METHODTYPE VSTextureDX9::GetCore() CONST

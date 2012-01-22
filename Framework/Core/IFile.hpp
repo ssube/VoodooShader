@@ -103,7 +103,7 @@ namespace VoodooShader
          * @note If @arg buffer is nullptr, the number of bytes that would have been read is returned but the file
          *      position is unchanged. If @arg count is -1, this returns the size to the end of the file.
          */
-        VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
+        VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t size, _In_opt_count_(size) void * pBuffer) PURE;
         /**
          * Write the given number of bytes to the file, starting at the current position.
          *
@@ -114,7 +114,7 @@ namespace VoodooShader
          * @note If @p buffer is nullptr, @p count zeros are written into the file. This is useful for padding binary
          *      formats.
          */
-        VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * const pBuffer) PURE;
+        VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * pBuffer) PURE;
         /**
          * @}
          */

@@ -169,7 +169,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     VSLog_CoreWarning, VOODOO_CORE_NAME,
-                    Format("No plugins found in directory '%1%'.") << path
+                    StringFormat("No plugins found in directory '%1%'.") << path
                 );
 
                 return VSFERR_FILENOTFOUND;
@@ -179,7 +179,7 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage
                 (
                     VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    Format("Error searching directory '%1%'.") << path
+                    StringFormat("Error searching directory '%1%'.") << path
                 );
 
                 return VSF_FAIL;
@@ -240,7 +240,7 @@ namespace VoodooShader
                 logger->LogMessage
                 (
                     VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format("Unable to load module '%1%'.") << filename
+                    StringFormat("Unable to load module '%1%'.") << filename
                 );
             }
 
@@ -254,7 +254,7 @@ namespace VoodooShader
         {
             if (logger)
             {
-                logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, Format("Null version returned by module '%1%'.") << fullname);
+                logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, StringFormat("Null version returned by module '%1%'.") << fullname);
             }
             return VSFERR_INVALIDPARAMS;
         }
@@ -267,13 +267,13 @@ namespace VoodooShader
             logger->LogMessage
             (
                 VSLog_CoreWarning, VOODOO_CORE_NAME,
-                Format("Debug build mismatch with module '%1%'.") << moduleversion->Name
+                StringFormat("Debug build mismatch with module '%1%'.") << moduleversion->Name
             );
         }
 
         if (logger)
         {
-            logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, Format("Loaded module: %1%") << *module->PluginInit());
+            logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, StringFormat("Loaded module: %1%") << *module->PluginInit());
         }
 
         int classCount = module->ClassCount();
@@ -358,7 +358,7 @@ namespace VoodooShader
                     logger->LogMessage
                     (
                         VSLog_CoreError, VOODOO_CORE_NAME,
-                        Format("Error creating instance of class %1%.") << clsid
+                        StringFormat("Error creating instance of class %1%.") << clsid
                     );
                 }
             }
@@ -372,7 +372,7 @@ namespace VoodooShader
                 logger->LogMessage
                 (
                     VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format("Class %1% not found.") << clsid
+                    StringFormat("Class %1% not found.") << clsid
                 );
             }
 

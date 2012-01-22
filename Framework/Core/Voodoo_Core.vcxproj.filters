@@ -37,7 +37,7 @@
     <ClCompile Include="VSModuleManager.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="Format.cpp">
+    <ClCompile Include="StringFormat.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
   </ItemGroup>
@@ -120,9 +120,6 @@
     <ClInclude Include="IResource.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="Format.hpp">
-      <Filter>Headers\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="VoodooDebug.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -149,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="IBinding.hpp">
       <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="StringFormat.hpp">
+      <Filter>Headers\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

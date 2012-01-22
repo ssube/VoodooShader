@@ -26,7 +26,7 @@
 #include "CVoodoo3DDevice8.hpp"
 #include "CVoodoo3D9.hpp"
 // Voodoo Core
-#include "Format.hpp"
+#include "StringFormat.hpp"
 #include "Support.inl"
 
 VoodooShader::IEffect * testEffect = nullptr;

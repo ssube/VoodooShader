@@ -67,7 +67,7 @@ namespace VoodooShader
          * @param append Flag specifying the open mode; if true, any existing log is truncated.
          * @return Success of the open operation.
          */
-        VOODOO_METHOD(Open)(_In_ IFile * const pFile, _In_ const bool append) PURE;
+        VOODOO_METHOD(Open)(_In_ IFile * pFile, _In_ const bool append) PURE;
         /**
          * Checks if this logger has an open file.
          */

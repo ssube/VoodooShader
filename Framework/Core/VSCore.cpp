@@ -154,7 +154,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        return Format("VSCore(%1%)") << m_Version;
+        return StringFormat("VSCore(%1%)") << m_Version;
     }
 
     ICore * VOODOO_METHODTYPE VSCore::GetCore() CONST
@@ -216,10 +216,10 @@ namespace VoodooShader
 
         int cmdargc = 0;
         LPWSTR * cmdargv = CommandLineToArgvW(cmdline, &cmdargc);
-        m_Parser->Add(VSTR("argc"), Format(VSTR("%d")) << cmdargc, VSVar_System);
+        m_Parser->Add(VSTR("argc"), StringFormat(VSTR("%d")) << cmdargc, VSVar_System);
         for (int i = 0; i < cmdargc; ++i)
         {
-            m_Parser->Add(Format(VSTR("argv_%d")) << i, cmdargv[i], VSVar_System);
+            m_Parser->Add(StringFormat(VSTR("argv_%d")) << i, cmdargv[i], VSVar_System);
         }
 
         // Load the config
@@ -332,7 +332,7 @@ namespace VoodooShader
             }
             else
             {
-                String error = Format(VSTR("Unable to create logger (class %1%).")) << logClass;
+                String error = StringFormat(VSTR("Unable to create logger (class %1%).")) << logClass;
                 Throw(VOODOO_CORE_NAME, error.GetData(), this);
             }
 
@@ -375,7 +375,7 @@ namespace VoodooShader
             }
             else
             {
-                Format fmt(VSTR("Unable to create hook manager (class %1%).")); fmt << hookClass;
+                StringFormat fmt(VSTR("Unable to create hook manager (class %1%).")); fmt << hookClass;
                 Throw(VOODOO_CORE_NAME, fmt, this);
             }
 
@@ -388,7 +388,7 @@ namespace VoodooShader
             }
             else
             {
-                Format fmt(VSTR("Unable to create file system (class %1%).")); fmt << fsClass;
+                StringFormat fmt(VSTR("Unable to create file system (class %1%).")); fmt << fsClass;
                 Throw(VOODOO_CORE_NAME, fmt, this);
             }
 
@@ -406,7 +406,7 @@ namespace VoodooShader
             if (m_Logger)
             {
                 m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format(VSTR("Exception during Core creation: %1%")) << exc.strwhat());
+                    StringFormat(VSTR("Exception during Core creation: %1%")) << exc.strwhat());
             } else {
                 GlobalLog(VSTR("Unlogged exception during core creation: %s"), exc.what());
             }
@@ -418,7 +418,7 @@ namespace VoodooShader
             if (m_Logger)
             {
                 m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format(VSTR("Error during Core creation: %1%")) << exc.what());
+                    StringFormat(VSTR("Error during Core creation: %1%")) << exc.what());
             }
 
             return VSF_FAIL;
@@ -493,7 +493,7 @@ namespace VoodooShader
             if (m_Logger)
             {
                 m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format("Unable to register callback %1% for event %2%, exception: %3%") << func << event << exc.what());
+                    StringFormat("Unable to register callback %1% for event %2%, exception: %3%") << func << event << exc.what());
             }
 
             return VSF_FAIL;
@@ -518,7 +518,7 @@ namespace VoodooShader
             if (m_Logger)
             {
                 m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format("Unable to register callback %1% for event %2%, exception: %3%") << func << event << exc.what());
+                    StringFormat("Unable to register callback %1% for event %2%, exception: %3%") << func << event << exc.what());
             }
 
             return VSF_FAIL;
@@ -553,7 +553,7 @@ namespace VoodooShader
             if (m_Logger)
             {
                 m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
-                    Format("Unable to call event %1%, exception: %2%") << event << exc.what());
+                    StringFormat("Unable to call event %1%, exception: %2%") << event << exc.what());
             }
 
             return VSF_FAIL;
@@ -610,7 +610,7 @@ namespace VoodooShader
             m_Logger->LogMessage
             (
                 VSLog_CoreDebug, VOODOO_CORE_NAME, 
-                Format(VSTR("Successfully created effect from %1%.")) << pFile->GetPath()
+                StringFormat(VSTR("Successfully created effect from %1%.")) << pFile->GetPath()
             );
         }
         catch (const std::exception & exc)
@@ -618,7 +618,7 @@ namespace VoodooShader
             m_Logger->LogMessage
             (
                 VSLog_CoreError, VOODOO_CORE_NAME,
-                Format(VSTR("Error creating effect from %1%: %2%")) << pFile->GetPath() << exc.what()
+                StringFormat(VSTR("Error creating effect from %1%: %2%")) << pFile->GetPath() << exc.what()
             );
         }
 
@@ -657,7 +657,7 @@ namespace VoodooShader
                 m_Logger->LogMessage
                 (
                     VSLog_CoreDebug, VOODOO_CORE_NAME,
-                    Format(VSTR("Created parameter %1% with type %2%.")) << parameter << desc
+                    StringFormat(VSTR("Created parameter %1% with type %2%.")) << parameter << desc
                 );
             }
             catch (const std::exception & exc)
@@ -665,7 +665,7 @@ namespace VoodooShader
                 m_Logger->LogMessage
                 (
                     VSLog_CoreDebug, VOODOO_CORE_NAME,
-                    Format(VSTR("Error creating parameter %1% with type %2%: %3%")) << name << desc << exc.what()
+                    StringFormat(VSTR("Error creating parameter %1% with type %2%: %3%")) << name << desc << exc.what()
                 );
             }
 
@@ -684,7 +684,7 @@ namespace VoodooShader
         if (textureEntry != m_Textures.end())
         {
             m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                Format(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
+                StringFormat(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
             return textureEntry->second.get();
         }
         else
@@ -693,7 +693,7 @@ namespace VoodooShader
 
             m_Textures[name] = texture;
 
-            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Created texture %1%.")) << name);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Created texture %1%.")) << name);
 
             return texture;
         }
@@ -711,7 +711,7 @@ namespace VoodooShader
         if (textureEntry != m_Textures.end())
         {
             m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                Format(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
+                StringFormat(VSTR("Trying to create texture with a duplicate name: %1%.")) << name);
             return textureEntry->second.get();
         }
         else
@@ -720,7 +720,7 @@ namespace VoodooShader
 
             m_Textures[name] = texture;
 
-            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Created texture %1%.")) << name);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Created texture %1%.")) << name);
 
             return texture;
         }
@@ -737,11 +737,11 @@ namespace VoodooShader
         if (paramIter == m_Parameters.end())
         {
             m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                Format(VSTR("Unable to find parameter %1%.")) << name);
+                StringFormat(VSTR("Unable to find parameter %1%.")) << name);
             return nullptr;
         }
 
-        m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Got parameter %1%.")) << name);
+        m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Got parameter %1%.")) << name);
         IParameterRef param = paramIter->second;
         ParameterDesc pdesc = param->GetDesc();
 
@@ -765,14 +765,14 @@ namespace VoodooShader
             m_Logger->LogMessage
             (
                 VSLog_CoreDebug, VOODOO_CORE_NAME, 
-                Format(VSTR("Got texture %1%.")) << name
+                StringFormat(VSTR("Got texture %1%.")) << name
             );
 
             return textureEntry->second.get();
         }
         else
         {
-            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Unable to find texture %1%.")) << name);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Unable to find texture %1%.")) << name);
 
             return nullptr;
         }
@@ -788,12 +788,12 @@ namespace VoodooShader
         if (parameter != m_Parameters.end())
         {
             m_Parameters.erase(parameter);
-            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Removed parameter %1%.")) << name);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Removed parameter %1%.")) << name);
             return VSF_OK;
         }
         else
         {
-            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Unable to find parameter %1%.")) << name);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Unable to find parameter %1%.")) << name);
             return VSFERR_INVALIDPARAMS;
         }
     }
@@ -808,12 +808,12 @@ namespace VoodooShader
         if (texture != m_Textures.end())
         {
             m_Textures.erase(texture);
-            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Removed texture %1%.")) << name);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Removed texture %1%.")) << name);
             return VSF_OK;
         }
         else
         {
-            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, Format(VSTR("Unable to find texture %1%.")) << name);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Unable to find texture %1%.")) << name);
             return VSFERR_INVALIDPARAMS;
         }
     }

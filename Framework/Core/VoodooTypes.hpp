@@ -61,7 +61,6 @@ namespace VoodooShader
         // Null texture format
         VSFmt_Null          = 0x0001,   /* !< Has no data and takes no space. */
         // General texture formats
-        VSFmt_RGB5          = 0x0101,   /* !< 5 bit RGB (1 bit X in D3D, may be R5G6B5 in OGL) */
         VSFmt_RGB5A1        = 0x0102,   /* !< 5 bit RGB, 1 bit alpha */
         VSFmt_RGB8          = 0x0103,   /* !< 8 bit RGB (8 bit X in D3D). Most common backbuffer format, common texture format. */
         VSFmt_RGBA8         = 0x0104,   /* !< 8 bit RGBA. Common texture format. */
@@ -517,7 +516,7 @@ namespace VoodooShader
      * @{
      */
     class Exception;
-    class Format;
+    class StringFormat;
     class Regex;
     class RegexMatch;
     class String;

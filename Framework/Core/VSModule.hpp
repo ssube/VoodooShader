@@ -29,7 +29,7 @@ namespace VoodooShader
     VOODOO_CLASS(VSModule, IModule, ({0x9F, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        static VSModule * Load(_In_ ICore * const pCore, _In_ const String & path);
+        static VSModule * Load(_In_ ICore * pCore, _In_ const String & path);
 
         VSModule(_In_ ICore * pCore, _In_ HMODULE hmodule);
         ~VSModule();

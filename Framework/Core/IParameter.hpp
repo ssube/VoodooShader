@@ -98,14 +98,14 @@ namespace VoodooShader
          *     parameters to virtual parameters.
          *
          */
-        VOODOO_METHOD(AttachParameter)(_In_opt_ IParameter * const pParam) PURE;
+        VOODOO_METHOD(AttachParameter)(_In_opt_ IParameter * pParam) PURE;
         /**
-         * Detaches this parameter from its source (set with a call to IParameter::AttachParameter(IParameter * const)).
+         * Detaches a parameter from this one.
          *
          * @warning If called on a parameter that has other parameters bound to it (a source), it will disconnect all of
          *      those. This breaks connections from either end, source or bound.
          */
-        VOODOO_METHOD(DetachParameter)(_In_opt_ IParameter * const pParam) PURE;
+        VOODOO_METHOD(DetachParameter)(_In_opt_ IParameter * pParam) PURE;
         /**
          * @}
          */

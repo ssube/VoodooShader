@@ -245,7 +245,7 @@ namespace VoodooShader
          * @param pBuffer Buffer to write converted string to.
          * @return Necessary buffer size or bytes converted.
          */
-        int32_t ToChars(_In_ int32_t size, _Inout_opt_count_(size) char * const pBuffer) const;
+        int32_t ToChars(_In_ int32_t size, _Inout_opt_count_(size) char * pBuffer) const;
 #if defined(_STRING_)
         /**
          * Creates a std::wstring from this string.

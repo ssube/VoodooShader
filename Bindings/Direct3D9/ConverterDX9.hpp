@@ -32,8 +32,6 @@ namespace VoodooShader
             {
                 switch (tf)
                 {
-                case VSFmt_RGB5:
-                    return D3DFMT_X1R5G5B5;
                 case VSFmt_RGB5A1:
                     return D3DFMT_A1R5G5B5;
                 case VSFmt_RGB8:
@@ -60,8 +58,6 @@ namespace VoodooShader
             {
                 switch (tf)
                 {
-                case D3DFMT_X1R5G5B5:
-                    return VSFmt_RGB5;
                 case D3DFMT_A1R5G5B5:
                     return VSFmt_RGB5A1;
                 case D3DFMT_X8R8G8B8:

@@ -25,7 +25,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSModule
     DeclareDebugCache();
 
-    VSModule * VSModule::Load(_In_ ICore * const pCore, _In_ const String & path)
+    VSModule * VSModule::Load(_In_ ICore * pCore, _In_ const String & path)
     {
         // Load the module
         HMODULE hmodule = LoadLibraryEx(path.GetData(), nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
@@ -163,7 +163,7 @@ namespace VoodooShader
         return m_ClassInfo(number, pUuid);
     }
 
-    IObject * VOODOO_METHODTYPE VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * const pCore) CONST
+    IObject * VOODOO_METHODTYPE VSModule::CreateClass(_In_ const uint32_t number, _In_ ICore * pCore) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 

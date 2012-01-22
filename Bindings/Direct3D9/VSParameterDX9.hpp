@@ -61,8 +61,8 @@ namespace VoodooShader
             VOODOO_METHOD(SetVector)(Float4 val);
         
             VOODOO_METHOD_(bool, IsVirtual)() CONST;
-            VOODOO_METHOD(AttachParameter)(_In_ IParameter * const pParam);
-            VOODOO_METHOD(DetachParameter)(_In_ IParameter * const pParam);
+            VOODOO_METHOD(AttachParameter)(_In_ IParameter * pParam);
+            VOODOO_METHOD(DetachParameter)(_In_ IParameter * pParam);
 
             VOODOO_METHOD_(IEffect *, GetEffect)() CONST;
 

@@ -29,7 +29,7 @@ namespace VoodooShader
     VOODOO_CLASS(VSParser, IParser, ({0xA2, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSParser(_In_ ICore * const pCore);
+        VSParser(_In_ ICore * pCore);
         ~VSParser();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
