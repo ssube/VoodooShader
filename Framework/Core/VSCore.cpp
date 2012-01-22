@@ -538,7 +538,11 @@ namespace VoodooShader
             EventCallbacks::iterator eventCallIter = eventMapIter->second.begin();
             while (eventCallIter != eventMapIter->second.end())
             {
-                (*eventCallIter)(this, count, pArgs);
+                VoodooResult vr = (*eventCallIter)(this, count, pArgs);
+                if (FAILED(vr))
+                {
+                    return vr;
+                }
                 ++eventCallIter;
             }
 

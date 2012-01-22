@@ -989,7 +989,7 @@ namespace VoodooShader
 
             if (lpparam_rcpres)
             {
-                Float4 rcpres_val = {1.0f / bbDesc.Width, 1.0f / bbDesc.Height, 0, 0};
+                Float4 rcpres_val = {1.0f / viewport.Width, 1.0f / viewport.Height, 0, 0};
                 lpparam_rcpres->SetVector(rcpres_val);
             }
 

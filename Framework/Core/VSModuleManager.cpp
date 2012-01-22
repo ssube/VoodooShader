@@ -260,7 +260,7 @@ namespace VoodooShader
         }
 
         m_Modules[moduleversion->LibId] = module;
-        m_ModuleNames[fullname] = moduleversion->LibId;
+        m_ModuleNames[moduleversion->Name] = moduleversion->LibId;
 
         if (moduleversion->Debug != VOODOO_DEBUG_BOOL && logger)
         {

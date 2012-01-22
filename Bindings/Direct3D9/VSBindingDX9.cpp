@@ -244,12 +244,12 @@ namespace VoodooShader
             }
 
             LPDIRECT3DTEXTURE9 texture = nullptr;
-            if (ilutD3D9TexFromFile(m_Device, pFile->GetPath().GetData(), &texture) != IL_TRUE)
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
-                    Format("Failed to load texture '%1%' from file '%2%'.") << name << pFile->GetPath());
-                return nullptr;
-            }
+            //if (ilutD3D9TexFromFile(m_Device, pFile->GetPath().GetData(), &texture) != IL_TRUE)
+            //{
+            //    m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
+            //        Format("Failed to load texture '%1%' from file '%2%'.") << name << pFile->GetPath());
+            //    return nullptr;
+            //}
 
             ITexture * pTexture = new VSTextureDX9(this, name, texture);
             return pTexture;

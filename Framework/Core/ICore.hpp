@@ -101,12 +101,34 @@ namespace VoodooShader
          * @param   event   The Uuid of the event to subscribe to. 
          * @param   func    The callback function for the event.
          *
-         * @warning It is not possible to type-check function pointers across module boundaries. <b>It is left to the plugin
-         *      to handle parameter types and make sure they meet the event's parameters. Failure to do so can crash the 
-         *      the process.</b> Because of this, it is possible for users to disable event handling in the config.
+         * @warning It is not possible to type-check function pointers across module boundaries. <b>All callbacks must meet
+         *      the given function prototype exactly, or the library can crash.</b> To help simplify this, the callback
+         *      prototype takes a list of variants, allowing a variety of parameters while retaining safety (this will be
+         *      changed to a map of variants in the future, once a map class is added).
          */
         VOODOO_METHOD(AddEvent)(Uuid event, Functions::CallbackFunc func) PURE;
+        /**
+         * Removes a callback from an event on this core. The callback will no longer be notified when the event is called.
+         *
+         * @param   event   The Uuid of the event to remove from.
+         * @param   func    The callback function to remove.
+         *
+         * @pre ICore::AddEvent() must be called with the same parameters.
+         */
         VOODOO_METHOD(DropEvent)(Uuid event, Functions::CallbackFunc func) PURE;
+        /**
+         * Broadcasts an event to all registered handlers, passing the provided argument list.
+         *
+         * @param   event   The Uuid of the event to call.
+         * @param   count   The number of variants passed, may be 0.
+         * @param   pArgs   The list of variants passed as arguments, may be nullptr if @a count is 0.
+         *
+         * @warning This calls all registered callbacks for the given event. The order registered callbacks will be called 
+         *      in is undefined.
+         * @warning Callbacks can modify the arguments, but not change the count.
+         * @warning If a callback returns a failure value, the loop will be aborted and remaining callbacks will nto be
+         *      called. The failure will be returned by this method. If no callbacks fail, this will return generic success.
+         */
         VOODOO_METHOD(CallEvent)(Uuid event, uint32_t count, _In_opt_count_(count) Variant * pArgs) PURE;
         /**
          * @}

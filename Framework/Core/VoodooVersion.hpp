@@ -70,8 +70,8 @@
 // Global defs
 #define VOODOO_GLOBAL_LIBID             {0xCA, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
 #define VOODOO_GLOBAL_AUTHOR            VSTR("Sean Sube, et al.")
-#define VOODOO_GLOBAL_NAME              VSTR("Voodoo/Framework")
-#define VOODOO_GLOBAL_PRETTYNAME        VSTR("Voodoo Shader Framework")
+#define VOODOO_GLOBAL_NAME              VSTR("VoodooShader")
+#define VOODOO_GLOBAL_PRETTYNAME        VSTR("Voodoo Shader")
 #define VOODOO_GLOBAL_VERSION_MAJOR     0
 #define VOODOO_GLOBAL_VERSION_MINOR     5
 #define VOODOO_GLOBAL_VERSION_PATCH     8
@@ -80,7 +80,7 @@
 // Core defs
 #define VOODOO_CORE_LIBID               {0xCB, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
 #define VOODOO_CORE_AUTHOR              VOODOO_GLOBAL_AUTHOR
-#define VOODOO_CORE_NAME                VSTR("Voodoo/Core")
+#define VOODOO_CORE_NAME                VSTR("Voodoo_Core")
 #define VOODOO_CORE_PRETTYNAME          VSTR("Voodoo Shader Framework Core")
 #define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
 #define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR

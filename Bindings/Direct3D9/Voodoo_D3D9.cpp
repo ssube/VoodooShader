@@ -27,11 +27,13 @@ namespace VoodooShader
     namespace Voodoo_D3D9
     {
         static const Version moduleVersion = VOODOO_VERSION_STRUCT(D3D9);
-        static const wchar_t * name_VSCompilerDX9 = L"VSBindingDX9";
-        static const Uuid clsid_VSCompilerDX9 = CLSID_VSBindingDX9;
+        static const wchar_t * name_VSBindingDX9 = L"VSBindingDX9";
+        static const Uuid clsid_VSBindingDX9 = CLSID_VSBindingDX9;
 
-        const Version * VOODOO_CALLTYPE API_PluginInit()
+        const Version * VOODOO_CALLTYPE API_PluginInit(ICore * pCore)
         {
+            UNREFERENCED_PARAMETER(pCore);
+
             return &moduleVersion;
         }
 
@@ -40,7 +42,7 @@ namespace VoodooShader
             return 1;
         }
 
-        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
+        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(const uint32_t index, Uuid * pUuid)
         {
             if (!pUuid)
             {
@@ -49,14 +51,14 @@ namespace VoodooShader
 
             if (index == 0)
             {
-                *pUuid = clsid_VSCompilerDX9;
-                return name_VSCompilerDX9;
+                *pUuid = clsid_VSBindingDX9;
+                return name_VSBindingDX9;
             }
 
             return nullptr;
         }
 
-        IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t number, _In_ ICore *core)
+        IObject * VOODOO_CALLTYPE API_ClassCreate(const uint32_t number, ICore *core)
         {
             if (number == 0)
             {

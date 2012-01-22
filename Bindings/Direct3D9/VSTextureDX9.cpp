@@ -44,7 +44,8 @@ namespace VoodooShader
         {
             if (!m_Binding) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture with no binding."), nullptr);
 
-            m_Core = m_Binding->m_Core;
+            m_Core = m_Binding->m_Core;
+
             if (!m_Core) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture from binding with no core."), nullptr);
             if (!m_DXTexture) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture with no hardware texture."), m_Core);
             
@@ -188,7 +189,8 @@ namespace VoodooShader
             else if (mode == VSTexMode_Target)
             {
                 if (index >= 4)
-                {                    return VSFERR_INVALIDPARAMS;
+                {
+                    return VSFERR_INVALIDPARAMS;
                 }
                 else if (m_Binding->m_BoundTargetTexture[index] != this || m_BoundTargetSlot != VOODOO_TEXTURE_INVALID)
                 {
@@ -236,7 +238,8 @@ namespace VoodooShader
                 }
             }
             else if (mode == VSTexMode_Target)
-            {                if (m_BoundTargetSlot == VOODOO_TEXTURE_INVALID || 
+            {
+                if (m_BoundTargetSlot == VOODOO_TEXTURE_INVALID || 
                     m_BoundTargetSlot >= 4 ||
                     m_Binding->m_BoundTargetTexture[m_BoundTargetSlot] != this)
                 {
