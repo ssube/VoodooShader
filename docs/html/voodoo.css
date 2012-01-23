@@ -60,6 +60,10 @@ h1, h2, h3, h4, #header, .tablist, .tablist a
     text-shadow: 0 1px 1px rgba(255,255,255,0.25), 0 -1px 0 rgba(0,0,0,0.75);
 }
 
+ul
+{
+    margin-left: 16px;
+}
 
 /* @group Tabs Stuff */
 .tabs, .tabs2, .tabs3, .navpath ul
@@ -76,7 +80,7 @@ h1, h2, h3, h4, #header, .tablist, .tablist a
 
 .tablist
 {
-    margin-left: 260px;
+    margin-left: 360px;
     height: 40px;	
     line-height: 40px;
         
@@ -118,12 +122,43 @@ h1, h2, h3, h4, #header, .tablist, .tablist a
     background: repeat-x;
 }
 
+.tablist li.current
+{
+    background: rgba(0,0,0,0.25);
+    background: linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
+    border-left: 1px ridge #303030;
+    border-left: 1px ridge rgba(32,32,32,0.5);
+}
+
+.tablist li.current:hover
+{
+    background: rgba(0,0,0,0.25);
+    background: linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
+    border-left: 1px ridge #000000;
+    border-left: 1px ridge rgba(0,0,0,0.5);
+}
+
+.tablist a
+{
+    font-size: 105%;
+    font-weight: normal;
+}
+
 .tablist a:hover
 {
     background: repeat-x;
 }
 
 /* @group Heading Levels */
+h1, h2, h3, h4
+{
+    padding-top: 0.2em;
+}
+
 h1
 {
     font-size: 1.25em;
@@ -137,6 +172,11 @@ h2
 h3
 {
     font-size: 1.00em;
+}
+
+h4
+{
+    text-transform: capitalize;
 }
 
 dt {
@@ -183,7 +223,7 @@ h3.version {
 }
 
 div.qindex, div.navtab{
-    background-color: #EAE4F7;
+    background-color: #333;
     border: 1px solid #A081DE;
     text-align: center;
     margin: 2px;
@@ -242,6 +282,10 @@ dl.el {
 pre.fragment {
     background: #4D4D4D;
     
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
     border: 1px solid #C2AEE9;
     border: 1px solid rgba(194, 174, 233, 0.25);
     
@@ -281,10 +325,10 @@ div.groupText {
     font-style: italic;
 }
 
-div.contents {
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+div.contents 
+{
+    background: rgba(64,64,64,0.25);
+    padding: 20px 40px;
 }
 
 td.indexkey {
@@ -346,11 +390,11 @@ span.keyword {
 }
 
 span.keywordtype {
-    color: #A89FDF;
+    color: #A88FCF;
 }
 
 span.keywordflow {
-    color: #A89FDF;
+    color: #806FB0;
 }
 
 span.comment {
@@ -362,11 +406,11 @@ span.preprocessor {
 }
 
 span.stringliteral {
-    color: #CCCCFC;
+    color: #CCACFC;
 }
 
 span.charliteral {
-    color: #CCCCFC;
+    color: #CCACFC;
 }
 
 span.vhdldigit { 
@@ -502,9 +546,9 @@ table.memberdecls {
 }
 
 .memproto {
-        border-top: 1px solid #000;
-        border-left: 1px solid #000;
-        border-right: 1px solid #000;
+        border-top: 1px solid #222;
+        border-left: 1px solid #222;
+        border-right: 1px solid #222;
         padding: 6px 0px 6px 0px;
         text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.9);
         background: url('../images/navbar.png') repeat-x;
@@ -774,6 +818,7 @@ table.doxtable th {
 div.summary
 {
     float: right;
+    margin-right: 15px;
     font-size: 8pt;
     padding-right: 5px;
     padding-top: 5px;
@@ -819,11 +864,26 @@ dl
 dl.note, dl.warning, dl.attention, dl.pre, dl.post, dl.invariant, dl.deprecated, dl.todo, dl.test, dl.bug
 {
         border-left: 4px solid;
-        border-top: 1px dashed;
-        border-right: 1px dashed;
-        border-bottom: 1px dashed;
+        border-top: 1px solid;
+        border-right: 1px solid;
+        border-bottom: 1px solid;
         padding: 0 0 0 6px;
-        margin: 12px 0px 12px 8px;
+        margin: 12px 10px 12px 8px;
+        
+    -webkit-border-radius: 0px 8px 8px 0px;
+    -moz-border-radius: 0px 8px 8px 0px;
+    border-radius: 0px 8px 8px 0px;
+}
+
+dl.note dt, dl.warning dt, dl.attention dt, dl.pre dt, dl.post dt, dl.invariant dt, dl.deprecated dt, dl.todo dt, dl.test dt, dl.bug dt
+{
+    margin: 5px 5px 5px 0px;
+}
+
+dl.note dt:before, dl.warning dt:before, dl.attention dt:before, dl.pre dt:before, dl.post dt:before, dl.invariant dt:before, 
+dl.deprecated dt:before, dl.todo dt:before, dl.test dt:before, dl.bug dt:before
+{
+    margin-right: 10px;
 }
 
 dl.note
@@ -856,9 +916,24 @@ dl.attention dt:before
     content: url(../images/icon-attention.png);
 }
 
-dl.pre, dl.post, dl.invariant
+dl.pre, dl.invariant
 {
-        border-color: #00D000;
+        border-color: #00D030;
+}
+
+dl.pre dt:before
+{
+    content: url(../images/icon-pre.png);
+}
+
+dl.post
+{
+    border-color: #0030D0;
+}
+
+dl.post dt:before
+{
+    content: url(../images/icon-post.png);
 }
 
 dl.deprecated
@@ -866,9 +941,15 @@ dl.deprecated
         border-color: #505050;
 }
 
+dl.deprecated dt:before
+{
+    content: url(../images/icon-deprecated.png);
+}
+
+
 dl.todo
 {
-        border-color: #00C0E0;
+        border-color: #00C080;
 }
 
 dl.todo dt:before
@@ -881,10 +962,22 @@ dl.test
         border-color: #3030E0;
 }
 
+dl.test dt:before
+{
+    content: url(../images/icon-test.png);
+}
+
+
 dl.bug
 {
         border-color: #C08050;
 }
+
+dl.bug dt:before
+{
+    content: url(../images/icon-bug.png);
+}
+
 
 #projectlogo
 {
@@ -938,9 +1031,13 @@ p code, dd code
     border: 1px solid #A090C0;
     border: 1px solid rgba(160, 144, 192, 0.25);
     
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    
     background-color: #3C3C3C;
     
-    padding: 0px 2px 0px 2px;
+    padding: 0px 2px 1px 2px;
     overflow: auto;
     word-wrap: break-word;
     line-height: 125%;      
