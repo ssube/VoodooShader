@@ -73,6 +73,7 @@ namespace VoodooShader
          *      parameter, with the device or context to be used.
          *
          * @pre ICore::Init()
+         * @post If this call succeeds, resources may be created from this core.
          */
         _Check_return_ VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams) PURE;
         /**
@@ -86,6 +87,7 @@ namespace VoodooShader
          *      AddRef or Release is undefined. All resources created by this core are immediately considered invalid.
          *
          * @pre ICore::Init()
+         * @post If this call fails, the core is in an undefined state and must be destroyed.
          */
         _Check_return_ VOODOO_METHOD(Reset)() PURE;
         /**

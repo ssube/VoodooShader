@@ -49,8 +49,8 @@ ModuleHook hookList[] =
     //{ false, nullptr,          nullptr,                nullptr }
 };
 
-VoodooShader::ICoreRef gpVoodooCore = nullptr;
-VoodooShader::ILoggerRef gpVoodooLogger = nullptr;
+VoodooShader::CoreRef gpVoodooCore = nullptr;
+VoodooShader::LoggerRef gpVoodooLogger = nullptr;
 
 VoodooShader::VoodooResult VOODOO_CALLTYPE FinalizeEvent(VoodooShader::ICore * pCore, uint32_t count, VoodooShader::Variant * pArgs)
 {
@@ -99,7 +99,7 @@ bool WINAPI InstallDllHook(LPTSTR name, LPCSTR symbol, LPVOID pDest)
 {
     if (!gpVoodooCore || !name || !symbol) return false;
 
-    VoodooShader::IHookManagerRef mgr = gpVoodooCore->GetHookManager();
+    VoodooShader::HookManagerRef mgr = gpVoodooCore->GetHookManager();
     if (!mgr) return false;
 
     HMODULE module = GetModuleHandle(name);

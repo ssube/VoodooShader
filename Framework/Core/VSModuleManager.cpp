@@ -176,13 +176,13 @@ namespace VoodooShader
             }
             else
             {
-                m_Core->GetLogger()->LogMessage
-                (
-                    VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    StringFormat("Error searching directory '%1%'.") << path
-                );
-
-                return VSF_FAIL;
+                m_Core->GetLogger()->LogMessage 
+                ( 
+                    VSLog_CoreWarning, VOODOO_CORE_NAME,  
+                    StringFormat("Error searching directory '%1%'.") << path 
+                ); 
+                 
+                return VSF_FAIL; 
             }
         }
 
@@ -214,7 +214,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        ILoggerRef logger = m_Core->GetLogger();
+        LoggerRef logger = m_Core->GetLogger();
 
         String fullname = m_Core->GetParser()->Parse(filename, VSParse_PathCanon);
 
@@ -231,7 +231,7 @@ namespace VoodooShader
         }
 
         // Create struct and load functions
-        IModuleRef module = VSModule::Load(m_Core, fullname);
+        ModuleRef module = VSModule::Load(m_Core, fullname);
 
         if (module == nullptr)
         {
@@ -346,7 +346,7 @@ namespace VoodooShader
 
         if (classiter != m_Classes.end())
         {
-            IModuleRef module = classiter->second.first;
+            ModuleRef module = classiter->second.first;
             uint32_t index = classiter->second.second;
 
             IObject * object = module->CreateClass(index, m_Core);

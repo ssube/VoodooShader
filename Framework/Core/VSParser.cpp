@@ -116,10 +116,10 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        ILoggerRef logger = m_Core->GetLogger();
+        LoggerRef logger = m_Core->GetLogger();
 
         if (logger)
-        {
+        { 
             StringFormat msg(VSTR("Adding variable '%1%' with value '%2%'."));
             msg << name << value;
             logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
@@ -154,7 +154,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        ILoggerRef logger = m_Core->GetLogger();
+        LoggerRef logger = m_Core->GetLogger();
 
         if (logger)
         {
@@ -184,7 +184,7 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        ILoggerRef logger(m_Core->GetLogger());
+        LoggerRef logger(m_Core->GetLogger());
 
         if (logger)
         {

@@ -108,7 +108,7 @@ HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWOR
     }
 #endif
 
-    if (retval)
+    if (retval) 
     {
         InstallKnownHooks();
     }

@@ -42,7 +42,7 @@ namespace VoodooShader
 
         if (pCore)
         {
-            ILoggerRef logger = pCore->GetLogger();
+            LoggerRef logger = pCore->GetLogger();
 
             if (logger)
             {
@@ -68,7 +68,7 @@ namespace VoodooShader
 
         if (pCore)
         {
-            ILoggerRef logger = pCore->GetLogger();
+            LoggerRef logger = pCore->GetLogger();
 
             if (logger)
             {

@@ -522,7 +522,7 @@ namespace VoodooShader
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            std::remove_if(m_Attached.begin(), m_Attached.end(), [&pParam](IParameterRef param){return param.get() == pParam;});
+            std::remove_if(m_Attached.begin(), m_Attached.end(), [&pParam](ParameterRef param){return param.get() == pParam;});
 
             return VSF_OK;
         }

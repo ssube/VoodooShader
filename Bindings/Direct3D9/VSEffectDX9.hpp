@@ -67,7 +67,7 @@ namespace VoodooShader
             VSBindingDX9 * m_Binding;
             PropertyMap m_Properties;
 
-            ITechniqueRef m_DefaultTechnique;
+            TechniqueRef m_DefaultTechnique;
             TechniqueVector m_Techniques;
             ParameterVector m_Parameters;
 

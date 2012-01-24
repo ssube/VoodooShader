@@ -47,7 +47,7 @@ namespace VoodooShader
             }
 
             // Cache core objects
-            ILoggerRef logger  = m_Core->GetLogger();
+            LoggerRef logger  = m_Core->GetLogger();
 
             if (!logger)
             {

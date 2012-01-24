@@ -96,10 +96,10 @@ namespace VoodooShader
             std::stack<LPDIRECT3DSTATEBLOCK9> m_StateStack;
 
             // Internal state tracking
-            IEffectRef m_BoundEffect;
-            IPassRef m_BoundPass;
-            ITextureRef m_BoundSourceTexture[8];
-            ITextureRef m_BoundTargetTexture[4];
+            EffectRef m_BoundEffect;
+            PassRef m_BoundPass;
+            TextureRef m_BoundSourceTexture[8];
+            TextureRef m_BoundTargetTexture[4];
         };
     }
 }

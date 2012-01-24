@@ -60,7 +60,7 @@ namespace VoodooShader
             VSTechniqueDX9 * m_Technique;
             PropertyMap m_Properties;
 
-            ITextureRef m_Targets[4];
+            TextureRef m_Targets[4];
 
             UINT m_DXPassId;
         };

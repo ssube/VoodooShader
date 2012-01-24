@@ -151,7 +151,7 @@ namespace VoodooShader
         {
             if (gpVoodooCore && testEffect)
             {
-                ILoggerRef logger = gpVoodooCore->GetLogger();
+                LoggerRef logger = gpVoodooCore->GetLogger();
 
                 HRESULT hr = m_RealDevice->StretchRect(m_BackBuffer, nullptr, surface_Frame0, nullptr, D3DTEXF_NONE);
                 if (FAILED(hr))
@@ -159,13 +159,13 @@ namespace VoodooShader
                     logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                 }
 
-                VoodooShader::ITechniqueRef tech = testEffect->Bind();
+                VoodooShader::TechniqueRef tech = testEffect->Bind();
                 if (tech)
                 {
                     uint32_t passCount = tech->GetPassCount();
                     for (uint32_t i = 0; i < passCount; ++i)
                     {
-                        VoodooShader::IPassRef pass = tech->GetPass(i);
+                        VoodooShader::PassRef pass = tech->GetPass(i);
                         if (pass)
                         {
                             hr = m_RealDevice->StretchRect(m_BackBuffer, nullptr, surface_Pass0, nullptr, D3DTEXF_NONE);
@@ -822,7 +822,7 @@ namespace VoodooShader
             if (m_VertDecl) m_VertDecl->Release();
             if (m_VertDeclT) m_VertDeclT->Release();
 
-            ILoggerRef logger = gpVoodooCore->GetLogger();
+            LoggerRef logger = gpVoodooCore->GetLogger();
 
             Variant deviceVar = CreateVariant(this);
             VoodooResult vr = gpVoodooCore->Bind(VSProfile_D3D9, 1, &deviceVar);

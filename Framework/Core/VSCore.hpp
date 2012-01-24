@@ -85,22 +85,22 @@ namespace VoodooShader
         XmlDocument m_ConfigFile;
 
         /** The current IAdapter implementation. */
-        IBindingRef m_Binding;
+        BindingRef m_Binding;
 
         /** The current IFileSystem implementation. */
-        IFileSystemRef m_FileSystem;
+        FileSystemRef m_FileSystem;
 
         /** The current IHookManager implementation. */
-        IHookManagerRef m_HookManager;
+        HookManagerRef m_HookManager;
 
         /** The current ILogger implementation. */
-        ILoggerRef m_Logger;
+        LoggerRef m_Logger;
 
         /** The current module manager. */
-        IModuleManagerRef m_ModuleManager;
+        ModuleManagerRef m_ModuleManager;
 
         /** The current variable parser. */
-        IParserRef m_Parser;
+        ParserRef m_Parser;
 
         /** Collection of all usable shaders. */
         EffectList m_Effects;
@@ -112,10 +112,10 @@ namespace VoodooShader
         ParameterMap m_Parameters;
 
         /** Default pass target texture for shader linker. */
-        ITextureRef m_LastPass;
+        TextureRef m_LastPass;
 
         /** Default technique target for shader linker. */
-        ITextureRef m_LastShader;
+        TextureRef m_LastShader;
 
         // Events
         EventRegistry m_Events;

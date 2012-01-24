@@ -40,8 +40,8 @@ namespace VoodooShader
     }
 }
 
-extern VoodooShader::ICoreRef gpVoodooCore;
-extern VoodooShader::ILoggerRef gpVoodooLogger;
+extern VoodooShader::CoreRef gpVoodooCore;
+extern VoodooShader::LoggerRef gpVoodooLogger;
 
 const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(_In_ VoodooShader::ICore * pCore);
 const uint32_t VOODOO_CALLTYPE API_ClassCount();

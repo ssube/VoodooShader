@@ -544,21 +544,21 @@ namespace VoodooShader
 #if !defined(VOODOO_NO_BOOST)
     void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
     void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
-    typedef boost::intrusive_ptr<IBinding>       IBindingRef;
-    typedef boost::intrusive_ptr<ICore>          ICoreRef;
-    typedef boost::intrusive_ptr<IEffect>        IEffectRef;
-    typedef boost::intrusive_ptr<IFile>          IFileRef;
-    typedef boost::intrusive_ptr<IFileSystem>    IFileSystemRef;
-    typedef boost::intrusive_ptr<IHookManager>   IHookManagerRef;
-    typedef boost::intrusive_ptr<ILogger>        ILoggerRef;
-    typedef boost::intrusive_ptr<IModule>        IModuleRef;
-    typedef boost::intrusive_ptr<IModuleManager> IModuleManagerRef;
-    typedef boost::intrusive_ptr<IObject>        IObjectRef;
-    typedef boost::intrusive_ptr<IParameter>     IParameterRef;
-    typedef boost::intrusive_ptr<IParser>        IParserRef;
-    typedef boost::intrusive_ptr<IPass>          IPassRef;
-    typedef boost::intrusive_ptr<ITechnique>     ITechniqueRef;
-    typedef boost::intrusive_ptr<ITexture>       ITextureRef;
+    typedef boost::intrusive_ptr<IBinding>       BindingRef;
+    typedef boost::intrusive_ptr<ICore>          CoreRef;
+    typedef boost::intrusive_ptr<IEffect>        EffectRef;
+    typedef boost::intrusive_ptr<IFile>          FileRef;
+    typedef boost::intrusive_ptr<IFileSystem>    FileSystemRef;
+    typedef boost::intrusive_ptr<IHookManager>   HookManagerRef;
+    typedef boost::intrusive_ptr<ILogger>        LoggerRef;
+    typedef boost::intrusive_ptr<IModule>        ModuleRef;
+    typedef boost::intrusive_ptr<IModuleManager> ModuleManagerRef;
+    typedef boost::intrusive_ptr<IObject>        ObjectRef;
+    typedef boost::intrusive_ptr<IParameter>     ParameterRef;
+    typedef boost::intrusive_ptr<IParser>        ParserRef;
+    typedef boost::intrusive_ptr<IPass>          PassRef;
+    typedef boost::intrusive_ptr<ITechnique>     TechniqueRef;
+    typedef boost::intrusive_ptr<ITexture>       TextureRef;
     /**
      * @}
      * @defgroup voodoo_collections Collections
@@ -566,36 +566,36 @@ namespace VoodooShader
      * @{
      */
 #if !defined(VOODOO_NO_STDLIB)
-    typedef std::pair<String, String>            StringPair;
-    typedef std::map<String, String>             StringMap;
-    typedef std::list<String>                    StringList;
-    typedef std::vector<String>                  StringVector;
-    typedef std::map<String, IEffectRef>         EffectMap;
-    typedef std::list<IEffectRef>                EffectList;
-    typedef std::vector<IEffectRef>              EffectVector;
-    typedef std::map<String, ITechniqueRef>      TechniqueMap;
-    typedef std::list<ITechniqueRef>             TechniqueList;
-    typedef std::vector<ITechniqueRef>           TechniqueVector;
-    typedef std::map<String, IPassRef>           PassMap;
-    typedef std::list<IPassRef>                  PassList;
-    typedef std::vector<IPassRef>                PassVector;
-    typedef std::map<String, IParameterRef>      ParameterMap;
-    typedef std::list<IParameterRef>             ParameterList;
-    typedef std::vector<IParameterRef>           ParameterVector;
-    typedef std::map<String, ITextureRef>        TextureMap;
-    typedef std::list<ITextureRef>               TextureList;
-    typedef std::vector<ITextureRef>             TextureVector;
-    typedef std::map<String, Variant>            VariantMap;
-    typedef std::list<Variant>                   VariantList;
-    typedef std::vector<Variant>                 VariantVector;
-    typedef std::map<Uuid, Variant>              PropertyMap;
-    typedef std::pair<String, uint32_t>          Variable;
-    typedef std::map<String, Variable>           VariableMap;
-    typedef std::map<Uuid, IModuleRef>           ModuleMap;
-    typedef std::pair<IModuleRef, uint32_t>      ClassSource;
-    typedef std::map<Uuid, ClassSource>          ClassMap;
-    typedef std::map<String, Uuid>               StrongNameMap;
-    typedef std::map<ITextureRef, IEffectRef>    MaterialMap;
+    typedef std::pair<String, String>           StringPair;
+    typedef std::map<String, String>            StringMap;
+    typedef std::list<String>                   StringList;
+    typedef std::vector<String>                 StringVector;
+    typedef std::map<String, EffectRef>         EffectMap;
+    typedef std::list<EffectRef>                EffectList;
+    typedef std::vector<EffectRef>              EffectVector;
+    typedef std::map<String, TechniqueRef>      TechniqueMap;
+    typedef std::list<TechniqueRef>             TechniqueList;
+    typedef std::vector<TechniqueRef>           TechniqueVector;
+    typedef std::map<String, PassRef>           PassMap;
+    typedef std::list<PassRef>                  PassList;
+    typedef std::vector<PassRef>                PassVector;
+    typedef std::map<String, ParameterRef>      ParameterMap;
+    typedef std::list<ParameterRef>             ParameterList;
+    typedef std::vector<ParameterRef>           ParameterVector;
+    typedef std::map<String, TextureRef>        TextureMap;
+    typedef std::list<TextureRef>               TextureList;
+    typedef std::vector<TextureRef>             TextureVector;
+    typedef std::map<String, Variant>           VariantMap;
+    typedef std::list<Variant>                  VariantList;
+    typedef std::vector<Variant>                VariantVector;
+    typedef std::map<Uuid, Variant>             PropertyMap;
+    typedef std::pair<String, uint32_t>         Variable;
+    typedef std::map<String, Variable>          VariableMap;
+    typedef std::map<Uuid, ModuleRef>           ModuleMap;
+    typedef std::pair<ModuleRef, uint32_t>      ClassSource;
+    typedef std::map<Uuid, ClassSource>         ClassMap;
+    typedef std::map<String, Uuid>              StrongNameMap;
+    typedef std::map<TextureRef, EffectRef>     MaterialMap;
 #endif
 #endif
     /**

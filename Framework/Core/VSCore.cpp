@@ -742,7 +742,7 @@ namespace VoodooShader
         }
 
         m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Got parameter %1%.")) << name);
-        IParameterRef param = paramIter->second;
+        ParameterRef param = paramIter->second;
         ParameterDesc pdesc = param->GetDesc();
 
         if (desc.Type != VSPT_Unknown && desc.Type != pdesc.Type) return nullptr;

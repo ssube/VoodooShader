@@ -88,7 +88,7 @@ namespace VoodooShader
             mutable Float4 m_VFloat;
             mutable int32_t m_VInt;
             mutable String m_VString;
-            ITextureRef m_Texture;
+            TextureRef m_Texture;
         };
     }
 }

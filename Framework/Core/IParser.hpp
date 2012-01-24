@@ -230,8 +230,7 @@ namespace VoodooShader
      * only the name. To help use this for variable varnames, this is forced to all lowercase. You can use it to change
      * the config settings based on the running executable, like so:
      *
-     * @par Example: Two adapter names, for different games. For this example, the running target is
-     * <code>nwmain.exe</code>.
+     * @par Example: Two adapter names, for different games. For this example, the running target is <tt>nwmain.exe</tt>:
      * @code
      * globalroot = M:\VoodooShader\
      * target = nwmain.exe
@@ -246,20 +245,20 @@ namespace VoodooShader
      * The variable used in adapter (and so, the value) change depending on the value of target.
      *
      * @subsection voodoo_vars_builtin_prefix $(prefix)
-     * The binary directory prefix. By default, or if not specified, this is @code bin\\ @endcode. Otherwise, this
+     * The binary directory prefix. By default, or if not specified, this is <tt>bin\\</tt>. Otherwise, this
      * takes a user-defined value. This is used within the framework to allow specifying a particular set of
-     * binaries, especially for debugging (set prefix to @code debug\\ @endcode and temporarily load debug binaries).
+     * binaries, especially for debugging (set prefix to <tt>debug\\</tt> and temporarily load debug binaries).
      *
      * @subsection voodoo_vars_builtin_binpath $(binpath)
-     * The framework binary directory. This is always @code $(path)\\$(module)\\$(prefix) @endcode, provided as a
-     * convenience. By default, @code $(module) @endcode always takes the value <tt>framework</tt>, but can be
+     * The framework binary directory. This is always <tt>\$(path)\\\$(module)\\\$(prefix)</tt>, provided as a
+     * convenience. By default, <tt>\$(module)</tt> always takes the value <tt>framework</tt>, but can be
      * overwritten by state variables.
      *
-     * @subsection voodoo_vars_builtin_args $(args), $(argc), $(argv_<em>N</em>)
-     * This set of variables describe the command line arguments passed to the target. @code $(args) @endcode is the
+     * @subsection voodoo_vars_builtin_args $(args), $(argc), $(argv_N)
+     * This set of variables describe the command line arguments passed to the target. <tt>\$(args)</tt> is the
      * full command line string, all arguments as passed. The others match their use in the traditional C main
-     * function, with @code $(argc) @endcode containing the number of arguments and @code $(argv) @endcode containg
-     * the arguments. As variables do not support arrays, the argument index is appended, as @code $(argv_0) @endcode.
+     * function, with <tt>\$(argc)</tt> containing the number of arguments and <tt>\$(argv)</tt> containg
+     * the arguments. As variables do not support arrays, the argument index is appended, as <tt>\$(argv_0)</tt>.
      *
      * @section voodoo_vars_config Config Variables
      * When the core loads, it retrieves any variables from the config (using the XPath query
