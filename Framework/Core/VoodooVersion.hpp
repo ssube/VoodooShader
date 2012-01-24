@@ -57,8 +57,8 @@
     VOODOO_##token##_VERSION_MAJOR, VOODOO_##token##_VERSION_MINOR, VOODOO_##token##_VERSION_PATCH, \
     VOODOO_##token##_VERSION_BUILD
 #define VOODOO_VERSION_STRUCT(token) \
-    { VOODOO_##token##_LIBID, VOODOO_VERSION_CHAIN(token), VOODOO_DEBUG_BOOL, \
-      VOODOO_##token##_NAME, VOODOO_##token##_VERSION_ID }
+    { VOODOO_##token##_NAME, VOODOO_##token##_VERSION_ID, VOODOO_##token##_LIBID, VOODOO_VERSION_CHAIN(token), \
+      VOODOO_DEBUG_BOOL }
 
 // Copyright info
 #define VOODOO_GLOBAL_COPYRIGHT_BRIEF   VSTR("Copyright © 2010-2012 by Sean Sube")

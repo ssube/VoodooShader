@@ -21,8 +21,10 @@
 
 #include "VoodooInternal.hpp"
 
+#pragma warning(push,3)
 #include <map>
 #include <set>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -78,6 +80,10 @@ namespace VoodooShader
         VOODOO_METHOD(RemoveTexture)(_In_ const String & name);
 
     private:
+        // Private these to prevent copying internally (external libs never will).
+        VSCore(const VSCore & other);
+        VSCore & operator=(const VSCore & other);
+
         mutable uint32_t m_Refs;
         uint32_t m_Version;
 

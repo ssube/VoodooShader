@@ -30,9 +30,13 @@
 // under /WX). This disables the warning for only that header.
 #pragma warning(push)
 #pragma warning(disable : 6387)
+#pragma warning(push,3)
 #include <shlobj.h>
 #pragma warning(pop)
+#pragma warning(pop)
+#pragma warning(push,3)
 #include <strsafe.h>
+#pragma warning(pop)
 
 namespace VoodooShader
 {

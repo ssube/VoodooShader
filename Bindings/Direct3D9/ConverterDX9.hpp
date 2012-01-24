@@ -46,9 +46,15 @@ namespace VoodooShader
                     return D3DFMT_A32B32G32R32F;
                 case VSFmt_D16:
                     return D3DFMT_D16;
+                case VSFmt_D24:
+                    return D3DFMT_D24X8;
+                case VSFmt_D24S8:
+                    return D3DFMT_D24S8;
                 case VSFmt_D32:
                     return D3DFMT_D32;
                 case VSFmt_Unknown:
+                case VSFmt_Null:
+                case VSFmt_DMax:
                 default:
                     return D3DFMT_UNKNOWN;
                 }

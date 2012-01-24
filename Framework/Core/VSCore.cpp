@@ -25,7 +25,10 @@
 // Voodoo Utility
 #include "Support.inl"
 // System
-#include "shellapi.h"
+#pragma warning(push)
+#pragma warning(disable: 4668)
+#include <shellapi.h>
+#pragma warning(pop)
 
 namespace VoodooShader
 {

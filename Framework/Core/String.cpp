@@ -20,16 +20,17 @@
 
 #include "VoodooFramework.hpp"
 // Boost
+#pragma warning(push,3)
 #include <boost/algorithm/string.hpp>
+#pragma warning(disable: 4640)
 #include <boost/uuid/string_generator.hpp>
-#pragma warning(push)
 #pragma warning(disable: 6246)
 #include <boost/uuid/uuid_io.hpp>
-#pragma warning(pop)
 // System
 #include <string>
 #include <sstream>
 #include <iomanip>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -138,16 +139,23 @@ namespace VoodooShader
         else
         {
             int len = MultiByteToWideChar(CP_UTF8, NULL, str, -1, NULL, 0);
-            std::vector<wchar_t> wstr(len);
-            MultiByteToWideChar(CP_UTF8, NULL, str, -1, &wstr[0], len);
-
-            if (size == 0)
+            if (len > 0)
             {
-                m_Impl = new StringImpl(&wstr[0]);
+                std::vector<wchar_t> wstr((unsigned int)len);
+                MultiByteToWideChar(CP_UTF8, NULL, str, -1, &wstr[0], len);
+
+                if (size == 0)
+                {
+                    m_Impl = new StringImpl(&wstr[0]);
+                }
+                else
+                {
+                    m_Impl = new StringImpl(size, &wstr[0]);
+                }
             }
             else
             {
-                m_Impl = new StringImpl(size, &wstr[0]);
+                Throw(VOODOO_CORE_NAME, VSTR("Unable to convert character string."), nullptr);
             }
         }
     }

@@ -23,7 +23,9 @@
 #include "DX9_Adapter.hpp"
 #include "DX8_ThinHeader.hpp"
 // System
+#pragma warning(push,3)
 #include <set>
+#pragma warning(pop)
 
 namespace VoodooShader
 {

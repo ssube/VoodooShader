@@ -26,7 +26,9 @@
 
 #include "WinUnit.h"
 
+#pragma warning(push,3)
 #include <windows.h>
+#pragma warning(pop)
 
 #define VOODOO_STATIC_LINK
 #include "VoodooFramework.hpp"

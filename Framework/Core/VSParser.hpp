@@ -55,6 +55,10 @@ namespace VoodooShader
         static const wchar_t  VarMarkerModeR = VSTR('-');
 
     private:
+        // Private these to prevent copying internally (external libs never will).
+        VSParser(const VSParser & other);
+        VSParser & operator=(const VSParser & other);
+
         String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) const;
 
         mutable uint32_t m_Refs;

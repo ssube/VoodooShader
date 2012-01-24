@@ -20,7 +20,9 @@
 
 #include "VoodooFramework.hpp"
 // System
+#pragma warning(push,3)
 #include <tchar.h>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -28,18 +30,21 @@ namespace VoodooShader
     {
         const wchar_t * formatBody = format;
 
-        if (_tcsnicmp(format, VSTR("TF_"), 3) == 0)
+        if (_tcsnicmp(format, VSTR("VSFmt_"), 6) == 0)
         {
-            formatBody += 3;
+            formatBody += 6;
         }
 
         if (formatBody[0] == VSTR('D'))
         {
             // Depth format
             if (_tcsnicmp(formatBody, VSTR("D16"), 3) == 0) return VSFmt_D16;
+            if (_tcsnicmp(formatBody, VSTR("D24"), 3) == 0) return VSFmt_D24;
+            if (_tcsnicmp(formatBody, VSTR("D24S8"), 5) == 0) return VSFmt_D24S8;
             if (_tcsnicmp(formatBody, VSTR("D32"), 3) == 0) return VSFmt_D32;
+            if (_tcsnicmp(formatBody, VSTR("DMax"), 4) == 0) return VSFmt_DMax;
         }
-        else
+        else if (formatBody[0] == VSTR('R'))
         {
             if (_tcsnicmp(formatBody, VSTR("RGB5A1"),  6) == 0) return VSFmt_RGB5A1;
             if (_tcsnicmp(formatBody, VSTR("RGB8"),    4) == 0) return VSFmt_RGB8;
@@ -47,6 +52,10 @@ namespace VoodooShader
             if (_tcsnicmp(formatBody, VSTR("RGB10A2"), 7) == 0) return VSFmt_RGB10A2;
             if (_tcsnicmp(formatBody, VSTR("RGBA16F"), 7) == 0) return VSFmt_RGBA16F;
             if (_tcsnicmp(formatBody, VSTR("RGBA32F"), 7) == 0) return VSFmt_RGBA32F;
+        }
+        else if (_tcsnicmp(formatBody, VSTR("Null"), 4) == 0)
+        {
+            return VSFmt_Null;
         }
 
         return VSFmt_Unknown;
@@ -60,6 +69,7 @@ namespace VoodooShader
     {
         switch (tf)
         {
+            CASESTRING(Null);
             CASESTRING(RGB5A1);
             CASESTRING(RGB8);
             CASESTRING(RGBA8);
@@ -67,7 +77,10 @@ namespace VoodooShader
             CASESTRING(RGBA16F);
             CASESTRING(RGBA32F);
             CASESTRING(D16);
+            CASESTRING(D24);
+            CASESTRING(D24S8);
             CASESTRING(D32);
+            CASESTRING(DMax);
         case VSFmt_Unknown:
         default:
             return VSTR("Unknown");
@@ -84,14 +97,16 @@ namespace VoodooShader
             CASESTRING(Int);
             CASESTRING(Float);
             CASESTRING(String);
-            CASESTRING(Texture1D);
-            CASESTRING(Texture2D);
-            CASESTRING(Texture3D);
-            CASESTRING(TextureCube);
+            CASESTRING(Sampler);
             CASESTRING(Sampler1D);
             CASESTRING(Sampler2D);
             CASESTRING(Sampler3D);
             CASESTRING(SamplerCube);
+            CASESTRING(Texture);
+            CASESTRING(Texture1D);
+            CASESTRING(Texture2D);
+            CASESTRING(Texture3D);
+            CASESTRING(TextureCube);
         case VSPT_Unknown:
         default:
             return VSTR("Unknown");
@@ -110,6 +125,7 @@ namespace VoodooShader
             CASESTRING(Domain);
             CASESTRING(Hull);
             CASESTRING(Compute);
+            CASESTRING(All);
         case VSStage_Unknown:
         default:
             return VSTR("Unknown");

@@ -53,6 +53,10 @@ namespace VoodooShader
         VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, const GetFileMode mode) CONST;
 
     private:
+        // Private these to prevent copying internally (external libs never will).
+        VSFileSystem(const VSFileSystem & other);
+        VSFileSystem & operator=(const VSFileSystem & other);
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
     };

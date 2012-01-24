@@ -24,7 +24,9 @@
 #include "CVoodoo3D9.hpp"
 // System
 #define WIN32_LEAN_AND_MEAN
+#pragma warning(push,3)
 #include <windows.h>
+#pragma warning(pop)
 
 HMODULE WINAPI VSLoadLibraryA(_In_ LPCSTR lpFileName);
 HMODULE WINAPI VSLoadLibraryW(_In_ LPCWSTR lpFileName);

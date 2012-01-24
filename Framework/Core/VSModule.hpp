@@ -46,6 +46,10 @@ namespace VoodooShader
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST;
 
     private:
+        // Private these to prevent copying internally (external libs never will).
+        VSModule(const VSModule & other);
+        VSModule & operator=(const VSModule & other);
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
 

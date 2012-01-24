@@ -51,6 +51,10 @@ namespace VoodooShader
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const String & name) CONST;
 
     private:
+        // Private these to prevent copying internally (external libs never will).
+        VSModuleManager(const VSModuleManager & other);
+        VSModuleManager & operator=(const VSModuleManager & other);
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
 

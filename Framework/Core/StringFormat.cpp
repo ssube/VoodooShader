@@ -21,8 +21,8 @@
 
 #include "VoodooFramework.hpp"
 // Boost
+#pragma warning(push,3)
 #include <boost/format.hpp>
-#pragma warning(push)
 #pragma warning(disable: 6246)
 #include <boost/uuid/uuid_io.hpp>
 #pragma warning(pop)

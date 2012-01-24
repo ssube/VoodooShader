@@ -21,7 +21,9 @@
 
 #include "VoodooInternal.hpp"
 
+#pragma warning(push,3)
 #include <fstream>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -60,6 +62,10 @@ namespace VoodooShader
         VOODOO_METHOD(LogMessage)(_In_ const uint32_t level, _In_ const String & source, _In_ const String & msg);
 
     private:
+        // Private these to prevent copying internally (external libs never will).
+        VSLogger(const VSLogger & other);
+        VSLogger & operator=(const VSLogger & other);
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
 

@@ -19,7 +19,9 @@
  */
 #pragma once
 
+#pragma warning(push,3)
 #include <d3d9.h>
+#pragma warning(pop)
 
 // DX8 enum values
 #define D3DTSS_ADDRESSU     13

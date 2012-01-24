@@ -21,7 +21,9 @@
 
 #include "VoodooInternal.hpp"
 
+#pragma warning(push,3)
 #include <easyhook.h>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -57,6 +59,10 @@ namespace VoodooShader
         VOODOO_METHOD(RemoveAll)();
 
     private:
+        // Private these to prevent copying internally (external libs never will).
+        VSHookManager(const VSHookManager & other);
+        VSHookManager & operator=(const VSHookManager & other);
+
         mutable uint32_t m_Refs;
         ICore * m_Core;
 

@@ -128,7 +128,7 @@ namespace VoodooShader
          *
          * @return Total number of matches.
          */
-        uint32_t GetCount() const;
+        int32_t GetCount() const;
 
         /**
          * Check if any matches were found.
@@ -142,7 +142,7 @@ namespace VoodooShader
          *
          * @return The specified submatch.
          */
-        String GetMatch(uint32_t index) const;
+        String GetMatch(int32_t index) const;
 
         /**
          * Formats the found submatches into an output string. This uses the <code>$0</code> syntax to perform formatting,

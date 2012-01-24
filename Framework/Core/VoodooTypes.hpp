@@ -19,20 +19,28 @@
  */
 #pragma once
 
+#pragma warning(push,3)
 #include <cstdint>
+#pragma warning(pop)
 
 #if !defined(VOODOO_NO_BOOST)
+#   pragma warning(push,3)
 #   include <boost/intrusive_ptr.hpp>
 #   include <boost/uuid/uuid.hpp>
+#   pragma warning(pop)
 #   if !defined(VOODOO_NO_STDLIB)
+#       pragma warning(push,3)
 #       include <list>
 #       include <map>
 #       include <vector>
+#       pragma warning(pop)
 #   endif
 #endif
 
 #if !defined(VOODOO_NO_PUGIXML)
-#   include "pugixml.hpp"
+#   pragma warning(push,3)
+#   include <pugixml.hpp>
+#   pragma warning(pop)
 #endif
 
 namespace VoodooShader
@@ -606,14 +614,14 @@ namespace VoodooShader
      */
     struct Version
     {
+        const wchar_t * Name;
+        const wchar_t * RevId;
         Uuid            LibId;
         int32_t         Major;
         int32_t         Minor;
         int32_t         Patch;
         int32_t         Build;
         bool            Debug;
-        const wchar_t * Name;
-        const wchar_t * RevId;
     };
     /**
      * Property variant type. Consists of the value type (filled union field), components in the value (for vector

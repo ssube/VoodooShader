@@ -262,10 +262,17 @@ namespace VoodooShader
          */
         std::string ToStringA() const
         {
-            uint32_t len = this->ToChars(0, nullptr);
-            std::vector<char> buffer(len);
-            this->ToChars(len, &buffer[0]);
-            return std::string(buffer.begin(), buffer.end());
+            int32_t len = this->ToChars(0, nullptr);
+            if (len < 0)
+            {
+                return std::string();
+            }
+            else
+            {
+                std::vector<char> buffer((uint32_t)len);
+                this->ToChars(len, &buffer[0U]);
+                return std::string(buffer.begin(), buffer.end());
+            }
         }
 #endif
         /**

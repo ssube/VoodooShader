@@ -20,7 +20,7 @@
 
 #include "VSHookManager.hpp"
 // System
-#pragma warning(push)
+#pragma warning(push,3)
 #pragma warning(disable: 4005)
 #include <ntstatus.h>
 #pragma warning(pop)
@@ -149,7 +149,7 @@ namespace VoodooShader
         );
 
         TRACED_HOOK_HANDLE hookHandle = new HOOK_TRACE_INFO();
-        DWORD result = LhInstallHook(pSrc, pDest, nullptr, hookHandle);
+        NTSTATUS result = LhInstallHook(pSrc, pDest, nullptr, hookHandle);
 
         if (result == STATUS_NOT_SUPPORTED || result == STATUS_NO_MEMORY || result == STATUS_INSUFFICIENT_RESOURCES)
         {
@@ -182,7 +182,7 @@ namespace VoodooShader
         if (hook != m_Hooks.end())
         {
             TRACED_HOOK_HANDLE tracedHandle = (TRACED_HOOK_HANDLE)hook->second;
-            DWORD result = LhUninstallHook(tracedHandle);
+            NTSTATUS result = LhUninstallHook(tracedHandle);
 
             delete tracedHandle;
 

@@ -22,7 +22,9 @@
 // Voodoo Core
 #include "VSModule.hpp"
 // System
+#pragma warning(push,3)
 #include <shlwapi.h>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -276,9 +278,9 @@ namespace VoodooShader
             logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, StringFormat("Loaded module: %1%") << *module->PluginInit());
         }
 
-        int classCount = module->ClassCount();
+        uint32_t classCount = module->ClassCount();
 
-        for (int curClass = 0; curClass < classCount; ++curClass)
+        for (uint32_t curClass = 0; curClass < classCount; ++curClass)
         {
             Uuid clsid;
             ZeroMemory(&clsid, sizeof(Uuid));

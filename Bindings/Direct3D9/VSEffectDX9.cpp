@@ -329,8 +329,15 @@ namespace VoodooShader
                 return VSFERR_INVALIDPARAMS;
             }
 
-            m_DefaultTechnique = pTechnique;
-            return VSF_OK;
+            if (SUCCEEDED(m_DXEffect->SetTechnique(pTechnique->m_DXHandle)))
+            {
+                m_DefaultTechnique = pTechnique;
+                return VSF_OK;
+            }
+            else
+            {
+                return VSFERR_APIERROR;
+            }
         }
 
         uint32_t VOODOO_METHODTYPE VSEffectDX9::GetParameterCount() CONST

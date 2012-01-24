@@ -18,6 +18,7 @@
  *   peachykeen@voodooshader.com
  */
 
+#pragma warning(push,3)
 #include <vector>
 #include <tchar.h>
 #include <strsafe.h>
@@ -27,8 +28,9 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#include "Shlwapi.h"
+#include <Shlwapi.h>
 #pragma comment(lib, "Shlwapi.lib")
+#pragma warning(pop)
 
 struct HookDef
 {
@@ -85,19 +87,28 @@ inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format
     va_list args;
     va_start(args, msg);
 
-    int bufsize = _vsctprintf(msg, args) + 1;
-    std::vector<TCHAR> buffer(bufsize);
-
-    _vsntprintf_s(&buffer[0], bufsize, bufsize-1, msg, args);
-
-    va_end(args);
-
-    GlobalLog(TEXT("Error: %s"), &buffer[0]);
-
     TCHAR title[32];
     _stprintf_s(title, TEXT("Voodoo Error 0X%04X"), errorCode);
 
-    MessageBox(nullptr, &buffer[0], title, MB_OK | MB_ICONWARNING);
+    // The added 1, and the if, are to allow for the null at the end and the -1 in line 98.
+    int bufsize = _vsctprintf(msg, args) + 1;
+    if (bufsize > 1)
+    {
+        std::vector<TCHAR> buffer((unsigned int)bufsize);
+        _vsntprintf_s(&buffer[0], (size_t)bufsize, (size_t)bufsize-1, msg, args);
+
+        GlobalLog(TEXT("Error: %s"), &buffer[0]);
+
+        MessageBox(nullptr, &buffer[0], title, MB_OK | MB_ICONWARNING);
+    }
+    else
+    {
+        GlobalLog(TEXT("Error: %d (unable to format)"), errorCode);
+
+        MessageBox(nullptr, TEXT("An error occurred, but could not be formatted."), title, MB_OK | MB_ICONWARNING);
+    }
+
+    va_end(args);
 }
 
 /**

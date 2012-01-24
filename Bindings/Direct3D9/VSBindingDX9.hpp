@@ -21,7 +21,9 @@
 
 #include "Voodoo_D3D9.hpp"
 // System
+#pragma warning(push,3)
 #include <stack>
+#pragma warning(pop)
 
 namespace VoodooShader
 {

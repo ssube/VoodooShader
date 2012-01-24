@@ -1,6 +1,8 @@
 
 #define D3D_DEBUG_INFO
+#pragma warning(push,3)
 #include <d3dx9.h>
+#pragma warning(pop)
 #pragma comment(lib,"d3d9.lib")
 #pragma comment(lib,"d3dx9.lib")
 #pragma comment(lib,"winmm.lib")

@@ -8,7 +8,9 @@
 /* This program was requested by Patrick Earl; hopefully someone else
    will write the equivalent Direct3D immediate mode program. */
 
+#pragma warning(push,3)
 #include <gl/glut.h>
+#pragma warning(pop)
 #pragma comment(lib, "glut32.lib")
 
 GLfloat light_diffuse[] = {1.0, 0.0, 0.0, 1.0};  /* Red diffuse light. */

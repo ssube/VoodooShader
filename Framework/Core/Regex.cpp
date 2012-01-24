@@ -20,12 +20,12 @@
 
 #include "VoodooFramework.hpp"
 // Boost
-#pragma warning(push)
+#pragma warning(push,3)
 #pragma warning(disable: 6334 6011)
 #include <boost/regex.hpp>
-#pragma warning(pop)
 // System
 #include <string>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -132,11 +132,11 @@ namespace VoodooShader
         delete m_Impl;
     }
 
-    uint32_t RegexMatch::GetCount() const
+    int32_t RegexMatch::GetCount() const
     {
         VOODOO_CHECK_IMPL;
 
-        return m_Impl->m_Match.size();
+        return (int32_t)m_Impl->m_Match.size();
     }
 
     bool RegexMatch::IsEmpty() const
@@ -146,7 +146,7 @@ namespace VoodooShader
         return m_Impl->m_Match.empty();
     }
 
-    String RegexMatch::GetMatch(uint32_t index) const
+    String RegexMatch::GetMatch(int32_t index) const
     {
         VOODOO_CHECK_IMPL;
 

@@ -30,7 +30,9 @@
 #endif
 
 #define WIN32_LEAN_AND_MEAN
+#pragma warning(push,3)
 #include <windows.h>
+#pragma warning(pop)
 
 #define VOODOO_SDK_VERSION 0
 

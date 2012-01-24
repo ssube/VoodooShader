@@ -20,8 +20,10 @@
 
 #include "VSLogger.hpp"
 // System
+#pragma warning(push,3)
 #include <sstream>
 #include <ios>
+#pragma warning(pop)
 
 namespace VoodooShader
 {

@@ -216,12 +216,53 @@ namespace VoodooShader
             if ((desc.Usage & VSTexFlag_Dynamic) > 0) usage |= D3DUSAGE_DYNAMIC;
             if ((desc.Usage & VSTexFlag_Target) > 0) usage |= D3DUSAGE_RENDERTARGET;
 
+            if (desc.Format == VSFmt_DMax)
+            {
+                LPDIRECT3DTEXTURE9 texture = Impl_CreateTexture(desc, usage, FOURCC('I','N','T','Z'));
+                if (texture)
+                {
+                    VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
+                    return pTexture;
+                }
+                texture = Impl_CreateTexture(desc, usage, FOURCC('D','F','2','4'));
+                if (texture)
+                {
+                    VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
+                    return pTexture;
+                }
+                texture = Impl_CreateTexture(desc, usage, FOURCC('D','F','1','6'));
+                if (texture)
+                {
+                    VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
+                    return pTexture;
+                }
+                texture = Impl_CreateTexture(desc, usage, FOURCC('R','A','W','Z'));
+                if (texture)
+                {
+                    VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
+                    return pTexture;
+                }
+                return nullptr;
+            }
+
             D3DFORMAT format = ConverterDX9::ToD3DFormat(desc.Format);
             if (format == D3DFMT_UNKNOWN)
             {
                 return nullptr;
             }
 
+            LPDIRECT3DTEXTURE9 texture = Impl_CreateTexture(desc, usage, format);
+            if (!texture)
+            {
+                return nullptr;
+            }
+
+            VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
+            return pTexture;
+        }
+
+        LPDIRECT3DTEXTURE9 Impl_CreateTexture(TextureDesc & desc, DWORD usage, D3DFORMAT format)
+        {
             LPDIRECT3DTEXTURE9 texture = nullptr;
             HRESULT hr = m_Device->CreateTexture(desc.Size.X, desc.Size.Y, desc.Levels, 
                 usage, format, D3DPOOL_DEFAULT, &texture, nullptr);
@@ -230,10 +271,11 @@ namespace VoodooShader
                 m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
                     StringFormat("Failed to create texture '%1%'.") << name);
                 return nullptr;
+            } 
+            else
+            {
+                return texture;
             }
-
-            ITexture * pTexture = new VSTextureDX9(this, name, texture);
-            return pTexture;
         }
 
         VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTextureFromFile)(CONST String & name, IFile * pFile)

@@ -25,7 +25,9 @@
 #include "IL/il.h"
 #include "pugixml.hpp"
 
+#pragma warning(push,3)
 #include <fstream>
+#pragma warning(pop)
 
 namespace VoodooShader
 {

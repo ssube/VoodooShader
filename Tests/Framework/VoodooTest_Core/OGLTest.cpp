@@ -26,10 +26,16 @@
 
 #include "WinUnit.h"
 
+#pragma warning(push,3)
 #include <windows.h>
+#pragma warning(pop)
 
+#pragma warning(push,3)
 #include <gl/gl.h>
+#pragma warning(pop)
+#pragma warning(push,3)
 #include <gl/glut.h>
+#pragma warning(pop)
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glut32.lib")
 

@@ -125,21 +125,21 @@ ul
 .tablist li.current
 {
     background: rgba(0,0,0,0.25);
-    background: linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
-    background: -moz-linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
+    background: linear-gradient(top, rgba(0,0,0,0.60) 0%, rgba(64,64,64,0.15) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.60) 0%, rgba(64,64,64,0.15) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.60) 0%, rgba(64,64,64,0.15) 100%);
     border-left: 1px ridge #303030;
     border-left: 1px ridge rgba(32,32,32,0.5);
 }
 
 .tablist li.current:hover
 {
-    background: rgba(0,0,0,0.25);
-    background: linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
-    background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
-    border-left: 1px ridge #000000;
-    border-left: 1px ridge rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.35);
+    background: linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(64,64,64,0.75) 50%, rgba(0,0,0,0.75) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(64,64,64,0.75) 50%, rgba(0,0,0,0.75) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(64,64,64,0.75) 50%, rgba(0,0,0,0.75) 100%);
+    border-left: 1px ridge #303030;
+    border-left: 1px ridge rgba(32,32,32,0.5);
 }
 
 .tablist a
@@ -327,9 +327,11 @@ div.groupText {
 
 div.contents 
 {
-    background: rgba(64,64,64,0.5);
+    background: rgba(64,64,64,0.75);
     margin: 0px 20px;
     padding: 20px 40px;
+    border-left: 1px solid rgba(128,128,128,0.5);
+    border-right: 1px solid rgba(128,128,128,0.5);
 }
 
 td.indexkey {
@@ -377,6 +379,12 @@ div.center img {
 address.footer {
     text-align: right;
     padding-right: 12px;
+    margin-right: 20px;
+}
+
+address.footer small:after
+{
+    content: "; the Voodoo Shader project and this documentation are released under the GNU Lesser General Public License v3.";
 }
 
 img.footer {
@@ -470,6 +478,7 @@ hr {
     height: 0px;
     border: none;
     border-top: 1px solid #666;
+    margin: 0px 20px;
 }
 
 hr.footer {
@@ -838,6 +847,7 @@ div.ingroups
     padding-left: 5px;
     width: 50%;
     text-align: left;
+    margin-left: 25px;
 }
 
 div.ingroups a
@@ -849,12 +859,13 @@ div.header
 {
     background: #444;
     margin:  0px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #222;
 }
 
 div.headertitle
 {
     padding: 5px 5px 5px 10px;
+    margin-left: 20px;
 }
 
 dl
@@ -868,12 +879,12 @@ dl.note, dl.warning, dl.attention, dl.pre, dl.post, dl.invariant, dl.deprecated,
         border-top: 1px solid;
         border-right: 1px solid;
         border-bottom: 1px solid;
-        padding: 0 0 0 6px;
+        padding: 0 0 6px 6px;
         margin: 12px 10px 12px 8px;
         
-    -webkit-border-radius: 0px 8px 8px 0px;
-    -moz-border-radius: 0px 8px 8px 0px;
-    border-radius: 0px 8px 8px 0px;
+    -webkit-border-radius: 0px 3px 3px 0px;
+    -moz-border-radius: 0px 3px 3px 0px;
+    border-radius: 0px 3px 3px 0px;
 }
 
 dl.note dt, dl.warning dt, dl.attention dt, dl.pre dt, dl.post dt, dl.invariant dt, dl.deprecated dt, dl.todo dt, dl.test dt, dl.bug dt
@@ -1026,20 +1037,21 @@ dl.bug dt:before
 /* Voodoo-specific rules */
 p code, dd code
 {
-    font-family: Consolas, Courier, monospace, fixed;
+    font-family: Consolas, Courier New, monospace, fixed;
     font-size:  10pt;
+    color: #CBCBCB;
     
-    border: 1px solid #A090C0;
-    border: 1px solid rgba(160, 144, 192, 0.25);
+    background: #4D4D4D;
+    border: 1px solid #C2AEE9;
+    border: 1px solid rgba(194, 174, 233, 0.25);
     
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    
-    background-color: #3C3C3C;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
     
     padding: 0px 2px 1px 2px;
+    
     overflow: auto;
     word-wrap: break-word;
-    line-height: 125%;      
+    line-height: 125%;    
 }

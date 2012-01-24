@@ -20,10 +20,12 @@
 
 #include "VSParser.hpp"
 // System
+#pragma warning(push,3)
 #include <shlwapi.h>
 #include <string>
 #include <sstream>
 #include <iostream>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
@@ -407,7 +409,7 @@ namespace VoodooShader
             bool doubleslash = (flags & VSParse_SlashDouble) == VSParse_SlashDouble;
             bool prevslash = false;
             bool slashrewrite = false;
-            char slashchar = VSTR(' ');
+            wchar_t slashchar = VSTR(' ');
 
             if (flags & VSParse_SlashTrail)
             {

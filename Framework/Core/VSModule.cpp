@@ -35,10 +35,14 @@ namespace VoodooShader
         {
             VSModule * module = new VSModule(pCore, hmodule);
 
+            // Disable conversion warnings, since GetProcAddress always returns FARPROC
+#pragma warning(push)
+#pragma warning(disable: 4191)
             module->m_PluginInit = reinterpret_cast<Functions::PluginInitFunc>(GetProcAddress(hmodule, "PluginInit"));
             module->m_ClassCount = reinterpret_cast<Functions::ClassCountFunc>(GetProcAddress(hmodule, "ClassCount"));
             module->m_ClassInfo = reinterpret_cast<Functions::ClassInfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
             module->m_ClassCreate = reinterpret_cast<Functions::ClassCreateFunc>(GetProcAddress(hmodule, "ClassCreate"));
+#pragma warning(pop)
 
             if
             (
