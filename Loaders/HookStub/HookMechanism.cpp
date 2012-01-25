@@ -181,7 +181,7 @@ bool WINAPI LoadVoodoo(HHOOKDEF pHook)
             gVoodooCore->Release();
             gVoodooCore = nullptr;
         } else {
-            GlobalLog(TEXT("Initialized Voodoo Shader, passing logging to core.\n"), corePath);
+            GlobalLog(TEXT("Initialized Voodoo Shader, passing logging to core.\n"));
         }
     }
 

@@ -411,7 +411,7 @@ namespace VoodooShader
                 m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
                     StringFormat(VSTR("Exception during Core creation: %1%")) << exc.strwhat());
             } else {
-                GlobalLog(VSTR("Unlogged exception during core creation: %s"), exc.what());
+                GlobalLog(VSTR("Unlogged exception during core creation: %S"), exc.what());
             }
 
             return VSF_FAIL;

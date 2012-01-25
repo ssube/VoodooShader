@@ -261,7 +261,7 @@ namespace VoodooShader
             return pTexture;
         }
 
-        LPDIRECT3DTEXTURE9 Impl_CreateTexture(TextureDesc & desc, DWORD usage, D3DFORMAT format)
+        VOODOO_METHODDEF_(LPDIRECT3DTEXTURE9, VSBindingDX9::Impl_CreateTexture)(TextureDesc & desc, DWORD usage, D3DFORMAT format)
         {
             LPDIRECT3DTEXTURE9 texture = nullptr;
             HRESULT hr = m_Device->CreateTexture(desc.Size.X, desc.Size.Y, desc.Levels, 

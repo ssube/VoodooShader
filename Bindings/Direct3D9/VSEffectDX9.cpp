@@ -91,12 +91,6 @@ namespace VoodooShader
                 m_DXEffect->GetTechniqueDesc(techHandle, &techdesc);
                 String techName(techdesc.Name);
 
-                if (FAILED(m_DXEffect->ValidateTechnique(techHandle)))
-                {
-                    logger->LogMessage(VSLog_CoreWarning, VOODOO_D3D9_NAME, 
-                        StringFormat("Failed to validate technique %1%.") << techName);
-                }
-
                 try
                 {
                     VSTechniqueDX9 * technique = new VSTechniqueDX9(this, m_DXEffect, techHandle);

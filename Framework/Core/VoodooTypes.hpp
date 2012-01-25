@@ -374,7 +374,7 @@ namespace VoodooShader
 #endif
     /**
      * @}
-     * @defgroup voodoo_types Basic Types 
+     * @addtogroup voodoo_types
      * @{
      */
     /**

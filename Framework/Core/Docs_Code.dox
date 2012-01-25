@@ -41,13 +41,13 @@ namespace VoodooShader
       * @code const Version * PluginInit(ICore * pCore); @endcode
       *
       * The @p PluginInit function performs any initialization the plugin needs to do and, if successful, returns a constant 
-      * @ref VersionDesc struct with the module's name, version and various flags. If the initialization fails, the plugin 
+      * VersionDesc struct with the module's name, version and various flags. If the initialization fails, the plugin 
       * must return a nullptr, and loading will be aborted and the DLL unloaded from the process.
       *
       * To allow plugins to register callbacks, @a pCore is given. @p PluginInit is typically called during the call to
       * ICore::Init(), so plugins @a must assume the core has not yet been initialized and must not call methods requiring
       * init to have completed. If the plugin requires initialization using the complete core, it should register a callback
-      * to the @ref EventIds::Finalize event, which will be called at the end of ICore::Init().
+      * to the EventIds::Finalize event, which will be called at the end of ICore::Init().
       *
       * @subsection voodoo_spec_plugin_exports_count ClassCount
       *

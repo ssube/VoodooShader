@@ -122,20 +122,20 @@ BEGIN_TEST(String_Ctor_VectorWChar_t)
 END_TEST;
 
 // String::String(_In_ const std::string & str)
-BEGIN_TEST(String_Ctor_Uuid)
+BEGIN_TEST(String_Ctor_StdString)
 {
     std::string std = "aaaa";
-    String str(uuid);
+    String str(std);
     String other(VSTR("aaaa"));
     WIN_ASSERT_EQUAL(other, str, L"std::string ctor did not parse properly.");
 }
 END_TEST;
 
 // String::String(_In_ const std::wstring & str)
-BEGIN_TEST(String_Ctor_Uuid)
+BEGIN_TEST(String_Ctor_WStdString)
 {
     std::string wstd = VSTR("aaaa");
-    String str(uuid);
+    String str(wstd);
     String other(VSTR("aaaa"));
     WIN_ASSERT_EQUAL(other, str, L"std::wstring ctor did not parse properly.");
 }

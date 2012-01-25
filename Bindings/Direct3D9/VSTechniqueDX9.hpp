@@ -34,7 +34,7 @@ namespace VoodooShader
             friend class VSPassDX9;
 
         public:
-            VSTechniqueDX9(_In_ VSEffectDX9 * pEffect, _In_ LPD3DXEFFECT pDXEffect, _In_ D3DXHANDLE pTechHandle);
+            VSTechniqueDX9(_In_ VSEffectDX9 * pEffect, _In_ D3DXHANDLE pTechHandle);
             ~VSTechniqueDX9();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;

@@ -29,8 +29,8 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSTechniqueDX9
         DeclareDebugCache();
 
-        VSTechniqueDX9::VSTechniqueDX9(VSEffectDX9 * pEffect, LPD3DXEFFECT pDXEffect, D3DXHANDLE pTechHandle) :
-            m_Refs(0), m_Effect(pEffect), m_DXEffect(pDXEffect), m_DXHandle(pTechHandle)
+        VSTechniqueDX9::VSTechniqueDX9(VSEffectDX9 * pEffect, D3DXHANDLE pTechHandle) :
+            m_Refs(0), m_Effect(pEffect), m_DXHandle(pTechHandle)
         {
             if (!m_Effect)
             {
@@ -39,25 +39,21 @@ namespace VoodooShader
 
             m_Core = m_Effect->GetCore();
 
-            if (!m_DXEffect)
-            {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware effect."), nullptr);
-            }
-            else if (!m_DXHandle)
+            if (!m_DXHandle)
             {
                 Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware handle."), nullptr);
             }
 
             D3DXTECHNIQUE_DESC desc;
             ZeroMemory(&desc, sizeof(D3DXTECHNIQUE_DESC));
-            if (FAILED(pDXEffect->GetTechniqueDesc(pTechHandle, &desc)))
+            if (FAILED(m_Effect->m_DXEffect->GetTechniqueDesc(m_DXHandle, &desc)))
             {
                 Throw(VOODOO_CORE_NAME, VSTR("Unable to get technique description."), m_Core);
             }
 
             m_Name = desc.Name;
 
-            if (FAILED(m_DXEffect->ValidateTechnique(m_DXHandle)))
+            if (FAILED(m_Effect->m_DXEffect->ValidateTechnique(m_DXHandle)))
             {
                 Throw(VOODOO_CORE_NAME, VSTR("Unable to validate technique."), m_Core);
             }

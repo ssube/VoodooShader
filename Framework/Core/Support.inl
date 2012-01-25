@@ -60,8 +60,11 @@ inline static FILE * WINAPI GetVoodooGlobalLog()
 /**
  * Logs a message to the Voodoo Shader global log (located in the user directory). These are for simple, vital messages,
  * such as hooks being matched or core files not being found.
+ *
+ * @param   msg     The format string to use for the log message.
+ * @param   ...     Arguments to the format string.
  */
-inline static void WINAPI GlobalLog(_In_ LPTSTR msg, ...)
+inline static void WINAPI GlobalLog(_In_ _Printf_format_string_ LPTSTR msg, ...)
 {
     va_list args;
     va_start(args, msg);
@@ -79,8 +82,9 @@ inline static void WINAPI GlobalLog(_In_ LPTSTR msg, ...)
 /**
  * Display a formatted error message.
  * 
- * @param msg Format string for the message.
- * @param ... Format arguments.
+ * @param   errorCode The code of the error, a unique number.
+ * @param   msg     Format string for the message.
+ * @param   ...     Format arguments.
  */
 inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format_string_ LPTSTR msg, ...)
 {

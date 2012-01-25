@@ -87,7 +87,10 @@ namespace VoodooShader
             VOODOO_METHOD_(void, PushState)();
             VOODOO_METHOD_(void, PopState)();
 
-        private:
+        private:            
+            // Internals
+            LPDIRECT3DTEXTURE9 Impl_CreateTexture(TextureDesc & desc, DWORD usage, D3DFORMAT format);
+
             mutable uint32_t m_Refs;
             ICore * m_Core;
 
