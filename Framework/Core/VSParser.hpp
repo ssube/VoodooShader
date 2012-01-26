@@ -30,7 +30,6 @@ namespace VoodooShader
     {
     public:
         VSParser(_In_ ICore * pCore);
-        ~VSParser();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -58,6 +57,7 @@ namespace VoodooShader
         // Private these to prevent copying internally (external libs never will).
         VSParser(const VSParser & other);
         VSParser & operator=(const VSParser & other);
+        ~VSParser();
 
         String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) const;
 

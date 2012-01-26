@@ -60,7 +60,6 @@ namespace VoodooShader
             PropertyMap m_Properties;
             PassVector m_Passes;
 
-            LPD3DXEFFECT m_DXEffect;
             D3DXHANDLE m_DXHandle;
         };
     }

@@ -93,7 +93,7 @@ namespace VoodooShader
 
                 try
                 {
-                    VSTechniqueDX9 * technique = new VSTechniqueDX9(this, m_DXEffect, techHandle);
+                    VSTechniqueDX9 * technique = new VSTechniqueDX9(this, techHandle);
                     m_Techniques.push_back(technique);
                     if (!m_DefaultTechnique)
                     {
@@ -323,7 +323,18 @@ namespace VoodooShader
                 return VSFERR_INVALIDPARAMS;
             }
 
-            if (SUCCEEDED(m_DXEffect->SetTechnique(pTechnique->m_DXHandle)))
+            VSTechniqueDX9 * pTechDX = nullptr;
+            if (FAILED(pTechnique->QueryInterface(CLSID_VSTechniqueDX9, (IObject**)&pTechDX)))
+            {                
+                m_Core->GetLogger()->LogMessage
+                (
+                    VSLog_CoreError, VOODOO_CORE_NAME,
+                    StringFormat(VSTR("Technique %1% is not a valid technique from this binding.")) << pTechnique
+                );
+                return VSFERR_INVALIDPARAMS;
+            }
+
+            if (SUCCEEDED(m_DXEffect->SetTechnique(pTechDX->m_DXHandle)))
             {
                 m_DefaultTechnique = pTechnique;
                 return VSF_OK;

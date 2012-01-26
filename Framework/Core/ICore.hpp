@@ -108,14 +108,14 @@ namespace VoodooShader
          *      prototype takes a list of variants, allowing a variety of parameters while retaining safety (this will be
          *      changed to a map of variants in the future, once a map class is added).
          */
-        VOODOO_METHOD(AddEvent)(Uuid event, Functions::CallbackFunc func) PURE;
+        VOODOO_METHOD(OnEvent)(Uuid event, Functions::CallbackFunc func) PURE;
         /**
          * Removes a callback from an event on this core. The callback will no longer be notified when the event is called.
          *
          * @param   event   The Uuid of the event to remove from.
          * @param   func    The callback function to remove.
          *
-         * @pre ICore::AddEvent() must be called with the same parameters.
+         * @pre ICore::OnEvent() must be called with the same parameters.
          */
         VOODOO_METHOD(DropEvent)(Uuid event, Functions::CallbackFunc func) PURE;
         /**

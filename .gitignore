@@ -18,6 +18,7 @@ Resources/Installers/Output/*
 [Dd]ependencies/*/*
 [Dd]ebug
 [Rr]elease
+VoodooPaths.props
 
 #Build version file
 Framework/Core/Version_Build.hpp

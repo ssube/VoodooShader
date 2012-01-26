@@ -46,7 +46,6 @@ namespace VoodooShader
 
     public:
         VSHookManager(_In_ ICore * pCore);
-        ~VSHookManager();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -62,6 +61,7 @@ namespace VoodooShader
         // Private these to prevent copying internally (external libs never will).
         VSHookManager(const VSHookManager & other);
         VSHookManager & operator=(const VSHookManager & other);
+        ~VSHookManager();
 
         mutable uint32_t m_Refs;
         ICore * m_Core;

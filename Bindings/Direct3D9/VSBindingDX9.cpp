@@ -204,6 +204,15 @@ namespace VoodooShader
             return pParam;
         }
 
+        D3DFORMAT DepthFormats[] =
+        {
+            (D3DFORMAT)MAKEFOURCC('I','N','T','Z'),
+            (D3DFORMAT)MAKEFOURCC('D','F','2','4'),
+            (D3DFORMAT)MAKEFOURCC('D','F','1','6'),
+            (D3DFORMAT)MAKEFOURCC('R','A','W','Z'),
+            (D3DFORMAT)0
+        };
+
         VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTexture)(CONST String & name, TextureDesc desc)
         {
             if (!m_Device)
@@ -215,45 +224,36 @@ namespace VoodooShader
             if ((desc.Usage & VSTexFlag_AutoMip) > 0) usage |= D3DUSAGE_AUTOGENMIPMAP;
             if ((desc.Usage & VSTexFlag_Dynamic) > 0) usage |= D3DUSAGE_DYNAMIC;
             if ((desc.Usage & VSTexFlag_Target) > 0) usage |= D3DUSAGE_RENDERTARGET;
+            
+            LPDIRECT3DTEXTURE9 texture = nullptr;
 
             if (desc.Format == VSFmt_DMax)
             {
-                LPDIRECT3DTEXTURE9 texture = Impl_CreateTexture(desc, usage, FOURCC('I','N','T','Z'));
-                if (texture)
+                uint32_t index = 0;
+                while (!texture && DepthFormats[index] != 0)
                 {
-                    VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
-                    return pTexture;
+                    texture = Impl_CreateTexture(desc, usage, DepthFormats[index]);
+                    ++index;
                 }
-                texture = Impl_CreateTexture(desc, usage, FOURCC('D','F','2','4'));
-                if (texture)
-                {
-                    VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
-                    return pTexture;
-                }
-                texture = Impl_CreateTexture(desc, usage, FOURCC('D','F','1','6'));
-                if (texture)
-                {
-                    VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
-                    return pTexture;
-                }
-                texture = Impl_CreateTexture(desc, usage, FOURCC('R','A','W','Z'));
-                if (texture)
-                {
-                    VSTextureDX9 * pTexture = new VSTextureDX9(this, name, texture);
-                    return pTexture;
-                }
-                return nullptr;
             }
-
-            D3DFORMAT format = ConverterDX9::ToD3DFormat(desc.Format);
-            if (format == D3DFMT_UNKNOWN)
+            else
             {
-                return nullptr;
+                D3DFORMAT format = ConverterDX9::ToD3DFormat(desc.Format);
+                if (format == D3DFMT_UNKNOWN)
+                {
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                        StringFormat("Unable to convert texture format %1%.") << desc.Format);
+
+                    return nullptr;
+                }
+
+                texture = Impl_CreateTexture(desc, usage, format);
             }
 
-            LPDIRECT3DTEXTURE9 texture = Impl_CreateTexture(desc, usage, format);
             if (!texture)
             {
+                m_Core->GetLogger()->LogMessage(VSLog_BindError, VOODOO_D3D9_NAME,
+                    StringFormat("Unable to create texture %1% from %2%.") << name << desc);
                 return nullptr;
             }
 
@@ -261,15 +261,13 @@ namespace VoodooShader
             return pTexture;
         }
 
-        VOODOO_METHODDEF_(LPDIRECT3DTEXTURE9, VSBindingDX9::Impl_CreateTexture)(TextureDesc & desc, DWORD usage, D3DFORMAT format)
+        LPDIRECT3DTEXTURE9 VSBindingDX9::Impl_CreateTexture(TextureDesc & desc, DWORD usage, D3DFORMAT format)
         {
             LPDIRECT3DTEXTURE9 texture = nullptr;
             HRESULT hr = m_Device->CreateTexture(desc.Size.X, desc.Size.Y, desc.Levels, 
                 usage, format, D3DPOOL_DEFAULT, &texture, nullptr);
             if (FAILED(hr))
             {
-                m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
-                    StringFormat("Failed to create texture '%1%'.") << name);
                 return nullptr;
             } 
             else

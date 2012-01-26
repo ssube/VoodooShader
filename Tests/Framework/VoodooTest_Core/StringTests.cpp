@@ -134,7 +134,7 @@ END_TEST;
 // String::String(_In_ const std::wstring & str)
 BEGIN_TEST(String_Ctor_WStdString)
 {
-    std::string wstd = VSTR("aaaa");
+    std::wstring wstd(VSTR("aaaa"));
     String str(wstd);
     String other(VSTR("aaaa"));
     WIN_ASSERT_EQUAL(other, str, L"std::wstring ctor did not parse properly.");
@@ -227,7 +227,7 @@ BEGIN_TEST(String_ToString)
 END_TEST;
 
 // String::std::string ToStringA() const
-BEGIN_TEST(String_ToString)
+BEGIN_TEST(String_ToStringA)
 {
     LPCSTR test = "testing";
     String str(L"testing");

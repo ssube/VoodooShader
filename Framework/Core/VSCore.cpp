@@ -477,7 +477,7 @@ namespace VoodooShader
         return VSF_OK;
     }
 
-    VOODOO_METHODDEF(VSCore::AddEvent)(Uuid event, Functions::CallbackFunc func)
+    VOODOO_METHODDEF(VSCore::OnEvent)(Uuid event, Functions::CallbackFunc func)
     {
         try
         {

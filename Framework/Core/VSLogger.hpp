@@ -42,7 +42,6 @@ namespace VoodooShader
     {
     public:
         VSLogger(ICore * pCore);
-        ~VSLogger();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -65,6 +64,7 @@ namespace VoodooShader
         // Private these to prevent copying internally (external libs never will).
         VSLogger(const VSLogger & other);
         VSLogger & operator=(const VSLogger & other);
+        ~VSLogger();
 
         mutable uint32_t m_Refs;
         ICore * m_Core;

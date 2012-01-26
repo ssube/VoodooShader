@@ -46,7 +46,6 @@ namespace VoodooShader
 
     public:
         VSCore(uint32_t version);
-        ~VSCore();
 
         // IObject
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -60,7 +59,7 @@ namespace VoodooShader
         VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
         VOODOO_METHOD(Reset)();
 
-        VOODOO_METHOD(AddEvent)(Uuid event, Functions::CallbackFunc func);
+        VOODOO_METHOD(OnEvent)(Uuid event, Functions::CallbackFunc func);
         VOODOO_METHOD(DropEvent)(Uuid event, Functions::CallbackFunc func);
         VOODOO_METHOD(CallEvent)(Uuid event, uint32_t count, _In_opt_count_(count) Variant * pArgs);
 
@@ -83,6 +82,7 @@ namespace VoodooShader
         // Private these to prevent copying internally (external libs never will).
         VSCore(const VSCore & other);
         VSCore & operator=(const VSCore & other);
+        ~VSCore();
 
         mutable uint32_t m_Refs;
         uint32_t m_Version;

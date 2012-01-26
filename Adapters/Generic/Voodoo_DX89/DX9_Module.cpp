@@ -67,7 +67,7 @@ const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(VoodooShader::ICore
     if (!pCore) return nullptr;
     gpVoodooCore = pCore;
 
-    pCore->AddEvent(VoodooShader::EventIds::Finalize, &FinalizeEvent);
+    pCore->OnEvent(VoodooShader::EventIds::Finalize, &FinalizeEvent);
 
     static const VoodooShader::Version dx9version = VOODOO_VERSION_STRUCT(DX89);
     return &dx9version;

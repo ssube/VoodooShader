@@ -30,7 +30,6 @@ namespace VoodooShader
     {
     public:
         VSModuleManager(_In_ ICore * pCore);
-        ~VSModuleManager();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -54,6 +53,7 @@ namespace VoodooShader
         // Private these to prevent copying internally (external libs never will).
         VSModuleManager(const VSModuleManager & other);
         VSModuleManager & operator=(const VSModuleManager & other);
+        ~VSModuleManager();
 
         mutable uint32_t m_Refs;
         ICore * m_Core;
