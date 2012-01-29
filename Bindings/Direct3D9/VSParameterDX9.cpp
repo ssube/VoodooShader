@@ -608,76 +608,19 @@ namespace VoodooShader
             D3DXHANDLE mipA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texmip");
             D3DXHANDLE rttA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texrtt");
             D3DXHANDLE fmtA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texfmt");
-            D3DXHANDLE srcA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texsrc");
-            if (!nameA || !dimA || !fmtA)
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    StringFormat("Texture parameter %1% has texture create flag set but is missing required parameters.") << m_Name);
-                return;
-            }
+            D3DXHANDLE srcA  = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texsrc");
+            if (srcA && nameA)
+            {                LPCSTR nameStr = NULL;
+                if (FAILED(m_Effect->m_DXEffect->GetString(nameA, &nameStr)))
+                {
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                        StringFormat("Unable to get texture name from parameter %1%.") << m_Name);
+                    return;
+                }
 
-            LPCSTR nameStr = NULL;
-            if (FAILED(m_Effect->m_DXEffect->GetString(nameA, &nameStr)))
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    StringFormat("Unable to get texture name from parameter %1%.") << m_Name);
-                return;
-            }
+                m_Core->GetLogger()->LogMessage(VSLog_CoreInfo, VOODOO_D3D9_NAME, 
+                    StringFormat("Loading texture %1% for parameter %2%.") << nameStr << m_Name);
 
-            DECLARE_AND_ZERO(D3DXVECTOR4, dimVec);
-            if (FAILED(m_Effect->m_DXEffect->GetVector(dimA, &dimVec)))
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    StringFormat("Unable to get texture dimensions from parameter %1%.") << m_Name);
-                return;
-            }
-
-            UInt3 dim = {(uint32_t)dimVec.x, (uint32_t)dimVec.y, (uint32_t)dimVec.z};
-
-            LPCSTR fmtStr = NULL;
-            if (FAILED(m_Effect->m_DXEffect->GetString(fmtA, &fmtStr)))
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    StringFormat("Unable to get texture format from parameter %1%.") << m_Name);
-                return;
-            }
-
-            TextureFormat fmt = Converter::ToTextureFormat(String(fmtStr).GetData());
-            if (fmt == VSFmt_Unknown)
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    StringFormat("Unknown texture format on parameter %1%.") << m_Name);
-                return;
-            }            
-
-            BOOL mipB = FALSE;
-            m_Effect->m_DXEffect->GetBool(mipA, &mipB);
-            uint32_t mip = (mipB == TRUE) ? 0 : 1;
-
-            BOOL rttB = TRUE;
-            m_Effect->m_DXEffect->GetBool(rttA, &rttB);
-            TextureFlags rtt = (rttB == TRUE) ? VSTexFlag_Target : VSTexFlag_None;
-
-            TextureDesc desc = {dim, mip, rtt, fmt};
-
-            m_Core->GetLogger()->LogMessage(VSLog_CoreInfo, VOODOO_CORE_NAME, 
-                StringFormat("Creating texture %1% as %2% for parameter %3%.") << nameStr << desc << m_Name);
-
-            ITexture * pTex = m_Core->CreateTexture(nameStr, desc);
-            if (!pTex)
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    StringFormat("Unable to create texture for parameter %1%.") << m_Name);
-                return;
-            }
-            else
-            {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
-                    StringFormat("Successfully created texture for parameter %1%.") << m_Name);
-            }
-
-            if (srcA)
-            {
                 LPCSTR srcStr = nullptr;
                 if (FAILED(m_Effect->m_DXEffect->GetString(srcA, &srcStr)) || !srcStr)
                 {
@@ -701,22 +644,70 @@ namespace VoodooShader
                         StringFormat("Unable to open texture file %1%.") << srcStr);
                     return;
                 }
-
-                TextureRegion region;
-                ZeroMemory(&region, sizeof(TextureRegion));
-                CopyMemory(&region, &desc, sizeof(TextureDesc));
-
-                D3DXHANDLE oriA = m_Effect->m_DXEffect->GetAnnotationByName(m_DXHandle, "vs_texori");
-                if (oriA)
+            } 
+            else if (nameA || dimA || fmtA)
+            {
+                LPCSTR nameStr = NULL;
+                if (FAILED(m_Effect->m_DXEffect->GetString(nameA, &nameStr)))
                 {
-                    D3DXVECTOR4 oriVec;
-                    if (SUCCEEDED(m_Effect->m_DXEffect->GetVector(oriA, &oriVec)))
-                    {
-                        region.Origin.X = (uint32_t)oriVec.x;
-                        region.Origin.Y = (uint32_t)oriVec.y;
-                        region.Origin.Z = (uint32_t)oriVec.z;
-                    }
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                        StringFormat("Unable to get texture name from parameter %1%.") << m_Name);
+                    return;
                 }
+
+                DECLARE_AND_ZERO(D3DXVECTOR4, dimVec);
+                if (FAILED(m_Effect->m_DXEffect->GetVector(dimA, &dimVec)))
+                {
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                        StringFormat("Unable to get texture dimensions from parameter %1%.") << m_Name);
+                    return;
+                }
+
+                UInt3 dim = {(uint32_t)dimVec.x, (uint32_t)dimVec.y, (uint32_t)dimVec.z};
+
+                LPCSTR fmtStr = NULL;
+                if (FAILED(m_Effect->m_DXEffect->GetString(fmtA, &fmtStr)))
+                {
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                        StringFormat("Unable to get texture format from parameter %1%.") << m_Name);
+                    return;
+                }
+
+                TextureFormat fmt = Converter::ToTextureFormat(String(fmtStr).GetData());
+                if (fmt == VSFmt_Unknown)
+                {
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                        StringFormat("Unknown texture format on parameter %1%.") << m_Name);
+                    return;
+                }            
+
+                BOOL mipB = FALSE;
+                m_Effect->m_DXEffect->GetBool(mipA, &mipB);
+                uint32_t mip = (mipB == TRUE) ? 0 : 1;
+
+                BOOL rttB = TRUE;
+                m_Effect->m_DXEffect->GetBool(rttA, &rttB);
+                TextureFlags rtt = (rttB == TRUE) ? VSTexFlag_Target : VSTexFlag_None;
+
+                TextureDesc desc = {dim, mip, rtt, fmt};
+
+                m_Core->GetLogger()->LogMessage(VSLog_CoreInfo, VOODOO_CORE_NAME, 
+                    StringFormat("Creating texture %1% as %2% for parameter %3%.") << nameStr << desc << m_Name);
+
+                ITexture * pTex = m_Core->CreateTexture(nameStr, desc);
+                if (!pTex)
+                {
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                        StringFormat("Unable to create texture for parameter %1%.") << m_Name);
+                    return;
+                }
+                else
+                {
+                    m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                        StringFormat("Successfully created texture for parameter %1%.") << m_Name);
+                }            } else {
+                m_Core->GetLogger()->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                    StringFormat("Texture parameter %1% has texture create flag set but is missing required parameters.") << m_Name);
             }
         }
     }

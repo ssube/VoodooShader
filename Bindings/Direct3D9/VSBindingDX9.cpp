@@ -36,6 +36,11 @@ namespace VoodooShader
         VSBindingDX9::VSBindingDX9(_In_ ICore * pCore)
             : m_Refs(0), m_Core(pCore), m_Device(nullptr)
         {
+            // Start up DevIL for D3D loading
+            ilInit();
+            iluInit();
+            ilutInit();
+
             if (ilutRenderer(ILUT_DIRECT3D9) != IL_TRUE)
             {
                 pCore->GetLogger()->LogMessage(VSLog_ModError, VOODOO_D3D9_NAME, 
@@ -278,18 +283,18 @@ namespace VoodooShader
 
         VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTextureFromFile)(CONST String & name, IFile * pFile)
         {
-            if (!pFile || !m_Device || !m_ILUT)
+            if (!pFile || !m_Device) // || !m_ILUT)
             {
                 return nullptr;
             }
 
             LPDIRECT3DTEXTURE9 texture = nullptr;
-            //if (ilutD3D9TexFromFile(m_Device, pFile->GetPath().GetData(), &texture) != IL_TRUE)
-            //{
-            //    m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
-            //        StringFormat("Failed to load texture '%1%' from file '%2%'.") << name << pFile->GetPath());
-            //    return nullptr;
-            //}
+            if (ilutD3D9TexFromFile(m_Device, pFile->GetPath().GetData(), &texture) != IL_TRUE)
+            {
+                m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
+                    StringFormat("Failed to load texture '%1%' from file '%2%'.") << name << pFile->GetPath());
+                return nullptr;
+            }
 
             ITexture * pTexture = new VSTextureDX9(this, name, texture);
             return pTexture;
