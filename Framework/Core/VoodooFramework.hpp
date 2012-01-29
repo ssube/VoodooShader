@@ -78,8 +78,12 @@
 
 #if !defined(VOODOO_EXPORT)
 #   define VOODOO_API __declspec(dllimport)
+#   define VOODOO_EXPORT_REGION 1
+#   define VOODOO_INTERNAL_REGION 0
 #else
 #   define VOODOO_API __declspec(dllexport)
+#   define VOODOO_EXPORT_REGION 0
+#   define VOODOO_INTERNAL_REGION 1
 #endif
 
 #define VOODOO_PUBLIC_FUNC VOODOO_API VOODOO_CALLTYPE
@@ -102,9 +106,10 @@
 
 #include "Converter.hpp"
 #include "Exception.hpp"
-#include "StringFormat.hpp"
 #include "Regex.hpp"
+#include "Stream.hpp"
 #include "String.hpp"
+#include "StringFormat.hpp"
 
 #include "IObject.hpp"
 #include "IBinding.hpp"
