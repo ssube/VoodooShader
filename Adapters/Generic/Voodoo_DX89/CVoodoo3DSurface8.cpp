@@ -20,6 +20,7 @@
 #pragma once
 
 #include "CVoodoo3DSurface8.hpp"
+#include "CVoodoo3DDevice8.hpp"
 
 #include "DX9_Version.hpp"
 
@@ -28,8 +29,20 @@ namespace VoodooShader
     namespace VoodooDX8
     {
         CVoodoo3DSurface8::CVoodoo3DSurface8(CVoodoo3DDevice8 * pDevice, IDirect3DSurface9 * pRealSurface) :
-            m_RealDevice(pDevice), m_RealSurface(pRealSurface)
-        { }
+            m_Refs(0), m_Device(pDevice), m_RealSurface(pRealSurface)
+        {
+            if (m_RealSurface) m_RealSurface->AddRef();
+            if (m_Device) m_Device->AddRef();
+        }
+
+        CVoodoo3DSurface8::~CVoodoo3DSurface8()
+        {
+            if (m_Device) m_Device->Release();
+            m_Device = nullptr;
+
+            if (m_RealSurface) m_RealSurface->Release();
+            m_RealSurface = nullptr;
+        }
 
         /* IUnknown methods */
         HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::QueryInterface(REFIID riid, void **ppvObj)
@@ -38,27 +51,24 @@ namespace VoodooShader
         }
         ULONG STDMETHODCALLTYPE CVoodoo3DSurface8::AddRef()
         {
-            return m_RealSurface->AddRef();
+            return ++m_Refs;
         }
         ULONG STDMETHODCALLTYPE CVoodoo3DSurface8::Release()
         {
-            ULONG refCount = m_RealSurface->Release();
+            ULONG count = --m_Refs;
 
-            if (refCount == 0)
+            if (count == 0)
             {
                 delete this;
-                return 0;
             }
-            else
-            {
-                return refCount;
-            }
+
+            return count;
         }
 
         /* IDirect3DSurface8 methods */
         HRESULT STDMETHODCALLTYPE CVoodoo3DSurface8::GetDevice(IDirect3DDevice8 **ppDevice)
         {
-            (*ppDevice) = (IDirect3DDevice8 *)m_RealDevice;
+            (*ppDevice) = (IDirect3DDevice8 *)m_Device;
             return D3D_OK;
         }
 

@@ -200,6 +200,7 @@ namespace VoodooShader
             STDMETHOD(VSSetRealDevice)(IDirect3DDevice9 * pDev);
 
         private:
+            UINT m_Refs;
             /**
              * A pointer to the true underlying IDirect3DDevice9 object wrapped by this
              * CVoodoo3D8 interface.

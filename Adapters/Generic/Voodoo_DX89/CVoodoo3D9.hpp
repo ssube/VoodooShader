@@ -105,8 +105,9 @@ namespace VoodooShader
             STDMETHOD(VSSetRealObject)(IDirect3D9 * pObj);
 
         private:
-            UINT m_SdkVersion;
+            UINT m_Refs;
             IDirect3D9 * m_RealObject;
+            UINT m_SdkVersion;
         };
     }
 }

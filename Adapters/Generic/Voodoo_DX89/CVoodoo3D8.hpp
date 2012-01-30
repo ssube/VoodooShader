@@ -44,6 +44,7 @@ namespace VoodooShader
         {
         public:
             CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObj);
+            ~CVoodoo3D8();
 
             /*** IUnknown methods ***/
             STDMETHOD(QueryInterface)(REFIID riid, void** ppvObj);
@@ -86,8 +87,9 @@ namespace VoodooShader
             STDMETHOD(VSSetRealObject)(IDirect3D9 * pObj);
 
         private:
-            UINT m_SdkVersion;
+            UINT m_Refs;
             IDirect3D9 * m_RealObject;
+            UINT m_SdkVersion;
             std::vector<D3DCAPS8> m_Caps;
         };
     }

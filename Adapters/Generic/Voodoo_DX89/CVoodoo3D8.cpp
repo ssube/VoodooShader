@@ -35,8 +35,15 @@ namespace VoodooShader
          * The default, public constructor for CVoodoo3D objects.
          */
         CVoodoo3D8::CVoodoo3D8(UINT sdkVersion, IDirect3D9 * pRealObject) :
-            m_SdkVersion(sdkVersion), m_RealObject(pRealObject)
+            m_Refs(0), m_RealObject(pRealObject), m_SdkVersion(sdkVersion)
         {
+            if (m_RealObject) m_RealObject->AddRef();
+        }
+
+        CVoodoo3D8::~CVoodoo3D8()
+        {
+            if (m_RealObject) m_RealObject->Release();
+            m_RealObject = nullptr;
         }
 
         // IUnknown methods
@@ -47,22 +54,19 @@ namespace VoodooShader
 
         ULONG STDMETHODCALLTYPE CVoodoo3D8::AddRef()
         {
-            return m_RealObject->AddRef();
+            return ++m_Refs;
         }
 
         ULONG STDMETHODCALLTYPE CVoodoo3D8::Release()
         {
-            ULONG refCount = m_RealObject->Release();
+            ULONG count = --m_Refs;
 
-            if (refCount == 0)
+            if (count == 0)
             {
                 delete this;
-                return 0;
             }
-            else
-            {
-                return refCount;
-            }
+
+            return count;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3D8::CheckDepthStencilMatch

@@ -23,6 +23,7 @@
 // CVoodoo3D8
 #include "CVoodoo3DSurface8.hpp"
 #include "CVoodoo3DTexture8.hpp"
+#include "CVoodoo3D8.hpp"
 // Voodoo DX89
 #include "DX9_Version.hpp"
 // Voodoo Core
@@ -37,12 +38,18 @@ namespace VoodooShader
             m_CurrentVertexShader(0), m_CurrentPixelShader(0), m_LastBaseIndex(0)
         {
             VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME, StringFormat("CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p") << realDevice << this);
+
+            if (m_RealDevice) m_RealDevice->AddRef();
+            if (m_Object) m_Object->AddRef();
         }
 
         CVoodoo3DDevice8::~CVoodoo3DDevice8()
         {
-            m_RealDevice = nullptr;
+            if (m_Object) m_Object->Release();
             m_Object = nullptr;
+
+            if (m_RealDevice) m_RealDevice->Release();
+            m_RealDevice = nullptr;
         }
 
         // IUnknown methods
@@ -52,25 +59,22 @@ namespace VoodooShader
         }
         ULONG STDMETHODCALLTYPE CVoodoo3DDevice8::AddRef()
         {
-            ULONG refCount = m_RealDevice->AddRef();
+            ULONG count = ++m_Refs;
 
-            VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME, StringFormat("CVoodoo3DDevice8::AddRef() == %u") << refCount);
+            VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME, StringFormat("CVoodoo3DDevice8::AddRef() == %u") << count);
 
-            return refCount;
+            return count;
         }
         ULONG STDMETHODCALLTYPE CVoodoo3DDevice8::Release()
         {
-            ULONG refCount = m_RealDevice->Release();
+            ULONG count = --m_Refs;
 
-            if (refCount == 0)
+            if (count == 0)
             {
                 delete this;
-                return 0;
             }
-            else
-            {
-                return refCount;
-            }
+
+            return count;
         }
 
         // IDirect3DDevice8 methods

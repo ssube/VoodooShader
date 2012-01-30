@@ -81,7 +81,7 @@
       <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);Voodoo_Core.lib;d3dx9.lib;ILUT.lib;shell32.lib;shlwapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);Voodoo_Core.lib;d3dx9d.lib;DevIL.lib;ILU.lib;ILUT.lib;shell32.lib;shlwapi.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_D3D9.def</ModuleDefinitionFile>
       <EntryPointSymbol>
@@ -97,7 +97,7 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);Voodoo_Core.lib;d3dx9.lib;ILUT.lib;shell32.lib;shlwapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);Voodoo_Core.lib;d3dx9.lib;DevIL.lib;ILU.lib;ILUT.lib;shell32.lib;shlwapi.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_D3D9.def</ModuleDefinitionFile>
     </Link>

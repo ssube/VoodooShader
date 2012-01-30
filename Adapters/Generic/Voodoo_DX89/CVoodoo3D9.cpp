@@ -32,11 +32,14 @@ namespace VoodooShader
     namespace VoodooDX9
     {
         CVoodoo3D9::CVoodoo3D9(UINT sdkVersion, IDirect3D9 * pD3D) :
-            m_SdkVersion(sdkVersion), m_RealObject(pD3D)
-        { }
+            m_Refs(0), m_RealObject(pD3D), m_SdkVersion(sdkVersion)
+        {
+            m_RealObject->AddRef();
+        }
 
         CVoodoo3D9::~CVoodoo3D9()
         {
+            if (m_RealObject) m_RealObject->Release();
             m_RealObject = nullptr;
         }
 
@@ -50,12 +53,12 @@ namespace VoodooShader
 
         ULONG STDMETHODCALLTYPE CVoodoo3D9::AddRef()
         {
-            return m_RealObject->AddRef();
+            return ++m_Refs;
         }
 
         ULONG STDMETHODCALLTYPE CVoodoo3D9::Release()
         {
-            ULONG count = m_RealObject->Release();
+            ULONG count = --m_Refs;
 
             if (count == 0)
             {

@@ -318,6 +318,7 @@ namespace VoodooShader
             STDMETHOD(VSDrawFSQuad)();
 
         private:
+            UINT m_Refs;
             CVoodoo3D9 * m_Object;
             IDirect3DDevice9 * m_RealDevice;
 
