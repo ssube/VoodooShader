@@ -90,6 +90,7 @@ namespace VoodooShader
             if (!ppD3D9) return D3DERR_INVALIDCALL;
 
             *ppD3D9 = (IDirect3D9*)m_Object;
+            (*ppD3D9)->AddRef();
 
             return D3D_OK;
         }
@@ -831,12 +832,14 @@ namespace VoodooShader
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::VSSetupDevice()
         {
+            if (!m_RealDevice) return D3DERR_INVALIDCALL;
+
             if (m_VertDecl) m_VertDecl->Release();
             if (m_VertDeclT) m_VertDeclT->Release();
 
             LoggerRef logger = gpVoodooCore->GetLogger();
 
-            Variant deviceVar = CreateVariant(this);
+            Variant deviceVar = CreateVariant(m_RealDevice);
             VoodooResult vr = gpVoodooCore->Bind(VSProfile_D3D9, 1, &deviceVar);
             assert(SUCCEEDED(vr));
 

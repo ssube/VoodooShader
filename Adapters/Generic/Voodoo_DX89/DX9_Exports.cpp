@@ -138,7 +138,7 @@ IDirect3D8 * WINAPI VSDirect3DCreate8(UINT sdkVersion)
 #ifdef _DEBUG
         if (!IsDebuggerPresent())
         {
-            MessageBox(NULL, TEXT("Caught D3D8 loading process."), TEXT("Voodoo Shader DX8.9 Debug"), MB_OK | MB_ICONINFORMATION);
+            //MessageBox(NULL, TEXT("Caught D3D8 loading process."), TEXT("Voodoo Shader DX8.9 Debug"), MB_OK | MB_ICONINFORMATION);
         }
 #endif
 
@@ -182,7 +182,7 @@ IDirect3D9 * WINAPI VSDirect3DCreate9(UINT sdkVersion)
 #ifdef _DEBUG
         if (!IsDebuggerPresent())
         {
-            MessageBox(NULL, TEXT("Caught D3D9 loading process."), TEXT("Voodoo Shader DX8.9 Debug"), MB_OK | MB_ICONINFORMATION);
+            //MessageBox(NULL, TEXT("Caught D3D9 loading process."), TEXT("Voodoo Shader DX8.9 Debug"), MB_OK | MB_ICONINFORMATION);
         }
 #endif
 
