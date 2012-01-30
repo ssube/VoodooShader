@@ -8,10 +8,10 @@ Default topic=index.html
 Index file=index.hhk
 Language=0x409 English (United States)
 Binary TOC=YES
-Title=Voodoo Shader Framework
+Title=&nbsp;
 
 [WINDOWS]
-main="Voodoo Shader Framework","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x10387e,,,,,,,,0
+main="&nbsp;","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x10387e,,,,,,,,0
 
 [FILES]
 _build_version_8hpp_source.html
@@ -40,8 +40,6 @@ _regex_8cpp_source.html
 _regex_8hpp_source.html
 _core_2resource_8h_source.html
 _file_system_2resource_8h_source.html
-_hook_manager_2resource_8h_source.html
-_logger_2resource_8h_source.html
 _stream_8hpp_source.html
 _string_8cpp_source.html
 _string_8hpp_source.html
@@ -72,12 +70,6 @@ _file_system_8hpp_source.html
 _filesystem___version_8hpp_source.html
 _w_file_8cpp_source.html
 _w_file_system_8cpp_source.html
-_hook___version_8hpp_source.html
-_hook_manager_8cpp_source.html
-_hook_manager_8hpp_source.html
-_logger_8cpp_source.html
-_logger_8hpp_source.html
-_logger___version_8hpp_source.html
 _build_version_8hpp.html
 _converter_8cpp.html
 _converter_8hpp.html
@@ -109,8 +101,6 @@ _regex_8cpp.html
 _regex_8hpp.html
 _core_2resource_8h.html
 _file_system_2resource_8h.html
-_hook_manager_2resource_8h.html
-_logger_2resource_8h.html
 _stream_8hpp.html
 _string_8cpp.html
 _string_8hpp.html
@@ -141,12 +131,6 @@ _file_system_8hpp.html
 _filesystem___version_8hpp.html
 _w_file_8cpp.html
 _w_file_system_8cpp.html
-_hook___version_8hpp.html
-_hook_manager_8cpp.html
-_hook_manager_8hpp.html
-_logger_8cpp.html
-_logger_8hpp.html
-_logger___version_8hpp.html
 voodoo_spec_plugin.html
 voodoo_spec_adapter.html
 voodoo_quality.html
@@ -180,13 +164,9 @@ group__voodoo__tutorials.html
 group__voodoo__structs.html
 group__voodoo__core__null.html
 group__voodoo__module__wfilesystem.html
-group__voodoo__module__ehhook.html
-group__voodoo__module__xmllogger.html
 struct_hook_def.html
 struct_hook_def-members.html
-class_v_s_e_h_hook_manager.html
 class_v_s_w_file.html
-class_v_s_xml_logger.html
 namespace_voodoo_shader.html
 class_voodoo_shader_1_1_converter.html
 class_voodoo_shader_1_1_converter-members.html
@@ -282,17 +262,13 @@ class_voodoo_shader_1_1_v_s_module_manager.html
 class_voodoo_shader_1_1_v_s_module_manager-members.html
 class_voodoo_shader_1_1_v_s_parser.html
 class_voodoo_shader_1_1_v_s_parser-members.html
-namespace_voodoo_shader_1_1_easy_hook.html
 namespace_voodoo_shader_1_1_event_ids.html
 namespace_voodoo_shader_1_1_functions.html
 namespace_voodoo_shader_1_1_prop_ids.html
 namespace_voodoo_shader_1_1_voodoo_w_f_s.html
-namespace_voodoo_shader_1_1_xml_logger.html
 dir_01e264dd7619ef20c2be8f77dd731219.html
 dir_7c9179117eec6d12efc9171ddbc50076.html
 dir_5016d2c55f760ce9fb99cb5412b1b3be.html
-dir_a4c0bc4b277a81108dbd0e5664ead5d1.html
-dir_d3166ddcbdbb04c61ade8a46bd346d93.html
 index.html
 pages.html
 modules.html
@@ -388,16 +364,3 @@ bc_s.png
 doxygen.png
 closed.png
 open.png
-ftv2blank.png
-ftv2doc.png
-ftv2folderclosed.png
-ftv2folderopen.png
-ftv2lastnode.png
-ftv2link.png
-ftv2mlastnode.png
-ftv2mnode.png
-ftv2node.png
-ftv2plastnode.png
-ftv2pnode.png
-ftv2vertline.png
-ftv2splitbar.png

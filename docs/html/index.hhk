@@ -13,11 +13,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#abecf8458df48f97e329912242b0c4e4e"><param name="Name" value="VoodooShader::VSHookManager"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#ad02b510190225987c3f2a10a9b0bceec"><param name="Name" value="VoodooShader::VSParser"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#aaf633a589a5572c8103ce35768947f2f"><param name="Name" value="AddEvent"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#aaf633a589a5572c8103ce35768947f2f"><param name="Name" value="VoodooShader::ICore"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a30e73d3cee84e86f5642a46ae5197aa5"><param name="Name" value="VoodooShader::VSCore"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_file_system.html#a19b955b695ddd1441173158713641657"><param name="Name" value="AddPath"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_file_system.html#a19b955b695ddd1441173158713641657"><param name="Name" value="VoodooShader::IFileSystem"></OBJECT>
@@ -64,55 +59,28 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#ab8eb4304c38e04f69f142aca7b2df49e"><param name="Name" value="Exports.cpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#ab8b0875a8b316b021959901467a558bc"><param name="Name" value="FileSystem.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#a65a1f42e4ddc732d381c2c15c01bd451"><param name="Name" value="HookManager.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#a65a1f42e4ddc732d381c2c15c01bd451"><param name="Name" value="HookManager.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#aa376280850da89afd1db03d7a7b5b05b"><param name="Name" value="Logger.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#aa376280850da89afd1db03d7a7b5b05b"><param name="Name" value="Logger.hpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#ab8eb4304c38e04f69f142aca7b2df49e"><param name="Name" value="VoodooInternal.hpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#ab8eb4304c38e04f69f142aca7b2df49e"><param name="Name" value="VoodooShader"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#a65a1f42e4ddc732d381c2c15c01bd451"><param name="Name" value="VoodooShader::EasyHook"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#ab8b0875a8b316b021959901467a558bc"><param name="Name" value="VoodooShader::VoodooWFS"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#aa376280850da89afd1db03d7a7b5b05b"><param name="Name" value="VoodooShader::XmlLogger"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#ab8b0875a8b316b021959901467a558bc"><param name="Name" value="WFileSystem.cpp"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#afbfbd00636bda7b1549d4109247408ce"><param name="Name" value="API_ClassCreate"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#afbfbd00636bda7b1549d4109247408ce"><param name="Name" value="Exports.cpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#acfc1b138c00ef97150cf82318be8b1bf"><param name="Name" value="FileSystem.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae5b449a0df06633ca9b63a1016ec2d31"><param name="Name" value="HookManager.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae5b449a0df06633ca9b63a1016ec2d31"><param name="Name" value="HookManager.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a3454ead5354533a1c821968e814567cb"><param name="Name" value="Logger.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a3454ead5354533a1c821968e814567cb"><param name="Name" value="Logger.hpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#afbfbd00636bda7b1549d4109247408ce"><param name="Name" value="VoodooInternal.hpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#afbfbd00636bda7b1549d4109247408ce"><param name="Name" value="VoodooShader"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae5b449a0df06633ca9b63a1016ec2d31"><param name="Name" value="VoodooShader::EasyHook"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#acfc1b138c00ef97150cf82318be8b1bf"><param name="Name" value="VoodooShader::VoodooWFS"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a3454ead5354533a1c821968e814567cb"><param name="Name" value="VoodooShader::XmlLogger"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#acfc1b138c00ef97150cf82318be8b1bf"><param name="Name" value="WFileSystem.cpp"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#a9cea9d587cfff33c405def14de261c48"><param name="Name" value="API_ClassInfo"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#a9cea9d587cfff33c405def14de261c48"><param name="Name" value="Exports.cpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#adcaf764ddd98aabf6352fed515b358f4"><param name="Name" value="FileSystem.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae99b845a110539b943449b868d4d12ee"><param name="Name" value="HookManager.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae99b845a110539b943449b868d4d12ee"><param name="Name" value="HookManager.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a07f4c121cbfad3e9c0c7a3b5a98ad5e0"><param name="Name" value="Logger.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a07f4c121cbfad3e9c0c7a3b5a98ad5e0"><param name="Name" value="Logger.hpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#a9cea9d587cfff33c405def14de261c48"><param name="Name" value="VoodooInternal.hpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#a9cea9d587cfff33c405def14de261c48"><param name="Name" value="VoodooShader"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae99b845a110539b943449b868d4d12ee"><param name="Name" value="VoodooShader::EasyHook"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#adcaf764ddd98aabf6352fed515b358f4"><param name="Name" value="VoodooShader::VoodooWFS"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a07f4c121cbfad3e9c0c7a3b5a98ad5e0"><param name="Name" value="VoodooShader::XmlLogger"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#adcaf764ddd98aabf6352fed515b358f4"><param name="Name" value="WFileSystem.cpp"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#abcf87a179f84eeb5e5f4d55ac803d4ae"><param name="Name" value="API_ModuleVersion"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#abcf87a179f84eeb5e5f4d55ac803d4ae"><param name="Name" value="HookManager.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#abcf87a179f84eeb5e5f4d55ac803d4ae"><param name="Name" value="HookManager.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a052640155aad0d3d6464764e4df90afd"><param name="Name" value="Logger.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a052640155aad0d3d6464764e4df90afd"><param name="Name" value="Logger.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#abcf87a179f84eeb5e5f4d55ac803d4ae"><param name="Name" value="VoodooShader::EasyHook"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a052640155aad0d3d6464764e4df90afd"><param name="Name" value="VoodooShader::XmlLogger"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#a5327e49b23f3999407680464d44bfb78"><param name="Name" value="API_PluginInit"></OBJECT>
   <UL>
@@ -255,11 +223,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#a6652e64c0b89642758fcf645575cf44e"><param name="Name" value="VoodooShader"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#a6652e64c0b89642758fcf645575cf44e"><param name="Name" value="VSCore.hpp"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#aaf970bb41492fcd93932a603ffede753"><param name="Name" value="clsid_VSEHHookManager"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#aaf970bb41492fcd93932a603ffede753"><param name="Name" value="HookManager.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#aaf970bb41492fcd93932a603ffede753"><param name="Name" value="VoodooShader::EasyHook"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__core__null.html#ga3d89f32e4a60fb1a015c99bfc4538203"><param name="Name" value="CLSID_VSFileSystem"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__core__null.html#ga3d89f32e4a60fb1a015c99bfc4538203"><param name="Name" value="voodoo_core_null"></OBJECT>
@@ -297,11 +260,6 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a8d1c604c4c5403f294dc4ccc655df852"><param name="Name" value="VoodooShader::VoodooWFS"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#a8d1c604c4c5403f294dc4ccc655df852"><param name="Name" value="WFileSystem.cpp"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a947b63cd9281529add24d6fcabc2c58c"><param name="Name" value="clsid_VSXmlLogger"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a947b63cd9281529add24d6fcabc2c58c"><param name="Name" value="Logger.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a947b63cd9281529add24d6fcabc2c58c"><param name="Name" value="VoodooShader::XmlLogger"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__collections.html"><param name="Name" value="Collections"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__types.html#ga4871e628819fb762ea0e8f36dccebebd"><param name="Name" value="Color"></OBJECT>
@@ -691,7 +649,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#ac1c8851e226ae9e88408d4070f5780e5"><param name="Name" value="VoodooShader::VSModuleManager"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a7c9c8067a07242fcc71a86cc36becc6c"><param name="Name" value="VoodooShader::VSParser"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a3ea38e6e56ec208d9494c54da5af240b"><param name="Name" value="GetCount"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a4be2713daadd946945f2681d2817dc04"><param name="Name" value="GetCount"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_string.html#ad2f2b3e8314b5cf05748bc161b202a13"><param name="Name" value="GetData"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_effect.html#a36e69958420757a6b0395bca8ac17e13"><param name="Name" value="GetDefaultTechnique"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_parameter.html#ae0d5d1e80ecad5bcd06b674ea1c05074"><param name="Name" value="GetDesc"></OBJECT>
@@ -738,7 +696,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#ab092e0580d614186832d9a291b2867d3"><param name="Name" value="VoodooShader::ICore"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#ab8f92f3432e6a7e5b02e7afb5a01df8e"><param name="Name" value="VoodooShader::VSCore"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a4472d36ba4aff9404165525404e8cf33"><param name="Name" value="GetMatch"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#af6bd220a36c47b302bd4b1c57ed50f6e"><param name="Name" value="GetMatch"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_module_manager.html#a4df9e4bb3f7c87f4438138127fb13a75"><param name="Name" value="GetModule"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_module_manager.html#a4df9e4bb3f7c87f4438138127fb13a75"><param name="Name" value="VoodooShader::IModuleManager"></OBJECT>
@@ -802,18 +760,6 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_support_8inl.html#a88011dd18b3818ec3786f616a5d58154"><param name="Name" value="GetVoodooPath"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_support_8inl.html#ae5a14b094eda6ea4fd0ddab32eb65529"><param name="Name" value="GlobalLog"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_support_8inl.html#a61e286a11f708c21d04bfb0e266ea60a"><param name="Name" value="HHOOKDEF"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#ga2ffd2b1769595ff7b5b616c86b34abb8"><param name="Name" value="VOODOO_HOOK_AUTHOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#ga40e858b611b49afb00340ef5a3e736e2"><param name="Name" value="VOODOO_HOOK_LIBID"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#gaef77c1b5850dc11967c5e401adb5e893"><param name="Name" value="VOODOO_HOOK_NAME"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#gab1faeb7b3891bfff4cc354003fa914d9"><param name="Name" value="VOODOO_HOOK_PRETTYNAME"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#gadb4e038fceb3fdf302090a1a8d6e81ae"><param name="Name" value="VOODOO_HOOK_VERSION_BUILD"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#ga004692e556818972ca24204f2242d695"><param name="Name" value="VOODOO_HOOK_VERSION_ID"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#ga37be088d7ebc189c33568761fb54b8e6"><param name="Name" value="VOODOO_HOOK_VERSION_MAJOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#ga38946f1cf6a9930ea67ff5861ddca32f"><param name="Name" value="VOODOO_HOOK_VERSION_MINOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook___version_8hpp.html#ga644c2974616601b649ffde7ae6e4c36c"><param name="Name" value="VOODOO_HOOK_VERSION_PATCH"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="struct_hook_def.html"><param name="Name" value="HookDef"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="struct_hook_def.html#ab18205ba803c002925eadebb2ce8ccb4"><param name="Name" value="Active"></OBJECT>
@@ -822,25 +768,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="struct_hook_def.html#ae37a10ee1c2b8608e06545259dc4d902"><param name="Name" value="Target"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_support_8inl.html#ad9c1b20bce7465efefabd4f5eb35ee87"><param name="Name" value="HookFromKey"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8cpp.html"><param name="Name" value="HookManager.cpp"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8cpp.html#a65a1f42e4ddc732d381c2c15c01bd451"><param name="Name" value="API_ClassCount"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8cpp.html#ae5b449a0df06633ca9b63a1016ec2d31"><param name="Name" value="API_ClassCreate"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8cpp.html#ae99b845a110539b943449b868d4d12ee"><param name="Name" value="API_ClassInfo"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8cpp.html#abcf87a179f84eeb5e5f4d55ac803d4ae"><param name="Name" value="API_ModuleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8cpp.html#aaf970bb41492fcd93932a603ffede753"><param name="Name" value="clsid_VSEHHookManager"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8cpp.html#afd1536e5cff48fb95786bc9c95bd8ae6"><param name="Name" value="moduleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8cpp.html#ae0c3da804f8ae4a25d8a879d8b5f3a04"><param name="Name" value="name_VSEHHookManager"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html"><param name="Name" value="HookManager.hpp"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#a65a1f42e4ddc732d381c2c15c01bd451"><param name="Name" value="API_ClassCount"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#ae5b449a0df06633ca9b63a1016ec2d31"><param name="Name" value="API_ClassCreate"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#ae99b845a110539b943449b868d4d12ee"><param name="Name" value="API_ClassInfo"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#abcf87a179f84eeb5e5f4d55ac803d4ae"><param name="Name" value="API_ModuleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#a31aa5b186d9930592013d83372996923"><param name="Name" value="VOODOO_IMPORT"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9"><param name="Name" value="VOODOO_NO_PUGIXML"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gaba113590a1c99a363419462f9eaac588"><param name="Name" value="HookManagerRef"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gaba113590a1c99a363419462f9eaac588"><param name="Name" value="voodoo_references"></OBJECT>
@@ -1077,37 +1004,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a5417216d929a24ab6e49df55076cf2b0"><param name="Name" value="VoodooShader::ICore"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a41e83282e4b2c3b4c668ef7f9a214c59"><param name="Name" value="VoodooShader::VSCore"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8cpp.html"><param name="Name" value="Logger.cpp"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8cpp.html#aa376280850da89afd1db03d7a7b5b05b"><param name="Name" value="API_ClassCount"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8cpp.html#a3454ead5354533a1c821968e814567cb"><param name="Name" value="API_ClassCreate"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8cpp.html#a07f4c121cbfad3e9c0c7a3b5a98ad5e0"><param name="Name" value="API_ClassInfo"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8cpp.html#a052640155aad0d3d6464764e4df90afd"><param name="Name" value="API_ModuleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8cpp.html#a947b63cd9281529add24d6fcabc2c58c"><param name="Name" value="clsid_VSXmlLogger"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8cpp.html#aa7a2d0dc34d000f6aa74737ce6f3fbac"><param name="Name" value="moduleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8cpp.html#a5d70d30b87000c758e20dbadae07fb3c"><param name="Name" value="name_VSXmlLogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html"><param name="Name" value="Logger.hpp"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html#aa376280850da89afd1db03d7a7b5b05b"><param name="Name" value="API_ClassCount"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html#a3454ead5354533a1c821968e814567cb"><param name="Name" value="API_ClassCreate"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html#a07f4c121cbfad3e9c0c7a3b5a98ad5e0"><param name="Name" value="API_ClassInfo"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html#a052640155aad0d3d6464764e4df90afd"><param name="Name" value="API_ModuleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html#a31aa5b186d9930592013d83372996923"><param name="Name" value="VOODOO_IMPORT"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9"><param name="Name" value="VOODOO_NO_PUGIXML"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#gab3639d1c667e5b4d6dae62a4a54f2777"><param name="Name" value="VOODOO_LOGGER_AUTHOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#gac62a9585402526846fc9dec5b7809a3b"><param name="Name" value="VOODOO_LOGGER_LIBID"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#gaed5f040d6abd714329b7143fa69ed1f1"><param name="Name" value="VOODOO_LOGGER_NAME"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#gab0027b0f9a1590ff7862bff3d7e4a801"><param name="Name" value="VOODOO_LOGGER_PRETTYNAME"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#ga9c33775e9a566d327282ae9fc16e024d"><param name="Name" value="VOODOO_LOGGER_VERSION_BUILD"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#ga9fa5f8793e3731fd6ee2f7b94290685b"><param name="Name" value="VOODOO_LOGGER_VERSION_ID"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#gaf74f7f8edda7e969198eddbb58a4002d"><param name="Name" value="VOODOO_LOGGER_VERSION_MAJOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#ga4f470b2d849e1cfc305217c689bfdbf0"><param name="Name" value="VOODOO_LOGGER_VERSION_MINOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger___version_8hpp.html#gaa1b524e75f5c061db327fc9f702a204d"><param name="Name" value="VOODOO_LOGGER_VERSION_PATCH"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gaa6eefbb5a1345c88dbb027ad63ca6c61"><param name="Name" value="LoggerRef"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gaa6eefbb5a1345c88dbb027ad63ca6c61"><param name="Name" value="voodoo_references"></OBJECT>
@@ -1231,13 +1127,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gad11284d9a417e30df0cc5d09d53f29ff"><param name="Name" value="VoodooShader"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gad11284d9a417e30df0cc5d09d53f29ff"><param name="Name" value="VoodooTypes.hpp"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#afd1536e5cff48fb95786bc9c95bd8ae6"><param name="Name" value="moduleVersion"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#afd1536e5cff48fb95786bc9c95bd8ae6"><param name="Name" value="HookManager.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#aa7a2d0dc34d000f6aa74737ce6f3fbac"><param name="Name" value="Logger.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#afd1536e5cff48fb95786bc9c95bd8ae6"><param name="Name" value="VoodooShader::EasyHook"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#aa7a2d0dc34d000f6aa74737ce6f3fbac"><param name="Name" value="VoodooShader::XmlLogger"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="struct_hook_def.html#a930b257eb6500ab21ccaba57440ddd14"><param name="Name" value="Name"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="struct_hook_def.html#a930b257eb6500ab21ccaba57440ddd14"><param name="Name" value="HookDef"></OBJECT>
@@ -1248,11 +1137,6 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#ab0e382a5c9dd7109160e3f8638f54047"><param name="Name" value="Exports.cpp"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#ab0e382a5c9dd7109160e3f8638f54047"><param name="Name" value="VoodooShader"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae0c3da804f8ae4a25d8a879d8b5f3a04"><param name="Name" value="name_VSEHHookManager"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae0c3da804f8ae4a25d8a879d8b5f3a04"><param name="Name" value="HookManager.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae0c3da804f8ae4a25d8a879d8b5f3a04"><param name="Name" value="VoodooShader::EasyHook"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html#a7812cff33dd52ebc945d6bf118a4d6b3"><param name="Name" value="name_VSFileSystem"></OBJECT>
   <UL>
@@ -1274,11 +1158,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#ad73a91a4591ec2a56a7d78defe3aafe6"><param name="Name" value="VoodooShader::VoodooWFS"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_voodoo_w_f_s.html#ad73a91a4591ec2a56a7d78defe3aafe6"><param name="Name" value="WFileSystem.cpp"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a5d70d30b87000c758e20dbadae07fb3c"><param name="Name" value="name_VSXmlLogger"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a5d70d30b87000c758e20dbadae07fb3c"><param name="Name" value="Logger.cpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a5d70d30b87000c758e20dbadae07fb3c"><param name="Name" value="VoodooShader::XmlLogger"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_string.html#a943847d43671c04e1643b6758cc17f28"><param name="Name" value="Npos"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__core__null.html"><param name="Name" value="Null Implementations"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gacafb1a8bb78ad1956331bde063f60d92"><param name="Name" value="ObjectRef"></OBJECT>
@@ -1286,6 +1165,11 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gacafb1a8bb78ad1956331bde063f60d92"><param name="Name" value="voodoo_references"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gacafb1a8bb78ad1956331bde063f60d92"><param name="Name" value="VoodooShader"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__references.html#gacafb1a8bb78ad1956331bde063f60d92"><param name="Name" value="VoodooTypes.hpp"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a647f01832904965e187171eb6c02eb84"><param name="Name" value="OnEvent"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a647f01832904965e187171eb6c02eb84"><param name="Name" value="VoodooShader::ICore"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a3bd3b7453647b45d2d69ac5eee3bb56e"><param name="Name" value="VoodooShader::VSCore"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_file.html#a9663e30bbbf8c2f8448d39cc0734d5ef"><param name="Name" value="Open"></OBJECT>
   <UL>
@@ -1311,6 +1195,13 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_stream_state.html#a0ea83f6f69283f8d189923143b691eae"><param name="Name" value="VoodooShader::StreamState"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_string.html#a77dfd43d6c21f08fcaee3e7407ff6b08"><param name="Name" value="VoodooShader::String"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a74076016fea9c39b1998e8151ccba033"><param name="Name" value="VoodooShader::VSCore"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html#a7a4443a842f3f7d988d0df89cc45abc5"><param name="Name" value="VoodooShader::VSFileSystem"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#af7e1ee410fc9f52d0704406b6d9c2b5d"><param name="Name" value="VoodooShader::VSHookManager"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html#af925a4aae0e83a071ab953dfeadcbeda"><param name="Name" value="VoodooShader::VSLogger"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html#a12f7f630d0084ef6d281871325575e24"><param name="Name" value="VoodooShader::VSModule"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#a1f418f77926d9acadf99c69c1b851ccd"><param name="Name" value="VoodooShader::VSModuleManager"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a0a20105d17f20c116ad84443f9763aca"><param name="Name" value="VoodooShader::VSParser"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_string.html#a746ebd26146ec9cd09da3d3c7a72dabe"><param name="Name" value="operator>="></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_string.html#ac7cfcff10fc590090e067051a1e72317"><param name="Name" value="operator>"></OBJECT>
@@ -1959,9 +1850,7 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="voodoo_spec_plugin.html"><param name="Name" value="Voodoo Shader Plugin Specifications"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__types.html"><param name="Name" value="Voodoo Shader Types"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html"><param name="Name" value="Voodoo/EHHook"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__wfilesystem.html"><param name="Name" value="Voodoo/WFileSystem"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html"><param name="Name" value="Voodoo/XmlLogger"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros__decl.html#ga64a3622e4b9bb13e6e7a451bfaa84a48"><param name="Name" value="VOODOO_API"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros__decl.html#ga64a3622e4b9bb13e6e7a451bfaa84a48"><param name="Name" value="voodoo_macros_decl"></OBJECT>
@@ -2211,6 +2100,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83ca983d1f7eeb1e51f17281b79daf8f9d71"><param name="Name" value="VSVar_State"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83cacf4de196a147288c036272a1b1a49aa8"><param name="Name" value="VSVar_System"></OBJECT>
   </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#a62f03e91afb4da4416eb5ded765c6d62"><param name="Name" value="VOODOO_EXPORT_REGION"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga2f84bf06835ede40be262d0cf2fb5296"><param name="Name" value="VOODOO_FILESYSTEM_AUTHOR"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga2f84bf06835ede40be262d0cf2fb5296"><param name="Name" value="Filesystem_Version.hpp"></OBJECT>
@@ -2267,57 +2157,7 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_version_8hpp.html#acbd5fcc009f70d2a24f03418af8d821e"><param name="Name" value="VOODOO_GLOBAL_VERSION_MAJOR"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_version_8hpp.html#acd615012a7d35c22cbe2bed3fc6a85a6"><param name="Name" value="VOODOO_GLOBAL_VERSION_MINOR"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_version_8hpp.html#ae757f33d6accba924710b75207ddd73b"><param name="Name" value="VOODOO_GLOBAL_VERSION_PATCH"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga2ffd2b1769595ff7b5b616c86b34abb8"><param name="Name" value="VOODOO_HOOK_AUTHOR"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga2ffd2b1769595ff7b5b616c86b34abb8"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga2ffd2b1769595ff7b5b616c86b34abb8"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga40e858b611b49afb00340ef5a3e736e2"><param name="Name" value="VOODOO_HOOK_LIBID"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga40e858b611b49afb00340ef5a3e736e2"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga40e858b611b49afb00340ef5a3e736e2"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893"><param name="Name" value="VOODOO_HOOK_NAME"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gab1faeb7b3891bfff4cc354003fa914d9"><param name="Name" value="VOODOO_HOOK_PRETTYNAME"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gab1faeb7b3891bfff4cc354003fa914d9"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gab1faeb7b3891bfff4cc354003fa914d9"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gadb4e038fceb3fdf302090a1a8d6e81ae"><param name="Name" value="VOODOO_HOOK_VERSION_BUILD"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gadb4e038fceb3fdf302090a1a8d6e81ae"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gadb4e038fceb3fdf302090a1a8d6e81ae"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga004692e556818972ca24204f2242d695"><param name="Name" value="VOODOO_HOOK_VERSION_ID"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga004692e556818972ca24204f2242d695"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga004692e556818972ca24204f2242d695"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga37be088d7ebc189c33568761fb54b8e6"><param name="Name" value="VOODOO_HOOK_VERSION_MAJOR"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga37be088d7ebc189c33568761fb54b8e6"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga37be088d7ebc189c33568761fb54b8e6"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga38946f1cf6a9930ea67ff5861ddca32f"><param name="Name" value="VOODOO_HOOK_VERSION_MINOR"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga38946f1cf6a9930ea67ff5861ddca32f"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga38946f1cf6a9930ea67ff5861ddca32f"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga644c2974616601b649ffde7ae6e4c36c"><param name="Name" value="VOODOO_HOOK_VERSION_PATCH"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga644c2974616601b649ffde7ae6e4c36c"><param name="Name" value="Hook_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga644c2974616601b649ffde7ae6e4c36c"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_file_system_8hpp.html#a31aa5b186d9930592013d83372996923"><param name="Name" value="VOODOO_IMPORT"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_file_system_8hpp.html#a31aa5b186d9930592013d83372996923"><param name="Name" value="FileSystem.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#a31aa5b186d9930592013d83372996923"><param name="Name" value="HookManager.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html#a31aa5b186d9930592013d83372996923"><param name="Name" value="Logger.hpp"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros__decl.html#ga4da6a669c83c1bfc5b3be471ea6a83b9"><param name="Name" value="VOODOO_INTERFACE"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros__decl.html#ga4da6a669c83c1bfc5b3be471ea6a83b9"><param name="Name" value="voodoo_macros_decl"></OBJECT>
@@ -2360,51 +2200,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__interfaces.html#ga61d04a3fb235257eb10b7a648399055e"><param name="Name" value="Reset"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__interfaces.html#ga71c6eaff2b611148d4ccd4cffce4e7f4"><param name="Name" value="ToString"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gab3639d1c667e5b4d6dae62a4a54f2777"><param name="Name" value="VOODOO_LOGGER_AUTHOR"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gab3639d1c667e5b4d6dae62a4a54f2777"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gab3639d1c667e5b4d6dae62a4a54f2777"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gac62a9585402526846fc9dec5b7809a3b"><param name="Name" value="VOODOO_LOGGER_LIBID"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gac62a9585402526846fc9dec5b7809a3b"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gac62a9585402526846fc9dec5b7809a3b"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1"><param name="Name" value="VOODOO_LOGGER_NAME"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gab0027b0f9a1590ff7862bff3d7e4a801"><param name="Name" value="VOODOO_LOGGER_PRETTYNAME"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gab0027b0f9a1590ff7862bff3d7e4a801"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gab0027b0f9a1590ff7862bff3d7e4a801"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga9c33775e9a566d327282ae9fc16e024d"><param name="Name" value="VOODOO_LOGGER_VERSION_BUILD"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga9c33775e9a566d327282ae9fc16e024d"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga9c33775e9a566d327282ae9fc16e024d"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga9fa5f8793e3731fd6ee2f7b94290685b"><param name="Name" value="VOODOO_LOGGER_VERSION_ID"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga9fa5f8793e3731fd6ee2f7b94290685b"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga9fa5f8793e3731fd6ee2f7b94290685b"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaf74f7f8edda7e969198eddbb58a4002d"><param name="Name" value="VOODOO_LOGGER_VERSION_MAJOR"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaf74f7f8edda7e969198eddbb58a4002d"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaf74f7f8edda7e969198eddbb58a4002d"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga4f470b2d849e1cfc305217c689bfdbf0"><param name="Name" value="VOODOO_LOGGER_VERSION_MINOR"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga4f470b2d849e1cfc305217c689bfdbf0"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga4f470b2d849e1cfc305217c689bfdbf0"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaa1b524e75f5c061db327fc9f702a204d"><param name="Name" value="VOODOO_LOGGER_VERSION_PATCH"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaa1b524e75f5c061db327fc9f702a204d"><param name="Name" value="Logger_Version.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaa1b524e75f5c061db327fc9f702a204d"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#a72d662c7ccc75a0622a25810d7561f0d"><param name="Name" value="VOODOO_INTERNAL_REGION"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros.html"><param name="Name" value="voodoo_macros"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros.html#ga52c6a8e70ab75842559c062432b7205a"><param name="Name" value="VOODOO_SDK_VERSION"></OBJECT>
@@ -2483,18 +2279,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be"><param name="Name" value="voodoo_macros_decl"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros__decl.html#gaf530cf20d7b36cf00eb562e2efe852be"><param name="Name" value="VoodooFramework.hpp"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html"><param name="Name" value="voodoo_module_ehhook"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga2ffd2b1769595ff7b5b616c86b34abb8"><param name="Name" value="VOODOO_HOOK_AUTHOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga40e858b611b49afb00340ef5a3e736e2"><param name="Name" value="VOODOO_HOOK_LIBID"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gaef77c1b5850dc11967c5e401adb5e893"><param name="Name" value="VOODOO_HOOK_NAME"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gab1faeb7b3891bfff4cc354003fa914d9"><param name="Name" value="VOODOO_HOOK_PRETTYNAME"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#gadb4e038fceb3fdf302090a1a8d6e81ae"><param name="Name" value="VOODOO_HOOK_VERSION_BUILD"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga004692e556818972ca24204f2242d695"><param name="Name" value="VOODOO_HOOK_VERSION_ID"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga37be088d7ebc189c33568761fb54b8e6"><param name="Name" value="VOODOO_HOOK_VERSION_MAJOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga38946f1cf6a9930ea67ff5861ddca32f"><param name="Name" value="VOODOO_HOOK_VERSION_MINOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__ehhook.html#ga644c2974616601b649ffde7ae6e4c36c"><param name="Name" value="VOODOO_HOOK_VERSION_PATCH"></OBJECT>
-  </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__wfilesystem.html"><param name="Name" value="voodoo_module_wfilesystem"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga2f84bf06835ede40be262d0cf2fb5296"><param name="Name" value="VOODOO_FILESYSTEM_AUTHOR"></OBJECT>
@@ -2506,23 +2290,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga5c744b657c91c9350fe9e4444309df97"><param name="Name" value="VOODOO_FILESYSTEM_VERSION_MAJOR"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__wfilesystem.html#ga62799880bd828289353280f5486401fe"><param name="Name" value="VOODOO_FILESYSTEM_VERSION_MINOR"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__wfilesystem.html#gab67ee615c7300bb54507d80143ac177a"><param name="Name" value="VOODOO_FILESYSTEM_VERSION_PATCH"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html"><param name="Name" value="voodoo_module_xmllogger"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gab3639d1c667e5b4d6dae62a4a54f2777"><param name="Name" value="VOODOO_LOGGER_AUTHOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gac62a9585402526846fc9dec5b7809a3b"><param name="Name" value="VOODOO_LOGGER_LIBID"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaed5f040d6abd714329b7143fa69ed1f1"><param name="Name" value="VOODOO_LOGGER_NAME"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gab0027b0f9a1590ff7862bff3d7e4a801"><param name="Name" value="VOODOO_LOGGER_PRETTYNAME"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga9c33775e9a566d327282ae9fc16e024d"><param name="Name" value="VOODOO_LOGGER_VERSION_BUILD"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga9fa5f8793e3731fd6ee2f7b94290685b"><param name="Name" value="VOODOO_LOGGER_VERSION_ID"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaf74f7f8edda7e969198eddbb58a4002d"><param name="Name" value="VOODOO_LOGGER_VERSION_MAJOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#ga4f470b2d849e1cfc305217c689bfdbf0"><param name="Name" value="VOODOO_LOGGER_VERSION_MINOR"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__module__xmllogger.html#gaa1b524e75f5c061db327fc9f702a204d"><param name="Name" value="VOODOO_LOGGER_VERSION_PATCH"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9"><param name="Name" value="VOODOO_NO_PUGIXML"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_hook_manager_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9"><param name="Name" value="HookManager.hpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="_logger_8hpp.html#a050e6ad7f917e7c68ee997116deba9e9"><param name="Name" value="Logger.hpp"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__macros__decl.html#ga5e73ef0ad4e5614cea6c0c7514ccafaf"><param name="Name" value="VOODOO_PUBLIC_FUNC"></OBJECT>
   <UL>
@@ -2792,8 +2559,10 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#ga64a3622e4b9bb13e6e7a451bfaa84a48"><param name="Name" value="VOODOO_API"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#ga0a3e5af0f45bff54944fe1b49baaba37"><param name="Name" value="VOODOO_CALLTYPE"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#ga58d5926d4e28ae4cd7db81a5e7fbe2c7"><param name="Name" value="VOODOO_CLASS"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#a62f03e91afb4da4416eb5ded765c6d62"><param name="Name" value="VOODOO_EXPORT_REGION"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#ga4da6a669c83c1bfc5b3be471ea6a83b9"><param name="Name" value="VOODOO_INTERFACE"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#gadcd19a6db969ade073c33d0ef63125bd"><param name="Name" value="VOODOO_INTERFACE_"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#a72d662c7ccc75a0622a25810d7561f0d"><param name="Name" value="VOODOO_INTERNAL_REGION"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#ga7078cec5070b544c069e44bdb066393e"><param name="Name" value="VOODOO_METHOD"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#ga2429390c4ff6a5f21db177976b9b9e8f"><param name="Name" value="VOODOO_METHOD_"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="_voodoo_framework_8hpp.html#a51e5c9b17f3ed89ae11a7f83ba5e3556"><param name="Name" value="VOODOO_METHODDEF"></OBJECT>
@@ -2822,16 +2591,6 @@
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_converter.html#a03186236d55cd563e1e8de0111cc4d68"><param name="Name" value="ToString"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_converter.html#ae0ce0481e276127ea94bd3a994b06e74"><param name="Name" value="ToTextureFormat"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html"><param name="Name" value="VoodooShader::EasyHook"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#a65a1f42e4ddc732d381c2c15c01bd451"><param name="Name" value="API_ClassCount"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae5b449a0df06633ca9b63a1016ec2d31"><param name="Name" value="API_ClassCreate"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae99b845a110539b943449b868d4d12ee"><param name="Name" value="API_ClassInfo"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#abcf87a179f84eeb5e5f4d55ac803d4ae"><param name="Name" value="API_ModuleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#aaf970bb41492fcd93932a603ffede753"><param name="Name" value="clsid_VSEHHookManager"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#afd1536e5cff48fb95786bc9c95bd8ae6"><param name="Name" value="moduleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_easy_hook.html#ae0c3da804f8ae4a25d8a879d8b5f3a04"><param name="Name" value="name_VSEHHookManager"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_event_ids.html"><param name="Name" value="VoodooShader::EventIds"></OBJECT>
   <UL>
@@ -2873,7 +2632,6 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html"><param name="Name" value="VoodooShader::ICore"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#aaf633a589a5572c8103ce35768947f2f"><param name="Name" value="AddEvent"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a6fe22471eac61572536bf3b38017d753"><param name="Name" value="AddRef"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#ad07f29075e216bc3da9b006a082a3381"><param name="Name" value="Bind"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a0e2aa350de7e2531a2ebd9ba0ddedbe3"><param name="Name" value="CallEvent"></OBJECT>
@@ -2891,6 +2649,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a8ff79b85773192eda84c66ccfdc42cf5"><param name="Name" value="GetTexture"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#aa3228d23a95ebf0065bb679b1c3f516f"><param name="Name" value="Init"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a5417216d929a24ab6e49df55076cf2b0"><param name="Name" value="LoadTexture"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a647f01832904965e187171eb6c02eb84"><param name="Name" value="OnEvent"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a49250cf48709b28b5f77e1491f1f1ef8"><param name="Name" value="QueryInterface"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a8914e5c32ac0d0976d55bf76a5815524"><param name="Name" value="Release"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_i_core.html#a515d36c9a64ae937d19b4033eb2f89ea"><param name="Name" value="RemoveParameter"></OBJECT>
@@ -3160,8 +2919,8 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html"><param name="Name" value="VoodooShader::RegexMatch"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a81d2e7db4e9d2be728e93ea538c44049"><param name="Name" value="Format"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a3ea38e6e56ec208d9494c54da5af240b"><param name="Name" value="GetCount"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a4472d36ba4aff9404165525404e8cf33"><param name="Name" value="GetMatch"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a4be2713daadd946945f2681d2817dc04"><param name="Name" value="GetCount"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#af6bd220a36c47b302bd4b1c57ed50f6e"><param name="Name" value="GetMatch"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#aeef54e6675bf8a2c781a76f272e3e877"><param name="Name" value="IsEmpty"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a6972356d6b5b01ea240014a13342a39d"><param name="Name" value="m_Impl"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_regex_match.html#a1f6f7620b7d2218c6c2a6a47f432ea6a"><param name="Name" value="Regex"></OBJECT>
@@ -3323,7 +3082,6 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html"><param name="Name" value="VoodooShader::VSCore"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a30e73d3cee84e86f5642a46ae5197aa5"><param name="Name" value="AddEvent"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a88772854bb744b6b4fd7e71b1928bcaf"><param name="Name" value="AddRef"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a76fae6d50531623e5e6465b6a8f6946b"><param name="Name" value="Bind"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#ae695313cb3c2e518ee2bb80c08425eb8"><param name="Name" value="CallEvent"></OBJECT>
@@ -3358,6 +3116,8 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a4f9a44dbdc140d8131c36f063a62058f"><param name="Name" value="m_Refs"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a50baa9a705aad3f8246dc50aa54b056b"><param name="Name" value="m_Textures"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a42e7b28d012878c0e55272949b2e9af2"><param name="Name" value="m_Version"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a3bd3b7453647b45d2d69ac5eee3bb56e"><param name="Name" value="OnEvent"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a74076016fea9c39b1998e8151ccba033"><param name="Name" value="operator="></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#aa7cf8c01d72f2be76ca834c5a971ab0b"><param name="Name" value="QueryInterface"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a94f52433e2e2713b8d9b507d26b81be3"><param name="Name" value="Release"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#a7158ba354f0826af352af437c4a95a98"><param name="Name" value="RemoveParameter"></OBJECT>
@@ -3375,6 +3135,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html#a2a3cb21de93689950f4f579e55740f1a"><param name="Name" value="GetFile"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html#aaea4f3ea6900655d0f687899e14426be"><param name="Name" value="m_Core"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html#a49f7b533f8efd40241e5da80aca42e83"><param name="Name" value="m_Refs"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html#a7a4443a842f3f7d988d0df89cc45abc5"><param name="Name" value="operator="></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html#a90e0ad24c99e30c98add4d736b04573f"><param name="Name" value="QueryInterface"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html#a2b83880e3f8be39071fc4701582073b9"><param name="Name" value="Release"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_file_system.html#ab499ba2473fe38eb31556bdc54d96938"><param name="Name" value="RemovePath"></OBJECT>
@@ -3393,6 +3154,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#a7637723233224204491f7bba49999a49"><param name="Name" value="m_Refs"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#a3a821e6473647bb9bb137698ae49baac"><param name="Name" value="m_ThreadCount"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#a2b7a344d36e5380bd964ff133cef018c"><param name="Name" value="m_ThreadIDs"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#af7e1ee410fc9f52d0704406b6d9c2b5d"><param name="Name" value="operator="></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#a626fe9005d86c97c8a9562779066acb7"><param name="Name" value="QueryInterface"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#a401d0a016344c6ffd7a516701dd02478"><param name="Name" value="Release"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_hook_manager.html#ab918d6a4e085d7f41d8baae2550fc186"><param name="Name" value="Remove"></OBJECT>
@@ -3417,6 +3179,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html#a8ade4d3eca502cb54441a6765ee45be9"><param name="Name" value="m_LogFile"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html#a1042ee947501c36ab95adad27f635dd6"><param name="Name" value="m_Refs"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html#a579946ca562f6cf3cb65ffa63c5711f5"><param name="Name" value="Open"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html#af925a4aae0e83a071ab953dfeadcbeda"><param name="Name" value="operator="></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html#a379820538166571f7b174ccac1810455"><param name="Name" value="QueryInterface"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html#ad76429fa4c3bc42226a48ecf59be9351"><param name="Name" value="Release"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_logger.html#a26038a6928eec9a48194211f0b763689"><param name="Name" value="SetFilter"></OBJECT>
@@ -3440,6 +3203,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html#aa3c7d5f93fe5262036903b9242413d7e"><param name="Name" value="m_Handle"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html#accf7cc89108b6e42272eb8b3b69a89fe"><param name="Name" value="m_PluginInit"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html#a145e3abfdc4af3734d044e704efb66a9"><param name="Name" value="m_Refs"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html#a12f7f630d0084ef6d281871325575e24"><param name="Name" value="operator="></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html#a7a329c2ff8d8db101cf6ed00e3075bfe"><param name="Name" value="PluginInit"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html#a9dbda1dea44cbb5a24e3ae20b409ca85"><param name="Name" value="QueryInterface"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module.html#ab20e17fff875b1e876a30f389f56b464"><param name="Name" value="Release"></OBJECT>
@@ -3463,6 +3227,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#a0346655638130b9441c02ae63d05ed9a"><param name="Name" value="m_ModuleNames"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#ab11ff6321349ebd2e011ed7f06f5cc4a"><param name="Name" value="m_Modules"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#a216328d154bc753dcd7177f11fe6ba4f"><param name="Name" value="m_Refs"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#a1f418f77926d9acadf99c69c1b851ccd"><param name="Name" value="operator="></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#ad7458d10ddc44c817f1aec1a4edeeb7d"><param name="Name" value="QueryInterface"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#a5f0a22fab595ef4272edd1cc72d6f50b"><param name="Name" value="Release"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_module_manager.html#a1bae771034369ce63f51943d805412bd"><param name="Name" value="ToString"></OBJECT>
@@ -3477,6 +3242,7 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#af546aa437bc2ea89e3489d5f6005b201"><param name="Name" value="m_Core"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a67f32dd3cd64cb90629a7b6ef3ab1dd0"><param name="Name" value="m_Refs"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a71101161076286935a88a6bf16bfa45c"><param name="Name" value="m_Variables"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a0a20105d17f20c116ad84443f9763aca"><param name="Name" value="operator="></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a4ed2c23404e7d45b64d19604fdb10028"><param name="Name" value="Parse"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a859d3e07a2936592d2826a72f02102e6"><param name="Name" value="ParseStringRaw"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a26fdaade66ae327887f33590626efca4"><param name="Name" value="QueryInterface"></OBJECT>
@@ -3496,16 +3262,6 @@
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a368b2f3418cb6e261acea0292b2a08cd"><param name="Name" value="VarMaxDepth"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a886fc3f96caee78de41d0bc0b9f2df87"><param name="Name" value="VSParser"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_parser.html#a499f44592f71bdc532e58306e7870e48"><param name="Name" value="~VSParser"></OBJECT>
-  </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html"><param name="Name" value="VoodooShader::XmlLogger"></OBJECT>
-  <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#aa376280850da89afd1db03d7a7b5b05b"><param name="Name" value="API_ClassCount"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a3454ead5354533a1c821968e814567cb"><param name="Name" value="API_ClassCreate"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a07f4c121cbfad3e9c0c7a3b5a98ad5e0"><param name="Name" value="API_ClassInfo"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a052640155aad0d3d6464764e4df90afd"><param name="Name" value="API_ModuleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a947b63cd9281529add24d6fcabc2c58c"><param name="Name" value="clsid_VSXmlLogger"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#aa7a2d0dc34d000f6aa74737ce6f3fbac"><param name="Name" value="moduleVersion"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader_1_1_xml_logger.html#a5d70d30b87000c758e20dbadae07fb3c"><param name="Name" value="name_VSXmlLogger"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespace_voodoo_shader.html"><param name="Name" value="VoodooShader"></OBJECT>
   <UL>
@@ -3809,7 +3565,6 @@
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="_v_s_core_8hpp.html"><param name="Name" value="VSCore.hpp"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_voodoo_shader_1_1_v_s_core.html#ab9259f9636b503a51a41a418a02fc81c"><param name="Name" value="VSCore"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_v_s_e_h_hook_manager.html"><param name="Name" value="VSEHHookManager"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__types__codes.html#ga8cb3f444eafbf19a649221d1f0525e88"><param name="Name" value="VSF_FAIL"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__types__codes.html#ga8cb3f444eafbf19a649221d1f0525e88"><param name="Name" value="voodoo_types_codes"></OBJECT>
@@ -4085,7 +3840,6 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83ca983d1f7eeb1e51f17281b79daf8f9d71"><param name="Name" value="VSVar_State"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__enums.html#gga0bdd161a02834f059ef7c545a757e83cacf4de196a147288c036272a1b1a49aa8"><param name="Name" value="VSVar_System"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="class_v_s_w_file.html"><param name="Name" value="VSWFile"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_v_s_xml_logger.html"><param name="Name" value="VSXmlLogger"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__types.html#ga60d203ec0923d9c465b143e944c07da6"><param name="Name" value="VUInt16"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__types.html#ga741fd4c4f9051ee4d72a0577cf65ba06"><param name="Name" value="VUInt32"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="group__voodoo__types.html#ga063ba3e756d9d18b14dfd8667ecae372"><param name="Name" value="VUInt8"></OBJECT>

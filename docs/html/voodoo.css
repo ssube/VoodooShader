@@ -57,7 +57,7 @@ h1, h2, h3, h4, #header, .tablist, .tablist a
 {
     color: #CCC;
     font-family: 'Droid Serif', serif;
-    text-shadow: 0 1px 1px rgba(255,255,255,0.25), 0 -1px 0 rgba(0,0,0,0.75);
+    text-shadow: 0 1px 1px rgba(255,255,255,0.15), 0 -1px 0 rgba(0,0,0,0.5);
 }
 
 ul
@@ -125,21 +125,21 @@ ul
 .tablist li.current
 {
     background: rgba(0,0,0,0.25);
-    background: linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
-    background: -moz-linear-gradient(top, rgba(0,0,0,0.45) 0%, rgba(64,64,64,0.15) 100%);
+    background: linear-gradient(top, rgba(0,0,0,0.60) 0%, rgba(48,48,48,0.15) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.60) 0%, rgba(48,48,48,0.15) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.60) 0%, rgba(48,48,48,0.15) 100%);
     border-left: 1px ridge #303030;
     border-left: 1px ridge rgba(32,32,32,0.5);
 }
 
 .tablist li.current:hover
 {
-    background: rgba(0,0,0,0.25);
-    background: linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
-    background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(64,64,64,0.15) 100%);
-    border-left: 1px ridge #000000;
-    border-left: 1px ridge rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.35);
+    background: linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, rgba(24,24,24,0.25) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, rgba(24,24,24,0.25) 100%);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 50%, rgba(24,24,24,0.25) 100%);
+    border-left: 1px ridge #202020;
+    border-left: 1px ridge rgba(24,24,24,0.5);
 }
 
 .tablist a
@@ -224,7 +224,7 @@ h3.version {
 
 div.qindex, div.navtab{
     background-color: #333;
-    border: 1px solid #A081DE;
+    border: 1px solid #B8B0CF;
     text-align: center;
     margin: 2px;
     padding: 2px;
@@ -297,21 +297,16 @@ pre.fragment {
 }
 
 div.ah {
-    background-color: black;
-    font-weight: bold;
-    color: #ffffff;
     margin-bottom: 3px;
     margin-top: 3px;
-    padding: 0.2em;
-    border: solid thin #333;
-    border-radius: 0.5em;
-    -webkit-border-radius: .5em;
-    -moz-border-radius: .5em;
-    box-shadow: 2px 2px 3px #999;
-    -webkit-box-shadow: 2px 2px 3px #999;
-    -moz-box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 2px;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#000),color-stop(0.3, #444));
-    background-image: -moz-linear-gradient(center top, #eee 0%, #444 40%, #000);
+    background: #4D4D4D;
+    
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+    border: 1px solid #C2AEE9;
+    border: 1px solid rgba(194, 174, 233, 0.25);    
 }
 
 div.groupHeader {
@@ -327,8 +322,11 @@ div.groupText {
 
 div.contents 
 {
-    background: rgba(64,64,64,0.25);
+    background: rgba(64,64,64,0.75);
+    margin: 0px 20px;
     padding: 20px 40px;
+    border-left: 1px solid rgba(128,128,128,0.5);
+    border-right: 1px solid rgba(128,128,128,0.5);
 }
 
 td.indexkey {
@@ -376,6 +374,12 @@ div.center img {
 address.footer {
     text-align: right;
     padding-right: 12px;
+    margin-right: 20px;
+}
+
+address.footer small:after
+{
+    content: "; the Voodoo Shader project and this documentation are released under the GNU Lesser General Public License v3.";
 }
 
 img.footer {
@@ -394,7 +398,7 @@ span.keywordtype {
 }
 
 span.keywordflow {
-    color: #806FB0;
+    color: #908FB0;
 }
 
 span.comment {
@@ -469,10 +473,12 @@ hr {
     height: 0px;
     border: none;
     border-top: 1px solid #666;
+    margin-bottom: 10px;
 }
 
 hr.footer {
     height: 1px;
+    margin: 0px 20px;
 }
 
 /* @group Member Descriptions */
@@ -486,9 +492,8 @@ table.memberdecls {
 .mdescLeft, .mdescRight,
 .memItemLeft, .memItemRight,
 .memTemplItemLeft, .memTemplItemRight, .memTemplParams {
-    background-color: rgba(64,64,64,0.5);
+    background-color: rgba(96,96,96,0.5);
     border: none;
-    margin: 4px;
     padding: 1px 0 0 8px;
 }
 
@@ -554,16 +559,16 @@ table.memberdecls {
         background: url('../images/navbar.png') repeat-x;
         background: url('../images/navbar.png') repeat-x rgba(64,64,64,0.5);
         /* opera specific markup */
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+        /*box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);*/
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
         /* firefox specific markup */
-        -moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
+        /*-moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;*/
         -moz-border-radius-topright: 4px;
         -moz-border-radius-topleft: 4px;
         background: -moz-linear-gradient(center top, rgba(128,128,128,0.25) 0%, rgba(64,64,64,0.0) 40%, rgba(16,16,16,0.5) 95%), url('../images/bg.png') repeat rgba(64,64,64,0.5);
         /* webkit specific markup */
-        -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+        /*-webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);*/
         -webkit-border-top-right-radius: 4px;
         -webkit-border-top-left-radius: 4px;
         background: -webkit-gradient(linear,center top,center bottom,from(rgba(128,128,128,0.25)), color-stop(0.4,rgba(64,64,64,0.0)), color-stop(0.95,rgba(16,16,16,0.5))), url('../images/bg.png') repeat rgba(64,64,64,0.5);
@@ -578,16 +583,16 @@ table.memberdecls {
         /* opera specific markup */
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+        /*box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);*/
         /* firefox specific markup */
         -moz-border-radius-bottomleft: 4px;
         -moz-border-radius-bottomright: 4px;
-        -moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
+        /*-moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;*/
         background-image: -moz-linear-gradient(center top, rgba(64,64,64,0.5) 0%, rgba(64,64,64,0.5) 60%, rgba(48,48,48,0.5) 95%, rgba(32,32,32,0.5));
         /* webkit specific markup */
         -webkit-border-bottom-left-radius: 4px;
         -webkit-border-bottom-right-radius: 4px;
-        -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+        /*-webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);*/
         background-image: -webkit-gradient(linear,center top,center bottom,from(rgba(64,64,64,0.5)), color-stop(0.6,rgba(64,64,64,0.5)), color-stop(0.60,rgba(64,64,64,0.5)), color-stop(0.95,rgba(48,48,48,0.5)), to(rgba(32,32,32,0.5)));
 }
 
@@ -837,6 +842,7 @@ div.ingroups
     padding-left: 5px;
     width: 50%;
     text-align: left;
+    margin-left: 25px;
 }
 
 div.ingroups a
@@ -846,14 +852,16 @@ div.ingroups a
 
 div.header
 {
-    background: #444;
+    background: #404040;
+    background: rgba(96,96,96,0.5);
     margin:  0px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #222;
 }
 
 div.headertitle
 {
     padding: 5px 5px 5px 10px;
+    margin-left: 20px;
 }
 
 dl
@@ -867,12 +875,12 @@ dl.note, dl.warning, dl.attention, dl.pre, dl.post, dl.invariant, dl.deprecated,
         border-top: 1px solid;
         border-right: 1px solid;
         border-bottom: 1px solid;
-        padding: 0 0 0 6px;
+        padding: 0 0 6px 6px;
         margin: 12px 10px 12px 8px;
         
-    -webkit-border-radius: 0px 8px 8px 0px;
-    -moz-border-radius: 0px 8px 8px 0px;
-    border-radius: 0px 8px 8px 0px;
+    -webkit-border-radius: 0px 3px 3px 0px;
+    -moz-border-radius: 0px 3px 3px 0px;
+    border-radius: 0px 3px 3px 0px;
 }
 
 dl.note dt, dl.warning dt, dl.attention dt, dl.pre dt, dl.post dt, dl.invariant dt, dl.deprecated dt, dl.todo dt, dl.test dt, dl.bug dt
@@ -888,7 +896,7 @@ dl.deprecated dt:before, dl.todo dt:before, dl.test dt:before, dl.bug dt:before
 
 dl.note
 {
-        border-color: #B0E0E6;
+        border-color: #C0C0C6;
 }
 
 dl.note dt:before
@@ -918,7 +926,7 @@ dl.attention dt:before
 
 dl.pre, dl.invariant
 {
-        border-color: #00D030;
+        border-color: #30D060;
 }
 
 dl.pre dt:before
@@ -928,7 +936,7 @@ dl.pre dt:before
 
 dl.post
 {
-    border-color: #0030D0;
+    border-color: #4080D0;
 }
 
 dl.post dt:before
@@ -978,6 +986,10 @@ dl.bug dt:before
     content: url(../images/icon-bug.png);
 }
 
+dl.return dt, dl.params dt
+{
+    font-style: italic;
+}
 
 #projectlogo
 {
@@ -1012,6 +1024,7 @@ dl.bug dt:before
     font: 1em arial,sans-serif;
     color: #ccc;
     margin: 0px;
+    margin-left: -16px;
     padding: 0px;
 }
 
@@ -1025,20 +1038,21 @@ dl.bug dt:before
 /* Voodoo-specific rules */
 p code, dd code
 {
-    font-family: Consolas, Courier, monospace, fixed;
+    font-family: Consolas, Courier New, monospace, fixed;
     font-size:  10pt;
+    color: #CBCBCB;
     
-    border: 1px solid #A090C0;
-    border: 1px solid rgba(160, 144, 192, 0.25);
+    background: #4D4D4D;
+    border: 1px solid #C2AEE9;
+    border: 1px solid rgba(194, 174, 233, 0.25);
     
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
-    
-    background-color: #3C3C3C;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
     
     padding: 0px 2px 1px 2px;
+    
     overflow: auto;
     word-wrap: break-word;
-    line-height: 125%;      
+    line-height: 125%;    
 }
