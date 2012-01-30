@@ -135,12 +135,23 @@ IDirect3D8 * WINAPI VSDirect3DCreate8(UINT sdkVersion)
     if (InterlockedCompareExchange(&SingleD3D8, 1, 0) == 0)
     {
         GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
+#ifdef _DEBUG
+        if (!IsDebuggerPresent())
+        {
+            MessageBox(NULL, TEXT("Caught D3D8 loading process."), TEXT("Voodoo Shader DX8.9 Debug"), MB_OK | MB_ICONINFORMATION);
+        }
+#endif
 
         VoodooShader::VoodooDX8::CVoodoo3D8 * pV3D8 = new VoodooShader::VoodooDX8::CVoodoo3D8(sdkVersion, nullptr);
         pV3D8->VSCacheCaps(pD3D8);
         pD3D8->Release();
 
-        IDirect3D9 * pD3D9 = VSDirect3DCreate9(D3D_SDK_VERSION);
+        if (!gFunc_Direct3DCreate9)
+        {
+            gFunc_Direct3DCreate9 = (Type_Direct3DCreate9)FindFunction(TEXT("d3d9.dll"), true, "Direct3DCreate9", &gModule_D3D9);
+        }
+
+        IDirect3D9 * pD3D9 = gFunc_Direct3DCreate9(D3D_SDK_VERSION);
         pV3D8->VSSetRealObject(pD3D9);
         pD3D8 = pV3D8;
 
@@ -168,6 +179,12 @@ IDirect3D9 * WINAPI VSDirect3DCreate9(UINT sdkVersion)
     if (InterlockedCompareExchange(&SingleD3D9, 1, 0) == 0)
     {
         GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
+#ifdef _DEBUG
+        if (!IsDebuggerPresent())
+        {
+            MessageBox(NULL, TEXT("Caught D3D9 loading process."), TEXT("Voodoo Shader DX8.9 Debug"), MB_OK | MB_ICONINFORMATION);
+        }
+#endif
 
         VoodooShader::VoodooDX9::CVoodoo3D9 * pV3D9 = new VoodooShader::VoodooDX9::CVoodoo3D9(sdkVersion, pD3D9);
         pD3D9 = pV3D9;

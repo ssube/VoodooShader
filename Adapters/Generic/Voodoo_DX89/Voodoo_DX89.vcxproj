@@ -57,7 +57,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>Voodoo_Core.lib;DXGUID.lib;D3DX9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Voodoo_Core.lib;DXGUID.lib;D3DX9D.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_DX9.def</ModuleDefinitionFile>
     </Link>

@@ -1,35 +1,28 @@
 
-#Voodoo-specific ignores
-[Bb]in
-[Bb]uild
-[Dd]ocs/html
-doxylog
-CodeAnalyst
-[Tt]emplate
-*~
-*.swp
-*.tmp
-*.orig
-*.chm
-*.ipch
+# Voodoo-specific ignores
 Analysis/Yasca/Yasca-Report-*.html
 Analysis/kwstyle/output/*
-Resources/Installers/Output/*
 [Dd]ependencies/*/*
-[Dd]ebug
-[Rr]elease
+[Bb]in
+[Bb]uild
+CodeAnalyst
+[Dd]ocs/html
+ipch
+[Tt]emplate
+doxylog
 VoodooPaths.props
 
-#Build version file
+# Build version file
 Framework/Core/Version_Build.hpp
 
-#Temp ignore for CMake files (until system is ready)
+# Temp ignore for CMake files (until system is ready)
 CMakeLists.txt
 
-#ignore thumbnails created by windows
+# ignore thumbnails created by windows
 Thumbs.db
 
-#Ignore files build by Visual Studio
+# Ignore files build by Visual Studio
+*~
 *.obj
 *.exe
 *.pdb
@@ -51,7 +44,11 @@ Thumbs.db
 *.opensdf
 *.lib
 *.sbr
+*.swp
+*.tmp
+*.orig
+*.chm
+*.ipch
 obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
-Framework/Core/Version_Build.hpp

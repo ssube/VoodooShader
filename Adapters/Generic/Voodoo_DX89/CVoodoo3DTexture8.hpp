@@ -35,6 +35,7 @@ namespace VoodooShader
         {
         public:
             CVoodoo3DTexture8(CVoodoo3DDevice8 * pDevice, IDirect3DTexture9 * pTexture);
+            ~CVoodoo3DTexture8();
 
             inline IDirect3DTexture9 *RealTexture() { return m_RealTexture; }
             STDMETHOD(QueryInterface)(REFIID riid, void **ppvObj);
@@ -60,6 +61,7 @@ namespace VoodooShader
             STDMETHOD(AddDirtyRect)(CONST RECT * pDirtyRect);
 
         private:
+            UINT m_Refs;
             CVoodoo3DDevice8 * m_Device;
             IDirect3DTexture9 * m_RealTexture;
         };

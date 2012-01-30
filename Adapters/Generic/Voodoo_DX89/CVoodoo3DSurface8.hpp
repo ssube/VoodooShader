@@ -31,6 +31,7 @@ namespace VoodooShader
         {
         public:
             CVoodoo3DSurface8(CVoodoo3DDevice8 * pDevice, IDirect3DSurface9 * pRealSurface);
+            ~CVoodoo3DSurface8();
 
             inline IDirect3DSurface9 *RealSurface() { return m_RealSurface; }
 
@@ -50,7 +51,8 @@ namespace VoodooShader
             STDMETHOD(UnlockRect)();
 
         private:
-            CVoodoo3DDevice8 * m_RealDevice;
+            UINT m_Refs;
+            CVoodoo3DDevice8 * m_Device;
             IDirect3DSurface9 * m_RealSurface;
         };
     }

@@ -40,6 +40,7 @@ ModuleHook hookList[] =
     { false, L"kernel32.dll",   "LoadLibraryW",         &VSLoadLibraryW },
     { false, L"kernel32.dll",   "LoadLibraryExA",       &VSLoadLibraryExA },
     { false, L"kernel32.dll",   "LoadLibraryExW",       &VSLoadLibraryExW },
+    { false, L"d3d8.dll",       "Direct3DCreate8",      &VSDirect3DCreate8 },
     { false, L"d3d9.dll",       "Direct3DCreate9",      &VSDirect3DCreate9 },
     //{ false, L"d3d9.dll",      "Direct3DCreate9Ex",    &VSDirect3DCreate9Ex },
     //{ false, L"dinput8.dll",   "DirectInput8Create",   &VSDirectInput8Create },
@@ -57,6 +58,9 @@ VoodooShader::VoodooResult VOODOO_CALLTYPE FinalizeEvent(VoodooShader::ICore * p
     UNREFERENCED_PARAMETER(pCore);
     UNREFERENCED_PARAMETER(count);
     UNREFERENCED_PARAMETER(pArgs);
+
+    if (pCore != gpVoodooCore) gpVoodooCore = pCore;
+    gpVoodooLogger = gpVoodooCore->GetLogger();
 
     InstallKnownHooks();
     return VSF_OK;

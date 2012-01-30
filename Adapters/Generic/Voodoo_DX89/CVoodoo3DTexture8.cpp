@@ -22,6 +22,7 @@
 // CVoodoo3D8
 #include "CVoodoo3DTexture8.hpp"
 #include "CVoodoo3DSurface8.hpp"
+#include "CVoodoo3DDevice8.hpp"
 // Voodoo_DX89
 #include "DX9_Version.hpp"
 // Voodoo Framework
@@ -32,13 +33,22 @@ namespace VoodooShader
     namespace VoodooDX8
     {
         CVoodoo3DTexture8::CVoodoo3DTexture8(CVoodoo3DDevice8 * pDevice, IDirect3DTexture9 * pTexture) :
-            m_Device(pDevice), m_RealTexture(pTexture)
+            m_Refs(0), m_Device(pDevice), m_RealTexture(pTexture)
         {
-            gpVoodooLogger->LogMessage
-            (
-                VSLog_ModDebug, VOODOO_DX89_NAME,
-                StringFormat("CVoodoo3DTexture8::CVoodoo3DTexture8(%1%, %2%) == %3%") << pDevice << pTexture << this
-            );
+            VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME,
+                StringFormat("CVoodoo3DTexture8::CVoodoo3DTexture8(%1%, %2%) == %3%") << pDevice << pTexture << this);
+
+            if (m_RealTexture) m_RealTexture->AddRef();
+            if (m_Device) m_Device->AddRef();
+        }
+
+        CVoodoo3DTexture8::~CVoodoo3DTexture8()
+        {
+            if (m_Device) m_Device->Release();
+            m_Device = nullptr;
+
+            if (m_RealTexture) m_RealTexture->Release();
+            m_RealTexture = nullptr;
         }
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DTexture8::QueryInterface(REFIID riid, void **ppvObj)
@@ -48,21 +58,18 @@ namespace VoodooShader
 
         ULONG STDMETHODCALLTYPE CVoodoo3DTexture8::AddRef()
         {
-            return m_RealTexture->AddRef();
+            return ++m_Refs;
         }
         ULONG STDMETHODCALLTYPE CVoodoo3DTexture8::Release()
         {
-            ULONG refCount = m_RealTexture->Release();
+            ULONG count = --m_Refs;
 
-            if (refCount == 0)
+            if (count == 0)
             {
                 delete this;
-                return 0;
             }
-            else
-            {
-                return refCount;
-            }
+
+            return count;
         }
 
         // IDirect3DBaseTexture8 methods

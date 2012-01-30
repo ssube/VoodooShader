@@ -288,8 +288,34 @@ namespace VoodooShader
                 return nullptr;
             }
 
+            ILuint image = ilGenImage();
+            ilBindImage(image);
+            if (ilLoadImage(pFile->GetPath().GetData()) == IL_FALSE)
+            {
+                ilBindImage(0);
+                ilDeleteImage(image);
+                return nullptr;
+            }
+
+            ILinfo info;
+            iluGetImageInfo(&info);
+            if (info.Origin == IL_ORIGIN_LOWER_LEFT)
+            {
+                iluFlipImage();
+            }
+
             LPDIRECT3DTEXTURE9 texture = nullptr;
-            if (ilutD3D9TexFromFile(m_Device, pFile->GetPath().GetData(), &texture) != IL_TRUE)
+            if (info.Depth > 1)
+            {
+                //texture = ilutD3D9VolumeTexture(m_Device);
+                m_Core->GetLogger()->LogMessage(VSLog_BindError, VOODOO_D3D9_NAME, VSTR("Volume textures are not yet supported."));
+            }
+            else
+            {
+                texture = ilutD3D9Texture(m_Device);
+            }
+
+            if (!texture)
             {
                 m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
                     StringFormat("Failed to load texture '%1%' from file '%2%'.") << name << pFile->GetPath());

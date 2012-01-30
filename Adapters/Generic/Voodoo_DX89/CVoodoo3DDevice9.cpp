@@ -19,23 +19,31 @@
  */
 
 #include "CVoodoo3DDevice9.hpp"
+#include "CVoodoo3D9.hpp"
 
 #include "DX9_Version.hpp"
+
+#define PREVENT_MANAGED_POOL() //if (Pool == D3DPOOL_MANAGED) Pool = D3DPOOL_DEFAULT
 
 namespace VoodooShader
 {
     namespace VoodooDX9
     {
         CVoodoo3DDevice9::CVoodoo3DDevice9(CVoodoo3D9 * pObject, IDirect3DDevice9 * pRealDevice) :
-            m_Object(pObject), m_RealDevice(pRealDevice),
+            m_Refs(0), m_RealDevice(pRealDevice), m_Object(pObject),
             m_VertDecl(nullptr), m_VertDeclT(nullptr), m_FSQuadVerts(nullptr), m_BackBuffer(nullptr)
         {
+            if (m_RealDevice) m_RealDevice->AddRef();
+            if (m_Object) m_Object->AddRef();
         };
 
         CVoodoo3DDevice9::~CVoodoo3DDevice9()
         {
-            m_RealDevice = nullptr;
+            if (m_Object) m_Object->Release();
             m_Object = nullptr;
+
+            if (m_RealDevice) m_RealDevice->Release();
+            m_RealDevice = nullptr;
         }
 
         /* IUnknown methods */
@@ -46,12 +54,12 @@ namespace VoodooShader
 
         ULONG STDMETHODCALLTYPE CVoodoo3DDevice9::AddRef()
         {
-            return m_RealDevice->AddRef();
+            return ++m_Refs;
         }
 
         ULONG STDMETHODCALLTYPE CVoodoo3DDevice9::Release()
         {
-            ULONG count = m_RealDevice->Release();
+            ULONG count = --m_Refs;
 
             if (count == 0)
             {
@@ -79,7 +87,6 @@ namespace VoodooShader
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::GetDirect3D(IDirect3D9 **ppD3D9)
         {
-            // Let the device validate the incoming pointer for us
             if (!ppD3D9) return D3DERR_INVALIDCALL;
 
             *ppD3D9 = (IDirect3D9*)m_Object;
@@ -229,6 +236,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
+            PREVENT_MANAGED_POOL();
             return m_RealDevice->CreateTexture(Width, Height, Levels, Usage, Format, Pool, ppTexture, pSharedHandle);
         }
 
@@ -245,6 +253,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
             )
         {
+            PREVENT_MANAGED_POOL();
             return m_RealDevice->CreateVolumeTexture(Width, Height, Depth, Levels, Usage, Format, Pool, ppVolumeTexture, pSharedHandle);
         }
 
@@ -259,6 +268,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
+            PREVENT_MANAGED_POOL();
             return m_RealDevice->CreateCubeTexture(EdgeLength, Levels, Usage, Format, Pool, ppCubeTexture, pSharedHandle);
         }
 
@@ -272,6 +282,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
+            PREVENT_MANAGED_POOL();
             return m_RealDevice->CreateVertexBuffer(Length, Usage, FVF, Pool, ppVertexBuffer, pSharedHandle);
         }
 
@@ -285,6 +296,7 @@ namespace VoodooShader
             HANDLE * pSharedHandle
         )
         {
+            PREVENT_MANAGED_POOL();
             return m_RealDevice->CreateIndexBuffer(Length, Usage, Format, Pool, ppIndexBuffer, pSharedHandle);
         }
 
