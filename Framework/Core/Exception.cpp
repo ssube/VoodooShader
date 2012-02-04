@@ -22,16 +22,16 @@
 
 namespace VoodooShader
 {
-    const wchar_t * ExceptionLogMsg = VSTR("Exception thrown from %1% in file %2% (line %3%): %4%");
-    const char * ExceptionFmtMsg = "VoodooShader::Exception thrown from %1% in module %2%, file %3% at %4% (line %5%): %6%";
+    static const wchar_t * ExceptionLogMsg = VSTR("Exception thrown from %1% in file %2% (line %3%): %4%");
+    static const char * ExceptionFmtMsg = "VoodooShader::Exception thrown from %1% in module %2%, file %3% at %4% (line %5%): %6%";
 
     Exception::Exception
     (
-        _In_z_ wchar_t * file,
-        _In_z_ wchar_t * function,
-        _In_ int line,
-        _In_ wchar_t * module,
-        _In_ wchar_t * message,
+        _In_z_ const wchar_t * file,
+        _In_z_ const wchar_t * function,
+        _In_ const int line,
+        _In_ const wchar_t * module,
+        _In_ const wchar_t * message,
         _In_opt_ ICore * pCore
     ) :
         m_Core(pCore)
@@ -53,11 +53,11 @@ namespace VoodooShader
 
     Exception::Exception
     (
-        _In_z_ wchar_t * file,
-        _In_z_ wchar_t * function,
-        _In_ int line,
-        _In_ String module,
-        _In_ String message,
+        _In_z_ const wchar_t * file,
+        _In_z_ const wchar_t * function,
+        _In_ const int line,
+        _In_ const String module,
+        _In_ const String message,
         _In_opt_ ICore * pCore
     ) :
             m_Core(pCore)

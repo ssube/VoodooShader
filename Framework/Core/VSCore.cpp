@@ -36,7 +36,7 @@ namespace VoodooShader
     DeclareDebugCache();
     HMODULE gCoreHandle = nullptr;
 
-    _Check_return_ ICore * VOODOO_CALLTYPE API_CreateCore(uint32_t version)
+    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(uint32_t version)
     {
         UNREFERENCED_PARAMETER(version);
 
@@ -62,7 +62,7 @@ namespace VoodooShader
         m_Refs(0), m_Version(version), m_ConfigFile(nullptr)
     {
 #if defined(VOODOO_DEBUG_MEMORY)
-        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRT0DBG_LEAK_CHECK_DF);
+        _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
         _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
         _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
         _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_DEBUG | _CRTDBG_MODE_FILE);
@@ -70,8 +70,8 @@ namespace VoodooShader
 #endif
 
         // Set up the internal objects
-        m_ModuleManager = GetPluginServer();
-        m_Parser = GetParser();
+        m_Parser = CreateParser();
+        m_ModuleManager = CreateServer();
 
         AddThisToDebugCache();
     };

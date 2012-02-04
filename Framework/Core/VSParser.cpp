@@ -32,7 +32,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSParser
     DeclareDebugCache();
 
-    _Check_return_ IParser * VOODOO_CALLTYPE API_GetParser()
+    _Check_return_ IParser * VOODOO_CALLTYPE CreateParser()
     {
         static VSParser * pParser = nullptr;
 

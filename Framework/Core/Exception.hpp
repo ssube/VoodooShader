@@ -38,24 +38,22 @@ namespace VoodooShader
     public:
         Exception
         (
-            _In_z_ wchar_t * file,
-            _In_z_ wchar_t * function,
-            _In_ int line,
-            _In_ wchar_t * module,
-            _In_ wchar_t * message,
+            _In_z_ const wchar_t * file,
+            _In_z_ const wchar_t * function,
+            _In_ const int line,
+            _In_ const wchar_t * module,
+            _In_ const wchar_t * message,
             _In_opt_ ICore * pCore
         );
-
         Exception
         (
-            _In_z_ wchar_t * file,
-            _In_z_ wchar_t * function,
-            _In_ int line,
-            _In_ String module,
-            _In_ String Message,
+            _In_z_ const wchar_t * file,
+            _In_z_ const wchar_t * function,
+            _In_ const int line,
+            _In_ const String module,
+            _In_ const String Message,
             _In_opt_ ICore * pCore
         );
-
         virtual ~Exception();
 
         virtual const char * what() const;

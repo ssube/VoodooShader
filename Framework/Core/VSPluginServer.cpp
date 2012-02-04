@@ -31,7 +31,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSPluginServer
     DeclareDebugCache();
 
-    _Check_return_ IPluginServer * VOODOO_CALLTYPE API_GetPluginServer()
+    _Check_return_ IPluginServer * VOODOO_CALLTYPE CreateServer()
     {
         static VSPluginServer * pServer = nullptr;
 
@@ -253,7 +253,7 @@ namespace VoodooShader
         }
 
         // Create struct and load functions
-        ModuleRef module = VSPlugin::Load(m_Core, fullname);
+        PluginRef module = VSPlugin::Load(m_Core, fullname);
 
         if (module == nullptr)
         {
@@ -368,7 +368,7 @@ namespace VoodooShader
 
         if (classiter != m_Classes.end())
         {
-            ModuleRef module = classiter->second.first;
+            PluginRef module = classiter->second.first;
             uint32_t index = classiter->second.second;
 
             IObject * object = module->CreateClass(index, m_Core);

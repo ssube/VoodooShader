@@ -559,12 +559,12 @@ namespace VoodooShader
     typedef boost::intrusive_ptr<IFileSystem>    FileSystemRef;
     typedef boost::intrusive_ptr<IHookManager>   HookManagerRef;
     typedef boost::intrusive_ptr<ILogger>        LoggerRef;
+    typedef boost::intrusive_ptr<IPlugin>        PluginRef;
+    typedef boost::intrusive_ptr<IPluginServer>  PluginServerRef;
     typedef boost::intrusive_ptr<IObject>        ObjectRef;
     typedef boost::intrusive_ptr<IParameter>     ParameterRef;
     typedef boost::intrusive_ptr<IParser>        ParserRef;
     typedef boost::intrusive_ptr<IPass>          PassRef;
-    typedef boost::intrusive_ptr<IPlugin>        PluginRef;
-    typedef boost::intrusive_ptr<IPluginServer>  PluginServeRef;
     typedef boost::intrusive_ptr<ITechnique>     TechniqueRef;
     typedef boost::intrusive_ptr<ITexture>       TextureRef;
     /**
@@ -599,8 +599,8 @@ namespace VoodooShader
     typedef std::map<Uuid, Variant>             PropertyMap;
     typedef std::pair<String, uint32_t>         Variable;
     typedef std::map<String, Variable>          VariableMap;
-    typedef std::map<Uuid, ModuleRef>           ModuleMap;
-    typedef std::pair<ModuleRef, uint32_t>      ClassSource;
+    typedef std::map<Uuid, PluginRef>           ModuleMap;
+    typedef std::pair<PluginRef, uint32_t>      ClassSource;
     typedef std::map<Uuid, ClassSource>         ClassMap;
     typedef std::map<String, Uuid>              StrongNameMap;
     typedef std::map<TextureRef, EffectRef>     MaterialMap;

@@ -1,9 +1,9 @@
 LIBRARY
 
 EXPORTS
-CreateCore      = API_CreateCore
-GetParser       = API_GetParser
-GetPluginServer = API_GetPluginServer
+CreateCore      = CreateCore
+CreateParser    = CreateParser
+CreateServer    = CreateServer
 
 PluginInit      = API_PluginInit
 ClassCount      = API_ClassCount

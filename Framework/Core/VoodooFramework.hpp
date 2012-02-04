@@ -91,7 +91,7 @@
 #   define VOODOO_INTERNAL_REGION   1
 #endif
 
-#define VOODOO_STRIP(...) __VA_ARGS__
+#define VOODOO_STRIP(...)           __VA_ARGS__
 
 #define DEFINE_UUID(name)           EXTERN_C CONST Uuid DECLSPEC_SELECTANY name
 #define DEFINE_IID(name)            DEFINE_UUID(IID_##name)
@@ -159,7 +159,7 @@ namespace VoodooShader
     /**
      * Retrieve the singleton variable parser.
      */
-    _Check_return_ VOODOO_FUNCTION(IParser *, GetParser)();
+    _Check_return_ VOODOO_FUNCTION(IParser *, CreateParser)();
     /**
      * Retrieve the singleton module manager, for loading and plugin use.
      * 
@@ -167,6 +167,6 @@ namespace VoodooShader
      *      available, for security and compatibility reasons. These is no way to create older managers, and they typically
      *      will be removed from the code.
      */
-    _Check_return_ VOODOO_FUNCTION(IPluginServer *, GetPluginServer)();
+    _Check_return_ VOODOO_FUNCTION(IPluginServer *, CreateServer)();
 }
 #endif

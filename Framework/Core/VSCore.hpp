@@ -85,7 +85,13 @@ namespace VoodooShader
         ~VSCore();
 
         mutable uint32_t m_Refs;
-        uint32_t m_Version;
+        const uint32_t m_Version;
+
+        /** The current variable parser. */
+        ParserRef m_Parser;
+
+        /** The current module manager. */
+        PluginServerRef m_ModuleManager;
 
         /** Config file. */
         XmlDocument m_ConfigFile;
@@ -101,12 +107,6 @@ namespace VoodooShader
 
         /** The current ILogger implementation. */
         LoggerRef m_Logger;
-
-        /** The current module manager. */
-        ModuleManagerRef m_ModuleManager;
-
-        /** The current variable parser. */
-        ParserRef m_Parser;
 
         /** Collection of all usable shaders. */
         EffectList m_Effects;
