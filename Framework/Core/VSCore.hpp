@@ -117,13 +117,7 @@ namespace VoodooShader
         /** Collection of all virtual parameters created by this pCore. */ 
         ParameterMap m_Parameters;
 
-        /** Default pass target texture for shader linker. */
-        TextureRef m_LastPass;
-
-        /** Default technique target for shader linker. */
-        TextureRef m_LastShader;
-
-        // Events
+        /** Event registry for core callbacks. */
         EventRegistry m_Events;
     };
 }

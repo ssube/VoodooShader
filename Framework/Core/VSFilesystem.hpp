@@ -40,7 +40,6 @@ namespace VoodooShader
     {
     public:
         VSFileSystem(_In_ ICore * pCore);
-        ~VSFileSystem();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -56,6 +55,7 @@ namespace VoodooShader
         // Private these to prevent copying internally (external libs never will).
         VSFileSystem(const VSFileSystem & other);
         VSFileSystem & operator=(const VSFileSystem & other);
+        ~VSFileSystem();
 
         mutable uint32_t m_Refs;
         ICore * m_Core;

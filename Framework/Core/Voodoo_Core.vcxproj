@@ -90,8 +90,8 @@
     <ClCompile Include="VSFilesystem.cpp" />
     <ClCompile Include="VSHookManager.cpp" />
     <ClCompile Include="VSLogger.cpp" />
-    <ClCompile Include="VSModule.cpp" />
-    <ClCompile Include="VSModuleManager.cpp" />
+    <ClCompile Include="VSPlugin.cpp" />
+    <ClCompile Include="VSPluginServer.cpp" />
     <ClCompile Include="VSParser.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -104,8 +104,8 @@
     <ClInclude Include="IFileSystem.hpp" />
     <ClInclude Include="IHookManager.hpp" />
     <ClInclude Include="ILogger.hpp" />
-    <ClInclude Include="IModule.hpp" />
-    <ClInclude Include="IModuleManager.hpp" />
+    <ClInclude Include="IPlugin.hpp" />
+    <ClInclude Include="IPluginServer.hpp" />
     <ClInclude Include="IObject.hpp" />
     <ClInclude Include="IParameter.hpp" />
     <ClInclude Include="IParser.hpp" />
@@ -119,8 +119,8 @@
     <ClInclude Include="VSFilesystem.hpp" />
     <ClInclude Include="VSHookManager.hpp" />
     <ClInclude Include="VSLogger.hpp" />
-    <ClInclude Include="VSModule.hpp" />
-    <ClInclude Include="VSModuleManager.hpp" />
+    <ClInclude Include="VSPlugin.hpp" />
+    <ClInclude Include="VSPluginServer.hpp" />
     <ClInclude Include="VSParser.hpp" />
     <ClInclude Include="Converter.hpp" />
     <ClInclude Include="Exception.hpp" />
@@ -141,6 +141,7 @@
     <None Include="Docs_License.dox" />
     <None Include="Docs_MainPage.dox" />
     <None Include="Docs_Tutorials.dox" />
+    <None Include="Docs_VSON.dox" />
     <None Include="Support.inl" />
     <None Include="VoodooFramework.hpp" />
     <None Include="Voodoo_Core.def" />

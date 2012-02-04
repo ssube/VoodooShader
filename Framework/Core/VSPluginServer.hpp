@@ -26,10 +26,10 @@ namespace VoodooShader
     /**
      * @clsid e6f312a0-05af-11e1-9e05-005056c00008
      */
-    VOODOO_CLASS(VSModuleManager, IModuleManager, ({0xA0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    VOODOO_CLASS(VSPluginServer, IPluginServer, ({0xA0, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSModuleManager(_In_ ICore * pCore);
+        VSPluginServer();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -37,13 +37,13 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD_(IModule *, GetModule)(_In_ CONST String & name) CONST;
-        VOODOO_METHOD_(IModule *, GetModule)(_In_ CONST Uuid libid) CONST;
+        VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST String & name) CONST;
+        VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST Uuid libid) CONST;
         VOODOO_METHOD_(bool, IsLoaded)(_In_ const String & name) CONST;
         VOODOO_METHOD_(bool, IsLoaded)(_In_ const Uuid & libid) CONST;
         VOODOO_METHOD(LoadPath)(_In_ const String & path, _In_ const String & filter);
-        VOODOO_METHOD(LoadFile)(_In_ const IFile * pFile);
-        VOODOO_METHOD(LoadFile)(_In_ const String & filename);
+        VOODOO_METHOD(LoadPlugin)(_In_ const IFile * pFile);
+        VOODOO_METHOD(LoadPlugin)(_In_ const String & filename);
         VOODOO_METHOD_(bool, ClassExists)(_In_ const Uuid refid) CONST;
         VOODOO_METHOD_(bool, ClassExists)(_In_ const String & name) CONST;
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid refid) CONST;
@@ -51,9 +51,9 @@ namespace VoodooShader
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSModuleManager(const VSModuleManager & other);
-        VSModuleManager & operator=(const VSModuleManager & other);
-        ~VSModuleManager();
+        VSPluginServer(const VSPluginServer & other);
+        VSPluginServer & operator=(const VSPluginServer & other);
+        ~VSPluginServer();
 
         mutable uint32_t m_Refs;
         ICore * m_Core;

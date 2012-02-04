@@ -103,7 +103,7 @@ namespace VoodooShader
     }
 
     // Boost intrusive_ptr functions
-    void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj)
+    VOODOO_FUNCTION(void, intrusive_ptr_add_ref)(IObject * obj)
     {
 #if defined(VOODOO_DEBUG_MEMORY)
         uint32_t refs = obj->AddRef();
@@ -116,7 +116,7 @@ namespace VoodooShader
 #endif
     }
 
-    void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj)
+    VOODOO_FUNCTION(void, intrusive_ptr_release)(IObject * obj)
     {
 #if defined(VOODOO_DEBUG_MEMORY)
         if (obj && obj->GetCore() && obj->GetCore()->GetLogger())

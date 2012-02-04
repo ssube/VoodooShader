@@ -29,14 +29,14 @@ namespace VoodooShader
      */
 
     /**
-     * @class IModuleManager
+     * @class IPluginServer
      *
      * Provides a framework for loading and unloading modules in core, as well as retrieving symbols and modules
      * from memory.
      *
      * @iid e6f31290-05af-11e1-9e05-005056c00008
      */
-    VOODOO_INTERFACE(IModuleManager, IObject, ({0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    VOODOO_INTERFACE(IPluginServer, IObject, ({0x90, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
         /**
@@ -58,13 +58,13 @@ namespace VoodooShader
          * 
          * @param   name  The module name, as reported by the plugin API.
          */
-        VOODOO_METHOD_(IModule *, GetModule)(_In_ CONST String & name) CONST PURE;
+        VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST String & name) CONST PURE;
         /**
          * Gets a loaded module.
          * 
          * @param   libid  The module LibId, as reported by the plugin API.
          */
-        VOODOO_METHOD_(IModule *, GetModule)(_In_ CONST Uuid libid) CONST PURE;
+        VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST Uuid libid) CONST PURE;
         /**
          * Tests if the module with the given name is currently loaded.
          * 
@@ -93,7 +93,7 @@ namespace VoodooShader
          *
          * @note This always uses the module's directory in the search path for required DLLs.
          */
-        VOODOO_METHOD(LoadFile)(_In_ const IFile * pFile) PURE;
+        VOODOO_METHOD(LoadPlugin)(_In_ const IFile * pFile) PURE;
         /**
          * Loads a single module, using an absolute or relative filename.
          *
@@ -102,7 +102,7 @@ namespace VoodooShader
          * @note If a relative path is provided, this will canonicalize that path relative to Voodoo's global root. For
          *      example, the call will be loaded as:
          *      @code
-         *      Call: IModuleManager->LoadFile("../Library.dll");
+         *      Call: IPluginServer->LoadPlugin("../Library.dll");
          *      Absolute: Canonicalize("$(path)\\bin\\../Library.dll");
          *      Parsed: Canonicalize("C:\\Voodoo\\bin\\../Library.dll");
          *      Final: "C:\\Voodoo\\Library.dll";
@@ -119,7 +119,7 @@ namespace VoodooShader
          *      @li All directories listed in the PATH environment variable, in order.
          *
          */
-        VOODOO_METHOD(LoadFile)(_In_ const String & filename) PURE;
+        VOODOO_METHOD(LoadPlugin)(_In_ const String & filename) PURE;
         /**
          * @}
          * @name Class Methods

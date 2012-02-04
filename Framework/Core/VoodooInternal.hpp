@@ -29,16 +29,10 @@ namespace VoodooShader
     class VSFileSystem;
     class VSHookManager;
     class VSLogger;
-    class VSModule;
-    class VSModuleManager;
+    class VSPlugin;
+    class VSPluginServer;
     class VSParser;
     
-    // API classes
-    class VSEffectDX9;
-    class VSTechniqueDX9;
-    class VSPassDX9;
-    class VSParameterDX9;
-
     /* Plugin exports. */
     const Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore);
     const uint32_t  VOODOO_CALLTYPE API_ClassCount();

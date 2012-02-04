@@ -26,12 +26,12 @@ namespace VoodooShader
     /**
      * @clsid e6f3129f-05af-11e1-9e05-005056c00008
      */
-    VOODOO_CLASS(VSModule, IModule, ({0x9F, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+    VOODOO_CLASS(VSPlugin, IPlugin, ({0x9F, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        static VSModule * Load(_In_ ICore * pCore, _In_ const String & path);
+        static VSPlugin * Load(_In_ ICore * pCore, _In_ const String & path);
 
-        VSModule(_In_ ICore * pCore, _In_ HMODULE hmodule);
+        VSPlugin(_In_ ICore * pCore, _In_ HMODULE hmodule);
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -46,9 +46,9 @@ namespace VoodooShader
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSModule(const VSModule & other);
-        VSModule & operator=(const VSModule & other);
-        ~VSModule();
+        VSPlugin(const VSPlugin & other);
+        VSPlugin & operator=(const VSPlugin & other);
+        ~VSPlugin();
 
         mutable uint32_t m_Refs;
         ICore * m_Core;

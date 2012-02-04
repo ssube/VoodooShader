@@ -32,8 +32,28 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSParser
     DeclareDebugCache();
 
-    VOODOO_METHODTYPE VSParser::VSParser(_In_ ICore * pCore) :
-        m_Refs(0), m_Core(pCore)
+    _Check_return_ IParser * VOODOO_CALLTYPE API_GetParser()
+    {
+        static VSParser * pParser = nullptr;
+
+        if (!pParser)
+        {
+            try
+            {
+                pParser = new VSParser();
+            }
+            catch (const std::exception & exc)
+            {
+                UNREFERENCED_PARAMETER(exc);
+                pParser = nullptr;
+            }
+        }
+
+        return pParser;
+    }
+
+    VOODOO_METHODTYPE VSParser::VSParser() :
+        m_Refs(0)
     {
         AddThisToDebugCache();
     }

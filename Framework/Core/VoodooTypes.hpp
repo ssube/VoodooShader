@@ -510,8 +510,8 @@ namespace VoodooShader
     class IFileSystem;
     class IHookManager;
     class ILogger;
-    class IModule;
-    class IModuleManager;
+    class IPlugin;
+    class IPluginServer;
     class IObject;
     class IParameter;
     class IParser;
@@ -550,8 +550,8 @@ namespace VoodooShader
      * @{
      */
 #if !defined(VOODOO_NO_BOOST)
-    void VOODOO_PUBLIC_FUNC intrusive_ptr_add_ref(IObject * obj);
-    void VOODOO_PUBLIC_FUNC intrusive_ptr_release(IObject * obj);
+    VOODOO_FUNCTION(void, intrusive_ptr_add_ref)(IObject * obj);
+    VOODOO_FUNCTION(void, intrusive_ptr_release)(IObject * obj);
     typedef boost::intrusive_ptr<IBinding>       BindingRef;
     typedef boost::intrusive_ptr<ICore>          CoreRef;
     typedef boost::intrusive_ptr<IEffect>        EffectRef;
@@ -559,12 +559,12 @@ namespace VoodooShader
     typedef boost::intrusive_ptr<IFileSystem>    FileSystemRef;
     typedef boost::intrusive_ptr<IHookManager>   HookManagerRef;
     typedef boost::intrusive_ptr<ILogger>        LoggerRef;
-    typedef boost::intrusive_ptr<IModule>        ModuleRef;
-    typedef boost::intrusive_ptr<IModuleManager> ModuleManagerRef;
     typedef boost::intrusive_ptr<IObject>        ObjectRef;
     typedef boost::intrusive_ptr<IParameter>     ParameterRef;
     typedef boost::intrusive_ptr<IParser>        ParserRef;
     typedef boost::intrusive_ptr<IPass>          PassRef;
+    typedef boost::intrusive_ptr<IPlugin>        PluginRef;
+    typedef boost::intrusive_ptr<IPluginServer>  PluginServeRef;
     typedef boost::intrusive_ptr<ITechnique>     TechniqueRef;
     typedef boost::intrusive_ptr<ITexture>       TextureRef;
     /**

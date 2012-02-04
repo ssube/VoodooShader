@@ -20,7 +20,7 @@
 
 #include "VSCore.hpp"
 // Voodoo Core
-#include "VSModuleManager.hpp"
+#include "VSPluginServer.hpp"
 #include "VSParser.hpp"
 // Voodoo Utility
 #include "Support.inl"
@@ -36,7 +36,7 @@ namespace VoodooShader
     DeclareDebugCache();
     HMODULE gCoreHandle = nullptr;
 
-    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(uint32_t version)
+    _Check_return_ ICore * VOODOO_CALLTYPE API_CreateCore(uint32_t version)
     {
         UNREFERENCED_PARAMETER(version);
 
@@ -70,8 +70,8 @@ namespace VoodooShader
 #endif
 
         // Set up the internal objects
-        m_ModuleManager = new VSModuleManager(this);
-        m_Parser = new VSParser(this);
+        m_ModuleManager = GetPluginServer();
+        m_Parser = GetParser();
 
         AddThisToDebugCache();
     };
@@ -79,9 +79,6 @@ namespace VoodooShader
     VSCore::~VSCore()
     {
         RemoveThisFromDebugCache();
-
-        m_LastPass = nullptr;
-        m_LastShader = nullptr;
 
         m_Parameters.clear();
         m_Textures.clear();
@@ -284,7 +281,7 @@ namespace VoodooShader
             }
 
             // Load plugins, starting with the core
-            m_ModuleManager->LoadFile(VSTR("$(core)"));
+            m_ModuleManager->LoadPlugin(VSTR("$(core)"));
 
             {
                 pugi::xpath_query xpq_getPluginPaths(L"./Plugins/Path");
@@ -312,7 +309,7 @@ namespace VoodooShader
                 {
                     String file = xpq_getText.evaluate_string(*iter);
 
-                    m_ModuleManager->LoadFile(file);
+                    m_ModuleManager->LoadPlugin(file);
 
                     ++iter;
                 }
@@ -430,17 +427,17 @@ namespace VoodooShader
 
     VOODOO_METHODDEF(VSCore::Bind)(CompilerProfile profile, uint32_t count, Variant * pParams)
     {
-        IModule * compiler = nullptr;
+        IPlugin * compiler = nullptr;
 
         if (profile == VSProfile_D3D9)
         {
             // Load D3D9 compiler
-            if (FAILED(m_ModuleManager->LoadFile(VSTR("$(binpath)\\Voodoo_D3D9.dll"))))
+            if (FAILED(m_ModuleManager->LoadPlugin(VSTR("$(binpath)\\Voodoo_D3D9.dll"))))
             {
                 return VSFERR_INVALIDCALL;
             }
 
-            compiler = m_ModuleManager->GetModule(VSTR("Voodoo_D3D9"));
+            compiler = m_ModuleManager->GetPlugin(VSTR("Voodoo_D3D9"));
             if (!compiler)
             {
                 return VSF_FAIL;

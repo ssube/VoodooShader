@@ -19,9 +19,6 @@
     <ClCompile Include="VSParser.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="VsModule.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="VSCore.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
@@ -34,11 +31,14 @@
     <ClCompile Include="VSLogger.cpp">
       <Filter>Source\Implementations</Filter>
     </ClCompile>
-    <ClCompile Include="VSModuleManager.cpp">
-      <Filter>Source\Implementations</Filter>
-    </ClCompile>
     <ClCompile Include="StringFormat.cpp">
       <Filter>Source\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="VSPluginServer.cpp">
+      <Filter>Source\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="VSPlugin.cpp">
+      <Filter>Source\Implementations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +58,6 @@
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="IObject.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IModule.hpp">
       <Filter>Headers\Interfaces</Filter>
     </ClInclude>
     <ClInclude Include="IParameter.hpp">
@@ -102,20 +99,11 @@
     <ClInclude Include="VSLogger.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
-    <ClInclude Include="VSModule.hpp">
-      <Filter>Headers\Implementations</Filter>
-    </ClInclude>
     <ClInclude Include="VSParser.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="IFile.hpp">
       <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IModuleManager.hpp">
-      <Filter>Headers\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="VSModuleManager.hpp">
-      <Filter>Headers\Implementations</Filter>
     </ClInclude>
     <ClInclude Include="IResource.hpp">
       <Filter>Headers\Interfaces</Filter>
@@ -149,6 +137,18 @@
     </ClInclude>
     <ClInclude Include="StringFormat.hpp">
       <Filter>Headers\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="IPluginServer.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlugin.hpp">
+      <Filter>Headers\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="VSPlugin.hpp">
+      <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="VSPluginServer.hpp">
+      <Filter>Headers\Implementations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +208,9 @@
       <Filter>Headers</Filter>
     </None>
     <None Include="Docs_Tutorials.dox">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="Docs_VSON.dox">
       <Filter>Docs</Filter>
     </None>
   </ItemGroup>
