@@ -80,12 +80,12 @@ namespace VoodooShader
       * @code
       * IParameter * global = core->CreateParameter("time", VSPT_Float);
       * IParameter * effect = shader->GetParameter("time");
-      * global->Attach(effect);
+      * global->AttachParameter(effect);
       * @endcode
       *
       * Whenever the global parameter is set to a new value, all attached parameters will also be updated. This mechanism is
       * useful for things like system time, common matrices, random values or other data that may be used by many shaders.
-      * To indicate the parent parameter to the linker, a parameter should have a "<tt>vs_source</tt>" string annotation.
+      * To indicate the parent parameter to the linker, a parameter should have a <tt>vs_source</tt> string annotation.
       *
       * @code
       * float2 resolution < string vs_source = ":resolution"; >;
@@ -122,11 +122,9 @@ namespace VoodooShader
       * other effects. If no target is specified in the technique or pass annotations, the shader linker uses the null 
       * texture, which does not save texture data. Textures may be bound using ITexture::Bind().
       *
-      * @page voodoo_graphics_params Parameters
+      * @section voodoo_graphics_params_diff Virtual and Effect Parameters
       *
       * Voodoo supports two general varieties of parameter (virtual and effect) and a number of specific data types.
-      *
-      * @section voodoo_graphics_params_diff Virtual and Effect Parameters
       *
       * The primary difference between virtual params and effect params are where they exist. Effect parameters exist within
       * a shader effect and on the GPU, and are used directly within programs. Virtual parameters exist only in the runtime

@@ -53,7 +53,25 @@ namespace VoodooShader
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DTexture8::QueryInterface(REFIID riid, void **ppvObj)
         {
-            return m_RealTexture->QueryInterface(riid, ppvObj);
+            if (!ppvObj)
+            {
+                return D3DERR_INVALIDCALL;
+            }
+
+            if (riid == IID_IUnknown)
+            {
+                ((IUnknown*)(*ppvObj))->AddRef();
+            }
+            else if (riid == IID_IDirect3DTexture8)
+            {
+                ((IDirect3DTexture8*)(*ppvObj))->AddRef();
+            }
+            else
+            {
+                return D3DERR_INVALIDCALL;
+            }
+
+            return D3D_OK;
         }
 
         ULONG STDMETHODCALLTYPE CVoodoo3DTexture8::AddRef()

@@ -22,10 +22,9 @@
 namespace VoodooShader
 {
      /**
-      * @addtogroup voodoo_tutorials Tutorials
-      * @{
+      * @page voodoo_tutorials Tutorials
       *
-      * @page voodoo_tut_basics Basics
+      * @section voodoo_tutorials_basics Basics
       *
       * To launch Voodoo Shader, a core must be created. This is done by calling the function <tt>CreateCore</tt>, 
       * exported undecorated from the core module. 
@@ -58,6 +57,30 @@ namespace VoodooShader
       * if (pCore->Initialize(VSTR("config.xml")))
       * {
       *     // Core is ready for use
+      * }
+      * @endcode
+      *
+      * @section voodoo_tutorials_effect Using Effects
+      *
+      * The main purpose of Voodoo Shader is to draw effects to the screen. The details of this are extremely API and game-
+      * specific, and not covered here in favor of the portion involving Voodoo Shader. The basic effect loop is:
+      *
+      * @code
+      * // Pre-effect work
+      * TechniqueRef technique = effect->Bind();                // If the effect is bound successfully, the active technique is returned.
+      * if (technique)
+      * {
+      *     uint32_t passCount = technique->GetPassCount();     // Each technique likely has multiple passes, creating the full effect.
+      *     for (uint32_t i = 0; i < passCount; ++i)
+      *     {
+      *         PassRef pass = technique->GetPass(i);
+      *         // Pre-pass work
+      *
+      *         pass->Bind();                                   // Once the effect has been bound, each pass should be bound for use.
+      *         // Draw pass
+      *         pass->Reset();
+      *     }
+      *     effect->Reset();
       * }
       * @endcode
       */

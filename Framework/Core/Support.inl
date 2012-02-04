@@ -23,8 +23,6 @@
 #include <tchar.h>
 #include <strsafe.h>
 
-#include <stdio.h>
-
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
@@ -95,7 +93,7 @@ inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format
     _stprintf_s(title, TEXT("Voodoo Error 0X%04X"), errorCode);
 
     // The added 1, and the if, are to allow for the null at the end and the -1 in line 98.
-    int bufsize = _vsctprintf(msg, args) + 1;
+    const int bufsize = _vsctprintf(msg, args) + 1;
     if (bufsize > 1)
     {
         std::vector<TCHAR> buffer((unsigned int)bufsize);
@@ -122,7 +120,7 @@ inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format
  *     interpreted relative to the system directory.
  * @return A handle to the module if loaded or a nullptr handle otherwise.
  */
-inline static HMODULE WINAPI LoadSystemLibrary(const LPTSTR libname)
+inline static HMODULE WINAPI LoadSystemLibrary(CONST LPTSTR libname)
 {
     TCHAR path[MAX_PATH];
 
@@ -132,7 +130,7 @@ inline static HMODULE WINAPI LoadSystemLibrary(const LPTSTR libname)
     return LoadLibrary(path);
 }
 
-inline static void * WINAPI FindFunction(const LPTSTR libname, bool system, const LPCSTR funcname, HMODULE * pModule)
+inline static void * WINAPI FindFunction(_In_ CONST LPTSTR libname, _In_ CONST bool system, _In_ CONST LPCSTR funcname, _Inout_ HMODULE * pModule)
 {
     void * function = nullptr;
 
@@ -177,15 +175,12 @@ inline static bool WINAPI GetVoodooPath(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
     HKEY root = GetVoodooKey();
     if (root)
     {
-        DWORD valueType = REG_SZ, valueSize = MAX_PATH;
+        DWORD valueType = REG_SZ;
+        DWORD valueSize = MAX_PATH;
 
         if (RegQueryValueEx(root, TEXT("Path"), NULL, &valueType, (BYTE*)pBuffer, &valueSize) == ERROR_SUCCESS)
         {
             pBuffer[valueSize - 1] = 0;
-
-            OutputDebugString(pBuffer);
-            OutputDebugString(TEXT("\n"));
-
             PathAddBackslash(pBuffer);
 
             RegCloseKey(root);
@@ -205,15 +200,12 @@ inline static bool WINAPI GetVoodooBinPrefix(_In_count_c_(MAX_PATH) TCHAR * pBuf
     HKEY root = GetVoodooKey();
     if (root)
     {
-        DWORD valueType = REG_SZ, valueSize = MAX_PATH;
+        DWORD valueType = REG_SZ;
+        DWORD valueSize = MAX_PATH;
 
         if (RegQueryValueEx(root, TEXT("BinPrefix"), NULL, &valueType, (BYTE*)pBuffer, &valueSize) == ERROR_SUCCESS)
         {
             pBuffer[valueSize - 1] = 0;
-
-            OutputDebugString(pBuffer);
-            OutputDebugString(TEXT("\n"));
-
             PathAddBackslash(pBuffer);
 
             RegCloseKey(root);
@@ -258,7 +250,8 @@ inline static HHOOKDEF WINAPI HookFromKey(_In_ HKEY pKey)
     HHOOKDEF hook = new HookDef();
     ZeroMemory(hook, sizeof(hook));
 
-    DWORD valueType = REG_SZ, valueSize = MAX_PATH;
+    DWORD valueType = REG_SZ;
+    DWORD valueSize = MAX_PATH;
     TCHAR activeBuffer[MAX_PATH];
     if (RegQueryValueEx(pKey, TEXT("Active"), NULL, &valueType, (BYTE*)activeBuffer, &valueSize) == ERROR_SUCCESS)
     {
@@ -317,7 +310,8 @@ inline static HHOOKDEF WINAPI SearchHooks(_In_z_ TCHAR * moduleName)
 
     if (RegOpenKeyEx(HKEY_CURRENT_USER, TEXT("Software\\VoodooShader\\Hooks"), 0, KEY_READ, &hookRoot) == ERROR_SUCCESS && hookRoot != nullptr)
     {
-        DWORD index = 0, nameSize = MAX_PATH;
+        DWORD index = 0;
+        DWORD nameSize = MAX_PATH;
         TCHAR hookID[MAX_PATH];
 
         while (RegEnumKeyEx(hookRoot, index++, hookID, &nameSize, NULL, NULL, NULL, NULL) == ERROR_SUCCESS && nameSize > 0)

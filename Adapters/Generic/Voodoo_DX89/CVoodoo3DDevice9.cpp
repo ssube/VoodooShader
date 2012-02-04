@@ -49,7 +49,25 @@ namespace VoodooShader
         /* IUnknown methods */
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::QueryInterface(REFIID riid, void **ppvObj)
         {
-            return m_RealDevice->QueryInterface(riid, ppvObj);
+            if (!ppvObj)
+            {
+                return D3DERR_INVALIDCALL;
+            }
+
+            if (riid == IID_IUnknown)
+            {
+                ((IUnknown*)(*ppvObj))->AddRef();
+            }
+            else if (riid == IID_IDirect3DDevice9)
+            {
+                ((IDirect3DDevice9*)(*ppvObj))->AddRef();
+            }
+            else
+            {
+                return D3DERR_INVALIDCALL;
+            }
+
+            return D3D_OK;
         }
 
         ULONG STDMETHODCALLTYPE CVoodoo3DDevice9::AddRef()

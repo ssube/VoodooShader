@@ -377,11 +377,6 @@ address.footer {
     margin-right: 20px;
 }
 
-address.footer small:after
-{
-    content: "; the Voodoo Shader project and this documentation are released under the GNU Lesser General Public License v3.";
-}
-
 img.footer {
     border: 0px;
     vertical-align: middle;
