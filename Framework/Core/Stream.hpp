@@ -36,11 +36,24 @@ namespace VoodooShader
     public:
         StreamState(std::ios_base & in) : s(in), f(in.flags()) {};
         StreamState(const StreamState & o) : s(o.s), f(o.f) {};
-        ~StreamState() { s.flags(f); };
+        ~StreamState() 
+        { 
+            try
+            {
+                s.flags(f);
+            }
+            catch (const std::exception & exc)
+            {
+                UNREFERENCED_PARAMETER(exc);
+            }
+        };
         StreamState & operator=(const StreamState & o)
         {
-            s = o.s;
-            f = o.f;
+            if (this != &o)
+            {
+                s = o.s;
+                f = o.f;
+            }
             return (*this);
         };
 
@@ -121,49 +134,49 @@ namespace VoodooShader
     template<typename Elem>
     std::basic_ostream<Elem> & operator<<(std::basic_ostream<Elem> & out, const Variant & v)
     {
-        out << VSTR("Variant(") << v.Type << VSTR(", ") << v.Components;
+        out << VSTR("Variant(") << v.Type << VSTR(", ") << v.Components ;
 
         switch (v.Type)
         {
         case VSUT_None:
             break;
         case VSUT_Bool:
-            out << v.VBool;
+            out << VSTR(", ") << v.VBool;
             break;
         case VSUT_Int8:
-            out << v.VInt8;
+            out << VSTR(", ") << v.VInt8;
             break;
         case VSUT_UInt8:
-            out << v.VUInt8;
+            out << VSTR(", ") << v.VUInt8;
             break;
         case VSUT_Int16:
-            out << v.VInt16;
+            out << VSTR(", ") << v.VInt16;
             break;
         case VSUT_UInt16:
-            out << v.VUInt16;
+            out << VSTR(", ") << v.VUInt16;
             break;
         case VSUT_Int32:
-            out << v.VInt32;
+            out << VSTR(", ") << v.VInt32;
             break;
         case VSUT_UInt32:
-            out << v.VUInt32;
+            out << VSTR(", ") << v.VUInt32;
             break;
         case VSUT_Float:
-            out << v.VFloat;
+            out << VSTR(", ") << v.VFloat;
             break;
         case VSUT_Double:
-            out << v.VDouble;
+            out << VSTR(", ") << v.VDouble;
             break;
         case VSUT_Uuid:
             if (v.VPUuid)
             {
-                out << (*v.VPUuid);
+                out << VSTR(", ") << (*v.VPUuid);
             }
             break;
         case VSUT_String:
             if (v.VPString)
             {
-                out << v.VPString->GetData();
+                out << VSTR(", ") << (*v.VPString);
             }
             break;
         case VSUT_IObject:

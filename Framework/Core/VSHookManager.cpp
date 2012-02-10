@@ -54,6 +54,7 @@ namespace VoodooShader
         m_Core->GetLogger()->LogMessage(VSLog_ModInfo, VOODOO_CORE_NAME, VSTR("Destroying hook manager."));
 
         delete[] m_ThreadIDs;
+        m_Core = nullptr;
     }
 
     uint32_t VOODOO_METHODTYPE VSHookManager::AddRef() CONST

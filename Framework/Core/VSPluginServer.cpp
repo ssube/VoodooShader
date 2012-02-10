@@ -48,12 +48,20 @@ namespace VoodooShader
             }
         }
 
+        if (pServer)
+        {
+            pServer->AddRef();
+        }
+
         return pServer;
     }
 
     VSPluginServer::VSPluginServer() :
         m_Refs(0)
     {
+        m_Parser = CreateParser();
+        m_Logger = CreateLogger();
+
         AddThisToDebugCache();
     }
 
@@ -61,19 +69,24 @@ namespace VoodooShader
     {
         RemoveThisFromDebugCache();
 
+        m_Parser = nullptr;
+        m_Logger = nullptr;
+
         m_Classes.clear();
         m_Modules.clear();
     }
 
     uint32_t VOODOO_METHODTYPE VSPluginServer::AddRef() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSPluginServer::Release() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
         {
@@ -84,7 +97,8 @@ namespace VoodooShader
 
     VoodooResult VOODOO_METHODTYPE VSPluginServer::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         if (!ppOut)
         {
             return VSFERR_INVALIDPARAMS;
@@ -116,21 +130,21 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSPluginServer::ToString() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         return VSTR("VSPluginServer()");
     }
 
     ICore * VOODOO_METHODTYPE VSPluginServer::GetCore() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        return m_Core;
+        return nullptr;
     }
 
     IPlugin * VOODOO_METHODTYPE VSPluginServer::GetPlugin(_In_ CONST String & name) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         StrongNameMap::const_iterator module = m_ModuleNames.find(name);
         if (module != m_ModuleNames.end())
@@ -146,7 +160,7 @@ namespace VoodooShader
 
     IPlugin * VOODOO_METHODTYPE VSPluginServer::GetPlugin(_In_ CONST Uuid libid) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         ModuleMap::const_iterator module = m_Modules.find(libid);
         if (module != m_Modules.end())
@@ -161,23 +175,23 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSPluginServer::IsLoaded(_In_ const String & name) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         return (m_ModuleNames.find(name) != m_ModuleNames.end());
     }
 
     bool VOODOO_METHODTYPE VSPluginServer::IsLoaded(_In_ const Uuid & libid) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         return (m_Modules.find(libid) != m_Modules.end());
     }
 
-    VoodooResult VOODOO_METHODTYPE VSPluginServer::LoadPath(_In_ const String & path, _In_ const String & filter)
+    VoodooResult VOODOO_METHODTYPE VSPluginServer::LoadPath(_In_ ICore * pCore, _In_ const String & path, _In_ const String & filter)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        String mask = m_Core->GetParser()->Parse(path) + VSTR("\\*");
+        String mask = m_Parser->Parse(path) + VSTR("\\*");
 
         WIN32_FIND_DATA findFile;
         HANDLE searchHandle = FindFirstFile(mask.GetData(), &findFile);
@@ -188,7 +202,7 @@ namespace VoodooShader
 
             if (error == ERROR_FILE_NOT_FOUND)
             {
-                m_Core->GetLogger()->LogMessage
+                m_Logger->LogMessage
                 (
                     VSLog_CoreWarning, VOODOO_CORE_NAME,
                     StringFormat("No plugins found in directory '%1%'.") << path
@@ -198,7 +212,7 @@ namespace VoodooShader
             }
             else
             {
-                m_Core->GetLogger()->LogMessage 
+                m_Logger->LogMessage 
                 ( 
                     VSLog_CoreWarning, VOODOO_CORE_NAME,  
                     StringFormat("Error searching directory '%1%'.") << path 
@@ -222,28 +236,22 @@ namespace VoodooShader
         {
             String module = findFile.cFileName;
 
-            if (compfilter.Find(module))
-            {
-                IFile * modulefile = m_Core->GetFileSystem()->GetFile(module);
-                this->LoadPlugin(modulefile);
-            }
+            this->LoadPlugin(pCore, module);
         } while (FindNextFile(searchHandle, &findFile) != 0);
 
         return VSF_OK;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSPluginServer::LoadPlugin(_In_ const String & filename)
+    VoodooResult VOODOO_METHODTYPE VSPluginServer::LoadPlugin(_In_ ICore * pCore, _In_ const String & filename)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        LoggerRef logger = m_Core->GetLogger();
-
-        String fullname = m_Core->GetParser()->Parse(filename, VSParse_PathCanon);
+        String fullname = m_Parser->Parse(filename, VSParse_PathCanon);
 
         // Check for relative
         if (PathIsRelative(fullname.GetData()))
         {
-            fullname = m_Core->GetParser()->Parse(String(VSTR("$(path)\\")) + fullname, VSParse_PathCanon);
+            fullname = m_Parser->Parse(String(VSTR("$(path)\\")) + fullname, VSParse_PathCanon);
         }
 
         // Check for already loaded
@@ -253,13 +261,13 @@ namespace VoodooShader
         }
 
         // Create struct and load functions
-        PluginRef module = VSPlugin::Load(m_Core, fullname);
+        PluginRef module = VSPlugin::Load(this, fullname);
 
         if (module == nullptr)
         {
-            if (logger)
+            if (m_Logger)
             {
-                logger->LogMessage
+                m_Logger->LogMessage
                 (
                     VSLog_CoreError, VOODOO_CORE_NAME, 
                     StringFormat("Unable to load module '%1%'.") << filename
@@ -270,13 +278,14 @@ namespace VoodooShader
         }
 
         // Register classes from module
-        const Version * moduleversion = module->PluginInit();
+        const Version * moduleversion = module->PluginInit(pCore);
 
         if (!moduleversion)
         {
-            if (logger)
+            if (m_Logger)
             {
-                logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, StringFormat("Null version returned by module '%1%'.") << fullname);
+                m_Logger->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                    StringFormat("Null version returned by module '%1%'.") << fullname);
             }
             return VSFERR_INVALIDPARAMS;
         }
@@ -284,18 +293,19 @@ namespace VoodooShader
         m_Modules[moduleversion->LibId] = module;
         m_ModuleNames[moduleversion->Name] = moduleversion->LibId;
 
-        if (moduleversion->Debug != VOODOO_DEBUG_BOOL && logger)
+        if (moduleversion->Debug != VOODOO_DEBUG_BOOL && m_Logger)
         {
-            logger->LogMessage
+            m_Logger->LogMessage
             (
                 VSLog_CoreWarning, VOODOO_CORE_NAME,
                 StringFormat("Debug build mismatch with module '%1%'.") << moduleversion->Name
             );
         }
 
-        if (logger)
+        if (m_Logger)
         {
-            logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, StringFormat("Loaded module: %1%") << *module->PluginInit());
+            m_Logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, 
+                StringFormat("Loaded module: %1%") << moduleversion->Name);
         }
 
         uint32_t classCount = module->ClassCount();
@@ -318,13 +328,13 @@ namespace VoodooShader
     }
 
 
-    VoodooResult VOODOO_METHODTYPE VSPluginServer::LoadPlugin(_In_ const IFile * pFile)
+    VoodooResult VOODOO_METHODTYPE VSPluginServer::LoadPlugin(_In_ ICore * pCore, _In_ const IFile * pFile)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         if (pFile)
         {
-            return this->LoadPlugin(pFile->GetPath());
+            return this->LoadPlugin(pCore, pFile->GetPath());
         }
         else
         {
@@ -334,14 +344,14 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSPluginServer::ClassExists(_In_ const Uuid clsid) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         return (m_Classes.find(clsid) != m_Classes.end());
     }
 
     bool VOODOO_METHODTYPE VSPluginServer::ClassExists(_In_ const String & name) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         Uuid clsid;
         if (!name.ToUuid(&clsid))
@@ -360,10 +370,10 @@ namespace VoodooShader
         return this->ClassExists(clsid);
     }
 
-    IObject * VOODOO_METHODTYPE VSPluginServer::CreateObject(_In_ const Uuid clsid) CONST
+    IObject * VOODOO_METHODTYPE VSPluginServer::CreateObject(_In_ ICore * pCore, _In_ const Uuid clsid) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        ILogger* logger = m_Core->GetLogger();
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         ClassMap::const_iterator classiter = m_Classes.find(clsid);
 
         if (classiter != m_Classes.end())
@@ -371,13 +381,13 @@ namespace VoodooShader
             PluginRef module = classiter->second.first;
             uint32_t index = classiter->second.second;
 
-            IObject * object = module->CreateClass(index, m_Core);
+            IObject * object = module->CreateClass(index, pCore);
 
             if (object == nullptr)
             {
-                if (logger)
+                if (m_Logger)
                 {
-                    logger->LogMessage
+                    m_Logger->LogMessage
                     (
                         VSLog_CoreError, VOODOO_CORE_NAME,
                         StringFormat("Error creating instance of class %1%.") << clsid
@@ -389,9 +399,9 @@ namespace VoodooShader
         }
         else
         {
-            if (logger)
+            if (m_Logger)
             {
-                logger->LogMessage
+                m_Logger->LogMessage
                 (
                     VSLog_CoreError, VOODOO_CORE_NAME, 
                     StringFormat("Class %1% not found.") << clsid
@@ -402,9 +412,9 @@ namespace VoodooShader
         }
     }
 
-    IObject * VOODOO_METHODTYPE VSPluginServer::CreateObject(_In_ const String & name) CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    IObject * VOODOO_METHODTYPE VSPluginServer::CreateObject(_In_ ICore * pCore, _In_ const String & name) CONST
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         Uuid clsid;
         if (!name.ToUuid(&clsid))
         {
@@ -419,6 +429,6 @@ namespace VoodooShader
             }
         }
 
-        return this->CreateObject(clsid);
+        return this->CreateObject(pCore, clsid);
     }
 }

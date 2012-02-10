@@ -41,13 +41,13 @@ namespace VoodooShader
         VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST Uuid libid) CONST;
         VOODOO_METHOD_(bool, IsLoaded)(_In_ const String & name) CONST;
         VOODOO_METHOD_(bool, IsLoaded)(_In_ const Uuid & libid) CONST;
-        VOODOO_METHOD(LoadPath)(_In_ const String & path, _In_ const String & filter);
-        VOODOO_METHOD(LoadPlugin)(_In_ const IFile * pFile);
-        VOODOO_METHOD(LoadPlugin)(_In_ const String & filename);
+        VOODOO_METHOD(LoadPath)(_In_ ICore * pCore, _In_ const String & path, _In_ const String & filter);
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const IFile * pFile);
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const String & filename);
         VOODOO_METHOD_(bool, ClassExists)(_In_ const Uuid refid) CONST;
         VOODOO_METHOD_(bool, ClassExists)(_In_ const String & name) CONST;
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid refid) CONST;
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const String & name) CONST;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ const Uuid refid) CONST;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ const String & name) CONST;
 
     private:
         // Private these to prevent copying internally (external libs never will).
@@ -56,7 +56,9 @@ namespace VoodooShader
         ~VSPluginServer();
 
         mutable uint32_t m_Refs;
-        ICore * m_Core;
+
+        LoggerRef m_Logger;
+        ParserRef m_Parser;
 
         ModuleMap m_Modules;
         StrongNameMap m_ModuleNames;

@@ -34,6 +34,8 @@ namespace VoodooShader
     VSFileSystem::~VSFileSystem()
     {
         RemoveThisFromDebugCache();
+
+        m_Core = nullptr;
     }
 
     uint32_t VOODOO_METHODTYPE VSFileSystem::AddRef() CONST

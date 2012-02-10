@@ -22,12 +22,14 @@
 namespace VoodooShader
 {
      /**
-      * @page voodoo_vson VSON
+      * @page voodoo_vson VSON Specification
       *
       * In order to concisely express objects and other information in files, as well as provide an alternate parser for
       * effect files where the standard HLSL compiler is not available, Voodoo Shader uses a simple object notation. In a
-      * futile attempt to be "cool", this is named VSON, and similar in some ways to JSON (it is, however, far less 
-      * verbose and constrained).
+      * futile attempt to be "cool", this is named VSON (Voodoo Shader object notation, pronounced vee-sun), and very 
+      * similar to JSON (it is, however, far less verbose and constrained). In addition, the supporting query language VSQL 
+      * (Voodoo Shader query language, vee-sequel) will be introduced to help manipulate VSON files. The eventual goal is
+      * to move the project away from XML entirely.
       *
       * This page details the basics of VSON. For language purposes, it is the standard specification.
       *
@@ -81,7 +83,7 @@ namespace VoodooShader
       *
       * @subsection voodoo_vson_types_decimal decimal
       * The <tt>decimal</tt> type is a 64-bit double, following the IEEE 754 standard for @a binary64. The <tt>dec</tt> is a
-      * floating-point type with variable precision, having a range of approximately +/–1.7E308 with at least 15 digits of 
+      * floating-point type with variable precision, having a range of approximately +/-1.7E308 with at least 15 digits of 
       * precision
       *
       * @par Representation:
@@ -104,12 +106,16 @@ namespace VoodooShader
       *
       * @par Representation:
       *     @code \".*\" @endcode
-      *     Any quoted value. Inline quotes and special characters must be escaped.
+      *     Any quoted value. Inline quotes and special characters must be escaped, by prefixing them with a single
+      *     backslash. To insert a backslash, simply escape it (@p \\).
+      *
+      * @note There is a second representation for strings, only valid within the property context. See 
+      *     @ref voodoo_vson_elements_property.
       *
       * @par Conversion:
       *     All other types can be converted to <tt>string</tt>. <tt>boolean</tt> is converted to "true" or "false", numeric
-      *     types are converted to their standard representation (for example, <tt>integer 13</tt> would be "13" and
-      *     <tt>decimal 13.57</tt> would be "13.57"). This is identical to the mechanic used during serialization.
+      *     types are converted to their standard representation (for example, integer <tt>13</tt> would be "13" and
+      *     decimal <tt>13.57</tt> would be "13.57"). This is identical to the mechanic used during serialization.
       *
       * @subsection voodoo_vson_types_parsed parsed
       * The <tt>parsed</tt> type is a special-behavior string. During loading, it is run through IParser::Parse with default
@@ -130,11 +136,10 @@ namespace VoodooShader
       *
       * @section voodoo_vson_scope Scope
       * Scopes in VSON are marked with braces (<tt>{</tt> and <tt>}</tt>). Scope may only change at certain points:
-      * @ul
       *  @li The beginning and end of a file (implicit document scope).
       *  @li An object declaration (explicit object scope).
       *
-      * Explicit scopes must have braces, implicit scopes do not.
+      * Explicit scopes must have braces, implicit scopes must not.
       *
       * @section voodoo_vson_elements Elements
       * The VSON language is remarkably concise, containing of only four primary elements. For compatibility, both standard
@@ -151,29 +156,32 @@ namespace VoodooShader
       * @subsection voodoo_vson_elements_directive Directive
       * Directive elements give special instructions to the VSON processor, particularly marking chunks of the file as being
       * literal or ignored. All directives must be alone on their line, with the exception of trailing comments, and the
-      * first characters of the line must be the sequence <tt>//!</tt> (whitespace between the directive and the initial 
+      * first characters of the line must be the sequence <tt>//#</tt> (whitespace between the directive and the initial 
       * sequence is allowed, newlines are not).
       *
       * Available directives include:
       *
-      * @subsubsection voodoo_vson_elements_directive_bang Bang
+      * @subsubsection voodoo_vson_elements_directive_langtag Language Tag
       * @code
-      * //! VSON
+      * //# VSON[-version]
       * @endcode
       * This directive indicates that the entire document, except parts marked as literal or ignored, should be parsed as
-      * VSON. This is only valid on the first line of a file. If it is not present, the file is parsed as if it was framed
-      * by literal directives. 
+      * VSON. This is only valid on the first content line of a file (lines containing only whitespace and/or comments are
+      * not considered content). If it is not present, the file is parsed as if it was framed by literal directives. 
       *
-      * Lack of a bang does @a not prevent the document scope from being created, it simply implies a literal region. Any
-      * parsed regions within a document missing a bang will be parsed into the document scope as usual.
+      * The language tag may optionally have a version marker, indicating which version of the VSON specification this 
+      * document is written against. No specified version will be interpretted with the latest parser. The current version 
+      * is @p 0.1.
+      *
+      * Lack of a language tag does @a not prevent the document scope from being created, it simply implies a literal
+      * region surrounding the entire document. Any parsed regions within a document will still be parsed as usual, into the
+      * document scope or any nested scopes are appropriate.
       *
       * @subsubsection voodoo_vson_elements_directive_literal Literal
       * @code
-      * \//! [[
-      * /\/! [[
-      * //\! [[
+      * //# [[
       * ...
-      * //! ]]
+      * //# ]]
       * @endcode
       * The region between the directives will not be parsed as VSON, regardless of document settings. It will instead be 
       * assigned to the @a value property of the current scope. In the case of HLSL, this is useful for embedding source 
@@ -181,14 +189,15 @@ namespace VoodooShader
       *
       * @subsubsection voodoo_vson_elements_directive_parsed Parsed
       * @code
-      * //\! {{
+      * //# {{
       * ...
-      * //! }}
+      * //# }}
       * @endcode
       * The region between the directives will be parsed as VSON, regardless of document settings. It will be added to the
-      * current scope, typically being the document scope (see the notes on @ref voodoo_vson_elements_directive_bang). It is
-      * possible to nest literal and parsed regions within a document (with or without bang), but this is not recommended, 
-      * as simply closing the scope is usually clearer. This directive's symbol indicates the region is in a VSON scope.
+      * current scope, typically being the document scope (see the notes on @ref voodoo_vson_elements_directive_langtag). It
+      * is possible to nest literal and parsed regions within a document (with or without bang), but this is not 
+      * recommended, as simply closing the scope is usually clearer. This directive's symbol indicates the region is in a 
+      * VSON scope.
       *
       * @subsection voosoo_vson_elements_identifier Identifier
       * Identifiers are used to name types and properties. They may contain any number of alphanumeric characters or
@@ -201,9 +210,11 @@ namespace VoodooShader
       * @par Representation:
       *     @code [type] name = value; @endcode
       *     @a name must be an identifier and unique within this scope.
-      *     @a value must be a valid representation of @type. If @type is not specified, it is implied from the first type 
-      *     for which @a value is valid (tested as boolean, decimal, boolean, string).
-      *     Properties must have a trailing semicolon.
+      *     @a value must be a valid representation of @a type. If @a type is not specified, it is implied from the first 
+      *     type for which @a value is valid (tested as boolean, decimal, integer, string). If @a value does not meet the
+      *     requirements for any type, including string, it will be interpreted as if it was wrapped in quotes, like so:
+      *     @code name = (")inserted quotes to wrap string(") /* comments */; @endcode
+      *     Properties must have a trailing semicolon, regardless of form.
       *
       * @par Conversion:
       *     Properties may be converted to <tt>string</tt>, where they will appear as given in the representation (including
@@ -231,5 +242,31 @@ namespace VoodooShader
       *     spacing and indentation). Objects with no name (or where name is an empty string) will not have a name in string
       *     form. This is used during serialization.
       *
+      *
+      * @section voodoo_vson_examples Examples
+      *
+      * @subsection voodoo_vson_examples_effect
+      * VSON is intended for use as a parser for both objects and effects. As Voodoo Shader cannot use the standard D3D
+      * compiler for OpenGL shaders, parsing the effect files and compiling the results is critical. Some of the ambiguous
+      * or confusing elements in VSON are specifically intended to parse effect files.
+      * @code
+      * // No language tag is given, causing the file to be interpreted as literal data. 
+      * // This allows using existing effects nearly as-is, with only parsed directives needed.
+      * 
+      * ... shader source code.
+      *
+      * // Techniques and passes are handled as objects, with appropriate properties and attributes. In this case, the
+      * // document and document scope act as the effect object and scope.
+      * //# {{
+      * technique "main"
+      * {
+      *     pass "p1"
+      *     {
+      *         // 
+      *         PixelShader = compile ps_2_0 function();
+      *     }
+      * }
+      * //# }}
+      * @endcode
       */
 }

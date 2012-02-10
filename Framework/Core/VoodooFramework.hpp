@@ -99,7 +99,8 @@
 #define DEFINE_LIBID(name)          DEFINE_UUID(LIBID_##name)
 
 #define VOODOO_CALLTYPE             STDCALL
-#define VOODOO_METHODTYPE           VOODOO_CALLTYPE
+#define VOODOO_METHODTYPE           VOODOO_CALLTYPE
+
 #define VOODOO_FUNCTION(type, name) VOODOO_API type VOODOO_CALLTYPE name
 #define VOODOO_METHOD_(type, name)  VIRTUAL DECLSPEC_NOTHROW type VOODOO_METHODTYPE name
 #define VOODOO_METHOD(name)         VOODOO_METHOD_(VoodooResult, name)
@@ -156,6 +157,7 @@ namespace VoodooShader
      *      future. Relying on this to return the same object repeatedly is undefined.
      */
     _Check_return_ VOODOO_FUNCTION(ICore *, CreateCore)(uint32_t version);
+    _Check_return_ VOODOO_FUNCTION(ILogger *, CreateLogger)();
     /**
      * Retrieve the singleton variable parser.
      */

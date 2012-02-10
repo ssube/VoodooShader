@@ -25,7 +25,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSPlugin
     DeclareDebugCache();
 
-    VSPlugin * VSPlugin::Load(_In_ ICore * pCore, _In_ const String & path)
+    VSPlugin * VSPlugin::Load(_In_ IPluginServer * pServer, _In_ const String & path)
     {
         // Load the module
         HMODULE hmodule = LoadLibraryEx(path.GetData(), nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
@@ -33,7 +33,7 @@ namespace VoodooShader
         // First set of error checks
         if (hmodule != nullptr)
         {
-            VSPlugin * module = new VSPlugin(pCore, hmodule);
+            VSPlugin * module = new VSPlugin(pServer, hmodule);
 
             // Disable conversion warnings, since GetProcAddress always returns FARPROC
 #pragma warning(push)
@@ -46,9 +46,9 @@ namespace VoodooShader
 
             if
             (
-                module->m_PluginInit == nullptr ||
-                module->m_ClassCount == nullptr ||
-                module->m_ClassInfo == nullptr ||
+                module->m_PluginInit  == nullptr ||
+                module->m_ClassCount  == nullptr ||
+                module->m_ClassInfo   == nullptr ||
                 module->m_ClassCreate == nullptr
             )
             {
@@ -66,8 +66,8 @@ namespace VoodooShader
         }
     }
 
-    VOODOO_METHODTYPE VSPlugin::VSPlugin(_In_ ICore * pCore, HMODULE hmodule) :
-        m_Refs(0), m_Core(pCore), m_Handle(hmodule)
+    VOODOO_METHODTYPE VSPlugin::VSPlugin(_In_ IPluginServer * pServer, HMODULE hmodule) :
+        m_Refs(0), m_Server(pServer), m_Handle(hmodule)
     {
         AddThisToDebugCache();
     }
@@ -86,12 +86,14 @@ namespace VoodooShader
     uint32_t VOODOO_METHODTYPE VSPlugin::AddRef() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSPlugin::Release() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
         {
@@ -103,6 +105,7 @@ namespace VoodooShader
     VoodooResult VOODOO_METHODTYPE VSPlugin::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+
         if (!ppOut)
         {
             return VSFERR_INVALIDPARAMS;
@@ -143,14 +146,14 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-        return m_Core;
+        return nullptr;
     }
 
-    const Version * VOODOO_METHODTYPE VSPlugin::PluginInit() CONST
+    const Version * VOODOO_METHODTYPE VSPlugin::PluginInit(_In_ ICore * pCore) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_ore->GetLogger());
 
-        return m_PluginInit(m_Core);
+        return m_PluginInit(pCore);
     }
 
     uint32_t VOODOO_METHODTYPE VSPlugin::ClassCount() CONST

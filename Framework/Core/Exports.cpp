@@ -41,15 +41,11 @@ EXTERN_C BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_
 
 namespace VoodooShader
 {
-    static const Version coreVersion = VOODOO_VERSION_STRUCT(CORE);
-    static const wchar_t * name_VSCore = VSTR("VSCore");
-    static const wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
-    static const wchar_t * name_VSHookManager = VSTR("VSHookManager");
-    static const wchar_t * name_VSLogger = VSTR("VSLogger");
-
     const Version * VOODOO_CALLTYPE API_PluginInit(ICore * pCore)
     {
         UNREFERENCED_PARAMETER(pCore);
+
+        static const Version coreVersion = VOODOO_VERSION_STRUCT(CORE);
 
         return &coreVersion;
     }
@@ -61,6 +57,11 @@ namespace VoodooShader
 
     const wchar_t * VOODOO_CALLTYPE API_ClassInfo(const uint32_t number, _Out_ Uuid * pUuid)
     {
+        static const wchar_t * name_VSCore = VSTR("VSCore");
+        static const wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
+        static const wchar_t * name_VSHookManager = VSTR("VSHookManager");
+        static const wchar_t * name_VSLogger = VSTR("VSLogger");
+
         if (!pUuid)
         {
             return nullptr;
@@ -95,8 +96,6 @@ namespace VoodooShader
             return new VSFileSystem(pCore);
         case 2:
             return new VSHookManager(pCore);
-        case 3:
-            return new VSLogger(pCore);
         default:
             return nullptr;
         }

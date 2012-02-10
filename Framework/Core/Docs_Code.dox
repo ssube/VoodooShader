@@ -30,11 +30,16 @@ namespace VoodooShader
       * created and used within Voodoo or adapters. To handle loading these modules, a known interface is required with a 
       * few specific features.
       *
-      * @section voodoo_spec_plugin_exports Module Exports
+      * @section voodoo_spec_plugin_exports Plugin Exports
       *
-      * Each Voodoo Shader module must export a set of 4 functions. These are used by the core to load and query the 
-      * module's version and what classes it provides. All these functions must be exported by name only, with no mangling 
-      * or decoration of any kind.
+      * Each Voodoo Shader plugin must export a single interface function, and may also export a set of 4 functions. These 
+      * are used by the core to load and query the plugin's version and what classes it provides. All these functions must 
+      * be exported by name only, with no mangling or decoration of any kind. 
+      *
+      * There are two options available here. All plugins @a must export @p PluginInit, and @a may additionally export
+      * @p ClassCount, @p ClassInfo, and @p ClassCreate if they expose public classes and wish to act as a factory.
+      * 
+      * If @p PluginInit is missing, or only some of the factory functions are present, the plugin will fail to load.
       *
       * @subsection voodoo_spec_plugin_exports_version PluginInit
       *
@@ -53,26 +58,29 @@ namespace VoodooShader
       *
       * @code const uint32_t ClassCount(); @endcode
       *
-      * Returns the total number of classes publicly exposed by this module. This may be 0, as adapters commonly do not
-      * expose public classes.
+      * Returns the total number of classes publicly exposed by this module. This function may be omitted, if the plugin
+      * does not act as a factory.
       *
       * @subsection voodoo_spec_plugin_exports_info ClassInfo
       *
       * @code const wchar_t * ClassInfo(const uint32_t index, Uuid * pClsid); @endcode
       *
-      * Returns the name and ClsId of a class. This is used to register the classes in the core's module manager when
-      * the module is loaded. The return value must be a pointer to the class name or nullptr if the index is invalid, and 
-      * the clsid parameter must be filled with the ClsId or unchanged if the index is invalid. 
+      * Returns the name and ClsId of a class. This function may be omitted, if the plugin does not act as a factory.
+      *
+      * This is used to register the classes in the core's module manager when the module is loaded. The return value must 
+      * be a pointer to the class name or nullptr if the index is invalid, and the clsid parameter must be filled with the 
+      * ClsId or unchanged if the index is invalid. 
       *
       * If @a index is greater than or equal to the value returned by this plugin's @p ClassCount, @p ClassInfo must return 
-      * nullptr. Class order must be constant throughout the plugin's lifetime and over multiple uses, and the values given
-      * in @a ClassInfo and class returned by @a ClassCreate must match.
+      * nullptr. Class order must be constant for a plugin (throughout the plugin's lifetime and over multiple uses), and 
+      * the values given in @a ClassInfo and class returned by @a ClassCreate must match.
       *
       * @subsection voodoo_spec_plugin_exports_create ClassCreate
       *
       * @code IObject * ClassCreate(const uint32_t index, ICore * pCore); @endcode
       *
-      * Creates a new instance of the given class, bound to the provided core. 
+      * Creates a new instance of the given class, bound to the provided core. This function may be omitted, if the plugin
+      * does not act as a factory.
       *
       * @note Class constructors @em may throw exceptions, but these must be caught within the create function and <em>must 
       *     not</em> be allowed to propagate between modules (this can cause crashes). If an error occurs, a nullptr must be 
@@ -82,17 +90,18 @@ namespace VoodooShader
       * @note Any class provided by this module that may be created externally by this function must be listed in ClassInfo
       *     using the same index.
       *
+      *
       * @section voodoo_spec_iobject IObject Interface
       *
       * Every class used in Voodoo Shader @em must derive from the IObject interface. The methods provided are vital for 
       * object lifetime management and garbage collection. This is performed in a manner very much like COM, with each 
       * object managing reference count internally.
       *
-      * Every object, except one which implements ICore, must hold a non-incremented reference to its core and may hold a
-      * non-incremented reference to its immediate parent. This allows tracking up without causing circular references. The 
-      * object may both temporarily increment the reference, when it needs a short-term guarantee of validity, or pass the 
-      * reference (where it may be incremented). However, in no other case may non-incremented references be used; this can 
-      * break thread-safety, cause crashes, and undefined behavior.
+      * Every object, except one which implements ICore, must hold a reference to its core and should hold a reference to 
+      * its immediate parent. Care must be taken to avoid causing circular references; typically references to the parent
+      * should only be incremented if the object is returned publicly and not incremented  if the object is held in an
+      * internal list or one which cannot be cleared. While both must be avoided, invalid pointers are far more dangerous
+      * than memory leaks, and so should receive focus when designing object linkage.
       *
       * @subsection voodoo_spec_iobject_addref IObject::AddRef
       * @code uint32_t IObject::AddRef() CONST @endcode
@@ -127,19 +136,19 @@ namespace VoodooShader
       * must evaluate equal to any other pointer to the same object, regardless of interface. The object's reference count 
       * must be incremented, from the pointer to be returned.
       *
-      * If the object does not implement the class or interface in @a refid, the call must fail with an invalid Uuid error
-      * (VSFERR_INVALIDUUID).
+      * If the object does not implement the class or interface in @a refid, or @a refid is a nil Uuid, the call must fail 
+      * with an invalid Uuid error (VSFERR_INVALIDUUID).
       *
       * All IObject-derived classes must provide interfaces for IObject, their parent interface(s), and their class. Calls
       * to @p QueryInterface must be symmetric (if <tt>QI(A)->B</tt> succeeds, then <tt>QI(QI(A)->B)->A</tt> must as well),
       * transitive (if <tt>QI(QI(A)->B)->C</tt> succeeds, then <tt>QI(A)->C</tt> must as well), and reflexive
       * (<tt>QI(A)->A</tt> must always succeed).
       *
-      * This is not to say that all objects of type <tt>A</tt> must behave the same; these guarantees must hold for any
-      * single object throughout its lifetime. Two objects of type <tt>A</tt> may be unable to provide an interface
-      * based on internal conditions (for example, if <tt>A1</tt> is an IObject queried from an ICore and <tt>A2</tt> is an
-      * IObject queried from an IParser, <tt>A2</tt> will not be able to provide an interface to ICore, but must be able to
-      * do so for IParser).
+      * This is not to say that all objects referenced through interface <tt>A</tt> must behave the same; these guarantees 
+      * must hold for any single object throughout its lifetime. Two objects of type <tt>A</tt> may be unable to provide an 
+      * interface based on internal conditions (for example, if <tt>A1</tt> is an IObject queried from an ICore and 
+      * <tt>A2</tt> is an IObject queried from an IParser, <tt>A2</tt> will not be able to provide an interface to ICore, 
+      * but must be able to do so for IParser).
       *
       * For VSCore (which implements ICore and IObject) an example QueryInterface may be:
       *
@@ -179,13 +188,12 @@ namespace VoodooShader
       * this is not recommended) and optionally some data. This string must follow the form:
       *
       * @code
-      * ImplName()
-      * ImplName(Key: Value; Key: Value)
+      * ImplName{}
+      * ImplName{Key: Value; Key: Value}
       * @endcode
       *
-      * If no data is provided, the data section inside the parentheses must be empty but the parentheses must be present.
-      * If data is provided, it must be in a <tt>(key: value[; ...])</tt> form with all colons, semicolons, quotes and 
-      * parantheses escaped (prefixed with a backslash).
+      * If no data is provided, the data section inside the braces must be empty but the braces must be present. If data is 
+      * provided, it must be in a <tt>key: value[; ...]</tt> form, matching the @ref voodoo_vson.
       *
       * @subsection voodoo_spec_iobject_getcore IObject::GetCore
       * @code ICore * IObject::GetCore() CONST @endcode

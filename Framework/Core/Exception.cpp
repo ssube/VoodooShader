@@ -79,6 +79,7 @@ namespace VoodooShader
 
     Exception::~Exception()
     {
+        m_Core = nullptr;
     }
 
     const char * Exception::what() const

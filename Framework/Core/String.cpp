@@ -126,6 +126,8 @@ namespace VoodooShader
 
     String::~String()
     {
+        delete m_Impl;
+        m_Impl = nullptr;
     }
 
     void String::CInit(const uint32_t size, const char * str)
@@ -364,7 +366,7 @@ namespace VoodooShader
                     ++index;
                 }
             }
-
+                
             return index;
         }
         else

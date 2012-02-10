@@ -21,10 +21,10 @@
 #include "VSParser.hpp"
 // System
 #pragma warning(push,3)
-#include <shlwapi.h>
-#include <string>
-#include <sstream>
-#include <iostream>
+#   include <shlwapi.h>
+#   include <string>
+#   include <sstream>
+#   include <iostream>
 #pragma warning(pop)
 
 namespace VoodooShader
@@ -47,6 +47,10 @@ namespace VoodooShader
                 UNREFERENCED_PARAMETER(exc);
                 pParser = nullptr;
             }
+        }
+        if (pParser)
+        {
+            pParser->AddRef();
         }
 
         return pParser;
@@ -55,6 +59,8 @@ namespace VoodooShader
     VOODOO_METHODTYPE VSParser::VSParser() :
         m_Refs(0)
     {
+        m_Logger = CreateLogger();
+
         AddThisToDebugCache();
     }
 
@@ -63,18 +69,18 @@ namespace VoodooShader
         RemoveThisFromDebugCache();
 
         m_Variables.clear();
+        m_Logger = nullptr;
     }
 
     uint32_t VOODOO_METHODTYPE VSParser::AddRef() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSParser::Release() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -88,8 +94,7 @@ namespace VoodooShader
     }
 
     VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         if (!ppOut)
         {
@@ -121,30 +126,25 @@ namespace VoodooShader
     }
 
     String VOODOO_METHODTYPE VSParser::ToString() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         return VSTR("VSParser()");
     }
 
     ICore * VOODOO_METHODTYPE VSParser::GetCore() CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        return m_Core;
+        return nullptr;
     }
 
     void VOODOO_METHODTYPE VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType type)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        LoggerRef logger = m_Core->GetLogger();
-
-        if (logger)
+        if (m_Logger)
         { 
             StringFormat msg(VSTR("Adding variable '%1%' with value '%2%'."));
             msg << name << value;
-            logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
         }
 
         String finalname = this->Parse(name);        
@@ -158,11 +158,11 @@ namespace VoodooShader
         {
             if (varIter->second.second == VSVar_System)
             {
-                if (logger)
+                if (m_Logger)
                 {
                     StringFormat msg(VSTR("Unable to add duplicate variable '%1%' (system variable already exists)."));
                     msg << finalname;
-                    logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, msg);
+                    m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, msg);
                 }
             }
             else
@@ -173,16 +173,13 @@ namespace VoodooShader
     }
 
     void VOODOO_METHODTYPE VSParser::Remove(_In_ const String & name)
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        LoggerRef logger = m_Core->GetLogger();
-
-        if (logger)
+        if (m_Logger)
         {
             StringFormat msg(VSTR("Removing variable '%1%'."));
             msg << name;
-            m_Core->GetLogger()->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
+            m_Logger->LogMessage(VSLog_CoreDebug, VOODOO_CORE_NAME, msg);
         }
 
         String finalname = this->Parse(name, VSParse_None);
@@ -195,22 +192,18 @@ namespace VoodooShader
     }
 
     String VOODOO_METHODTYPE VSParser::Parse(_In_ const String & input, _In_ const ParseFlags flags) CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         StringMap parseState;
         return this->ParseStringRaw(input, flags, 0, parseState);
     }
 
     String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) CONST
-    {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        LoggerRef logger(m_Core->GetLogger());
-
-        if (logger)
+        if (m_Logger)
         {
-            logger->LogMessage
+            m_Logger->LogMessage
             (
                 VSLog_CoreDebug, VOODOO_CORE_NAME, 
                 StringFormat(VSTR("Parsing string '%1%' (%2%).")) << input << flags
@@ -326,12 +319,13 @@ namespace VoodooShader
                             localFlags = (ParseFlags)(flags | newFlags);
                         }
 
-                        if (logger)
+                        if (m_Logger)
                         {
-                            logger->LogMessage(VSLog_CoreInfo, VOODOO_CORE_NAME, 
+                            m_Logger->LogMessage(VSLog_CoreInfo, VOODOO_CORE_NAME, 
                                 StringFormat("Variable local flags of %1% found, merged %2% with original %3%, flags set to %4%.") << newFlags << merge << flags << localFlags);
                         }
-                    } catch (std::exception & exc)
+                    } 
+                    catch (const std::exception & exc)
                     {
                         UNREFERENCED_PARAMETER(exc);
                     }
@@ -530,9 +524,9 @@ namespace VoodooShader
             }
         }
 
-        if (logger)
+        if (m_Logger)
         {
-            logger->LogMessage
+            m_Logger->LogMessage
             (
                 VSLog_CoreDebug, VOODOO_CORE_NAME,
                 StringFormat(VSTR("Returning string '%1%' from parser.")) << iteration

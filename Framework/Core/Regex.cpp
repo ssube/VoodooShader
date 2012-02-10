@@ -72,6 +72,7 @@ namespace VoodooShader
     Regex::~Regex()
     {
         delete m_Impl;
+        m_Impl = nullptr;
     }
 
     void Regex::SetExpr(const String & expr)
@@ -130,6 +131,7 @@ namespace VoodooShader
     RegexMatch::~RegexMatch()
     {
         delete m_Impl;
+        m_Impl = nullptr;
     }
 
     int32_t RegexMatch::GetCount() const

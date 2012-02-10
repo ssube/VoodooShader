@@ -21,8 +21,8 @@
 #include "VSLogger.hpp"
 // System
 #pragma warning(push,3)
-#include <sstream>
-#include <ios>
+#   include <sstream>
+#   include <ios>
 #pragma warning(pop)
 
 namespace VoodooShader
@@ -30,8 +30,34 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSLogger
     DeclareDebugCache();
 
-    VSLogger::VSLogger(ICore * pCore) :
-        m_Refs(0), m_Core(pCore), m_Filter(VSLog_Default), m_Flags(VSLogFlag_Unknown)
+    _Check_return_ VOODOO_FUNCTION(ILogger *, CreateLogger)()
+    {
+        static LONG lock = 0;
+        static VSLogger * pLogger = nullptr;
+
+        if (InterlockedCompareExchange(&lock, 0, 1))
+        {            try
+            {
+                pLogger = new VSLogger();
+                lock = 0;
+            }
+            catch (const std::exception & exc)
+            {
+                UNREFERENCED_PARAMETER(exc);
+                pLogger = nullptr;
+            }
+        }
+
+        if (pLogger)
+        {
+            pLogger->AddRef();
+        }
+
+        return pLogger;
+    }
+
+    VSLogger::VSLogger() :
+        m_Refs(0), m_Filter(VSLog_Default), m_Flags(VSLogFlag_Unknown)
     { 
         AddThisToDebugCache();
     }
@@ -43,13 +69,11 @@ namespace VoodooShader
 
     uint32_t VOODOO_METHODTYPE VSLogger::AddRef() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSLogger::Release() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
             delete this;
@@ -63,7 +87,6 @@ namespace VoodooShader
 
     VoodooResult VOODOO_METHODTYPE VSLogger::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (!ppOut)
         {
             return VSFERR_INVALIDPARAMS;
@@ -95,22 +118,16 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSLogger::ToString() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
         return VSTR("VSLogger()");
     }
 
     ICore * VOODOO_METHODTYPE VSLogger::GetCore() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
-        return m_Core;
+        return nullptr;
     }
 
     VoodooResult VOODOO_METHODTYPE VSLogger::Open(_In_ const String & filename, _In_ const bool append)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
         if (this->m_LogFile.is_open())
         {
             this->Close();
@@ -127,7 +144,15 @@ namespace VoodooShader
             flags |= std::ios_base::trunc;
         }
 
-        this->m_LogFile.open(filename.GetData(), flags);
+        ParserRef parser = CreateParser();
+        if (parser)
+        {
+            this->m_LogFile.open(parser->Parse(filename).GetData(), flags);
+        }
+        else
+        {
+            this->m_LogFile.open(filename.GetData(), flags);
+        }
 
         if (this->m_LogFile.is_open())
         {
@@ -156,8 +181,6 @@ namespace VoodooShader
 
     VoodooResult VOODOO_METHODTYPE VSLogger::Open(IFile * CONST pFile, CONST bool append)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
         if (!pFile) return VSFERR_INVALIDPARAMS;
 
         return this->Open(pFile->GetPath(), append);
@@ -165,15 +188,11 @@ namespace VoodooShader
 
     bool VOODOO_METHODTYPE VSLogger::IsOpen() CONST 
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        
         return m_LogFile.is_open();
     }
 
     VoodooResult VOODOO_METHODTYPE VSLogger::Close()
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
         if (this->IsOpen())
         {
             this->m_LogFile.close();
@@ -187,7 +206,6 @@ namespace VoodooShader
 
     void VOODOO_METHODTYPE VSLogger::Flush()
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         if (this->IsOpen())
         {
             this->m_LogFile.flush();
@@ -196,27 +214,21 @@ namespace VoodooShader
 
     void VOODOO_METHODTYPE VSLogger::SetFilter(CONST uint32_t level)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_Filter = (LogLevel)level;
     }
 
     LogLevel VOODOO_METHODTYPE VSLogger::GetFilter() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
         return m_Filter;
     }
 
     void VOODOO_METHODTYPE VSLogger::SetFlags(CONST LogFlags flags)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         m_Flags = flags;
     }
 
     LogFlags VOODOO_METHODTYPE VSLogger::GetFlags() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-
         return m_Flags;
     }
 
@@ -227,8 +239,6 @@ namespace VoodooShader
         _In_ const String & msg
     )
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
-        
         if (!this->IsOpen()) return false;
 
         uint32_t reqMask = VSLog_Critical | VSLog_Error;

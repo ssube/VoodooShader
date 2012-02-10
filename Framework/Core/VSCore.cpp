@@ -70,6 +70,7 @@ namespace VoodooShader
 #endif
 
         // Set up the internal objects
+        m_Logger = CreateLogger();
         m_Parser = CreateParser();
         m_ModuleManager = CreateServer();
 
@@ -85,9 +86,10 @@ namespace VoodooShader
 
         m_HookManager = nullptr;
         m_FileSystem = nullptr;
-        m_Logger = nullptr;
 
         m_ModuleManager = nullptr;
+        m_Parser = nullptr;
+        m_Logger = nullptr;
 
         if (m_ConfigFile)
         {
@@ -103,12 +105,14 @@ namespace VoodooShader
     VOODOO_METHODDEF_(uint32_t, VSCore::AddRef)() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         return SAFE_INCREMENT(m_Refs);
     }
 
     VOODOO_METHODDEF_(uint32_t, VSCore::Release)() CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
+
         uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
         {
@@ -281,7 +285,7 @@ namespace VoodooShader
             }
 
             // Load plugins, starting with the core
-            m_ModuleManager->LoadPlugin(VSTR("$(core)"));
+            m_ModuleManager->LoadPlugin(this, VSTR("$(core)"));
 
             {
                 pugi::xpath_query xpq_getPluginPaths(L"./Plugins/Path");
@@ -294,7 +298,7 @@ namespace VoodooShader
                     String filter = xpq_getFilter.evaluate_string(*iter);
                     String path = xpq_getText.evaluate_string(*iter);
 
-                    m_ModuleManager->LoadPath(path, filter);
+                    m_ModuleManager->LoadPath(this, path, filter);
 
                     ++iter;
                 }
@@ -309,7 +313,7 @@ namespace VoodooShader
                 {
                     String file = xpq_getText.evaluate_string(*iter);
 
-                    m_ModuleManager->LoadPlugin(file);
+                    m_ModuleManager->LoadPlugin(this, file);
 
                     ++iter;
                 }
@@ -324,7 +328,7 @@ namespace VoodooShader
             String hookClass = m_Parser->Parse(hookQuery.evaluate_string(globalNode).c_str());
 
             // Make sure a logger was loaded
-            IObject * coreplugin = m_ModuleManager->CreateObject(logClass);
+            IObject * coreplugin = m_ModuleManager->CreateObject(this, logClass);
             ILogger * plogger = nullptr;
             if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_ILogger, (IObject**)&plogger)) && plogger)
             {
@@ -366,7 +370,7 @@ namespace VoodooShader
             m_Logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             // Load less vital classes
-            coreplugin = m_ModuleManager->CreateObject(hookClass);
+            coreplugin = m_ModuleManager->CreateObject(this, hookClass);
             IHookManager * phm = nullptr;
             if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_IHookManager, (IObject**)&phm)) && phm)
             {
@@ -379,7 +383,7 @@ namespace VoodooShader
                 Throw(VOODOO_CORE_NAME, fmt, this);
             }
 
-            coreplugin = m_ModuleManager->CreateObject(fsClass);
+            coreplugin = m_ModuleManager->CreateObject(this, fsClass);
             IFileSystem * pfs = nullptr;
             if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_IFileSystem, (IObject**)&pfs)) && pfs)
             {
@@ -432,7 +436,7 @@ namespace VoodooShader
         if (profile == VSProfile_D3D9)
         {
             // Load D3D9 compiler
-            if (FAILED(m_ModuleManager->LoadPlugin(VSTR("$(binpath)\\Voodoo_D3D9.dll"))))
+            if (FAILED(m_ModuleManager->LoadPlugin(this, VSTR("$(binpath)\\Voodoo_D3D9.dll"))))
             {
                 return VSFERR_INVALIDCALL;
             }
@@ -488,7 +492,7 @@ namespace VoodooShader
 
             return VSF_OK;
         }
-        catch (std::exception & exc)
+        catch (const std::exception & exc)
         {
             if (m_Logger)
             {
@@ -513,7 +517,7 @@ namespace VoodooShader
 
             return VSF_OK;
         }
-        catch (std::exception & exc)
+        catch (const std::exception & exc)
         {
             if (m_Logger)
             {
@@ -548,7 +552,7 @@ namespace VoodooShader
 
             return VSF_OK;
         }
-        catch (std::exception & exc)
+        catch (const std::exception & exc)
         {
             if (m_Logger)
             {

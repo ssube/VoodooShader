@@ -41,7 +41,7 @@ namespace VoodooShader
     VOODOO_CLASS(VSLogger, ILogger, ({0x9E, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        VSLogger(ICore * pCore);
+        VSLogger();
 
         VOODOO_METHOD_(uint32_t, AddRef)() CONST;
         VOODOO_METHOD_(uint32_t, Release)() CONST;
@@ -67,7 +67,6 @@ namespace VoodooShader
         ~VSLogger();
 
         mutable uint32_t m_Refs;
-        ICore * m_Core;
 
         std::wfstream m_LogFile;
         LogLevel m_Filter;

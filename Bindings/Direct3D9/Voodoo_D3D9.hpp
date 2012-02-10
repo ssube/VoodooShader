@@ -23,14 +23,12 @@
 #define VOODOO_NO_PUGIXML
 #include "VoodooFramework.hpp"
 
-#ifdef _DEBUG
-#define D3D_DEBUG_INFO
-#endif
 #pragma warning(push,3)
-#include <d3d9.h>
-#pragma warning(pop)
-#pragma warning(push,3)
-#include <d3dx9effect.h>
+#   ifdef _DEBUG
+#       define D3D_DEBUG_INFO
+#   endif
+#   include <d3d9.h>
+#   include <d3dx9effect.h>
 #pragma warning(pop)
 
 namespace VoodooShader

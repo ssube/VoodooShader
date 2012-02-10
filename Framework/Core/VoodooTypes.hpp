@@ -538,6 +538,7 @@ namespace VoodooShader
     {
         typedef ICore *         (VOODOO_CALLTYPE * CoreCreateFunc)(uint32_t);
         typedef const Version * (VOODOO_CALLTYPE * PluginInitFunc)(ICore *);
+        typedef void            (VOODOO_CALLTYPE * PluginResetFunc)(ICore *);
         typedef const uint32_t  (VOODOO_CALLTYPE * ClassCountFunc)();
         typedef const wchar_t * (VOODOO_CALLTYPE * ClassInfoFunc)(const uint32_t, Uuid *);
         typedef IObject *       (VOODOO_CALLTYPE * ClassCreateFunc)(const uint32_t, ICore *);

@@ -44,7 +44,7 @@ namespace VoodooShader
         try
         {
             m_Impl = new FormatImpl(fmt);
-        } catch (boost::exception & exc)
+        } catch (const boost::exception & exc)
         {
             UNREFERENCED_PARAMETER(exc);
             Throw(VOODOO_CORE_NAME, VSTR("StringFormat string error"), nullptr);
@@ -59,6 +59,7 @@ namespace VoodooShader
     StringFormat::~StringFormat()
     {
         delete m_Impl;
+        m_Impl = nullptr;
     }
 
     String StringFormat::ToString() const

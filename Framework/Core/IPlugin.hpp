@@ -55,7 +55,7 @@ namespace VoodooShader
         /**
          * Get the current version of this module.
          */
-        VOODOO_METHOD_(const Version *, PluginInit)() CONST PURE;
+        VOODOO_METHOD_(const Version *, PluginInit)(_In_ ICore * pCore) CONST PURE;
         /**
          * Get the number of classes this module publicly provides. 
          */

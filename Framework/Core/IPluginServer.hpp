@@ -85,7 +85,7 @@ namespace VoodooShader
          *
          * @note Only loads files whose filename matches the filter (standard regex match).
          */
-        VOODOO_METHOD(LoadPath)(_In_ const String & path, _In_ const String & filter) PURE;
+        VOODOO_METHOD(LoadPath)(_In_ ICore * pCore, _In_ const String & path, _In_ const String & filter) PURE;
         /**
          * Loads a single module, from an already-existing file.
          *
@@ -93,7 +93,7 @@ namespace VoodooShader
          *
          * @note This always uses the module's directory in the search path for required DLLs.
          */
-        VOODOO_METHOD(LoadPlugin)(_In_ const IFile * pFile) PURE;
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const IFile * pFile) PURE;
         /**
          * Loads a single module, using an absolute or relative filename.
          *
@@ -119,7 +119,7 @@ namespace VoodooShader
          *      @li All directories listed in the PATH environment variable, in order.
          *
          */
-        VOODOO_METHOD(LoadPlugin)(_In_ const String & filename) PURE;
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const String & filename) PURE;
         /**
          * @}
          * @name Class Methods
@@ -150,7 +150,7 @@ namespace VoodooShader
          * @param clsid The class Uuid to create.
          * @return New object or nullptr if the class wasn't found or couldn't be created.
          */
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const Uuid clsid) CONST PURE;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ const Uuid clsid) CONST PURE;
         /**
          * Create a new instance of the given class, using a class name or Uuid in string form.
          *
@@ -163,7 +163,7 @@ namespace VoodooShader
          *
          * @sa @ref String::String(const Uuid &) for String to Uuid conversion rules.
          */
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ const String & name) CONST PURE;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ const String & name) CONST PURE;
         /**
          * @}
          */
