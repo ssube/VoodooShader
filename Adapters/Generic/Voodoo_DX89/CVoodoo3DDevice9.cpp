@@ -182,7 +182,7 @@ namespace VoodooShader
                 HRESULT hr = m_RealDevice->StretchRect(m_BackBuffer, nullptr, surface_Frame0, nullptr, D3DTEXF_NONE);
                 if (FAILED(hr))
                 {
-                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
+                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                 }
 
                 VoodooShader::TechniqueRef tech = testEffect->Bind();
@@ -197,7 +197,7 @@ namespace VoodooShader
                             hr = m_RealDevice->StretchRect(m_BackBuffer, nullptr, surface_Pass0, nullptr, D3DTEXF_NONE);
                             if (FAILED(hr))
                             {
-                                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
+                                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                             }
 
                             pass->Bind();
@@ -867,13 +867,13 @@ namespace VoodooShader
 
             if (!bestVertStr || !bestFragStr)
             {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Error detecting latest shader profiles."));
+                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, VSTR("Error detecting latest shader profiles."));
                 return VSF_FAIL;
             }
 
             logger->LogMessage
             (
-                VSLog_ModInfo, VOODOO_DX89_NAME,
+                VSLog_PlugInfo, VOODOO_DX89_NAME,
                 StringFormat("Detected latest profiles as %1% and %2%.") << bestVertStr << bestFragStr
             );
 
@@ -891,7 +891,7 @@ namespace VoodooShader
 
             if (!SUCCEEDED(errors))
             {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to create standard vertex declaration."));
+                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, VSTR("Unable to create standard vertex declaration."));
             }
 
             vertDeclElems[0].Usage = D3DDECLUSAGE_POSITIONT;
@@ -900,7 +900,7 @@ namespace VoodooShader
 
             if (!SUCCEEDED(errors))
             {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Unable to create transformed vertex declaration."));
+                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, VSTR("Unable to create transformed vertex declaration."));
             }
 
             // Get params
@@ -910,7 +910,7 @@ namespace VoodooShader
 
             logger->LogMessage
             (
-                VSLog_ModInfo, VOODOO_DX89_NAME, 
+                VSLog_PlugInfo, VOODOO_DX89_NAME, 
                 StringFormat("Prepping for %1% by %2% target.") << (uint32_t)viewport.Width << (uint32_t)viewport.Height
             );
 
@@ -938,7 +938,7 @@ namespace VoodooShader
 
             if (FAILED(errors))
             {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
+                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, VSTR("Failed to create vertex buffer."));
             }
 
             VertexDesc * pVertices = nullptr;
@@ -951,7 +951,7 @@ namespace VoodooShader
             }
             else
             {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
+                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, VSTR("Failed to lock vertex buffer to fsquad."));
             }
 
             TextureDesc bufferTextureDesc;
@@ -967,11 +967,11 @@ namespace VoodooShader
 
             if (SUCCEEDED(hrt))
             {
-                logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
+                logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached backbuffer surface.");
             }
             else
             {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
+                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
             }
 
             texture_Frame0 = gpVoodooCore->CreateTexture(L":frame0", bufferTextureDesc);
@@ -981,11 +981,11 @@ namespace VoodooShader
                 if (SUCCEEDED(texture_Frame0->GetProperty(PropIds::D3D9Surface, &texvar)))
                 {
                     surface_Frame0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                    logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
+                    logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
                 }
                 else
                 {
-                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
+                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
                 }
             }
 
@@ -996,11 +996,11 @@ namespace VoodooShader
                 if (SUCCEEDED(texture_Pass0->GetProperty(PropIds::D3D9Surface, &texvar)))
                 {
                     surface_Pass0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                    logger->LogMessage(VSLog_ModInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
+                    logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
                 }
                 else
                 {
-                    logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
+                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
                 }
             }
 
@@ -1017,7 +1017,7 @@ namespace VoodooShader
             }
             catch (std::exception & exc)
             {
-                logger->LogMessage(VSLog_ModError, VOODOO_DX89_NAME, StringFormat("Error loading shader: %1%") << exc.what());
+                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, StringFormat("Error loading shader: %1%") << exc.what());
             }
 
             if (lpparam_rcpres)

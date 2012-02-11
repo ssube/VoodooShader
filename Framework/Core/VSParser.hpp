@@ -61,7 +61,8 @@ namespace VoodooShader
 
         String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) const;
 
-        mutable uint32_t m_Refs;
+        mutable uint32_t m_Refs;
+
         LoggerRef m_Logger;
 
         VariableMap m_Variables;

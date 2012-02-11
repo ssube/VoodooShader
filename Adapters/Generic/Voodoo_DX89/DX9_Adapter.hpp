@@ -28,7 +28,7 @@
 #include "D3DX9Shader.h"
 
 #ifdef VOODOO_DX89_DEBUG3D8
-#   define VOODOO_API_LOG(...) gpVoodooLogger->LogMessage(VSLog_ModDebug, VOODOO_DX89_NAME, __VA_ARGS__)
+#   define VOODOO_API_LOG(...) gpVoodooLogger->LogMessage(VSLog_PlugDebug, VOODOO_DX89_NAME, __VA_ARGS__)
 #else
 #   define VOODOO_API_LOG(...)
 #endif

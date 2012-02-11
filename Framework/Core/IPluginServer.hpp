@@ -31,8 +31,9 @@ namespace VoodooShader
     /**
      * @class IPluginServer
      *
-     * Provides a framework for loading and unloading modules in core, as well as retrieving symbols and modules
-     * from memory.
+     * Provides a framework for loading and unloading plugins in core, as well as retrieving symbols and modules from 
+     * memory. The plugin server operates as an in-memory server and supports only basic handling, roughly equivalent to
+     * COM with an in-process STA server and no external class registry.
      *
      * @iid e6f31290-05af-11e1-9e05-005056c00008
      */
@@ -50,38 +51,38 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
-         * @name Module Methods
+         * @name Plugin Methods
          * @{
          */
         /**
-         * Gets a loaded module.
+         * Gets a loaded plugin.
          * 
-         * @param   name  The module name, as reported by the plugin API.
+         * @param   name  The plugin name, as reported by the plugin API.
          */
         VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST String & name) CONST PURE;
         /**
          * Gets a loaded module.
          * 
-         * @param   libid  The module LibId, as reported by the plugin API.
+         * @param   libid  The plugin LibId, as reported by the plugin API.
          */
         VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST Uuid libid) CONST PURE;
         /**
-         * Tests if the module with the given name is currently loaded.
+         * Tests if the plugin with the given name is currently loaded.
          * 
-         * @param name The module name to check.
+         * @param   name    The module name to check.
          */
         VOODOO_METHOD_(bool, IsLoaded)(_In_ const String & name) CONST PURE;
         /**
          * Tests if the module with the given Uuid is currently loaded.
          * 
-         * @param libid The module Uuid to check.
+         * @param   libid   The module Uuid to check.
          */
         VOODOO_METHOD_(bool, IsLoaded)(_In_ const Uuid & libid) CONST PURE;
         /**
          * Loads a set of modules from a given path.
          *
-         * @param path The path to load from (may be any Windows path type). Sent through the parser before use.
-         * @param filter A regex to filter filenames by.
+         * @param   path    The path to load from (may be any Windows path type). Sent through the parser before use.
+         * @param   filter  A regex to filter filenames by.
          *
          * @note Only loads files whose filename matches the filter (standard regex match).
          */
@@ -93,7 +94,8 @@ namespace VoodooShader
          *
          * @note This always uses the module's directory in the search path for required DLLs.
          */
-        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const IFile * pFile) PURE;
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const IFile * pFile) PURE;        VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST String & name) PURE;
+        VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST Uuid libid) PURE;
         /**
          * Loads a single module, using an absolute or relative filename.
          *

@@ -44,6 +44,8 @@ namespace VoodooShader
         VOODOO_METHOD(LoadPath)(_In_ ICore * pCore, _In_ const String & path, _In_ const String & filter);
         VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const IFile * pFile);
         VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const String & filename);
+        VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST String & name);
+        VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST Uuid libid);
         VOODOO_METHOD_(bool, ClassExists)(_In_ const Uuid refid) CONST;
         VOODOO_METHOD_(bool, ClassExists)(_In_ const String & name) CONST;
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ const Uuid refid) CONST;
@@ -60,8 +62,8 @@ namespace VoodooShader
         LoggerRef m_Logger;
         ParserRef m_Parser;
 
-        ModuleMap m_Modules;
-        StrongNameMap m_ModuleNames;
+        StrongPluginMap m_Plugins;
+        StrongNameMap m_PluginNames;
         ClassMap m_Classes;
         StrongNameMap m_ClassNames;
     };

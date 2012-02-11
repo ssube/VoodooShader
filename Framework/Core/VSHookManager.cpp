@@ -40,7 +40,7 @@ namespace VoodooShader
 
         LhSetGlobalInclusiveACL(m_ThreadIDs, m_ThreadCount);
 
-        m_Core->GetLogger()->LogMessage(VSLog_ModInfo, VOODOO_CORE_NAME, VSTR("Created hook manager."));
+        m_Core->GetLogger()->LogMessage(VSLog_PlugInfo, VOODOO_CORE_NAME, VSTR("Created hook manager."));
 
         AddThisToDebugCache();
     }
@@ -51,7 +51,7 @@ namespace VoodooShader
 
         this->RemoveAll();
 
-        m_Core->GetLogger()->LogMessage(VSLog_ModInfo, VOODOO_CORE_NAME, VSTR("Destroying hook manager."));
+        m_Core->GetLogger()->LogMessage(VSLog_PlugInfo, VOODOO_CORE_NAME, VSTR("Destroying hook manager."));
 
         delete[] m_ThreadIDs;
         m_Core = nullptr;
@@ -136,7 +136,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                VSLog_ModError, VOODOO_CORE_NAME,
+                VSLog_PlugError, VOODOO_CORE_NAME,
                 StringFormat(VSTR("Attempted to create a hook with a duplicate name (%1%).")) << name
             );
 
@@ -145,7 +145,7 @@ namespace VoodooShader
 
         m_Core->GetLogger()->LogMessage
         (
-            VSLog_ModDebug, VOODOO_CORE_NAME,
+            VSLog_PlugDebug, VOODOO_CORE_NAME,
             StringFormat(VSTR("Creating hook %1%. Redirecting function %2% to %3%.")) << name << pSrc << pDest
         );
 
@@ -156,7 +156,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                VSLog_ModError, VOODOO_CORE_NAME,
+                VSLog_PlugError, VOODOO_CORE_NAME,
                 StringFormat(VSTR("Error %1 creating hook %s.")) << (uint32_t)result << name
             );
 
@@ -178,7 +178,7 @@ namespace VoodooShader
 
         HookMap::iterator hook = m_Hooks.find(name);
 
-        m_Core->GetLogger()->LogMessage(VSLog_ModDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Removing hook %1%.")) << name);
+        m_Core->GetLogger()->LogMessage(VSLog_PlugDebug, VOODOO_CORE_NAME, StringFormat(VSTR("Removing hook %1%.")) << name);
 
         if (hook != m_Hooks.end())
         {
@@ -191,7 +191,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    VSLog_ModError, VOODOO_CORE_NAME,
+                    VSLog_PlugError, VOODOO_CORE_NAME,
                     StringFormat("Error %1% removing hook %2%.") << (uint32_t)result << name
                 );
 
@@ -209,7 +209,7 @@ namespace VoodooShader
         {
             m_Core->GetLogger()->LogMessage
             (
-                VSLog_ModDebug, VOODOO_CORE_NAME,
+                VSLog_PlugDebug, VOODOO_CORE_NAME,
                 StringFormat(VSTR("Trying to remove hook %1% (does not exist).")) << name.GetData()
             );
             return VSFERR_INVALIDPARAMS;

@@ -128,7 +128,7 @@ namespace VoodooShader
          *
          * @note When formatting log messages that do not need reused, it may be cleaner to do it inline:
          * @code
-         * pLogger->LogMessage(VSLog_Module | VSLog_Info, MODULE_NAME, Format("Hello %1%.") << "World");
+         * pLogger->LogMessage(VSLog_Plugin | VSLog_Info, MODULE_NAME, Format("Hello %1%.") << "World");
          * @endcode
          * This uses the Format class and implicit casts to String after the last argument is inserted.
          */

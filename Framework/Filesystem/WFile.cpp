@@ -144,7 +144,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    VSLog_ModWarning, VOODOO_FILESYSTEM_NAME,
+                    VSLog_PlugWarning, VOODOO_FILESYSTEM_NAME,
                     StringFormat(VSTR("Attempted to open file '%1%' with unknown mode (%2%).")) << m_Path << mode
                 );
                 return VSFERR_INVALIDPARAMS;
@@ -154,7 +154,7 @@ namespace VoodooShader
 
             m_Core->GetLogger()->LogMessage
             (
-                VSLog_ModDebug, VOODOO_FILESYSTEM_NAME,
+                VSLog_PlugDebug, VOODOO_FILESYSTEM_NAME,
                 StringFormat(VSTR("Opening file %1% with mode %2% (underlying %3%).")) << m_Path << mode << access
             );
 
@@ -164,7 +164,7 @@ namespace VoodooShader
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    VSLog_ModWarning, VOODOO_FILESYSTEM_NAME, 
+                    VSLog_PlugWarning, VOODOO_FILESYSTEM_NAME, 
                     StringFormat(VSTR("Unable to open file '%1%'.")) << m_Path
                 );
                 return VSFERR_FILENOTFOUND;

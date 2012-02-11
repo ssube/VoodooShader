@@ -73,7 +73,7 @@ namespace VoodooShader
         m_Logger = nullptr;
 
         m_Classes.clear();
-        m_Modules.clear();
+        m_Plugins.clear();
     }
 
     uint32_t VOODOO_METHODTYPE VSPluginServer::AddRef() CONST
@@ -146,8 +146,8 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        StrongNameMap::const_iterator module = m_ModuleNames.find(name);
-        if (module != m_ModuleNames.end())
+        StrongNameMap::const_iterator module = m_PluginNames.find(name);
+        if (module != m_PluginNames.end())
         {
             Uuid libid = module->second;
             return this->GetPlugin(libid);
@@ -162,10 +162,11 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        ModuleMap::const_iterator module = m_Modules.find(libid);
-        if (module != m_Modules.end())
+        StrongPluginMap::const_iterator iter = m_Plugins.find(libid);
+        if (iter != m_Plugins.end())
         {
-            return module->second.get();
+            PluginRef plugin = iter->second;
+            return plugin.get();
         }
         else
         {
@@ -177,14 +178,14 @@ namespace VoodooShader
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        return (m_ModuleNames.find(name) != m_ModuleNames.end());
+        return (m_PluginNames.find(name) != m_PluginNames.end());
     }
 
     bool VOODOO_METHODTYPE VSPluginServer::IsLoaded(_In_ const Uuid & libid) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
-        return (m_Modules.find(libid) != m_Modules.end());
+        return (m_Plugins.find(libid) != m_Plugins.end());
     }
 
     VoodooResult VOODOO_METHODTYPE VSPluginServer::LoadPath(_In_ ICore * pCore, _In_ const String & path, _In_ const String & filter)
@@ -255,7 +256,7 @@ namespace VoodooShader
         }
 
         // Check for already loaded
-        if (m_ModuleNames.find(fullname) != m_ModuleNames.end())
+        if (m_PluginNames.find(fullname) != m_PluginNames.end())
         {
             return VSF_OK;
         }
@@ -290,8 +291,8 @@ namespace VoodooShader
             return VSFERR_INVALIDPARAMS;
         }
 
-        m_Modules[moduleversion->LibId] = module;
-        m_ModuleNames[moduleversion->Name] = moduleversion->LibId;
+        m_Plugins[moduleversion->LibId] = module;
+        m_PluginNames[moduleversion->Name] = moduleversion->LibId;
 
         if (moduleversion->Debug != VOODOO_DEBUG_BOOL && m_Logger)
         {
@@ -335,6 +336,52 @@ namespace VoodooShader
         if (pFile)
         {
             return this->LoadPlugin(pCore, pFile->GetPath());
+        }
+        else
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSPluginServer::UnloadPlugin(_In_ ICore * pCore, _In_ CONST String & name)
+    {
+        StrongNameMap::iterator module = m_PluginNames.find(name);
+        if (module != m_PluginNames.end())
+        {
+            VoodooResult result = this->UnloadPlugin(pCore, module->second);
+            if (SUCCEEDED(result))
+            {
+                m_PluginNames.erase(module);
+            }
+            return result;
+        }
+        else
+        {
+            return VSFERR_INVALIDPARAMS;
+        }
+    }
+
+    VoodooResult VOODOO_METHODTYPE VSPluginServer::UnloadPlugin(_In_ ICore * pCore, _In_ CONST Uuid libid)
+    {
+        StrongPluginMap::iterator module = m_Plugins.find(libid);
+        if (module != m_Plugins.end())
+        {
+            PluginRef plugin = module->second;
+            plugin->PluginReset(pCore);
+
+            for (StrongNameMap::iterator iter = m_PluginNames.begin(); iter != m_PluginNames.end(); ++iter)
+            {
+                if (iter->second == libid)
+                {
+                    m_PluginNames.erase(iter);
+                }
+                ++iter;
+            }
+
+            m_Plugins.erase(module);
+            plugin.reset();
+
+            return VSF_OK;
         }
         else
         {
@@ -413,7 +460,8 @@ namespace VoodooShader
     }
 
     IObject * VOODOO_METHODTYPE VSPluginServer::CreateObject(_In_ ICore * pCore, _In_ const String & name) CONST
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         Uuid clsid;
         if (!name.ToUuid(&clsid))

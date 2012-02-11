@@ -226,7 +226,7 @@ namespace VoodooShader
         VSLog_Error        = 0x0008,   /* !< Problem, fatal at function scope but not program. */
         // Source
         VSLog_External     = 0x0100,   /* !< Completely external source (network, pipe, IPC, etc). */
-        VSLog_Module       = 0x0200,   /* !< Voodoo plugin module. Module must be loaded as a plugin. */
+        VSLog_Plugin       = 0x0200,   /* !< Voodoo plugin module. Module must be loaded as a plugin. */
         VSLog_Binding      = 0x0400,   /* !< Voodoo binding module. Module must be loaded as a plugin and acting as the hardware binding. */
         VSLog_Core         = 0x0800,   /* !< Voodoo core module. Must not be used elsewhere. */
         // Flags
@@ -247,18 +247,18 @@ namespace VoodooShader
         VSLog_BindNotice   = VSLog_Binding | VSLog_Notice,
         VSLog_BindWarning  = VSLog_Binding | VSLog_Warning,
         VSLog_BindError    = VSLog_Binding | VSLog_Error,
-        VSLog_ModDebug     = VSLog_Module | VSLog_Debug,
-        VSLog_ModException = VSLog_Module | VSLog_Exception,
-        VSLog_ModInfo      = VSLog_Module | VSLog_Info,
-        VSLog_ModNotice    = VSLog_Module | VSLog_Notice,
-        VSLog_ModWarning   = VSLog_Module | VSLog_Warning,
-        VSLog_ModError     = VSLog_Module | VSLog_Error,
+        VSLog_PlugDebug    = VSLog_Plugin | VSLog_Debug,
+        VSLog_PlugException= VSLog_Plugin | VSLog_Exception,
+        VSLog_PlugInfo     = VSLog_Plugin | VSLog_Info,
+        VSLog_PlugNotice   = VSLog_Plugin | VSLog_Notice,
+        VSLog_PlugWarning  = VSLog_Plugin | VSLog_Warning,
+        VSLog_PlugError    = VSLog_Plugin | VSLog_Error,
         // Masks
         VSLog_Severity     = VSLog_Debug | VSLog_Info | VSLog_Warning | VSLog_Error,
         VSLog_Flags        = VSLog_Critical,
-        VSLog_Origin       = VSLog_External | VSLog_Module | VSLog_Core | VSLog_Binding,
+        VSLog_Origin       = VSLog_External | VSLog_Plugin | VSLog_Core | VSLog_Binding,
         // Other
-        VSLog_Default      = VSLog_Info | VSLog_Warning | VSLog_Module | VSLog_Core | VSLog_Binding,
+        VSLog_Default      = VSLog_Info | VSLog_Warning | VSLog_Plugin | VSLog_Core | VSLog_Binding,
         VSLog_All          = VSLog_Severity | VSLog_Origin | VSLog_Flags
     };
 
@@ -600,11 +600,11 @@ namespace VoodooShader
     typedef std::map<Uuid, Variant>             PropertyMap;
     typedef std::pair<String, uint32_t>         Variable;
     typedef std::map<String, Variable>          VariableMap;
-    typedef std::map<Uuid, PluginRef>           ModuleMap;
+    typedef std::map<TextureRef, EffectRef>     MaterialMap;
+    typedef std::map<String, Uuid>              StrongNameMap;
+    typedef std::map<Uuid, PluginRef>           StrongPluginMap;
     typedef std::pair<PluginRef, uint32_t>      ClassSource;
     typedef std::map<Uuid, ClassSource>         ClassMap;
-    typedef std::map<String, Uuid>              StrongNameMap;
-    typedef std::map<TextureRef, EffectRef>     MaterialMap;
 #endif
 #endif
     /**

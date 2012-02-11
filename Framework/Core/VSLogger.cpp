@@ -252,7 +252,7 @@ namespace VoodooShader
                 VSTR(", ") << source << VSTR(", ") << msg << std::endl;
 
 #ifdef _DEBUG
-            if (level & (VSLog_ModWarning | VSLog_ModError))
+            if (level & (VSLog_PlugWarning | VSLog_PlugError))
             {
                 OutputDebugString(logMsg.str().c_str());
 #   ifdef VOODOO_DEBUG_CONSOLE

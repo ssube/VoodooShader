@@ -35,7 +35,7 @@ namespace VoodooShader
         CVoodoo3DTexture8::CVoodoo3DTexture8(CVoodoo3DDevice8 * pDevice, IDirect3DTexture9 * pTexture) :
             m_Refs(0), m_Device(pDevice), m_RealTexture(pTexture)
         {
-            VOODOO_API_LOG(VSLog_ModDebug, VOODOO_DX89_NAME,
+            VOODOO_API_LOG(VSLog_PlugDebug, VOODOO_DX89_NAME,
                 StringFormat("CVoodoo3DTexture8::CVoodoo3DTexture8(%1%, %2%) == %3%") << pDevice << pTexture << this);
 
             if (m_RealTexture) m_RealTexture->AddRef();

@@ -38,15 +38,17 @@ namespace VoodooShader
             // Disable conversion warnings, since GetProcAddress always returns FARPROC
 #pragma warning(push)
 #pragma warning(disable: 4191)
-            module->m_PluginInit = reinterpret_cast<Functions::PluginInitFunc>(GetProcAddress(hmodule, "PluginInit"));
-            module->m_ClassCount = reinterpret_cast<Functions::ClassCountFunc>(GetProcAddress(hmodule, "ClassCount"));
-            module->m_ClassInfo = reinterpret_cast<Functions::ClassInfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
+            module->m_PluginInit  = reinterpret_cast<Functions::PluginInitFunc>(GetProcAddress(hmodule, "PluginInit"));
+            module->m_PluginReset = reinterpret_cast<Functions::PluginResetFunc>(GetProcAddress(hmodule, "PluginReset"));
+            module->m_ClassCount  = reinterpret_cast<Functions::ClassCountFunc>(GetProcAddress(hmodule, "ClassCount"));
+            module->m_ClassInfo   = reinterpret_cast<Functions::ClassInfoFunc>(GetProcAddress(hmodule, "ClassInfo"));
             module->m_ClassCreate = reinterpret_cast<Functions::ClassCreateFunc>(GetProcAddress(hmodule, "ClassCreate"));
 #pragma warning(pop)
 
             if
             (
                 module->m_PluginInit  == nullptr ||
+                module->m_PluginReset == nullptr ||
                 module->m_ClassCount  == nullptr ||
                 module->m_ClassInfo   == nullptr ||
                 module->m_ClassCreate == nullptr
@@ -85,14 +87,14 @@ namespace VoodooShader
 
     uint32_t VOODOO_METHODTYPE VSPlugin::AddRef() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return SAFE_INCREMENT(m_Refs);
     }
 
     uint32_t VOODOO_METHODTYPE VSPlugin::Release() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         uint32_t count = SAFE_DECREMENT(m_Refs);
         if (count == 0)
@@ -104,7 +106,7 @@ namespace VoodooShader
 
     VoodooResult VOODOO_METHODTYPE VSPlugin::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         if (!ppOut)
         {
@@ -137,42 +139,48 @@ namespace VoodooShader
 
     String VOODOO_METHODTYPE VSPlugin::ToString() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return VSTR("VSPlugin()");
     }
 
     ICore * VOODOO_METHODTYPE VSPlugin::GetCore() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return nullptr;
     }
 
     const Version * VOODOO_METHODTYPE VSPlugin::PluginInit(_In_ ICore * pCore) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_ore->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_ore->GetLogger());
 
         return m_PluginInit(pCore);
+    }    
+    void VOODOO_METHODTYPE VSPlugin::PluginReset(_In_ ICore * pCore) CONST
+    {
+        //VOODOO_DEBUG_FUNCLOG(m_Server->)
+
+        return m_PluginReset(pCore);
     }
 
     uint32_t VOODOO_METHODTYPE VSPlugin::ClassCount() CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return m_ClassCount();
     }
 
     const wchar_t * VOODOO_METHODTYPE VSPlugin::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return m_ClassInfo(number, pUuid);
     }
 
     IObject * VOODOO_METHODTYPE VSPlugin::CreateClass(_In_ const uint32_t number, _In_ ICore * pCore) CONST
     {
-        VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
+        //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return m_ClassCreate(number, pCore);
     }

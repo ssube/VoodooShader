@@ -49,24 +49,44 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
          * @}
-         * @name Module Interface Methods
+         * @name Plugin Interface Methods
          * @{
          */
         /**
-         * Get the current version of this module.
+         * Initializes the plugin, including registering events with the core, and returns the current version if 
+         * successful.
+         * 
+         * @param   pCore   The core to use for initialization. May be used before, during, or after calling 
+         *                  ICore::Initialize() (plugins must only call safe pre-init methods).
          */
         VOODOO_METHOD_(const Version *, PluginInit)(_In_ ICore * pCore) CONST PURE;
         /**
-         * Get the number of classes this module publicly provides. 
+         * Resets the plugin, unregistering any events and performing shutdown as needed.
+         * 
+         * Plugins must remove all events, callbacks, and hooks they may have registered when being reset. Typically reset
+         * comes shortly before the plugin is unloaded from memory, which will invalidate any orphaned callbacks.
+         * 
+         * @param   pCore   The core to use for reset. If this does not match the core used for init, this call must
+         *                  return immediately with no side effects. 
+         */
+        VOODOO_METHOD_(void, PluginReset)(_In_ ICore * pCore) CONST PURE;
+        /**
+         * Get the number of classes this plugin publicly provides. 
          */
         VOODOO_METHOD_(uint32_t, ClassCount)() CONST PURE;
         /**
          * Get the name and ClsId of a class, by index.
          * 
-         * @param number The class index in this module.
-         * @param pUuid The destination Uuid buffer.
+         * @param   number  The class index in this plugin.
+         * @param   pUuid   The destination Uuid buffer.
          */
         VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST PURE;
+        /**
+         * Creates an instance of the given class from the plugin. If the plugin does not provide a class with this index,
+         * the call must return nullptr.
+         * 
+         * @param   pCore   The core to use for object creation and init.
+         */
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST PURE;
         /**
          * @}

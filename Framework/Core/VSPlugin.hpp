@@ -39,7 +39,7 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD_(const Version *, PluginInit)(_In_ ICore * pCore) CONST;
+        VOODOO_METHOD_(const Version *, PluginInit)(_In_ ICore * pCore) CONST;        VOODOO_METHOD_(void, PluginReset)(_In_ ICore * pCore) CONST;
         VOODOO_METHOD_(uint32_t, ClassCount)() CONST;
         VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST;
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST;
@@ -55,6 +55,7 @@ namespace VoodooShader
 
         HMODULE m_Handle;
         Functions::PluginInitFunc m_PluginInit;
+        Functions::PluginResetFunc m_PluginReset;
         Functions::ClassCountFunc m_ClassCount;
         Functions::ClassInfoFunc m_ClassInfo;
         Functions::ClassCreateFunc m_ClassCreate;

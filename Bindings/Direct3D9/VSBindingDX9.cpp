@@ -43,7 +43,7 @@ namespace VoodooShader
 
             if (ilutRenderer(ILUT_DIRECT3D9) != IL_TRUE)
             {
-                pCore->GetLogger()->LogMessage(VSLog_ModError, VOODOO_D3D9_NAME, 
+                pCore->GetLogger()->LogMessage(VSLog_PlugError, VOODOO_D3D9_NAME, 
                     VSTR("Unable to initialize ILUT for image loading."));
                 m_ILUT = false;
             }
@@ -317,7 +317,7 @@ namespace VoodooShader
 
             if (!texture)
             {
-                m_Core->GetLogger()->LogMessage(VSLog_ModWarning, VOODOO_D3D9_NAME, 
+                m_Core->GetLogger()->LogMessage(VSLog_PlugWarning, VOODOO_D3D9_NAME, 
                     StringFormat("Failed to load texture '%1%' from file '%2%'.") << name << pFile->GetPath());
                 return nullptr;
             }

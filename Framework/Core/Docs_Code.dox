@@ -26,8 +26,8 @@ namespace VoodooShader
       *
       * The Voodoo Shader core library is designed to provide a generic framework and certain Voodoo-specific features to 
       * help support shaders. To allow additional features without breaking compatibility with other compilers or systems, 
-      * Voodoo Shader provides a class-based plugin interface. Modules may be added and classes provided by those modules 
-      * created and used within Voodoo or adapters. To handle loading these modules, a known interface is required with a 
+      * Voodoo Shader provides a class-based plugin interface. Plugins may be added and classes provided by those modules 
+      * created and used within Voodoo or adapters. To handle loading these plugins, a known interface is required with a 
       * few specific features.
       *
       * @section voodoo_spec_plugin_exports Plugin Exports

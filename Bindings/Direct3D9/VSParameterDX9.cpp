@@ -446,7 +446,7 @@ namespace VoodooShader
                 Variant propVar = CreateVariant();
                 if (FAILED(pVal->GetProperty(PropIds::D3D9Texture, &propVar)))
                 {
-                    m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_D3D9_NAME, StringFormat("Unable to get hardware texture from texture %1%.") << pVal);
+                    m_Core->GetLogger()->LogMessage(VSLog_PlugError, VOODOO_D3D9_NAME, StringFormat("Unable to get hardware texture from texture %1%.") << pVal);
                     return VSFERR_INVALIDPARAMS;
                 }
 
@@ -456,11 +456,11 @@ namespace VoodooShader
 
                 if (FAILED(hr))
                 {
-                    m_Core->GetLogger()->LogMessage(VSLog_ModError, VOODOO_D3D9_NAME, StringFormat("Unable to bind texture %1% to parameter %2%.") << pVal << this);
+                    m_Core->GetLogger()->LogMessage(VSLog_PlugError, VOODOO_D3D9_NAME, StringFormat("Unable to bind texture %1% to parameter %2%.") << pVal << this);
                     return VSFERR_INVALIDCALL;
                 }
 
-                m_Core->GetLogger()->LogMessage(VSLog_ModDebug, VOODOO_D3D9_NAME, StringFormat("Bound texture %1% to parameter %2%.") << pVal << this);
+                m_Core->GetLogger()->LogMessage(VSLog_PlugDebug, VOODOO_D3D9_NAME, StringFormat("Bound texture %1% to parameter %2%.") << pVal << this);
             }
 
             return VSF_OK;

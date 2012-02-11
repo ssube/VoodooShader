@@ -90,8 +90,8 @@ namespace VoodooShader
         /** The current variable parser. */
         ParserRef m_Parser;
 
-        /** The current module manager. */
-        PluginServerRef m_ModuleManager;
+        /** The current plugin server. */
+        PluginServerRef m_Server;
 
         /** Config file. */
         XmlDocument m_ConfigFile;

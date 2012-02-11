@@ -72,7 +72,7 @@ namespace VoodooShader
         // Set up the internal objects
         m_Logger = CreateLogger();
         m_Parser = CreateParser();
-        m_ModuleManager = CreateServer();
+        m_Server = CreateServer();
 
         AddThisToDebugCache();
     };
@@ -87,7 +87,7 @@ namespace VoodooShader
         m_HookManager = nullptr;
         m_FileSystem = nullptr;
 
-        m_ModuleManager = nullptr;
+        m_Server = nullptr;
         m_Parser = nullptr;
         m_Logger = nullptr;
 
@@ -285,7 +285,7 @@ namespace VoodooShader
             }
 
             // Load plugins, starting with the core
-            m_ModuleManager->LoadPlugin(this, VSTR("$(core)"));
+            m_Server->LoadPlugin(this, VSTR("$(core)"));
 
             {
                 pugi::xpath_query xpq_getPluginPaths(L"./Plugins/Path");
@@ -298,7 +298,7 @@ namespace VoodooShader
                     String filter = xpq_getFilter.evaluate_string(*iter);
                     String path = xpq_getText.evaluate_string(*iter);
 
-                    m_ModuleManager->LoadPath(this, path, filter);
+                    m_Server->LoadPath(this, path, filter);
 
                     ++iter;
                 }
@@ -313,7 +313,7 @@ namespace VoodooShader
                 {
                     String file = xpq_getText.evaluate_string(*iter);
 
-                    m_ModuleManager->LoadPlugin(this, file);
+                    m_Server->LoadPlugin(this, file);
 
                     ++iter;
                 }
@@ -328,7 +328,7 @@ namespace VoodooShader
             String hookClass = m_Parser->Parse(hookQuery.evaluate_string(globalNode).c_str());
 
             // Make sure a logger was loaded
-            IObject * coreplugin = m_ModuleManager->CreateObject(this, logClass);
+            IObject * coreplugin = m_Server->CreateObject(this, logClass);
             ILogger * plogger = nullptr;
             if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_ILogger, (IObject**)&plogger)) && plogger)
             {
@@ -370,7 +370,7 @@ namespace VoodooShader
             m_Logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
 
             // Load less vital classes
-            coreplugin = m_ModuleManager->CreateObject(this, hookClass);
+            coreplugin = m_Server->CreateObject(this, hookClass);
             IHookManager * phm = nullptr;
             if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_IHookManager, (IObject**)&phm)) && phm)
             {
@@ -383,7 +383,7 @@ namespace VoodooShader
                 Throw(VOODOO_CORE_NAME, fmt, this);
             }
 
-            coreplugin = m_ModuleManager->CreateObject(this, fsClass);
+            coreplugin = m_Server->CreateObject(this, fsClass);
             IFileSystem * pfs = nullptr;
             if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_IFileSystem, (IObject**)&pfs)) && pfs)
             {
@@ -436,12 +436,12 @@ namespace VoodooShader
         if (profile == VSProfile_D3D9)
         {
             // Load D3D9 compiler
-            if (FAILED(m_ModuleManager->LoadPlugin(this, VSTR("$(binpath)\\Voodoo_D3D9.dll"))))
+            if (FAILED(m_Server->LoadPlugin(this, VSTR("$(binpath)\\Voodoo_D3D9.dll"))))
             {
                 return VSFERR_INVALIDCALL;
             }
 
-            compiler = m_ModuleManager->GetPlugin(VSTR("Voodoo_D3D9"));
+            compiler = m_Server->GetPlugin(VSTR("Voodoo_D3D9"));
             if (!compiler)
             {
                 return VSF_FAIL;
