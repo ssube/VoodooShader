@@ -155,6 +155,8 @@ IDirect3D8 * WINAPI VSDirect3DCreate8(UINT sdkVersion)
         pV3D8->VSSetRealObject(pD3D9);
         pD3D8 = pV3D8;
 
+        pD3D8->AddRef();
+
         SingleD3D8 = 0;
     }
 
@@ -188,6 +190,8 @@ IDirect3D9 * WINAPI VSDirect3DCreate9(UINT sdkVersion)
 
         VoodooShader::VoodooDX9::CVoodoo3D9 * pV3D9 = new VoodooShader::VoodooDX9::CVoodoo3D9(sdkVersion, pD3D9);
         pD3D9 = pV3D9;
+
+        pD3D9->AddRef();
 
         SingleD3D9 = 0;
     }

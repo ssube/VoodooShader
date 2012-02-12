@@ -1012,7 +1012,7 @@ namespace VoodooShader
 
             DECLARE_AND_ZERO(TextureDesc, depthTextureDesc);
             CopyMemory(&depthTextureDesc, &bufferTextureDesc, sizeof(TextureDesc));
-            depthTextureDesc.Format = VSFmt_DMax;
+            depthTextureDesc.Format = VSFmt_D24;
 
             texture_Depth = gpVoodooCore->CreateTexture(L":depth", depthTextureDesc);
             if (texture_Depth)

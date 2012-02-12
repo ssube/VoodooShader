@@ -236,6 +236,11 @@ namespace VoodooShader
                 v3d->VSSetupDevice();
 
                 *ppReturnedDeviceInterface = v3d;
+                (*ppReturnedDeviceInterface)->AddRef();
+            }
+            else
+            {
+                *ppReturnedDeviceInterface = nullptr;
             }
 
             return hr;

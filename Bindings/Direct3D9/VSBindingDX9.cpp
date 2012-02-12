@@ -229,22 +229,18 @@ namespace VoodooShader
             if ((desc.Usage & VSTexFlag_AutoMip) > 0)   usage |= D3DUSAGE_AUTOGENMIPMAP;
             if ((desc.Usage & VSTexFlag_Dynamic) > 0)   usage |= D3DUSAGE_DYNAMIC;
             if ((desc.Usage & VSTexFlag_Target) > 0)    usage |= D3DUSAGE_RENDERTARGET;
+
+            if (desc.Format == VSFmt_D16 || desc.Format == VSFmt_D24 || desc.Format == VSFmt_D24S8 ||
+                desc.Format == VSFmt_D32 || desc.Format == VSFmt_DMax)
+            {
+                usage = D3DUSAGE_DEPTHSTENCIL; // | D3DUSAGE_RENDERTARGET;
+                desc.Levels = 1;
+            }
             
             LPDIRECT3DTEXTURE9 texture = nullptr;
 
             if (desc.Format == VSFmt_DMax)
             {
-                usage = D3DUSAGE_DEPTHSTENCIL;
-                desc.Levels = 1;
-                HRESULT hr = m_Device->CreateTexture
-                (
-                    //desc.Size.X, desc.Size.Y, desc.Levels, 
-                    512, 512, 1,
-                    D3DUSAGE_DEPTHSTENCIL, ((D3DFORMAT)(MAKEFOURCC('I','N','T','Z'))), 
-                    D3DPOOL_DEFAULT, &texture, NULL
-                );
-                assert(SUCCEEDED(hr));
-
                 uint32_t index = 0;
                 while (!texture && DepthFormats[index] != 0)
                 {

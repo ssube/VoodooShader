@@ -228,12 +228,16 @@ namespace VoodooShader
             if (!SUCCEEDED(hr))
             {
                 gpVoodooLogger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, StringFormat("CVoodoo3D8::CreateDevice failed with error %d on adapter %d.") << hr << Adapter);
+
+                *ppReturnedDeviceInterface = nullptr;
+
                 return hr;
             }
             else
             {
                 // Succeeded, create a fake device and go from there
                 *ppReturnedDeviceInterface = new CVoodoo3DDevice8(this, pRealDevice);
+                (*ppReturnedDeviceInterface)->AddRef();
 
                 return hr;
             }
