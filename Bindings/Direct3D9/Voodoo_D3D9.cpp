@@ -35,6 +35,9 @@ namespace VoodooShader
             UNREFERENCED_PARAMETER(pCore);
 
             return &moduleVersion;
+        }        void VOODOO_CALLTYPE API_PluginReset(ICore * pCore)
+        {
+            UNREFERENCED_PARAMETER(pCore);
         }
 
         const uint32_t VOODOO_CALLTYPE API_ClassCount()

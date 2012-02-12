@@ -39,13 +39,13 @@ namespace VoodooShader
                 StringFormat("CVoodoo3DTexture8::CVoodoo3DTexture8(%1%, %2%) == %3%") << pDevice << pTexture << this);
 
             if (m_RealTexture) m_RealTexture->AddRef();
-            if (m_Device) m_Device->AddRef();
+            //if (m_Device) m_Device->AddRef();
         }
 
         CVoodoo3DTexture8::~CVoodoo3DTexture8()
         {
-            if (m_Device) m_Device->Release();
-            m_Device = nullptr;
+            //if (m_Device) m_Device->Release();
+            //m_Device = nullptr;
 
             if (m_RealTexture) m_RealTexture->Release();
             m_RealTexture = nullptr;
@@ -57,21 +57,23 @@ namespace VoodooShader
             {
                 return D3DERR_INVALIDCALL;
             }
-
-            if (riid == IID_IUnknown)
+            else if (riid == IID_IUnknown)
             {
+                *ppvObj = this;
                 ((IUnknown*)(*ppvObj))->AddRef();
+                return D3D_OK;
             }
             else if (riid == IID_IDirect3DTexture8)
             {
+                *ppvObj = this;
                 ((IDirect3DTexture8*)(*ppvObj))->AddRef();
+                return D3D_OK;
             }
             else
             {
+                *ppvObj = nullptr;
                 return D3DERR_INVALIDCALL;
             }
-
-            return D3D_OK;
         }
 
         ULONG STDMETHODCALLTYPE CVoodoo3DTexture8::AddRef()

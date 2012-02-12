@@ -1,7 +1,7 @@
 // Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
-#include "VoodooVersion.hpp"
+#include "D3D9_Version.hpp"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -54,7 +54,7 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION VOODOO_VERSION_CHAIN(CORE)
+ FILEVERSION VOODOO_VERSION_CHAIN(D3D9)
  PRODUCTVERSION VOODOO_VERSION_CHAIN(GLOBAL)
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
@@ -70,9 +70,9 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "CompanyName", VOODOO_STRING_AUTHOR(CORE)
-            VALUE "FileDescription", VOODOO_STRING_NAME_FULL(CORE)
-            VALUE "FileVersion", VOODOO_STRING_VERSION_FULL(CORE)
+            VALUE "CompanyName", VOODOO_STRING_AUTHOR(D3D9)
+            VALUE "FileDescription", VOODOO_STRING_NAME_FULL(D3D9)
+            VALUE "FileVersion", VOODOO_STRING_VERSION_FULL(D3D9)
             VALUE "InternalName", VOODOO_STRING_NAME_INTERNAL
             VALUE "LegalCopyright", VOODOO_GLOBAL_COPYRIGHT_BRIEF
             VALUE "OriginalFilename", VOODOO_STRING_NAME_TARGET

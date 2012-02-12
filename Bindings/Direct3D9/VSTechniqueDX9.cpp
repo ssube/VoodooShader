@@ -21,6 +21,7 @@
 #include "VSTechniqueDX9.hpp"
 #include "VSEffectDX9.hpp"
 #include "VSPassDX9.hpp"
+#include "D3D9_Version.hpp"
 
 namespace VoodooShader
 {
@@ -34,28 +35,28 @@ namespace VoodooShader
         {
             if (!m_Effect)
             {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no effect."), nullptr);
+                Throw(VOODOO_D3D9_NAME, VSTR("Unable to create technique with no effect."), nullptr);
             }
 
             m_Core = m_Effect->GetCore();
 
             if (!m_DXHandle)
             {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to create technique with no hardware handle."), nullptr);
+                Throw(VOODOO_D3D9_NAME, VSTR("Unable to create technique with no hardware handle."), nullptr);
             }
 
             D3DXTECHNIQUE_DESC desc;
             ZeroMemory(&desc, sizeof(D3DXTECHNIQUE_DESC));
             if (FAILED(m_Effect->m_DXEffect->GetTechniqueDesc(m_DXHandle, &desc)))
             {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to get technique description."), m_Core);
+                Throw(VOODOO_D3D9_NAME, VSTR("Unable to get technique description."), m_Core);
             }
 
             m_Name = desc.Name;
 
             if (FAILED(m_Effect->m_DXEffect->ValidateTechnique(m_DXHandle)))
             {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to validate technique."), m_Core);
+                Throw(VOODOO_D3D9_NAME, VSTR("Unable to validate technique."), m_Core);
             }
 
             for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)

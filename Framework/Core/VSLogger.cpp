@@ -32,25 +32,19 @@ namespace VoodooShader
 
     _Check_return_ VOODOO_FUNCTION(ILogger *, CreateLogger)()
     {
-        static LONG lock = 0;
         static VSLogger * pLogger = nullptr;
 
-        if (InterlockedCompareExchange(&lock, 0, 1))
-        {            try
+        if (!pLogger)
+        {
+            try
             {
                 pLogger = new VSLogger();
-                lock = 0;
             }
             catch (const std::exception & exc)
             {
                 UNREFERENCED_PARAMETER(exc);
                 pLogger = nullptr;
             }
-        }
-
-        if (pLogger)
-        {
-            pLogger->AddRef();
         }
 
         return pLogger;

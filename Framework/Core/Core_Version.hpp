@@ -20,21 +20,15 @@
 #pragma once
 
 #include "VoodooVersion.hpp"
-#include "VoodooBuild_Voodoo_HookStub.hpp"
+#include "VoodooBuild_Voodoo_Core.hpp"
 
-/**
- * @addtogroup voodoo_module_hookstub
- * @{
- */
-#define VOODOO_HOOKSTUB_LIBID         {0xB3, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
-#define VOODOO_HOOKSTUB_AUTHOR        VOODOO_GLOBAL_AUTHOR
-#define VOODOO_HOOKSTUB_NAME          VSTR("Voodoo_HookStub")
-#define VOODOO_HOOKSTUB_PRETTYNAME    VSTR("Voodoo Hook Stub")
-#define VOODOO_HOOKSTUB_VERSION_MAJOR 0
-#define VOODOO_HOOKSTUB_VERSION_MINOR 5
-#define VOODOO_HOOKSTUB_VERSION_PATCH 8
-#define VOODOO_HOOKSTUB_VERSION_BUILD VOODOO_PROJECT_VERSION_BUILD
-#define VOODOO_HOOKSTUB_VERSION_ID    VOODOO_PROJECT_VERSION_ID
-/**
- * @}
- */
+// Core defs
+#define VOODOO_CORE_LIBID               {0xCB, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
+#define VOODOO_CORE_AUTHOR              VOODOO_GLOBAL_AUTHOR
+#define VOODOO_CORE_NAME                VSTR("Voodoo_Core")
+#define VOODOO_CORE_PRETTYNAME          VSTR("Voodoo Shader Framework Core")
+#define VOODOO_CORE_VERSION_MAJOR       VOODOO_GLOBAL_VERSION_MAJOR
+#define VOODOO_CORE_VERSION_MINOR       VOODOO_GLOBAL_VERSION_MINOR
+#define VOODOO_CORE_VERSION_PATCH       VOODOO_GLOBAL_VERSION_PATCH
+#define VOODOO_CORE_VERSION_BUILD       VOODOO_PROJECT_VERSION_BUILD
+#define VOODOO_CORE_VERSION_ID          VOODOO_PROJECT_VERSION_ID

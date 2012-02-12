@@ -47,10 +47,6 @@ namespace VoodooShader
                 UNREFERENCED_PARAMETER(exc);
                 pParser = nullptr;
             }
-        }
-        if (pParser)
-        {
-            pParser->AddRef();
         }
 
         return pParser;
@@ -80,7 +76,8 @@ namespace VoodooShader
     }
 
     uint32_t VOODOO_METHODTYPE VSParser::Release() CONST
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         if (SAFE_DECREMENT(m_Refs) == 0)
         {
@@ -94,7 +91,8 @@ namespace VoodooShader
     }
 
     VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         if (!ppOut)
         {
@@ -126,19 +124,22 @@ namespace VoodooShader
     }
 
     String VOODOO_METHODTYPE VSParser::ToString() CONST
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         return VSTR("VSParser()");
     }
 
     ICore * VOODOO_METHODTYPE VSParser::GetCore() CONST
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         return nullptr;
     }
 
     void VOODOO_METHODTYPE VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType type)
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         if (m_Logger)
         { 
@@ -173,7 +174,8 @@ namespace VoodooShader
     }
 
     void VOODOO_METHODTYPE VSParser::Remove(_In_ const String & name)
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         if (m_Logger)
         {
@@ -192,14 +194,16 @@ namespace VoodooShader
     }
 
     String VOODOO_METHODTYPE VSParser::Parse(_In_ const String & input, _In_ const ParseFlags flags) CONST
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         StringMap parseState;
         return this->ParseStringRaw(input, flags, 0, parseState);
     }
 
     String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) CONST
-    {        VOODOO_DEBUG_FUNCLOG(m_Logger);
+    {
+        VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         if (m_Logger)
         {

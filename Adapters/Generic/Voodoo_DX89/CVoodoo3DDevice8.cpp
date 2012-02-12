@@ -40,13 +40,13 @@ namespace VoodooShader
             VOODOO_API_LOG(VSLog_PlugDebug, VOODOO_DX89_NAME, StringFormat("CVoodoo3DDevice8::CVoodoo3DDevice8(%p) == %p") << realDevice << this);
 
             if (m_RealDevice) m_RealDevice->AddRef();
-            if (m_Object) m_Object->AddRef();
+            //if (m_Object) m_Object->AddRef();
         }
 
         CVoodoo3DDevice8::~CVoodoo3DDevice8()
         {
-            if (m_Object) m_Object->Release();
-            m_Object = nullptr;
+            //if (m_Object) m_Object->Release();
+            //m_Object = nullptr;
 
             if (m_RealDevice) m_RealDevice->Release();
             m_RealDevice = nullptr;
@@ -59,21 +59,23 @@ namespace VoodooShader
             {
                 return D3DERR_INVALIDCALL;
             }
-
-            if (riid == IID_IUnknown)
+            else if (riid == IID_IUnknown)
             {
+                *ppvObj = this;
                 ((IUnknown*)(*ppvObj))->AddRef();
+                return D3D_OK;
             }
             else if (riid == IID_IDirect3DDevice8)
             {
+                *ppvObj = this;
                 ((IDirect3DDevice9*)(*ppvObj))->AddRef();
+                return D3D_OK;
             }
             else
             {
+                *ppvObj = nullptr;
                 return D3DERR_INVALIDCALL;
             }
-
-            return D3D_OK;
         }
         ULONG STDMETHODCALLTYPE CVoodoo3DDevice8::AddRef()
         {

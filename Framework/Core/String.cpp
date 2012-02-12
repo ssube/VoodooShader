@@ -19,6 +19,7 @@
  */
 
 #include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
 // Boost
 #pragma warning(push,3)
 #include <boost/algorithm/string.hpp>

@@ -54,7 +54,7 @@ namespace VoodooShader
          * Creates a string from the given character (one character, converted).
          * @param ch Character to use.
          */
-        String(_In_ const char ch);
+        EXPLICIT String(_In_ const char ch);
         /**
          * Creates a string from a C-style string (converted).
          * @param str String to use.
@@ -65,18 +65,18 @@ namespace VoodooShader
          * @param size The number of characters.
          * @param ch The character to use.
          */
-        String(_In_ const uint32_t size, _In_ const char ch);
+        EXPLICIT String(_In_ const uint32_t size, _In_ const char ch);
         /**
          * Creates a string from a portion of the given string (taken from the beginning and converted).
          * @param size The number of characters to use.
          * @param str The string to use.
          */
-        String(_In_ const uint32_t size, _In_z_count_(size) const char * str);
+        EXPLICIT String(_In_ const uint32_t size, _In_z_count_(size) const char * str);
         /**
          * Creates a string from the given character (one character).
          * @param ch Character to use.
          */
-        String(_In_ const wchar_t ch);
+        EXPLICIT String(_In_ const wchar_t ch);
         /**
          * Creates a string from a C-style wide string.
          * @param str String to use.
@@ -87,13 +87,13 @@ namespace VoodooShader
          * @param size The number of characters.
          * @param ch The character to use.
          */
-        String(_In_ const uint32_t size, _In_ const wchar_t ch);
+        EXPLICIT String(_In_ const uint32_t size, _In_ const wchar_t ch);
         /**
          * Create a string from a C-style wide string.
          * @param size The number of characters to use.
          * @param str The string to use.
          */
-        String(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        EXPLICIT String(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
         /**
          * Creates a string from another String (copy constructor).
          * @param str The string to copy.
@@ -107,13 +107,13 @@ namespace VoodooShader
          *
          * This is considered the standard form for Voodoo Uuids.
          */
-        String(_In_ const Uuid & uuid);
+        EXPLICIT String(_In_ const Uuid & uuid);
 #if defined(_VECTOR_)
         /**
          * Create a string from a vector, treating it as a character array (performs conversion).
          * @param vec The vector to convert and use.
          */
-        String(_In_ const std::vector<char> & vec) :
+        EXPLICIT String(_In_ const std::vector<char> & vec) :
             m_Impl(nullptr)
         {
             this->CInit(0, &vec[0]);
@@ -122,7 +122,7 @@ namespace VoodooShader
          * Create a string from a vector, treating it as a wide character array.
          * @param vec The vector to use.
          */
-        String(_In_ const std::vector<wchar_t> & vec) :
+        EXPLICIT String(_In_ const std::vector<wchar_t> & vec) :
             m_Impl(nullptr)
         {
             this->WInit(0, &vec[0]);

@@ -284,6 +284,37 @@ namespace VoodooShader
                 }
             }
 
+            // Open the logger as early as possible
+            pugi::xpath_query logfQuery(L"./Log/File/text()");
+            pugi::xpath_query logaQuery(L"./Log/Append/text()");
+            pugi::xpath_query loglQuery(L"./Log/Level/text()");
+
+            String logFile  = m_Parser->Parse(logfQuery.evaluate_string(globalNode));
+            String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(globalNode));
+            String logAppendStr = m_Parser->Parse(logaQuery.evaluate_string(globalNode));
+
+            LogLevel logLevel = VSLog_Default;
+            try
+            {
+                logLevel = (LogLevel)stoi(logLevelStr.ToString());
+            }
+            catch (const std::exception & exc)
+            {
+                UNREFERENCED_PARAMETER(exc);
+                logLevel = VSLog_Default;
+            }
+
+            bool logAppend = logAppendStr.Compare(VSTR("true"), false) || logAppendStr.StartsWith("1");
+
+            m_Logger->Open(logFile, logAppend);
+            m_Logger->SetFilter(logLevel);
+
+            // Log extended build information
+            String configMsg = m_Parser->Parse(VSTR("Config loaded from '$(config)'."));
+            m_Logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, configMsg);
+            m_Logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
+
+
             // Load plugins, starting with the core
             m_Server->LoadPlugin(this, VSTR("$(core)"));
 
@@ -320,57 +351,13 @@ namespace VoodooShader
             }
 
             // Lookup classes
-            pugi::xpath_query logQuery(L"./Classes/Logger/text()");
             pugi::xpath_query fsQuery(L"./Classes/FileSystem/text()");
             pugi::xpath_query hookQuery(L"./Classes/HookManager/text()");
-            String logClass = m_Parser->Parse(logQuery.evaluate_string(globalNode).c_str());
             String fsClass = m_Parser->Parse(fsQuery.evaluate_string(globalNode).c_str());
             String hookClass = m_Parser->Parse(hookQuery.evaluate_string(globalNode).c_str());
 
-            // Make sure a logger was loaded
-            IObject * coreplugin = m_Server->CreateObject(this, logClass);
-            ILogger * plogger = nullptr;
-            if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_ILogger, (IObject**)&plogger)) && plogger)
-            {
-                m_Logger = plogger;
-            }
-            else
-            {
-                String error = StringFormat(VSTR("Unable to create logger (class %1%).")) << logClass;
-                Throw(VOODOO_CORE_NAME, error.GetData(), this);
-            }
-
-            pugi::xpath_query logfQuery(L"./Log/File/text()");
-            pugi::xpath_query logaQuery(L"./Log/Append/text()");
-            pugi::xpath_query loglQuery(L"./Log/Level/text()");
-
-            String logFile  = m_Parser->Parse(logfQuery.evaluate_string(globalNode));
-            String logLevelStr = m_Parser->Parse(loglQuery.evaluate_string(globalNode));
-            String logAppendStr = m_Parser->Parse(logaQuery.evaluate_string(globalNode));
-
-            LogLevel logLevel = VSLog_Default;
-            try
-            {
-                logLevel = (LogLevel)stoi(logLevelStr.ToString());
-            }
-            catch (const std::exception & exc)
-            {
-                UNREFERENCED_PARAMETER(exc);
-                logLevel = VSLog_Default;
-            }
-
-            bool logAppend = logAppendStr.Compare(VSTR("true"), false) || logAppendStr.StartsWith("1");
-
-            m_Logger->Open(logFile, logAppend);
-            m_Logger->SetFilter(logLevel);
-
-            // Log extended build information
-            String configMsg = m_Parser->Parse(VSTR("Config loaded from '$(config)'."));
-            m_Logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, configMsg);
-            m_Logger->LogMessage(VSLog_CoreNotice, VOODOO_CORE_NAME, VOODOO_GLOBAL_COPYRIGHT_FULL);
-
             // Load less vital classes
-            coreplugin = m_Server->CreateObject(this, hookClass);
+            ObjectRef coreplugin = m_Server->CreateObject(this, hookClass);
             IHookManager * phm = nullptr;
             if (coreplugin && SUCCEEDED(coreplugin->QueryInterface(IID_IHookManager, (IObject**)&phm)) && phm)
             {

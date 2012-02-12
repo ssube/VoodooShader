@@ -52,21 +52,23 @@ namespace VoodooShader
             {
                 return D3DERR_INVALIDCALL;
             }
-
-            if (riid == IID_IUnknown)
+            else if (riid == IID_IUnknown)
             {
+                *ppvObj = this;
                 ((IUnknown*)(*ppvObj))->AddRef();
+                return D3D_OK;
             }
             else if (riid == IID_IDirect3D9)
             {
+                *ppvObj = this;
                 ((IDirect3D9*)(*ppvObj))->AddRef();
+                return D3D_OK;
             }
             else
             {
+                *ppvObj = nullptr;
                 return D3DERR_INVALIDCALL;
             }
-
-            return D3D_OK;
         }
 
         ULONG STDMETHODCALLTYPE CVoodoo3D9::AddRef()

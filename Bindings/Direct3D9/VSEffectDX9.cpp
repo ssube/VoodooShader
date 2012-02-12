@@ -51,7 +51,7 @@ namespace VoodooShader
 
             if (!logger)
             {
-                Throw(VOODOO_CORE_NAME, VSTR("Unable to create effect without logger."), m_Core);
+                Throw(VOODOO_D3D9_NAME, VSTR("Unable to create effect without logger."), m_Core);
             }
 
             // Get desc
@@ -59,7 +59,7 @@ namespace VoodooShader
             ZeroMemory(&desc, sizeof(D3DXEFFECT_DESC));
             if (FAILED(m_DXEffect->GetDesc(&desc)))
             {
-                Throw(VOODOO_CORE_NAME, VSTR("Failed to retrieve effect description."), m_Core);
+                Throw(VOODOO_D3D9_NAME, VSTR("Failed to retrieve effect description."), m_Core);
             }
 
             // Get parameters
@@ -102,7 +102,7 @@ namespace VoodooShader
                 }
                 catch (Exception & exc)
                 {
-                    logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, 
+                    logger->LogMessage(VSLog_PlugWarning, VOODOO_D3D9_NAME, 
                         StringFormat("Failed to create technique %1%: %2%") << techName << exc.strwhat());
                 }
             } 
@@ -309,14 +309,14 @@ namespace VoodooShader
 
             if (!pTechnique)
             {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, VSTR("Cannot set null technique as default."));
+                m_Core->GetLogger()->LogMessage(VSLog_PlugError, VOODOO_D3D9_NAME, VSTR("Cannot set null technique as default."));
                 return VSFERR_INVALIDPARAMS;
             }
             else if (pTechnique->GetEffect() != this)
             {
                 m_Core->GetLogger()->LogMessage
                 (
-                    VSLog_CoreError, VOODOO_CORE_NAME,
+                    VSLog_PlugError, VOODOO_D3D9_NAME,
                     StringFormat(VSTR("Technique %1% cannot be set as default (technique originated from another effect)."))
                     << pTechnique
                 );
@@ -328,7 +328,7 @@ namespace VoodooShader
             {                
                 m_Core->GetLogger()->LogMessage
                 (
-                    VSLog_CoreError, VOODOO_CORE_NAME,
+                    VSLog_PlugError, VOODOO_D3D9_NAME,
                     StringFormat(VSTR("Technique %1% is not a valid technique from this binding.")) << pTechnique
                 );
                 return VSFERR_INVALIDPARAMS;

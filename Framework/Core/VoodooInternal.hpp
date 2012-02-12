@@ -20,9 +20,11 @@
 #pragma once
 
 #include "VoodooFramework.hpp"
+#include "Core_Version.hpp"
 
 namespace VoodooShader
 {
+
     // Main classes
     class VSAdapter;
     class VSCore;

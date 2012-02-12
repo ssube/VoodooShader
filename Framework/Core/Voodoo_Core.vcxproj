@@ -61,9 +61,6 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
-    <PreBuildEvent>
-      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(SolutionDir)\ "</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -75,9 +72,6 @@
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_Core.def</ModuleDefinitionFile>
     </Link>
-    <PreBuildEvent>
-      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(SolutionDir)\ "</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Converter.cpp" />
@@ -95,6 +89,7 @@
     <ClCompile Include="VSParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core_Version.hpp" />
     <ClInclude Include="IBinding.hpp" />
     <ClInclude Include="Stream.hpp" />
     <ClInclude Include="VoodooDocs.hpp" />
@@ -129,7 +124,6 @@
     <ClInclude Include="Regex.hpp" />
     <ClInclude Include="String.hpp" />
     <ClInclude Include="VoodooVersion.hpp" />
-    <ClInclude Include="BuildVersion.hpp" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

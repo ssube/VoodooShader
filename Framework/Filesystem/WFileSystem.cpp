@@ -53,6 +53,11 @@ namespace VoodooShader
             return &version;
         }
 
+        void VOODOO_CALLTYPE API_PluginReset(ICore * pCore)
+        {
+            UNREFERENCED_PARAMETER(pCore);
+        }
+
         const uint32_t VOODOO_CALLTYPE API_ClassCount()
         {
             return 1;
@@ -245,7 +250,7 @@ namespace VoodooShader
 
                 m_Core->GetLogger()->LogMessage
                 (
-                    VSLog_PlugDebug, VOODOO_CORE_NAME,
+                    VSLog_PlugDebug, VOODOO_FILESYSTEM_NAME,
                     StringFormat(VSTR("Checking file '%1%'.")) << fullname
                 );
 
@@ -257,7 +262,7 @@ namespace VoodooShader
 
                     m_Core->GetLogger()->LogMessage
                     (
-                        VSLog_PlugDebug, VOODOO_CORE_NAME,
+                        VSLog_PlugDebug, VOODOO_FILESYSTEM_NAME,
                         StringFormat(VSTR("File '%1%' found in directory '%2%'.")) << name << (*curDir)
                     );
 
@@ -269,7 +274,7 @@ namespace VoodooShader
 
             m_Core->GetLogger()->LogMessage
             (
-                VSLog_PlugWarning, VOODOO_CORE_NAME, 
+                VSLog_PlugWarning, VOODOO_FILESYSTEM_NAME, 
                 StringFormat(VSTR("Unable to find file '%1%'.")) << name.GetData()
             );
 
@@ -279,7 +284,7 @@ namespace VoodooShader
 
                 m_Core->GetLogger()->LogMessage
                 (
-                    VSLog_PlugInfo, VOODOO_CORE_NAME,
+                    VSLog_PlugInfo, VOODOO_FILESYSTEM_NAME,
                     StringFormat(VSTR("Creating file '%1%'.")) << fullname
                 );
 
@@ -291,7 +296,7 @@ namespace VoodooShader
 
                     m_Core->GetLogger()->LogMessage
                     (
-                        VSLog_PlugDebug, VOODOO_CORE_NAME,
+                        VSLog_PlugDebug, VOODOO_FILESYSTEM_NAME,
                         StringFormat(VSTR("File '%1%' created in directory '%2%'.")) << name << (*curDir)
                     );
 

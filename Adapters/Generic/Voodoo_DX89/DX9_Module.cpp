@@ -77,6 +77,15 @@ const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(VoodooShader::ICore
     return &dx9version;
 }
 
+void VOODOO_CALLTYPE API_PluginReset(VoodooShader::ICore * pCore)
+{
+    if (!pCore || gpVoodooCore != pCore) return;
+
+    pCore->DropEvent(VoodooShader::EventIds::Finalize, &FinalizeEvent);
+
+    return;
+}
+
 const uint32_t VOODOO_CALLTYPE API_ClassCount()
 {
     return 0;

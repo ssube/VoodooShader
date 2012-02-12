@@ -87,9 +87,6 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
-    <PreBuildEvent>
-      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(SolutionDir)\ "</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -101,9 +98,6 @@
       <AdditionalLibraryDirectories>$(TargetDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>Voodoo_D3D9.def</ModuleDefinitionFile>
     </Link>
-    <PreBuildEvent>
-      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(SolutionDir)\ "</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

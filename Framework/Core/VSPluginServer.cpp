@@ -48,11 +48,6 @@ namespace VoodooShader
             }
         }
 
-        if (pServer)
-        {
-            pServer->AddRef();
-        }
-
         return pServer;
     }
 
@@ -373,9 +368,12 @@ namespace VoodooShader
             {
                 if (iter->second == libid)
                 {
-                    m_PluginNames.erase(iter);
+                    m_PluginNames.erase(iter++);
                 }
-                ++iter;
+                else
+                {
+                    ++iter;
+                }
             }
 
             m_Plugins.erase(module);

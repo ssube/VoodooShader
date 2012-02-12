@@ -33,11 +33,13 @@
 #   define VOODOO_API_LOG(...)
 #endif
 
-extern VoodooShader::IEffect * testEffect;
+extern VoodooShader::EffectRef  testEffect;
 
-extern IDirect3DSurface9 *surface_Frame0;
-extern VoodooShader::ITexture* texture_Frame0;
-extern IDirect3DSurface9 *surface_Pass0;
-extern VoodooShader::ITexture* texture_Pass0;
-extern IDirect3DSurface9 * surface_Scratch;
-extern VoodooShader::ITexture* texture_Scratch;
+extern VoodooShader::TextureRef texture_Frame0;
+extern IDirect3DSurface9 *      surface_Frame0;
+extern VoodooShader::TextureRef texture_Pass0;
+extern IDirect3DSurface9 *      surface_Pass0;
+extern VoodooShader::TextureRef texture_Depth;
+extern IDirect3DSurface9 *      surface_Depth;
+extern IDirect3DSurface9 *      surface_Scratch;
+extern VoodooShader::TextureRef texture_Scratch;

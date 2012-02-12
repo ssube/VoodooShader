@@ -167,7 +167,7 @@ namespace VoodooShader
                 &effect, &errors);
             if (FAILED(hr))
             {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                m_Core->GetLogger()->LogMessage(VSLog_PlugError, VOODOO_D3D9_NAME, 
                     StringFormat("Error compiling effect from source. Errors:\n%2%") << (LPCSTR)errors->GetBufferPointer());
 
                 return nullptr;
@@ -192,7 +192,7 @@ namespace VoodooShader
                 &effect, &errors);
             if (FAILED(hr))
             {
-                m_Core->GetLogger()->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                m_Core->GetLogger()->LogMessage(VSLog_PlugError, VOODOO_D3D9_NAME, 
                     StringFormat("Error compiling effect from file '%1%'. Errors:\n%2%") << 
                     pFile->GetPath() << (LPCSTR)errors->GetBufferPointer());
 
@@ -211,11 +211,11 @@ namespace VoodooShader
 
         D3DFORMAT DepthFormats[] =
         {
-            (D3DFORMAT)MAKEFOURCC('I','N','T','Z'),
-            (D3DFORMAT)MAKEFOURCC('D','F','2','4'),
-            (D3DFORMAT)MAKEFOURCC('D','F','1','6'),
-            (D3DFORMAT)MAKEFOURCC('R','A','W','Z'),
-            (D3DFORMAT)0
+            ((D3DFORMAT)(MAKEFOURCC('I','N','T','Z'))),
+            ((D3DFORMAT)(MAKEFOURCC('D','F','2','4'))),
+            ((D3DFORMAT)(MAKEFOURCC('D','F','1','6'))),
+            ((D3DFORMAT)(MAKEFOURCC('R','A','W','Z'))),
+            ((D3DFORMAT)0)
         };
 
         VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTexture)(CONST String & name, TextureDesc desc)
@@ -226,14 +226,25 @@ namespace VoodooShader
             }
 
             DWORD usage = 0;
-            if ((desc.Usage & VSTexFlag_AutoMip) > 0) usage |= D3DUSAGE_AUTOGENMIPMAP;
-            if ((desc.Usage & VSTexFlag_Dynamic) > 0) usage |= D3DUSAGE_DYNAMIC;
-            if ((desc.Usage & VSTexFlag_Target) > 0) usage |= D3DUSAGE_RENDERTARGET;
+            if ((desc.Usage & VSTexFlag_AutoMip) > 0)   usage |= D3DUSAGE_AUTOGENMIPMAP;
+            if ((desc.Usage & VSTexFlag_Dynamic) > 0)   usage |= D3DUSAGE_DYNAMIC;
+            if ((desc.Usage & VSTexFlag_Target) > 0)    usage |= D3DUSAGE_RENDERTARGET;
             
             LPDIRECT3DTEXTURE9 texture = nullptr;
 
             if (desc.Format == VSFmt_DMax)
             {
+                usage = D3DUSAGE_DEPTHSTENCIL;
+                desc.Levels = 1;
+                HRESULT hr = m_Device->CreateTexture
+                (
+                    //desc.Size.X, desc.Size.Y, desc.Levels, 
+                    512, 512, 1,
+                    D3DUSAGE_DEPTHSTENCIL, ((D3DFORMAT)(MAKEFOURCC('I','N','T','Z'))), 
+                    D3DPOOL_DEFAULT, &texture, NULL
+                );
+                assert(SUCCEEDED(hr));
+
                 uint32_t index = 0;
                 while (!texture && DepthFormats[index] != 0)
                 {
@@ -246,7 +257,7 @@ namespace VoodooShader
                 D3DFORMAT format = ConverterDX9::ToD3DFormat(desc.Format);
                 if (format == D3DFMT_UNKNOWN)
                 {
-                    m_Core->GetLogger()->LogMessage(VSLog_CoreError, VOODOO_CORE_NAME, 
+                    m_Core->GetLogger()->LogMessage(VSLog_PlugError, VOODOO_D3D9_NAME, 
                         StringFormat("Unable to convert texture format %1%.") << desc.Format);
 
                     return nullptr;
@@ -270,7 +281,7 @@ namespace VoodooShader
         {
             LPDIRECT3DTEXTURE9 texture = nullptr;
             HRESULT hr = m_Device->CreateTexture(desc.Size.X, desc.Size.Y, desc.Levels, 
-                usage, format, D3DPOOL_DEFAULT, &texture, nullptr);
+                usage, format, D3DPOOL_DEFAULT, &texture, NULL);
             if (FAILED(hr))
             {
                 return nullptr;

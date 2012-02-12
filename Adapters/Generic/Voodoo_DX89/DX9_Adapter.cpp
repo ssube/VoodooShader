@@ -29,11 +29,13 @@
 #include "StringFormat.hpp"
 #include "Support.inl"
 
-VoodooShader::IEffect * testEffect = nullptr;
+VoodooShader::EffectRef   testEffect = nullptr;
 
-IDirect3DSurface9 *surface_Frame0 = nullptr;
-VoodooShader::ITexture* texture_Frame0 = nullptr;
-IDirect3DSurface9 *surface_Pass0 = nullptr;
-VoodooShader::ITexture* texture_Pass0 = nullptr;
-IDirect3DSurface9 * surface_Scratch = nullptr;
-VoodooShader::ITexture* texture_Scratch = nullptr;
+VoodooShader::TextureRef  texture_Frame0 = nullptr;
+IDirect3DSurface9       * surface_Frame0 = nullptr;
+VoodooShader::TextureRef  texture_Pass0 = nullptr;
+IDirect3DSurface9       * surface_Pass0 = nullptr;
+VoodooShader::TextureRef  texture_Depth = nullptr;
+IDirect3DSurface9       * surface_Depth = nullptr;
+VoodooShader::TextureRef  texture_Scratch = nullptr;
+IDirect3DSurface9       * surface_Scratch = nullptr;

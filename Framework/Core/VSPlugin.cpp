@@ -156,7 +156,8 @@ namespace VoodooShader
         //VOODOO_DEBUG_FUNCLOG(m_ore->GetLogger());
 
         return m_PluginInit(pCore);
-    }    
+    }
+    
     void VOODOO_METHODTYPE VSPlugin::PluginReset(_In_ ICore * pCore) CONST
     {
         //VOODOO_DEBUG_FUNCLOG(m_Server->)

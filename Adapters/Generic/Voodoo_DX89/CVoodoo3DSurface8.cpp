@@ -32,13 +32,13 @@ namespace VoodooShader
             m_Refs(0), m_Device(pDevice), m_RealSurface(pRealSurface)
         {
             if (m_RealSurface) m_RealSurface->AddRef();
-            if (m_Device) m_Device->AddRef();
+            //if (m_Device) m_Device->AddRef();
         }
 
         CVoodoo3DSurface8::~CVoodoo3DSurface8()
         {
-            if (m_Device) m_Device->Release();
-            m_Device = nullptr;
+            //if (m_Device) m_Device->Release();
+            //m_Device = nullptr;
 
             if (m_RealSurface) m_RealSurface->Release();
             m_RealSurface = nullptr;
@@ -51,21 +51,23 @@ namespace VoodooShader
             {
                 return D3DERR_INVALIDCALL;
             }
-
-            if (riid == IID_IUnknown)
+            else if (riid == IID_IUnknown)
             {
+                *ppvObj = this;
                 ((IUnknown*)(*ppvObj))->AddRef();
+                return D3D_OK;
             }
             else if (riid == IID_IDirect3DSurface8)
             {
+                *ppvObj = this;
                 ((IDirect3DSurface8*)(*ppvObj))->AddRef();
+                return D3D_OK;
             }
             else
             {
+                *ppvObj = nullptr;
                 return D3DERR_INVALIDCALL;
             }
-
-            return D3D_OK;
         }
         ULONG STDMETHODCALLTYPE CVoodoo3DSurface8::AddRef()
         {

@@ -21,7 +21,7 @@ Resources/Installers/Output/*
 VoodooPaths.props
 
 #Build version file
-Framework/Core/Version_Build.hpp
+VoodooBuild_*.hpp
 
 #Temp ignore for CMake files (until system is ready)
 CMakeLists.txt

@@ -23,6 +23,7 @@
 #include "VSTechniqueDX9.hpp"
 #include "VSEffectDX9.hpp"
 #include "VSBindingDX9.hpp"
+#include "D3D9_Version.hpp"
 
 namespace VoodooShader
 {
@@ -36,7 +37,7 @@ namespace VoodooShader
         {
             if (!m_Technique)
             {
-                Throw(VOODOO_CORE_NAME, VSTR("Cannot create a pass with no parent technique."), nullptr);
+                Throw(VOODOO_D3D9_NAME, VSTR("Cannot create a pass with no parent technique."), nullptr);
             } 
 
             m_Core = m_Technique->GetCore();

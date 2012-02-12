@@ -19,6 +19,7 @@
  */
 
 #include "VoodooFramework.hpp"
+#include "VoodooInternal.hpp"
 // Voodoo Core
 #include "VSCore.hpp"
 #include "VSFileSystem.hpp"
@@ -48,6 +49,11 @@ namespace VoodooShader
         static const Version coreVersion = VOODOO_VERSION_STRUCT(CORE);
 
         return &coreVersion;
+    }
+
+    void VOODOO_CALLTYPE API_PluginReset(ICore * pCore)
+    {
+        UNREFERENCED_PARAMETER(pCore);
     }
 
     const uint32_t VOODOO_CALLTYPE API_ClassCount()

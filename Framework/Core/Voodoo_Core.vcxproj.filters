@@ -117,9 +117,6 @@
     <ClInclude Include="VoodooVersion.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="BuildVersion.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="VoodooDocs.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -149,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="VSPluginServer.hpp">
       <Filter>Headers\Implementations</Filter>
+    </ClInclude>
+    <ClInclude Include="Core_Version.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -52,11 +52,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Voodoo_D3D9.def">
-      <Filter>Source Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="VSParameterDX9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,5 +73,10 @@
     <ClCompile Include="VSBindingDX9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Voodoo_D3D9.def">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
