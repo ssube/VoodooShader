@@ -54,6 +54,8 @@ namespace VoodooShader
         StringFormat & operator<<(unsigned int val);
         StringFormat & operator<<(long val);
         StringFormat & operator<<(unsigned long val);
+		StringFormat & operator<<(long long val);
+		StringFormat & operator<<(unsigned long long val);
         StringFormat & operator<<(float val);
         StringFormat & operator<<(double val);
 

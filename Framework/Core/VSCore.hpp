@@ -59,9 +59,9 @@ namespace VoodooShader
         _Check_return_ VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
         _Check_return_ VOODOO_METHOD(Reset)();
 
-        VOODOO_METHOD(OnEvent)(Uuid event, Functions::CallbackFunc func);
-        VOODOO_METHOD(DropEvent)(Uuid event, Functions::CallbackFunc func);
-        VOODOO_METHOD(CallEvent)(Uuid event, uint32_t count, _In_opt_count_(count) Variant * pArgs);
+        VOODOO_METHOD(OnEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func);
+        VOODOO_METHOD(DropEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func);
+        VOODOO_METHOD(CallEvent)(_In_ Uuid event, _In_ uint32_t count, _In_reads_opt_(count) Variant * pArgs);
 
         VOODOO_METHOD_(XmlDocument, GetConfig)() CONST;
         VOODOO_METHOD_(IFileSystem *, GetFileSystem)() CONST;

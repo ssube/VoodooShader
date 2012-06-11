@@ -53,12 +53,12 @@ namespace VoodooShader
             VOODOO_METHOD(GetString)(String * pVal) CONST;
             VOODOO_METHOD(GetTexture)(ITexture ** pVal) CONST;
             VOODOO_METHOD(GetVector)(Float4 * pVal) CONST;
-            VOODOO_METHOD(SetBool)(bool val);
-            VOODOO_METHOD(SetFloat)(float val);
-            VOODOO_METHOD(SetInt)(int32_t val);
+            VOODOO_METHOD(SetBool)(CONST bool val);
+            VOODOO_METHOD(SetFloat)(CONST float val);
+            VOODOO_METHOD(SetInt)(CONST int32_t val);
             VOODOO_METHOD(SetString)(CONST String & val);
-            VOODOO_METHOD(SetTexture)(ITexture * pVal);
-            VOODOO_METHOD(SetVector)(Float4 val);
+            VOODOO_METHOD(SetTexture)(CONST ITexture * pVal);
+            VOODOO_METHOD(SetVector)(CONST Float4 val);
         
             VOODOO_METHOD_(bool, IsVirtual)() CONST;
             VOODOO_METHOD(AttachParameter)(_In_ IParameter * pParam);

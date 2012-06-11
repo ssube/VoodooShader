@@ -21,10 +21,10 @@
 #include "HookMechanism.hpp"
 
 // Globals
-VoodooShader::ICore * gVoodooCore = nullptr;
-HINSTANCE gHookLoader = nullptr;
-unsigned int gLoadOnce = 1;
-HHOOK gSystemHook = nullptr;
+VoodooShader::ICore * g_VoodooCore = nullptr;
+HINSTANCE g_HookLoader = nullptr;
+unsigned int g_LoadOnce = 1;
+HHOOK g_SystemHook = nullptr;
 
 BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
 {
@@ -34,7 +34,7 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVO
 
     if (fdwReason == DLL_PROCESS_ATTACH)
     {
-        gHookLoader = hinstDLL;
+        g_HookLoader = hinstDLL;
     }
 
     return TRUE;
@@ -50,7 +50,7 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
     {
         if (nCode == HCBT_CREATEWND || nCode == HCBT_ACTIVATE)
         {
-            if (InterlockedCompareExchange(&gLoadOnce, 0, 1) == 1)
+            if (InterlockedCompareExchange(&g_LoadOnce, 0, 1) == 1)
             {
                 TCHAR moduleName[MAX_PATH];
                 GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
@@ -66,7 +66,7 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
                     delete hook;
 				}
 
-				InterlockedExchange(&gLoadOnce, 0);
+				InterlockedExchange(&g_LoadOnce, 0);
             }
         }
 
@@ -76,11 +76,11 @@ LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lP
 
 HHOOK WINAPI InstallGlobalHook()
 {
-    if (gSystemHook) return gSystemHook;
+    if (g_SystemHook) return g_SystemHook;
     
-    gSystemHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, gHookLoader, 0);
+    g_SystemHook = SetWindowsHookEx(WH_CBT, &GlobalHookCb, g_HookLoader, 0);
 
-    if (!gSystemHook)
+    if (!g_SystemHook)
     {
         DWORD error = GetLastError();
 
@@ -98,7 +98,7 @@ HHOOK WINAPI InstallGlobalHook()
 
     GlobalLog(TEXT("Installed global hook.\n"));
 
-    return gSystemHook;
+    return g_SystemHook;
 }
 
 void WINAPI RemoveGlobalHook(HHOOK hook)
@@ -127,7 +127,7 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
 
 bool WINAPI LoadVoodoo(_In_ HHOOKDEF pHook)
 {
-    if (gVoodooCore) return true;
+    if (g_VoodooCore) return true;
 
     GlobalLog(TEXT("Loading Voodoo Shader framework.\n"));
 
@@ -165,25 +165,25 @@ bool WINAPI LoadVoodoo(_In_ HHOOKDEF pHook)
         return false;
     }
 
-    gVoodooCore = createFunc(0);
+    g_VoodooCore = createFunc(0);
     
-    if (!gVoodooCore)
+    if (!g_VoodooCore)
     {
         ErrorMessage(0x2008, L"Unable to create Voodoo Shader core.");
     }
     else
     {
-        gVoodooCore->AddRef();
+        g_VoodooCore->AddRef();
 
-        if (FAILED(gVoodooCore->Init(pHook->Config)))
+        if (FAILED(g_VoodooCore->Init(pHook->Config)))
         {
             ErrorMessage(0x2009, L"Unable to initialize Voodoo Shader core.");
-            gVoodooCore->Release();
-            gVoodooCore = nullptr;
+            g_VoodooCore->Release();
+            g_VoodooCore = nullptr;
         } else {
             GlobalLog(TEXT("Initialized Voodoo Shader, passing logging to core.\n"));
         }
     }
 
-    return (gVoodooCore != nullptr);
+    return (g_VoodooCore != nullptr);
 }

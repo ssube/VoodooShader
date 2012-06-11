@@ -141,7 +141,23 @@ namespace VoodooShader
 
         m_Impl->m_Format % val;
         return (*this);
-    }
+	}
+
+	StringFormat & StringFormat::operator<<(long long val)
+	{
+		VOODOO_CHECK_IMPL;
+
+		m_Impl->m_Format % val;
+		return (*this);
+	}
+
+	StringFormat & StringFormat::operator<<(unsigned long long val)
+	{
+		VOODOO_CHECK_IMPL;
+
+		m_Impl->m_Format % val;
+		return (*this);
+	}
 
     StringFormat & StringFormat::operator<<(float val)
     {

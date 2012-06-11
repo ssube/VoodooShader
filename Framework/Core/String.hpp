@@ -54,52 +54,52 @@ namespace VoodooShader
          * Creates a string from the given character (one character, converted).
          * @param ch Character to use.
          */
-        EXPLICIT String(_In_ const char ch);
+        EXPLICIT String(_In_ CONST char ch);
         /**
          * Creates a string from a C-style string (converted).
          * @param str String to use.
          */
-        String(_In_z_ const char * str);
+        String(_In_z_ CONST char * str);
         /**
          * Creates a string from the given character (converted and repeated).
          * @param size The number of characters.
          * @param ch The character to use.
          */
-        EXPLICIT String(_In_ const uint32_t size, _In_ const char ch);
+        EXPLICIT String(_In_ CONST uint32_t size, _In_ CONST char ch);
         /**
          * Creates a string from a portion of the given string (taken from the beginning and converted).
          * @param size The number of characters to use.
          * @param str The string to use.
          */
-        EXPLICIT String(_In_ const uint32_t size, _In_z_count_(size) const char * str);
+        EXPLICIT String(_In_ CONST uint32_t size, _In_z_count_(size) CONST char * str);
         /**
          * Creates a string from the given character (one character).
          * @param ch Character to use.
          */
-        EXPLICIT String(_In_ const wchar_t ch);
+        EXPLICIT String(_In_ CONST wchar_t ch);
         /**
          * Creates a string from a C-style wide string.
          * @param str String to use.
          */
-        String(_In_z_ const wchar_t * str);
+        String(_In_z_ CONST wchar_t * str);
         /**
          * Creates a string from the given character (repeated).
          * @param size The number of characters.
          * @param ch The character to use.
          */
-        EXPLICIT String(_In_ const uint32_t size, _In_ const wchar_t ch);
+        EXPLICIT String(_In_ CONST uint32_t size, _In_ CONST wchar_t ch);
         /**
          * Create a string from a C-style wide string.
          * @param size The number of characters to use.
          * @param str The string to use.
          */
-        EXPLICIT String(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        EXPLICIT String(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str);
         /**
          * Creates a string from another String (copy constructor).
          * @param str The string to copy.
          * @note This does not provide a partial copy constructor, use <code>String(String.Left())</code>.
          */
-        String(_In_ const String & str);
+        String(_In_ CONST String & str);
         /**
          * Creates a string from a Uuid in unbraced 4/2/2/2/6 form.
          *
@@ -107,13 +107,13 @@ namespace VoodooShader
          *
          * This is considered the standard form for Voodoo Uuids.
          */
-        EXPLICIT String(_In_ const Uuid & uuid);
+        EXPLICIT String(_In_ CONST Uuid & uuid);
 #if defined(_VECTOR_)
         /**
          * Create a string from a vector, treating it as a character array (performs conversion).
          * @param vec The vector to convert and use.
          */
-        EXPLICIT String(_In_ const std::vector<char> & vec) :
+        EXPLICIT String(_In_ CONST std::vector<char> & vec) :
             m_Impl(nullptr)
         {
             this->CInit(0, &vec[0]);
@@ -122,7 +122,7 @@ namespace VoodooShader
          * Create a string from a vector, treating it as a wide character array.
          * @param vec The vector to use.
          */
-        EXPLICIT String(_In_ const std::vector<wchar_t> & vec) :
+        EXPLICIT String(_In_ CONST std::vector<wchar_t> & vec) :
             m_Impl(nullptr)
         {
             this->WInit(0, &vec[0]);
@@ -133,7 +133,7 @@ namespace VoodooShader
          * Create a string from a std::string (performs conversion).
          * @param str The string to use.
          */
-        String(_In_ const std::string & str) :
+        String(_In_ CONST std::string & str) :
             m_Impl(nullptr)
         {
             this->CInit(0, str.c_str());
@@ -142,7 +142,7 @@ namespace VoodooShader
          * Create a string from a std::wstring.
          * @param str The string to use.
          */
-        String(_In_ const std::wstring & str) :
+        String(_In_ CONST std::wstring & str) :
             m_Impl(nullptr)
         {
             this->WInit(0, str.c_str());
@@ -178,23 +178,23 @@ namespace VoodooShader
          * @name String Modification
          * @{
          */
-        String & Append(_In_ const wchar_t ch);
-        String & Append(_In_ const uint32_t size, _In_ const wchar_t ch);
-        String & Append(_In_ const wchar_t * str);
-        String & Append(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
-        String & Append(_In_ const String & str);
-        String & Assign(_In_ const wchar_t ch);
-        String & Assign(_In_ const uint32_t size, _In_ const wchar_t ch);
-        String & Assign(_In_ const wchar_t * str);
-        String & Assign(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
-        String & Assign(_In_ const String & str);
+        String & Append(_In_ CONST wchar_t ch);
+        String & Append(_In_ CONST uint32_t size, _In_ CONST wchar_t ch);
+        String & Append(_In_ CONST wchar_t * str);
+        String & Append(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str);
+        String & Append(_In_ CONST String & str);
+        String & Assign(_In_ CONST wchar_t ch);
+        String & Assign(_In_ CONST uint32_t size, _In_ CONST wchar_t ch);
+        String & Assign(_In_ CONST wchar_t * str);
+        String & Assign(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str);
+        String & Assign(_In_ CONST String & str);
         String & Clear();
-        String & Prepend(_In_ const wchar_t ch);
-        String & Prepend(_In_ const uint32_t size, _In_ const wchar_t ch);
-        String & Prepend(_In_z_ const wchar_t * str);
-        String & Prepend(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
-        String & Prepend(_In_ const String & str);
-        String & Truncate(_In_ uint32_t size);
+        String & Prepend(_In_ CONST wchar_t ch);
+        String & Prepend(_In_ CONST uint32_t size, _In_ CONST wchar_t ch);
+        String & Prepend(_In_z_ CONST wchar_t * str);
+        String & Prepend(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str);
+        String & Prepend(_In_ CONST String & str);
+        String & Truncate(_In_ CONST uint32_t size);
         /**
          * @}
          * @name Conversion and Split
@@ -203,17 +203,17 @@ namespace VoodooShader
         /**
          * Return a lower-cased copy of the string.
          */
-        String ToLower() const;
+        String ToLower() CONST;
         /**
          * Return an upper-cased copy of the string.
          */
-        String ToUpper() const;
+        String ToUpper() CONST;
         /**
-         * Splits the string into tokens based on the delimeters given. The remainder of the string,
+         * Splits the string into tokens based on the delimiters given. The remainder of the string,
          * after the maximum number of tokens is reached, will be appended to the end of the final
-         * token. The delimeter characters will not be included in the split strings.
+         * token. The delimiter characters will not be included in the split strings.
          *
-         * @param delims The list of delimeter characters.
+         * @param delims The list of delimiter characters.
          * @param count The maximum number of tokens. Must be 0 if pStrings is null.
          * @param pStrings The destination array of strings to be filled with split tokens. If null, the number of tokens
          *      that would be split is counted and returned without any strings being copied.
@@ -222,9 +222,9 @@ namespace VoodooShader
          */
         uint32_t Split
         (
-            _In_ const String & delims, 
-            _In_ const uint32_t count, 
-            _In_opt_count_(count) String * pStrings, 
+            _In_ CONST String & delims, 
+            _In_ CONST uint32_t count, 
+            _In_reads_opt_(count) String * pStrings, 
             _In_ bool stripEmpty = false
         ) const;
         /**
@@ -241,7 +241,7 @@ namespace VoodooShader
          *      null Uuid.
          * @return Success of conversion.
          */
-        bool ToUuid(_Out_ Uuid * pUuid) const;
+        bool ToUuid(_Out_ Uuid * pUuid) CONST;
         /**
          * Attempts to convert this String to a character array. If size is 0 and pBuffer is null, this estimates the size
          * of the buffer required and returns that; otherwise it converts the string and returns the number of bytes written
@@ -251,21 +251,21 @@ namespace VoodooShader
          * @param pBuffer Buffer to write converted string to.
          * @return Necessary buffer size or bytes converted.
          */
-        int32_t ToChars(_In_ int32_t size, _Inout_opt_count_(size) char * pBuffer) const;
+        int32_t ToChars(_In_ int32_t size, _Inout_updates_opt_(size) char * pBuffer) CONST;
 #if defined(_STRING_)
         /**
          * Creates a std::wstring from this string.
          *
          * @return Copied string.
          */
-        std::wstring ToString() const
+        std::wstring ToString() CONST
         {
             return std::wstring(this->GetData());
         };
         /**
          * Creates a std::string from this string.
          */
-        std::string ToStringA() const
+        std::string ToStringA() CONST
         {
             int32_t len = this->ToChars(0, nullptr);
             if (len < 0)
@@ -285,43 +285,43 @@ namespace VoodooShader
          * @name String Partial Copy
          * @{
          */
-        String Left(_In_ uint32_t count) const;
-        String Right(_In_ uint32_t count) const;
-        String Substr(_In_ uint32_t start, _In_ uint32_t count = String::Npos) const;
+        String Left(_In_ uint32_t count) CONST;
+        String Right(_In_ uint32_t count) CONST;
+        String Substr(_In_ uint32_t start, _In_ uint32_t count = String::Npos) CONST;
         /**
          * @}
          * @name String Predicates
          * @{
          */
-        bool Compare(_In_ const wchar_t ch, _In_ bool useCase = true) const;
-        bool Compare(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
-        bool Compare(_In_ const String & str, _In_ bool useCase = true) const;
-        bool Contains(_In_ const wchar_t ch, _In_ bool useCase = true) const;
-        bool Contains(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
-        bool Contains(_In_ const String & str, _In_ bool useCase = true) const;
-        bool StartsWith(_In_ const wchar_t ch, _In_ bool useCase = true) const;
-        bool StartsWith(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
-        bool StartsWith(_In_ const String & str, _In_ bool useCase = true) const;
-        bool EndsWith(_In_ const wchar_t ch, _In_ bool useCase = true) const;
-        bool EndsWith(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
-        bool EndsWith(_In_ const String & str, _In_ bool useCase = true) const;
+        bool Compare(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
+        bool Compare(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
+        bool Compare(_In_ CONST String & str, _In_ bool useCase = true) CONST;
+        bool Contains(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
+        bool Contains(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
+        bool Contains(_In_ CONST String & str, _In_ bool useCase = true) CONST;
+        bool StartsWith(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
+        bool StartsWith(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
+        bool StartsWith(_In_ CONST String & str, _In_ bool useCase = true) CONST;
+        bool EndsWith(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
+        bool EndsWith(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
+        bool EndsWith(_In_ CONST String & str, _In_ bool useCase = true) CONST;
         /**
          * @}
          * @name String Find and Replace
          * @{
          */
-        uint32_t Find(_In_ const wchar_t ch, _In_ bool useCase = true) const;
-        uint32_t Find(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
-        uint32_t Find(_In_ const String & str, _In_ bool useCase = true) const;
-        uint32_t ReverseFind(_In_ const wchar_t ch, _In_ bool useCase = true) const;
-        uint32_t ReverseFind(_In_z_ const wchar_t * str, _In_ bool useCase = true) const;
-        uint32_t ReverseFind(_In_ const String & str, _In_ bool useCase = true) const;
-        String & Replace(_In_ const wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
-        String & Replace(_In_z_ const wchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
-        String & Replace(_In_ const String & fstr, _In_ const String & rstr, _In_ bool caseSensitive = true);
-        String & Remove(_In_ const wchar_t fch, _In_ bool useCase = true);
-        String & Remove(_In_z_ const wchar_t * fstr, _In_ bool useCase = true);
-        String & Remove(_In_ const String & fstr, _In_ bool useCase = true);
+        uint32_t Find(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
+        uint32_t Find(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
+        uint32_t Find(_In_ CONST String & str, _In_ bool useCase = true) CONST;
+        uint32_t ReverseFind(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
+        uint32_t ReverseFind(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
+        uint32_t ReverseFind(_In_ CONST String & str, _In_ bool useCase = true) CONST;
+        String & Replace(_In_ CONST wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
+        String & Replace(_In_z_ CONST wchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
+        String & Replace(_In_ CONST String & fstr, _In_ const String & rstr, _In_ bool caseSensitive = true);
+        String & Remove(_In_ CONST wchar_t fch, _In_ bool useCase = true);
+        String & Remove(_In_z_ CONST wchar_t * fstr, _In_ bool useCase = true);
+        String & Remove(_In_ CONST String & fstr, _In_ bool useCase = true);
         /**
          * @}
          * @name Data Access Methods
@@ -330,11 +330,11 @@ namespace VoodooShader
         /**
          * Get the current length of the string, in characters.
          */
-        uint32_t GetLength() const;
+        uint32_t GetLength() CONST;
         /**
          * Get whether the string's length is 0 characters.
          */
-        bool IsEmpty() const;
+        bool IsEmpty() CONST;
         /**
          * Reserve the given number of characters, minimizing string reallocations.
          *
@@ -345,7 +345,7 @@ namespace VoodooShader
          * Get a single character from the string.
          * @param pos Position to retrieve.
          */
-        wchar_t GetAt(_In_ uint32_t pos) const;
+        wchar_t GetAt(_In_ uint32_t pos) CONST;
         /**
          * Sets a single character in the string.
          * @param pos Position to assign.
@@ -362,55 +362,55 @@ namespace VoodooShader
          *
          * @warning The C-string returned may be read-only, attempting to write is undefined.
          */
-        const wchar_t * GetData() const;
+        const wchar_t * GetData() CONST;
         /**
          * @}
          * @name Assignment and Concatenation Operators
          * @{
          */
-        inline String & operator=(_In_ const wchar_t ch)
+        inline String & operator=(_In_ CONST wchar_t ch)
         {
             this->Assign(ch);
             return (*this);
         };
-        inline String & operator=(_In_z_ const wchar_t * str)
+        inline String & operator=(_In_z_ CONST wchar_t * str)
         {
             this->Assign(str);
             return (*this);
         };
-        inline String & operator=(_In_ const String & str)
+        inline String & operator=(_In_ CONST String & str)
         {
             this->Assign(str);
             return (*this);
         };
-        inline String & operator+=(_In_ const wchar_t ch)
+        inline String & operator+=(_In_ CONST wchar_t ch)
         {
             this->Append(ch);
             return (*this);
         };
-        inline String & operator+=(_In_z_ const wchar_t * str)
+        inline String & operator+=(_In_z_ CONST wchar_t * str)
         {
             this->Append(str);
             return (*this);
         };
-        inline String & operator+=(_In_ const String & str)
+        inline String & operator+=(_In_ CONST String & str)
         {
             this->Append(str);
             return (*this);
         };
-        inline const String operator+(_In_ const wchar_t ch) const
+        inline const String operator+(_In_ CONST wchar_t ch) CONST
         {
             String c = (*this);
             c += ch;
             return c;
         };
-        inline const String operator+(_In_z_ const wchar_t * str) const
+        inline const String operator+(_In_z_ CONST wchar_t * str) CONST
         {
             String c = (*this);
             c += str;
             return c;
         };
-        inline const String operator+(_In_ const String & str) const
+        inline const String operator+(_In_ CONST String & str) CONST
         {
             String c = (*this);
             c += str;
@@ -421,39 +421,39 @@ namespace VoodooShader
          * @name Comparison Operators
          * @{
          */
-        inline bool operator==(_In_z_ const wchar_t * str) const
+        inline bool operator==(_In_z_ CONST wchar_t * str) CONST
         {
             return this->Compare(str);
         };
-        inline bool operator==(_In_ const String & str) const
+        inline bool operator==(_In_ CONST String & str) CONST
         {
             return this->Compare(str);
         };
-        inline bool operator!=(_In_z_ const wchar_t * str) const
+        inline bool operator!=(_In_z_ CONST wchar_t * str) CONST
         {
             return !(this->operator==(str));
         };
-        inline bool operator!=(_In_ const String & str) const
+        inline bool operator!=(_In_ CONST String & str) CONST
         {
             return !(this->operator==(str));
         };
-        bool operator<(_In_z_ const wchar_t * str) const;
-        bool operator<(_In_ const String & str) const;
-        bool operator>(_In_z_ const wchar_t * str) const;
-        bool operator>(_In_ const String & str) const;
-        inline bool operator<=(_In_z_ const wchar_t * str) const
+        bool operator<(_In_z_ CONST wchar_t * str) CONST;
+        bool operator<(_In_ CONST String & str) CONST;
+        bool operator>(_In_z_ CONST wchar_t * str) CONST;
+        bool operator>(_In_ CONST String & str) CONST;
+        inline bool operator<=(_In_z_ CONST wchar_t * str) CONST
         {
             return !(this->operator>(str));
         };
-        inline bool operator<=(_In_ const String & str) const
+        inline bool operator<=(_In_ CONST String & str) CONST
         {
             return !(this->operator>(str));
         };
-        inline bool operator>=(_In_z_ const wchar_t * str) const
+        inline bool operator>=(_In_z_ CONST wchar_t * str) CONST
         {
             return !(this->operator<(str));
         };
-        inline bool operator>=(_In_ const String & str) const
+        inline bool operator>=(_In_ CONST String & str) CONST
         {
             return !(this->operator<(str));
         };
@@ -463,17 +463,17 @@ namespace VoodooShader
         /**
          * Character positions indicating beyond the end of the string or not found.
          */
-        static const uint32_t Npos = (uint32_t)-1;
+        static CONST uint32_t Npos = (uint32_t)-1;
 
     private:
         /**
          * Initializes the string from an ASCII string, doing conversion as needed.
          */
-        void CInit(_In_ const uint32_t size, _In_z_count_(size) const char * str);
+        void CInit(_In_ CONST uint32_t size, _In_reads_z_(size) CONST char * str);
         /**
          * Initializes the string from a wide string, copying as needed.
          */
-        void WInit(_In_ const uint32_t size, _In_z_count_(size) const wchar_t * str);
+        void WInit(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str);
 
         StringImpl * m_Impl;
     };

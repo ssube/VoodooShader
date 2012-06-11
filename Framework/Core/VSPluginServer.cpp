@@ -462,8 +462,7 @@ namespace VoodooShader
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
         Uuid clsid;
-        i
-			f (!name.ToUuid(&clsid))
+        if (!name.ToUuid(&clsid))
         {
             StrongNameMap::const_iterator classiter = m_ClassNames.find(name);
             if (classiter != m_ClassNames.end())

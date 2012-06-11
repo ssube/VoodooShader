@@ -134,7 +134,7 @@ IDirect3D8 * WINAPI VSDirect3DCreate8(UINT sdkVersion)
     volatile static UINT SingleD3D8 = 0;
     if (InterlockedCompareExchange(&SingleD3D8, 1, 0) == 0)
     {
-        GlobalLog(VSTR("Loading Voodoo Shader from %s."), VSTR(__FUNCTION__));
+        GlobalLog(VSTR("Loading Voodoo Shader from %s.\n"), VSTR(__FUNCTION__));
 #ifdef _DEBUG
         if (!IsDebuggerPresent())
         {

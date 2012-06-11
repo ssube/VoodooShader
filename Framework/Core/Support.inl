@@ -99,13 +99,13 @@ inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format
         std::vector<TCHAR> buffer((unsigned int)bufsize);
         _vsntprintf_s(&buffer[0], (size_t)bufsize, (size_t)bufsize-1, msg, args);
 
-        GlobalLog(TEXT("Error: %s"), &buffer[0]);
+        GlobalLog(TEXT("Error: %s\n"), &buffer[0]);
 
         MessageBox(nullptr, &buffer[0], title, MB_OK | MB_ICONWARNING);
     }
     else
     {
-        GlobalLog(TEXT("Error: %u (unable to format)"), errorCode);
+        GlobalLog(TEXT("Error: %u (unable to format)\n"), errorCode);
 
         MessageBox(nullptr, TEXT("An error occurred, but could not be formatted."), title, MB_OK | MB_ICONWARNING);
     }
@@ -168,9 +168,11 @@ inline static HKEY WINAPI GetVoodooKey()
     }
 }
 
-inline static bool WINAPI GetVoodooPath(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
+inline static bool WINAPI GetVoodooPath(_Out_writes_(MAX_PATH) TCHAR * pBuffer)
 {
     if (!pBuffer) return false;
+
+	ZeroMemory(pBuffer, MAX_PATH * sizeof(TCHAR));
 
     HKEY root = GetVoodooKey();
     if (root)
@@ -193,7 +195,7 @@ inline static bool WINAPI GetVoodooPath(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
     return false;
 }
 
-inline static bool WINAPI GetVoodooBinPrefix(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
+inline static bool WINAPI GetVoodooBinPrefix(_Out_writes_(MAX_PATH) TCHAR * pBuffer)
 {
     if (!pBuffer) return false;
 
@@ -218,7 +220,7 @@ inline static bool WINAPI GetVoodooBinPrefix(_In_count_c_(MAX_PATH) TCHAR * pBuf
     return false;
 }
 
-inline static bool WINAPI GetVoodooBinPath(_In_count_c_(MAX_PATH) TCHAR * pBuffer)
+inline static bool WINAPI GetVoodooBinPath(_Out_writes_(MAX_PATH) TCHAR * pBuffer)
 {
     if (!pBuffer) return false;
 
