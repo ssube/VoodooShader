@@ -32,7 +32,7 @@ namespace VoodooShader
         {
         public:
             VSParameterDX9(_Pre_notnull_ VSEffectDX9 * pEffect, _In_ D3DXHANDLE pParamHandle);
-            VSParameterDX9(_In_ VSBindingDX9 * pBinding, const String & name, ParameterDesc desc);
+            VSParameterDX9(_In_ VSBindingDX9 * pBinding, CONST String & name, ParameterDesc desc);
             ~VSParameterDX9();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -42,8 +42,8 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
         
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+            VOODOO_METHOD(GetProperty)(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(CONST Uuid propid, _In_ Variant * pValue);
 
             VOODOO_METHOD_(ParameterDesc, GetDesc)() CONST;
 
@@ -56,7 +56,7 @@ namespace VoodooShader
             VOODOO_METHOD(SetBool)(bool val);
             VOODOO_METHOD(SetFloat)(float val);
             VOODOO_METHOD(SetInt)(int32_t val);
-            VOODOO_METHOD(SetString)(const String & val);
+            VOODOO_METHOD(SetString)(CONST String & val);
             VOODOO_METHOD(SetTexture)(ITexture * pVal);
             VOODOO_METHOD(SetVector)(Float4 val);
         

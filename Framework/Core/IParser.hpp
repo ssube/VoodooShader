@@ -58,13 +58,13 @@ namespace VoodooShader
          * @param value The variable's value (may contain variables, they will be resolved when this variable is used).
          * @param type Flags for this of variable.
          */
-        VOODOO_METHOD_(void, Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VSVar_Normal) PURE;
+        VOODOO_METHOD(Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VSVar_Normal) PURE;
         /**
          * Removes a variable from the internal dictionary.
          *
          * @param name The variable name (may contain variables, they will be resolved immediately).
          */
-        VOODOO_METHOD_(void, Remove)(_In_ const String & name) PURE;
+        VOODOO_METHOD(Remove)(_In_ const String & name) PURE;
         /**
          * Parses a string, replacing any variables with their values. Variables are resolved when found, so it is
          * possible to have variables within variables and trigger recursion.

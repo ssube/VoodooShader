@@ -30,7 +30,7 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSTechniqueDX9
         DeclareDebugCache();
 
-        VSTechniqueDX9::VSTechniqueDX9(VSEffectDX9 * pEffect, D3DXHANDLE pTechHandle) :
+        VSTechniqueDX9::VSTechniqueDX9(_In_ VSEffectDX9 * pEffect, D3DXHANDLE pTechHandle) :
             m_Refs(0), m_Effect(pEffect), m_DXHandle(pTechHandle)
         {
             if (!m_Effect)
@@ -62,7 +62,7 @@ namespace VoodooShader
             for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)
             {
                 D3DXHANDLE passHandle = m_Effect->m_DXEffect->GetPass(m_DXHandle, passIndex);
-                VSPassDX9 * pass = new VSPassDX9(this, passIndex);
+                VSPassDX9Ref pass(new VSPassDX9(this, passIndex));
                 m_Passes.push_back(pass);
 
                 // Get the targets
@@ -171,7 +171,7 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::GetProperty(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
         {
             if (!pValue) VSFERR_INVALIDPARAMS;
 
@@ -205,7 +205,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        IPass * VOODOO_METHODTYPE VSTechniqueDX9::GetPass(const uint32_t index) CONST
+        IPass * VOODOO_METHODTYPE VSTechniqueDX9::GetPass(_In_ const uint32_t index) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
             if (index < m_Passes.size())

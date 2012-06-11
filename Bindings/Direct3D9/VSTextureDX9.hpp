@@ -43,8 +43,8 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+            VOODOO_METHOD(GetProperty)(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(CONST Uuid propid, _In_ Variant * pValue);
 
             VOODOO_METHOD(Bind)(TextureMode mode, uint32_t index);
             VOODOO_METHOD(Reset)(TextureMode mode);

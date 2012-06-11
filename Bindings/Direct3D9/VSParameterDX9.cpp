@@ -31,7 +31,7 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSParameterDX9
         DeclareDebugCache();
 
-        VSParameterDX9::VSParameterDX9(VSEffectDX9 * pEffect, D3DXHANDLE pParamHandle) :
+        VSParameterDX9::VSParameterDX9(_In_ VSEffectDX9 * pEffect, D3DXHANDLE pParamHandle) :
             m_Refs(0), m_Effect(pEffect), m_DXHandle(pParamHandle)
         {
             if (!m_Effect)
@@ -67,7 +67,7 @@ namespace VoodooShader
             AddThisToDebugCache();
         }
 
-        VSParameterDX9::VSParameterDX9(VSBindingDX9 * pBinding, const String & name, ParameterDesc desc) :
+        VSParameterDX9::VSParameterDX9(_In_ VSBindingDX9 * pBinding, CONST String & name, ParameterDesc desc) :
             m_Refs(0), m_Binding(pBinding), m_Effect(nullptr), m_Name(name), m_Desc(desc), m_DXHandle(nullptr)
         {
             if (!m_Binding)
@@ -105,7 +105,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE VSParameterDX9::QueryInterface(CONST Uuid refid, IObject ** ppOut)
+        VoodooResult VOODOO_METHODTYPE VSParameterDX9::QueryInterface(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
             if (!ppOut)
@@ -158,7 +158,7 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSParameterDX9::GetProperty(const Uuid propid, Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSParameterDX9::GetProperty(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -183,7 +183,7 @@ namespace VoodooShader
             return VSFERR_INVALIDCALL;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSParameterDX9::SetProperty(const Uuid propid, Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE VSParameterDX9::SetProperty(_In_ CONST Uuid propid, _In_ Variant * pValue)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -401,7 +401,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::SetString)(const String & val)
+        VOODOO_METHODDEF(VSParameterDX9::SetString)(CONST String & val)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -504,7 +504,7 @@ namespace VoodooShader
             return (m_Effect && m_DXHandle);
         }
 
-        VoodooResult VOODOO_METHODTYPE VSParameterDX9::AttachParameter(IParameter * pParam)
+        VoodooResult VOODOO_METHODTYPE VSParameterDX9::AttachParameter(_In_ IParameter * pParam)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -518,11 +518,14 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSParameterDX9::DetachParameter(IParameter * pParam)
+        VoodooResult VOODOO_METHODTYPE VSParameterDX9::DetachParameter(_In_ IParameter * pParam)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
-            std::remove_if(m_Attached.begin(), m_Attached.end(), [&pParam](ParameterRef param){return param.get() == pParam;});
+            std::remove_if(m_Attached.begin(), m_Attached.end(), 
+				[&pParam](ParameterRef param){
+				return param.get() == pParam;
+			});
 
             return VSF_OK;
         }
@@ -543,7 +546,7 @@ namespace VoodooShader
                 if (texAnnot)
                 {
                     LPCSTR texName = nullptr;
-                    if (SUCCEEDED(m_Effect->m_DXEffect->GetString(texAnnot, &texName)))
+                    if (SUCCEEDED(m_Effect->m_DXEffect->GetString(texAnnot, &texName)) && texName)
                     {
                         m_Texture = m_Core->GetTexture(texName);
 
@@ -570,7 +573,7 @@ namespace VoodooShader
             if (sourceAnnot)
             {
                 LPCSTR sourceName = NULL;
-                if (SUCCEEDED(m_Effect->m_DXEffect->GetString(sourceAnnot, &sourceName)))
+                if (SUCCEEDED(m_Effect->m_DXEffect->GetString(sourceAnnot, &sourceName)) && sourceName)
                 {
                     IParameter * sourceParam = m_Core->GetParameter(sourceName, m_Desc);
                     if (sourceParam)
@@ -642,7 +645,7 @@ namespace VoodooShader
             else if (nameA || dimA || fmtA)
             {
                 LPCSTR nameStr = NULL;
-                if (FAILED(m_Effect->m_DXEffect->GetString(nameA, &nameStr)))
+                if (FAILED(m_Effect->m_DXEffect->GetString(nameA, &nameStr)) || !nameStr)
                 {
                     m_Core->GetLogger()->LogMessage(VSLog_PlugWarning, VOODOO_D3D9_NAME, 
                         StringFormat("Unable to get texture name from parameter %1%.") << m_Name);
@@ -660,7 +663,7 @@ namespace VoodooShader
                 UInt3 dim = {(uint32_t)dimVec.x, (uint32_t)dimVec.y, (uint32_t)dimVec.z};
 
                 LPCSTR fmtStr = NULL;
-                if (FAILED(m_Effect->m_DXEffect->GetString(fmtA, &fmtStr)))
+                if (FAILED(m_Effect->m_DXEffect->GetString(fmtA, &fmtStr)) || !fmtStr)
                 {
                     m_Core->GetLogger()->LogMessage(VSLog_PlugWarning, VOODOO_D3D9_NAME, 
                         StringFormat("Unable to get texture format from parameter %1%.") << m_Name);

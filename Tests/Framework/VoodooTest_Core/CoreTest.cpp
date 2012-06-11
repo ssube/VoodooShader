@@ -24,67 +24,69 @@
  * These tests focus on core functionality.
  */
 
-#include "WinUnit.h"
+#include <cfixcc.h>
 
+#define VOODOO_NO_PUGIXML
 #define VOODOO_STATIC_IMPORT
 #include "VoodooFramework.hpp"
 using namespace VoodooShader;
 
-namespace
+class CoreInnerTests : public cfixcc::TestFixture
 {
-    ICore * gpCore;
+public:
+    ICore * pCore;
+
+    virtual void Before()
+    {
+        pCore = CreateCore(VOODOO_SDK_VERSION);
+        pCore->AddRef();
+        pCore->Init(VSTR("D:\\Code\\VoodooShader\\Tests\\Resources\\default.xmlconfig"));
+        CFIXCC_ASSERT_NOT_EQUALS_MESSAGE(pCore, nullptr, L"Core is null before test.");
+    }
+
+    virtual void After()
+    {
+        CFIXCC_ASSERT_NOT_EQUALS_MESSAGE(pCore, nullptr, L"Core is null after test.")
+        pCore->Reset();
+        pCore->Release();
+    }
+
+    void GetParser()
+    {
+        IParser * pParser = pCore->GetParser();
+        CFIXCC_ASSERT_NOT_EQUALS(pParser, nullptr);
+    }
+
+    void GetHookManager()
+    {
+        IHookManager * pHookManager = pCore->GetHookManager();
+        CFIXCC_ASSERT_NOT_EQUALS(pHookManager, nullptr);
+    }
+
+    void GetFileSystem()
+    {
+        IFileSystem * pFileSystem = pCore->GetFileSystem();
+        CFIXCC_ASSERT_NOT_EQUALS(pFileSystem, nullptr);
+    }
+
+    void GetLogger()
+    {
+        ILogger * pLogger = pCore->GetLogger();
+        CFIXCC_ASSERT_NOT_EQUALS(pLogger, nullptr);
+    }
+
+    void GetConfig()
+    {
+        XmlDocument pConfig = pCore->GetConfig();
+        CFIXCC_ASSERT_NOT_EQUALS(pConfig, nullptr);
+    }
 }
 
-FIXTURE(DefaultCore);
+CFIXCC_BEGIN_CLASS(CoreInnerTests)
+    CFIXCC_METHOD(GetParser)
+    CFIXCC_METHOD(GetHookManager)
+    CFIXCC_METHOD(GetFileSystem)
+    CFIXCC_METHOD(GetLogger)
+    CFIXCC_METHOD(GetConfig)
+CFIXCC_END_CLASS()
 
-SETUP(DefaultCore)
-{
-    wchar_t cwd[MAX_PATH + 1];
-    GetCurrentDirectory(MAX_PATH, cwd);
-    cwd[MAX_PATH] = 0;
-    
-    gpCore = CreateCore(0);
-    gpCore->AddRef();
-    gpCore->Init(VSTR("D:\\Code\\VoodooShader\\Tests\\Resources\\default.xmlconfig"));
-    WIN_ASSERT_NOT_NULL(gpCore, L"DefaultCore::Setup: gpCore is nullptr.");
-}
-
-TEARDOWN(DefaultCore)
-{
-    gpCore->Release();
-}
-
-BEGIN_TESTF(Core_GetParser, DefaultCore)
-{
-    IParser* parser = gpCore->GetParser();
-    WIN_ASSERT_NOT_NULL(parser, L"Core_GetParser: parser is nullptr.");
-}
-END_TESTF;
-
-BEGIN_TESTF(Core_GetHookManager, DefaultCore)
-{
-    IHookManager* pHookManager = gpCore->GetHookManager();
-    WIN_ASSERT_NOT_NULL(pHookManager, L"Core_GetHookManager: hook manager is nullptr.");
-}
-END_TESTF;
-
-BEGIN_TESTF(Core_GetFileSystem, DefaultCore)
-{
-    IFileSystem* pFilesystem = gpCore->GetFileSystem();
-    WIN_ASSERT_NOT_NULL(pFilesystem, L"Core_GetFileSystem: filesystem is nullptr.");
-}
-END_TESTF;
-
-BEGIN_TESTF(Core_GetLogger, DefaultCore)
-{
-    ILogger* pLogger = gpCore->GetLogger();
-    WIN_ASSERT_NOT_NULL(pLogger, L"Core_GetLogger: logger is nullptr.");
-}
-END_TESTF;
-
-BEGIN_TESTF(Core_GetConfig, DefaultCore)
-{
-    void *pConfig = gpCore->GetConfig();
-    WIN_ASSERT_NOT_NULL(pConfig, L"Core_GetConfig: pConfig is nullptr.");
-}
-END_TESTF;

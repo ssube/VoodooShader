@@ -63,7 +63,7 @@ namespace VoodooShader
          * @warning The calling convention of pSrc and pDest must be identical, or bad things might happen. This is only a
          *     bother with member functions but should be noted for all.
          */
-        VOODOO_METHOD(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest) PURE;
+        VOODOO_METHOD(Add)(_In_ CONST String & name, _In_ void * pSrc, _In_ void * pDest) PURE;
         /**
          * Removes a single hook.
          *
@@ -73,7 +73,7 @@ namespace VoodooShader
          * @warning <em>Do not</em>, under any circumstances, remove a hook while execution is passing through the
          *     trampoline function. This can cause the process to crash. Until EasyHook is replaced, be careful!
          */
-        VOODOO_METHOD(Remove)(_In_ const String & name) PURE;
+        VOODOO_METHOD(Remove)(_In_ CONST String & name) PURE;
         /**
          * Removes all hooks created by this hook manager.
          *

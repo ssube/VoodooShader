@@ -82,7 +82,7 @@ HMODULE WINAPI VSLoadLibraryExA(_In_ LPCSTR lpFileName, HANDLE hFile, _In_ DWORD
     FILE * pf = GetVoodooGlobalLog();
     if (pf)
     {
-        _ftprintf(pf, TEXT("Intercept: VSLoadLibraryExA(%S, %p, %d)\n"), lpFileName, hFile, dwFlags);
+        _ftprintf(pf, TEXT("Intercept: VSLoadLibraryExA(%S, %p, %u)\n"), lpFileName, hFile, dwFlags);
         fclose(pf);
     }
 #endif
@@ -103,7 +103,7 @@ HMODULE WINAPI VSLoadLibraryExW(_In_ LPCWSTR lpFileName, HANDLE hFile, _In_ DWOR
     FILE * pf = GetVoodooGlobalLog();
     if (pf)
     {
-        _ftprintf(pf, TEXT("Intercept: VSLoadLibraryExW(%s, %p, %d)\n"), lpFileName, hFile, dwFlags);
+        _ftprintf(pf, TEXT("Intercept: VSLoadLibraryExW(%s, %p, %u)\n"), lpFileName, hFile, dwFlags);
         fclose(pf);
     }
 #endif
@@ -157,7 +157,7 @@ IDirect3D8 * WINAPI VSDirect3DCreate8(UINT sdkVersion)
 
         pD3D8->AddRef();
 
-        SingleD3D8 = 0;
+		InterlockedExchange(&SingleD3D8, 0);
     }
 
     return pD3D8;
@@ -193,7 +193,7 @@ IDirect3D9 * WINAPI VSDirect3DCreate9(UINT sdkVersion)
 
         pD3D9->AddRef();
 
-        SingleD3D9 = 0;
+		InterlockedExchange(&SingleD3D9, 0);
     }
 
     return pD3D9;

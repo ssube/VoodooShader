@@ -63,8 +63,8 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
         /**
          * @}
          * @name Effect Methods
@@ -83,7 +83,7 @@ namespace VoodooShader
          *      passes have been used and reset, the effect must be reset. Failing to reset the effect may cause unwanted
          *      states for future draw calls.
          */
-        VOODOO_METHOD_(ITechnique *, Bind)(bool clean = true) PURE;
+        VOODOO_METHOD_(ITechnique *, Bind)(_In_ bool clean = true) PURE;
         /**
          * Reset this effect, unbinding it from hardware and resetting states if needed.
          */
@@ -94,8 +94,8 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST PURE;
-        VOODOO_METHOD_(IParameter *, GetParameter)(const uint32_t index) CONST PURE;
-        VOODOO_METHOD_(IParameter *, GetParameterByName)(const String & name) CONST PURE;
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ CONST uint32_t index) CONST PURE;
+        VOODOO_METHOD_(IParameter *, GetParameterByName)(_In_ CONST String & name) CONST PURE;
         /**
          * @}
          * @name Technique Methods
@@ -111,8 +111,8 @@ namespace VoodooShader
          *
          * @param   index   The index of the technique to get.
          */
-        VOODOO_METHOD_(ITechnique *, GetTechnique)(const uint32_t index) CONST PURE;
-        VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(const String & name) CONST PURE;
+        VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ CONST uint32_t index) CONST PURE;
+        VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(_In_ CONST String & name) CONST PURE;
         /**
          * Retrieves the default technique from this shader. All drawing should be done with the default technique: it is
          * guaranteed to be valid for the current shader profiles and API. The default technique is the first technique

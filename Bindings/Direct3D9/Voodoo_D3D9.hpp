@@ -42,6 +42,13 @@ namespace VoodooShader
         class VSTechniqueDX9;
         class VSTextureDX9;
 
+		typedef boost::intrusive_ptr<VSBindingDX9> VSBindingDX9Ref;
+		typedef boost::intrusive_ptr<VSEffectDX9> VSEffectDX9Ref;
+		typedef boost::intrusive_ptr<VSParameterDX9> VSParameterDX9Ref;
+		typedef boost::intrusive_ptr<VSPassDX9> VSPassDX9Ref;
+		typedef boost::intrusive_ptr<VSTechniqueDX9> VSTechniqueDX9Ref;
+		typedef boost::intrusive_ptr<VSTextureDX9> VSTextureDX9Ref;
+
         const Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore);
         const uint32_t  VOODOO_CALLTYPE API_ClassCount();
         const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);

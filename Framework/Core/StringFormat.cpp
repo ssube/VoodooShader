@@ -39,7 +39,7 @@ namespace VoodooShader
         boost::basic_format<wchar_t> m_Format;
     };
 
-    StringFormat::StringFormat(_In_ const wchar_t * fmt) :
+    StringFormat::StringFormat(_In_z_ CONST wchar_t * fmt) :
         m_Impl(new FormatImpl(fmt))
     {
         try
@@ -52,7 +52,7 @@ namespace VoodooShader
         }
     }
 
-    StringFormat::StringFormat(_In_ const String & fmt) :
+    StringFormat::StringFormat(_In_ CONST String & fmt) :
         m_Impl(new FormatImpl(fmt.GetData()))
     {
     }

@@ -62,7 +62,7 @@ namespace VoodooShader
          * 
          * @note This is equivalent to IDirect3DResource::GetPrivateData.
          */
-        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST PURE;
         /**
          * Sets a resource property.
          * 
@@ -74,7 +74,7 @@ namespace VoodooShader
          *      
          * @note This is equivalent to IDirect3DResource::SetPrivateData.
          */
-        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue) PURE;
+        VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue) PURE;
     };
     /**
      * @}

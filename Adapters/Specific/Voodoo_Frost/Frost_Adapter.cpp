@@ -22,7 +22,7 @@
 #include "Frost_Texture.hpp"
 #include "VoodooGL.hpp"
 // Voodoo Core
-#include "Format.hpp"
+#include "StringFormat.hpp"
 
 #define VOODOO_OGL_HOOK_PARAMS(x) #x, &x, &v##x
 

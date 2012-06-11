@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="UserMacros">
-    <BoostInclude>D:\Code\Boost</BoostInclude>
-    <BoostLib>D:\Code\Boost\stage\lib</BoostLib>
-    <CgInclude>D:\Code\CgToolkit\include</CgInclude>
-    <CgLib>D:\Code\CgToolkit\lib\</CgLib>
-    <DXInclude>D:\code\DX_June2010\Include</DXInclude>
-    <DXLib>D:\code\DX_June2010\Lib\x86</DXLib>
+    <BoostInclude>I:\Code\Boost</BoostInclude>
+    <BoostLib>I:\Code\Boost\stage\lib</BoostLib>
+    <CgInclude>I:\Code\CgToolkit\include</CgInclude>
+    <CgLib>I:\Code\CgToolkit\lib\</CgLib>
+    <DXInclude>I:\code\DirectX\9c\Include</DXInclude>
+    <DXLib>I:\code\DirectX\9c\Lib\x86</DXLib>
     <DevILInclude>$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include</DevILInclude>
-    <DevILLib>$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib\unicode</DevILLib>
+    <DevILLib>$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib</DevILLib>
     <EasyHookInclude>$(SolutionDir)\dependencies\EasyHook_2.6\include</EasyHookInclude>
     <EasyHookLib>$(SolutionDir)\dependencies\EasyHook_2.6\lib</EasyHookLib>
     <GlewInclude>$(SolutionDir)\dependencies\Glew_1.5.7\include</GlewInclude>

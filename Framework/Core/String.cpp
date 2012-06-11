@@ -39,16 +39,16 @@ namespace VoodooShader
     {
     public:
         StringImpl() : m_Str() {};
-        StringImpl(const uint32_t size, const wchar_t ch) : m_Str(size, ch) {};
-        StringImpl(const wchar_t * str)
+        StringImpl(CONST uint32_t size, CONST wchar_t ch) : m_Str(size, ch) {};
+        StringImpl(CONST wchar_t * str)
         {
             if (str) m_Str = (str);
         };
-        StringImpl(const uint32_t size, const wchar_t * str)
+        StringImpl(CONST uint32_t size, CONST wchar_t * str)
         {
             if (str) m_Str = std::wstring(str, size);
         };
-        StringImpl(const std::wstring & str) : m_Str(str) {};
+        StringImpl(CONST std::wstring & str) : m_Str(str) {};
 
     public:
         std::basic_string<wchar_t, std::char_traits<wchar_t>> m_Str;
@@ -59,7 +59,7 @@ namespace VoodooShader
     {
     }
 
-    String::String(const char ch) :
+    String::String(_In_ CONST char ch) :
         m_Impl(nullptr)
     {
         wchar_t wch = 0;
@@ -67,13 +67,13 @@ namespace VoodooShader
         m_Impl = new StringImpl(1, wch);
     }
 
-    String::String(const char * str) :
+    String::String(_In_z_ CONST char * str) :
         m_Impl(nullptr)
     {
         this->CInit(0, str);
     }
 
-    String::String(const uint32_t size, const char ch) :
+    String::String(_In_ CONST uint32_t size, _In_ CONST char ch) :
         m_Impl(nullptr)
     {
         wchar_t wch = 0;
@@ -81,33 +81,33 @@ namespace VoodooShader
         m_Impl = new StringImpl(size, wch);
     }
 
-    String::String(const uint32_t size, const char * str) :
+    String::String(_In_ CONST uint32_t size, _In_z_count_(size) CONST char * str) :
         m_Impl(nullptr)
     {
         this->CInit(size, str);
     }
 
-    String::String(const wchar_t ch) :
+    String::String(_In_ CONST wchar_t ch) :
         m_Impl(new StringImpl(1, ch))
     {
     }
 
-    String::String(const wchar_t * str) :
+    String::String(_In_z_ CONST wchar_t * str) :
         m_Impl(new StringImpl(str))
     {
     }
 
-    String::String(const uint32_t size, const wchar_t ch) :
+    String::String(_In_ CONST uint32_t size, _In_ CONST wchar_t ch) :
         m_Impl(new StringImpl(size, ch))
     {
     }
 
-    String::String(const uint32_t size, const wchar_t * str) :
+    String::String(_In_ CONST uint32_t size, _In_z_count_c_(size) CONST wchar_t * str) :
         m_Impl(new StringImpl(size, str))
     {
     }
 
-    String::String(const String & other) :
+    String::String(_In_ CONST String & other) :
         m_Impl(nullptr)
     {
         if (other.m_Impl)
@@ -120,7 +120,7 @@ namespace VoodooShader
         }
     }
 
-    String::String(const Uuid & uuid) :
+    String::String(_In_ const Uuid & uuid) :
         m_Impl(new StringImpl(boost::uuids::to_wstring(uuid)))
     {
     }
@@ -131,7 +131,7 @@ namespace VoodooShader
         m_Impl = nullptr;
     }
 
-    void String::CInit(const uint32_t size, const char * str)
+    void String::CInit(_In_ CONST uint32_t size, _In_z_count_c_(size) const char * str)
     {
         if (m_Impl) delete m_Impl;
 
@@ -163,7 +163,7 @@ namespace VoodooShader
         }
     }
 
-    void String::WInit(const uint32_t size, const wchar_t * str)
+    void String::WInit(_In_ CONST uint32_t size, _In_z_count_c_(size) CONST wchar_t * str)
     {
         if (m_Impl) delete m_Impl;
 
@@ -181,7 +181,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::ToUuid(Uuid * pUuid) const
+    bool String::ToUuid(_Out_ Uuid * pUuid) CONST
     {
         if (!pUuid)
         {
@@ -203,48 +203,48 @@ namespace VoodooShader
         }
     }
 
-    int32_t String::ToChars(int32_t size, char * pBuffer) const
+    int32_t String::ToChars(_In_ int32_t size, _Inout_opt_count_(size) char * pBuffer) const
     {
         VOODOO_CHECK_IMPL;
         return WideCharToMultiByte(CP_UTF8, NULL, m_Impl->m_Str.c_str(), -1, pBuffer, size, NULL, NULL);
     }
 
-    String & String::Append(const wchar_t ch)
+    String & String::Append(_In_ CONST wchar_t ch)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.append(1, ch);
         return (*this);
     }
 
-    String & String::Append(const uint32_t size, const wchar_t ch)
+    String & String::Append(_In_ CONST uint32_t size, _In_ CONST wchar_t ch)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.append(size, ch);
         return (*this);
     }
 
-    String & String::Append(const wchar_t * str)
+    String & String::Append(_In_z_ CONST wchar_t * str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.append(str);
         return (*this);
     }
 
-    String & String::Append(const uint32_t size, const wchar_t * str)
+    String & String::Append(_In_ CONST uint32_t size, _In_z_count_(size) CONST wchar_t * str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.append(str, size);
         return (*this);
     }
 
-    String & String::Append(const String & str)
+    String & String::Append(_In_ CONST String & str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.append(str.m_Impl->m_Str);
         return (*this);
     }
 
-    String & String::Assign(const wchar_t ch)
+    String & String::Assign(_In_ CONST wchar_t ch)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.assign(1, ch);

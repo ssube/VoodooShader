@@ -32,7 +32,9 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSParser
     DeclareDebugCache();
 
-    _Check_return_ IParser * VOODOO_CALLTYPE CreateParser()
+    VariableMap g_GlobalVariables;
+
+    IParser * VOODOO_CALLTYPE CreateParser()
     {
         static VSParser * pParser = nullptr;
 
@@ -90,7 +92,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
+    VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(Uuid refid, IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -137,7 +139,7 @@ namespace VoodooShader
         return nullptr;
     }
 
-    void VOODOO_METHODTYPE VSParser::Add(_In_ const String & name, _In_ const String & value, _In_ const VariableType type)
+    VoodooResult VOODOO_METHODTYPE VSParser::Add(const String & name, const String & value, const VariableType type)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -149,31 +151,42 @@ namespace VoodooShader
         }
 
         String finalname = this->Parse(name);        
-        VariableMap::iterator varIter = m_Variables.find(finalname);
-
-        if (varIter == m_Variables.end())
+        VariableMap::iterator varIter = g_GlobalVariables.find(finalname);
+        
+        if (varIter != g_GlobalVariables.end() && (varIter->second.second & VSVar_System) == VSVar_System)
         {
-            m_Variables[finalname] = Variable(value, type);
+            StringFormat msg(VSTR("Unable to add duplicate variable '%1%' (global system variable already exists)."));
+            msg << finalname;
+            m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, msg);
+
+            return VSF_FAIL;
+        }
+        else if ((type & VSVar_Global) == VSVar_Global)
+        {
+            g_GlobalVariables[finalname] = Variable(value, type);
+            return VSF_OK;
+        }
+
+        varIter = m_Variables.find(finalname);
+
+        if (varIter != m_Variables.end() && (varIter->second.second & VSVar_System) == VSVar_System)
+        {
+            if (m_Logger)
+            {
+                StringFormat msg(VSTR("Unable to add duplicate variable '%1%' (system variable already exists)."));
+                msg << finalname;
+                m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, msg);
+            }
+            return VSF_FAIL;
         }
         else
         {
-            if (varIter->second.second == VSVar_System)
-            {
-                if (m_Logger)
-                {
-                    StringFormat msg(VSTR("Unable to add duplicate variable '%1%' (system variable already exists)."));
-                    msg << finalname;
-                    m_Logger->LogMessage(VSLog_CoreWarning, VOODOO_CORE_NAME, msg);
-                }
-            }
-            else
-            {
-                m_Variables[finalname] = Variable(value, type);
-            }
+            m_Variables[finalname] = Variable(value, type);
+            return VSF_OK;
         }
     }
 
-    void VOODOO_METHODTYPE VSParser::Remove(_In_ const String & name)
+    VoodooResult VOODOO_METHODTYPE VSParser::Remove(const String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -190,10 +203,15 @@ namespace VoodooShader
         if (varIter != m_Variables.end() && varIter->second.second != VSVar_System)
         {
             m_Variables.erase(varIter);
+            return VSF_OK;
+        }
+        else
+        {
+            return VSF_FAIL;
         }
     }
 
-    String VOODOO_METHODTYPE VSParser::Parse(_In_ const String & input, _In_ const ParseFlags flags) CONST
+    String VOODOO_METHODTYPE VSParser::Parse(const String & input, const ParseFlags flags) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -201,7 +219,7 @@ namespace VoodooShader
         return this->ParseStringRaw(input, flags, 0, parseState);
     }
 
-    String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) CONST
+    String VSParser::ParseStringRaw(String input, ParseFlags flags, uint32_t depth, StringMap & state) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -383,8 +401,8 @@ namespace VoodooShader
                 {
                     // Unrecognized variable, try env
                     size_t reqSize = 0;
-
                     _wgetenv_s(&reqSize, nullptr, 0, varname.GetData());
+
                     if (reqSize != 0)
                     {
                         std::vector<wchar_t> buffer(reqSize);

@@ -19,16 +19,21 @@
  */
 #pragma once
 
-#include "VoodooInternal.hpp"
+#define VOODOO_NO_PUGIXML
+#include "VoodooFramework.hpp"
+
+#pragma warning(push,3)
+#   include <easyhook.h>
+#   include <map>
+#pragma warning(pop)
 
 namespace VoodooShader
 {
-    /**
-     * @addtogroup voodoo_core_null Null Implementations
-     * @ingroup voodoo_core
-     *
-     * @{
-     */
+    CONST Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore);
+    void            VOODOO_CALLTYPE API_PluginReset(_In_ ICore * pCore);
+    CONST uint32_t  VOODOO_CALLTYPE API_ClassCount();
+	CONST wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ CONST uint32_t index, _Out_ Uuid * pUuid);
+    IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ CONST uint32_t index, _In_ ICore * pCore);
 
     /**
      * Voodoo Shader null hook manager implementation. Returns true or nullptr for methods as necessary, does not install
@@ -38,6 +43,8 @@ namespace VoodooShader
      */
     VOODOO_CLASS(VSHookManager, IHookManager, ({0x9D, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
+        typedef std::map<String, TRACED_HOOK_HANDLE> HookMap;
+
     public:
         VSHookManager(_In_ ICore * pCore);
 
@@ -47,18 +54,22 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
-        VOODOO_METHOD(Remove)(_In_ const String & name);
+        VOODOO_METHOD(Add)(_In_ CONST String & name, _In_ void * pSrc, _In_ void * pDest);
+        VOODOO_METHOD(Remove)(_In_ CONST String & name);
         VOODOO_METHOD(RemoveAll)();
 
     private:
-        // Private these to prevent copying internally (external libs never will).
-        VSHookManager(const VSHookManager & other);
-        VSHookManager & operator=(const VSHookManager & other);
+        VSHookManager(CONST VSHookManager & other);
+        VSHookManager & operator=(CONST VSHookManager & other);
         ~VSHookManager();
 
         mutable uint32_t m_Refs;
         ICore * m_Core;
+
+        HookMap m_Hooks;
+
+        unsigned long m_ThreadCount;
+        unsigned long * m_ThreadIDs;
     };
     /**
      * @}

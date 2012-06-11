@@ -288,7 +288,7 @@ namespace VoodooShader
             }
         }
 
-        VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTextureFromFile)(CONST String & name, IFile * pFile)
+        VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTextureFromFile)(CONST String & name, _In_ IFile * pFile)
         {
             if (!pFile || !m_Device) // || !m_ILUT)
             {

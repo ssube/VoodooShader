@@ -63,7 +63,7 @@ namespace VoodooShader
          * @note If this fails, the binding is considered in an undefined state and resources must not be created from it
          *      until it is reset.
          */
-        VOODOO_METHOD(Init)(uint32_t count, _In_count_(count) Variant * pParams) PURE;
+        VOODOO_METHOD(Init)(_In_ uint32_t count, _In_count_(count) Variant * pParams) PURE;
         /**
          * Resets the binding, releasing the hardware context and invalidating any resources created from it. This must not
          * destroy the hardware context @a explicitly, as it may still be in use by the host, but it must release the
@@ -88,7 +88,7 @@ namespace VoodooShader
          *      string should not contain characters requiring multiple bytes within the code, or behavior is undefined and
          *      will likely result in compiler or linker errors.
          */
-        VOODOO_METHOD_(IEffect *, CreateEffect)(CONST String & source) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ CONST String & source) PURE;
         /**
          * Creates and links an effect from a file.
          * 
@@ -98,7 +98,7 @@ namespace VoodooShader
          *      interpreted as such by the compiler. Using characters that require multiple bytes may cause undefined
          *      behavior and will likely result in compiler or linker errors.
          */
-        VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST IFile * pFile) PURE;
+        VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(_In_ CONST IFile * pFile) PURE;
         /**
          * @}
          * @name Parameter Methods
@@ -114,7 +114,7 @@ namespace VoodooShader
          * 
          * @pre IBinding::Init() must have been previously called, successfully.
          */
-        VOODOO_METHOD_(IParameter *, CreateParameter)(CONST String & name, ParameterDesc desc) PURE;
+        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ CONST String & name, _In_ ParameterDesc desc) PURE;
         /**
          * @}
          * @name Texture Methods
@@ -124,8 +124,8 @@ namespace VoodooShader
          * Creates a new texture with the given name and description. The contents of this texture are binding-defined, and
          * may be undefined data (this is the most common). 
          */
-        VOODOO_METHOD_(ITexture *, CreateTexture)(CONST String & name, TextureDesc desc) PURE;
-        VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(CONST String & name, _In_ IFile * pFile) PURE;
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ TextureDesc desc) PURE;
+        VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(_In_ CONST String & name, _In_ IFile * pFile) PURE;
         VOODOO_METHOD_(ITexture *, CreateNullTexture)() PURE;
         /**
          * @}

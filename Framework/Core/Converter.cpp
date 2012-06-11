@@ -26,7 +26,7 @@
 
 namespace VoodooShader
 {
-    TextureFormat Converter::ToTextureFormat(_In_ const wchar_t * format)
+    TextureFormat Converter::ToTextureFormat(_In_ CONST wchar_t * format)
     {
         const wchar_t * formatBody = format;
 

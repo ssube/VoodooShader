@@ -17,26 +17,25 @@
  * or by contacting the lead developer at
  *   peachykeen@voodooshader.com
  */
+#pragma once
 
-// Voodoo DX89
-#include "DX9_Adapter.hpp"
-#include "DX9_Version.hpp"
-// CVoodoo3D
-#include "CVoodoo3D8.hpp"
-#include "CVoodoo3DDevice8.hpp"
-#include "CVoodoo3D9.hpp"
-// Voodoo Core
-#include "StringFormat.hpp"
-#include "Support.inl"
+#include "VoodooVersion.hpp"
+#include "VoodooBuild_Voodoo_EHHookManager.hpp"
 
-VoodooShader::EffectRef   testEffect = nullptr;
-
-IDirect3DSurface9       * target_Color = nullptr;
-IDirect3DSurface9       * target_Depth = nullptr;
-
-VoodooShader::TextureRef  texture_Frame0 = nullptr;
-IDirect3DSurface9       * surface_Frame0 = nullptr;
-VoodooShader::TextureRef  texture_Pass0 = nullptr;
-IDirect3DSurface9       * surface_Pass0 = nullptr;
-VoodooShader::TextureRef  texture_Depth = nullptr;
-IDirect3DSurface9       * surface_Depth = nullptr;
+/**
+ * @addtogroup voodoo_module_ehhookmanager
+ * @{
+ * HookManager defs
+ */
+#define VOODOO_HOOKMANAGER_LIBID         {0xCD, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
+#define VOODOO_HOOKMANAGER_AUTHOR        VOODOO_GLOBAL_AUTHOR
+#define VOODOO_HOOKMANAGER_NAME          VSTR("Voodoo_EHHookManager")
+#define VOODOO_HOOKMANAGER_PRETTYNAME    VSTR("Voodoo Shader Hook Manager")
+#define VOODOO_HOOKMANAGER_VERSION_MAJOR 0
+#define VOODOO_HOOKMANAGER_VERSION_MINOR 5
+#define VOODOO_HOOKMANAGER_VERSION_PATCH 8
+#define VOODOO_HOOKMANAGER_VERSION_BUILD VOODOO_PROJECT_VERSION_BUILD
+#define VOODOO_HOOKMANAGER_VERSION_ID    VOODOO_PROJECT_VERSION_ID
+/**
+ * @}
+ */

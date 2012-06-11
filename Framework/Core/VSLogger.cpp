@@ -30,7 +30,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSLogger
     DeclareDebugCache();
 
-    _Check_return_ VOODOO_FUNCTION(ILogger *, CreateLogger)()
+    VOODOO_FUNCTION(ILogger *, CreateLogger)()
     {
         static VSLogger * pLogger = nullptr;
 
@@ -79,7 +79,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
+    VoodooResult VOODOO_METHODTYPE VSLogger::QueryInterface(Uuid refid, IObject ** ppOut)
     {
         if (!ppOut)
         {
@@ -120,7 +120,7 @@ namespace VoodooShader
         return nullptr;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::Open(_In_ const String & filename, _In_ const bool append)
+    VoodooResult VOODOO_METHODTYPE VSLogger::Open(const String & filename, const bool append)
     {
         if (this->m_LogFile.is_open())
         {
@@ -228,9 +228,9 @@ namespace VoodooShader
 
     VoodooResult VOODOO_METHODTYPE VSLogger::LogMessage
     (
-        _In_ const uint32_t level,
-        _In_ const String & source,
-        _In_ const String & msg
+        const uint32_t level,
+        const String & source,
+        const String & msg
     )
     {
         if (!this->IsOpen()) return false;

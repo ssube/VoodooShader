@@ -32,7 +32,7 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSEffectDX9
         DeclareDebugCache();
 
-        VSEffectDX9::VSEffectDX9(VSBindingDX9 * pBinding, LPD3DXEFFECT pEffect) :
+        VSEffectDX9::VSEffectDX9(_In_ VSBindingDX9 * pBinding, LPD3DXEFFECT pEffect) :
             m_Refs(0), m_Binding(pBinding), m_DXEffect(pEffect)
         {
             if (!m_Binding)
@@ -93,7 +93,7 @@ namespace VoodooShader
 
                 try
                 {
-                    VSTechniqueDX9 * technique = new VSTechniqueDX9(this, techHandle);
+					VSTechniqueDX9Ref technique(new VSTechniqueDX9(this, techHandle));
                     m_Techniques.push_back(technique);
                     if (!m_DefaultTechnique)
                     {
@@ -190,7 +190,7 @@ namespace VoodooShader
             return VSTR("Unnamed");
         }
 
-        VoodooResult VOODOO_METHODTYPE VSEffectDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSEffectDX9::GetProperty(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
         {
             if (!pValue) VSFERR_INVALIDPARAMS;
 
@@ -213,7 +213,7 @@ namespace VoodooShader
             return VSFERR_INVALIDCALL;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetProperty(const Uuid propid, Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetProperty(CONST Uuid propid, _In_ Variant * pValue)
         {
             if (propid == PropIds::D3DX9Effect)
             {
@@ -273,7 +273,7 @@ namespace VoodooShader
             return m_Techniques.size();
         }
 
-        ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetTechnique(const uint32_t index) CONST
+        ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetTechnique(_In_ CONST uint32_t index) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
             if (index < m_Techniques.size())
@@ -286,7 +286,7 @@ namespace VoodooShader
             }
         }
 
-        ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetTechniqueByName(const String & name) CONST
+        ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetTechniqueByName(CONST String & name) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
             TechniqueVector::const_iterator tech = m_Techniques.begin();
@@ -303,7 +303,7 @@ namespace VoodooShader
             return m_DefaultTechnique.get();
         }
 
-        VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetDefaultTechnique(ITechnique * pTechnique)
+        VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetDefaultTechnique(_In_ ITechnique * pTechnique)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -324,7 +324,7 @@ namespace VoodooShader
             }
 
             VSTechniqueDX9 * pTechDX = nullptr;
-            if (FAILED(pTechnique->QueryInterface(CLSID_VSTechniqueDX9, (IObject**)&pTechDX)))
+            if (FAILED(pTechnique->QueryInterface(CLSID_VSTechniqueDX9, (IObject**)&pTechDX)) || pTechDX == nullptr)
             {                
                 m_Core->GetLogger()->LogMessage
                 (
@@ -352,7 +352,7 @@ namespace VoodooShader
             return m_Parameters.size();
         }
 
-        IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameter(_In_ const uint32_t index) CONST
+        IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameter(_In_ CONST uint32_t index) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -366,7 +366,7 @@ namespace VoodooShader
             }
         }
 
-        IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameterByName(const String & name) CONST
+        IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameterByName(CONST String & name) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 

@@ -20,7 +20,7 @@
 
 #include "Frost_Module.hpp"
 // Voodoo Core
-#include "Format.hpp"
+#include "StringFormat.hpp"
 
 using namespace VoodooShader;
 

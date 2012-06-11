@@ -26,7 +26,7 @@ HINSTANCE gHookLoader = nullptr;
 unsigned int gLoadOnce = 1;
 HHOOK gSystemHook = nullptr;
 
-BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
+BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
 {
     UNREFERENCED_PARAMETER(lpvReserved);
 
@@ -40,7 +40,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
     return TRUE;
 }
 
-LRESULT CALLBACK GlobalHookCb(int nCode, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK GlobalHookCb(_In_ int nCode, _In_ WPARAM wParam, _In_ LPARAM lParam)
 {
     if (nCode < 0)
     {
@@ -52,8 +52,6 @@ LRESULT CALLBACK GlobalHookCb(int nCode, WPARAM wParam, LPARAM lParam)
         {
             if (InterlockedCompareExchange(&gLoadOnce, 0, 1) == 1)
             {
-                gLoadOnce = false;
-
                 TCHAR moduleName[MAX_PATH];
                 GetModuleFileName(GetModuleHandle(NULL), moduleName, MAX_PATH);
 
@@ -66,7 +64,9 @@ LRESULT CALLBACK GlobalHookCb(int nCode, WPARAM wParam, LPARAM lParam)
                     LoadVoodoo(hook);
 
                     delete hook;
-                }
+				}
+
+				InterlockedExchange(&gLoadOnce, 0);
             }
         }
 
@@ -125,7 +125,7 @@ void WINAPI RemoveGlobalHook(HHOOK hook)
     }
 }
 
-bool WINAPI LoadVoodoo(HHOOKDEF pHook)
+bool WINAPI LoadVoodoo(_In_ HHOOKDEF pHook)
 {
     if (gVoodooCore) return true;
 
@@ -139,10 +139,10 @@ bool WINAPI LoadVoodoo(HHOOKDEF pHook)
         return false;
     }
 
-    TCHAR targetName[MAX_PATH];
+    TCHAR targetName[MAX_PATH];	ZeroMemory(targetName, MAX_PATH);
     GetModuleFileName(targetModule, targetName, MAX_PATH);
 
-    TCHAR corePath[MAX_PATH];
+    TCHAR corePath[MAX_PATH];	ZeroMemory(corePath, MAX_PATH);
     GetVoodooBinPath(corePath);
     PathCombine(corePath, corePath, TEXT("Voodoo_Core.dll"));
 

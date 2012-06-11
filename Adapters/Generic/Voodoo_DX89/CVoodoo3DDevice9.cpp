@@ -187,7 +187,11 @@ namespace VoodooShader
                     logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                 }
 
-                hr = m_RealDevice->SetDepthStencilSurface(nullptr);
+                hr = m_RealDevice->SetDepthStencilSurface(target_Depth);
+                if (FAILED(hr))
+                {
+                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, "Failed to unbind depth surface.");
+                }
 
                 VoodooShader::TechniqueRef tech = testEffect->Bind();
                 if (tech)
@@ -204,15 +208,26 @@ namespace VoodooShader
                                 logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, "Failed to stretch backbuffer to scratch texture.");
                             }
 
-                            pass->Bind();
-                            this->VSDrawFSQuad();
-                            pass->Reset();
+                            VoodooResult vr = pass->Bind();
+                            if (FAILED(vr))
+                            {
+                                logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, "Failed to bind shader.");
+                            }
+                            else
+                            {
+                                this->VSDrawFSQuad();
+                                pass->Reset();
+                            }
                         }
                     }
                     testEffect->Reset();
                 }
 
                 hr = m_RealDevice->SetDepthStencilSurface(surface_Depth);
+                if (FAILED(hr))
+                {
+                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, "Failed to rebind depth surface.");
+                }
             }
 
             return m_RealDevice->Present(pSourceRect, pDestRect, hDestWindowOverride, pDirtyRegion);
@@ -980,33 +995,33 @@ namespace VoodooShader
                 logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to retrieve backbuffer surface.");
             }
 
-            texture_Frame0 = gpVoodooCore->CreateTexture(L":frame0", bufferTextureDesc);
+            texture_Frame0 = gpVoodooCore->CreateTexture(L"frame0", bufferTextureDesc);
             if (texture_Frame0)
             {
                 Variant texvar = CreateVariant();
                 if (SUCCEEDED(texture_Frame0->GetProperty(PropIds::D3D9Surface, &texvar)))
                 {
                     surface_Frame0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                    logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached :frame0 surface.");
+                    logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached frame0 surface.");
                 }
                 else
                 {
-                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to cache :frame0 surface.");
+                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to cache frame0 surface.");
                 }
             }
 
-            texture_Pass0 = gpVoodooCore->CreateTexture(L":pass0", bufferTextureDesc);
+            texture_Pass0 = gpVoodooCore->CreateTexture(L"pass0", bufferTextureDesc);
             if (texture_Pass0)
             {
                 Variant texvar = CreateVariant();
                 if (SUCCEEDED(texture_Pass0->GetProperty(PropIds::D3D9Surface, &texvar)))
                 {
                     surface_Pass0 = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                    logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached :pass0 surface.");
+                    logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached pass0 surface.");
                 }
                 else
                 {
-                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to cache :pass0 surface.");
+                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to cache pass0 surface.");
                 }
             }
 
@@ -1014,20 +1029,31 @@ namespace VoodooShader
             CopyMemory(&depthTextureDesc, &bufferTextureDesc, sizeof(TextureDesc));
             depthTextureDesc.Format = VSFmt_D24;
 
-            texture_Depth = gpVoodooCore->CreateTexture(L":depth", depthTextureDesc);
+            texture_Depth = gpVoodooCore->CreateTexture(L"depth", depthTextureDesc);
             if (texture_Depth)
             {
                 Variant texvar = CreateVariant();
                 if (SUCCEEDED(texture_Depth->GetProperty(PropIds::D3D9Surface, &texvar)))
                 {
                     surface_Depth = reinterpret_cast<IDirect3DSurface9 *>(texvar.VPVoid);
-                    logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached :depth surface.");
+                    logger->LogMessage(VSLog_PlugInfo, VOODOO_DX89_NAME, L"Cached depth surface.");
                 }
                 else
                 {
-                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to cache :depth surface.");
+                    logger->LogMessage(VSLog_PlugError, VOODOO_DX89_NAME, L"Failed to cache depth surface.");
                 }
             }
+
+            HRESULT thr = m_RealDevice->CreateDepthStencilSurface
+            (
+                viewport.Width, viewport.Height, ((D3DFORMAT)(MAKEFOURCC('I','N','T','Z'))), 
+                D3DMULTISAMPLE_NONE, 0, FALSE, &target_Depth, NULL
+            );
+
+            thr = m_RealDevice->CreateRenderTarget
+            (
+                viewport.Width, viewport.Height, D3DFMT_X8R8G8B8, D3DMULTISAMPLE_NONE, 0, FALSE, &target_Color, NULL
+            );
 
             ParameterDesc rcpres_desc = {VSPT_Float, 1, 2, 0};
             IParameter * lpparam_rcpres = gpVoodooCore->CreateParameter(L"rcpres", rcpres_desc);

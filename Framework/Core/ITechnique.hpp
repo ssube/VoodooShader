@@ -59,8 +59,8 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
         /**
          * @}
          * @name Technique Data Methods
@@ -75,7 +75,7 @@ namespace VoodooShader
          *
          * @param index     The pass number to retrieve.
          */
-        VOODOO_METHOD_(IPass *, GetPass)(_In_ const uint32_t index) CONST PURE;
+        VOODOO_METHOD_(IPass *, GetPass)(_In_ CONST uint32_t index) CONST PURE;
         /**
          * Retrieve the parent shader of this technique.
          */

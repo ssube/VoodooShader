@@ -105,7 +105,7 @@ inline static void WINAPI ErrorMessage(_In_ DWORD errorCode, _In_ _Printf_format
     }
     else
     {
-        GlobalLog(TEXT("Error: %d (unable to format)"), errorCode);
+        GlobalLog(TEXT("Error: %u (unable to format)"), errorCode);
 
         MessageBox(nullptr, TEXT("An error occurred, but could not be formatted."), title, MB_OK | MB_ICONWARNING);
     }
@@ -222,8 +222,8 @@ inline static bool WINAPI GetVoodooBinPath(_In_count_c_(MAX_PATH) TCHAR * pBuffe
 {
     if (!pBuffer) return false;
 
-    TCHAR path[MAX_PATH];
-    TCHAR prefix[MAX_PATH];
+    TCHAR path[MAX_PATH];	ZeroMemory(path, MAX_PATH);
+    TCHAR prefix[MAX_PATH];	ZeroMemory(prefix, MAX_PATH);
 
     GetVoodooPath(path);
     GetVoodooBinPrefix(prefix);

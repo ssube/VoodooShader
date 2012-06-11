@@ -299,7 +299,8 @@ namespace VoodooShader
     {
         VSVar_Normal        = 0x00,
         VSVar_State         = 0x01,
-        VSVar_System        = 0x10
+        VSVar_Global        = 0x02,
+        VSVar_System        = 0x10,
     };
 
     enum UnionType : uint32_t
@@ -334,6 +335,8 @@ namespace VoodooShader
         uint8_t data[16];
     } Uuid;
 #endif
+	DEFINE_UUID(NilUuid) = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
     /**
      * @defgroup voodoo_classes_uuids Predefined Uuids
      * @{

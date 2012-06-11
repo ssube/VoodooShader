@@ -66,7 +66,7 @@ VoodooShader::VoodooResult VOODOO_CALLTYPE FinalizeEvent(VoodooShader::ICore * p
     return VSF_OK;
 }
 
-const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(VoodooShader::ICore * pCore)
+const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(_In_ VoodooShader::ICore * pCore)
 {
     if (!pCore) return nullptr;
     gpVoodooCore = pCore;
@@ -96,6 +96,12 @@ const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ V
     UNREFERENCED_PARAMETER(index);
     UNREFERENCED_PARAMETER(refid);
 
+	if (!refid)
+	{
+		return nullptr;
+	}
+
+	*refid = VoodooShader::NilUuid;
     return nullptr;
 }
 

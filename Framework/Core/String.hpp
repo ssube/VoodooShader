@@ -200,7 +200,13 @@ namespace VoodooShader
          * @name Conversion and Split
          * @{
          */
+        /**
+         * Return a lower-cased copy of the string.
+         */
         String ToLower() const;
+        /**
+         * Return an upper-cased copy of the string.
+         */
         String ToUpper() const;
         /**
          * Splits the string into tokens based on the delimeters given. The remainder of the string,
@@ -256,7 +262,6 @@ namespace VoodooShader
         {
             return std::wstring(this->GetData());
         };
-
         /**
          * Creates a std::string from this string.
          */

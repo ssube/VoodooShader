@@ -156,7 +156,7 @@ namespace VoodooShader
      * @note As of 0.5.8, this is a singleton; it is not possible to create more than one core. This may be changed in the
      *      future. Relying on this to return the same object repeatedly is undefined.
      */
-    _Check_return_ VOODOO_FUNCTION(ICore *, CreateCore)(uint32_t version);
+    _Check_return_ VOODOO_FUNCTION(ICore *, CreateCore)(_In_ uint32_t version);
     _Check_return_ VOODOO_FUNCTION(ILogger *, CreateLogger)();
     /**
      * Retrieve the singleton variable parser.

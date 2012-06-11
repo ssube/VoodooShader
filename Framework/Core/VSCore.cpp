@@ -36,7 +36,7 @@ namespace VoodooShader
     DeclareDebugCache();
     HMODULE gCoreHandle = nullptr;
 
-    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(uint32_t version)
+    ICore * VOODOO_CALLTYPE CreateCore(_In_ uint32_t version)
     {
         UNREFERENCED_PARAMETER(version);
 
@@ -168,7 +168,7 @@ namespace VoodooShader
         return nullptr;
     }
 
-    VOODOO_METHODDEF(VSCore::Init)(_In_ CONST wchar_t * config)
+    _Check_return_ VOODOO_METHODDEF(VSCore::Init)(_In_z_ CONST wchar_t * config)
     {
         if (config)
         {
@@ -181,7 +181,7 @@ namespace VoodooShader
 
         // Load variables, built-in first
         {
-            wchar_t buffer[MAX_PATH];
+            wchar_t buffer[MAX_PATH];	ZeroMemory(buffer, MAX_PATH);
 
             // Global path
             GetVoodooPath(buffer);
@@ -416,7 +416,7 @@ namespace VoodooShader
         }
     }
 
-    VOODOO_METHODDEF(VSCore::Bind)(CompilerProfile profile, uint32_t count, Variant * pParams)
+    _Check_return_ VOODOO_METHODDEF(VSCore::Bind)(_In_ CompilerProfile profile, _In_ uint32_t count, _In_ Variant * pParams)
     {
         IPlugin * compiler = nullptr;
 
@@ -458,14 +458,14 @@ namespace VoodooShader
         return m_Binding->Init(count, pParams);
     }
 
-    VOODOO_METHODDEF(VSCore::Reset)()
+    _Check_return_ VOODOO_METHODDEF(VSCore::Reset)()
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
         //! @todo Actually reset stuff.
         return VSF_OK;
     }
 
-    VOODOO_METHODDEF(VSCore::OnEvent)(Uuid event, Functions::CallbackFunc func)
+    VOODOO_METHODDEF(VSCore::OnEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func)
     {
         try
         {
@@ -491,7 +491,7 @@ namespace VoodooShader
         }
     }
 
-    VOODOO_METHODDEF(VSCore::DropEvent)(Uuid event, Functions::CallbackFunc func)
+    VOODOO_METHODDEF(VSCore::DropEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func)
     {
         try
         {
@@ -516,7 +516,7 @@ namespace VoodooShader
         }
     }
 
-    VOODOO_METHODDEF(VSCore::CallEvent)(Uuid event, uint32_t count, Variant * pArgs)
+    VOODOO_METHODDEF(VSCore::CallEvent)(_In_ Uuid event, _In_ uint32_t count, _In_count_(count) Variant * pArgs)
     {
         try
         {
@@ -621,7 +621,7 @@ namespace VoodooShader
         return effect;
     }
 
-    IParameter * VOODOO_METHODTYPE VSCore::CreateParameter(const String & name, const ParameterDesc desc)
+    IParameter * VOODOO_METHODTYPE VSCore::CreateParameter(_In_ CONST String & name, _In_ CONST ParameterDesc desc)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -664,7 +664,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(_In_ const String & name, _In_ const TextureDesc pDesc)
+    ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(const String & name, const TextureDesc pDesc)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -690,7 +690,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VOODOO_METHODTYPE VSCore::LoadTexture(_In_ const String & name, _In_ IFile * pFile)
+    ITexture * VOODOO_METHODTYPE VSCore::LoadTexture(const String & name, IFile * pFile)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
         
@@ -769,7 +769,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSCore::RemoveParameter(_In_ const String & name)
+    VoodooResult VOODOO_METHODTYPE VSCore::RemoveParameter(const String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -789,7 +789,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSCore::RemoveTexture(_In_ const String & name)
+    VoodooResult VOODOO_METHODTYPE VSCore::RemoveTexture(const String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 

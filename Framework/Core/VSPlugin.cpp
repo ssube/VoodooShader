@@ -25,7 +25,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSPlugin
     DeclareDebugCache();
 
-    VSPlugin * VSPlugin::Load(_In_ IPluginServer * pServer, _In_ const String & path)
+    VSPlugin * VSPlugin::Load(IPluginServer * pServer, const String & path)
     {
         // Load the module
         HMODULE hmodule = LoadLibraryEx(path.GetData(), nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
@@ -104,7 +104,7 @@ namespace VoodooShader
         return count;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSPlugin::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
+    VoodooResult VOODOO_METHODTYPE VSPlugin::QueryInterface(_In_ Uuid refid, _Deref_out_ IObject ** ppOut)
     {
         //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -151,14 +151,14 @@ namespace VoodooShader
         return nullptr;
     }
 
-    const Version * VOODOO_METHODTYPE VSPlugin::PluginInit(_In_ ICore * pCore) CONST
+    const Version * VOODOO_METHODTYPE VSPlugin::PluginInit(ICore * pCore) CONST
     {
         //VOODOO_DEBUG_FUNCLOG(m_ore->GetLogger());
 
         return m_PluginInit(pCore);
     }
     
-    void VOODOO_METHODTYPE VSPlugin::PluginReset(_In_ ICore * pCore) CONST
+    void VOODOO_METHODTYPE VSPlugin::PluginReset(ICore * pCore) CONST
     {
         //VOODOO_DEBUG_FUNCLOG(m_Server->)
 
@@ -172,14 +172,14 @@ namespace VoodooShader
         return m_ClassCount();
     }
 
-    const wchar_t * VOODOO_METHODTYPE VSPlugin::ClassInfo(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST
+    const wchar_t * VOODOO_METHODTYPE VSPlugin::ClassInfo(const uint32_t number, Uuid * pUuid) CONST
     {
         //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
         return m_ClassInfo(number, pUuid);
     }
 
-    IObject * VOODOO_METHODTYPE VSPlugin::CreateClass(_In_ const uint32_t number, _In_ ICore * pCore) CONST
+    IObject * VOODOO_METHODTYPE VSPlugin::CreateClass(const uint32_t number, ICore * pCore) CONST
     {
         //VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 

@@ -25,20 +25,20 @@
 // The MS shlobj header contains a few functions that cause errors in analysis under /W4 (and cause the build to fail
 // under /WX). This disables the warning for only that header.
 #pragma warning(push)
-#pragma warning(disable : 6387)
-#pragma warning(push,3)
-#include <shlobj.h>
+#	pragma warning(disable : 6387)
+#	pragma warning(push,3)
+#		include <shlobj.h>
+#	pragma warning(pop)
 #pragma warning(pop)
-#pragma warning(pop)
 #pragma warning(push,3)
-#include <strsafe.h>
+#	include <strsafe.h>
 #pragma warning(pop)
 
 namespace VoodooShader
 {
     namespace VoodooWFS
     {
-        VSWFile::VSWFile(ICore * pCore, const String & path) :
+        VSWFile::VSWFile(_In_ ICore * pCore, _In_ CONST String & path) :
             m_Path(path), m_Core(pCore)
         { };
 
@@ -111,7 +111,7 @@ namespace VoodooShader
             return m_Path;
         }
 
-        VoodooResult VSWFile::Open(FileOpenMode mode)
+        VoodooResult VSWFile::Open(_In_ FileOpenMode mode)
         {
             std::ios_base::openmode access = 0;
 

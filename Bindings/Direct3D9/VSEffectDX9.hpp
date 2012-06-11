@@ -45,19 +45,19 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+            VOODOO_METHOD(GetProperty)(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(CONST Uuid propid, _In_ Variant * pValue);
 
             VOODOO_METHOD_(ITechnique *, Bind)(bool clear = true);
             VOODOO_METHOD(Reset)();
 
             VOODOO_METHOD_(uint32_t, GetParameterCount)() CONST;
-            VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const uint32_t index) CONST;
-            VOODOO_METHOD_(IParameter *, GetParameterByName)(const String & name) CONST;
+            VOODOO_METHOD_(IParameter *, GetParameter)(_In_ CONST uint32_t index) CONST;
+            VOODOO_METHOD_(IParameter *, GetParameterByName)(CONST String & name) CONST;
 
             VOODOO_METHOD_(uint32_t, GetTechniqueCount)() CONST;
-            VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ const uint32_t index) CONST;
-            VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(const String & name) CONST;
+            VOODOO_METHOD_(ITechnique *, GetTechnique)(_In_ CONST uint32_t index) CONST;
+            VOODOO_METHOD_(ITechnique *, GetTechniqueByName)(CONST String & name) CONST;
             VOODOO_METHOD_(ITechnique *, GetDefaultTechnique)() CONST;
             VOODOO_METHOD(SetDefaultTechnique)(_In_ ITechnique * pTechnique);
 

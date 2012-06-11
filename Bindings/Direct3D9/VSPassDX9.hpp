@@ -41,15 +41,15 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+            VOODOO_METHOD(GetProperty)(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(CONST Uuid propid, _In_ Variant * pValue);
 
             VOODOO_METHOD(Bind)();
             VOODOO_METHOD(Reset)();
 
-            VOODOO_METHOD_(ITexture *, GetTarget)(const uint32_t index) CONST;
-            VOODOO_METHOD(SetTarget)(const uint32_t index, ITexture * pTarget);
-            VOODOO_METHOD(GetShader)(const ShaderStage stage, _In_ Variant * pShader) CONST;
+            VOODOO_METHOD_(ITexture *, GetTarget)(CONST uint32_t index) CONST;
+            VOODOO_METHOD(SetTarget)(CONST uint32_t index, ITexture * pTarget);
+            VOODOO_METHOD(GetShader)(CONST ShaderStage stage, _In_ Variant * pShader) CONST;
             VOODOO_METHOD_(ITechnique *, GetTechnique)() CONST;
 
         private:

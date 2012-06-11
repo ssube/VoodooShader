@@ -36,8 +36,8 @@ namespace VoodooShader
     class VSParser;
     
     /* Plugin exports. */
-    const Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore);
-    const uint32_t  VOODOO_CALLTYPE API_ClassCount();
-    const wchar_t * VOODOO_CALLTYPE API_ClassInfo(const uint32_t index, _Out_ Uuid * pUuid);
-    IObject *       VOODOO_CALLTYPE API_ClassCreate(const uint32_t index, _Pre_notnull_ ICore * pCore);
+    CONST Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore);
+    CONST uint32_t  VOODOO_CALLTYPE API_ClassCount();
+    CONST wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ CONST uint32_t index, _Out_ Uuid * pUuid);
+    IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ CONST uint32_t index, _In_ ICore * pCore);
 }

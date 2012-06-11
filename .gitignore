@@ -19,6 +19,7 @@ Resources/Installers/Output/*
 [Dd]ebug
 [Rr]elease
 VoodooPaths.props
+autoexp.dat
 
 #Build version file
 VoodooBuild_*.hpp

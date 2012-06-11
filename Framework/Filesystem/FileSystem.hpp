@@ -50,6 +50,7 @@ namespace VoodooShader
         typedef std::list<String> StringList;
 
         const Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore);
+        void            VOODOO_CALLTYPE API_PluginReset(_In_ ICore * pCore);
         const uint32_t  VOODOO_CALLTYPE API_ClassCount();
         const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid);
         IObject *       VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore);
@@ -64,7 +65,7 @@ namespace VoodooShader
          * @par ClassId
          *      e6f312b1-05af-11e1-9e05-005056c00008
          */
-        VOODOO_CLASS(VSWFileSystem, IFileSystem, ({0xB1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
+        VOODOO_CLASS(VSWFileSystem, IFileSystem, ({0xCE, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
         {
         public:
             VSWFileSystem(_In_ ICore *core);

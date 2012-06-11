@@ -52,8 +52,8 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
         /**
          * @}
          * @name Value Type Methods
@@ -68,18 +68,18 @@ namespace VoodooShader
          * @name Value Access Methods
          * @{
          */
-        VOODOO_METHOD(GetBool)(bool * pVal) CONST PURE;
-        VOODOO_METHOD(GetFloat)(float * pVal) CONST PURE;
-        VOODOO_METHOD(GetInt)(int32_t * pVal) CONST PURE;
-        VOODOO_METHOD(GetString)(String * pVal) CONST PURE;
-        VOODOO_METHOD(GetTexture)(ITexture ** pVal) CONST PURE;
-        VOODOO_METHOD(GetVector)(Float4 * pVal) CONST PURE;
-        VOODOO_METHOD(SetBool)(bool val) PURE;
-        VOODOO_METHOD(SetFloat)(float val) PURE;
-        VOODOO_METHOD(SetInt)(int32_t val) PURE;
-        VOODOO_METHOD(SetString)(const String & val) PURE;
-        VOODOO_METHOD(SetTexture)(ITexture * pVal) PURE;
-        VOODOO_METHOD(SetVector)(Float4 val) PURE;
+        VOODOO_METHOD(GetBool)(_Out_ bool * pVal) CONST PURE;
+        VOODOO_METHOD(GetFloat)(_Out_ float * pVal) CONST PURE;
+        VOODOO_METHOD(GetInt)(_Out_ int32_t * pVal) CONST PURE;
+        VOODOO_METHOD(GetString)(_Out_ String * pVal) CONST PURE;
+        VOODOO_METHOD(GetTexture)(_Out_ ITexture ** pVal) CONST PURE;
+        VOODOO_METHOD(GetVector)(_Out_ Float4 * pVal) CONST PURE;
+        VOODOO_METHOD(SetBool)(_In_ CONST bool val) PURE;
+        VOODOO_METHOD(SetFloat)(_In_ CONST float val) PURE;
+        VOODOO_METHOD(SetInt)(_In_ CONST int32_t val) PURE;
+        VOODOO_METHOD(SetString)(_In_ CONST String & val) PURE;
+        VOODOO_METHOD(SetTexture)(_In_ CONST ITexture * pVal) PURE;
+        VOODOO_METHOD(SetVector)(_In_ CONST Float4 val) PURE;
         /**
          * @}
          * @name Link Methods

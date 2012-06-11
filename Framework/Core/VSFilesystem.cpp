@@ -107,7 +107,7 @@ namespace VoodooShader
         return m_Core;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSFileSystem::AddPath(_In_ const String & dir, PathType type)
+    VoodooResult VOODOO_METHODTYPE VSFileSystem::AddPath(const String & dir, PathType type)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(dir);
@@ -116,7 +116,7 @@ namespace VoodooShader
         return VSFERR_INVALIDCALL;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSFileSystem::RemovePath(_In_ const String & dir)
+    VoodooResult VOODOO_METHODTYPE VSFileSystem::RemovePath(const String & dir)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(dir);
@@ -124,7 +124,7 @@ namespace VoodooShader
         return VSFERR_INVALIDCALL;
     }
 
-    IFile * VOODOO_METHODTYPE VSFileSystem::GetFile(_In_ const String & name, const GetFileMode mode) CONST
+    IFile * VOODOO_METHODTYPE VSFileSystem::GetFile(const String & name, const GetFileMode mode) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
         UNREFERENCED_PARAMETER(name);

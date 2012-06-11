@@ -32,13 +32,13 @@ namespace VoodooShader
 {
     namespace Voodoo_D3D9
     {
-        VSTextureDX9::VSTextureDX9(VSBindingDX9 * pBinding) :
+        VSTextureDX9::VSTextureDX9(_In_ VSBindingDX9 * pBinding) :
             m_Refs(0), m_Binding(pBinding)
         {
 
         }
 
-        VSTextureDX9::VSTextureDX9(VSBindingDX9 * pBinding, String name, IDirect3DTexture9 * pTexture) :
+        VSTextureDX9::VSTextureDX9(_In_ VSBindingDX9 * pBinding, String name, IDirect3DTexture9 * pTexture) :
             m_Refs(0), m_Binding(pBinding), m_Name(name), m_DXTexture(pTexture), m_DXSurface(nullptr), 
             m_BoundSourceSlot(VOODOO_TEXTURE_INVALID), m_BoundTargetSlot(VOODOO_TEXTURE_INVALID)
         {
@@ -130,7 +130,7 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTextureDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSTextureDX9::GetProperty(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
         {
             if (!pValue) return VSFERR_INVALIDPARAMS;
 
@@ -152,7 +152,7 @@ namespace VoodooShader
             return VSFERR_INVALIDPARAMS;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTextureDX9::SetProperty(const Uuid propid, _In_ Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE VSTextureDX9::SetProperty(CONST Uuid propid, _In_ Variant * pValue)
         {
             UNREFERENCED_PARAMETER(propid);
 

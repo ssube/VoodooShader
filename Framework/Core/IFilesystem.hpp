@@ -67,7 +67,7 @@ namespace VoodooShader
          * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This
          *      combined with parser environment access allows regular-form environment vars to be added to the file system.
          */
-        VOODOO_METHOD(AddPath)(_In_ const String & path, PathType type = VSPath_Directory) PURE;
+        VOODOO_METHOD(AddPath)(_In_ CONST String & path, _In_ PathType type = VSPath_Directory) PURE;
         /**
          * Removes a directory from the search path, following the same rules as adding (adding a string then removing the
          * same string will always work).
@@ -78,7 +78,7 @@ namespace VoodooShader
          * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This
          *      combined with parser environment access allows regular-form environment vars to be added to the file system.
          */
-        VOODOO_METHOD(RemovePath)(_In_ const String & path) PURE;
+        VOODOO_METHOD(RemovePath)(_In_ CONST String & path) PURE;
         /**
          * @}
          * @name Search Methods
@@ -94,7 +94,7 @@ namespace VoodooShader
          * @param mode The file mode to use.
          * @return The file, if found or created (depending on mode).
          */
-        VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode = VSSearch_Exists) CONST PURE;
+        VOODOO_METHOD_(IFile *, GetFile)(_In_ CONST String & name, _In_ CONST GetFileMode mode = VSSearch_Exists) CONST PURE;
         /**
          * @}
          */

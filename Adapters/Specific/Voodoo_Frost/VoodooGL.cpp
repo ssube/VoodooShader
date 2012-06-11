@@ -20,7 +20,7 @@
 
 #include "VoodooGL.hpp"
 // Voodoo Core
-#include "Format.hpp"
+#include "StringFormat.hpp"
 // WinAPI
 #include <strsafe.h>
 

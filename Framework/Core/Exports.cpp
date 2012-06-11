@@ -26,7 +26,7 @@
 #include "VSHookManager.hpp"
 #include "VSLogger.hpp"
 
-EXTERN_C BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_opt_ LPVOID lpvReserved)
+EXTERN_C BOOL WINAPI DllMain(HINSTANCE hinstDLL,  DWORD fdwReason, LPVOID lpvReserved)
 {
     UNREFERENCED_PARAMETER(lpvReserved);
 
@@ -42,38 +42,38 @@ EXTERN_C BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_
 
 namespace VoodooShader
 {
-    const Version * VOODOO_CALLTYPE API_PluginInit(ICore * pCore)
+    CONST Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore)
     {
         UNREFERENCED_PARAMETER(pCore);
 
-        static const Version coreVersion = VOODOO_VERSION_STRUCT(CORE);
+        static CONST Version coreVersion = VOODOO_VERSION_STRUCT(CORE);
 
         return &coreVersion;
     }
 
-    void VOODOO_CALLTYPE API_PluginReset(ICore * pCore)
+    void VOODOO_CALLTYPE API_PluginReset(_In_ ICore * pCore)
     {
         UNREFERENCED_PARAMETER(pCore);
     }
 
-    const uint32_t VOODOO_CALLTYPE API_ClassCount()
+    CONST uint32_t VOODOO_CALLTYPE API_ClassCount()
     {
         return 4;
     }
 
-    const wchar_t * VOODOO_CALLTYPE API_ClassInfo(const uint32_t number, _Out_ Uuid * pUuid)
-    {
-        static const wchar_t * name_VSCore = VSTR("VSCore");
-        static const wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
-        static const wchar_t * name_VSHookManager = VSTR("VSHookManager");
-        static const wchar_t * name_VSLogger = VSTR("VSLogger");
+	CONST wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ CONST uint32_t index, _Out_ Uuid * pUuid )
+	{
+        static CONST wchar_t * name_VSCore = VSTR("VSCore");
+        static CONST wchar_t * name_VSFileSystem = VSTR("VSFileSystem");
+        static CONST wchar_t * name_VSHookManager = VSTR("VSHookManager");
+        static CONST wchar_t * name_VSLogger = VSTR("VSLogger");
 
         if (!pUuid)
         {
             return nullptr;
         }
 
-        switch (number)
+        switch (index)
         {
         case 0:
             *pUuid = CLSID_VSCore;
@@ -88,11 +88,12 @@ namespace VoodooShader
             *pUuid = CLSID_VSLogger;
             return name_VSLogger;
         default:
+			*pUuid = VoodooShader::NilUuid;
             return nullptr;
         }
     }
 
-    IObject * VOODOO_CALLTYPE API_ClassCreate(const uint32_t number, _Pre_notnull_ ICore * pCore)
+    IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ CONST uint32_t number, _In_ ICore * pCore)
     {
         switch (number)
         {

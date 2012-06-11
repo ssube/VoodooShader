@@ -35,6 +35,9 @@
 
 extern VoodooShader::EffectRef  testEffect;
 
+extern IDirect3DSurface9 *      target_Color;
+extern IDirect3DSurface9 *      target_Depth;
+
 extern VoodooShader::TextureRef texture_Frame0;
 extern IDirect3DSurface9 *      surface_Frame0;
 extern VoodooShader::TextureRef texture_Pass0;

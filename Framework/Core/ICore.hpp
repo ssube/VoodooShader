@@ -59,7 +59,7 @@ namespace VoodooShader
          * @param   config  Name of the configuration file used to initialize this core.
          * @return          Success of the initialization.
          */
-        _Check_return_ VOODOO_METHOD(Init)(_In_ CONST wchar_t * config) PURE;
+        _Check_return_ VOODOO_METHOD(Init)(_In_z_ CONST wchar_t * config) PURE;
         /**
          * Binds the core to a particular compiler profile. This loads and initializes the compiler, attaching it to this
          * core until the core is reset or destroyed. Compiler profiles interface the Voodoo Shader core with a given
@@ -75,7 +75,7 @@ namespace VoodooShader
          * @pre ICore::Init()
          * @post If this call succeeds, resources may be created from this core.
          */
-        _Check_return_ VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams) PURE;
+        _Check_return_ VOODOO_METHOD(Bind)(_In_ CompilerProfile profile, _In_ uint32_t count, _In_count_(count) Variant * pParams) PURE;
         /**
          * Cleans up all modules and objects. Invalidates all objects created by this core. This method
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this
@@ -108,7 +108,7 @@ namespace VoodooShader
          *      prototype takes a list of variants, allowing a variety of parameters while retaining safety (this will be
          *      changed to a map of variants in the future, once a map class is added).
          */
-        VOODOO_METHOD(OnEvent)(Uuid event, Functions::CallbackFunc func) PURE;
+        VOODOO_METHOD(OnEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func) PURE;
         /**
          * Removes a callback from an event on this core. The callback will no longer be notified when the event is called.
          *
@@ -117,7 +117,7 @@ namespace VoodooShader
          *
          * @pre ICore::OnEvent() must be called with the same parameters.
          */
-        VOODOO_METHOD(DropEvent)(Uuid event, Functions::CallbackFunc func) PURE;
+        VOODOO_METHOD(DropEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func) PURE;
         /**
          * Broadcasts an event to all registered handlers, passing the provided argument list.
          *
@@ -131,7 +131,7 @@ namespace VoodooShader
          * @warning If a callback returns a failure value, the loop will be aborted and remaining callbacks will nto be
          *      called. The failure will be returned by this method. If no callbacks fail, this will return generic success.
          */
-        VOODOO_METHOD(CallEvent)(Uuid event, uint32_t count, _In_opt_count_(count) Variant * pArgs) PURE;
+        VOODOO_METHOD(CallEvent)(_In_ Uuid event, _In_ uint32_t count, _In_opt_count_(count) Variant * pArgs) PURE;
         /**
          * @}
          * @name Core Field Methods

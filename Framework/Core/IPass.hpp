@@ -57,8 +57,8 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(const Uuid propid, _In_ Variant * pValue) CONST;
-        VOODOO_METHOD(SetProperty)(const Uuid propid, _In_ Variant * pValue);
+        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+        VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
         /**
          * @}
          * @name IPass Methods
@@ -88,7 +88,7 @@ namespace VoodooShader
          * @param   index       The target index.
          * @return              The target texture.
          */
-        VOODOO_METHOD_(ITexture *, GetTarget)(const uint32_t index) CONST PURE;
+        VOODOO_METHOD_(ITexture *, GetTarget)(_In_ CONST uint32_t index) CONST PURE;
         /**
          * Set a target texture buffer this pass should render to. This must be a texture created with the render
          * target flag set.
@@ -96,14 +96,14 @@ namespace VoodooShader
          * @param   index       The target index.
          * @param   pTarget     The target texture.
          */
-        VOODOO_METHOD(SetTarget)(const uint32_t index, ITexture * pTarget) PURE;
+        VOODOO_METHOD(SetTarget)(_In_ CONST uint32_t index,_In_  ITexture * pTarget) PURE;
         /**
          * Retrieve a specific shader stage from this pass.
          *
          * @param   stage       The stage to retrieve.
          * @param   pValue      A Variant to be filled with the shader.
          */
-        VOODOO_METHOD(GetShader)(const ShaderStage stage, _In_ Variant * pValue) CONST PURE;
+        VOODOO_METHOD(GetShader)(_In_ CONST ShaderStage stage, _Out_ Variant * pValue) CONST PURE;
         /**
          * Retrieve the parent technique of this pass.
          */

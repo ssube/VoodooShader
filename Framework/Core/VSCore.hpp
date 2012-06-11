@@ -55,9 +55,9 @@ namespace VoodooShader
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
         // ICore
-        VOODOO_METHOD(Init)(_In_ const wchar_t * config);
-        VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
-        VOODOO_METHOD(Reset)();
+        _Check_return_ VOODOO_METHOD(Init)(_In_z_ CONST wchar_t * config);
+        _Check_return_ VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
+        _Check_return_ VOODOO_METHOD(Reset)();
 
         VOODOO_METHOD(OnEvent)(Uuid event, Functions::CallbackFunc func);
         VOODOO_METHOD(DropEvent)(Uuid event, Functions::CallbackFunc func);

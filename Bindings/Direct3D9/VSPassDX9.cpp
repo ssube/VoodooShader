@@ -32,7 +32,7 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSPassDX9
         DeclareDebugCache();
 
-        VSPassDX9::VSPassDX9(VSTechniqueDX9 * pTechnique, UINT passId) :
+        VSPassDX9::VSPassDX9(_In_ VSTechniqueDX9 * pTechnique, UINT passId) :
             m_Refs(0), m_Technique(pTechnique),  m_DXPassId(passId)
         {
             if (!m_Technique)
@@ -126,7 +126,7 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSPassDX9::GetProperty(const Uuid propid, _In_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSPassDX9::GetProperty(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -150,7 +150,7 @@ namespace VoodooShader
             return VSFERR_INVALIDCALL;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSPassDX9::SetProperty(const Uuid propid, _In_ Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE VSPassDX9::SetProperty(CONST Uuid propid, _In_ Variant * pValue)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -209,7 +209,7 @@ namespace VoodooShader
             }
         }
 
-        ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(const uint32_t index) CONST
+        ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(CONST uint32_t index) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -223,7 +223,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE VSPassDX9::SetTarget(const uint32_t index, ITexture * pTarget)
+        VoodooResult VOODOO_METHODTYPE VSPassDX9::SetTarget(CONST uint32_t index, ITexture * pTarget)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -238,7 +238,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE VSPassDX9::GetShader(const ShaderStage stage, _In_ Variant * pShader) CONST
+        VoodooResult VOODOO_METHODTYPE VSPassDX9::GetShader(CONST ShaderStage stage, _In_ Variant * pShader) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 

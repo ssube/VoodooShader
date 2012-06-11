@@ -20,21 +20,22 @@
 #pragma once
 
 #include "VoodooVersion.hpp"
+#include "VoodooBuild_Voodoo_WFileSystem.hpp"
 
 /**
  * @addtogroup voodoo_module_wfilesystem
  * @{
  * Filesystem defs
  */
-#define VOODOO_FILESYSTEM_LIBID         {0xCD, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
+#define VOODOO_FILESYSTEM_LIBID         {0xCE, 0xCF, 0x87, 0xA6, 0x3C, 0x06, 0xE1, 0x11, 0xB2, 0x2E, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
 #define VOODOO_FILESYSTEM_AUTHOR        VOODOO_GLOBAL_AUTHOR
 #define VOODOO_FILESYSTEM_NAME          VSTR("Voodoo_WFileSystem")
-#define VOODOO_FILESYSTEM_PRETTYNAME    VSTR("Voodoo Windows FileSystem")
+#define VOODOO_FILESYSTEM_PRETTYNAME    VSTR("Voodoo Shader Windows FileSystem")
 #define VOODOO_FILESYSTEM_VERSION_MAJOR 0
 #define VOODOO_FILESYSTEM_VERSION_MINOR 5
 #define VOODOO_FILESYSTEM_VERSION_PATCH 8
-#define VOODOO_FILESYSTEM_VERSION_BUILD VOODOO_GLOBAL_VERSION_BUILD
-#define VOODOO_FILESYSTEM_VERSION_ID    VOODOO_GLOBAL_VERSION_ID
+#define VOODOO_FILESYSTEM_VERSION_BUILD VOODOO_PROJECT_VERSION_BUILD
+#define VOODOO_FILESYSTEM_VERSION_ID    VOODOO_PROJECT_VERSION_ID
 /**
  * @}
  */

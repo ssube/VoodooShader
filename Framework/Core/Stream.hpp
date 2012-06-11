@@ -51,7 +51,8 @@ namespace VoodooShader
         {
             if (this != &o)
             {
-                s = o.s;
+				//! @todo Fix this assignment: apparently VS11 made std::ios_base::operator= private
+                //s = o.s;
                 f = o.f;
             }
             return (*this);

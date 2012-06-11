@@ -95,7 +95,7 @@ namespace VoodooShader
          *
          * @param level The minimum log level.
          */
-        VOODOO_METHOD_(void, SetFilter)(_In_ const uint32_t level) PURE;
+        VOODOO_METHOD_(void, SetFilter)(_In_ CONST uint32_t level) PURE;
         /**
          * Get the current log level.
          *
@@ -107,7 +107,7 @@ namespace VoodooShader
          *
          * @param flags New flag settings.
          */
-        VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flags) PURE;
+        VOODOO_METHOD_(void, SetFlags)(_In_ CONST LogFlags flags) PURE;
         /**
          * Get the current log flags.
          *
@@ -132,7 +132,7 @@ namespace VoodooShader
          * @endcode
          * This uses the Format class and implicit casts to String after the last argument is inserted.
          */
-        VOODOO_METHOD(LogMessage)(_In_ const uint32_t level, _In_ const String & source, _In_ const String & msg) PURE;
+        VOODOO_METHOD(LogMessage)(_In_ CONST uint32_t level, _In_ CONST String & source, _In_ CONST String & msg) PURE;
         /**
          * @}
          */

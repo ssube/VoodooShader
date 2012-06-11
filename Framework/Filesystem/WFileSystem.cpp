@@ -28,14 +28,10 @@
 
 // The MS shlobj header contains a few functions that cause errors in analysis under /W4 (and cause the build to fail
 // under /WX). This disables the warning for only that header.
-#pragma warning(push)
-#pragma warning(disable : 6387)
 #pragma warning(push,3)
-#include <shlobj.h>
-#pragma warning(pop)
-#pragma warning(pop)
-#pragma warning(push,3)
-#include <strsafe.h>
+#   pragma warning(disable : 6387)
+#   include <shlobj.h>
+#   include <strsafe.h>
 #pragma warning(pop)
 
 namespace VoodooShader
@@ -53,7 +49,7 @@ namespace VoodooShader
             return &version;
         }
 
-        void VOODOO_CALLTYPE API_PluginReset(ICore * pCore)
+        void VOODOO_CALLTYPE API_PluginReset(_In_ ICore * pCore)
         {
             UNREFERENCED_PARAMETER(pCore);
         }
@@ -76,10 +72,11 @@ namespace VoodooShader
                 return name_VSWFileSystem;
             }
 
+			*pUuid = NilUuid;
             return nullptr;
         }
 
-        IObject * VOODOO_CALLTYPE API_ClassCreate(const uint32_t index, _In_ ICore * pCore)
+        IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore)
         {
             if (index == 0)
             {
@@ -196,7 +193,7 @@ namespace VoodooShader
             return m_Core;
         }
 
-        VoodooResult VSWFileSystem::AddPath(const String & name, PathType type)
+        VoodooResult VSWFileSystem::AddPath(_In_ const String & name, PathType type)
         {
             if (type != VSPath_Directory) return VSFERR_INVALIDPARAMS;
 
@@ -212,7 +209,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VoodooResult VSWFileSystem::RemovePath(const String & name)
+        VoodooResult VSWFileSystem::RemovePath(_In_ const String & name)
         {
             this->m_Directories.remove_if
             (
@@ -225,7 +222,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        IFile * VSWFileSystem::GetFile(const String & name, const GetFileMode mode) const
+        IFile * VSWFileSystem::GetFile(_In_ const String & name, _In_ const GetFileMode mode) const
         {
             m_Core->GetLogger()->LogMessage
             (
