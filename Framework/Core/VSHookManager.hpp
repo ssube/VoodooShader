@@ -47,14 +47,14 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD(Add)(_In_ const String & name, _In_ void * pSrc, _In_ void * pDest);
-        VOODOO_METHOD(Remove)(_In_ const String & name);
+        VOODOO_METHOD(Add)(_In_ CONST String & name, _In_ void * pSrc, _In_ void * pDest);
+        VOODOO_METHOD(Remove)(_In_ CONST String & name);
         VOODOO_METHOD(RemoveAll)();
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSHookManager(const VSHookManager & other);
-        VSHookManager & operator=(const VSHookManager & other);
+        VSHookManager(CONST VSHookManager & other);
+        VSHookManager & operator=(CONST VSHookManager & other);
         ~VSHookManager();
 
         mutable uint32_t m_Refs;

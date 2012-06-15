@@ -30,7 +30,7 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSTechniqueDX9
         DeclareDebugCache();
 
-        VSTechniqueDX9::VSTechniqueDX9(_In_ VSEffectDX9 * pEffect, D3DXHANDLE pTechHandle) :
+        VSTechniqueDX9::VSTechniqueDX9(_In_ VSEffectDX9 * pEffect, _In_ D3DXHANDLE pTechHandle) :
             m_Refs(0), m_Effect(pEffect), m_DXHandle(pTechHandle)
         {
             if (!m_Effect)
@@ -171,7 +171,7 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::GetProperty(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::GetProperty(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST
         {
             if (!pValue) VSFERR_INVALIDPARAMS;
 
@@ -189,12 +189,16 @@ namespace VoodooShader
                     CopyMemory(pValue, &property->second, sizeof(Variant));
                     return VSF_OK;
                 }
+				else
+				{
+					*pValue = CreateVariant();
+				}
             }
 
             return VSFERR_INVALIDCALL;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::SetProperty(const Uuid propid, _In_ Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE VSTechniqueDX9::SetProperty(_In_ CONST Uuid propid, _In_ Variant * pValue)
         {
             if (propid == PropIds::D3DX9Handle || propid == PropIds::D3DX9Effect)
             {
@@ -205,7 +209,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        IPass * VOODOO_METHODTYPE VSTechniqueDX9::GetPass(_In_ const uint32_t index) CONST
+        IPass * VOODOO_METHODTYPE VSTechniqueDX9::GetPass(_In_ CONST uint32_t index) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
             if (index < m_Passes.size())

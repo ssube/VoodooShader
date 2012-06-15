@@ -126,7 +126,7 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSPassDX9::GetProperty(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSPassDX9::GetProperty(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -145,12 +145,16 @@ namespace VoodooShader
                     CopyMemory(pValue, &property->second, sizeof(Variant));
                     return VSF_OK;
                 }
+				else
+				{
+					*pValue = CreateVariant();
+				}
             }
 
             return VSFERR_INVALIDCALL;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSPassDX9::SetProperty(CONST Uuid propid, _In_ Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE VSPassDX9::SetProperty(_In_ CONST Uuid propid, _In_ Variant * pValue)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -209,7 +213,7 @@ namespace VoodooShader
             }
         }
 
-        ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(CONST uint32_t index) CONST
+        ITexture * VOODOO_METHODTYPE VSPassDX9::GetTarget(_In_ CONST uint32_t index) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -223,7 +227,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE VSPassDX9::SetTarget(CONST uint32_t index, ITexture * pTarget)
+        VoodooResult VOODOO_METHODTYPE VSPassDX9::SetTarget(_In_ CONST uint32_t index, _In_ ITexture * pTarget)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -238,7 +242,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE VSPassDX9::GetShader(CONST ShaderStage stage, _In_ Variant * pShader) CONST
+        VoodooResult VOODOO_METHODTYPE VSPassDX9::GetShader(_In_ CONST ShaderStage stage, _In_ Variant * pShader) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 

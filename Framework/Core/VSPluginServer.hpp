@@ -39,22 +39,22 @@ namespace VoodooShader
 
         VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST String & name) CONST;
         VOODOO_METHOD_(IPlugin *, GetPlugin)(_In_ CONST Uuid libid) CONST;
-        VOODOO_METHOD_(bool, IsLoaded)(_In_ const String & name) CONST;
-        VOODOO_METHOD_(bool, IsLoaded)(_In_ const Uuid & libid) CONST;
-        VOODOO_METHOD(LoadPath)(_In_ ICore * pCore, _In_ const String & path, _In_ const String & filter);
-        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const IFile * pFile);
-        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ const String & filename);
+        VOODOO_METHOD_(bool, IsLoaded)(_In_ CONST String & name) CONST;
+        VOODOO_METHOD_(bool, IsLoaded)(_In_ CONST Uuid & libid) CONST;
+        VOODOO_METHOD(LoadPath)(_In_ ICore * pCore, _In_ CONST String & path, _In_ CONST String & filter);
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ IFile * pFile);
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ CONST String & filename);
         VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST String & name);
         VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST Uuid libid);
-        VOODOO_METHOD_(bool, ClassExists)(_In_ const Uuid refid) CONST;
-        VOODOO_METHOD_(bool, ClassExists)(_In_ const String & name) CONST;
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ const Uuid refid) CONST;
-        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ const String & name) CONST;
+        VOODOO_METHOD_(bool, ClassExists)(_In_ CONST Uuid refid) CONST;
+        VOODOO_METHOD_(bool, ClassExists)(_In_ CONST String & name) CONST;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ CONST Uuid refid) CONST;
+        _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ CONST String & name) CONST;
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSPluginServer(const VSPluginServer & other);
-        VSPluginServer & operator=(const VSPluginServer & other);
+        VSPluginServer(CONST VSPluginServer & other);
+        VSPluginServer & operator=(CONST VSPluginServer & other);
         ~VSPluginServer();
 
         mutable uint32_t m_Refs;

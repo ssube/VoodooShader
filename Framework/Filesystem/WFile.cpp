@@ -251,7 +251,7 @@ namespace VoodooShader
             }
         }
 
-        int32_t VSWFile::Write(_In_ const int32_t count, _In_opt_bytecount_(count) void * pBuffer)
+        int32_t VSWFile::Write(_In_ CONST int32_t count, _In_opt_bytecount_(count) void * pBuffer)
         {
             UNREFERENCED_PARAMETER(m_Core);
 

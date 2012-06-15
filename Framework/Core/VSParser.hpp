@@ -37,9 +37,9 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD(Add)(_In_ const String & name, _In_ const String & value, _In_ const VariableType type = VSVar_Normal);
-        VOODOO_METHOD(Remove)(_In_ const String & name);
-        VOODOO_METHOD_(String, Parse)(_In_ const String & input, _In_ const ParseFlags flags = VSParse_None) CONST;
+        VOODOO_METHOD(Add)(_In_ CONST String & name, _In_ CONST String & value, _In_ CONST VariableType type = VSVar_Normal);
+        VOODOO_METHOD(Remove)(_In_ CONST String & name);
+        VOODOO_METHOD_(String, Parse)(_In_ CONST String & input, _In_ CONST ParseFlags flags = VSParse_None) CONST;
 
         static const uint32_t VarMaxDepth    = 8;
         static const wchar_t  VarDelimPre    = VSTR('$');
@@ -55,11 +55,11 @@ namespace VoodooShader
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSParser(const VSParser & other);
-        VSParser & operator=(const VSParser & other);
+        VSParser(CONST VSParser & other);
+        VSParser & operator=(CONST VSParser & other);
         ~VSParser();
 
-        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) const;
+        String ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) CONST;
 
         mutable uint32_t m_Refs;
 

@@ -63,7 +63,7 @@ namespace VoodooShader
          * @note If this fails, the binding is considered in an undefined state and resources must not be created from it
          *      until it is reset.
          */
-        VOODOO_METHOD(Init)(_In_ uint32_t count, _In_count_(count) Variant * pParams) PURE;
+        VOODOO_METHOD(Init)(_In_ uint32_t count, _In_reads_(count) Variant * pParams) PURE;
         /**
          * Resets the binding, releasing the hardware context and invalidating any resources created from it. This must not
          * destroy the hardware context @a explicitly, as it may still be in use by the host, but it must release the
@@ -114,7 +114,7 @@ namespace VoodooShader
          * 
          * @pre IBinding::Init() must have been previously called, successfully.
          */
-        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ CONST String & name, _In_ ParameterDesc desc) PURE;
+        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ CONST String & name, _In_ CONST ParameterDesc desc) PURE;
         /**
          * @}
          * @name Texture Methods
@@ -124,7 +124,7 @@ namespace VoodooShader
          * Creates a new texture with the given name and description. The contents of this texture are binding-defined, and
          * may be undefined data (this is the most common). 
          */
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ TextureDesc desc) PURE;
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ CONST TextureDesc desc) PURE;
         VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(_In_ CONST String & name, _In_ IFile * pFile) PURE;
         VOODOO_METHOD_(ITexture *, CreateNullTexture)() PURE;
         /**

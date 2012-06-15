@@ -63,7 +63,7 @@ namespace VoodooShader
          * @param mode Desired access mode.
          * @return Success of file open.
          */
-        VOODOO_METHOD(Open)(_In_ FileOpenMode mode) PURE;
+        VOODOO_METHOD(Open)(_In_ CONST FileOpenMode mode) PURE;
         /**
          * Close the file if it is open.
          *
@@ -84,14 +84,14 @@ namespace VoodooShader
          * @param offset The offset to seek to.
          * @return Success of the seek operation.
          */
-        VOODOO_METHOD(Seek)(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset) PURE;
+        VOODOO_METHOD(Seek)(_In_ CONST StreamType stream, _In_ CONST SeekMode mode, _In_ CONST int32_t offset) PURE;
         /**
          * Get the position of the given stream.
          *
          * @param stream The stream to check.
          * @return The current position, or -1 on error.
          */
-        VOODOO_METHOD_(int32_t, Tell)(_In_ StreamType stream) PURE;
+        VOODOO_METHOD_(int32_t, Tell)(_In_ CONST StreamType stream) PURE;
         /**
          * Read the given number of bytes from the file, starting at the current position. The file must have been opened
          * for reading previously or this call will fail.
@@ -103,7 +103,7 @@ namespace VoodooShader
          * @note If @arg buffer is nullptr, the number of bytes that would have been read is returned but the file
          *      position is unchanged. If @arg count is -1, this returns the size to the end of the file.
          */
-        VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t size, _In_opt_count_(size) void * pBuffer) PURE;
+        VOODOO_METHOD_(int32_t, Read)(_In_ CONST int32_t size, _In_reads_opt_(size) void * pBuffer) PURE;
         /**
          * Write the given number of bytes to the file, starting at the current position.
          *
@@ -114,7 +114,7 @@ namespace VoodooShader
          * @note If @p buffer is nullptr, @p count zeros are written into the file. This is useful for padding binary
          *      formats.
          */
-        VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t size, _In_opt_count_(size) void * pBuffer) PURE;
+        VOODOO_METHOD_(int32_t, Write)(_In_ CONST int32_t size, _In_reads_opt_(size) void * pBuffer) PURE;
         /**
          * @}
          */

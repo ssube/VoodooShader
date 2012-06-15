@@ -31,7 +31,7 @@ namespace VoodooShader
         #define VOODOO_DEBUG_TYPE VSParameterDX9
         DeclareDebugCache();
 
-        VSParameterDX9::VSParameterDX9(_In_ VSEffectDX9 * pEffect, D3DXHANDLE pParamHandle) :
+        VSParameterDX9::VSParameterDX9(_In_ VSEffectDX9 * pEffect, _In_ D3DXHANDLE pParamHandle) :
             m_Refs(0), m_Effect(pEffect), m_DXHandle(pParamHandle)
         {
             if (!m_Effect)
@@ -67,7 +67,7 @@ namespace VoodooShader
             AddThisToDebugCache();
         }
 
-        VSParameterDX9::VSParameterDX9(_In_ VSBindingDX9 * pBinding, CONST String & name, ParameterDesc desc) :
+        VSParameterDX9::VSParameterDX9(_In_ VSBindingDX9 * pBinding, _In_ CONST String & name, _In_ ParameterDesc desc) :
             m_Refs(0), m_Binding(pBinding), m_Effect(nullptr), m_Name(name), m_Desc(desc), m_DXHandle(nullptr)
         {
             if (!m_Binding)
@@ -158,7 +158,7 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSParameterDX9::GetProperty(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSParameterDX9::GetProperty(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -180,6 +180,7 @@ namespace VoodooShader
                 }
             }
 
+			*pValue = CreateVariant();
             return VSFERR_INVALIDCALL;
         }
 
@@ -203,12 +204,16 @@ namespace VoodooShader
             return m_Desc;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::GetBool)(bool * pVal) CONST
+        VOODOO_METHODDEF(VSParameterDX9::GetBool)(_Out_ bool * pVal) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
             if (!pVal) return VSFERR_INVALIDPARAMS;
-            if (m_Desc.Type != VSPT_Bool) return VSFERR_INVALIDCALL;
+            if (m_Desc.Type != VSPT_Bool) 
+			{
+				*pVal = false;
+				return VSFERR_INVALIDCALL;
+			}
 
             if (m_Effect && m_DXHandle)
             {
@@ -219,6 +224,7 @@ namespace VoodooShader
                 }
                 else
                 {
+					*pVal = false;
                     return VSFERR_APIERROR;
                 }
             }
@@ -228,12 +234,16 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::GetFloat)(float * pVal) CONST
+        VOODOO_METHODDEF(VSParameterDX9::GetFloat)(_Out_ float * pVal) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
             if (!pVal) return VSFERR_INVALIDPARAMS;
-            if (m_Desc.Type != VSPT_Float) return VSFERR_INVALIDCALL;
+            if (m_Desc.Type != VSPT_Float) 
+			{
+				*pVal = 0.0;
+				return VSFERR_INVALIDCALL;
+			}
 
             if (m_Effect && m_DXHandle)
             {
@@ -244,6 +254,7 @@ namespace VoodooShader
                 }
                 else
                 {
+					*pVal = 0.0f;
                     return VSFERR_APIERROR;
                 }
             }
@@ -253,15 +264,20 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::GetInt)(int32_t * pVal) CONST
+        VOODOO_METHODDEF(VSParameterDX9::GetInt)(_Out_ int32_t * pVal) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
             if (!pVal) return VSFERR_INVALIDPARAMS;
-            if (m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
+            if (m_Desc.Type != VSPT_Int) 
+			{
+				*pVal = 0;
+				return VSFERR_INVALIDCALL;
+			}
 
             if (m_Effect && m_DXHandle && FAILED(m_Effect->m_DXEffect->GetInt(m_DXHandle, &m_VInt)))
             {
+				*pVal = 0;
                 return VSFERR_APIERROR;
             }
 
@@ -270,12 +286,16 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::GetString)(String * pVal) CONST
+        VOODOO_METHODDEF(VSParameterDX9::GetString)(_Out_ String * pVal) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
             if (!pVal) return VSFERR_INVALIDPARAMS;
-            if (m_Desc.Type != VSPT_String) return VSFERR_INVALIDCALL;
+            if (m_Desc.Type != VSPT_String) 
+			{
+				*pVal = String();
+				return VSFERR_INVALIDCALL;
+			}
 
             if (m_Effect && m_DXHandle)
             {
@@ -286,6 +306,7 @@ namespace VoodooShader
                 }
                 else
                 {
+					*pVal = String();
                     return VSFERR_APIERROR;
                 }
             }
@@ -295,24 +316,32 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::GetTexture)(ITexture ** ppVal) CONST
+        VOODOO_METHODDEF(VSParameterDX9::GetTexture)(_Out_ ITexture ** ppVal) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
             if (!ppVal) return VSFERR_INVALIDPARAMS;
-            if (m_Desc.Type < VSPT_Texture || m_Desc.Type > VSPT_TextureCube) return VSFERR_INVALIDCALL;
+            if (m_Desc.Type < VSPT_Texture || m_Desc.Type > VSPT_TextureCube)
+			{
+				*ppVal = nullptr;
+				return VSFERR_INVALIDCALL;
+			}
 
             (*ppVal) = m_Texture.get();
 
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::GetVector)(Float4 * pVal) CONST
+        VOODOO_METHODDEF(VSParameterDX9::GetVector)(_Out_ Float4 * pVal) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
             if (!pVal) return VSFERR_INVALIDPARAMS;
-            if (m_Desc.Type != VSPT_Float && m_Desc.Type != VSPT_Bool && m_Desc.Type != VSPT_Int) return VSFERR_INVALIDCALL;
+            if (m_Desc.Type != VSPT_Float && m_Desc.Type != VSPT_Bool && m_Desc.Type != VSPT_Int)
+			{
+				ZeroMemory(pVal, sizeof(Float4));
+				return VSFERR_INVALIDCALL;
+			}
 
             if (m_Effect && m_DXHandle)
             {
@@ -326,6 +355,7 @@ namespace VoodooShader
                 }
                 else
                 {
+					ZeroMemory(pVal, sizeof(Float4));
                     return VSFERR_APIERROR;
                 }
             }
@@ -335,7 +365,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::SetBool)(bool val)
+        VOODOO_METHODDEF(VSParameterDX9::SetBool)(_In_ CONST bool val)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -357,7 +387,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::SetFloat)(float val)
+        VOODOO_METHODDEF(VSParameterDX9::SetFloat)(_In_ CONST float val)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -379,7 +409,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::SetInt)(int32_t val)
+        VOODOO_METHODDEF(VSParameterDX9::SetInt)(_In_ CONST int32_t val)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -401,7 +431,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::SetString)(CONST String & val)
+        VOODOO_METHODDEF(VSParameterDX9::SetString)(_In_ CONST String & val)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -427,7 +457,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::SetTexture)(ITexture * pVal)
+        VOODOO_METHODDEF(VSParameterDX9::SetTexture)(_In_ ITexture * pVal)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -466,7 +496,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF(VSParameterDX9::SetVector)(Float4 val)
+        VOODOO_METHODDEF(VSParameterDX9::SetVector)(_In_ CONST Float4 val)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 

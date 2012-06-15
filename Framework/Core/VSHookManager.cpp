@@ -25,7 +25,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSHookManager
     DeclareDebugCache();
 
-    VSHookManager::VSHookManager(ICore * pCore) :
+    VSHookManager::VSHookManager(_In_ ICore * pCore) :
         m_Refs(0), m_Core(pCore)
     { 
         m_Core->GetLogger()->LogMessage(VSLog_PlugInfo, VOODOO_CORE_NAME, VSTR("Created hook manager."));
@@ -64,7 +64,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSHookManager::QueryInterface(Uuid refid, IObject ** ppOut)
+    VoodooResult VOODOO_METHODTYPE VSHookManager::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 
@@ -111,7 +111,7 @@ namespace VoodooShader
         return m_Core;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSHookManager::Add(const String & name, void * pSrc, void * pDest)
+    VoodooResult VOODOO_METHODTYPE VSHookManager::Add(_In_ CONST String & name, _In_ void * pSrc, _In_ void * pDest)
     {
         UNREFERENCED_PARAMETER(name);
         UNREFERENCED_PARAMETER(pSrc);
@@ -122,7 +122,7 @@ namespace VoodooShader
         return VSF_OK;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSHookManager::Remove(const String & name)
+    VoodooResult VOODOO_METHODTYPE VSHookManager::Remove(_In_ CONST String & name)
     {
         UNREFERENCED_PARAMETER(name);
 

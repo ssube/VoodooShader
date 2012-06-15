@@ -30,7 +30,7 @@ namespace VoodooShader
     #define VOODOO_DEBUG_TYPE VSLogger
     DeclareDebugCache();
 
-    VOODOO_FUNCTION(ILogger *, CreateLogger)()
+    _Check_return_ VOODOO_FUNCTION(ILogger *, CreateLogger)()
     {
         static VSLogger * pLogger = nullptr;
 
@@ -79,7 +79,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::QueryInterface(Uuid refid, IObject ** ppOut)
+    VoodooResult VOODOO_METHODTYPE VSLogger::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         if (!ppOut)
         {
@@ -120,7 +120,7 @@ namespace VoodooShader
         return nullptr;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::Open(const String & filename, const bool append)
+    VoodooResult VOODOO_METHODTYPE VSLogger::Open(_In_ CONST String & filename, _In_ CONST bool append)
     {
         if (this->m_LogFile.is_open())
         {
@@ -173,7 +173,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSLogger::Open(IFile * CONST pFile, CONST bool append)
+    VoodooResult VOODOO_METHODTYPE VSLogger::Open(_In_ IFile * CONST pFile, _In_ CONST bool append)
     {
         if (!pFile) return VSFERR_INVALIDPARAMS;
 
@@ -206,7 +206,7 @@ namespace VoodooShader
         }
     }
 
-    void VOODOO_METHODTYPE VSLogger::SetFilter(CONST uint32_t level)
+    void VOODOO_METHODTYPE VSLogger::SetFilter(_In_ CONST uint32_t level)
     {
         m_Filter = (LogLevel)level;
     }
@@ -216,7 +216,7 @@ namespace VoodooShader
         return m_Filter;
     }
 
-    void VOODOO_METHODTYPE VSLogger::SetFlags(CONST LogFlags flags)
+    void VOODOO_METHODTYPE VSLogger::SetFlags(_In_ CONST LogFlags flags)
     {
         m_Flags = flags;
     }
@@ -228,9 +228,9 @@ namespace VoodooShader
 
     VoodooResult VOODOO_METHODTYPE VSLogger::LogMessage
     (
-        const uint32_t level,
-        const String & source,
-        const String & msg
+        _In_ CONST uint32_t level,
+        _In_ CONST String & source,
+        _In_ CONST String & msg
     )
     {
         if (!this->IsOpen()) return false;

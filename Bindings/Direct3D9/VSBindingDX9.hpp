@@ -58,28 +58,28 @@ namespace VoodooShader
              * @name IBinding Methods
              * @{
              */
-            VOODOO_METHOD(Init)(uint32_t count, _In_count_(count) Variant * pParams);
+            VOODOO_METHOD(Init)(_In_ uint32_t count, _In_reads_(count) Variant * pParams);
             VOODOO_METHOD(Reset)();
             /**
              * @}
              * @name Effect Methods
              * @{
              */
-            VOODOO_METHOD_(IEffect *, CreateEffect)(CONST String & source);
-            VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(CONST IFile * pFile);
+            VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ CONST String & source);
+            VOODOO_METHOD_(IEffect *, CreateEffectFromFile)(_In_ CONST IFile * pFile);
             /**
              * @}
              * @name Parameter Methods
              * @{
              */
-            VOODOO_METHOD_(IParameter *, CreateParameter)(CONST String & name, ParameterDesc desc);
+            VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ CONST String & name, _In_ CONST ParameterDesc desc);
             /**
              * @}
              * @name Texture Methods
              * @{
              */
-            VOODOO_METHOD_(ITexture *, CreateTexture)(CONST String & name, TextureDesc desc);
-            VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(CONST String & name, _In_ IFile * pFile);
+            VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ CONST TextureDesc desc);
+            VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(_In_ CONST String & name, _In_ IFile * pFile);
             VOODOO_METHOD_(ITexture *, CreateNullTexture)();
 
             // Non-interface methods
@@ -89,7 +89,7 @@ namespace VoodooShader
 
         private:            
             // Internals
-            LPDIRECT3DTEXTURE9 Impl_CreateTexture(TextureDesc & desc, DWORD usage, D3DFORMAT format);
+            LPDIRECT3DTEXTURE9 Impl_CreateTexture(_In_ TextureDesc & desc, _In_ DWORD usage, _In_ D3DFORMAT format);
 
             mutable uint32_t m_Refs;
             ICore * m_Core;

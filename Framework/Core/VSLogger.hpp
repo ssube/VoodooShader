@@ -49,21 +49,21 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD(Open)(_In_ const String & filename, _In_ const bool append);
-        VOODOO_METHOD(Open)(_In_ IFile * pFile, _In_ const bool append);
+        VOODOO_METHOD(Open)(_In_ CONST String & filename, _In_ CONST bool append);
+        VOODOO_METHOD(Open)(_In_ IFile * pFile, _In_ CONST bool append);
         VOODOO_METHOD_(bool, IsOpen)() CONST;
         VOODOO_METHOD(Close)();
         VOODOO_METHOD_(void, Flush)();
-        VOODOO_METHOD_(void, SetFilter)(_In_ const uint32_t level);
-        VOODOO_METHOD_(LogLevel, GetFilter)() const;
-        VOODOO_METHOD_(void, SetFlags)(_In_ const LogFlags flush);
-        VOODOO_METHOD_(LogFlags, GetFlags)() const;
-        VOODOO_METHOD(LogMessage)(_In_ const uint32_t level, _In_ const String & source, _In_ const String & msg);
+        VOODOO_METHOD_(void, SetFilter)(_In_ CONST uint32_t level);
+        VOODOO_METHOD_(LogLevel, GetFilter)() CONST;
+        VOODOO_METHOD_(void, SetFlags)(_In_ CONST LogFlags flush);
+        VOODOO_METHOD_(LogFlags, GetFlags)() CONST;
+        VOODOO_METHOD(LogMessage)(_In_ CONST uint32_t level, _In_ CONST String & source, _In_ CONST String & msg);
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSLogger(const VSLogger & other);
-        VSLogger & operator=(const VSLogger & other);
+        VSLogger(CONST VSLogger & other);
+        VSLogger & operator=(CONST VSLogger & other);
         ~VSLogger();
 
         mutable uint32_t m_Refs;

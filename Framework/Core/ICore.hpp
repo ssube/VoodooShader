@@ -75,7 +75,7 @@ namespace VoodooShader
          * @pre ICore::Init()
          * @post If this call succeeds, resources may be created from this core.
          */
-        _Check_return_ VOODOO_METHOD(Bind)(_In_ CompilerProfile profile, _In_ uint32_t count, _In_count_(count) Variant * pParams) PURE;
+        _Check_return_ VOODOO_METHOD(Bind)(_In_ CONST CompilerProfile profile, _In_ CONST uint32_t count, _In_reads_(count) Variant * pParams) PURE;
         /**
          * Cleans up all modules and objects. Invalidates all objects created by this core. This method
          * provides an early cleanup (in cases where process-termination cleanup may cause crashes). If successful, this
@@ -108,7 +108,7 @@ namespace VoodooShader
          *      prototype takes a list of variants, allowing a variety of parameters while retaining safety (this will be
          *      changed to a map of variants in the future, once a map class is added).
          */
-        VOODOO_METHOD(OnEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func) PURE;
+        VOODOO_METHOD(OnEvent)(_In_ CONST Uuid event, _In_ Functions::CallbackFunc func) PURE;
         /**
          * Removes a callback from an event on this core. The callback will no longer be notified when the event is called.
          *
@@ -117,7 +117,7 @@ namespace VoodooShader
          *
          * @pre ICore::OnEvent() must be called with the same parameters.
          */
-        VOODOO_METHOD(DropEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func) PURE;
+        VOODOO_METHOD(DropEvent)(_In_ CONST Uuid event, _In_ Functions::CallbackFunc func) PURE;
         /**
          * Broadcasts an event to all registered handlers, passing the provided argument list.
          *
@@ -131,7 +131,7 @@ namespace VoodooShader
          * @warning If a callback returns a failure value, the loop will be aborted and remaining callbacks will nto be
          *      called. The failure will be returned by this method. If no callbacks fail, this will return generic success.
          */
-        VOODOO_METHOD(CallEvent)(_In_ Uuid event, _In_ uint32_t count, _In_opt_count_(count) Variant * pArgs) PURE;
+        VOODOO_METHOD(CallEvent)(_In_ CONST Uuid event, _In_ CONST uint32_t count, _In_reads_opt_(count) Variant * pArgs) PURE;
         /**
          * @}
          * @name Core Field Methods
@@ -197,7 +197,7 @@ namespace VoodooShader
          * @note This function creates global parameters, which are not associated with any effect. They are primarily used
          *      to propagate values down to other parameters, both global and effect.
          */
-        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ CONST String & name, _In_ ParameterDesc desc) PURE;
+        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ CONST String & name, _In_ CONST ParameterDesc desc) PURE;
         /**
          * Registers a texture with this core.
          *
@@ -209,7 +209,7 @@ namespace VoodooShader
          * @note This method calls IAdapter::CreateTexture() to handle the actual creation, then registers
          *     the returned texture with the core and sets things up properly.
          */
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ TextureDesc desc) PURE;
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ CONST TextureDesc desc) PURE;
         /**
          * Loads a texture from file and registers it with this core. The texture file dictates size and format of the
          * resulting object, and only supported formats will be loaded. This relies in part on the active binding, but
@@ -229,7 +229,7 @@ namespace VoodooShader
          *
          * @note If type is VSPT_Unknown, no type checking is performed, only the name is used.
          */
-        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ CONST String & name, _In_ ParameterDesc desc) CONST PURE;
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ CONST String & name, _In_ CONST ParameterDesc desc) CONST PURE;
         /**
          * Retrieves a texture from the ICore's texture map by name.
          *

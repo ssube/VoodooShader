@@ -36,7 +36,7 @@ namespace VoodooShader
     DeclareDebugCache();
     HMODULE gCoreHandle = nullptr;
 
-    ICore * VOODOO_CALLTYPE CreateCore(_In_ uint32_t version)
+    _Check_return_ ICore * VOODOO_CALLTYPE CreateCore(_In_ uint32_t version)
     {
         UNREFERENCED_PARAMETER(version);
 
@@ -418,7 +418,7 @@ namespace VoodooShader
         }
     }
 
-    _Check_return_ VOODOO_METHODDEF(VSCore::Bind)(_In_ CompilerProfile profile, _In_ uint32_t count, _In_ Variant * pParams)
+    _Check_return_ VOODOO_METHODDEF(VSCore::Bind)(_In_ CompilerProfile profile, _In_ uint32_t count, _In_reads_(count) Variant * pParams)
     {
         IPlugin * compiler = nullptr;
 
@@ -450,7 +450,10 @@ namespace VoodooShader
         IBinding * pBinding = nullptr;
         if (FAILED(pCompObj->QueryInterface(IID_IBinding, (IObject**)&pBinding)) || !pBinding)
         {
-            pBinding->Release();
+			if (pBinding)
+			{
+				pBinding->Release();
+			}
             return VSF_FAIL;
         }
 
@@ -518,7 +521,7 @@ namespace VoodooShader
         }
     }
 
-    VOODOO_METHODDEF(VSCore::CallEvent)(_In_ Uuid event, _In_ uint32_t count, _In_count_(count) Variant * pArgs)
+    VOODOO_METHODDEF(VSCore::CallEvent)(_In_ Uuid event, _In_ uint32_t count, _In_reads_opt_(count) Variant * pArgs)
     {
         try
         {
@@ -666,7 +669,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(const String & name, const TextureDesc pDesc)
+    ITexture * VOODOO_METHODTYPE VSCore::CreateTexture(_In_ CONST String & name, _In_ CONST TextureDesc pDesc)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -692,7 +695,7 @@ namespace VoodooShader
         }
     }
 
-    ITexture * VOODOO_METHODTYPE VSCore::LoadTexture(const String & name, IFile * pFile)
+    ITexture * VOODOO_METHODTYPE VSCore::LoadTexture(_In_ CONST String & name, _In_ IFile * pFile)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
         
@@ -719,7 +722,7 @@ namespace VoodooShader
         }
     }
 
-    IParameter * VOODOO_METHODTYPE VSCore::GetParameter(const String & name, const ParameterDesc desc) CONST
+    IParameter * VOODOO_METHODTYPE VSCore::GetParameter(_In_ CONST String & name, _In_ CONST ParameterDesc desc) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -746,7 +749,7 @@ namespace VoodooShader
         return param.get();
     }
 
-    ITexture * VOODOO_METHODTYPE VSCore::GetTexture(const String & name) CONST
+    ITexture * VOODOO_METHODTYPE VSCore::GetTexture(_In_ CONST String & name) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -771,7 +774,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSCore::RemoveParameter(const String & name)
+    VoodooResult VOODOO_METHODTYPE VSCore::RemoveParameter(_In_ CONST String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -791,7 +794,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSCore::RemoveTexture(const String & name)
+    VoodooResult VOODOO_METHODTYPE VSCore::RemoveTexture(_In_ CONST String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 

@@ -77,9 +77,9 @@ namespace VoodooShader
             VOODOO_METHOD_(String, ToString)() CONST;
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-            VOODOO_METHOD(AddPath)(_In_ const String & path, PathType type = VSPath_Directory);
-            VOODOO_METHOD(RemovePath)(_In_ const String & path);
-            VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, _In_ const GetFileMode mode) CONST;
+            VOODOO_METHOD(AddPath)(_In_ CONST String & path, _In_ CONST PathType type = VSPath_Directory);
+            VOODOO_METHOD(RemovePath)(_In_ CONST String & path);
+            VOODOO_METHOD_(IFile *, GetFile)(_In_ CONST String & name, _In_ CONST GetFileMode mode) CONST;
 
         private:
             mutable uint32_t m_Refs;
@@ -115,12 +115,12 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetPath)() CONST;
-            VOODOO_METHOD(Open)(_In_ FileOpenMode mode);
+            VOODOO_METHOD(Open)(_In_ CONST FileOpenMode mode);
             VOODOO_METHOD(Close)();
-            VOODOO_METHOD(Seek)(_In_ StreamType stream, _In_ SeekMode mode, _In_ int32_t offset);
-            VOODOO_METHOD_(int32_t, Tell)(_In_ StreamType stream);
-            VOODOO_METHOD_(int32_t, Read)(_In_ const int32_t count, _In_opt_bytecount_(count) void * pBuffer);
-            VOODOO_METHOD_(int32_t, Write)(_In_ const int32_t count, _In_opt_bytecount_(count) void * pBuffer);
+            VOODOO_METHOD(Seek)(_In_ CONST StreamType stream, _In_ CONST SeekMode mode, _In_ CONST int32_t offset);
+            VOODOO_METHOD_(int32_t, Tell)(_In_ CONST StreamType stream);
+            VOODOO_METHOD_(int32_t, Read)(_In_ CONST int32_t count, _In_opt_bytecount_(count) void * pBuffer);
+            VOODOO_METHOD_(int32_t, Write)(_In_ CONST int32_t count, _In_opt_bytecount_(count) void * pBuffer);
 
         private:
             mutable uint32_t m_Refs;

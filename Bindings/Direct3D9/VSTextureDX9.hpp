@@ -33,7 +33,7 @@ namespace VoodooShader
         {
         public:
             VSTextureDX9(_In_ VSBindingDX9 * pBinding);
-            VSTextureDX9(_In_ VSBindingDX9 * pBinding, _In_ String name, _In_ IDirect3DTexture9 * pTexture);
+            VSTextureDX9(_In_ VSBindingDX9 * pBinding, _In_ CONST String & name, _In_ IDirect3DTexture9 * pTexture);
             ~VSTextureDX9();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -43,15 +43,15 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(CONST Uuid propid, _In_ Variant * pValue);
+            VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
 
-            VOODOO_METHOD(Bind)(TextureMode mode, uint32_t index);
-            VOODOO_METHOD(Reset)(TextureMode mode);
+            VOODOO_METHOD(Bind)(_In_ CONST TextureMode mode, _In_ CONST uint32_t index);
+            VOODOO_METHOD(Reset)(_In_ CONST TextureMode mode);
 
             VOODOO_METHOD_(TextureDesc, GetDesc)() CONST;
-            VOODOO_METHOD(StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, CONST Rect dest);
-            VOODOO_METHOD(CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, CONST UInt3 dest);
+            VOODOO_METHOD(StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, _In_ CONST Rect dest);
+            VOODOO_METHOD(CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, _In_ CONST UInt3 dest);
 
         private:
             void GetTexDesc();

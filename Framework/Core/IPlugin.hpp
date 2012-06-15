@@ -59,7 +59,7 @@ namespace VoodooShader
          * @param   pCore   The core to use for initialization. May be used before, during, or after calling 
          *                  ICore::Initialize() (plugins must only call safe pre-init methods).
          */
-        VOODOO_METHOD_(_In_ CONST Version *, PluginInit)(_In_ ICore * pCore) CONST PURE;
+        VOODOO_METHOD_(CONST Version *, PluginInit)(_In_ ICore * pCore) CONST PURE;
         /**
          * Resets the plugin, unregistering any events and performing shutdown as needed.
          * 
@@ -80,7 +80,7 @@ namespace VoodooShader
          * @param   number  The class index in this plugin.
          * @param   pUuid   The destination Uuid buffer.
          */
-        VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ CONST uint32_t number, _Out_ Uuid * pUuid) CONST PURE;
+        VOODOO_METHOD_(CONST wchar_t *, ClassInfo)(_In_ CONST uint32_t number, _Out_ Uuid * pUuid) CONST PURE;
         /**
          * Creates an instance of the given class from the plugin. If the plugin does not provide a class with this index,
          * the call must return nullptr.

@@ -36,7 +36,7 @@ namespace VoodooShader
     static const wchar_t * name_VSEHHookManager = VSTR("VSEHHookManager");
     static const Uuid clsid_VSEHHookManager = CLSID_VSHookManager;
 
-    const Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore)
+    CONST Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore)
     {
         UNREFERENCED_PARAMETER(pCore);
 
@@ -48,12 +48,12 @@ namespace VoodooShader
         UNREFERENCED_PARAMETER(pCore);
     }
 
-    const uint32_t VOODOO_CALLTYPE API_ClassCount()
+    CONST uint32_t VOODOO_CALLTYPE API_ClassCount()
     {
         return 1;
     }
 
-    const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
+    CONST wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ CONST uint32_t index, _Out_ Uuid * pUuid)
     {
         if (!pUuid)
         {
@@ -70,7 +70,7 @@ namespace VoodooShader
         return nullptr;
     }
 
-    IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore)
+    IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ CONST uint32_t index, _In_ ICore * pCore)
     {
         if (index == 0)
         {

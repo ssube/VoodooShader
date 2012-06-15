@@ -44,8 +44,8 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(CONST Uuid propid, _In_ Variant * pValue);
+            VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
 
             VOODOO_METHOD_(uint32_t, GetPassCount)() CONST;
             VOODOO_METHOD_(IPass *, GetPass)(_In_ CONST uint32_t index) CONST;

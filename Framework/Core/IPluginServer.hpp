@@ -94,7 +94,7 @@ namespace VoodooShader
          *
          * @note This always uses the module's directory in the search path for required DLLs.
          */
-        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ CONST IFile * pFile) PURE;
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ IFile * pFile) PURE;
         VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST String & name) PURE;
         VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST Uuid libid) PURE;
         /**
@@ -164,7 +164,7 @@ namespace VoodooShader
          * @param name The class name or uuid to create.
          * @return New object or nullptr if the class wasn't found or couldn't be created.
          *
-         * @sa @ref String::String(const Uuid &) for String to Uuid conversion rules.
+         * @sa @ref String::String(CONST Uuid &) for String to Uuid conversion rules.
          */
         _Check_return_ VOODOO_METHOD_(IObject *, CreateObject)(_In_ ICore * pCore, _In_ CONST String & name) CONST PURE;
         /**

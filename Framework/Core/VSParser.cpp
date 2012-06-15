@@ -34,7 +34,7 @@ namespace VoodooShader
 
     VariableMap g_GlobalVariables;
 
-    IParser * VOODOO_CALLTYPE CreateParser()
+    _Check_return_ IParser * VOODOO_CALLTYPE CreateParser()
     {
         static VSParser * pParser = nullptr;
 
@@ -92,7 +92,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(Uuid refid, IObject ** ppOut)
+    VoodooResult VOODOO_METHODTYPE VSParser::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -139,7 +139,7 @@ namespace VoodooShader
         return nullptr;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSParser::Add(const String & name, const String & value, const VariableType type)
+    VoodooResult VOODOO_METHODTYPE VSParser::Add(_In_ CONST String & name, _In_ CONST String & value, _In_ CONST VariableType type)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -186,7 +186,7 @@ namespace VoodooShader
         }
     }
 
-    VoodooResult VOODOO_METHODTYPE VSParser::Remove(const String & name)
+    VoodooResult VOODOO_METHODTYPE VSParser::Remove(_In_ CONST String & name)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -211,7 +211,7 @@ namespace VoodooShader
         }
     }
 
-    String VOODOO_METHODTYPE VSParser::Parse(const String & input, const ParseFlags flags) CONST
+    String VOODOO_METHODTYPE VSParser::Parse(_In_ CONST String & input, _In_ CONST ParseFlags flags) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 
@@ -219,7 +219,7 @@ namespace VoodooShader
         return this->ParseStringRaw(input, flags, 0, parseState);
     }
 
-    String VSParser::ParseStringRaw(String input, ParseFlags flags, uint32_t depth, StringMap & state) CONST
+    String VSParser::ParseStringRaw(_In_ String input, _In_ ParseFlags flags, _In_ uint32_t depth, _In_ StringMap & state) CONST
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 

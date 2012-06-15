@@ -63,7 +63,7 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
         /**
          * @}
@@ -83,7 +83,7 @@ namespace VoodooShader
          *      passes have been used and reset, the effect must be reset. Failing to reset the effect may cause unwanted
          *      states for future draw calls.
          */
-        VOODOO_METHOD_(ITechnique *, Bind)(_In_ bool clean = true) PURE;
+        VOODOO_METHOD_(ITechnique *, Bind)(_In_ CONST bool clean = true) PURE;
         /**
          * Reset this effect, unbinding it from hardware and resetting states if needed.
          */

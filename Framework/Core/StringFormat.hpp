@@ -35,12 +35,12 @@ namespace VoodooShader
         class FormatImpl;
 
     public:
-        StringFormat(_In_ const wchar_t * fmt);
-        StringFormat(_In_ const String & fmt);
+        StringFormat(_In_z_ CONST wchar_t * fmt);
+        StringFormat(_In_ CONST String & fmt);
         ~StringFormat();
         
-        String ToString() const;
-        operator String() const
+        String ToString() CONST;
+        operator String() CONST
         {
             return this->ToString();
         }
@@ -72,41 +72,41 @@ namespace VoodooShader
         }
 #endif
 
-        StringFormat & operator<<(const Exception & val);
-        StringFormat & operator<<(const StringFormat & val);
-        StringFormat & operator<<(const Regex & val);
-        StringFormat & operator<<(const String & val);
+        StringFormat & operator<<(CONST Exception & val);
+        StringFormat & operator<<(CONST StringFormat & val);
+        StringFormat & operator<<(CONST Regex & val);
+        StringFormat & operator<<(CONST String & val);
 
-        StringFormat & operator<<(const ParameterDesc & val);
-        StringFormat & operator<<(const TextureDesc & val);
-        StringFormat & operator<<(const TextureRegion & val);
-        StringFormat & operator<<(const Uuid & val);
-        StringFormat & operator<<(const Variant & val);
-        StringFormat & operator<<(const Version & val);
+        StringFormat & operator<<(CONST ParameterDesc & val);
+        StringFormat & operator<<(CONST TextureDesc & val);
+        StringFormat & operator<<(CONST TextureRegion & val);
+        StringFormat & operator<<(CONST Uuid & val);
+        StringFormat & operator<<(CONST Variant & val);
+        StringFormat & operator<<(CONST Version & val);
 
         // Pointer overloads
-        StringFormat & operator<<(const void * val);
-        StringFormat & operator<<(const char * val);
-        StringFormat & operator<<(const wchar_t * val);
-        StringFormat & operator<<(const IObject * val);
+        StringFormat & operator<<(CONST void * val);
+        StringFormat & operator<<(CONST char * val);
+        StringFormat & operator<<(CONST wchar_t * val);
+        StringFormat & operator<<(CONST IObject * val);
 
         template<typename T>
-        StringFormat & operator<<(const Vector1<T> & val)
+        StringFormat & operator<<(CONST Vector1<T> & val)
         {
             this->operator<<(VSTR("[")) << val.X << VSTR("]");
         }
         template<typename T>
-        StringFormat & operator<<(const Vector2<T> & val)
+        StringFormat & operator<<(CONST Vector2<T> & val)
         {
             this->operator<<(VSTR("[")) << val.X << VSTR(", ") << val.Y << VSTR("]");
         }
         template<typename T>
-        StringFormat & operator<<(const Vector3<T> & val)
+        StringFormat & operator<<(CONST Vector3<T> & val)
         {
             this->operator<<(VSTR("[")) << val.X << VSTR(", ") << val.Y << VSTR(", ") << val.Z << VSTR("]");
         }
         template<typename T>
-        StringFormat & operator<<(const Vector4<T> & val)
+        StringFormat & operator<<(CONST Vector4<T> & val)
         {
             this->operator<<(VSTR("[")) << val.X << VSTR(", ") << val.Y << VSTR(", ") << val.Z << VSTR(", ") << val.W << VSTR("]");
         }

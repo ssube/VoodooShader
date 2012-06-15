@@ -42,7 +42,7 @@ namespace VoodooShader
         static const wchar_t * name_VSWFileSystem = VSTR("VSWFileSystem");
         static const Uuid clsid_VSWFileSystem = CLSID_VSWFileSystem;
 
-        const Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore)
+        CONST Version * VOODOO_CALLTYPE API_PluginInit(_In_ ICore * pCore)
         {
             UNREFERENCED_PARAMETER(pCore);
 
@@ -54,12 +54,12 @@ namespace VoodooShader
             UNREFERENCED_PARAMETER(pCore);
         }
 
-        const uint32_t VOODOO_CALLTYPE API_ClassCount()
+        CONST uint32_t VOODOO_CALLTYPE API_ClassCount()
         {
             return 1;
         }
 
-        const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ Uuid * pUuid)
+        CONST wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ CONST uint32_t index, _Out_ Uuid * pUuid)
         {
             if (!pUuid)
             {
@@ -76,7 +76,7 @@ namespace VoodooShader
             return nullptr;
         }
 
-        IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ ICore * pCore)
+        IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ CONST uint32_t index, _In_ ICore * pCore)
         {
             if (index == 0)
             {
@@ -134,12 +134,12 @@ namespace VoodooShader
             m_Directories.clear();
         }
 
-        uint32_t VSWFileSystem::AddRef() const
+        uint32_t VSWFileSystem::AddRef() CONST
         {
             return SAFE_INCREMENT(m_Refs);
         }
 
-        uint32_t VSWFileSystem::Release() const
+        uint32_t VSWFileSystem::Release() CONST
         {
             if (SAFE_DECREMENT(m_Refs) == 0)
             {
@@ -183,17 +183,17 @@ namespace VoodooShader
             }
         }
 
-        String VSWFileSystem::ToString() const
+        String VSWFileSystem::ToString() CONST
         {
             return VSTR("VSWFileSystem()");
         }
 
-        ICore * VSWFileSystem::GetCore() const
+        ICore * VSWFileSystem::GetCore() CONST
         {
             return m_Core;
         }
 
-        VoodooResult VSWFileSystem::AddPath(_In_ const String & name, PathType type)
+        VoodooResult VSWFileSystem::AddPath(_In_ CONST String & name, _In_ PathType type)
         {
             if (type != VSPath_Directory) return VSFERR_INVALIDPARAMS;
 
@@ -209,7 +209,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VoodooResult VSWFileSystem::RemovePath(_In_ const String & name)
+        VoodooResult VSWFileSystem::RemovePath(_In_ CONST String & name)
         {
             this->m_Directories.remove_if
             (
@@ -222,7 +222,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        IFile * VSWFileSystem::GetFile(_In_ const String & name, _In_ const GetFileMode mode) const
+        IFile * VSWFileSystem::GetFile(_In_ CONST String & name, _In_ CONST GetFileMode mode) CONST
         {
             m_Core->GetLogger()->LogMessage
             (

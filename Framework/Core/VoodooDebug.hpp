@@ -29,7 +29,7 @@
  */
 #if defined(VOODOO_DEBUG)
 #   define VOODOO_DEBUG_BREAK   DebugBreak()
-#   define VOODOO_CHECK_IMPL    if (!m_Impl) { Throw(VSTR("Extended Debug"), VSTR("String has no impl."), nullptr); }
+#   define VOODOO_CHECK_IMPL    if (!m_Impl) { Throw(VSTR("Extended Debug"), VSTR("Object has no implementation instance."), nullptr); }
 #   define SAFE_INCREMENT(x)    InterlockedIncrement(&x)
 #   define SAFE_DECREMENT(x)    InterlockedDecrement(&x)
 #else

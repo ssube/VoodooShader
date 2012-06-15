@@ -199,6 +199,8 @@ inline static bool WINAPI GetVoodooBinPrefix(_Out_writes_(MAX_PATH) TCHAR * pBuf
 {
     if (!pBuffer) return false;
 
+	ZeroMemory(pBuffer, MAX_PATH * sizeof(TCHAR));
+
     HKEY root = GetVoodooKey();
     if (root)
     {

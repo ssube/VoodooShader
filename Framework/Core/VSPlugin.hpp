@@ -29,7 +29,7 @@ namespace VoodooShader
     VOODOO_CLASS(VSPlugin, IPlugin, ({0x9F, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
     {
     public:
-        static VSPlugin * Load(_In_ IPluginServer * pServer, _In_ const String & path);
+        static VSPlugin * Load(_In_ IPluginServer * pServer, _In_ CONST String & path);
 
         VSPlugin(_In_ IPluginServer * pServer, _In_ HMODULE hmodule);
 
@@ -39,15 +39,16 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD_(const Version *, PluginInit)(_In_ ICore * pCore) CONST;        VOODOO_METHOD_(void, PluginReset)(_In_ ICore * pCore) CONST;
+        VOODOO_METHOD_(CONST Version *, PluginInit)(_In_ ICore * pCore) CONST;
+        VOODOO_METHOD_(void, PluginReset)(_In_ ICore * pCore) CONST;
         VOODOO_METHOD_(uint32_t, ClassCount)() CONST;
-        VOODOO_METHOD_(const wchar_t *, ClassInfo)(_In_ const uint32_t number, _Out_ Uuid * pUuid) CONST;
-        VOODOO_METHOD_(IObject *, CreateClass)(_In_ const uint32_t number, _In_ ICore * pCore) CONST;
+        VOODOO_METHOD_(CONST wchar_t *, ClassInfo)(_In_ CONST uint32_t number, _Out_ Uuid * pUuid) CONST;
+        VOODOO_METHOD_(IObject *, CreateClass)(_In_ CONST uint32_t number, _In_ ICore * pCore) CONST;
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSPlugin(const VSPlugin & other);
-        VSPlugin & operator=(const VSPlugin & other);
+        VSPlugin(CONST VSPlugin & other);
+        VSPlugin & operator=(CONST VSPlugin & other);
         ~VSPlugin();
 
         mutable uint32_t m_Refs;

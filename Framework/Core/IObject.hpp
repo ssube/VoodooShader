@@ -61,7 +61,7 @@ namespace VoodooShader
          * @param   refid   IID of the interface desired.
          * @param   ppOut   A pointer to the new interface, passed as <code>void**</code>.
          */
-        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_ IObject ** ppOut) PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
         /**
          * Get a string identifying this object. This must follow the form given in @ref voodoo_spec_iobject_tostring.
          *

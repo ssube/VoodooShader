@@ -120,7 +120,7 @@ namespace VoodooShader
             return m_Core;
         }
 
-        VOODOO_METHODDEF(VSBindingDX9::Init)(uint32_t count, _In_count_(count) Variant * pParams)
+        VOODOO_METHODDEF(VSBindingDX9::Init)(_In_ uint32_t count, _In_reads_(count) Variant * pParams)
         {
             if (count != 1 || !pParams)
             {
@@ -151,7 +151,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        VOODOO_METHODDEF_(IEffect *, VSBindingDX9::CreateEffect)(CONST String & source)
+        VOODOO_METHODDEF_(IEffect *, VSBindingDX9::CreateEffect)(_In_ CONST String & source)
         {
             if (!m_Device)
             {
@@ -177,7 +177,7 @@ namespace VoodooShader
             return pEffect;
         }
 
-        VOODOO_METHODDEF_(IEffect *, VSBindingDX9::CreateEffectFromFile)(CONST IFile * pFile)
+        VOODOO_METHODDEF_(IEffect *, VSBindingDX9::CreateEffectFromFile)(_In_ CONST IFile * pFile)
         {
             if (!m_Device)
             {
@@ -203,7 +203,7 @@ namespace VoodooShader
             return pEffect;
         }
 
-        VOODOO_METHODDEF_(IParameter *, VSBindingDX9::CreateParameter)(CONST String & name, ParameterDesc desc)
+        VOODOO_METHODDEF_(IParameter *, VSBindingDX9::CreateParameter)(_In_ CONST String & name, _In_ ParameterDesc desc)
         {
             IParameter * pParam = new VSParameterDX9(this, name, desc);
             return pParam;
@@ -218,7 +218,7 @@ namespace VoodooShader
             ((D3DFORMAT)0)
         };
 
-        VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTexture)(CONST String & name, TextureDesc desc)
+        VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTexture)(_In_ CONST String & name, _In_ TextureDesc desc)
         {
             if (!m_Device)
             {
@@ -273,7 +273,7 @@ namespace VoodooShader
             return pTexture;
         }
 
-        LPDIRECT3DTEXTURE9 VSBindingDX9::Impl_CreateTexture(TextureDesc & desc, DWORD usage, D3DFORMAT format)
+        LPDIRECT3DTEXTURE9 VSBindingDX9::Impl_CreateTexture(_In_ TextureDesc & desc, _In_ DWORD usage, _In_ D3DFORMAT format)
         {
             LPDIRECT3DTEXTURE9 texture = nullptr;
             HRESULT hr = m_Device->CreateTexture(desc.Size.X, desc.Size.Y, desc.Levels, 
@@ -288,7 +288,7 @@ namespace VoodooShader
             }
         }
 
-        VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTextureFromFile)(CONST String & name, _In_ IFile * pFile)
+        VOODOO_METHODDEF_(ITexture *, VSBindingDX9::CreateTextureFromFile)(_In_ CONST String & name, _In_ IFile * pFile)
         {
             if (!pFile || !m_Device) // || !m_ILUT)
             {

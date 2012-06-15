@@ -158,13 +158,13 @@ namespace VoodooShader
          *
          * @note If the time cannot be retrieved or formatted, <code>Unknown Time</code> will be returned.
          */
-        static String Time(time_t * pTime = nullptr);
+        static String Time(_In_opt_ time_t * pTime = nullptr);
         /**
          * Formats a date as <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present.
          *
          * @note If the time cannot be retrieved or formatted, <code>Unknown Date</code> will be returned.
          */
-        static String Date(time_t * pTime = nullptr);
+        static String Date(_In_opt_ time_t * pTime = nullptr);
         /**
          * Formats the system's current tick count, with a varying length. This records ms since system start (not useful
          * for global timing, but holds enough precision to order events).
@@ -180,12 +180,12 @@ namespace VoodooShader
          */
         String & Append(_In_ CONST wchar_t ch);
         String & Append(_In_ CONST uint32_t size, _In_ CONST wchar_t ch);
-        String & Append(_In_ CONST wchar_t * str);
+        String & Append(_In_z_ CONST wchar_t * str);
         String & Append(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str);
         String & Append(_In_ CONST String & str);
         String & Assign(_In_ CONST wchar_t ch);
         String & Assign(_In_ CONST uint32_t size, _In_ CONST wchar_t ch);
-        String & Assign(_In_ CONST wchar_t * str);
+        String & Assign(_In_z_ CONST wchar_t * str);
         String & Assign(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str);
         String & Assign(_In_ CONST String & str);
         String & Clear();
@@ -224,9 +224,9 @@ namespace VoodooShader
         (
             _In_ CONST String & delims, 
             _In_ CONST uint32_t count, 
-            _In_reads_opt_(count) String * pStrings, 
+            _Out_writes_opt_(count) String * pStrings, 
             _In_ bool stripEmpty = false
-        ) const;
+        ) CONST;
         /**
          * Attempts to convert this String to a Uuid. The string must be of one of the following forms:
          * @li <code>{01234567-89ab-cdef-0123-456789abcdef}</code>
@@ -251,7 +251,7 @@ namespace VoodooShader
          * @param pBuffer Buffer to write converted string to.
          * @return Necessary buffer size or bytes converted.
          */
-        int32_t ToChars(_In_ int32_t size, _Inout_updates_opt_(size) char * pBuffer) CONST;
+        int32_t ToChars(_In_ int32_t size, _Out_writes_opt_(size) char * pBuffer) CONST;
 #if defined(_STRING_)
         /**
          * Creates a std::wstring from this string.
@@ -310,18 +310,18 @@ namespace VoodooShader
          * @name String Find and Replace
          * @{
          */
-        uint32_t Find(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
-        uint32_t Find(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
-        uint32_t Find(_In_ CONST String & str, _In_ bool useCase = true) CONST;
-        uint32_t ReverseFind(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
-        uint32_t ReverseFind(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
-        uint32_t ReverseFind(_In_ CONST String & str, _In_ bool useCase = true) CONST;
-        String & Replace(_In_ CONST wchar_t fch, _In_ const wchar_t rch, _In_ bool useCase = true);
-        String & Replace(_In_z_ CONST wchar_t * fstr, _In_z_ const wchar_t * rstr, _In_ bool useCase = true);
-        String & Replace(_In_ CONST String & fstr, _In_ const String & rstr, _In_ bool caseSensitive = true);
-        String & Remove(_In_ CONST wchar_t fch, _In_ bool useCase = true);
-        String & Remove(_In_z_ CONST wchar_t * fstr, _In_ bool useCase = true);
-        String & Remove(_In_ CONST String & fstr, _In_ bool useCase = true);
+        uint32_t Find(_In_ CONST wchar_t ch, _In_ CONST bool useCase = true) CONST;
+        uint32_t Find(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase = true) CONST;
+        uint32_t Find(_In_ CONST String & str, _In_ CONST bool useCase = true) CONST;
+        uint32_t ReverseFind(_In_ CONST wchar_t ch, _In_ CONST bool useCase = true) CONST;
+        uint32_t ReverseFind(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase = true) CONST;
+        uint32_t ReverseFind(_In_ CONST String & str, _In_ CONST bool useCase = true) CONST;
+        String & Replace(_In_ CONST wchar_t fch, _In_ CONST wchar_t rch, _In_ CONST bool useCase = true);
+        String & Replace(_In_z_ CONST wchar_t * fstr, _In_z_ CONST wchar_t * rstr, _In_ CONST bool useCase = true);
+        String & Replace(_In_ CONST String & fstr, _In_ CONST String & rstr, _In_ CONST bool useCase = true);
+        String & Remove(_In_ CONST wchar_t fch, _In_ CONST bool useCase = true);
+        String & Remove(_In_z_ CONST wchar_t * fstr, _In_ CONST bool useCase = true);
+        String & Remove(_In_ CONST String & fstr, _In_ CONST bool useCase = true);
         /**
          * @}
          * @name Data Access Methods
@@ -340,29 +340,29 @@ namespace VoodooShader
          *
          * @param size Characters to reserve.
          */
-        void Reserve(uint32_t size);
+        void Reserve(_In_ CONST uint32_t size);
         /**
          * Get a single character from the string.
          * @param pos Position to retrieve.
          */
-        wchar_t GetAt(_In_ uint32_t pos) CONST;
+        wchar_t GetAt(_In_ CONST uint32_t pos) CONST;
         /**
          * Sets a single character in the string.
          * @param pos Position to assign.
          * @param data Character to assign.
          */
-        void SetAt(_In_ uint32_t pos, _In_ wchar_t data);
+        void SetAt(_In_ CONST uint32_t pos, _In_ CONST wchar_t data);
         /**
          * Get a reference to a character in the string, allowing it to be changed.
          * @param pos Position to retrieve.
          */
-        wchar_t & operator[](_In_ uint32_t pos);
+        wchar_t & operator[](_In_ CONST uint32_t pos);
         /**
          * Get a pointer to the data of the string, often for use as a LPWSTR.
          *
          * @warning The C-string returned may be read-only, attempting to write is undefined.
          */
-        const wchar_t * GetData() CONST;
+        CONST wchar_t * GetData() CONST;
         /**
          * @}
          * @name Assignment and Concatenation Operators
@@ -398,19 +398,19 @@ namespace VoodooShader
             this->Append(str);
             return (*this);
         };
-        inline const String operator+(_In_ CONST wchar_t ch) CONST
+        inline CONST String operator+(_In_ CONST wchar_t ch) CONST
         {
             String c = (*this);
             c += ch;
             return c;
         };
-        inline const String operator+(_In_z_ CONST wchar_t * str) CONST
+        inline CONST String operator+(_In_z_ CONST wchar_t * str) CONST
         {
             String c = (*this);
             c += str;
             return c;
         };
-        inline const String operator+(_In_ CONST String & str) CONST
+        inline CONST String operator+(_In_ CONST String & str) CONST
         {
             String c = (*this);
             c += str;

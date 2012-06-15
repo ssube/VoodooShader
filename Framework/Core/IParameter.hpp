@@ -52,7 +52,7 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
         /**
          * @}
@@ -78,7 +78,7 @@ namespace VoodooShader
         VOODOO_METHOD(SetFloat)(_In_ CONST float val) PURE;
         VOODOO_METHOD(SetInt)(_In_ CONST int32_t val) PURE;
         VOODOO_METHOD(SetString)(_In_ CONST String & val) PURE;
-        VOODOO_METHOD(SetTexture)(_In_ CONST ITexture * pVal) PURE;
+        VOODOO_METHOD(SetTexture)(_In_ ITexture * pVal) PURE;
         VOODOO_METHOD(SetVector)(_In_ CONST Float4 val) PURE;
         /**
          * @}
@@ -90,7 +90,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(bool, IsVirtual)() CONST PURE;
         /**
-         * Attaches a second parameter to this one, forcing the other to update whenever this value is changed.
+         * Attaches another parameter to this one, forcing the other to be updated whenever this parameter changes value.
          *
          * @param pParam The parameter to bind to this one.
          *
@@ -98,14 +98,14 @@ namespace VoodooShader
          *     parameters to virtual parameters.
          *
          */
-        VOODOO_METHOD(AttachParameter)(_In_opt_ IParameter * pParam) PURE;
+        VOODOO_METHOD(AttachParameter)(_In_ IParameter * pParam) PURE;
         /**
          * Detaches a parameter from this one.
          *
          * @warning If called on a parameter that has other parameters bound to it (a source), it will disconnect all of
          *      those. This breaks connections from either end, source or bound.
          */
-        VOODOO_METHOD(DetachParameter)(_In_opt_ IParameter * pParam) PURE;
+        VOODOO_METHOD(DetachParameter)(_In_ IParameter * pParam) PURE;
         /**
          * @}
          */

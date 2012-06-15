@@ -87,7 +87,7 @@ namespace VoodooShader
          *      depth buffer. For this to work, the texture must be a depth format (VSFmt_D16, VSFmt_D24, VSFmt_D24S8,
          *      VSFmt_D32, or VSFmt_DMax). In some cases, these textures may also be bound as VSTexMode_Source.
          */
-        VOODOO_METHOD(Bind)(_In_ TextureMode mode, _In_ uint32_t index);
+        VOODOO_METHOD(Bind)(_In_ CONST TextureMode mode, _In_ CONST uint32_t index);
         /**
          * Unbinds this texture from the render target, reseting the texture previously bound to that source or target.
          * 
@@ -95,7 +95,7 @@ namespace VoodooShader
          *                  is possible to reset them separately.
          * @note This must only be called after ITexture::Bind, and will reset the value displaced by that call.
          */
-        VOODOO_METHOD(Reset)(_In_ TextureMode mode);
+        VOODOO_METHOD(Reset)(_In_ CONST TextureMode mode);
         /**
          * Copies a 1 or 2D region of texture data from another texture. 
          * 

@@ -43,10 +43,10 @@ namespace VoodooShader
 extern VoodooShader::CoreRef gpVoodooCore;
 extern VoodooShader::LoggerRef gpVoodooLogger;
 
-const VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(_In_ VoodooShader::ICore * pCore);
-const uint32_t VOODOO_CALLTYPE API_ClassCount();
-const wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ const uint32_t index, _Out_ VoodooShader::Uuid * refid);
-VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ const uint32_t index, _In_ VoodooShader::ICore * pCore);
+CONST VoodooShader::Version * VOODOO_CALLTYPE API_PluginInit(_In_ VoodooShader::ICore * pCore);
+CONST uint32_t VOODOO_CALLTYPE API_ClassCount();
+CONST wchar_t * VOODOO_CALLTYPE API_ClassInfo(_In_ CONST uint32_t index, _Out_ VoodooShader::Uuid * refid);
+VoodooShader::IObject * VOODOO_CALLTYPE API_ClassCreate(_In_ CONST uint32_t index, _In_ VoodooShader::ICore * pCore);
 
 bool WINAPI InstallDllHook(LPTSTR name, LPCSTR symbol, LPVOID pDest);
 int WINAPI InstallKnownHooks();

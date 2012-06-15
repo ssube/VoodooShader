@@ -57,7 +57,7 @@ namespace VoodooShader
          * @{
          */
         VOODOO_METHOD_(String, GetName)() CONST;
-        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
+        VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST;
         VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
         /**
          * @}
@@ -96,7 +96,7 @@ namespace VoodooShader
          * @param   index       The target index.
          * @param   pTarget     The target texture.
          */
-        VOODOO_METHOD(SetTarget)(_In_ CONST uint32_t index,_In_  ITexture * pTarget) PURE;
+        VOODOO_METHOD(SetTarget)(_In_ CONST uint32_t index, _In_ ITexture * pTarget) PURE;
         /**
          * Retrieve a specific shader stage from this pass.
          *

@@ -64,7 +64,7 @@ namespace VoodooShader
         m_Impl = new RegexImpl();
     }
 
-    Regex::Regex(const String & expr)
+    Regex::Regex(CONST String & expr)
     {
         m_Impl = new RegexImpl(expr);
     }
@@ -75,21 +75,21 @@ namespace VoodooShader
         m_Impl = nullptr;
     }
 
-    void Regex::SetExpr(const String & expr)
+    void Regex::SetExpr(CONST String & expr)
     {
         VOODOO_CHECK_IMPL;
 
         m_Impl->m_Regex.set_expression(expr.ToString());
     }
 
-    String Regex::GetExpr() const
+    String Regex::GetExpr() CONST
     {
         VOODOO_CHECK_IMPL;
 
         return String(m_Impl->m_Regex.str());
     }
 
-    RegexMatch Regex::Match(const String & string) const
+    RegexMatch Regex::Match(CONST String & string) CONST
     {
         VOODOO_CHECK_IMPL;
 
@@ -104,14 +104,14 @@ namespace VoodooShader
         return match;
     }
 
-    bool Regex::Find(const String & find) const
+    bool Regex::Find(CONST String & find) CONST
     {
         VOODOO_CHECK_IMPL;
 
         return boost::regex_search(find.ToString(), m_Impl->m_Regex);
     }
 
-    String Regex::Replace(const String & find, const String & replace) const
+    String Regex::Replace(CONST String & find, CONST String & replace) CONST
     {
         VOODOO_CHECK_IMPL;
 
@@ -123,7 +123,7 @@ namespace VoodooShader
         m_Impl = new RegexMatchImpl();
     }
 
-    RegexMatch::RegexMatch(const RegexMatch & other)
+    RegexMatch::RegexMatch(CONST RegexMatch & other)
     {
         m_Impl = new RegexMatchImpl(other.m_Impl->m_Match);
     }
@@ -134,28 +134,28 @@ namespace VoodooShader
         m_Impl = nullptr;
     }
 
-    int32_t RegexMatch::GetCount() const
+    int32_t RegexMatch::GetCount() CONST
     {
         VOODOO_CHECK_IMPL;
 
         return (int32_t)m_Impl->m_Match.size();
     }
 
-    bool RegexMatch::IsEmpty() const
+    bool RegexMatch::IsEmpty() CONST
     {
         VOODOO_CHECK_IMPL;
 
         return m_Impl->m_Match.empty();
     }
 
-    String RegexMatch::GetMatch(int32_t index) const
+    String RegexMatch::GetMatch(int32_t index) CONST
     {
         VOODOO_CHECK_IMPL;
 
         return m_Impl->m_Match[index];
     }
 
-    String RegexMatch::Format(const String & fmt) const
+    String RegexMatch::Format(CONST String & fmt) CONST
     {
         VOODOO_CHECK_IMPL;
 

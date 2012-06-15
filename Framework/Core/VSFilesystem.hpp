@@ -47,14 +47,14 @@ namespace VoodooShader
         VOODOO_METHOD_(String, ToString)() CONST;
         VOODOO_METHOD_(ICore *, GetCore)() CONST;
 
-        VOODOO_METHOD(AddPath)(_In_ const String & path, PathType type);
-        VOODOO_METHOD(RemovePath)(_In_ const String & path);
-        VOODOO_METHOD_(IFile *, GetFile)(_In_ const String & name, const GetFileMode mode) CONST;
+        VOODOO_METHOD(AddPath)(_In_ CONST String & path, _In_ CONST PathType type);
+        VOODOO_METHOD(RemovePath)(_In_ CONST String & path);
+        VOODOO_METHOD_(IFile *, GetFile)(_In_ CONST String & name, _In_ CONST GetFileMode mode) CONST;
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSFileSystem(const VSFileSystem & other);
-        VSFileSystem & operator=(const VSFileSystem & other);
+        VSFileSystem(CONST VSFileSystem & other);
+        VSFileSystem & operator=(CONST VSFileSystem & other);
         ~VSFileSystem();
 
         mutable uint32_t m_Refs;

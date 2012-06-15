@@ -38,7 +38,7 @@ namespace VoodooShader
 
         }
 
-        VSTextureDX9::VSTextureDX9(_In_ VSBindingDX9 * pBinding, String name, IDirect3DTexture9 * pTexture) :
+        VSTextureDX9::VSTextureDX9(_In_ VSBindingDX9 * pBinding, _In_ CONST String & name, _In_ IDirect3DTexture9 * pTexture) :
             m_Refs(0), m_Binding(pBinding), m_Name(name), m_DXTexture(pTexture), m_DXSurface(nullptr), 
             m_BoundSourceSlot(VOODOO_TEXTURE_INVALID), m_BoundTargetSlot(VOODOO_TEXTURE_INVALID)
         {
@@ -130,7 +130,7 @@ namespace VoodooShader
             return m_Name;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTextureDX9::GetProperty(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSTextureDX9::GetProperty(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST
         {
             if (!pValue) return VSFERR_INVALIDPARAMS;
 
@@ -149,10 +149,11 @@ namespace VoodooShader
                 return VSF_OK;
             }
 
+			*pValue = CreateVariant();
             return VSFERR_INVALIDPARAMS;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTextureDX9::SetProperty(CONST Uuid propid, _In_ Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE VSTextureDX9::SetProperty(_In_ CONST Uuid propid, _In_ Variant * pValue)
         {
             UNREFERENCED_PARAMETER(propid);
 
@@ -161,7 +162,7 @@ namespace VoodooShader
             return VSFERR_INVALIDCALL;
         }
 
-        VOODOO_METHODDEF(VSTextureDX9::Bind)(TextureMode mode, uint32_t index)
+        VOODOO_METHODDEF(VSTextureDX9::Bind)(_In_ TextureMode mode, _In_ uint32_t index)
         {
             if (mode == VSTexMode_Source)
             {
@@ -219,7 +220,7 @@ namespace VoodooShader
             }
         }
 
-        VOODOO_METHODDEF(VSTextureDX9::Reset)(TextureMode mode)
+        VOODOO_METHODDEF(VSTextureDX9::Reset)(_In_ TextureMode mode)
         {
             if (mode == VSTexMode_Source)
             {
@@ -298,7 +299,7 @@ namespace VoodooShader
             }
         }
 
-        VOODOO_METHODDEF(VSTextureDX9::StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, CONST Rect dest)
+        VOODOO_METHODDEF(VSTextureDX9::StretchRect)(_In_ ITexture * pSource, _In_ CONST Rect source, _In_ CONST Rect dest)
         {
             if (!pSource) return VSFERR_INVALIDPARAMS;
 
@@ -342,7 +343,7 @@ namespace VoodooShader
             }
         }
 
-        VOODOO_METHODDEF(VSTextureDX9::CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, CONST UInt3 dest)
+        VOODOO_METHODDEF(VSTextureDX9::CopyVolume)(_In_ ITexture * pSource, _In_ CONST Box source, _In_ CONST UInt3 dest)
         {
             UNREFERENCED_PARAMETER(pSource);
             UNREFERENCED_PARAMETER(source);

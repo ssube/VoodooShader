@@ -190,7 +190,7 @@ namespace VoodooShader
             return VSTR("Unnamed");
         }
 
-        VoodooResult VOODOO_METHODTYPE VSEffectDX9::GetProperty(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST
+        VoodooResult VOODOO_METHODTYPE VSEffectDX9::GetProperty(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST
         {
             if (!pValue) VSFERR_INVALIDPARAMS;
 
@@ -208,12 +208,16 @@ namespace VoodooShader
                     CopyMemory(pValue, &property->second, sizeof(Variant));
                     return VSF_OK;
                 }
+				else
+				{
+					*pValue = CreateVariant();
+				}
             }
 
             return VSFERR_INVALIDCALL;
         }
 
-        VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetProperty(CONST Uuid propid, _In_ Variant * pValue)
+        VoodooResult VOODOO_METHODTYPE VSEffectDX9::SetProperty(_In_ CONST Uuid propid, _In_ Variant * pValue)
         {
             if (propid == PropIds::D3DX9Effect)
             {
@@ -224,7 +228,7 @@ namespace VoodooShader
             return VSF_OK;
         }
 
-        ITechnique * VOODOO_METHODTYPE VSEffectDX9::Bind(bool clean)
+        ITechnique * VOODOO_METHODTYPE VSEffectDX9::Bind(_In_ CONST bool clean)
         {
             if (m_Binding->m_BoundEffect && m_Binding->m_BoundEffect != this) return nullptr;
 
@@ -286,7 +290,7 @@ namespace VoodooShader
             }
         }
 
-        ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetTechniqueByName(CONST String & name) CONST
+        ITechnique * VOODOO_METHODTYPE VSEffectDX9::GetTechniqueByName(_In_ CONST String & name) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
             TechniqueVector::const_iterator tech = m_Techniques.begin();
@@ -366,7 +370,7 @@ namespace VoodooShader
             }
         }
 
-        IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameterByName(CONST String & name) CONST
+        IParameter * VOODOO_METHODTYPE VSEffectDX9::GetParameterByName(_In_ CONST String & name) CONST
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
 

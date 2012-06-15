@@ -81,7 +81,7 @@ namespace VoodooShader
         m_Impl = new StringImpl(size, wch);
     }
 
-    String::String(_In_ CONST uint32_t size, _In_z_count_(size) CONST char * str) :
+    String::String(_In_ CONST uint32_t size, _In_reads_z_(size) CONST char * str) :
         m_Impl(nullptr)
     {
         this->CInit(size, str);
@@ -102,7 +102,7 @@ namespace VoodooShader
     {
     }
 
-    String::String(_In_ CONST uint32_t size, _In_z_count_c_(size) CONST wchar_t * str) :
+    String::String(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str) :
         m_Impl(new StringImpl(size, str))
     {
     }
@@ -120,7 +120,7 @@ namespace VoodooShader
         }
     }
 
-    String::String(_In_ const Uuid & uuid) :
+    String::String(_In_ CONST Uuid & uuid) :
         m_Impl(new StringImpl(boost::uuids::to_wstring(uuid)))
     {
     }
@@ -131,7 +131,7 @@ namespace VoodooShader
         m_Impl = nullptr;
     }
 
-    void String::CInit(_In_ CONST uint32_t size, _In_z_count_c_(size) const char * str)
+    void String::CInit(_In_ CONST uint32_t size, _In_z_count_(size) CONST char * str)
     {
         if (m_Impl) delete m_Impl;
 
@@ -163,7 +163,7 @@ namespace VoodooShader
         }
     }
 
-    void String::WInit(_In_ CONST uint32_t size, _In_z_count_c_(size) CONST wchar_t * str)
+    void String::WInit(_In_ CONST uint32_t size, _In_z_count_(size) CONST wchar_t * str)
     {
         if (m_Impl) delete m_Impl;
 
@@ -203,7 +203,7 @@ namespace VoodooShader
         }
     }
 
-    int32_t String::ToChars(_In_ int32_t size, _Inout_opt_count_(size) char * pBuffer) const
+    int32_t String::ToChars(_In_ CONST int32_t size, _Out_writes_opt_(size) char * pBuffer) CONST
     {
         VOODOO_CHECK_IMPL;
         return WideCharToMultiByte(CP_UTF8, NULL, m_Impl->m_Str.c_str(), -1, pBuffer, size, NULL, NULL);
@@ -230,7 +230,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Append(_In_ CONST uint32_t size, _In_z_count_(size) CONST wchar_t * str)
+    String & String::Append(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.append(str, size);
@@ -251,28 +251,28 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Assign(const uint32_t size, const wchar_t ch)
+    String & String::Assign(_In_ CONST uint32_t size, _In_ CONST wchar_t ch)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.assign(size, ch);
         return (*this);
     }
 
-    String & String::Assign(const wchar_t * str)
+    String & String::Assign(_In_z_ CONST wchar_t * str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.assign(str);
         return (*this);
     }
 
-    String & String::Assign(const uint32_t size, const wchar_t * str)
+    String & String::Assign(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.assign(str, size);
         return (*this);
     }
 
-    String & String::Assign(const String & str)
+    String & String::Assign(_In_ CONST String & str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.assign(str.m_Impl->m_Str);
@@ -286,35 +286,35 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Prepend(const wchar_t ch)
+    String & String::Prepend(_In_ CONST wchar_t ch)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str = std::wstring(1, ch) + m_Impl->m_Str;
         return (*this);
     }
 
-    String & String::Prepend(const uint32_t size, const wchar_t ch)
+    String & String::Prepend(_In_ CONST uint32_t size, _In_ CONST wchar_t ch)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str = std::wstring(size, ch) + m_Impl->m_Str;
         return (*this);
     }
 
-    String & String::Prepend(const wchar_t * str)
+    String & String::Prepend(_In_z_ CONST wchar_t * str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str = std::wstring(str) + m_Impl->m_Str;
         return (*this);
     }
 
-    String & String::Prepend(const uint32_t size, const wchar_t * str)
+    String & String::Prepend(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str = std::wstring(str, size) + m_Impl->m_Str;
         return (*this);
     }
 
-    String & String::Prepend(const String & str)
+    String & String::Prepend(_In_ CONST String & str)
     {
         VOODOO_CHECK_IMPL;
         if (str.m_Impl)
@@ -324,20 +324,20 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Truncate(uint32_t size)
+    String & String::Truncate(_In_ CONST uint32_t size)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str = m_Impl->m_Str.substr(size);
         return (*this);
     }
 
-    void String::Reserve(uint32_t size)
+    void String::Reserve(_In_ CONST uint32_t size)
     {
         VOODOO_CHECK_IMPL;
         m_Impl->m_Str.reserve(size);
     }
 
-    uint32_t String::Split(const String & delims, const uint32_t count, String * pStrings, bool stripEmpty) const
+    uint32_t String::Split(_In_ CONST String & delims, _In_ CONST uint32_t count, _Out_writes_opt_(count) String * pStrings, _In_ CONST bool stripEmpty) CONST
     {
         VOODOO_CHECK_IMPL;
 
@@ -376,19 +376,19 @@ namespace VoodooShader
         }
     }
 
-    String String::ToLower() const
+    String String::ToLower() CONST
     {
         VOODOO_CHECK_IMPL;
         return String(boost::to_lower_copy(m_Impl->m_Str));
     }
 
-    String String::ToUpper() const
+    String String::ToUpper() CONST
     {
         VOODOO_CHECK_IMPL;
         return String(boost::to_upper_copy(m_Impl->m_Str));
     }
 
-    String String::Left(uint32_t count) const
+    String String::Left(_In_ uint32_t count) CONST
     {
         VOODOO_CHECK_IMPL;
         if (count == String::Npos)
@@ -401,13 +401,13 @@ namespace VoodooShader
         }
     }
 
-    String String::Right(uint32_t count) const
+    String String::Right(_In_ uint32_t count) CONST
     {
         VOODOO_CHECK_IMPL;
         return String(m_Impl->m_Str.substr(max(this->GetLength() - count, 0), count));
     }
 
-    String String::Substr(uint32_t start, uint32_t count) const
+    String String::Substr(_In_ uint32_t start, _In_ uint32_t count) CONST
     {
         VOODOO_CHECK_IMPL;
         if (count == String::Npos)
@@ -420,7 +420,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::Compare(const wchar_t ch, bool useCase) const
+    bool String::Compare(_In_ CONST wchar_t ch, _In_ bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -433,7 +433,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::Compare(const wchar_t * str, bool useCase) const
+    bool String::Compare(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -446,7 +446,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::Compare(const String & str, bool useCase) const
+    bool String::Compare(_In_ CONST String & str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -459,7 +459,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::StartsWith(const wchar_t ch, bool useCase) const
+    bool String::StartsWith(_In_ CONST wchar_t ch, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -472,7 +472,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::StartsWith(const wchar_t * str, bool useCase) const
+    bool String::StartsWith(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -485,7 +485,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::StartsWith(const String & str, bool useCase) const
+    bool String::StartsWith(_In_ CONST String & str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -498,7 +498,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::EndsWith(const wchar_t ch, bool useCase) const
+    bool String::EndsWith(_In_ CONST wchar_t ch, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -511,7 +511,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::EndsWith(const wchar_t * str, bool useCase) const
+    bool String::EndsWith(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -524,7 +524,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::EndsWith(const String & str, bool useCase) const
+    bool String::EndsWith(_In_ CONST String & str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -537,7 +537,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::Contains(const wchar_t ch, bool useCase) const
+    bool String::Contains(_In_ CONST wchar_t ch, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -550,7 +550,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::Contains(const wchar_t * str, bool useCase) const
+    bool String::Contains(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -563,7 +563,7 @@ namespace VoodooShader
         }
     }
 
-    bool String::Contains(const String & str, bool useCase) const
+    bool String::Contains(_In_ CONST String & str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -576,7 +576,7 @@ namespace VoodooShader
         }
     }
 
-    uint32_t String::Find(const wchar_t ch, bool useCase) const
+    uint32_t String::Find(_In_ CONST wchar_t ch, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -591,7 +591,7 @@ namespace VoodooShader
         }
     }
 
-    uint32_t String::Find(const wchar_t * str, bool useCase) const
+    uint32_t String::Find(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -607,7 +607,7 @@ namespace VoodooShader
         }
     }
 
-    uint32_t String::Find(const String & str, bool useCase) const
+    uint32_t String::Find(_In_ CONST String & str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -622,7 +622,7 @@ namespace VoodooShader
         }
     }
 
-    uint32_t String::ReverseFind(const wchar_t ch, bool useCase) const
+    uint32_t String::ReverseFind(_In_ CONST wchar_t ch, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -637,7 +637,7 @@ namespace VoodooShader
         }
     }
 
-    uint32_t String::ReverseFind(const wchar_t * str, bool useCase) const
+    uint32_t String::ReverseFind(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -653,7 +653,7 @@ namespace VoodooShader
         }
     }
 
-    uint32_t String::ReverseFind(const String & str, bool useCase) const
+    uint32_t String::ReverseFind(_In_ CONST String & str, _In_ CONST bool useCase) CONST
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -668,7 +668,7 @@ namespace VoodooShader
         }
     }
 
-    String & String::Replace(const wchar_t fch, const wchar_t rch, bool useCase)
+    String & String::Replace(_In_ CONST wchar_t fch, _In_ CONST wchar_t rch, _In_ CONST bool useCase)
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -682,7 +682,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Replace(const wchar_t * fstr, const wchar_t * rstr, bool useCase)
+    String & String::Replace(_In_z_ CONST wchar_t * fstr, _In_z_ CONST wchar_t * rstr, _In_ CONST bool useCase)
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -696,7 +696,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Replace(const String & fstr, const String & rstr, bool useCase)
+    String & String::Replace(_In_ CONST String & fstr, _In_ CONST String & rstr, _In_ CONST bool useCase)
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -710,7 +710,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Remove(const wchar_t fch, bool useCase)
+    String & String::Remove(_In_ CONST wchar_t fch, _In_ CONST bool useCase)
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -724,7 +724,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Remove(const wchar_t * fstr, bool useCase)
+    String & String::Remove(_In_z_ CONST wchar_t * fstr, _In_ CONST bool useCase)
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -738,7 +738,7 @@ namespace VoodooShader
         return (*this);
     }
 
-    String & String::Remove(const String & fstr, bool useCase)
+    String & String::Remove(_In_ CONST String & fstr, _In_ CONST bool useCase)
     {
         VOODOO_CHECK_IMPL;
         if (useCase)
@@ -752,70 +752,70 @@ namespace VoodooShader
         return (*this);
     }
 
-    uint32_t String::GetLength() const
+    uint32_t String::GetLength() CONST
     {
         VOODOO_CHECK_IMPL;
         return m_Impl->m_Str.size();
     }
 
-    bool String::IsEmpty() const
+    bool String::IsEmpty() CONST
     {
         VOODOO_CHECK_IMPL;
         return (this->GetLength() == 0);
     }
 
-    wchar_t String::GetAt(uint32_t pos) const
+    wchar_t String::GetAt(_In_ uint32_t pos) CONST
     {
         VOODOO_CHECK_IMPL;
         //! @todo Error checking on pos.
         return m_Impl->m_Str.at(pos);
     }
 
-    wchar_t & String::operator[](uint32_t pos)
+    wchar_t & String::operator[](_In_ uint32_t pos)
     {
         VOODOO_CHECK_IMPL;
         //! @todo Error checking on pos.
         return m_Impl->m_Str[pos];
     }
 
-    void String::SetAt(uint32_t pos, wchar_t data)
+    void String::SetAt(_In_ uint32_t pos, _In_ wchar_t data)
     {
         VOODOO_CHECK_IMPL;
         //! @todo Error checking on pos.
         m_Impl->m_Str[pos] = data;
     }
 
-    const wchar_t * String::GetData() const
+    CONST wchar_t * String::GetData() CONST
     {
         VOODOO_CHECK_IMPL;
         return m_Impl->m_Str.c_str();
     }
 
-    bool String::operator<(const wchar_t * str) const
+    bool String::operator<(_In_z_ CONST wchar_t * str) CONST
     {
         VOODOO_CHECK_IMPL;
         return (m_Impl->m_Str < str);
     }
 
-    bool String::operator<(const String & str) const
+    bool String::operator<(_In_ CONST String & str) CONST
     {
         VOODOO_CHECK_IMPL;
         return (m_Impl->m_Str < str.m_Impl->m_Str);
     }
 
-    bool String::operator>(const wchar_t * str) const
+    bool String::operator>(_In_z_ CONST wchar_t * str) CONST
     {
         VOODOO_CHECK_IMPL;
         return (m_Impl->m_Str > str);
     }
 
-    bool String::operator>(const String & str) const
+    bool String::operator>(_In_ CONST String & str) CONST
     {
         VOODOO_CHECK_IMPL;
         return (m_Impl->m_Str > str.m_Impl->m_Str);
     }
 
-    String String::Time(time_t * pTime)
+    String String::Time(_In_opt_ time_t * pTime)
     {
         tm localTime;
         if (pTime)
@@ -839,7 +839,7 @@ namespace VoodooShader
         return stamp.str();
     }
 
-    String String::Date(time_t * pTime)
+    String String::Date(_In_opt_ time_t * pTime)
     {
         using namespace std;
 

@@ -67,7 +67,7 @@ namespace VoodooShader
          * @note This function will split paths at the ';' character, similar to how Windows treats the path variable. This
          *      combined with parser environment access allows regular-form environment vars to be added to the file system.
          */
-        VOODOO_METHOD(AddPath)(_In_ CONST String & path, _In_ PathType type = VSPath_Directory) PURE;
+        VOODOO_METHOD(AddPath)(_In_ CONST String & path, _In_ CONST PathType type = VSPath_Directory) PURE;
         /**
          * Removes a directory from the search path, following the same rules as adding (adding a string then removing the
          * same string will always work).

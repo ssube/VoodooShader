@@ -31,8 +31,8 @@ namespace VoodooShader
         VOODOO_CLASS(VSParameterDX9, IParameter, ({0xA1, 0x12, 0xF3, 0xE6, 0xAF, 0x05, 0xE1, 0x11, 0x9E, 0x05, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
         {
         public:
-            VSParameterDX9(_Pre_notnull_ VSEffectDX9 * pEffect, _In_ D3DXHANDLE pParamHandle);
-            VSParameterDX9(_In_ VSBindingDX9 * pBinding, CONST String & name, ParameterDesc desc);
+            VSParameterDX9(_In_ VSEffectDX9 * pEffect, _In_ D3DXHANDLE pParamHandle);
+            VSParameterDX9(_In_ VSBindingDX9 * pBinding, _In_ CONST String & name, _In_ ParameterDesc desc);
             ~VSParameterDX9();
 
             VOODOO_METHOD_(uint32_t, AddRef)() CONST;
@@ -42,23 +42,23 @@ namespace VoodooShader
             VOODOO_METHOD_(ICore *, GetCore)() CONST;
         
             VOODOO_METHOD_(String, GetName)() CONST;
-            VOODOO_METHOD(GetProperty)(CONST Uuid propid, _Deref_out_ Variant * pValue) CONST;
-            VOODOO_METHOD(SetProperty)(CONST Uuid propid, _In_ Variant * pValue);
+            VOODOO_METHOD(GetProperty)(_In_ CONST Uuid propid, _Out_ Variant * pValue) CONST;
+            VOODOO_METHOD(SetProperty)(_In_ CONST Uuid propid, _In_ Variant * pValue);
 
             VOODOO_METHOD_(ParameterDesc, GetDesc)() CONST;
 
-            VOODOO_METHOD(GetBool)(bool * pVal) CONST;
-            VOODOO_METHOD(GetFloat)(float * pVal) CONST;
-            VOODOO_METHOD(GetInt)(int32_t * pVal) CONST;
-            VOODOO_METHOD(GetString)(String * pVal) CONST;
-            VOODOO_METHOD(GetTexture)(ITexture ** pVal) CONST;
-            VOODOO_METHOD(GetVector)(Float4 * pVal) CONST;
-            VOODOO_METHOD(SetBool)(CONST bool val);
-            VOODOO_METHOD(SetFloat)(CONST float val);
-            VOODOO_METHOD(SetInt)(CONST int32_t val);
-            VOODOO_METHOD(SetString)(CONST String & val);
-            VOODOO_METHOD(SetTexture)(CONST ITexture * pVal);
-            VOODOO_METHOD(SetVector)(CONST Float4 val);
+            VOODOO_METHOD(GetBool)(_Out_ bool * pVal) CONST;
+            VOODOO_METHOD(GetFloat)(_Out_ float * pVal) CONST;
+            VOODOO_METHOD(GetInt)(_Out_ int32_t * pVal) CONST;
+            VOODOO_METHOD(GetString)(_Out_ String * pVal) CONST;
+            VOODOO_METHOD(GetTexture)(_Out_ ITexture ** pVal) CONST;
+            VOODOO_METHOD(GetVector)(_Out_ Float4 * pVal) CONST;
+            VOODOO_METHOD(SetBool)(_In_ CONST bool val);
+            VOODOO_METHOD(SetFloat)(_In_ CONST float val);
+            VOODOO_METHOD(SetInt)(_In_ CONST int32_t val);
+            VOODOO_METHOD(SetString)(_In_ CONST String & val);
+            VOODOO_METHOD(SetTexture)(_In_ ITexture * pVal);
+            VOODOO_METHOD(SetVector)(_In_ CONST Float4 val);
         
             VOODOO_METHOD_(bool, IsVirtual)() CONST;
             VOODOO_METHOD(AttachParameter)(_In_ IParameter * pParam);

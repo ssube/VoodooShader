@@ -115,7 +115,7 @@ namespace VoodooShader
 #undef PREFIX
 
 #define PREFIX VSStage_
-    const wchar_t * Converter::ToString(ShaderStage stage)
+    const wchar_t * Converter::ToString(_In_ ShaderStage stage)
     {
         switch (stage)
         {

@@ -54,7 +54,7 @@ interface IDirect3DVolume8;
 interface IDirect3DVolumeTexture8;
 
 #define DEFINE_LOCAL_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
-        EXTERN_C const GUID DECLSPEC_SELECTANY name \
+        EXTERN_C CONST GUID DECLSPEC_SELECTANY name \
                 = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
 
 /* IID_IDirect3D8 */

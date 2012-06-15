@@ -56,12 +56,12 @@ namespace VoodooShader
 
         // ICore
         _Check_return_ VOODOO_METHOD(Init)(_In_z_ CONST wchar_t * config);
-        _Check_return_ VOODOO_METHOD(Bind)(CompilerProfile profile, uint32_t count, _In_count_(count) Variant * pParams);
+        _Check_return_ VOODOO_METHOD(Bind)(_In_ CONST CompilerProfile profile, _In_ CONST uint32_t count, _In_reads_(count) Variant * pParams);
         _Check_return_ VOODOO_METHOD(Reset)();
 
-        VOODOO_METHOD(OnEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func);
-        VOODOO_METHOD(DropEvent)(_In_ Uuid event, _In_ Functions::CallbackFunc func);
-        VOODOO_METHOD(CallEvent)(_In_ Uuid event, _In_ uint32_t count, _In_reads_opt_(count) Variant * pArgs);
+        VOODOO_METHOD(OnEvent)(_In_ CONST Uuid event, _In_ Functions::CallbackFunc func);
+        VOODOO_METHOD(DropEvent)(_In_ CONST Uuid event, _In_ Functions::CallbackFunc func);
+        VOODOO_METHOD(CallEvent)(_In_ CONST Uuid event, _In_ CONST uint32_t count, _In_reads_opt_(count) Variant * pArgs);
 
         VOODOO_METHOD_(XmlDocument, GetConfig)() CONST;
         VOODOO_METHOD_(IFileSystem *, GetFileSystem)() CONST;
@@ -70,18 +70,18 @@ namespace VoodooShader
         VOODOO_METHOD_(IParser *, GetParser)() CONST;
 
         VOODOO_METHOD_(IEffect *, CreateEffect)(_In_ IFile * pFile); 
-        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ const String & name, _In_ ParameterDesc desc);
-        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ const String & name, _In_ TextureDesc desc);
-        VOODOO_METHOD_(ITexture *, LoadTexture)(_In_ const String & name, _In_ IFile * pFile);
-        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ const String & name, _In_ ParameterDesc desc) CONST;
-        VOODOO_METHOD_(ITexture *, GetTexture)(_In_ const String & name) CONST;
-        VOODOO_METHOD(RemoveParameter)(_In_ const String & name);
-        VOODOO_METHOD(RemoveTexture)(_In_ const String & name);
+        VOODOO_METHOD_(IParameter *, CreateParameter)(_In_ CONST String & name, _In_ CONST ParameterDesc desc);
+        VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ CONST TextureDesc desc);
+        VOODOO_METHOD_(ITexture *, LoadTexture)(_In_ CONST String & name, _In_ IFile * pFile);
+        VOODOO_METHOD_(IParameter *, GetParameter)(_In_ CONST String & name, _In_ CONST ParameterDesc desc) CONST;
+        VOODOO_METHOD_(ITexture *, GetTexture)(_In_ CONST String & name) CONST;
+        VOODOO_METHOD(RemoveParameter)(_In_ CONST String & name);
+        VOODOO_METHOD(RemoveTexture)(_In_ CONST String & name);
 
     private:
         // Private these to prevent copying internally (external libs never will).
-        VSCore(const VSCore & other);
-        VSCore & operator=(const VSCore & other);
+        VSCore(CONST VSCore & other);
+        VSCore & operator=(CONST VSCore & other);
         ~VSCore();
 
         mutable uint32_t m_Refs;
