@@ -45,21 +45,21 @@ namespace VoodooShader
             return this->ToString();
         }
 
-        StringFormat & operator<<(bool val);
-        StringFormat & operator<<(char val);
-        StringFormat & operator<<(unsigned char val);
-        StringFormat & operator<<(short val);
-        StringFormat & operator<<(unsigned short val);
-        StringFormat & operator<<(int val);
-        StringFormat & operator<<(unsigned int val);
-        StringFormat & operator<<(long val);
-        StringFormat & operator<<(unsigned long val);
-		StringFormat & operator<<(long long val);
-		StringFormat & operator<<(unsigned long long val);
-        StringFormat & operator<<(float val);
-        StringFormat & operator<<(double val);
+        StringFormat & operator<<(CONST bool val);
+        StringFormat & operator<<(CONST char val);
+        StringFormat & operator<<(CONST unsigned char val);
+        StringFormat & operator<<(CONST short val);
+        StringFormat & operator<<(CONST unsigned short val);
+        StringFormat & operator<<(CONST int val);
+        StringFormat & operator<<(CONST unsigned int val);
+        StringFormat & operator<<(CONST long val);
+        StringFormat & operator<<(CONST unsigned long val);
+		StringFormat & operator<<(CONST long long val);
+		StringFormat & operator<<(CONST unsigned long long val);
+        StringFormat & operator<<(CONST float val);
+        StringFormat & operator<<(CONST double val);
 
-        StringFormat & operator<<(wchar_t val);
+        StringFormat & operator<<(CONST wchar_t val);
 
 #if defined(_STRING)
         StringFormat & operator<<(std::string val)

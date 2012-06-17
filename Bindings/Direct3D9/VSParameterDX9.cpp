@@ -105,7 +105,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE VSParameterDX9::QueryInterface(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut)
+        VoodooResult VOODOO_METHODTYPE VSParameterDX9::QueryInterface(_In_ CONST Uuid refid, _Outptr_result_maybenull_ IObject ** ppOut)
         {
             VOODOO_DEBUG_FUNCLOG(m_Core->GetLogger());
             if (!ppOut)

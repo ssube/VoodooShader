@@ -44,7 +44,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Outptr_result_maybenull_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -103,7 +103,7 @@ namespace VoodooShader
          * @note If @arg buffer is nullptr, the number of bytes that would have been read is returned but the file
          *      position is unchanged. If @arg count is -1, this returns the size to the end of the file.
          */
-        VOODOO_METHOD_(int32_t, Read)(_In_ CONST int32_t size, _In_reads_opt_(size) void * pBuffer) PURE;
+        VOODOO_METHOD_(int32_t, Read)(_In_ CONST int32_t size, _Out_writes_opt_(size) void * pBuffer) PURE;
         /**
          * Write the given number of bytes to the file, starting at the current position.
          *

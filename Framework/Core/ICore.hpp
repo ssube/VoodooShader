@@ -45,7 +45,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Outptr_result_maybenull_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -128,7 +128,7 @@ namespace VoodooShader
          * @warning This calls all registered callbacks for the given event. The order registered callbacks will be called 
          *      in is undefined.
          * @warning Callbacks can modify the arguments, but not change the count.
-         * @warning If a callback returns a failure value, the loop will be aborted and remaining callbacks will nto be
+         * @warning If a callback returns a failure value, the loop will be aborted and remaining callbacks will not be
          *      called. The failure will be returned by this method. If no callbacks fail, this will return generic success.
          */
         VOODOO_METHOD(CallEvent)(_In_ CONST Uuid event, _In_ CONST uint32_t count, _In_reads_opt_(count) Variant * pArgs) PURE;

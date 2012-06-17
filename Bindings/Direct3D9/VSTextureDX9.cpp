@@ -33,7 +33,8 @@ namespace VoodooShader
     namespace Voodoo_D3D9
     {
         VSTextureDX9::VSTextureDX9(_In_ VSBindingDX9 * pBinding) :
-            m_Refs(0), m_Binding(pBinding)
+			m_Refs(0), m_Binding(pBinding), m_DXTexture(nullptr), m_DXSurface(nullptr),
+			m_BoundSourceSlot(VOODOO_TEXTURE_INVALID), m_BoundTargetSlot(VOODOO_TEXTURE_INVALID)
         {
 
         }
@@ -49,7 +50,7 @@ namespace VoodooShader
             if (!m_Core) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture from binding with no core."), nullptr);
             if (!m_DXTexture) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture with no hardware texture."), m_Core);
             
-            if (pTexture)
+            if (m_DXTexture)
             {
                 m_DXTexture->AddRef();
                 m_DXTexture->GetSurfaceLevel(0, &m_DXSurface);
@@ -84,7 +85,7 @@ namespace VoodooShader
             }
         }
 
-        VoodooResult VOODOO_METHODTYPE VSTextureDX9::QueryInterface(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut)
+        VoodooResult VOODOO_METHODTYPE VSTextureDX9::QueryInterface(_In_ CONST Uuid refid, _Outptr_result_maybenull_ IObject ** ppOut)
         {
             if (!ppOut)
             {

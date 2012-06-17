@@ -121,7 +121,7 @@ namespace VoodooShader
         return count;
     }
 
-    VoodooResult VOODOO_METHODTYPE VSCore::QueryInterface(_In_ Uuid refid, _Deref_out_opt_ IObject ** ppOut)
+    VoodooResult VOODOO_METHODTYPE VSCore::QueryInterface(_In_ Uuid refid, _Outptr_result_maybenull_ IObject ** ppOut)
     {
         VOODOO_DEBUG_FUNCLOG(m_Logger);
 

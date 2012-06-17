@@ -47,7 +47,7 @@ namespace VoodooShader
          */
         VOODOO_METHOD_(uint32_t, AddRef)() CONST PURE;
         VOODOO_METHOD_(uint32_t, Release)() CONST PURE;
-        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut) PURE;
+        VOODOO_METHOD(QueryInterface)(_In_ CONST Uuid refid, _Outptr_result_maybenull_ IObject ** ppOut) PURE;
         VOODOO_METHOD_(String, ToString)() CONST PURE;
         VOODOO_METHOD_(ICore *, GetCore)() CONST PURE;
         /**
@@ -63,7 +63,7 @@ namespace VoodooShader
          * @note If this fails, the binding is considered in an undefined state and resources must not be created from it
          *      until it is reset.
          */
-        VOODOO_METHOD(Init)(_In_ uint32_t count, _In_reads_(count) Variant * pParams) PURE;
+        VOODOO_METHOD(Init)(_In_ CONST uint32_t count, _In_reads_(count) Variant * pParams) PURE;
         /**
          * Resets the binding, releasing the hardware context and invalidating any resources created from it. This must not
          * destroy the hardware context @a explicitly, as it may still be in use by the host, but it must release the

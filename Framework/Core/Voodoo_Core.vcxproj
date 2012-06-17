@@ -120,13 +120,6 @@
     <ClInclude Include="ITechnique.hpp" />
     <ClInclude Include="ITexture.hpp" />
     <ClInclude Include="VoodooDebug.hpp" />
-    <ClInclude Include="VSCore.hpp" />
-    <ClInclude Include="VSFilesystem.hpp" />
-    <ClInclude Include="VSHookManager.hpp" />
-    <ClInclude Include="VSLogger.hpp" />
-    <ClInclude Include="VSPlugin.hpp" />
-    <ClInclude Include="VSPluginServer.hpp" />
-    <ClInclude Include="VSParser.hpp" />
     <ClInclude Include="Converter.hpp" />
     <ClInclude Include="Exception.hpp" />
     <ClInclude Include="VoodooInternal.hpp" />
@@ -135,6 +128,13 @@
     <ClInclude Include="String.hpp" />
     <ClInclude Include="VoodooVersion.hpp" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="VSCore.hpp" />
+    <ClInclude Include="VSFilesystem.hpp" />
+    <ClInclude Include="VSHookManager.hpp" />
+    <ClInclude Include="VSLogger.hpp" />
+    <ClInclude Include="VSParser.hpp" />
+    <ClInclude Include="VSPlugin.hpp" />
+    <ClInclude Include="VSPluginServer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Voodoo_Core.rc" />

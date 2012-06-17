@@ -131,7 +131,7 @@ namespace VoodooShader
         m_Impl = nullptr;
     }
 
-    void String::CInit(_In_ CONST uint32_t size, _In_z_count_(size) CONST char * str)
+    void String::CInit(_In_ CONST uint32_t size, _In_reads_z_(size) CONST char * str)
     {
         if (m_Impl) delete m_Impl;
 
@@ -163,7 +163,7 @@ namespace VoodooShader
         }
     }
 
-    void String::WInit(_In_ CONST uint32_t size, _In_z_count_(size) CONST wchar_t * str)
+    void String::WInit(_In_ CONST uint32_t size, _In_reads_z_(size) CONST wchar_t * str)
     {
         if (m_Impl) delete m_Impl;
 
@@ -815,7 +815,7 @@ namespace VoodooShader
         return (m_Impl->m_Str > str.m_Impl->m_Str);
     }
 
-    String String::Time(_In_opt_ time_t * pTime)
+    String String::Time(_In_opt_ CONST time_t * pTime)
     {
         tm localTime;
         if (pTime)
@@ -839,7 +839,7 @@ namespace VoodooShader
         return stamp.str();
     }
 
-    String String::Date(_In_opt_ time_t * pTime)
+    String String::Date(_In_opt_ CONST time_t * pTime)
     {
         using namespace std;
 

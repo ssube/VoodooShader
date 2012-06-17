@@ -79,7 +79,7 @@ namespace VoodooShader
             }
         }
 
-        VOODOO_METHODDEF(VSBindingDX9::QueryInterface)(_In_ CONST Uuid refid, _Deref_out_opt_ IObject ** ppOut)
+        VOODOO_METHODDEF(VSBindingDX9::QueryInterface)(_In_ CONST Uuid refid, _Outptr_result_maybenull_ IObject ** ppOut)
         {
             if (!ppOut)
             {
@@ -120,7 +120,7 @@ namespace VoodooShader
             return m_Core;
         }
 
-        VOODOO_METHODDEF(VSBindingDX9::Init)(_In_ uint32_t count, _In_reads_(count) Variant * pParams)
+        VOODOO_METHODDEF(VSBindingDX9::Init)(_In_ CONST uint32_t count, _In_reads_(count) Variant * pParams)
         {
             if (count != 1 || !pParams)
             {

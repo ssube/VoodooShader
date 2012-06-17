@@ -71,7 +71,7 @@ namespace VoodooShader
          * @param size The number of characters to use.
          * @param str The string to use.
          */
-        EXPLICIT String(_In_ CONST uint32_t size, _In_z_count_(size) CONST char * str);
+        EXPLICIT String(_In_ CONST uint32_t size, _In_reads_z_(size) CONST char * str);
         /**
          * Creates a string from the given character (one character).
          * @param ch Character to use.
@@ -158,13 +158,13 @@ namespace VoodooShader
          *
          * @note If the time cannot be retrieved or formatted, <code>Unknown Time</code> will be returned.
          */
-        static String Time(_In_opt_ time_t * pTime = nullptr);
+        static String Time(_In_opt_ CONST time_t * pTime = nullptr);
         /**
          * Formats a date as <code>YYYYMMDD</code>. Leading zeros are guaranteed to be present.
          *
          * @note If the time cannot be retrieved or formatted, <code>Unknown Date</code> will be returned.
          */
-        static String Date(_In_opt_ time_t * pTime = nullptr);
+        static String Date(_In_opt_ CONST time_t * pTime = nullptr);
         /**
          * Formats the system's current tick count, with a varying length. This records ms since system start (not useful
          * for global timing, but holds enough precision to order events).
@@ -225,7 +225,7 @@ namespace VoodooShader
             _In_ CONST String & delims, 
             _In_ CONST uint32_t count, 
             _Out_writes_opt_(count) String * pStrings, 
-            _In_ bool stripEmpty = false
+            _In_ CONST bool stripEmpty = false
         ) CONST;
         /**
          * Attempts to convert this String to a Uuid. The string must be of one of the following forms:
@@ -251,7 +251,7 @@ namespace VoodooShader
          * @param pBuffer Buffer to write converted string to.
          * @return Necessary buffer size or bytes converted.
          */
-        int32_t ToChars(_In_ int32_t size, _Out_writes_opt_(size) char * pBuffer) CONST;
+        int32_t ToChars(_In_ CONST int32_t size, _Out_writes_opt_(size) char * pBuffer) CONST;
 #if defined(_STRING_)
         /**
          * Creates a std::wstring from this string.
@@ -285,26 +285,26 @@ namespace VoodooShader
          * @name String Partial Copy
          * @{
          */
-        String Left(_In_ uint32_t count) CONST;
-        String Right(_In_ uint32_t count) CONST;
-        String Substr(_In_ uint32_t start, _In_ uint32_t count = String::Npos) CONST;
+        String Left(_In_ CONST uint32_t count) CONST;
+        String Right(_In_ CONST uint32_t count) CONST;
+        String Substr(_In_ CONST uint32_t start, _In_ CONST uint32_t count = String::Npos) CONST;
         /**
          * @}
          * @name String Predicates
          * @{
          */
-        bool Compare(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
-        bool Compare(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
-        bool Compare(_In_ CONST String & str, _In_ bool useCase = true) CONST;
-        bool Contains(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
-        bool Contains(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
-        bool Contains(_In_ CONST String & str, _In_ bool useCase = true) CONST;
-        bool StartsWith(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
-        bool StartsWith(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
-        bool StartsWith(_In_ CONST String & str, _In_ bool useCase = true) CONST;
-        bool EndsWith(_In_ CONST wchar_t ch, _In_ bool useCase = true) CONST;
-        bool EndsWith(_In_z_ CONST wchar_t * str, _In_ bool useCase = true) CONST;
-        bool EndsWith(_In_ CONST String & str, _In_ bool useCase = true) CONST;
+        bool Compare(_In_ CONST wchar_t ch, _In_ CONST bool useCase = true) CONST;
+        bool Compare(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase = true) CONST;
+        bool Compare(_In_ CONST String & str, _In_ CONST bool useCase = true) CONST;
+        bool Contains(_In_ CONST wchar_t ch, _In_ CONST bool useCase = true) CONST;
+        bool Contains(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase = true) CONST;
+        bool Contains(_In_ CONST String & str, _In_ CONST bool useCase = true) CONST;
+        bool StartsWith(_In_ CONST wchar_t ch, _In_ CONST bool useCase = true) CONST;
+        bool StartsWith(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase = true) CONST;
+        bool StartsWith(_In_ CONST String & str, _In_ CONST bool useCase = true) CONST;
+        bool EndsWith(_In_ CONST wchar_t ch, _In_ CONST bool useCase = true) CONST;
+        bool EndsWith(_In_z_ CONST wchar_t * str, _In_ CONST bool useCase = true) CONST;
+        bool EndsWith(_In_ CONST String & str, _In_ CONST bool useCase = true) CONST;
         /**
          * @}
          * @name String Find and Replace
