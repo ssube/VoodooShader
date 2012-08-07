@@ -2,12 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-      <VoodooVersionMajor>0</VoodooVersionMajor>
-      <VoodooVersionMinor>5</VoodooVersionMinor>
-      <VoodooVersionPatch>8</VoodooVersionPatch>
-      <VoodooVersionBuild>0</VoodooVersionBuild>
-      <VoodooVersionGit>local</VoodooVersionGit>
-      <VoodooVersionTiming>false</VoodooVersionTiming>
+    <VoodooVersionMajor>0</VoodooVersionMajor>
+    <VoodooVersionMinor>0</VoodooVersionMinor>
+    <VoodooVersionPatch>0</VoodooVersionPatch>
+    <VoodooVersionBuild>0</VoodooVersionBuild>
+    <VoodooVersionGit>local</VoodooVersionGit>
+    <VoodooVersionTiming>false</VoodooVersionTiming>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>

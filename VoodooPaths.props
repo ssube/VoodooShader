@@ -3,8 +3,6 @@
   <PropertyGroup Label="UserMacros">
     <BoostInclude>I:\Code\Boost</BoostInclude>
     <BoostLib>I:\Code\Boost\stage\lib</BoostLib>
-    <CgInclude>I:\Code\CgToolkit\include</CgInclude>
-    <CgLib>I:\Code\CgToolkit\lib\</CgLib>
     <DXInclude>I:\code\DirectX\9c\Include</DXInclude>
     <DXLib>I:\code\DirectX\9c\Lib\x86</DXLib>
     <DevILInclude>$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include</DevILInclude>
@@ -24,12 +22,6 @@
     </BuildMacro>
     <BuildMacro Include="BoostLib">
       <Value>$(BoostLib)</Value>
-    </BuildMacro>
-    <BuildMacro Include="CgInclude">
-      <Value>$(CgInclude)</Value>
-    </BuildMacro>
-    <BuildMacro Include="CgLib">
-      <Value>$(CgLib)</Value>
     </BuildMacro>
     <BuildMacro Include="DXInclude">
       <Value>$(DXInclude)</Value>
