@@ -881,6 +881,7 @@ namespace VoodooShader
             Variant deviceVar = CreateVariant(m_RealDevice);
             VoodooResult vr = gpVoodooCore->Bind(VSProfile_D3D9, 1, &deviceVar);
             assert(SUCCEEDED(vr));
+            UNREFERENCED_PARAMETER(vr);
 
             // Setup profiles
             const char * bestVertStr = D3DXGetVertexShaderProfile(m_RealDevice);

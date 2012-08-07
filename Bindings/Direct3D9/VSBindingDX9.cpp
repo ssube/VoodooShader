@@ -137,6 +137,7 @@ namespace VoodooShader
 
             HRESULT errors = m_Device->CreateStateBlock(D3DSBT_ALL, &m_InitialState);
             assert(SUCCEEDED(errors));
+            UNREFERENCED_PARAMETER(errors);
 
             return VSF_OK;
         }

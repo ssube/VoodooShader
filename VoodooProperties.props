@@ -2,6 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
+      <VoodooVersionMajor>0</VoodooVersionMajor>
+      <VoodooVersionMinor>5</VoodooVersionMinor>
+      <VoodooVersionPatch>8</VoodooVersionPatch>
+      <VoodooVersionTiming>false</VoodooVersionTiming>
     <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
@@ -32,7 +36,7 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <PreBuildEvent>
-      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(ProjectDir)\VoodooBuild_$(ProjectName).hpp"</Command>
+      <Command>$(SolutionDir)\Utilities\VoodooBuild\bin\$(Configuration)\VoodooBuild.exe "$(ProjectDir)\VoodooBuild_$(ProjectName).hpp" $(VoodooVersionMajor) $(VoodooVersionMinor) $(VoodooVersionPatch) $(VoodooVersionTiming)</Command>
       <Message>Running VoodooBuild tool...</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
