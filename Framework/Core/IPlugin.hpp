@@ -85,6 +85,7 @@ namespace VoodooShader
          * Creates an instance of the given class from the plugin. If the plugin does not provide a class with this index,
          * the call must return nullptr.
          * 
+         * @param	number	The class to create, by index (must be less than the value returned by @ref IPlugin::ClassCount()).
          * @param   pCore   The core to use for object creation and init.
          */
         VOODOO_METHOD_(IObject *, CreateClass)(_In_ CONST uint32_t number, _In_ ICore * pCore) CONST PURE;

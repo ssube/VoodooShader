@@ -149,7 +149,7 @@ namespace VoodooShader
     /**
      * Creates a new core. This function is exported and meant for use by the loader.
      *
-     * @param   version     Version identifier for this core, should always be <tt>VOODOO_SDK_VERSION</tt>.
+     * @param   version     Version identifier for this core, should always be `VOODOO_SDK_VERSION`.
      * @return  A new ICore object, if one was created successfully. The core is not initialized, and so ICore::Init() must
      *      be called prior to use.
      *      

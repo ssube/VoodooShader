@@ -54,7 +54,7 @@ namespace VoodooShader
       * @endcode
       *
       * @subsection voodoo_vson_types_boolean boolean
-      * The <tt>boolean</tt> type is a simple binary type. It can represent the values true or false.
+      * The `boolean` type is a simple binary type. It can represent the values true or false.
       *
       * @par Representation:
       *     @code (true|false) @endcode
@@ -62,46 +62,46 @@ namespace VoodooShader
       *     type must be explicitly given.
       *
       * @par Conversion:
-      *     All other types can be converted to <tt>boolean</tt>. For numeric types, this is performed as <tt>x > 0</tt>, so
+      *     All other types can be converted to `boolean`. For numeric types, this is performed as `x > 0`, so
       *     0 is retained (becoming false) and all positive values become 1 (for unsigned, this is all values other than 0).
-      *     For strings, this is <tt>!x.IsEmpty()</tt>, so strings with any value are considered true. Objects always
-      *     convert to true.
+      *     For strings, this is `!x.IsEmpty()`, so strings with any value are considered true. Objects convert to true if
+	  *		not null.
       *
       * @subsection voodoo_vson_types_integer integer
-      * The <tt>integer</tt> type is a 64-bit signed integer. It can represent values from -9,223,372,036,854,775,808 to 
+      * The `integer` type is a 64-bit signed integer. It can represent values from -9,223,372,036,854,775,808 to 
       * +9,223,372,036,854,775,807, or approximately 19 digits.
       *
       * @par Representation:
       *     @code [-+]?([0-9]+) @endcode
-      *     Any unquoted numeric value not containing a decimal point (the <tt>.</tt> character) is considered to be an
+      *     Any unquoted numeric value not containing a decimal point (the `.` character) is considered to be an
       *     integer. Integers may be padded with leading zeroes (trailing zeros are significant) and may begin with a sign.
       *
       * @par Conversion:
-      *     The <tt>bool</tt> and <tt>decimal</tt> types may be converted to <tt>int</tt>. <tt>bool</tt> is converted to
-      *     1 or 0 when true or false, respectively. <tt>decimal</tt> is truncated to the integral part and clamped to the
-      *     minimum or maximum value <tt>integer</tt> can represent, where necessary.
+      *     The `bool` and `decimal` types may be converted to `int`. `bool` is converted to
+      *     1 or 0 when true or false, respectively. `decimal` is truncated to the integral part and clamped to the
+      *     minimum or maximum value `integer` can represent, where necessary.
       *
       * @subsection voodoo_vson_types_decimal decimal
-      * The <tt>decimal</tt> type is a 64-bit double, following the IEEE 754 standard for @a binary64. The <tt>dec</tt> is a
+      * The `decimal` type is a 64-bit double, following the IEEE 754 standard for @a binary64. The `dec` is a
       * floating-point type with variable precision, having a range of approximately +/-1.7E308 with at least 15 digits of 
       * precision
       *
       * @par Representation:
       *     @code [-+]?([0-9]+\.[0-9]*) @endcode
-      *     Any unquoted numeric value containing a decimal point (the <tt>.</tt> character) is considered to be a decimal. 
+      *     Any unquoted numeric value containing a decimal point (the `.` character) is considered to be a decimal. 
       *     Decimals may be padded with zeroes, including starting and ending with them. Decimals may end with a decimal 
       *     point, although they must begin with a digit or sign.
       *
       * @par Conversion:
-      *     The <tt>boolean</tt> and <tt>integer</tt> types may be converted to <tt>decimal</tt>. <tt>boolean</tt> will be
-      *     converted to 1 or 0 for true or false, respectively. <tt>integer</tt> will be used as-is whenever possible; due
+      *     The `boolean` and `integer` types may be converted to `decimal`. `boolean` will be
+      *     converted to 1 or 0 for true or false, respectively. `integer` will be used as-is whenever possible; due
       *     to how decimals are handled, rounding may occur and may be significant for large values.
       *
-      * @warning Converting between <tt>integer</tt> and <tt>decimal</tt>, for extremely large numbers, can cause loss of
+      * @warning Converting between `integer` and `decimal`, for extremely large numbers, can cause loss of
       *     precision. This is a characteristic of the floating-point type.
       *     
       * @subsection voodoo_vson_types_string string
-      * The <tt>string</tt> type is an arbitrary-length character array, capable of holding any ASCII characters. Strings
+      * The `string` type is an arbitrary-length character array, capable of holding any ASCII characters. Strings
       * have a length limit of 2 billion characters.
       *
       * @par Representation:
@@ -113,29 +113,29 @@ namespace VoodooShader
       *     @ref voodoo_vson_elements_property.
       *
       * @par Conversion:
-      *     All other types can be converted to <tt>string</tt>. <tt>boolean</tt> is converted to "true" or "false", numeric
-      *     types are converted to their standard representation (for example, integer <tt>13</tt> would be "13" and
-      *     decimal <tt>13.57</tt> would be "13.57"). This is identical to the mechanic used during serialization.
+      *     All other types can be converted to `string`. `boolean` is converted to "true" or "false", numeric
+      *     types are converted to their standard representation (for example, integer `13` would be "13" and
+      *     decimal `13.57` would be "13.57"). This is identical to the mechanic used during serialization.
       *
       * @subsection voodoo_vson_types_parsed parsed
-      * The <tt>parsed</tt> type is a special-behavior string. During loading, it is run through IParser::Parse with default
+      * The `parsed` type is a special-behavior string. During loading, it is run through IParser::Parse with default
       * flags, and follows all standard variable rules (including specifying flags in a variable). The result of the parsing
       * is converted to a string and used as the value.
       *
-      * @note The initial string for a <tt>parsed</tt> is retained for serialization purposes, but not exposed directly. If
+      * @note The initial string for a `parsed` is retained for serialization purposes, but not exposed directly. If
       *     the value is set on an object during runtime, the new value replaces the initial string, is parsed, and the
-      *     result again becomes the public value. This allows <tt>parsed</tt> to retain its value across serialization.
+      *     result again becomes the public value. This allows `parsed` to retain its value across serialization.
       *
       * @par Representation: 
-      *     Due to having the same form as <tt>string</tt>, <tt>parsed</tt> must always have the type explicitly given.
-      *     Strings not marked as <tt>parsed</tt> will never be interpreted as such. Otherwise, it is identical to 
-      *     <tt>string</tt>.
+      *     Due to having the same form as `string`, `parsed` must always have the type explicitly given.
+      *     Strings not marked as `parsed` will never be interpreted as such. Otherwise, it is identical to 
+      *     `string`.
       *
       * @par Conversion:
-      *     The same conversion rules apply to <tt>parsed</tt> as to <tt>string</tt>.
+      *     The same conversion rules apply to `parsed` as to `string`.
       *
       * @section voodoo_vson_scope Scope
-      * Scopes in VSON are marked with braces (<tt>{</tt> and <tt>}</tt>). Scope may only change at certain points:
+      * Scopes in VSON are marked with braces (`{` and `}`). Scope may only change at certain points:
       *  @li The beginning and end of a file (implicit document scope).
       *  @li An object declaration (explicit object scope).
       *
@@ -145,10 +145,8 @@ namespace VoodooShader
       * The VSON language is remarkably concise, containing of only four primary elements. For compatibility, both standard
       * HLSL comment types are allowed:
       *
-      * @code
-      * // Trailing comment
-      * /* Region comment */
-      * @endcode
+      *     // Trailing comment
+      *     /* Region comment * /
       *
       * Trailing comments last until the end of the current line, while region comments may be used inline. Region comments
       * may not be nested.
@@ -156,15 +154,15 @@ namespace VoodooShader
       * @subsection voodoo_vson_elements_directive Directive
       * Directive elements give special instructions to the VSON processor, particularly marking chunks of the file as being
       * literal or ignored. All directives must be alone on their line, with the exception of trailing comments, and the
-      * first characters of the line must be the sequence <tt>//#</tt> (whitespace between the directive and the initial 
+      * first characters of the line must be the sequence `//#` (whitespace between the directive and the initial 
       * sequence is allowed, newlines are not).
       *
       * Available directives include:
       *
       * @subsubsection voodoo_vson_elements_directive_langtag Language Tag
-      * @code
-      * //# VSON[-version]
-      * @endcode
+      * 
+      *     //# VSON[-version]
+      * 
       * This directive indicates that the entire document, except parts marked as literal or ignored, should be parsed as
       * VSON. This is only valid on the first content line of a file (lines containing only whitespace and/or comments are
       * not considered content). If it is not present, the file is parsed as if it was framed by literal directives. 
@@ -178,21 +176,21 @@ namespace VoodooShader
       * document scope or any nested scopes are appropriate.
       *
       * @subsubsection voodoo_vson_elements_directive_literal Literal
-      * @code
-      * //# [[
-      * ...
-      * //# ]]
-      * @endcode
+	  *
+      *     //# [[
+      *     ...
+      *     //# ]]
+      * 
       * The region between the directives will not be parsed as VSON, regardless of document settings. It will instead be 
       * assigned to the @a value property of the current scope. In the case of HLSL, this is useful for embedding source 
       * code in the document scope. This directive's symbol is inspired by the XML CDATA marker.
       *
       * @subsubsection voodoo_vson_elements_directive_parsed Parsed
-      * @code
-      * //# {{
-      * ...
-      * //# }}
-      * @endcode
+	  *
+      *     //# {{
+      *     ...
+      *     //# }}
+	  *
       * The region between the directives will be parsed as VSON, regardless of document settings. It will be added to the
       * current scope, typically being the document scope (see the notes on @ref voodoo_vson_elements_directive_langtag). It
       * is possible to nest literal and parsed regions within a document (with or without bang), but this is not 
@@ -208,37 +206,41 @@ namespace VoodooShader
       * map, keyed by name, and may be retrieved or changed later.
       *
       * @par Representation:
-      *     @code [type] name = value; @endcode
-      *     @a name must be an identifier and unique within this scope.
-      *     @a value must be a valid representation of @a type. If @a type is not specified, it is implied from the first 
-      *     type for which @a value is valid (tested as boolean, decimal, integer, string). If @a value does not meet the
-      *     requirements for any type, including string, it will be interpreted as if it was wrapped in quotes, like so:
-      *     @code name = (")inserted quotes to wrap string(") /* comments */; @endcode
-      *     Properties must have a trailing semicolon, regardless of form.
+	  *
+	  *	    [type] name = value;
+	  *
+      *   @a name must be an identifier and unique within this scope.
+      *   @a value must be a valid representation of @a type. If @a type is not specified, it is implied from the first 
+      *   type for which @a value is valid (tested as boolean, decimal, integer, string). If @a value does not meet the
+      *   requirements for any type, including string, it will be interpreted as if it was wrapped in quotes, like so:
+      *     
+	  *	    name = (")inserted quotes to wrap string(") /* comments * /;
+	  *
+      *   Properties must have a trailing semicolon, regardless of form.
       *
       * @par Conversion:
-      *     Properties may be converted to <tt>string</tt>, where they will appear as given in the representation (including
-      *     spacing). This is used during serialization.
+      *   Properties may be converted to `string`, where they will appear as given in the representation (including
+      *   spacing). This is used during serialization.
       *
       * @subsection voodoo_vson_elements_object Object
       * Objects are custom-typed objects with an optional named. Objects create a new scope when declared and may belong to
       * another scope, either document or object (they may be nested).
       *
       * @par Representation:
-      *     @code 
-      * type ["name"]
-      * {
-      *     ...
-      * }[;]
-      *     @endcode
-      *     @a type must be an identifier, but need not be unique within this scope.
-      *     @a name is an optional string. It is recommended that it be unique within this scope, but is not required to be.
-      *     Following the declaration, a new scope for this object is created, and properties and objects may be nested.
-      *     Objects do not need a trailing semicolon, although they may optionally have one; the object ends at the closing
-      *     brace regardless.
+	  *
+      *     type ["name"]
+      *     {
+      *         ...
+      *     }[;]
+	  *
+      *   @a type must be an identifier, but need not be unique within this scope.
+      *   @a name is an optional string. It is recommended that it be unique within this scope, but is not required to be.
+      *   Following the declaration, a new scope for this object is created, and properties and objects may be nested.
+      *   Objects do not need a trailing semicolon, although they may optionally have one; the object ends at the closing
+      *   brace regardless.
       *
       * @par Conversion:
-      *     Objects may be converted to <tt>string</tt>, where they will appear as given in the representation (including
+      *     Objects may be converted to `string`, where they will appear as given in the representation (including
       *     spacing and indentation). Objects with no name (or where name is an empty string) will not have a name in string
       *     form. This is used during serialization.
       *
@@ -249,24 +251,22 @@ namespace VoodooShader
       * VSON is intended for use as a parser for both objects and effects. As Voodoo Shader cannot use the standard D3D
       * compiler for OpenGL shaders, parsing the effect files and compiling the results is critical. Some of the ambiguous
       * or confusing elements in VSON are specifically intended to parse effect files.
-      * @code
-      * // No language tag is given, causing the file to be interpreted as literal data. 
-      * // This allows using existing effects nearly as-is, with only parsed directives needed.
       * 
-      * ... shader source code.
+      *     // No language tag is given, causing the file to be interpreted as literal data. 
+      *     // This allows using existing effects nearly as-is, with only parsed directives needed.
+      * 
+      *     ... shader source code.
       *
-      * // Techniques and passes are handled as objects, with appropriate properties and attributes. In this case, the
-      * // document and document scope act as the effect object and scope.
-      * //# {{
-      * technique "main"
-      * {
-      *     pass "p1"
+      *     // Techniques and passes are handled as objects, with appropriate properties and attributes. In this case, the
+      *     // document and document scope act as the effect object and scope.
+      *     //# {{
+      *     technique "main"
       *     {
-      *         // 
-      *         PixelShader = compile ps_2_0 function();
+      *         pass "p1"
+      *         {
+      *             PixelShader = compile ps_2_0 function();
+      *         }
       *     }
-      * }
-      * //# }}
-      * @endcode
+      *     //# }}
       */
 }

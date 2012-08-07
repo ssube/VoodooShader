@@ -81,6 +81,7 @@ namespace VoodooShader
         /**
          * Loads a set of modules from a given path.
          *
+		 * @param	pCore	The core to use for loading and resolution.
          * @param   path    The path to load from (may be any Windows path type). Sent through the parser before use.
          * @param   filter  A regex to filter filenames by.
          *
@@ -88,19 +89,10 @@ namespace VoodooShader
          */
         VOODOO_METHOD(LoadPath)(_In_ ICore * pCore, _In_ CONST String & path, _In_ CONST String & filter) PURE;
         /**
-         * Loads a single module, from an already-existing file.
-         *
-         * @param pFile The file to load, a file system reference.
-         *
-         * @note This always uses the module's directory in the search path for required DLLs.
-         */
-        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ IFile * pFile) PURE;
-        VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST String & name) PURE;
-        VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST Uuid libid) PURE;
-        /**
          * Loads a single module, using an absolute or relative filename.
-         *
-         * @param filename The file to load, sent through the parser before use.
+		 *
+		 * @param	pCore	The core to use for loading and resolution.
+         * @param	name The file to load, sent through the parser before use.
          *
          * @note If a relative path is provided, this will canonicalize that path relative to Voodoo's global root. For
          *      example, the call will be loaded as:
@@ -122,7 +114,30 @@ namespace VoodooShader
          *      @li All directories listed in the PATH environment variable, in order.
          *
          */
-        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ CONST String & filename) PURE;
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ CONST String & name) PURE;
+        /**
+         * Loads a single module, from an already-existing file.
+		 *
+		 * @param	pCore	The core to use for loading and resolution.
+         * @param	pFile	The file to load, a file system reference.
+         *
+         * @note This always uses the module's directory in the search path for required DLLs.
+         */
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ IFile * pFile) PURE;
+		/**
+		 * Unloads a single module.
+		 *
+		 * @param	pCore	The core to unload from.
+		 * @param	name	The file name to unload.
+		 */
+        VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST String & name) PURE;
+		/**
+		 * Unloads a single module.
+		 * 
+		 * @param	pCore	The core to unload from.
+		 * @param	libid	The UUID of the library to unload.
+		 */
+        VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST Uuid libid) PURE;
         /**
          * @}
          * @name Class Methods

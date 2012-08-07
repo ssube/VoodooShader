@@ -53,7 +53,8 @@ namespace VoodooShader
      * @{
      * @defgroup voodoo_enums Enums
      * @{
-     *
+     */
+    /**
      * Texture formats for use by @ref VoodooShader::ITexture "textures", describing the layout and size of the texture
      * data. These may not be implemented by the underlying graphics API exactly as they are indicated here, but the
      * available components and sizes are guaranteed to be equal to or greater than the indicated values (with the exception
@@ -117,11 +118,11 @@ namespace VoodooShader
 
     /**
      * Target compiler profiles. These control the compiler used for Voodoo Shader resources.
-     * 
-     * @note Various portions of this enum are reserved or have a special purpose:
-     *  @li @a 0x00FF: Version within the API. Typically this matches the version the API itself reports.
-     *  @li @a 0x7FF0: Major API or vendor. The unset API is reserved for internal Voodoo Shader profiles.
-     *  @li @a 0x8000: Debug flag, where the API provides a debug version.
+     *
+     * Various portions of this enum are reserved or have a special purpose:
+     *   - @a 0x00FF: Version within the API. Typically this matches the version the API itself reports.
+     *   - @a 0x7F00: Major API or vendor. The unset API is reserved for internal Voodoo Shader profiles.
+     *   - @a 0x8000: Debug flag, where the API provides a debug version.
      */
     enum CompilerProfile : uint32_t
     {
@@ -335,12 +336,19 @@ namespace VoodooShader
         uint8_t data[16];
     } Uuid;
 #endif
-	DEFINE_UUID(NilUuid) = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-
+#if !defined(VOODOO_NO_PUGIXML)
+    typedef pugi::xml_document * XmlDocument;
+    typedef pugi::xml_node * XmlNode;
+#else
+    typedef void * XmlDocument;
+    typedef void * XmlNode;
+#endif
     /**
+     * @}
      * @defgroup voodoo_classes_uuids Predefined Uuids
      * @{
      */
+    DEFINE_UUID(NilUuid) = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     namespace PropIds
     {
         DEFINE_UUID(D3D8Object)    = {0xe0, 0xc0, 0x4d, 0x6a, 0x21, 0x37, 0x43, 0x68, 0x9b, 0x80, 0xfa, 0xe4, 0x30, 0x94, 0x52, 0xa5};
@@ -367,18 +375,6 @@ namespace VoodooShader
     }
     /**
      * @}
-     */
-#if !defined(VOODOO_NO_PUGIXML)
-    typedef pugi::xml_document * XmlDocument;
-    typedef pugi::xml_node * XmlNode;
-#else
-    typedef void * XmlDocument;
-    typedef void * XmlNode;
-#endif
-    /**
-     * @}
-     * @addtogroup voodoo_types
-     * @{
      */
     /**
      * Standard return type for Voodoo Shader functions, indicating various levels of success or failure.
@@ -409,14 +405,13 @@ namespace VoodooShader
 #define VSFERR_PROPERTYNOTFOUND MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100B)
 #define VSFERR_APIERROR         MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0x100C)
     /**
-     * @{
+     * @}
      * @defgroup voodoo_types_textures Special Texture Slots
      * @{
      */
 #define VOODOO_TEXTURE_INVALID   uint32_t(-1)
 #define VOODOO_TEXTURE_DEPTH     uint32_t(-2)
     /**
-     * @}
      * @}
      * @defgroup voodoo_types_vectors Vectors
      * @{
@@ -502,7 +497,6 @@ namespace VoodooShader
     struct Version;
     struct Vertex;
     /**
-     * @}
      * @defgroup voodoo_interfaces Interfaces
      * @{
      */
@@ -534,7 +528,7 @@ namespace VoodooShader
     /**
      * @}
      * @defgroup voodoo_functions Function Typedefs
-     * Function pointer types for module interfaces.
+     * @note Behavior and use of these functions is described in @ref voodoo_spec_plugin.
      * @{
      */
     namespace Functions
@@ -550,7 +544,7 @@ namespace VoodooShader
     /**
      * @}
      * @defgroup voodoo_references Reference Typedefs
-     * To provide smart intrusive pointers, Boost is required.
+     * @note To provide smart intrusive pointers, Boost is required.
      * @{
      */
 #if !defined(VOODOO_NO_BOOST)
@@ -574,7 +568,7 @@ namespace VoodooShader
     /**
      * @}
      * @defgroup voodoo_collections Collections
-     * To provide collections of Voodoo Shader objects, smart pointers are required.
+     * @note To provide collections of Voodoo Shader objects, smart pointers are required.
      * @{
      */
 #if !defined(VOODOO_NO_STDLIB)
@@ -612,8 +606,10 @@ namespace VoodooShader
 #endif
     /**
      * @}
-     * @addtogroup voodoo_structs
+     * @defgroup voodoo_structs Structures
      * @{
+     */
+    /**
      * Describes the precise version of a particular library, including name, main version, revision and debug status.
      */
     struct Version
@@ -652,6 +648,61 @@ namespace VoodooShader
             IObject *   VPIObject;
             void *      VPVoid;
         };
+    };
+    /**
+     * Describes a texture, including size and format.
+     */
+    struct TextureDesc
+    {
+        UInt3         Size;
+        uint32_t      Levels;
+        TextureFlags  Usage;
+        TextureFormat Format;
+    };
+    /**
+     * Describes a portion of a texture. This defines a cube region and provides an optional format the region should be
+     * set up as.
+     */
+    struct TextureRegion :
+        public TextureDesc
+    {
+        UInt3 Origin;
+    };
+    /**
+     * Standard vertex structure.
+     */
+    struct VertexDesc
+    {
+        Float4  Position;
+        UByte4  Color;
+        Float4  TexCoord[2];
+    };
+    /**
+     * Shader-compatible light structure
+     */
+    struct LightDesc
+    {
+        uint32_t Type;
+        Float4   Diffuse;
+        Float4   Specular;
+        Float4   Ambient;
+        Float3   Position;
+        Float3   Direction;
+        float    Range;
+        float    Falloff;
+        Float3   Attenuation;
+        float    Theta;
+        float    Phi;
+    };
+    /**
+     * Parameter description.
+     */
+    struct ParameterDesc
+    {
+        ParameterType Type;
+        uint32_t      Rows;
+        uint32_t      Columns;
+        uint32_t      Elements;
     };
     /**
      * @defgroup voodoo_variant_decl Variant Declaration & Init
@@ -719,62 +770,6 @@ namespace VoodooShader
      * @}
      */
     /**
-     * Describes a texture, including size and format.
-     */
-    struct TextureDesc
-    {
-        UInt3         Size;
-        uint32_t      Levels;
-        TextureFlags  Usage;
-        TextureFormat Format;
-    };
-    /**
-     * Describes a portion of a texture. This defines a cube region and provides an optional format the region should be
-     * set up as.
-     */
-    struct TextureRegion :
-        public TextureDesc
-    {
-        UInt3 Origin;
-    };
-    /**
-     * Standard vertex structure.
-     */
-    struct VertexDesc
-    {
-        Float4  Position;
-        UByte4  Color;
-        Float4  TexCoord[2];
-    };
-    /**
-     * Shader-compatible light structure
-     */
-    struct LightDesc
-    {
-        uint32_t Type;
-        Float4   Diffuse;
-        Float4   Specular;
-        Float4   Ambient;
-        Float3   Position;
-        Float3   Direction;
-        float    Range;
-        float    Falloff;
-        Float3   Attenuation;
-        float    Theta;
-        float    Phi;
-    };
-    /**
-     * Parameter description.
-     */
-    struct ParameterDesc
-    {
-        ParameterType Type;
-        uint32_t      Rows;
-        uint32_t      Columns;
-        uint32_t      Elements;
-    };
-    /**
-     * @}
      * @}
      */
 }

@@ -22,6 +22,9 @@
 /**
  * @addtogroup voodoo_macros
  * @{
+ */
+
+/**
  * @defgroup voodoo_macros_debug Debug Macros
  * These will enable a significant amount of additional code and will cause major performance loss. However, full
  * memory management and program flow will be logged.
@@ -80,5 +83,5 @@
 /**
  * @}
  * @}
- * @ * }
+ * @}
  */

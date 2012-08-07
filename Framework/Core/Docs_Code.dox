@@ -43,7 +43,7 @@ namespace VoodooShader
       *
       * @subsection voodoo_spec_plugin_exports_version PluginInit
       *
-      * @code const Version * PluginInit(ICore * pCore); @endcode
+      *     const Version * PluginInit(ICore * pCore);
       *
       * The @p PluginInit function performs any initialization the plugin needs to do and, if successful, returns a constant 
       * VersionDesc struct with the module's name, version and various flags. If the initialization fails, the plugin 
@@ -56,14 +56,14 @@ namespace VoodooShader
       *
       * @subsection voodoo_spec_plugin_exports_count ClassCount
       *
-      * @code const uint32_t ClassCount(); @endcode
+      *     const uint32_t ClassCount();
       *
       * Returns the total number of classes publicly exposed by this module. This function may be omitted, if the plugin
       * does not act as a factory.
       *
       * @subsection voodoo_spec_plugin_exports_info ClassInfo
       *
-      * @code const wchar_t * ClassInfo(const uint32_t index, Uuid * pClsid); @endcode
+      *     const wchar_t * ClassInfo(const uint32_t index, Uuid * pClsid);
       *
       * Returns the name and ClsId of a class. This function may be omitted, if the plugin does not act as a factory.
       *
@@ -77,7 +77,7 @@ namespace VoodooShader
       *
       * @subsection voodoo_spec_plugin_exports_create ClassCreate
       *
-      * @code IObject * ClassCreate(const uint32_t index, ICore * pCore); @endcode
+      *     IObject * ClassCreate(const uint32_t index, ICore * pCore);
       *
       * Creates a new instance of the given class, bound to the provided core. This function may be omitted, if the plugin
       * does not act as a factory.
@@ -104,17 +104,19 @@ namespace VoodooShader
       * than memory leaks, and so should receive focus when designing object linkage.
       *
       * @subsection voodoo_spec_iobject_addref IObject::AddRef
-      * @code uint32_t IObject::AddRef() CONST @endcode
+	  *
+      *     uint32_t IObject::AddRef() CONST
       *
       * Increments the internal reference count by 1 and returns the new count, no other effects shall be caused. Any call
       * to @p AddRef must have a matching call to @p Release; these may be handled by a smart pointer (such as boost's
       * intrusive_ptr). Calls to this will always be thread-safe.
       *
       * @subsection voodoo_spec_iobject_release IObject::Release
-      * @code uint32_t IObject::Release() CONST @endcode
+	  *
+      *     uint32_t IObject::Release() CONST
       *
       * Decrements the internal reference count by 1 and returns the new count. If the new count is 0, the object must be
-      * deleted internally before the function returns (<tt>delete this;</tt>), no other effects shall be caused. This 
+      * deleted internally before the function returns (`delete this;`), no other effects shall be caused. This 
       * guarantees correct memory allocation and deallocation, safe from compiler or module boundaries. Calls to this will
       * always be thread-safe.
       *
@@ -123,13 +125,14 @@ namespace VoodooShader
       *     process.
       *
       * @subsection voodoo_spec_iobject_query IObject::QueryInterface
-      * @code VoodooResult IObject::QueryInterface(CONST Uuid refid, IObject ** ppOut) @endcode
+	  *
+      *     VoodooResult IObject::QueryInterface(CONST Uuid refid, IObject ** ppOut)
       *
       * Queries the object for a particular interface. This is used for a variety of purposes, including extended 
-      * polymorphism and object identification. For example, IModule::CreateObject() returns a generic IObject, which can be
+      * polymorphism and object identification. For example, IPlugin::CreateObject() returns a generic IObject, which can be
       * safely checked for a desired interface by calling @p QueryInterface, without resorting to dangerous casts.
       *
-      * If @a ppOut is a nullptr, the call must fail with invalid parameters (VSFERR_INVALIDPARAMS).
+      * If @a ppOut is a nullptr, the call must fail with invalid parameters (@ref VSFERR_INVALIDPARAMS).
       *
       * If @a refid is not a nil Uuid and the object implements the interface passed in @a refid or if @a refid is the 
       * object's ClsId, it must place a pointer providing that interface into @a ppOut and return @a VSF_OK. The pointer 
@@ -137,66 +140,64 @@ namespace VoodooShader
       * must be incremented, from the pointer to be returned.
       *
       * If the object does not implement the class or interface in @a refid, or @a refid is a nil Uuid, the call must fail 
-      * with an invalid Uuid error (VSFERR_INVALIDUUID).
+      * with an invalid Uuid error (@ref VSFERR_INVALIDUUID).
       *
       * All IObject-derived classes must provide interfaces for IObject, their parent interface(s), and their class. Calls
-      * to @p QueryInterface must be symmetric (if <tt>QI(A)->B</tt> succeeds, then <tt>QI(QI(A)->B)->A</tt> must as well),
-      * transitive (if <tt>QI(QI(A)->B)->C</tt> succeeds, then <tt>QI(A)->C</tt> must as well), and reflexive
-      * (<tt>QI(A)->A</tt> must always succeed).
+      * to @p QueryInterface must be symmetric (if `QI(A)->B` succeeds, then `QI(QI(A)->B)->A` must as well),
+      * transitive (if `QI(QI(A)->B)->C` succeeds, then `QI(A)->C` must as well), and reflexive
+      * (`QI(A)->A` must always succeed).
       *
-      * This is not to say that all objects referenced through interface <tt>A</tt> must behave the same; these guarantees 
-      * must hold for any single object throughout its lifetime. Two objects of type <tt>A</tt> may be unable to provide an 
-      * interface based on internal conditions (for example, if <tt>A1</tt> is an IObject queried from an ICore and 
-      * <tt>A2</tt> is an IObject queried from an IParser, <tt>A2</tt> will not be able to provide an interface to ICore, 
+      * This is not to say that all objects referenced through interface `A` must behave the same; these guarantees 
+      * must hold for any single object throughout its lifetime. Two objects of type `A` may be unable to provide an 
+      * interface based on internal conditions (for example, if `A1` is an IObject queried from an ICore and 
+      * `A2` is an IObject queried from an IParser, `A2` will not be able to provide an interface to ICore, 
       * but must be able to do so for IParser).
       *
       * For VSCore (which implements ICore and IObject) an example QueryInterface may be:
       *
-      * @code
-      * if (!ppOut)
-      * {
-      *     return VSFERR_INVALIDPARAMS;
-      * } 
-      * else 
-      * {
-      *     if (clsid == IID_IObject)
+      *     if (!ppOut)
       *     {
-      *         *ppOut = static_cast<IObject*>(this);
-      *     }
-      *     else if (clsid == IID_ICore)
+      *         return VSFERR_INVALIDPARAMS;
+      *     } 
+      *     else 
       *     {
-      *         *ppOut = static_cast<ICore*>(this);
+      *         if (clsid == IID_IObject)
+      *         {
+      *             *ppOut = static_cast<IObject*>(this);
+      *         }
+      *         else if (clsid == IID_ICore)
+      *         {
+      *             *ppOut = static_cast<ICore*>(this);
+      *         }
+      *         else if (clsid == CLSID_VSCore)
+      *         {
+      *             *ppOut = static_cast<VSCore*>(this);
+      *         }
+      *         else
+      *         {
+      *             *ppOut = nullptr;
+      *             return vSFERR_INVALIDUUID;
+      *         }
+      *         (*ppOut)->AddRef();
+      *         return VSF_OK;
       *     }
-      *     else if (clsid == CLSID_VSCore)
-      *     {
-      *         *ppOut = static_cast<VSCore*>(this);
-      *     }
-      *     else
-      *     {
-      *         *ppOut = nullptr;
-      *         return vSFERR_INVALIDUUID;
-      *     }
-      *     (*ppOut)->AddRef();
-      *     return VSF_OK;
-      * }
-      * @endcode
       *
       * @subsection voodoo_spec_iobject_tostring IObject::ToString
-      * @code String IObject::ToString() CONST @endcode
+	  *
+      *     String IObject::ToString() CONST
       *
       * Returns a formatted string made up of the object's type <em>name</em> (which may be the object's ClsId, although
       * this is not recommended) and optionally some data. This string must follow the form:
       *
-      * @code
-      * ImplName{}
-      * ImplName{Key: Value; Key: Value}
-      * @endcode
+      *     ImplName{}
+      *     ImplName{Key: Value; Key: Value}
       *
       * If no data is provided, the data section inside the braces must be empty but the braces must be present. If data is 
-      * provided, it must be in a <tt>key: value[; ...]</tt> form, matching the @ref voodoo_vson.
+      * provided, it must be in a `key: value[; ...]` form, matching the @ref voodoo_vson.
       *
       * @subsection voodoo_spec_iobject_getcore IObject::GetCore
-      * @code ICore * IObject::GetCore() CONST @endcode
+	  *
+      *     ICore * IObject::GetCore() CONST
       *
       * Returns a reference to the object's parent core.
       *
@@ -207,7 +208,7 @@ namespace VoodooShader
       * languages and it may not be possible to safely pass exceptions.
       *
       * Methods which call other functions that may throw (such as standard library functions) must catch and handle any
-      * potential exception and prevent it from propagating. Constructors may throw, and all calls to <tt>new</tt> should be
+      * potential exception and prevent it from propagating. Constructors may throw, and all calls to `new` should be
       * wrapped in try/catch blocks to handle both exceptions from the ctor and various other exceptions (such as memory).
       *
       * @section voodoo_spec_plugin_docs Documentation
@@ -230,9 +231,9 @@ namespace VoodooShader
       * Adapter modules are free to provide other classes, in support of or unrelated to, the adapter itself. The adapter
       * must provide at least one implementation each of IAdapter and ITexture.
       *
-      * It is recommended that the adapter name be of the form <tt>[Name]Adapter</tt> and each supporting class use
-      * <tt>[Name]classname</tt>, to easily identify them. If the adapter or module is part of the framework, the name
-      * scheme extends to the module's name (<tt>Voodoo/[Name]</tt>) and filename (<tt>Voodoo_[Name].dll</tt>). Each
+      * It is recommended that the adapter name be of the form `[Name]Adapter` and each supporting class use
+      * `[Name]classname`, to easily identify them. If the adapter or module is part of the framework, the name
+      * scheme extends to the module's name (`Voodoo/[Name]`) and filename (`Voodoo_[Name].dll`). Each
       * framework adapter is given a short one word name related to its game in some manner.
       *
       * For further details on the behavior required of adapters, please refer to the IAdapter interface documentation.

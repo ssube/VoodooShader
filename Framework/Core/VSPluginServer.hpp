@@ -43,7 +43,7 @@ namespace VoodooShader
         VOODOO_METHOD_(bool, IsLoaded)(_In_ CONST Uuid & libid) CONST;
         VOODOO_METHOD(LoadPath)(_In_ ICore * pCore, _In_ CONST String & path, _In_ CONST String & filter);
         VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ IFile * pFile);
-        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ CONST String & filename);
+        VOODOO_METHOD(LoadPlugin)(_In_ ICore * pCore, _In_ CONST String & name);
         VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST String & name);
         VOODOO_METHOD(UnloadPlugin)(_In_ ICore * pCore, _In_ CONST Uuid libid);
         VOODOO_METHOD_(bool, ClassExists)(_In_ CONST Uuid refid) CONST;

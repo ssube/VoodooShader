@@ -26,15 +26,15 @@ namespace VoodooShader
       *
       * @section voodoo_tutorials_basics Basics
       *
-      * To launch Voodoo Shader, a core must be created. This is done by calling the function <tt>CreateCore</tt>, 
+      * To launch Voodoo Shader, a core must be created. This is done by calling the function `CreateCore`, 
       * exported undecorated from the core module. 
       *
-      * It is possible to link to the Voodoo Core, by defining <tt>VOODOO_STATIC_LINK</tt> before including 
+      * It is possible to link to the Voodoo Core, by defining `VOODOO_STATIC_LINK` before including 
       * VoodooFramework.hpp, or load the module at runtime. As the location of the core is unknown, loading at runtime is 
-      * highly recommended. Once loaded, calling CreateCore will return an <tt>ICore *</tt>.
+      * highly recommended. Once loaded, calling CreateCore will return an `ICore *`.
       *
       * If a valid core is returned, it must be initialized to load the config and plugins. The desired config file must
-      * be passed to <tt>pCore->Initialize()</tt> with the desired startup parameters, and the core will load the
+      * be passed to `pCore->Initialize()` with the desired startup parameters, and the core will load the
       * config, modules, and other necessary data. The core must not be used until initialized, except for adding and
       * releasing references.
       *

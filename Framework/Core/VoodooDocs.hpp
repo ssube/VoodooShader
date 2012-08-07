@@ -26,7 +26,7 @@
  *
  * @file VoodooFramework.hpp
  * This file is the public-facing include for the Voodoo Shader core. All libraries using the Voodoo Shader Framework should
- * include this file, and optionally <tt>Support.inl</tt>; this file includes all other headers necessary to use Voodoo
+ * include this file, and optionally `Support.inl`; this file includes all other headers necessary to use Voodoo
  * Shader.
  * 
  * @defgroup voodoo_macros Macros
@@ -82,9 +82,6 @@
  * @def VOODOO_API
  * Declares the DLL visibility type for functions. When building the core, this is typically export; otherwise it defaults
  * to import to simplify using the framework.
- * 
- * @def VOODOO_PUBLIC_FUNC
- * Declares the full set of qualifiers and visibility modifiers for publicly-visible function.
  * 
  * @def VOODOO_METHOD_(type, name)
  * Declares a method with full qualifiers, named @a name and with a return type of @a type.

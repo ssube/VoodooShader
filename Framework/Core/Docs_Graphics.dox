@@ -85,7 +85,7 @@ namespace VoodooShader
       *
       * Whenever the global parameter is set to a new value, all attached parameters will also be updated. This mechanism is
       * useful for things like system time, common matrices, random values or other data that may be used by many shaders.
-      * To indicate the parent parameter to the linker, a parameter should have a <tt>vs_source</tt> string annotation.
+      * To indicate the parent parameter to the linker, a parameter should have a `vs_source` string annotation.
       *
       * @code
       * float2 resolution < string vs_source = ":resolution"; >;
@@ -149,15 +149,15 @@ namespace VoodooShader
       *
       * @page voodoo_textures Textures
       *
-      * The shaders used in Voodoo are capable of accessing a number of texture types, and Voodoo is able to load a wide
-      * variety of texture formats. This provides a very powerful system and allows you to use a great variety of textures.
+      * The image loading system used in Voodoo is capable of reading and writing a large variety of formats, providing
+	  * easy access to most common textures.
       *
       * @section voodoo_textures_types Texture Types
       *
       * Three basic texture types are supported in Voodoo:
-      *     @li 1-dimensional texture rows (a simple row of pixels, 1 by x)
-      *     @li 2-dimensional texture planes (the most common type, a rectangle of pixels, x by y)
-      *     @li 3-dimensional texture volumes (effectively a number of 2D textures stacked in slices, x by y by z)
+      *     - 1-dimensional texture rows (a simple row of pixels, 1 by x)
+      *     - 2-dimensional texture planes (the most common type, a rectangle of pixels, x by y)
+      *     - 3-dimensional texture volumes (effectively a number of 2D textures stacked in slices, x by y by z)
       *
       * Any of these types may also contain mipmaps, which theoretically add another dimension but are not considered as
       * such.
@@ -182,35 +182,35 @@ namespace VoodooShader
       * values, but they will usually be clamped. If you need to store values outside of that range, use one of the formats
       * suffixed with 'F' to store the data as floats (single and double texture formats are available).
       *
-      * <table>
-      *     <tr><th>Voodoo Format</th> <th>DirectX Format</th> <th>OpenGL Format</th> <th>RT/Copy/Load<sup>6</sup></th> <th>Bits</th> <th>Channels</th></tr>
-      *     <tr><td>@ref VSFmt_Null</td> <td>n/a <sup>1</sup></td> <td>n/a <sup>1</sup></td> <td>Y/N/N</td> <td>0</td> <td>none</td></tr>
-      *     <tr><td>@ref VSFmt_RGB5A1</td> <td>D3DFMT_A1R5G5B5</td> <td>GL_RGB5_A1</td> <td>Yes</td> <td>16</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGB8</td> <td>D3DFMT_X8R8G8B8</td> <td>GL_RGB8</td> <td>Yes</td> <td>24</td> <td>RGB</td></tr>
-      *     <tr><td>@ref VSFmt_RGBA8</td> <td>D3DFMT_A8R8G8B8</td> <td>GL_RGBA8</td> <td>Yes</td> <td>32</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGB10A2</td> <td>D3DFMT_A2R10G10B10</td> <td>GL_RGB10_A2</td> <td>Yes</td> <td>32</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGBA16F<sup>2</sup></td><td>D3DFMT_A16B16G16R16F</td> <td>GL_RGBA16F</td> <td>Yes</td> <td>64</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_RGBA32F<sup>2</sup></td><td>D3DFMT_A32B32G32R32F</td> <td>GL_RGBA32F</td> <td>Yes</td> <td>128</td> <td>RGBA</td></tr>
-      *     <tr><td>@ref VSFmt_D16</td> <td>D3DFMT_D16</td> <td>GL_DEPTH_COMPONENT16</td> <td>Y/Y<sup>3</sup>/N</td> <td>16</td> <td>R</td></tr>
-      *     <tr><td>@ref VSFmt_D24</td> <td>D3DFMT_D24X8</td> <td>GL_DEPTH_COMPONENT24</td> <td>Y/Y<sup>3</sup>/N</td> <td>24</td> <td>R</td></tr>
-      *     <tr><td>@ref VSFmt_D24S8</td> <td>D3DFMT_D24S8</tr> <td>GL_DEPTH_COMPONENT24S8</td> <td>Y/Y<sup>3</sup>/N</td> <td>32</td> <td>R<sup>4</sup></td></tr>
-      *     <tr><td>@ref VSFmt_D32</td> <td>D3DFMT_D32</td> <td>GL_DEPTH_COMPONENT32</td> <td>Y/Y<sup>3</sup>/N</td> <td>32</td> <td>R</td></tr>
-      *     <tr><td>@ref VSFmt_DMax</td> <td>varies <sup>5</sup></td> <td>varies <sup>5</sup></td> <td>Y/Y<sup>3</sup>/N</td> <td>variable</td> <td>R</td></tr>
-      * </table>
-      * <br/>
+      * | Voodoo Format      | DirectX Format      | OpenGL Format           | RT/Copy/Load<sup>6</sup> | Bits | Channels |
+	  *	---------------------|---------------------|-------------------------|--------------------------|------|-----------
+      * | @ref VSFmt_Null    | n/a <sup>1</sup>    | n/a <sup>1</sup>        | Y/N/N                    | 0    | none     |
+      * | @ref VSFmt_RGB5A1  | D3DFMT_A1R5G5B5     | GL_RGB5_A1              | Yes                      | 16   | RGBA     |
+      * | @ref VSFmt_RGB8    | D3DFMT_X8R8G8B8     | GL_RGB8                 | Yes                      | 24   | RGB      |
+      * | @ref VSFmt_RGBA8   | D3DFMT_A8R8G8B8     | GL_RGBA8                | Yes                      | 32   | RGBA     |
+      * | @ref VSFmt_RGB10A2 | D3DFMT_A2R10G10B10  | GL_RGB10_A2             | Yes                      | 32   | RGBA     |
+      * | @ref VSFmt_RGBA16F<sup>2</sup> | D3DFMT_A16B16G16R16F | GL_RGBA16F | Yes                      | 64   | RGBA     |
+      * | @ref VSFmt_RGBA32F<sup>2</sup> | D3DFMT_A32B32G32R32F | GL_RGBA32F | Yes                      | 128  | RGBA     |
+      * | @ref VSFmt_D16     | D3DFMT_D16          | GL_DEPTH_COMPONENT16    | Y/Y<sup>3</sup>/N        | 16   | R        |
+      * | @ref VSFmt_D24     | D3DFMT_D24X8        | GL_DEPTH_COMPONENT24    | Y/Y<sup>3</sup>/N        | 24   | R        |
+      * | @ref VSFmt_D24S8   | D3DFMT_D24S8        | GL_DEPTH_COMPONENT24S8  | Y/Y<sup>3</sup>/N        | 32   | R<sup>4</sup>|
+      * | @ref VSFmt_D32     | D3DFMT_D32          | GL_DEPTH_COMPONENT32    | Y/Y<sup>3</sup>/N        | 32   | R        |
+      * | @ref VSFmt_DMax    | varies <sup>5</sup> | varies <sup>5</sup>     | Y/Y<sup>3</sup>/N        | variable | R    |
+      *
       * <em><sup>1</sup>:</em> the null format is a special format with no backing texture data, but which can be bound as
       *     a render-target in any of the color buffers. This is useful when color data may be discarded but depth data must
       *     be written, as most bindings require at least one render target besides a depth texture.
+      *
       * <em><sup>2</sup>:</em> floating-point texture formats (@ref VSFmt_RGBA16F and @ref VSFmt_RGBA32F) may not be 
       *     supported on all hardware. Where they are not available, the next-highest precision format will be used, being
       *     no less than @ref VSFmt_RGBA8.
-      * <br/>
+      *
       * <em><sup>3</sup>:</em> Depth textures suffer additional restrictions in some APIs. See the
       *     @ref voodoo_textures_depth "depth buffers" section for more information.
-      * <br/>
+      *
       * <em><sup>4</sup>:</em> Depth/stencil formats allow access to the depth component only, mapping to one of the regular 
       *     channels.
-      * <br/>
+      *
       * <em><sup>5</sup>:</em> The @ref VSFmt_DMax format is unique in that it has a varying depth. It is the maximum 
       *     precision depth buffer which can be used as a source texture on the current platform. The actual format varies
       *     widely, from D16 to INTZ or even D32, depending on hardware capabilities. When using a depth texture, this is
@@ -248,20 +248,19 @@ namespace VoodooShader
       *
       * @section voodoo_textures_fileformats Supported File Formats
       *
-      * <table>
-      *     <tr><th>Format</th><th>Extension</th><th>Load</th><th>Save<sup>2</sup></th></tr>
-      *     <tr><td>Windows Bitmap<sup>1</sup></td><td>bmp</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>DirectDraw Surface</td><td>dds</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>C-style Header<sup>1</sup></td><td>h</td><td></td><td>Yes</td></tr>
-      *     <tr><td>Radiance High Dynamic</td><td>hdr</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Portable Network Graphics</td><td>png</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Adobe Photoshop</td><td>psd</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Raw Data</td><td>raw</td><td>Yes</td><td>Yes</td></tr>
-      *     <tr><td>Truevision Targa</td><td>tga</td><td>Yes</td><td>Yes</td></tr>
-      * </table>
-      * <br/>
+      * | Format                     | Extension | Load | Save<sup>2</sup> |
+      * -----------------------------|-----------|------|-------------------
+      * | Windows Bitmap<sup>1</sup> | bmp       | Yes  | Yes |
+      * | DirectDraw Surface         | dds       | Yes  | Yes | 
+      * | C-style Header<sup>1</sup> | h         |      | Yes |
+      * | Radiance High Dynamic      | hdr       | Yes  | Yes |
+      * | Portable Network Graphics  | png       | Yes  | Yes |
+      * | Adobe Photoshop            | psd       | Yes  | Yes |
+      * | Raw Data                   | raw       | Yes  | Yes |
+      * | Truevision Targa           | tga       | Yes  | Yes |
+      *
       * <em><sup>1</sup>:</em> These formats are not recommended for use, due to poor quality or capabilities.
-      * <br />
+      * 
       * <em><sup>2</sup>:</em> @ref voodoo_module_wfilesystem does not yet support saving images. Support for these formats
       *     is provided directly by DevIL, including the ability to convert most internal formats.
       *
