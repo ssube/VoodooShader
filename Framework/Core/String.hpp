@@ -224,7 +224,7 @@ namespace VoodooShader
         (
             _In_ CONST String & delims, 
             _In_ CONST uint32_t count, 
-            _Out_writes_opt_(count) String * pStrings, 
+            _Inout_updates_opt_(count) String * pStrings, 
             _In_ CONST bool stripEmpty = false
         ) CONST;
         /**

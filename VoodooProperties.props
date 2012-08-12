@@ -1,74 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup>
-    <VoodooVersionMajor>0</VoodooVersionMajor>
-    <VoodooVersionMinor>0</VoodooVersionMinor>
-    <VoodooVersionPatch>0</VoodooVersionPatch>
-    <VoodooVersionBuild>0</VoodooVersionBuild>
-    <VoodooVersionGit>local</VoodooVersionGit>
-    <VoodooVersionTiming>false</VoodooVersionTiming>
-    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <CharacterSet>Unicode</CharacterSet>
-    <CLRSupport>false</CLRSupport>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup />
-  <ItemDefinitionGroup>
-    <ClCompile>
-        <!-- There are a lot of warnings turned off. However, all but 1 are level 4, and that one is in a boost
+    <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+        <VoodooVersionMajor>0</VoodooVersionMajor>
+        <VoodooVersionMinor>0</VoodooVersionMinor>
+        <VoodooVersionPatch>0</VoodooVersionPatch>
+        <VoodooVersionBuild>0</VoodooVersionBuild>
+        <VoodooVersionGit>local</VoodooVersionGit>
+        <VoodooVersionTiming>false</VoodooVersionTiming>
+        <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
+        <IntDir>$(SolutionDir)\build\$(ProjectName)\$(Configuration)\</IntDir>
+        <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
+        <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+        <CharacterSet>Unicode</CharacterSet>
+        <CLRSupport>false</CLRSupport>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+        <UseDebugLibraries>false</UseDebugLibraries>
+        <RunCodeAnalysis>false</RunCodeAnalysis>
+        <WholeProgramOptimization>true</WholeProgramOptimization>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+        <UseDebugLibraries>true</UseDebugLibraries>
+        <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+        <RunCodeAnalysis>true</RunCodeAnalysis>
+    </PropertyGroup>
+    <PropertyGroup />
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <!-- There are a lot of warnings turned off. However, all but 1 are level 4, and that one is in a boost
              file and ignores pragmas. The rest are "function not inlined", "3 bytes padding added", etc. -->
-      <DisableSpecificWarnings>4265;4350;4514;4548;4619;4710;4820;4996;</DisableSpecificWarnings>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-        <PreprocessorDefinitions>VOODOO_VERSION_MAJOR=$(VoodooVersionMajor);VOODOO_VERSION_MINOR=$(VoodooVersionMinor);VOODOO_VERSION_PATCH=$(VoodooVersionPatch);VOODOO_VERSION_BUILD=$(VoodooVersionBuild);VOODOO_VERSION_GIT=$(VoodooVersionGit);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <Optimization>MaxSpeed</Optimization>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <Optimization>Disabled</Optimization>
-      <EnablePREfast>true</EnablePREfast>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup>
-    <ResourceCompile>
-      <PreprocessorDefinitions>BUILD_PROJECTNAME=$(ProjectName);BUILD_FILENAME=$(TargetFileName);VOODOO_VERSION_MAJOR=$(VoodooVersionMajor);VOODOO_VERSION_MINOR=$(VoodooVersionMinor);VOODOO_VERSION_PATCH=$(VoodooVersionPatch);VOODOO_VERSION_BUILD=$(VoodooVersionBuild);VOODOO_VERSION_GIT=$(VoodooVersionGit);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-  </ItemDefinitionGroup>
-  <ItemGroup />
+            <DisableSpecificWarnings>4265;4350;4514;4548;4619;4710;4820;4996;</DisableSpecificWarnings>
+            <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+            <PreprocessorDefinitions>VOODOO_VERSION_MAJOR=$(VoodooVersionMajor);VOODOO_VERSION_MINOR=$(VoodooVersionMinor);VOODOO_VERSION_PATCH=$(VoodooVersionPatch);VOODOO_VERSION_BUILD=$(VoodooVersionBuild);VOODOO_VERSION_GIT=$(VoodooVersionGit);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+        </ClCompile>
+        <Link>
+            <GenerateDebugInformation>true</GenerateDebugInformation>
+            <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+        </Link>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+        <ClCompile>
+            <WarningLevel>Level4</WarningLevel>
+            <TreatWarningAsError>false</TreatWarningAsError>
+            <Optimization>MaxSpeed</Optimization>
+            <IntrinsicFunctions>true</IntrinsicFunctions>
+            <FunctionLevelLinking>true</FunctionLevelLinking>
+            <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+            <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+            <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+        </ClCompile>
+        <Link>
+            <GenerateDebugInformation>false</GenerateDebugInformation>
+            <EnableCOMDATFolding>true</EnableCOMDATFolding>
+            <OptimizeReferences>true</OptimizeReferences>
+        </Link>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+        <ClCompile>
+            <WarningLevel>Level4</WarningLevel>
+            <TreatWarningAsError>true</TreatWarningAsError>
+            <Optimization>Disabled</Optimization>
+            <EnablePREfast>true</EnablePREfast>
+            <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+        </ClCompile>
+    </ItemDefinitionGroup>
+    <ItemDefinitionGroup>
+        <ResourceCompile>
+            <PreprocessorDefinitions>BUILD_PROJECTNAME=$(ProjectName);BUILD_FILENAME=$(TargetFileName);VOODOO_VERSION_MAJOR=$(VoodooVersionMajor);VOODOO_VERSION_MINOR=$(VoodooVersionMinor);VOODOO_VERSION_PATCH=$(VoodooVersionPatch);VOODOO_VERSION_BUILD=$(VoodooVersionBuild);VOODOO_VERSION_GIT=$(VoodooVersionGit);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+        </ResourceCompile>
+    </ItemDefinitionGroup>
+    <ItemGroup />
 </Project>

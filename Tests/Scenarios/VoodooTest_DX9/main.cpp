@@ -250,7 +250,7 @@ LRESULT WINAPI WinProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 }
 
 // Application entry point
-INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, INT)
+INT WINAPI WinMain(_In_ HINSTANCE hInst, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ INT)
 {
     // Register the window class
     WNDCLASSEX wc = {sizeof(WNDCLASSEX), CS_CLASSDC, WinProc, 0L, 0L,

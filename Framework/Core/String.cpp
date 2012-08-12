@@ -337,28 +337,33 @@ namespace VoodooShader
         m_Impl->m_Str.reserve(size);
     }
 
-    uint32_t String::Split(_In_ CONST String & delims, _In_ CONST uint32_t count, _Out_writes_opt_(count) String * pStrings, _In_ CONST bool stripEmpty) CONST
+    uint32_t String::Split(_In_ CONST String & delims, _In_ CONST uint32_t count, _Inout_updates_opt_(count) String * pStrings, _In_ CONST bool stripEmpty) CONST
     {
         VOODOO_CHECK_IMPL;
 
         std::vector<std::wstring> tokens;
         boost::split(tokens, m_Impl->m_Str, boost::is_any_of(delims.GetData()), stripEmpty ? boost::algorithm::token_compress_on : boost::algorithm::token_compress_off);
 
-        if (pStrings)
+        if (pStrings && count > 0)
         {
             uint32_t index = 0;
             uint32_t cap = min(count, tokens.size());
+
             while (index < cap)
             {
                 pStrings[index] = tokens[index];
                 ++index;
             }
 
-            if (index == tokens.size())
+            if (tokens.size() < count)
             {
-                return index;
+                while (index < count)
+                {
+                    pStrings[index].Clear();
+                    ++index;
+                }
             }
-            else if (index == count)
+            else if (tokens.size() > count)
             {
                 cap = tokens.size();
                 while (index < cap)

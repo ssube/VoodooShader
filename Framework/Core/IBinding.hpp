@@ -121,11 +121,23 @@ namespace VoodooShader
          * @{
          */
         /**
-         * Creates a new texture with the given name and description. The contents of this texture are binding-defined, and
-         * may be undefined data (this is the most common). 
+         * Creates a new texture with the given name and description. The contents of this texture are initially undefined. 
+         * 
+         * @param   name    The texture's name (registered with the core).
+         * @param   desc    The texture's description.
          */
         VOODOO_METHOD_(ITexture *, CreateTexture)(_In_ CONST String & name, _In_ CONST TextureDesc desc) PURE;
+        /**
+         * Creates a new texture with the given name and loads data into it from a file. The texture will take the size and
+         * format of the file.
+         * 
+         * @param   name    The texture's name (registered with the core).
+         * @param   pFile   The texture file to load.
+         */
         VOODOO_METHOD_(ITexture *, CreateTextureFromFile)(_In_ CONST String & name, _In_ IFile * pFile) PURE;
+        /**
+         * Creates a null texture from the device.
+         */
         VOODOO_METHOD_(ITexture *, CreateNullTexture)() PURE;
         /**
          * @}

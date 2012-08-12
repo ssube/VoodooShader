@@ -1,63 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Label="UserMacros">
-    <BoostInclude>I:\Code\Boost</BoostInclude>
-    <BoostLib>I:\Code\Boost\stage\lib</BoostLib>
-    <DXInclude>I:\code\DirectX\9c\Include</DXInclude>
-    <DXLib>I:\code\DirectX\9c\Lib\x86</DXLib>
-    <DevILInclude>$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include</DevILInclude>
-    <DevILLib>$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib</DevILLib>
-    <EasyHookInclude>$(SolutionDir)\dependencies\EasyHook_2.6\include</EasyHookInclude>
-    <EasyHookLib>$(SolutionDir)\dependencies\EasyHook_2.6\lib</EasyHookLib>
-    <GlewInclude>$(SolutionDir)\dependencies\Glew_1.5.7\include</GlewInclude>
-    <GlewLib>$(SolutionDir)\dependencies\Glew_1.5.7\lib</GlewLib>
-    <PugiXmlInclude>$(SolutionDir)\dependencies\pugixml_1.0\include\</PugiXmlInclude>
-    <PugiXmlLib>$(SolutionDir)\dependencies\pugixml_1.0\bin\x32</PugiXmlLib>
-    <CoreInclude>$(SolutionDir)\Framework\Core</CoreInclude>
-    <CoreLib>$(SolutionDir)\bin\$(Configuration)\</CoreLib>
-  </PropertyGroup>
-  <ItemGroup>
-    <BuildMacro Include="BoostInclude">
-      <Value>$(BoostInclude)</Value>
-    </BuildMacro>
-    <BuildMacro Include="BoostLib">
-      <Value>$(BoostLib)</Value>
-    </BuildMacro>
-    <BuildMacro Include="DXInclude">
-      <Value>$(DXInclude)</Value>
-    </BuildMacro>
-    <BuildMacro Include="DXLib">
-      <Value>$(DXLib)</Value>
-    </BuildMacro>
-    <BuildMacro Include="DevILInclude">
-      <Value>$(DevILInclude)</Value>
-    </BuildMacro>
-    <BuildMacro Include="DevILLib">
-      <Value>$(DevILLib)</Value>
-    </BuildMacro>
-    <BuildMacro Include="EasyHookInclude">
-      <Value>$(EasyHookInclude)</Value>
-    </BuildMacro>
-    <BuildMacro Include="EasyHookLib">
-      <Value>$(EasyHookLib)</Value>
-    </BuildMacro>
-    <BuildMacro Include="GlewInclude">
-      <Value>$(GlewInclude)</Value>
-    </BuildMacro>
-    <BuildMacro Include="GlewLib">
-      <Value>$(GlewLib)</Value>
-    </BuildMacro>
-    <BuildMacro Include="PugiXmlInclude">
-      <Value>$(PugiXmlInclude)</Value>
-    </BuildMacro>
-    <BuildMacro Include="PugiXmlLib">
-      <Value>$(PugiXmlLib)</Value>
-    </BuildMacro>
-    <BuildMacro Include="CoreInclude">
-      <Value>$(CoreInclude)</Value>
-    </BuildMacro>
-    <BuildMacro Include="CoreLib">
-      <Value>$(CoreLib)</Value>
-    </BuildMacro>
-  </ItemGroup>
+    <PropertyGroup Label="UserMacros">
+        <BoostInclude>I:\Code\Boost</BoostInclude>
+        <BoostLib>I:\Code\Boost\stage\lib</BoostLib>
+        <DXInclude>I:\code\DirectX\9c\Include</DXInclude>
+        <DXLib>I:\code\DirectX\9c\Lib\x86</DXLib>
+        <DevILInclude>$(SolutionDir)\dependencies\DevIL_x86_1.7.8\include</DevILInclude>
+        <DevILLib>$(SolutionDir)\dependencies\DevIL_x86_1.7.8\lib</DevILLib>
+        <EasyHookInclude>$(SolutionDir)\dependencies\EasyHook_2.6\include</EasyHookInclude>
+        <EasyHookLib>$(SolutionDir)\dependencies\EasyHook_2.6\lib</EasyHookLib>
+        <GlewInclude>$(SolutionDir)\dependencies\Glew_1.5.7\include</GlewInclude>
+        <GlewLib>$(SolutionDir)\dependencies\Glew_1.5.7\lib</GlewLib>
+        <MojoShaderInclude>$(SolutionDir)\dependencies\MojoShader_1111</MojoShaderInclude>
+        <MojoShaderLib>$(SolutionDir)\dependencies\MojoShader_1111\lib</MojoShaderLib>
+        <PugiXmlInclude>$(SolutionDir)\dependencies\pugixml_1.0\include\</PugiXmlInclude>
+        <PugiXmlLib>$(SolutionDir)\dependencies\pugixml_1.0\bin\x32</PugiXmlLib>
+        <CoreInclude>$(SolutionDir)\Framework\Core</CoreInclude>
+        <CoreLib>$(SolutionDir)\bin\$(Configuration)\</CoreLib>
+    </PropertyGroup>
+    <ItemGroup>
+        <BuildMacro Include="BoostInclude">
+            <Value>$(BoostInclude)</Value>
+        </BuildMacro>
+        <BuildMacro Include="BoostLib">
+            <Value>$(BoostLib)</Value>
+        </BuildMacro>
+        <BuildMacro Include="DXInclude">
+            <Value>$(DXInclude)</Value>
+        </BuildMacro>
+        <BuildMacro Include="DXLib">
+            <Value>$(DXLib)</Value>
+        </BuildMacro>
+        <BuildMacro Include="DevILInclude">
+            <Value>$(DevILInclude)</Value>
+        </BuildMacro>
+        <BuildMacro Include="DevILLib">
+            <Value>$(DevILLib)</Value>
+        </BuildMacro>
+        <BuildMacro Include="EasyHookInclude">
+            <Value>$(EasyHookInclude)</Value>
+        </BuildMacro>
+        <BuildMacro Include="EasyHookLib">
+            <Value>$(EasyHookLib)</Value>
+        </BuildMacro>
+        <BuildMacro Include="GlewInclude">
+            <Value>$(GlewInclude)</Value>
+        </BuildMacro>
+        <BuildMacro Include="GlewLib">
+            <Value>$(GlewLib)</Value>
+        </BuildMacro>
+        <BuildMacro Include="MojoShaderInclude">
+            <Value>$(MojoShaderInclude)</Value>
+        </BuildMacro>
+        <BuildMacro Include="MojoShaderLib">
+            <Value>$(MojoShaderLib)</Value>
+        </BuildMacro>
+        <BuildMacro Include="PugiXmlInclude">
+            <Value>$(PugiXmlInclude)</Value>
+        </BuildMacro>
+        <BuildMacro Include="PugiXmlLib">
+            <Value>$(PugiXmlLib)</Value>
+        </BuildMacro>
+        <BuildMacro Include="CoreInclude">
+            <Value>$(CoreInclude)</Value>
+        </BuildMacro>
+        <BuildMacro Include="CoreLib">
+            <Value>$(CoreLib)</Value>
+        </BuildMacro>
+    </ItemGroup>
 </Project>
