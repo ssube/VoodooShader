@@ -31,7 +31,7 @@ namespace VoodooShader
         DeclareDebugCache();
 
         VSTechniqueDX9::VSTechniqueDX9(_In_ VSEffectDX9 * pEffect, _In_ D3DXHANDLE pTechHandle) :
-            m_Refs(0), m_Effect(pEffect), m_DXHandle(pTechHandle)
+            m_Refs(0), m_Effect(pEffect), m_Handle(pTechHandle)
         {
             if (!m_Effect)
             {
@@ -40,28 +40,28 @@ namespace VoodooShader
 
             m_Core = m_Effect->GetCore();
 
-            if (!m_DXHandle)
+            if (!m_Handle)
             {
                 Throw(VOODOO_D3D9_NAME, VSTR("Unable to create technique with no hardware handle."), nullptr);
             }
 
             D3DXTECHNIQUE_DESC desc;
             ZeroMemory(&desc, sizeof(D3DXTECHNIQUE_DESC));
-            if (FAILED(m_Effect->m_DXEffect->GetTechniqueDesc(m_DXHandle, &desc)))
+            if (FAILED(m_Effect->m_Handle->GetTechniqueDesc(m_Handle, &desc)))
             {
                 Throw(VOODOO_D3D9_NAME, VSTR("Unable to get technique description."), m_Core);
             }
 
             m_Name = desc.Name;
 
-            if (FAILED(m_Effect->m_DXEffect->ValidateTechnique(m_DXHandle)))
+            if (FAILED(m_Effect->m_Handle->ValidateTechnique(m_Handle)))
             {
                 Throw(VOODOO_D3D9_NAME, VSTR("Unable to validate technique."), m_Core);
             }
 
             for (UINT passIndex = 0; passIndex < desc.Passes; ++passIndex)
             {
-                D3DXHANDLE passHandle = m_Effect->m_DXEffect->GetPass(m_DXHandle, passIndex);
+                D3DXHANDLE passHandle = m_Effect->m_Handle->GetPass(m_Handle, passIndex);
                 VSPassDX9Ref pass(new VSPassDX9(this, passIndex));
                 m_Passes.push_back(pass);
 
@@ -73,14 +73,14 @@ namespace VoodooShader
                     char targetIndexChar = '0' + char(targetIndex);
                     targetName[9] = targetIndexChar;
 
-                    D3DXHANDLE annotation = m_Effect->m_DXEffect->GetAnnotationByName(passHandle, targetName);
+                    D3DXHANDLE annotation = m_Effect->m_Handle->GetAnnotationByName(passHandle, targetName);
                     if (!annotation)
                     {
                         break;
                     }
 
                     LPCSTR annotationValue = NULL;
-                    if (FAILED(m_Effect->m_DXEffect->GetString(annotation, &annotationValue)) || !annotationValue)
+                    if (FAILED(m_Effect->m_Handle->GetString(annotation, &annotationValue)) || !annotationValue)
                     {
                         break;
                     }
@@ -178,7 +178,7 @@ namespace VoodooShader
             if (propid == PropIds::D3DX9Handle)
             {
                 pValue->Type = VSUT_PVoid;
-                pValue->VPVoid = (PVOID)m_DXHandle;
+                pValue->VPVoid = (PVOID)m_Handle;
                 return VSF_OK;
             }
             else

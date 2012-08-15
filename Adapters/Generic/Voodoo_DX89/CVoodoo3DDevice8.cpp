@@ -913,6 +913,10 @@ namespace VoodooShader
                 hr = m_RealDevice->SetTexture(Stage, nullptr);
             }
 
+            m_RealDevice->SetSamplerState(Stage, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+            m_RealDevice->SetSamplerState(Stage, D3DSAMP_MINFILTER, D3DTEXF_POINT);
+            m_RealDevice->SetSamplerState(Stage, D3DSAMP_MIPFILTER, D3DTEXF_POINT);
+
             VOODOO_API_LOG(VSLog_PlugDebug, VOODOO_DX89_NAME, StringFormat("CVoodoo3DDevice8::SetTexture(%d, %p) == %d") << Stage << pTexture << hr);
 
             return hr;

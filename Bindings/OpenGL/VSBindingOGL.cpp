@@ -41,7 +41,7 @@ namespace VoodooShader
             iluInit();
             ilutInit();
 
-            if (ilutRenderer(ILUT_DIRECT3D9) != IL_TRUE)
+            if (ilutRenderer(ILUT_OPENGL) != IL_TRUE)
             {
                 pCore->GetLogger()->LogMessage(VSLog_PlugError, VOODOO_OGL_NAME, 
                     VSTR("Unable to initialize ILUT for image loading."));
@@ -51,14 +51,13 @@ namespace VoodooShader
             {
                 m_ILUT = true;
             }
+
+            //! @todo Initialize Mojoshader
         }
 
         VSBindingOGL::~VSBindingOGL()
         {
-            if (m_Device)
-            {
-                m_Device->Release();
-            }
+            //! @todo Shutdown Mojoshader
         }
 
         VOODOO_METHODDEF_(uint32_t, VSBindingOGL::AddRef)() CONST
@@ -122,32 +121,31 @@ namespace VoodooShader
 
         VOODOO_METHODDEF(VSBindingOGL::Init)(_In_ CONST uint32_t count, _In_reads_(count) Variant * pParams)
         {
-            if (count != 1 || !pParams)
+            if (count != 2 || !pParams)
             {
                 return VSFERR_INVALIDPARAMS;
             }
 
-            if (pParams[0].Type != VSUT_PVoid || !pParams[0].VPVoid)
+            if (pParams[0].Type != VSUT_PVoid || !pParams[0].VPVoid || pParams[1].Type != VSUT_PVoid || !pParams[1].VPVoid)
             {
                 return VSFERR_INVALIDPARAMS;
             }
 
-            m_Device = reinterpret_cast<LPDIRECT3DDEVICE9>(pParams[0].VPVoid);
-            m_Device->AddRef();
-
-            HRESULT errors = m_Device->CreateStateBlock(D3DSBT_ALL, &m_InitialState);
-            assert(SUCCEEDED(errors));
-            UNREFERENCED_PARAMETER(errors);
+            m_Context = reinterpret_cast<HGLRC>(pParams[0].VPVoid);
+            m_Device = reinterpret_cast<HDC>(pParams[1].VPVoid);
 
             return VSF_OK;
         }
 
         VOODOO_METHODDEF(VSBindingOGL::Reset)()
         {
-            if (!m_Device) return VSFERR_INVALIDCALL;
+            if (!m_Device || !m_Context)
+            {
+                return VSFERR_INVALIDCALL;
+            }
 
-            m_Device->Release();
             m_Device = nullptr;
+            m_Context = nullptr;
 
             return VSF_OK;
         }
@@ -158,6 +156,8 @@ namespace VoodooShader
             {
                 return nullptr;
             }
+
+            MOJOSHADER_parseEffect("arb1", )
 
             // Output/buffer
             std::string asource = source.ToStringA();

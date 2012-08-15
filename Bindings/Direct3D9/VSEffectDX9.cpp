@@ -33,7 +33,7 @@ namespace VoodooShader
         DeclareDebugCache();
 
         VSEffectDX9::VSEffectDX9(_In_ VSBindingDX9 * pBinding, LPD3DXEFFECT pEffect) :
-            m_Refs(0), m_Binding(pBinding), m_DXEffect(pEffect)
+            m_Refs(0), m_Binding(pBinding), m_Handle(pEffect)
         {
             if (!m_Binding)
             {
@@ -57,7 +57,7 @@ namespace VoodooShader
             // Get desc
             D3DXEFFECT_DESC desc;
             ZeroMemory(&desc, sizeof(D3DXEFFECT_DESC));
-            if (FAILED(m_DXEffect->GetDesc(&desc)))
+            if (FAILED(m_Handle->GetDesc(&desc)))
             {
                 Throw(VOODOO_D3D9_NAME, VSTR("Failed to retrieve effect description."), m_Core);
             }
@@ -65,7 +65,7 @@ namespace VoodooShader
             // Get parameters
             for (UINT paramIndex = 0; paramIndex < desc.Parameters; ++paramIndex)
             {
-                D3DXHANDLE paramHandle = m_DXEffect->GetParameter(NULL, paramIndex);
+                D3DXHANDLE paramHandle = m_Handle->GetParameter(NULL, paramIndex);
                 if (!paramHandle)
                 {
                     break;
@@ -80,7 +80,7 @@ namespace VoodooShader
             // Get techniques
             for (UINT techIndex = 0; techIndex < desc.Techniques; ++techIndex)
             {
-                D3DXHANDLE techHandle = m_DXEffect->GetTechnique(techIndex++);
+                D3DXHANDLE techHandle = m_Handle->GetTechnique(techIndex++);
                 if (!techHandle)
                 {
                     break;
@@ -88,7 +88,7 @@ namespace VoodooShader
 
                 D3DXTECHNIQUE_DESC techdesc;
                 ZeroMemory(&techdesc, sizeof(D3DXTECHNIQUE_DESC));
-                m_DXEffect->GetTechniqueDesc(techHandle, &techdesc);
+                m_Handle->GetTechniqueDesc(techHandle, &techdesc);
                 String techName(techdesc.Name);
 
                 try
@@ -197,7 +197,7 @@ namespace VoodooShader
             if (propid == PropIds::D3DX9Effect)
             {
                 pValue->Type = VSUT_PVoid;
-                pValue->VPVoid = (PVOID)m_DXEffect;
+                pValue->VPVoid = (PVOID)m_Handle;
                 return VSF_OK;
             }
             else
@@ -242,7 +242,7 @@ namespace VoodooShader
                 m_Binding->ResetState();
             }
 
-            if (SUCCEEDED(m_DXEffect->Begin(&passes, flags)))
+            if (SUCCEEDED(m_Handle->Begin(&passes, flags)))
             {
                 m_Binding->m_BoundEffect = this;
                 return m_DefaultTechnique.get();
@@ -259,7 +259,7 @@ namespace VoodooShader
         {
             if (m_Binding->m_BoundEffect != this) return VSFERR_INVALIDCALL;
 
-            if (SUCCEEDED(m_DXEffect->End()))
+            if (SUCCEEDED(m_Handle->End()))
             {
                 m_Binding->PopState();
                 m_Binding->m_BoundEffect = nullptr;
@@ -338,7 +338,7 @@ namespace VoodooShader
                 return VSFERR_INVALIDPARAMS;
             }
 
-            if (SUCCEEDED(m_DXEffect->SetTechnique(pTechDX->m_DXHandle)))
+            if (SUCCEEDED(m_Handle->SetTechnique(pTechDX->m_Handle)))
             {
                 m_DefaultTechnique = pTechnique;
                 return VSF_OK;

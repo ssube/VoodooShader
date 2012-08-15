@@ -571,6 +571,10 @@ namespace VoodooShader
 
         HRESULT STDMETHODCALLTYPE CVoodoo3DDevice9::SetTexture(DWORD Stage, IDirect3DBaseTexture9 * pTexture)
         {
+            m_RealDevice->SetSamplerState(Stage, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+            m_RealDevice->SetSamplerState(Stage, D3DSAMP_MINFILTER, D3DTEXF_POINT);
+            m_RealDevice->SetSamplerState(Stage, D3DSAMP_MIPFILTER, D3DTEXF_POINT);
+
             return m_RealDevice->SetTexture(Stage, pTexture);
         }
 

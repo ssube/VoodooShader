@@ -33,7 +33,7 @@ namespace VoodooShader
         DeclareDebugCache();
 
         VSPassDX9::VSPassDX9(_In_ VSTechniqueDX9 * pTechnique, UINT passId) :
-            m_Refs(0), m_Technique(pTechnique),  m_DXPassId(passId)
+            m_Refs(0), m_Technique(pTechnique),  m_PassId(passId)
         {
             if (!m_Technique)
             {
@@ -134,7 +134,7 @@ namespace VoodooShader
 
             if (propid == PropIds::D3DX9PassId)
             {
-                (*pValue) = CreateVariant(uint32_t(m_DXPassId));
+                (*pValue) = CreateVariant(uint32_t(m_PassId));
                 return VSF_OK;
             }
             else
@@ -181,7 +181,7 @@ namespace VoodooShader
                 return VSFERR_INVALIDCALL;
             }
 
-            if (SUCCEEDED(effect->m_DXEffect->BeginPass(m_DXPassId)))
+            if (SUCCEEDED(effect->m_Handle->BeginPass(m_PassId)))
             {
                 effect->m_Binding->m_BoundPass = this;
                 return VSF_OK;
@@ -202,7 +202,7 @@ namespace VoodooShader
                 return VSFERR_INVALIDCALL;
             }
 
-            if (SUCCEEDED(effect->m_DXEffect->EndPass()))
+            if (SUCCEEDED(effect->m_Handle->EndPass()))
             {
                 effect->m_Binding->m_BoundPass = nullptr;
                 return VSF_OK;

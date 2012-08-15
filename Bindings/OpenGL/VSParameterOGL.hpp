@@ -31,7 +31,7 @@ namespace VoodooShader
         VOODOO_CLASS(VSParameterOGL, IParameter, ({0xC8, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
         {
         public:
-            VSParameterOGL(_In_ VSEffectOGL * pEffect, _In_ D3DXHANDLE pParamHandle);
+            VSParameterOGL(_In_ VSEffectOGL * pEffect, _In_ MOJOSHADER_effectParam * pHandle);
             VSParameterOGL(_In_ VSBindingOGL * pBinding, _In_ CONST String & name, _In_ ParameterDesc desc);
             ~VSParameterOGL();
 
@@ -81,7 +81,7 @@ namespace VoodooShader
             ParameterDesc m_Desc;
             ParameterList m_Attached;
 
-            D3DXHANDLE m_DXHandle;
+            MOJOSHADER_effectParam * m_Handle;
 
             // Value cache types
             mutable bool m_VBool;

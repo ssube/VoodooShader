@@ -26,8 +26,7 @@ namespace VoodooShader
     namespace Voodoo_D3D9
     {
         /**
-         * @par ClassId
-         *      f84ac3c2-073f-11e1-83d4-005056c00008
+         * @clsid f84ac3c2-073f-11e1-83d4-005056c00008
          */
         VOODOO_CLASS(VSTextureDX9, ITexture, ({0xC2, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}))
         {
@@ -68,8 +67,8 @@ namespace VoodooShader
             IDirect3DBaseTexture9 * m_ReplacedSource;
             IDirect3DSurface9 * m_ReplacedTarget;
 
-            IDirect3DTexture9 * m_DXTexture;
-            IDirect3DSurface9 * m_DXSurface;
+            IDirect3DTexture9 * m_TextureHandle;
+            IDirect3DSurface9 * m_SurfaceHandle;
             TextureDesc m_Desc;
         };
     }

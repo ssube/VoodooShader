@@ -35,6 +35,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Frost", "Adapters\Specific\Voodoo_Frost\Voodoo_Frost.vcxproj", "{98903591-D205-49ED-AE60-44BDD620D16E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
+		{F2152CAD-085F-44DB-99B0-605F2D29BE8D} = {F2152CAD-085F-44DB-99B0-605F2D29BE8D}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_Core", "Framework\Core\Voodoo_Core.vcxproj", "{A5C09646-DA38-4869-82C3-11A66D706C43}"
@@ -130,6 +131,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_EHHookManager", "Fra
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Voodoo_OGL", "Bindings\OpenGL\OpenGL.vcxproj", "{F2152CAD-085F-44DB-99B0-605F2D29BE8D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5C09646-DA38-4869-82C3-11A66D706C43} = {A5C09646-DA38-4869-82C3-11A66D706C43}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

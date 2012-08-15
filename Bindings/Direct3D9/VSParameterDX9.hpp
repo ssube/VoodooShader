@@ -81,7 +81,7 @@ namespace VoodooShader
             ParameterDesc m_Desc;
             ParameterList m_Attached;
 
-            D3DXHANDLE m_DXHandle;
+            D3DXHANDLE m_Handle;
 
             // Value cache types
             mutable bool m_VBool;

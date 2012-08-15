@@ -62,7 +62,7 @@ namespace VoodooShader
 
             TextureRef m_Targets[4];
 
-            UINT m_DXPassId;
+            UINT m_PassId;
         };
     }
 }

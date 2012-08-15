@@ -33,14 +33,14 @@ namespace VoodooShader
     namespace Voodoo_D3D9
     {
         VSTextureDX9::VSTextureDX9(_In_ VSBindingDX9 * pBinding) :
-			m_Refs(0), m_Binding(pBinding), m_DXTexture(nullptr), m_DXSurface(nullptr),
+			m_Refs(0), m_Binding(pBinding), m_TextureHandle(nullptr), m_SurfaceHandle(nullptr),
 			m_BoundSourceSlot(VOODOO_TEXTURE_INVALID), m_BoundTargetSlot(VOODOO_TEXTURE_INVALID)
         {
 
         }
 
         VSTextureDX9::VSTextureDX9(_In_ VSBindingDX9 * pBinding, _In_ CONST String & name, _In_ IDirect3DTexture9 * pTexture) :
-            m_Refs(0), m_Binding(pBinding), m_Name(name), m_DXTexture(pTexture), m_DXSurface(nullptr), 
+            m_Refs(0), m_Binding(pBinding), m_Name(name), m_TextureHandle(pTexture), m_SurfaceHandle(nullptr), 
             m_BoundSourceSlot(VOODOO_TEXTURE_INVALID), m_BoundTargetSlot(VOODOO_TEXTURE_INVALID)
         {
             if (!m_Binding) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture with no binding."), nullptr);
@@ -48,12 +48,12 @@ namespace VoodooShader
             m_Core = m_Binding->m_Core;
 
             if (!m_Core) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture from binding with no core."), nullptr);
-            if (!m_DXTexture) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture with no hardware texture."), m_Core);
+            if (!m_TextureHandle) Throw(VOODOO_D3D9_NAME, VSTR("Unable to create texture with no hardware texture."), m_Core);
             
-            if (m_DXTexture)
+            if (m_TextureHandle)
             {
-                m_DXTexture->AddRef();
-                m_DXTexture->GetSurfaceLevel(0, &m_DXSurface);
+                m_TextureHandle->AddRef();
+                m_TextureHandle->GetSurfaceLevel(0, &m_SurfaceHandle);
 
                 this->GetTexDesc();
             }
@@ -61,9 +61,9 @@ namespace VoodooShader
 
         VSTextureDX9::~VSTextureDX9()
         {
-            if (m_DXTexture)
+            if (m_TextureHandle)
             {
-                m_DXTexture->Release();
+                m_TextureHandle->Release();
             }
         }
 
@@ -139,14 +139,14 @@ namespace VoodooShader
             {
                 pValue->Type = VSUT_PVoid;
                 pValue->Components = 0;
-                pValue->VPVoid = m_DXTexture;
+                pValue->VPVoid = m_TextureHandle;
                 return VSF_OK;
             }
             else if (propid == PropIds::D3D9Surface)
             {
                 pValue->Type = VSUT_PVoid;
                 pValue->Components = 0;
-                pValue->VPVoid = m_DXSurface;
+                pValue->VPVoid = m_SurfaceHandle;
                 return VSF_OK;
             }
 
@@ -179,7 +179,7 @@ namespace VoodooShader
                 }
 
                 m_Binding->m_Device->GetTexture(index, &m_ReplacedSource);
-                if (SUCCEEDED(m_Binding->m_Device->SetTexture(index, m_DXTexture)))
+                if (SUCCEEDED(m_Binding->m_Device->SetTexture(index, m_TextureHandle)))
                 {
                     m_Binding->m_BoundSourceTexture[index] = this;
                     m_BoundSourceSlot = index;
@@ -204,7 +204,7 @@ namespace VoodooShader
                 }
 
                 m_Binding->m_Device->GetRenderTarget(index, &m_ReplacedTarget);
-                if (SUCCEEDED(m_Binding->m_Device->SetRenderTarget(index, m_DXSurface)))
+                if (SUCCEEDED(m_Binding->m_Device->SetRenderTarget(index, m_SurfaceHandle)))
                 {
                     m_Binding->m_BoundTargetTexture[index] = this;
                     m_BoundTargetSlot = index;
@@ -278,16 +278,16 @@ namespace VoodooShader
         {
             ZeroMemory(&m_Desc, sizeof(TextureDesc));
 
-            if (!m_DXTexture) return;
+            if (!m_TextureHandle) return;
 
-            if (m_DXTexture->GetLevelCount() > 0)
+            if (m_TextureHandle->GetLevelCount() > 0)
             {
                 m_Desc.Usage = TextureFlags(m_Desc.Usage | VSTexFlag_MipMaps);
             }
 
             // Test for 2D texture
             D3DSURFACE_DESC desc;
-            if (SUCCEEDED(m_DXTexture->GetLevelDesc(0, &desc)))
+            if (SUCCEEDED(m_TextureHandle->GetLevelDesc(0, &desc)))
             {
                 m_Desc.Size.X = desc.Width;
                 m_Desc.Size.Y = desc.Height;
@@ -310,13 +310,13 @@ namespace VoodooShader
                 return VSFERR_INVALIDPARAMS;
             }
 
-            if (!pOther->m_DXTexture)
+            if (!pOther->m_TextureHandle)
             {
                 return VSFERR_INVALIDPARAMS;
             }
 
             LPDIRECT3DDEVICE9 pDevice = nullptr;
-            if (FAILED(m_DXTexture->GetDevice(&pDevice)) || !pDevice)
+            if (FAILED(m_TextureHandle->GetDevice(&pDevice)) || !pDevice)
             {
                 return VSFERR_APIERROR;
             }
@@ -324,17 +324,17 @@ namespace VoodooShader
             RECT src = {source.Min.X, source.Min.Y, source.Max.X, source.Max.Y};
             RECT dst = {dest.Min.X, dest.Min.Y, dest.Max.X, dest.Max.Y};
 
-            if (SUCCEEDED(pDevice->StretchRect(pOther->m_DXSurface, &src, m_DXSurface, &dst, D3DTEXF_NONE)))
+            if (SUCCEEDED(pDevice->StretchRect(pOther->m_SurfaceHandle, &src, m_SurfaceHandle, &dst, D3DTEXF_NONE)))
             {
                 return VSF_OK;
             }
 
-            if (FAILED(m_DXTexture->AddDirtyRect(&dst)))
+            if (FAILED(m_TextureHandle->AddDirtyRect(&dst)))
             {
                 return VSFERR_APIERROR;
             }
 
-            if (SUCCEEDED(pDevice->UpdateTexture(pOther->m_DXTexture, m_DXTexture)))
+            if (SUCCEEDED(pDevice->UpdateTexture(pOther->m_TextureHandle, m_TextureHandle)))
             {
                 return VSF_OK;
             }

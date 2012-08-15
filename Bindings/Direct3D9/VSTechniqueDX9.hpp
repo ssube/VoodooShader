@@ -60,7 +60,7 @@ namespace VoodooShader
             PropertyMap m_Properties;
             PassVector m_Passes;
 
-            D3DXHANDLE m_DXHandle;
+            D3DXHANDLE m_Handle;
         };
     }
 }

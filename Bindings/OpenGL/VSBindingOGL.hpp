@@ -89,7 +89,7 @@ namespace VoodooShader
 
         private:            
             // Internals
-            GLint Impl_CreateTexture(_In_ TextureDesc & desc, _In_ DWORD usage, _In_ D3DFORMAT format);
+            GLint Impl_CreateTexture(_In_ TextureDesc & desc, _In_ DWORD usage, _In_ GLint format);
 
             mutable uint32_t m_Refs;
             ICore * m_Core;
@@ -102,7 +102,7 @@ namespace VoodooShader
             // Internal state tracking
             EffectRef m_BoundEffect;
             PassRef m_BoundPass;
-            TextureRef m_BoundSourceTexture[8];
+            TextureRef m_BoundSourceTexture[4];
             TextureRef m_BoundTargetTexture[4];
         };
     }
