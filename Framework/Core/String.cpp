@@ -873,7 +873,7 @@ namespace VoodooShader
     String String::Ticks()
     {
         StringFormat fmt(VSTR("%d"));
-        fmt << GetTickCount64();
+        fmt << GetTickCount();
 
         return fmt.ToString();
     }
