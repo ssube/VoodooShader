@@ -19,21 +19,17 @@
  */
 #pragma once
 
-#include "VoodooVersion.hpp"
+/*
+ * This header is essentially a shim for MSVC 10 and previous, until XP support is added to MSVC 11.
+ */
+#if defined(VOODOO_COMPAT_MSVC10)
 
-/**
- * @addtogroup voodoo_module_hookstub
- * @{
- */
-#define VOODOO_HOOKSTUB_LIBID         {0xB3, 0xC3, 0x4A, 0xF8, 0x3F, 0x07, 0xE1, 0x11, 0x83, 0xD4, 0x00, 0x50, 0x56, 0xC0, 0x00, 0x08}
-#define VOODOO_HOOKSTUB_AUTHOR        VOODOO_GLOBAL_AUTHOR
-#define VOODOO_HOOKSTUB_NAME          VSTR("Voodoo_HookStub")
-#define VOODOO_HOOKSTUB_PRETTYNAME    VSTR("Voodoo Hook Stub")
-#define VOODOO_HOOKSTUB_VERSION_MAJOR 0
-#define VOODOO_HOOKSTUB_VERSION_MINOR 5
-#define VOODOO_HOOKSTUB_VERSION_PATCH 8
-#define VOODOO_HOOKSTUB_VERSION_BUILD VOODOO_GLOBAL_VERSION_BUILD
-#define VOODOO_HOOKSTUB_VERSION_ID    VOODOO_GLOBAL_VERSION_ID
-/**
- * @}
- */
+#define _In_reads_(x)
+#define _In_reads_z_(x)
+#define _In_reads_opt_(x)
+#define _Inout_updates_opt_(x)
+#define _Out_writes_(x)
+#define _Out_writes_opt_(x)
+#define _Outptr_result_maybenull_
+
+#endif

@@ -150,6 +150,9 @@
     <ClInclude Include="VSParser.hpp">
       <Filter>Headers\Implementations</Filter>
     </ClInclude>
+    <ClInclude Include=".\VoodooCompatibility.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Docs">

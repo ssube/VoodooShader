@@ -36,6 +36,10 @@
 #   include <windows.h>
 #pragma warning(pop)
 
+#if !defined(VOODOO_COMPAT_NONE)
+#   include "VoodooCompatibility.hpp"
+#endif
+
 #if !defined(CONST)
 #   define CONST const
 #endif
