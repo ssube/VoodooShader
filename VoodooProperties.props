@@ -19,7 +19,7 @@
         <RunCodeAnalysis>false</RunCodeAnalysis>
         <WholeProgramOptimization>true</WholeProgramOptimization>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'">
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'">
         <UseDebugLibraries>false</UseDebugLibraries>
         <RunCodeAnalysis>false</RunCodeAnalysis>
         <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -63,7 +63,7 @@
             <OptimizeReferences>true</OptimizeReferences>
         </Link>
     </ItemDefinitionGroup>
-    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'">
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'">
         <ClCompile>
             <WarningLevel>Level4</WarningLevel>
             <TreatWarningAsError>false</TreatWarningAsError>

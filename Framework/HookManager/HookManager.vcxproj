@@ -5,8 +5,8 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release - XP|Win32">
-      <Configuration>Release - XP</Configuration>
+    <ProjectConfiguration Include="Release.XP|Win32">
+      <Configuration>Release.XP</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
@@ -34,7 +34,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -54,7 +54,7 @@
     <Import Project="..\..\VoodooProperties.props" />
     <Import Project="..\..\VoodooPaths.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\VoodooProperties.props" />
     <Import Project="..\..\VoodooPaths.props" />
@@ -68,7 +68,7 @@
     <IncludePath>$(BoostInclude);$(EasyHookInclude);$(CoreInclude);$(IncludePath)</IncludePath>
     <LibraryPath>$(EasyHookLib);$(CoreLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'">
     <IncludePath>$(BoostInclude);$(EasyHookInclude);$(CoreInclude);$(IncludePath)</IncludePath>
     <LibraryPath>$(EasyHookLib);$(CoreLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -102,7 +102,7 @@
       <AdditionalDependencies>Voodoo_Core.lib;EasyHook32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>

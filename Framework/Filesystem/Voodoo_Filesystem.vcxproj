@@ -5,8 +5,8 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release - XP|Win32">
-      <Configuration>Release - XP</Configuration>
+    <ProjectConfiguration Include="Release.XP|Win32">
+      <Configuration>Release.XP</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
@@ -32,7 +32,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -51,7 +51,7 @@
     <Import Project="..\..\VoodooProperties.props" />
     <Import Project="..\..\VoodooPaths.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\VoodooProperties.props" />
     <Import Project="..\..\VoodooPaths.props" />
@@ -65,7 +65,7 @@
     <IncludePath>$(BoostInclude);$(DevILInclude);$(PugiXmlInclude);$(CoreInclude);$(IncludePath)</IncludePath>
     <LibraryPath>$(PugiXmlLib);$(DevILLib);$(CoreLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'">
     <IncludePath>$(BoostInclude);$(DevILInclude);$(PugiXmlInclude);$(CoreInclude);$(IncludePath)</IncludePath>
     <LibraryPath>$(PugiXmlLib);$(DevILLib);$(CoreLib);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -95,7 +95,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\Framework\Core</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release - XP|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release.XP|Win32'">
     <Link>
       <ModuleDefinitionFile>Voodoo_Filesystem.def</ModuleDefinitionFile>
       <AdditionalDependencies>Voodoo_Core.lib;DevIL.lib;pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>

@@ -242,7 +242,7 @@ namespace VoodooShader
         {
             // Format the message in memory to prevent partial messages from being dumped
             std::wstringstream logMsg;
-            logMsg << std::hex << std::showbase << level << std::dec << std::noshowbase << VSTR(", ") << GetTickCount() << 
+            logMsg << std::hex << std::showbase << level << std::dec << std::noshowbase << VSTR(", ") << GetVoodooTickCount() << 
                 VSTR(", ") << source << VSTR(", ") << msg << std::endl;
 
 #ifdef _DEBUG
