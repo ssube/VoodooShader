@@ -45,14 +45,14 @@ PROJECT_BRIEF          = &nbsp;
 # exceed 55 pixels and the maximum width should not exceed 200 pixels. 
 # Doxygen will copy the logo to the output directory.
 
-PROJECT_LOGO           = I:/Code/VoodooShader/Framework/voodoo.png
+PROJECT_LOGO           = $(VoodooProject)/Framework/voodoo.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) 
 # base path where the generated documentation will be put. 
 # If a relative path is entered, it will be relative to the location 
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = I:\Code\VoodooShader\Pages\docs
+OUTPUT_DIRECTORY       = $(VoodooOutput)\Pages\docs
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 
 # 4096 sub-directories (in 2 levels) under the output directory of each output 
@@ -655,7 +655,7 @@ WARN_FORMAT            = "$file:$line: $text"
 # and error messages should be written. If left blank the output is written 
 # to stderr.
 
-WARN_LOGFILE           = I:\Code\VoodooShader\Docs\doxylog
+WARN_LOGFILE           = $(VoodooOutput)\Docs\doxylog
 
 #---------------------------------------------------------------------------
 # configuration options related to the input files
@@ -666,7 +666,7 @@ WARN_LOGFILE           = I:\Code\VoodooShader\Docs\doxylog
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = I:\Code\VoodooShader\Framework\Framework
+INPUT                  = $(VoodooProject)\Framework\Framework
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
@@ -1019,7 +1019,7 @@ GENERATE_HTMLHELP      = YES
 # can add a path in front of the file if the result should not be 
 # written to the html output directory.
 
-CHM_FILE               = I:\code\VoodooShader_Pages\docs\VoodooFramework.chm
+CHM_FILE               = $(VoodooOutput)\docs\VoodooFramework.chm
 
 # If the GENERATE_HTMLHELP tag is set to YES, the HHC_LOCATION tag can 
 # be used to specify the location (absolute path including file name) of 
