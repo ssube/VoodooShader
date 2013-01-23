@@ -5,7 +5,7 @@
 -----
 
 ### 0. Build Status
-![Build Status](http://build.voodooshader.com/teamcity/app/rest/builds/buildType:\(id:bt2\)/statusIcon)
+<a href="http://build.voodooshader.com/teamcity/viewType.html?buildTypeId=bt2&tab=buildTypeStatusDiv&guest=1"><img src="http://build.voodooshader.com/teamcity/app/rest/builds/buildType:\(id:bt2\)/statusIcon"/></a>
 
 ### 1. Summary
 
