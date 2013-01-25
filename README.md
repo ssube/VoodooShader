@@ -4,6 +4,9 @@
 
 -----
 
+### 0. Build Status
+<a href="http://build.voodooshader.com/teamcity/viewType.html?buildTypeId=bt2&tab=buildTypeStatusDiv&guest=1"><img src="http://build.voodooshader.com/teamcity/app/rest/builds/buildType:(id:bt2)/statusIcon"/></a>
+
 ### 1. Summary
 
 Voodoo Shader improves and extends graphics in old and new games. It's fast, stable, open-source, and runs on ATi/AMD and 
