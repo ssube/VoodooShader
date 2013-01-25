@@ -32,7 +32,7 @@ PROJECT_NAME           = "Voodoo Shader"
 # This could be handy for archiving the generated documentation or 
 # if some version control system is used.
 
-PROJECT_NUMBER         = framework-5.8
+PROJECT_NUMBER         = framework-5.7
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description 
 # for a project that appears at the top of each page and should give viewer 
@@ -45,7 +45,7 @@ PROJECT_BRIEF          = &nbsp;
 # exceed 55 pixels and the maximum width should not exceed 200 pixels. 
 # Doxygen will copy the logo to the output directory.
 
-PROJECT_LOGO           = $(VoodooProject)/Framework/voodoo.png
+PROJECT_LOGO           = $(VoodooProject)/voodoo.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) 
 # base path where the generated documentation will be put. 
@@ -666,7 +666,7 @@ WARN_LOGFILE           = $(VoodooOutput)/docs/doxylog
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = $(VoodooProject)\Framework\Framework
+INPUT                  = $(VoodooProject)\Framework
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
@@ -1012,7 +1012,7 @@ DOCSET_PUBLISHER_NAME  = Publisher
 # Microsoft HTML help workshop to generate a compiled HTML help file (.chm) 
 # of the generated HTML documentation.
 
-GENERATE_HTMLHELP      = YES
+GENERATE_HTMLHELP      = NO
 
 # If the GENERATE_HTMLHELP tag is set to YES, the CHM_FILE tag can 
 # be used to specify the file name of the resulting .chm file. You 
