@@ -1,8 +1,0 @@
-LIBRARY
-
-EXPORTS
-PluginInit  = API_PluginInit
-PluginReset = API_PluginReset
-ClassCount  = API_ClassCount
-ClassInfo   = API_ClassInfo
-ClassCreate = API_ClassCreate
