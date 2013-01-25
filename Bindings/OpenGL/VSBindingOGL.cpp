@@ -157,12 +157,10 @@ namespace VoodooShader
                 return nullptr;
             }
 
-            MOJOSHADER_parseEffect("arb1", )
+            MOJOSHADER_parseEffect("arb1", nullptr, 0, nullptr, 0, nullptr, 0, nullptr, nullptr, nullptr);
 
             // Output/buffer
             std::string asource = source.ToStringA();
-            LPD3DXEFFECT effect = NULL;
-            LPD3DXBUFFER errors = NULL;
 
             HRESULT hr = D3DXCreateEffect(m_Device, asource.c_str(), asource.length(), NULL, NULL, 0, NULL, 
                 &effect, &errors);

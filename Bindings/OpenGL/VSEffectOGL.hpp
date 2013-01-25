@@ -72,7 +72,7 @@ namespace VoodooShader
             TechniqueVector m_Techniques;
             ParameterVector m_Parameters;
 
-            LPD3DXEFFECT m_DXEffect;
+            MOJOSHADER_effect * m_DXEffect;
         };
     }
 }

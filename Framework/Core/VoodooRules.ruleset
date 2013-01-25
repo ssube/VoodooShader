@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="VoodooRules" ToolsVersion="11.0">
-  <Include Path="allrules.ruleset" Action="Default" />
-  <Include Path="mixedminimumrules.ruleset" Action="Default" />
-  <Include Path="mixedrecommendedrules.ruleset" Action="Default" />
-  <Include Path="nativeminimumrules.ruleset" Action="Default" />
-  <Include Path="nativerecommendedrules.ruleset" Action="Default" />
-</RuleSet>

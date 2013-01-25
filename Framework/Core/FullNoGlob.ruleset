@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="FullNoGlob" ToolsVersion="10.0">
-  <Include Path="allrules.ruleset" Action="Default" />
-  <Include Path="basiccorrectnessrules.ruleset" Action="Default" />
-  <Include Path="basicdesignguidelinerules.ruleset" Action="Default" />
-  <Include Path="extendedcorrectnessrules.ruleset" Action="Default" />
-  <Include Path="extendeddesignguidelinerules.ruleset" Action="Default" />
-  <Include Path="securityrules.ruleset" Action="Default" />
-</RuleSet>

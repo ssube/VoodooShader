@@ -28,59 +28,63 @@ namespace VoodooShader
         class ConverterOGL
         {
         public:
-            static inline D3DFORMAT ToD3DFormat(TextureFormat tf)
+            static inline GLenum ToOGLFormat(TextureFormat tf)
             {
                 switch (tf)
                 {
                 case VSFmt_RGB5A1:
-                    return D3DFMT_A1R5G5B5;
+                    return GL_RGB5_A1;
                 case VSFmt_RGB8:
-                    return D3DFMT_X8R8G8B8;
+                    return GL_RGB8;
                 case VSFmt_RGBA8:
-                    return D3DFMT_A8R8G8B8;
+                    return GL_RGBA8;
                 case VSFmt_RGB10A2:
-                    return D3DFMT_A2B10G10R10;
+                    return GL_RGB10_A2;
                 case VSFmt_RGBA16F:
-                    return D3DFMT_A16B16G16R16F;
+                    return GL_RGBA_16F;
                 case VSFmt_RGBA32F:
-                    return D3DFMT_A32B32G32R32F;
+                    return GL_RGBA_32F;
                 case VSFmt_D16:
-                    return D3DFMT_D16;
+                    return GL_DEPTH_COMPONENT16;
                 case VSFmt_D24:
-                    return D3DFMT_D24X8;
+                    return GL_DEPTH_COMPONENT24;
                 case VSFmt_D24S8:
-                    return D3DFMT_D24S8;
+                    return GL_DEPTH24_STENCIL8;
                 case VSFmt_D32:
-                    return D3DFMT_D32;
+                    return GL_DEPTH_COMPONENT32;
                 case VSFmt_Unknown:
                 case VSFmt_Null:
                 case VSFmt_DMax:
                 default:
-                    return D3DFMT_UNKNOWN;
+                    return 0;
                 }
             }
 
-            static inline TextureFormat ToTextureFormat(D3DFORMAT tf)
+            static inline TextureFormat ToTextureFormat(GLenum tf)
             {
                 switch (tf)
                 {
-                case D3DFMT_A1R5G5B5:
+                case GL_RGB5_A1:
                     return VSFmt_RGB5A1;
-                case D3DFMT_X8R8G8B8:
+                case GL_RGB8:
                     return VSFmt_RGB8;
-                case D3DFMT_A8R8G8B8:
+                case GL_RGBA8:
                     return VSFmt_RGBA8;
-                case D3DFMT_A2B10G10R10:
+                case GL_RGB10_A2:
                     return VSFmt_RGB10A2;
-                case D3DFMT_A16B16G16R16F:
+                case GL_RGBA_16F:
                     return VSFmt_RGBA16F;
-                case D3DFMT_A32B32G32R32F:
+                case GL_RGBA_32F:
                     return VSFmt_RGBA32F;
-                case D3DFMT_D16:
+                case GL_DEPTH_COMPONENT16:
                     return VSFmt_D16;
-                case D3DFMT_D32:
+                case GL_DEPTH_COMPONENT24:
+                    return VSFmt_D24;
+                case GL_DEPTH24_STENCIL8:
+                    return VSFmt_D24S8;
+                case GL_DEPTH_COMPONENT32:
                     return VSFmt_D32;
-                case D3DFMT_UNKNOWN:
+                case 0:
                 default:
                     return VSFmt_Unknown;
                 }

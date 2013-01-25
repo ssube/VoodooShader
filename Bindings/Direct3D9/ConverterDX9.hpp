@@ -78,6 +78,10 @@ namespace VoodooShader
                     return VSFmt_RGBA32F;
                 case D3DFMT_D16:
                     return VSFmt_D16;
+                case D3DFMT_D24X8:
+                    return VSFmt_D24;
+                case D3DFMT_D24S8:
+                    return VSFmt_D24S8;
                 case D3DFMT_D32:
                     return VSFmt_D32;
                 case D3DFMT_UNKNOWN:
