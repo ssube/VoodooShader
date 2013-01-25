@@ -52,7 +52,7 @@ PROJECT_LOGO           = $(VoodooProject)/Framework/voodoo.png
 # If a relative path is entered, it will be relative to the location 
 # where doxygen was started. If left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = $(VoodooOutput)\Pages\docs
+OUTPUT_DIRECTORY       = $(VoodooOutput)/docs
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 
 # 4096 sub-directories (in 2 levels) under the output directory of each output 
@@ -655,7 +655,7 @@ WARN_FORMAT            = "$file:$line: $text"
 # and error messages should be written. If left blank the output is written 
 # to stderr.
 
-WARN_LOGFILE           = $(VoodooOutput)\Docs\doxylog
+WARN_LOGFILE           = $(VoodooOutput)/docs/doxylog
 
 #---------------------------------------------------------------------------
 # configuration options related to the input files
@@ -1019,7 +1019,7 @@ GENERATE_HTMLHELP      = YES
 # can add a path in front of the file if the result should not be 
 # written to the html output directory.
 
-CHM_FILE               = $(VoodooOutput)\docs\VoodooFramework.chm
+CHM_FILE               = $(VoodooOutput)/docs/VoodooFramework.chm
 
 # If the GENERATE_HTMLHELP tag is set to YES, the HHC_LOCATION tag can 
 # be used to specify the location (absolute path including file name) of 
